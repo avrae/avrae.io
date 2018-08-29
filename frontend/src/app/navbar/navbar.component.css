@@ -1,0 +1,18 @@
+.navbar-header {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 8px 16px;
+  position: fixed;
+  height: 56px;
+  z-index: 100;
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.navbar-link {
+  text-decoration: inherit;
+  flex: 1;
+}
