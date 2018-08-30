@@ -4,6 +4,15 @@
   </a>
   <a mat-button class="button" routerLink="commands">Commands</a>
   <a mat-button class="button" routerLink="cheatsheets">Cheatsheets</a>
+  <button mat-button [matMenuTriggerFor]="appMenu">
+    More
+  </button>
   <div class="flex-spacer"></div>
   <a mat-button class="button" routerLink="dashboard">Dashboard</a>
 </mat-toolbar>
+
+<mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+  <a mat-menu-item class="button" href="http://invite.avrae.io">Invite Link</a>
+  <a mat-menu-item class="button" href="http://support.avrae.io">Support Server</a>
+  <a mat-menu-item class="button" href="http://donate.avrae.io">Donate</a>
+</mat-menu>
