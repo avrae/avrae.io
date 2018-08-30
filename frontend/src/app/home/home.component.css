@@ -1,3 +1,19 @@
+
+.greetings {
+  margin: 30px;
+}
+
+.circular-greetings {
+  position: center;
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+}
+
+.nomargin {
+  margin: 0;
+}
+
 .grid-container {
   margin: 20px;
 }
@@ -10,12 +26,38 @@
   bottom: 15px;
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-}
-
 .dashboard-card-content {
   text-align: center;
+}
+
+.feature-header {
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.muted {
+  color: #aaa;
+}
+
+.feature-desc {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+a {
+  color: #3489c7;
+  text-decoration: none;
+}
+
+.end {
+  text-align: center;
+  margin: 30px;
+}
+
+.circular-end {
+  height: 40%;
+  width: 40%;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  background: transparent;
 }
