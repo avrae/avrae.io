@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run build-themes && ng serve",
-    "build": "ng build",
+    "build": "npm run build-themes && ng build",
+    "build-prod": "npm run build-themes && ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "build-themes": "bash ./tools/build-themes.sh",
