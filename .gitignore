@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/frontend/src/assets/*.css
 
 # dependencies
 /node_modules
