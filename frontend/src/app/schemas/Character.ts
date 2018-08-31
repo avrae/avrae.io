@@ -21,6 +21,11 @@ export class Character {
   live?: boolean;
 }
 
+export class CharacterMeta {
+  upstream: string;
+  stats: Stats;
+}
+
 export class Stats {
   name: string;
   image: string;

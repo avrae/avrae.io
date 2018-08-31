@@ -25,7 +25,7 @@ def hello_world():
 
 @app.route('/userInfo', methods=["GET"])
 def user_info():
-    info = get_user_info(request.headers['Authorization'])
+    info = get_user_info()
     data = {
         "username": info.username,
         "discriminator": info.discriminator,
@@ -38,12 +38,9 @@ def user_info():
     return dumps(data)
 
 
-@app.route('/characterList', methods=["GET"])
-def character_list():
-    user = get_user_info(request.headers['Authorization'])
-    data = list(mdb.characters.find({"owner": user.id}))
-    return dumps(data)
+from blueprints.characters import characters
 
+app.register_blueprint(characters, url_prefix="/characters")
 
 if __name__ == '__main__':
     app.run()

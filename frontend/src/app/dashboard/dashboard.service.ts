@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {HttpClient} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {defaultOptions} from "./APIHelper";
-import {Character} from "../schemas/Character";
+import {CharacterMeta} from "../schemas/Character";
 
 
 @Injectable({
@@ -13,7 +13,7 @@ import {Character} from "../schemas/Character";
 export class DashboardService {
 
   private userInfoUrl = `${environment.apiURL}/userInfo`;
-  private characterListUrl = `${environment.apiURL}/characterList`;
+  private characterMetaUrl = `${environment.apiURL}/characters/meta`;
 
   constructor(private http: HttpClient) {
   }
@@ -22,7 +22,7 @@ export class DashboardService {
     return this.http.get<UserInfo>(this.userInfoUrl, defaultOptions());
   }
 
-  getCharacterList(): Observable<Character[]> {
-    return this.http.get<Character[]>(this.characterListUrl, defaultOptions());
+  getCharacterMeta(): Observable<CharacterMeta[]> {
+    return this.http.get<CharacterMeta[]>(this.characterMetaUrl, defaultOptions());
   }
 }
