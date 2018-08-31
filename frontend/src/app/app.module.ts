@@ -14,6 +14,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {FooterComponent} from './footer/footer.component';
 import {LoginComponent} from './login/login.component';
 import {ThemesModule} from "./themes/themes.module";
+import {ErrorComponent} from './error/error.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ThemesModule} from "./themes/themes.module";
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

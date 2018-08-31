@@ -1,0 +1,13 @@
+
+.circle {
+  border-radius: 50%;
+}
+
+.smallmargin {
+  margin: 8px;
+}
+
+.container {
+  text-align: center;
+  align-items: center;
+}
