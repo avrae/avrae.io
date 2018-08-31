@@ -9,6 +9,7 @@
 /node_modules
 
 # IDEs and editors
+/frontend/.idea
 /.idea
 .project
 .classpath
