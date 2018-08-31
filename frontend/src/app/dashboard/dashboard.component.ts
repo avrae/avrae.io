@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {isLoggedIn, removeToken} from "../SecurityHelper";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'avr-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
-  constructor() { }
+  constructor(private router: Router) {
+    if (!isLoggedIn()) {
+      this.router.navigate(["login"]);
+    }
+  }
 
-  ngOnInit() {
+  logout() {
+    removeToken();
+    this.router.navigate(['']);
   }
 
 }

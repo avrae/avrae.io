@@ -1,26 +1,18 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatGridListModule,
-  MatIconModule,
-  MatListModule,
-  MatMenuModule,
-  MatSidenavModule,
-  MatToolbarModule
-} from '@angular/material';
 import {LayoutModule} from '@angular/cdk/layout';
 
 import {AppRoutingModule} from './app-routing.module';
+import {DashboardModule} from "./dashboard/dashboard.module";
+import {MaterialModule} from "./material/material.module";
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {FooterComponent} from './footer/footer.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {LoginComponent} from './login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -28,22 +20,15 @@ import {LoginComponent} from './login/login.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    DashboardComponent,
     LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
     LayoutModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
+    MaterialModule,
+    DashboardModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

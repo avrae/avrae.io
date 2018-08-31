@@ -2,6 +2,10 @@
   color: #aaa;
 }
 
+.footer-card {
+  padding: 16px;
+}
+
 .footer-body {
   margin: 16px;
 }

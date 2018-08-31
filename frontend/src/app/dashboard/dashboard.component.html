@@ -1,3 +1,20 @@
-<p>
-  dashboard works!
-</p>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    opened
+    mode="side"
+    class="sidenav"
+    fixedTopGap="56px">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard">Overview</a>
+      <a mat-list-item routerLink="/dashboard/aliases">Customization</a>
+      <a mat-list-item routerLink="/dashboard/gvars">Global Variables</a>
+      <div class="spacer"></div>
+      <a mat-list-item (click)="logout()">Logout</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+    <h1 class="mat-h1">raaa</h1>
+  </mat-sidenav-content>
+</mat-sidenav-container>
