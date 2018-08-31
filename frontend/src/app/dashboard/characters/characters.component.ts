@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserInfo} from "../../schemas/UserInfo";
 import {DashboardService} from "../dashboard.service";
+import {Character} from "../../schemas/Character";
 
 @Component({
   selector: 'avr-characters',
@@ -10,6 +11,7 @@ import {DashboardService} from "../dashboard.service";
 export class CharactersComponent implements OnInit {
 
   userInfo: UserInfo;
+  characters: Character[];
 
   constructor(private dashboardService: DashboardService) {
   }

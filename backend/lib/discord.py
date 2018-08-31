@@ -16,9 +16,9 @@ class UserInfo:
 
     def get_avatar_url(self):
         if self.avatar:
-            return f"{DISCORD_CDN}/avatars/{self.id}/{self.avatar}.png?size=1024"
+            return f"{DISCORD_CDN}/avatars/{self.id}/{self.avatar}.png?size=512"
         else:
-            return f"{DISCORD_CDN}/embed/avatars/{int(self.discriminator) % 5}.png?size=1024"
+            return f"{DISCORD_CDN}/embed/avatars/{int(self.discriminator) % 5}.png?size=512"
 
 
 def get(endpoint, token):
