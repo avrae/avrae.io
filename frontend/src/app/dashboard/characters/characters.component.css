@@ -12,3 +12,17 @@
 .smallmargin {
   margin-bottom: 16px;
 }
+
+.spacer-8px {
+  margin: 8px;
+}
+
+.char-card {
+  width: 100%;
+  height: 100%;
+}
+
+.char-name {
+  margin-top: 16px;
+}
+

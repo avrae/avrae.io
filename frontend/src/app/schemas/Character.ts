@@ -19,10 +19,6 @@ export class Character {
   consumables?: Consumables;
   spellbook?: Spellbook;
   live?: boolean;
-
-  get_name(): string {
-    return this.stats.name;
-  }
 }
 
 export class Stats {

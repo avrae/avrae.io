@@ -18,11 +18,17 @@ export class CharactersComponent implements OnInit {
 
   ngOnInit() {
     this.getUserInfo();
+    this.getCharacters();
   }
 
   getUserInfo(): void {
     this.dashboardService.getUserInfo()
       .subscribe(userInfo => this.userInfo = userInfo);
+  }
+
+  getCharacters(): void {
+    this.dashboardService.getCharacterList()
+      .subscribe(characters => this.characters = characters);
   }
 
 }
