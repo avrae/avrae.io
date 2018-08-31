@@ -36,6 +36,10 @@ yarn-error.log
 testem.log
 /typings
 
+# for firebase test deployment unless zhu wishes to start using firebase himself
+/.firebaserc
+/firebase.json
+
 # System Files
 .DS_Store
 Thumbs.db
