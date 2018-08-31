@@ -8,7 +8,7 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .avr-background {
+  .avr-app-background {
     background: mat-color($background, background);
   }
 

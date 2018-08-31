@@ -13,6 +13,7 @@ import {HomeComponent} from './home/home.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {FooterComponent} from './footer/footer.component';
 import {LoginComponent} from './login/login.component';
+import {ThemesModule} from "./themes/themes.module";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {LoginComponent} from './login/login.component';
     MaterialModule,
     DashboardModule,
     AppRoutingModule,
+    ThemesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
