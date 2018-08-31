@@ -20,6 +20,12 @@
     }
   }
 
+  a {
+    color: mat-color($accent);
+    text-decoration: none;
+    font-weight: lighter;
+  }
+
   .avr-footer {
     background: mat-color($primary);
     color: mat-color($primary, default-contrast);

@@ -39,6 +39,12 @@ export class ThemePickerComponent {
       href: 'purple-green.css',
       isDark: true,
     },
+    {
+      primary: '#ce342a',
+      accent: '#ce342a',
+      href: 'red-unknown.css',
+      isDark: true
+    }
   ];
 
   constructor(
