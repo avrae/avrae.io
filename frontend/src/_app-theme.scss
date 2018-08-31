@@ -1,0 +1,33 @@
+@import '../node_modules/@angular/material/theming';
+
+// Styles for the docs app that are based on the current theme.
+@mixin avr-app-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .avr-app-background {
+    background: mat-color($background, background);
+  }
+
+  .avr-primary-header {
+    background: mat-color($primary);
+
+    h1 {
+      color: mat-color($primary, default-contrast);
+    }
+  }
+
+  a {
+    color: mat-color($accent);
+    text-decoration: none;
+    font-weight: lighter;
+  }
+
+  .avr-footer {
+    background: mat-color($primary);
+    color: mat-color($primary, default-contrast);
+  }
+}
