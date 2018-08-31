@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {UserInfo} from "../../schemas/UserInfo";
+import {DashboardService} from "../dashboard.service";
 
 @Component({
   selector: 'avr-characters',
@@ -7,14 +9,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CharactersComponent implements OnInit {
 
-  username: string = "zhu.exe";
-  discrim: string = "4211";
-  userStats: object = {};
+  userInfo: UserInfo;
 
-  constructor() {
+  constructor(private dashboardService: DashboardService) {
   }
 
   ngOnInit() {
+    this.getUserInfo();
+  }
+
+  getUserInfo(): void {
+    this.dashboardService.getUserInfo()
+      .subscribe(userInfo => this.userInfo = userInfo);
   }
 
 }

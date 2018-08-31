@@ -1,17 +1,17 @@
 <div class="characterList">
-  <mat-card class="user-card">
+  <mat-card class="user-card" *ngIf="userInfo">
     <mat-grid-list cols="4" rowHeight="1:1">
       <mat-grid-tile>
-        <img [src]="avatarUrl" class="avatarImg mat-elevation-z1">
+        <img [src]="userInfo.avatarUrl" class="avatarImg mat-elevation-z1">
       </mat-grid-tile>
       <mat-grid-tile colspan="3">
         <div>
           <h1 class="mat-display-2 smallmargin">
-            {{username}}<span class="mat-small">#{{discrim}}</span>
+            {{userInfo.username}}<span class="mat-small">#{{userInfo.discriminator}}</span>
           </h1>
           <p class="mat-h3">
-            Characters: {{numCharacters}}<br>
-            Customizations: {{numCustomizations}}
+            Characters: {{userInfo.numCharacters}}<br>
+            Customizations: {{userInfo.numCustomizations}}
           </p>
         </div>
       </mat-grid-tile>
