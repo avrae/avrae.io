@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {DashboardComponent} from "./dashboard.component";
 import {DashboardRoutingModule} from "./dashboard-routing.module";
 import {MaterialModule} from "../material/material.module";
+import {CharactersComponent} from "./characters/characters.component";
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {MaterialModule} from "../material/material.module";
     DashboardRoutingModule
   ],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    CharactersComponent
   ]
 })
 

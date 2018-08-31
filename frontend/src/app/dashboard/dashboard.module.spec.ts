@@ -1,6 +1,6 @@
 import { DashboardModule } from './dashboard.module';
 
-describe('DashboardModule', () => {
+describe('CharactersModule', () => {
   let dashboardModule: DashboardModule;
 
   beforeEach(() => {
