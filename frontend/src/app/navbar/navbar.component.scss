@@ -1,16 +1,22 @@
+.navbar-container {
+  margin-left: 30px;
+  margin-right: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
 .navbar-header {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   padding: 8px 16px;
-  position: sticky;
-  top: 0;
   height: 56px;
-  z-index: 100;
 }
 
 .flex-spacer {
-  flex-grow: 1;
+  flex: 1 1;
+  //flex-grow: 1;
 }
 
 .navbar-link {
