@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'avr-characters',
@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CharactersComponent implements OnInit {
 
-  constructor() { }
+  username: string = "zhu.exe";
+  discrim: string = "4211";
+  userStats: object = {};
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

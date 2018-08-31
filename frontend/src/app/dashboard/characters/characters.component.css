@@ -1,0 +1,14 @@
+.characterList {
+  margin: 8px;
+}
+
+.avatarImg {
+  position: center;
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+}
+
+.smallmargin {
+  margin-bottom: 16px;
+}
