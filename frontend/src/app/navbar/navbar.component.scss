@@ -1,17 +1,12 @@
-.navbar-container {
-  margin-left: 30px;
-  margin-right: 30px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
 .navbar-header {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   padding: 8px 16px;
   height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .avrae-icon {

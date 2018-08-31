@@ -1,6 +1,7 @@
 
 .greetings {
-  margin: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .circular-greetings {
@@ -15,15 +16,29 @@
 }
 
 .grid-container {
-  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .dashboard-card {
   position: absolute;
   top: 15px;
-  left: 15px;
-  right: 15px;
   bottom: 15px;
+}
+
+.card-center {
+  left: 5px;
+  right: 5px;
+}
+
+.card-left {
+  left: 0;
+  right: 10px;
+}
+
+.card-right {
+  right: 0;
+  left: 10px;
 }
 
 .dashboard-card-content {
