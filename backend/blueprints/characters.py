@@ -1,5 +1,5 @@
 from bson.json_util import dumps
-from flask import Blueprint, request
+from flask import Blueprint
 
 from app import mdb
 from lib.discord import get_user_info

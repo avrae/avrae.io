@@ -1,7 +1,7 @@
 import os
 
 from bson.json_util import dumps
-from flask import Flask, request
+from flask import Flask
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 
@@ -39,8 +39,10 @@ def user_info():
 
 
 from blueprints.characters import characters
+from blueprints.customizations import customizations
 
 app.register_blueprint(characters, url_prefix="/characters")
+app.register_blueprint(customizations, url_prefix="/customizations")
 
 if __name__ == '__main__':
     app.run()
