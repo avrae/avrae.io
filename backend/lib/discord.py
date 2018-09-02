@@ -1,5 +1,5 @@
 import requests
-from flask import request
+from flask import request, abort
 
 DISCORD_API = "https://discordapp.com/api/v6"
 DISCORD_CDN = "https://cdn.discordapp.com"
@@ -29,6 +29,10 @@ def get(endpoint, token):
 
 
 def get_user_info():
-    token = request.headers['Authorization']
+    token = None
+    try:
+        token = request.headers['Authorization']
+    except KeyError:
+        abort(403)
     r = get("/users/@me", token)
     return UserInfo(r.json())

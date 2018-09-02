@@ -16,3 +16,19 @@ def customization_list():
         "uvars": list(mdb.uvars.find({"owner": user.id}))
     }
     return dumps(data)
+
+
+@customizations.route("/aliases", methods=["GET"])
+def alias_list():
+    user = get_user_info()
+    data = list(mdb.aliases.find({"owner": user.id}))
+    return dumps(data)
+
+
+@customizations.route("/aliases/<name>", methods=["DELETE"])
+def alias_delete(name):
+    user = get_user_info()
+    result = mdb.aliases.delete_one({"owner": user.id, "name": name})
+    if not result.deleted_count:
+        return "Alias not found.", 404
+    return "Alias deleted."
