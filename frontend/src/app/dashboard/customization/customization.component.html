@@ -1,13 +1,13 @@
 <div class="container">
   <mat-card>
     <mat-tab-group>
-      <mat-tab label="Aliases ({{aliases ? aliases.length : 0}})">
+      <mat-tab label="Aliases">
         <avr-alias-list [data]="aliases"></avr-alias-list>
       </mat-tab>
-      <mat-tab label="Snippets ({{snippets ? snippets.length : 0}})">
+      <mat-tab label="Snippets">
         <avr-snippet-list [data]="snippets"></avr-snippet-list>
       </mat-tab>
-      <mat-tab label="Uvars ({{uvars ? uvars.length : 0}})">
+      <mat-tab label="Uvars">
         <avr-uvar-list [data]="uvars"></avr-uvar-list>
       </mat-tab>
     </mat-tab-group>

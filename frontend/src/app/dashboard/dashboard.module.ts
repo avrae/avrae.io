@@ -8,6 +8,7 @@ import {CustomizationComponent} from './customization/customization.component';
 import {AliasListComponent} from './customization/alias-list/alias-list.component';
 import {SnippetListComponent} from './customization/snippet-list/snippet-list.component';
 import {UvarListComponent} from './customization/uvar-list/uvar-list.component';
+import {ConfirmDeleteDialog} from './customization/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,11 @@ import {UvarListComponent} from './customization/uvar-list/uvar-list.component';
     CustomizationComponent,
     AliasListComponent,
     SnippetListComponent,
-    UvarListComponent
+    UvarListComponent,
+    ConfirmDeleteDialog
+  ],
+  entryComponents: [
+    ConfirmDeleteDialog
   ]
 })
 

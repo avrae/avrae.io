@@ -7,28 +7,28 @@ import {defaultOptions} from "./APIHelper";
 import {CharacterMeta} from "../schemas/Character";
 import {Customizations} from "../schemas/Customization";
 
+const userInfoUrl = `${environment.apiURL}/userInfo`;
+const characterMetaUrl = `${environment.apiURL}/characters/meta`;
+const customizationsUrl = `${environment.apiURL}/customizations`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
 
-  private userInfoUrl = `${environment.apiURL}/userInfo`;
-  private characterMetaUrl = `${environment.apiURL}/characters/meta`;
-  private customizationsUrl = `${environment.apiURL}/customizations`;
 
   constructor(private http: HttpClient) {
   }
 
   getUserInfo(): Observable<UserInfo> {
-    return this.http.get<UserInfo>(this.userInfoUrl, defaultOptions());
+    return this.http.get<UserInfo>(userInfoUrl, defaultOptions());
   }
 
   getCharacterMeta(): Observable<CharacterMeta[]> {
-    return this.http.get<CharacterMeta[]>(this.characterMetaUrl, defaultOptions());
+    return this.http.get<CharacterMeta[]>(characterMetaUrl, defaultOptions());
   }
 
   getCustomizations(): Observable<Customizations> {
-    return this.http.get<Customizations>(this.customizationsUrl, defaultOptions());
+    return this.http.get<Customizations>(customizationsUrl, defaultOptions());
   }
 }

@@ -1,15 +1,20 @@
 import {NgModule} from '@angular/core';
 import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatButtonModule,
   MatCardModule,
+  MatDialogModule,
   MatGridListModule,
   MatIconModule,
   MatListModule,
   MatMenuModule,
   MatSidenavModule,
+  MatSnackBarModule,
+  MatTableModule,
   MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
+
 
 @NgModule({
   imports: [
@@ -21,7 +26,10 @@ import {
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   exports: [
     MatGridListModule,
@@ -32,7 +40,13 @@ import {
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSnackBarModule
+  ],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ]
 })
 export class MaterialModule {

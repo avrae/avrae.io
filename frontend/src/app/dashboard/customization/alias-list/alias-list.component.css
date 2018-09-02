@@ -1,0 +1,11 @@
+.list-table {
+  width: 100%;
+}
+
+.table-data-cell {
+  width: 70%;
+}
+
+pre {
+  white-space: pre-wrap;
+}
