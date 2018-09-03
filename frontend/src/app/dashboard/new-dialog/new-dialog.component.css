@@ -6,3 +6,7 @@
 .form-container > * {
   width: 100%;
 }
+
+textarea {
+  font-family: "Courier New", monospace;
+}
