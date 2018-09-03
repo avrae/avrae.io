@@ -15,6 +15,7 @@ import {FooterComponent} from './footer/footer.component';
 import {LoginComponent} from './login/login.component';
 import {ThemesModule} from "./themes/themes.module";
 import {ErrorComponent} from './error/error.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {ErrorComponent} from './error/error.component';
     HttpClientModule,
     BrowserAnimationsModule,
     LayoutModule,
+    FormsModule,
     MaterialModule,
     DashboardModule,
     AppRoutingModule,

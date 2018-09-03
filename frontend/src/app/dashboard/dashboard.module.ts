@@ -8,12 +8,16 @@ import {CustomizationComponent} from './customization/customization.component';
 import {AliasListComponent} from './customization/alias-list/alias-list.component';
 import {SnippetListComponent} from './customization/snippet-list/snippet-list.component';
 import {UvarListComponent} from './customization/uvar-list/uvar-list.component';
-import {ConfirmDeleteDialog} from './customization/confirm-delete-dialog/confirm-delete-dialog.component';
+import {ConfirmDeleteDialog} from './confirm-delete-dialog/confirm-delete-dialog.component';
+import {EditDialog} from './edit-dialog/edit-dialog.component';
+import {NewDialog} from './new-dialog/new-dialog.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
+    FormsModule,
     DashboardRoutingModule
   ],
   declarations: [
@@ -23,10 +27,14 @@ import {ConfirmDeleteDialog} from './customization/confirm-delete-dialog/confirm
     AliasListComponent,
     SnippetListComponent,
     UvarListComponent,
-    ConfirmDeleteDialog
+    ConfirmDeleteDialog,
+    EditDialog,
+    NewDialog
   ],
   entryComponents: [
-    ConfirmDeleteDialog
+    ConfirmDeleteDialog,
+    EditDialog,
+    NewDialog
   ]
 })
 

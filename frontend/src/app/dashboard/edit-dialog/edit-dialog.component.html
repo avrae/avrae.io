@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Editing {{data.name}}</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="data.content"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="data.content">Done</button>
+</mat-dialog-actions>
