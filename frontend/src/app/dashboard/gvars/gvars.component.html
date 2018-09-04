@@ -1,0 +1,12 @@
+<div class="container">
+  <mat-card>
+    <mat-tab-group>
+      <mat-tab label="Owned">
+        <avr-gvar-list [data]="ownedGvars" [owned]="true"></avr-gvar-list>
+      </mat-tab>
+      <mat-tab label="Editable">
+        <avr-gvar-list [data]="editableGvars" [owned]="false"></avr-gvar-list>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

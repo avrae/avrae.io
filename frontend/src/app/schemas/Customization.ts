@@ -29,3 +29,10 @@ export class CharVar {
   value: string;
 }
 
+export class GlobalVar {
+  owner: string;
+  key: string;
+  owner_name: string;
+  value: string;
+  editors: string[];
+}

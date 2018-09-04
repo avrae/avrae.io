@@ -12,6 +12,8 @@ import {ConfirmDeleteDialog} from './confirm-delete-dialog/confirm-delete-dialog
 import {EditDialog} from './edit-dialog/edit-dialog.component';
 import {NewDialog} from './new-dialog/new-dialog.component';
 import {FormsModule} from "@angular/forms";
+import {GvarsComponent} from './gvars/gvars.component';
+import { GvarListComponent } from './gvars/gvar-list/gvar-list.component';
 
 @NgModule({
   imports: [
@@ -27,9 +29,11 @@ import {FormsModule} from "@angular/forms";
     AliasListComponent,
     SnippetListComponent,
     UvarListComponent,
+    GvarsComponent,
     ConfirmDeleteDialog,
     EditDialog,
-    NewDialog
+    NewDialog,
+    GvarListComponent,
   ],
   entryComponents: [
     ConfirmDeleteDialog,
