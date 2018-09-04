@@ -16,6 +16,8 @@ import {LoginComponent} from './login/login.component';
 import {ThemesModule} from "./themes/themes.module";
 import {ErrorComponent} from './error/error.component';
 import {FormsModule} from "@angular/forms";
+import { CommandsComponent } from './commands/commands.component';
+import { CommandListComponent } from './commands/command-list/command-list.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {FormsModule} from "@angular/forms";
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    ErrorComponent
+    ErrorComponent,
+    CommandsComponent,
+    CommandListComponent
   ],
   imports: [
     BrowserModule,

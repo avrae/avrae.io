@@ -4,6 +4,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
@@ -33,7 +34,8 @@ import {
     MatDialogModule,
     MatSnackBarModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule
   ],
   exports: [
     MatGridListModule,
@@ -49,7 +51,8 @@ import {
     MatDialogModule,
     MatSnackBarModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}

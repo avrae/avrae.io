@@ -1,0 +1,23 @@
+.title {
+  margin: 8px;
+}
+
+.container {
+  margin: 8px;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.nav-button {
+  width: 100%
+}
+
+.smallmargin {
+  margin-bottom: 8px;
+}

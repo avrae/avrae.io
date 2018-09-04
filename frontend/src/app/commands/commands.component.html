@@ -1,0 +1,32 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    opened
+    mode="side"
+    class="sidenav mat-elevation-z3"
+    fixedInViewport="true"
+    fixedTopGap="64">
+    <mat-list>
+      <mat-list-item>
+        <button mat-button class="nav-button">Commands</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-card class="title">
+      <h1 class="mat-display-1 smallmargin">Command List</h1>
+      <p>This page is a list of all commands, subcommands, and valid arguments that Avrae can parse.</p>
+      <p>Avrae's command system is split into distinct modules. All commands are called by starting a message with the
+        message prefix (default <kbd>!</kbd>, but can be configured), followed by the command name.</p>
+      <p class="mat-small">This list is current as of Build 845. An updated version is always provided in
+        <kbd>!help</kbd>.</p>
+    </mat-card>
+
+    <mat-card class="container">
+
+      <h2 class="mat-h2 smallmargin">Module</h2>
+      <p>Module description</p>
+      <avr-command-list></avr-command-list>
+
+    </mat-card>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,11 @@
+.smallmargin {
+  margin-bottom: 8px;
+}
+
+.nomargin {
+  margin: 1px;
+}
+
+th {
+  text-align: left;
+}
