@@ -1,3 +1,5 @@
+import uuid
+
 from bson.json_util import dumps
 from flask import Blueprint, request
 
@@ -123,3 +125,78 @@ def uvar_delete(name):
     if not result.deleted_count:
         return "Uvar not found.", 404
     return "Uvar deleted."
+
+
+@customizations.route("/gvars", methods=["GET"])
+def gvar_list():
+    user = get_user_info()
+    data = {"owned": list(mdb.gvars.find({"owner": user.id})),
+            "editable": list(mdb.gvars.find({"editors": user.id}))}
+    return dumps(data)
+
+
+@customizations.route("/gvars/owned", methods=["GET"])
+def gvar_list_owned():
+    user = get_user_info()
+    data = list(mdb.gvars.find({"owner": user.id}))
+    return dumps(data)
+
+
+@customizations.route("/gvars/editable", methods=["GET"])
+def gvar_list_editable():
+    user = get_user_info()
+    data = list(mdb.gvars.find({"editors": user.id}))
+    return dumps(data)
+
+
+@customizations.route("/gvars", methods=["POST"])
+def gvar_new():
+    user = get_user_info()
+    data = request.json
+    if data is None:
+        return "No data found", 400
+    if 'value' not in data:
+        return "Missing value field", 400
+    if len(data['value']) > 100000:
+        return "Gvars must be less than 100KB", 400
+    key = str(uuid.uuid4())
+    gvar = {
+        "owner": user.id,
+        "key": key,
+        "owner_name": f"{user.username}#{user.discriminator}",
+        "value": data['value'],
+        "editors": []
+    }
+    mdb.gvars.insert_one(gvar)
+    return f"Gvar {key} created."
+
+
+@customizations.route("/gvars/<key>", methods=["POST"])
+def gvar_update(key):
+    user = get_user_info()
+    data = request.json
+    gvar = mdb.gvars.find_one({"key": key}, ['owner', 'editors'])
+    if data is None:
+        return "No data found", 400
+    if 'value' not in data:
+        return "Missing value field", 400
+    if gvar is None:
+        return "Gvar not found", 404
+    if gvar['owner'] != user.id and user.id not in gvar.get('editors', []):
+        return "You do not have permission to edit this gvar", 403
+    if len(data['value']) > 100000:
+        return "Gvars must be less than 100KB", 400
+    mdb.gvars.update_one({"key": key}, {"$set": {"value": data['value']}})
+    return "Gvar updated."
+
+
+@customizations.route("/gvars/<key>", methods=["DELETE"])
+def gvar_delete(key):
+    user = get_user_info()
+    gvar = mdb.gvars.find_one({"key": key}, ['owner'])
+    if gvar is None:
+        return "Gvar not found", 404
+    if gvar['owner'] != user.id:
+        return "You do not have permission to delete this gvar", 403
+    mdb.gvars.delete_one({"key": key})
+    return "Gvar deleted."
