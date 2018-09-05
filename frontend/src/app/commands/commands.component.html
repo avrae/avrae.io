@@ -4,7 +4,8 @@
     mode="side"
     class="sidenav mat-elevation-z3"
     fixedInViewport="true"
-    fixedTopGap="64">
+    fixedTopGap="64"
+    fixedBottomGap="8">
     <mat-list>
       <mat-list-item>
         <button mat-button class="nav-button">Commands</button>
@@ -21,11 +22,11 @@
         <kbd>!help</kbd>.</p>
     </mat-card>
 
-    <mat-card class="container">
+    <mat-card class="container" *ngFor="let module of modules">
 
-      <h2 class="mat-h2 smallmargin">Module</h2>
-      <p>Module description</p>
-      <avr-command-list></avr-command-list>
+      <h2 class="mat-h2 smallmargin">{{module.name}}</h2>
+      <p>{{module.desc}}</p>
+      <avr-command-list [commands]="module.commands"></avr-command-list>
 
     </mat-card>
   </mat-sidenav-content>

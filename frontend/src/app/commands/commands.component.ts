@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CommandModule} from "../schemas/Commands";
+import {CommandsService} from "./commands.service";
 
 @Component({
   selector: 'avr-commands',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommandsComponent implements OnInit {
 
-  constructor() { }
+  modules: CommandModule[];
+
+  constructor(private commandService: CommandsService) {
+  }
 
   ngOnInit() {
+    this.getCommands();
+  }
+
+  getCommands(): void {
+    this.commandService.getCommands()
+      .subscribe(modules => this.modules = modules.modules);
   }
 
 }

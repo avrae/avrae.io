@@ -1,5 +1,5 @@
 export function isLoggedIn() {
-  return localStorage.getItem("token") != null;
+  return getToken() != null;
 }
 
 export function setToken(token: string, expires: number) {
