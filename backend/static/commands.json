@@ -1,0 +1,2486 @@
+{
+  "modules": [
+    {
+      "name": "CharGenerator",
+      "desc": "Random character generator.",
+      "commands": [
+        {
+          "name": "autochar",
+          "short": "Automagically creates a dicecloud sheet for you, with basic character information complete.",
+          "docs": "Automagically creates a dicecloud sheet for you, with basic character information complete.",
+          "args": [
+            {
+              "name": "level",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!autochar <level>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "charref",
+          "short": "Gives you reference stats for a 5e character.",
+          "docs": "Gives you reference stats for a 5e character.",
+          "args": [
+            {
+              "name": "level",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![charref|makechar] <level>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "randchar",
+          "short": "Makes a random 5e character.",
+          "docs": "Makes a random 5e character.",
+          "args": [
+            {
+              "name": "level",
+              "required": false,
+              "default": "0",
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!randchar [level=0]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "randname",
+          "short": "Generates a random name, as per DMG rules.",
+          "docs": "Generates a random name, as per DMG rules.",
+          "args": [],
+          "signature": "!randname",
+          "subcommands": [],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "Core",
+      "desc": "Core utilty and general commands.",
+      "commands": [
+        {
+          "name": "about",
+          "short": "Information about the bot.",
+          "docs": "Information about the bot.",
+          "args": [],
+          "signature": "![about|stats|info]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "bug",
+          "short": "Reports a bug to the developer.",
+          "docs": "Reports a bug to the developer.",
+          "args": [
+            {
+              "name": "report",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![bug|feedback] <report>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "donate",
+          "short": "Prints a link to donate to the bot developer.",
+          "docs": "Prints a link to donate to the bot developer.",
+          "args": [],
+          "signature": "!donate",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "invite",
+          "short": "Prints a link to invite Avrae to your server.",
+          "docs": "Prints a link to invite Avrae to your server.",
+          "args": [],
+          "signature": "!invite",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "ping",
+          "short": "Checks the ping time to the bot.",
+          "docs": "Checks the ping time to the bot.",
+          "args": [],
+          "signature": "!ping",
+          "subcommands": [],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "Customization",
+      "desc": "Commands to help streamline using the bot.",
+      "commands": [
+        {
+          "name": "alias",
+          "short": "Adds an alias for a long command.",
+          "docs": "Adds an alias for a long command.\nAfter an alias has been added, you can instead run the aliased command with !<alias_name>.\nIf a user and a server have aliases with the same name, the user alias will take priority.",
+          "args": [
+            {
+              "name": "alias_name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "cmds",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!alias [alias_name] [cmds]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists all user aliases.",
+              "docs": "Lists all user aliases.",
+              "args": [],
+              "signature": "!alias list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "delete",
+              "short": "Deletes a user alias.",
+              "docs": "Deletes a user alias.",
+              "args": [
+                {
+                  "name": "alias_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!alias [delete|remove] <alias_name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "deleteall",
+              "short": "Deletes ALL user aliases.",
+              "docs": "Deletes ALL user aliases.",
+              "args": [],
+              "signature": "!alias [deleteall|removeall]",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "globalvar",
+          "short": "Commands to manage global, community variables for use in snippets and aliases.",
+          "docs": "Commands to manage global, community variables for use in snippets and aliases.\nIf run without a subcommand, shows the value of a global variable.\nGlobal variables are readable by all users, but only editable by the creator.\nGlobal variables must be accessed through scripting, with `get_gvar(gvar_id)`.\nSee http://avrae.io/cheatsheets/aliasing for more help.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![globalvar|gvar] [name]",
+          "subcommands": [
+            {
+              "name": "create",
+              "short": "Creates a global variable.",
+              "docs": "Creates a global variable.\nA name will be randomly assigned upon creation.",
+              "args": [
+                {
+                  "name": "value",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!globalvar create <value>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "edit",
+              "short": "Edits a global variable.",
+              "docs": "Edits a global variable.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "value",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!globalvar edit <name> <value>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "editor",
+              "short": "Toggles the editor status of a user.",
+              "docs": "Toggles the editor status of a user.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "user",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!globalvar editor <name> [user]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "remove",
+              "short": "Deletes a global variable.",
+              "docs": "Deletes a global variable.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!globalvar [remove|delete] <name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "list",
+              "short": "Lists all global variables for the user.",
+              "docs": "Lists all global variables for the user.",
+              "args": [],
+              "signature": "!globalvar list",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "multiline",
+          "short": "Runs each line as a separate command, with a 1 second delay between commands.",
+          "docs": "Runs each line as a separate command, with a 1 second delay between commands.\nLimited to 1 multiline every 20 seconds due to abuse.\nUsage:\n\"!multiline\n!roll 1d20\n!spell Fly\n!monster Rat\"",
+          "args": [
+            {
+              "name": "cmds",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!multiline <cmds>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "servalias",
+          "short": "Adds an alias that the entire server can use.",
+          "docs": "Adds an alias that the entire server can use.\nRequires __Administrator__ Discord permissions or a role called \"Server Aliaser\".\nIf a user and a server have aliases with the same name, the user alias will take priority.",
+          "args": [
+            {
+              "name": "alias_name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "cmds",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![servalias|serveralias] [alias_name] [cmds]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists all server aliases.",
+              "docs": "Lists all server aliases.",
+              "args": [],
+              "signature": "!servalias list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "delete",
+              "short": "Deletes a server alias.",
+              "docs": "Deletes a server alias.\nAny user with permission to create a server alias can delete one from the server.",
+              "args": [
+                {
+                  "name": "alias_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!servalias [delete|remove] <alias_name>",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "servsnippet",
+          "short": "Creates a snippet to use in attack macros for the entire server.",
+          "docs": "Creates a snippet to use in attack macros for the entire server.\nRequires __Administrator__ Discord permissions or a role called \"Server Aliaser\".\nIf a user and a server have snippets with the same name, the user snippet will take priority.\nEx: *!snippet sneak -d \"2d6[Sneak Attack]\"* can be used as *!a sword sneak*.",
+          "args": [
+            {
+              "name": "snipname",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "snippet",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!servsnippet [snipname] [snippet]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists this server's snippets.",
+              "docs": "Lists this server's snippets.",
+              "args": [],
+              "signature": "!servsnippet list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "delete",
+              "short": "Deletes a server snippet.",
+              "docs": "Deletes a server snippet.\nAny user that can create a server snippet can delete one.",
+              "args": [
+                {
+                  "name": "snippet_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!servsnippet [delete|remove] <snippet_name>",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "snippet",
+          "short": "Creates a snippet to use in attack macros.",
+          "docs": "Creates a snippet to use in attack macros.\nEx: *!snippet sneak -d \"2d6[Sneak Attack]\"* can be used as *!a sword sneak*.",
+          "args": [
+            {
+              "name": "snipname",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "snippet",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!snippet [snipname] [snippet]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists your user snippets.",
+              "docs": "Lists your user snippets.",
+              "args": [],
+              "signature": "!snippet list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "delete",
+              "short": "Deletes a snippet.",
+              "docs": "Deletes a snippet.",
+              "args": [
+                {
+                  "name": "snippet_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!snippet [delete|remove] <snippet_name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "deleteall",
+              "short": "Deletes ALL user snippets.",
+              "docs": "Deletes ALL user snippets.",
+              "args": [],
+              "signature": "!snippet [deleteall|removeall]",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "test",
+          "short": "Parses `str` as if it were in an alias, for testing.",
+          "docs": "Parses `str` as if it were in an alias, for testing.",
+          "args": [
+            {
+              "name": "teststr",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!test <teststr>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "uservar",
+          "short": "Commands to manage user variables for use in snippets and aliases.",
+          "docs": "Commands to manage user variables for use in snippets and aliases.\nUser variables can be called in the `-phrase` tag by surrounding the variable name with `{}` (calculates) or `<>` (prints).\nArguments surrounded with `{{}}` will be evaluated as a custom script.\nSee http://avrae.io/cheatsheets/aliasing for more help.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "value",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![uservar|uvar] [name] [value]",
+          "subcommands": [
+            {
+              "name": "remove",
+              "short": "Deletes a uvar from the user.",
+              "docs": "Deletes a uvar from the user.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!uservar [remove|delete] <name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "list",
+              "short": "Lists all uvars for the user.",
+              "docs": "Lists all uvars for the user.",
+              "args": [],
+              "signature": "!uservar list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "deleteall",
+              "short": "Deletes ALL user variables.",
+              "docs": "Deletes ALL user variables.",
+              "args": [],
+              "signature": "!uservar [deleteall|removeall]",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "Dice",
+      "desc": "Dice and math related commands.",
+      "commands": [
+        {
+          "name": "monster_atk",
+          "short": "Rolls a monster's attack.",
+          "docs": "Rolls a monster's attack.\nAttack name can be \"list\" for a list of all of the monster's attacks.\nValid Arguments: adv/dis\n                 -ac [target ac]\n                 -b [to hit bonus]\n                 -d [damage bonus]\n                 -d# [applies damage to the first # hits]\n                 -rr [times to reroll]\n                 -t [target]\n                 -phrase [flavor text]\n                 crit (automatically crit)",
+          "args": [
+            {
+              "name": "monster_name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "atk_name",
+              "required": false,
+              "default": "list",
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![monster_atk|ma|monster_attack] <monster_name> [atk_name=list] [args]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "monster_check",
+          "short": "Rolls a check for a monster.",
+          "docs": "Rolls a check for a monster.\nArgs: adv/dis\n      -b [conditional bonus]\n      -phrase [flavor text]\n      -title [title] *note: [mname] and [cname] will be replaced automatically*\n      -dc [dc]\n      -rr [iterations]\n      str/dex/con/int/wis/cha (different skill base; e.g. Strength (Intimidation))",
+          "args": [
+            {
+              "name": "monster_name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "check",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": true,
+              "desc": ""
+            }
+          ],
+          "signature": "![monster_check|mc] <monster_name> <check> [args...]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "monster_save",
+          "short": "Rolls a save for a monster.",
+          "docs": "Rolls a save for a monster.\nArgs: adv/dis\n      -b [conditional bonus]\n      -phrase [flavor text]\n      -title [title] *note: [mname] and [cname] will be replaced automatically*\n      -dc [dc]\n      -rr [iterations]",
+          "args": [
+            {
+              "name": "monster_name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "save",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": true,
+              "desc": ""
+            }
+          ],
+          "signature": "![monster_save|ms] <monster_name> <save> [args...]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "roll",
+          "short": "Rolls dice in xdy format.",
+          "docs": "Rolls dice in xdy format.\nUsage: !r xdy Attack!\n       !r xdy+z adv Attack with Advantage!\n       !r xdy-z dis Hide with Heavy Armor!\n       !r xdy+xdy*z\n       !r XdYkhZ\n       !r 4d6mi2[fire] Elemental Adept, Fire\n       !r 2d6e6 Explode on 6\n       !r 10d6ra6 Spell Bombardment\n       !r 4d6ro<3 Great Weapon Master\nSupported Operators: k (keep)\n                     ro (reroll once)\n                     rr (reroll infinitely)\n                     mi/ma (min/max result)\n                     e (explode dice of value)\n                     ra (reroll and add)\nSupported Selectors: lX (lowest X)\n                     hX (highest X)\n                     >X/<X (greater than or less than X)",
+          "args": [
+            {
+              "name": "rollStr",
+              "required": false,
+              "default": "1d20",
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![roll|r] [rollStr=1d20]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "multiroll",
+          "short": "Rolls dice in xdy format a given number of times.",
+          "docs": "Rolls dice in xdy format a given number of times.\nUsage: !rrr <iterations> <xdy> [args]",
+          "args": [
+            {
+              "name": "iterations",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "rollStr",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![multiroll|rr] <iterations> <rollStr> [args]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "iterroll",
+          "short": "Rolls dice in xdy format, given a set dc.",
+          "docs": "Rolls dice in xdy format, given a set dc.\nUsage: !rrr <iterations> <xdy> <DC> [args]",
+          "args": [
+            {
+              "name": "iterations",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "rollStr",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "dc",
+              "required": false,
+              "default": 0,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![iterroll|rrr] <iterations> <rollStr> [dc=0] [args]",
+          "subcommands": [],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "GameTrack",
+      "desc": "Commands to help track game resources.",
+      "commands": [
+        {
+          "name": "cast",
+          "short": "Casts a spell.",
+          "docs": "Casts a spell.\n__Valid Arguments:__\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.",
+          "args": [
+            {
+              "name": "spell_name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!cast <spell_name> [args]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "customcounter",
+          "short": "Commands to implement custom counters.",
+          "docs": "Commands to implement custom counters.\nWhen called on its own, if modifier is supplied, increases the counter *name* by *modifier*.\nIf modifier is not supplied, prints the value and metadata of the counter *name*.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "modifier",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![customcounter|cc] [name] [modifier]",
+          "subcommands": [
+            {
+              "name": "create",
+              "short": "Creates a new custom counter.",
+              "docs": "Creates a new custom counter.\n__Valid Arguments__\n`-reset <short|long|none>` - Counter will reset to max on a short/long rest, or not ever when \"none\". Default - will reset on a call of `!cc reset`.\n`-max <max value>` - The maximum value of the counter.\n`-min <min value>` - The minimum value of the counter.\n`-type <bubble|default>` - Whether the counter displays bubbles to show remaining uses or numbers. Default - numbers.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!customcounter create <name> [args...]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "delete",
+              "short": "Deletes a custom counter.",
+              "docs": "Deletes a custom counter.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!customcounter [delete|remove] <name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "summary",
+              "short": "Prints a summary of all custom counters.",
+              "docs": "Prints a summary of all custom counters.",
+              "args": [],
+              "signature": "!customcounter [summary|list]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "reset",
+              "short": "Resets custom counters, hp, death saves, and spell slots.",
+              "docs": "Resets custom counters, hp, death saves, and spell slots.\nWill reset all if name is not passed, otherwise the specific passed one.\nA counter can only be reset if it has a maximum value.\nReset hierarchy: short < long < default < none\n__Valid Arguments__\n-h - Hides the character summary output.",
+              "args": [
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!customcounter reset [args...]",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "game",
+          "short": "Commands to help track character information in a game. Use `!help game` to view subcommands.",
+          "docs": "Commands to help track character information in a game. Use `!help game` to view subcommands.",
+          "args": [],
+          "signature": "![game|g]",
+          "subcommands": [
+            {
+              "name": "status",
+              "short": "Prints the status of the current active character.",
+              "docs": "Prints the status of the current active character.",
+              "args": [],
+              "signature": "!game [status|summary]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "spellslot",
+              "short": "Views or sets your remaining spell slots.",
+              "docs": "Views or sets your remaining spell slots.",
+              "args": [
+                {
+                  "name": "level",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "value",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!game [spellslot|ss] [level] [value]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "longrest",
+              "short": "Performs a long rest, resetting applicable counters.",
+              "docs": "Performs a long rest, resetting applicable counters.\n__Valid Arguments__\n-h - Hides the character summary output.",
+              "args": [
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!game [longrest|lr] [args...]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "shortrest",
+              "short": "Performs a short rest, resetting applicable counters.",
+              "docs": "Performs a short rest, resetting applicable counters.\n__Valid Arguments__\n-h - Hides the character summary output.",
+              "args": [
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!game [shortrest|sr] [args...]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "hp",
+              "short": "Modifies the HP of a the current active character. Synchronizes live with Dicecloud.",
+              "docs": "Modifies the HP of a the current active character. Synchronizes live with Dicecloud.\nIf operator is not passed, assumes `mod`.\nOperators: `mod`, `set`.",
+              "args": [
+                {
+                  "name": "operator",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "hp",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!game hp [operator] [hp]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "thp",
+              "short": "Modifies the temp HP of a the current active character.",
+              "docs": "Modifies the temp HP of a the current active character.\nIf positive, assumes set; if negative, assumes mod.",
+              "args": [
+                {
+                  "name": "thp",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!game thp [thp]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "deathsave",
+              "short": "Commands to manage character death saves.",
+              "docs": "Commands to manage character death saves.\n__Valid Arguments__\nSee `!help save`.",
+              "args": [
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!game [deathsave|ds] [args...]",
+              "subcommands": [
+                {
+                  "name": "success",
+                  "short": "Adds a successful death save.",
+                  "docs": "Adds a successful death save.",
+                  "args": [],
+                  "signature": "!game deathsave [success|s|save]",
+                  "subcommands": [],
+                  "example": ""
+                },
+                {
+                  "name": "fail",
+                  "short": "Adds a failed death save.",
+                  "docs": "Adds a failed death save.",
+                  "args": [],
+                  "signature": "!game deathsave [fail|f]",
+                  "subcommands": [],
+                  "example": ""
+                },
+                {
+                  "name": "reset",
+                  "short": "Resets all death saves.",
+                  "docs": "Resets all death saves.",
+                  "args": [],
+                  "signature": "!game deathsave reset",
+                  "subcommands": [],
+                  "example": ""
+                }
+              ],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "spellbook",
+          "short": "Commands to display a character's known spells and metadata.",
+          "docs": "Commands to display a character's known spells and metadata.",
+          "args": [],
+          "signature": "![spellbook|sb]",
+          "subcommands": [
+            {
+              "name": "add",
+              "short": "Adds a spell to the spellbook override. If character is live, will add to sheet as well.",
+              "docs": "Adds a spell to the spellbook override. If character is live, will add to sheet as well.",
+              "args": [
+                {
+                  "name": "spell_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!spellbook add <spell_name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "addall",
+              "short": "Adds all spells of a given level from a given class list to the spellbook override. Requires live sheet.",
+              "docs": "Adds all spells of a given level from a given class list to the spellbook override. Requires live sheet.\nIf `spell_list` is passed, will add these spells to the list named so in Dicecloud.",
+              "args": [
+                {
+                  "name": "_class",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "level",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "spell_list",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!spellbook addall <_class> <level> [spell_list]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "remove",
+              "short": "Removes a spell from the spellbook override. Must type in full name.",
+              "docs": "Removes a spell from the spellbook override. Must type in full name.",
+              "args": [
+                {
+                  "name": "spell_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!spellbook remove <spell_name>",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "Help",
+      "desc": null,
+      "commands": [
+        {
+          "name": "help",
+          "short": "Shows this message.",
+          "docs": "Shows this message.\n<argument> - This means the argument is __**required**__.\n[argument] - This means the argument is __**optional**__.\n[A|B] - This means the it can be __**either A or B**__.\n[argument...] - This means you can have multiple arguments.\nNow that you know the basics, it should be noted that __**you do not type in the brackets!**__",
+          "args": [
+            {
+              "name": "commands",
+              "required": false,
+              "default": null,
+              "multiple": true,
+              "desc": ""
+            }
+          ],
+          "signature": "![help|commands] [commands...]",
+          "subcommands": [],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "Homebrew",
+      "desc": "Commands to manage homebrew in Avrae.",
+      "commands": [
+        {
+          "name": "bestiary",
+          "short": "Commands to manage homebrew monsters.",
+          "docs": "Commands to manage homebrew monsters.\nWhen called without an argument, lists the current bestiary and the monsters in it.\nWhen called with a name, switches to a different bestiary.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!bestiary [name]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists your available bestiaries.",
+              "docs": "Lists your available bestiaries.",
+              "args": [],
+              "signature": "!bestiary list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "delete",
+              "short": "Deletes a bestiary from Avrae.",
+              "docs": "Deletes a bestiary from Avrae.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!bestiary delete <name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "import",
+              "short": "Imports a published bestiary from [CritterDB](http://www.critterdb.com/).",
+              "docs": "Imports a published bestiary from [CritterDB](http://www.critterdb.com/).",
+              "args": [
+                {
+                  "name": "url",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!bestiary import <url>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "update",
+              "short": "Updates the active bestiary from CritterDB.",
+              "docs": "Updates the active bestiary from CritterDB.",
+              "args": [],
+              "signature": "!bestiary update",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "InitTracker",
+      "desc": "Initiative tracking commands. Use !help init for more details.\nTo use, first start combat in a channel by saying \"!init begin\".\nThen, each combatant should add themselves to the combat with \"!init add <MOD> <NAME>\".\nTo hide a combatant's HP, add them with \"!init add <MOD> <NAME> -h\".\nOnce every combatant is added, each combatant should set their max hp with \"!init hp <NAME> max <MAXHP>\".\nThen, you can proceed through combat with \"!init next\".\nOnce combat ends, end combat with \"!init end\".\nFor more help, the !help command shows applicable arguments for each command.",
+      "commands": [
+        {
+          "name": "init",
+          "short": "Commands to help track initiative.",
+          "docs": "Commands to help track initiative.",
+          "args": [],
+          "signature": "![init|i]",
+          "subcommands": [
+            {
+              "name": "begin",
+              "short": "Begins combat in the channel the command is invoked.",
+              "docs": "Begins combat in the channel the command is invoked.\nUsage: !init begin <ARGS (opt)>\nValid Arguments: -dyn (dynamic init; rerolls all initiatives at the start of a round)\n                 -name <NAME> (names the combat)\n                 -turnnotif (notifies the next player)",
+              "args": [
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init begin [args]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "add",
+              "short": "Adds a combatant to the initiative order.",
+              "docs": "Adds a combatant to the initiative order.\nIf a character is set up with the SheetManager module, you can use !init dcadd instead.\nIf you are adding monsters to combat, you can use !init madd instead.\nUse !help init [dcadd|madd] for more help.\nValid Arguments:    -h (hides HP)\n                    -p (places at given number instead of rolling)\n                    -controller <CONTROLLER> (pings a different person on turn)\n                    -group <GROUP> (adds the combatant to a group)\n                    -hp <HP> (starts with HP)\n                    -ac <AC> (sets combatant AC)\n                    -resist/immune/vuln <resistance>",
+              "args": [
+                {
+                  "name": "modifier",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init add <modifier> <name> [args...]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "madd",
+              "short": "Adds a monster to combat.",
+              "docs": "Adds a monster to combat.\nArgs: adv/dis\n      -b [conditional bonus]\n      -n [number of monsters]\n      -p [init value]\n      -name [name scheme, use \"#\" for auto-numbering, ex. \"Orc#\"]\n      -h (same as !init add, default true)\n      -group (same as !init add)\n      -npr (removes physical resistances when added)\n      -rollhp (rolls monster HP)\n      -hp [starting hp]\n      -ac [starting ac]",
+              "args": [
+                {
+                  "name": "monster_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init madd <monster_name> [args...]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "join",
+              "short": "Adds the current active character to combat. A character must be loaded through the SheetManager module first.",
+              "docs": "Adds the current active character to combat. A character must be loaded through the SheetManager module first.\nArgs: adv/dis\n      -b [conditional bonus]\n      -phrase [flavor text]\n      -p [init value]\n      -h (same as !init add)\n      --group (same as !init add)",
+              "args": [
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init [join|cadd|dcadd] [args]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "next",
+              "short": "Moves to the next turn in initiative order.",
+              "docs": "Moves to the next turn in initiative order.\nIt must be your turn or you must be the DM (the person who started combat) to use this command.",
+              "args": [],
+              "signature": "!init [next|n]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "prev",
+              "short": "Moves to the previous turn in initiative order.",
+              "docs": "Moves to the previous turn in initiative order.",
+              "args": [],
+              "signature": "!init [prev|previous|rewind]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "move",
+              "short": "Moves to a certain initiative.",
+              "docs": "Moves to a certain initiative.\n`target` can be either a number, to go to that initiative, or a name.\nIf not supplied, goes to the first combatant that the user controls.",
+              "args": [
+                {
+                  "name": "target",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init [move|goto] [target]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "skipround",
+              "short": "Skips one or more rounds of initiative.",
+              "docs": "Skips one or more rounds of initiative.",
+              "args": [
+                {
+                  "name": "numrounds",
+                  "required": false,
+                  "default": 1,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init [skipround|round|skiprounds] [numrounds=1]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "list",
+              "short": "Lists the combatants.",
+              "docs": "Lists the combatants.",
+              "args": [],
+              "signature": "!init [list|summary]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "note",
+              "short": "Attaches a note to a combatant.",
+              "docs": "Attaches a note to a combatant.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "note",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init note <name> [note]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "opt",
+              "short": "Edits the options of a combatant.",
+              "docs": "Edits the options of a combatant.\nValid Arguments:    -h (hides HP)\n                    -p (changes init)\n                    -name <NAME> (changes combatant name)\n                    -controller <CONTROLLER> (pings a different person on turn)\n                    -ac <AC> (changes combatant AC)\n                    -resist <RESISTANCE>\n                    -immune <IMMUNITY>\n                    -vuln <VULNERABILITY>\n                    -group <GROUP> (changes group)",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init [opt|opts] <name> [args...]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "status",
+              "short": "Gets the status of a combatant or group.",
+              "docs": "Gets the status of a combatant or group.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init status <name> [args]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "hp",
+              "short": "Modifies the HP of a combatant.",
+              "docs": "Modifies the HP of a combatant.\nUsage: !init hp <NAME> <mod/set/max> <HP>\nIf no operator is supplied, mod is assumed.\nIf max is given with no number, resets combatant to max hp.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "operator",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "hp",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init hp <name> <operator> [hp]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "thp",
+              "short": "Modifies the temporary HP of a combatant.",
+              "docs": "Modifies the temporary HP of a combatant.\nUsage: !init thp <NAME> <HP>\nSets the combatant's THP if hp is positive, modifies it otherwise (i.e. `!i thp Avrae 5` would set Avrae's THP to 5 but `!i thp Avrae -2` would remove 2 THP).",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "thp",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init thp <name> <thp>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "effect",
+              "short": "Attaches a status effect to a combatant.",
+              "docs": "Attaches a status effect to a combatant.\n[effect] is a set of args that will be appended to every `!i a` the combatant makes.\nValid Arguments: -b [bonus] (see !a)\n                 -d [damage bonus] (see !a)\n                 -ac [ac] (modifies ac temporarily; adds if starts with +/- or sets otherwise)",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "duration",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "effect_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "effect",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init effect <name> <duration> <effect_name> [effect]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "re",
+              "short": "Removes a status effect from a combatant. Removes all if effect is not passed.",
+              "docs": "Removes a status effect from a combatant. Removes all if effect is not passed.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "effect",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init re <name> [effect]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "attack",
+              "short": "Rolls an attack against another combatant.",
+              "docs": "Rolls an attack against another combatant.\nValid Arguments: see !a and !ma.\n`-custom` - Makes a custom attack with 0 to hit and base damage. Use `-b` and `-d` to add damage and to hit.",
+              "args": [
+                {
+                  "name": "target_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "atk_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init [attack|a] <target_name> <atk_name> [args]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "aoo",
+              "short": "Rolls an attack of opportunity against another combatant.",
+              "docs": "Rolls an attack of opportunity against another combatant.\nValid Arguments: see !a and !ma.\n`-custom` - Makes a custom attack with 0 to hit and base damage. Use `-b` and `-d` to add damage and to hit.",
+              "args": [
+                {
+                  "name": "combatant_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "target_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "atk_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init aoo <combatant_name> <target_name> <atk_name> [args]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "cast",
+              "short": "Casts a spell against another combatant.",
+              "docs": "Casts a spell against another combatant.\n__Valid Arguments__\n-t [target (chainable)] - Required\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\nadv/dis - forces all saves to be at adv/dis.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.",
+              "args": [
+                {
+                  "name": "spell_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init cast <spell_name> [args]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "reactcast",
+              "short": "Casts a spell against another combatant.",
+              "docs": "Casts a spell against another combatant.\n__Valid Arguments__\n-t [target (chainable)] - Required\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\nadv/dis - forces all saves to be at adv/dis.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.",
+              "args": [
+                {
+                  "name": "combatant_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "spell_name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init reactcast <combatant_name> <spell_name> [args]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "remove",
+              "short": "Removes a combatant or group from the combat.",
+              "docs": "Removes a combatant or group from the combat.\nUsage: !init remove <NAME>",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init remove <name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "end",
+              "short": "Ends combat in the channel.",
+              "docs": "Ends combat in the channel.",
+              "args": [],
+              "signature": "!init end",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "Lookup",
+      "desc": "Commands to help look up items, status effects, rules, etc.",
+      "commands": [
+        {
+          "name": "class",
+          "short": "Looks up a class, or all features of a certain level.",
+          "docs": "Looks up a class, or all features of a certain level.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "level",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!class <name> [level]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "background",
+          "short": "Looks up a background.",
+          "docs": "Looks up a background.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!background <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "classfeat",
+          "short": "Looks up a class feature.",
+          "docs": "Looks up a class feature.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!classfeat <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "condition",
+          "short": "Looks up a condition.",
+          "docs": "Looks up a condition.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![condition|status] <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "feat",
+          "short": "Looks up a feat.",
+          "docs": "Looks up a feat.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!feat <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "item",
+          "short": "Looks up an item.",
+          "docs": "Looks up an item.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!item <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "lookup_settings",
+          "short": "Changes settings for the lookup module.",
+          "docs": "Changes settings for the lookup module.\nUsage: !lookup_settings -req_dm_monster True\nCurrent settings are: -req_dm_monster [True/False] - Requires a Game Master role to show a full monster stat block.\n                      -pm_result [True/False] - PMs the result of the lookup to reduce spam.\n                      -srd [True/False] - toggles SRD lookup restriction in a server.",
+          "args": [
+            {
+              "name": "args",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!lookup_settings <args>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "monster",
+          "short": "Looks up a monster.",
+          "docs": "Looks up a monster.\nGenerally requires a Game Master role to show full stat block.\nGame Master Roles: GM, DM, Game Master, Dungeon Master",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!monster <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "race",
+          "short": "Looks up a race.",
+          "docs": "Looks up a race.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!race <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "racefeat",
+          "short": "Looks up a racial feature.",
+          "docs": "Looks up a racial feature.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!racefeat <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "rule",
+          "short": "Looks up a rule.",
+          "docs": "Looks up a rule.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!rule <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "spell",
+          "short": "Looks up a spell.",
+          "docs": "Looks up a spell.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!spell <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "subclass",
+          "short": "Looks up a subclass.",
+          "docs": "Looks up a subclass.",
+          "args": [
+            {
+              "name": "name",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!subclass <name>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "token",
+          "short": "Shows a token for a monster or player. May not support all monsters.",
+          "docs": "Shows a token for a monster or player. May not support all monsters.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!token [name]",
+          "subcommands": [],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "PBPUtils",
+      "desc": "Commands to help streamline playing-by-post over Discord.",
+      "commands": [
+        {
+          "name": "br",
+          "short": "Prints a scene break.",
+          "docs": "Prints a scene break.",
+          "args": [],
+          "signature": "!br",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "echo",
+          "short": "Echos a message.",
+          "docs": "Echos a message.",
+          "args": [
+            {
+              "name": "msg",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!echo <msg>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "embed",
+          "short": "Creates and prints an Embed.",
+          "docs": "Creates and prints an Embed.\nArguments: -title [title]\n-desc [description text]\n-thumb [image url]\n-image [image url]\n-footer [footer text]\n-f [\"Field Title|Field Text\"]\n-color [hex color]\n-t [timeout (0..600)]",
+          "args": [
+            {
+              "name": "args",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!embed <args>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "pythag",
+          "short": "Performs a pythagorean theorem calculation to calculate diagonals.",
+          "docs": "Performs a pythagorean theorem calculation to calculate diagonals.",
+          "args": [
+            {
+              "name": "num1",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "num2",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!pythag <num1> <num2>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "techo",
+          "short": "Echos a message, and deletes it after a few seconds.",
+          "docs": "Echos a message, and deletes it after a few seconds.",
+          "args": [
+            {
+              "name": "seconds",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "msg",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!techo <seconds> <msg>",
+          "subcommands": [],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "Permissions",
+      "desc": "Handles the bot's permission system.\n\nThis is how you disable or enable certain commands\nfor your server.",
+      "commands": [
+        {
+          "name": "disable",
+          "short": "Disables a command for this server. Case-sensitive.",
+          "docs": "Disables a command for this server. Case-sensitive.\n\nYou must have Manage Server permissions or the\nBot Admin role to use this command.",
+          "args": [
+            {
+              "name": "command",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!disable <command>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "enable",
+          "short": "Enables a command for this server.",
+          "docs": "Enables a command for this server.\n\nYou must have Manage Server permissions or the\nBot Admin role to use this command.",
+          "args": [
+            {
+              "name": "command",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!enable <command>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "prefix",
+          "short": "Sets the bot's prefix for this server.",
+          "docs": "Sets the bot's prefix for this server.\n\nYou must have Manage Server permissions or the\nBot Admin role to use this command.\n\nForgot the prefix? Reset it with \"@Avrae#6944 prefix !\".",
+          "args": [
+            {
+              "name": "prefix",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!prefix [prefix]",
+          "subcommands": [],
+          "example": ""
+        }
+      ]
+    },
+    {
+      "name": "SheetManager",
+      "desc": "Commands to import a character sheet from [Dicecloud](https://dicecloud.com),\na [Google Sheet](https://gsheet.avrae.io), or a D&D Beyond PDF.",
+      "commands": [
+        {
+          "name": "attack",
+          "short": "Rolls an attack for the current active character.",
+          "docs": "Rolls an attack for the current active character.\nValid Arguments: adv/dis\n                 adv#/dis# (applies adv to the first # attacks)\n                 -ac [target ac]\n                 -b [to hit bonus]\n                 -d [damage bonus]\n                 -d# [applies damage to the first # hits]\n                 -rr [times to reroll]\n                 -t [target]\n                 -c [damage bonus on crit]\n                 -criton [a number to crit on if rolled on or above]\n                 -phrase [flavor text]\n                 -title [title] *note: [charname], [aname], and [target] will be replaced automatically*\n                 -resist [damage resistance]\n                 -immune [damage immunity]\n                 -vuln [damage vulnerability]\n                 -hit (automatically hits)\n                 -miss (automatically misses)\n                 crit (automatically crit)\n                 ea (Elven Accuracy double advantage)\n                 -f \"Field Title|Field Text\" (see !embed)\n                 [user snippet]",
+          "args": [
+            {
+              "name": "atk_name",
+              "required": false,
+              "default": "list",
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![attack|a] [atk_name=list] [args]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "beyond",
+          "short": "Loads a character sheet from D&D Beyond, resetting all settings.",
+          "docs": "Loads a character sheet from D&D Beyond, resetting all settings.",
+          "args": [
+            {
+              "name": "url",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!beyond <url>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "character",
+          "short": "Switches the active character.",
+          "docs": "Switches the active character.\nBreaks for characters created before Jan. 20, 2017.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![character|char] [name]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists your characters.",
+              "docs": "Lists your characters.",
+              "args": [],
+              "signature": "!character list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "delete",
+              "short": "Deletes a character.",
+              "docs": "Deletes a character.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!character delete <name>",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "check",
+          "short": "Rolls a check for your current active character.",
+          "docs": "Rolls a check for your current active character.\nArgs: adv/dis\n      -b [conditional bonus]\n      -mc [minimum roll]\n      -phrase [flavor text]\n      -title [title] *note: [charname] and [cname] will be replaced automatically*\n      -dc [dc]\n      -rr [iterations]\n      str/dex/con/int/wis/cha (different skill base; e.g. Strength (Intimidation))",
+          "args": [
+            {
+              "name": "check",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![check|c] <check> [args]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "csettings",
+          "short": "Updates personalization settings for the currently active character.",
+          "docs": "Updates personalization settings for the currently active character.\nValid Arguments:\n`color <hex color>` - Colors all embeds this color.\n`criton <number>` - Makes attacks crit on something other than a 20.\n`reroll <number>` - Defines a number that a check will automatically reroll on, for cases such as Halfling Luck.\n`srslots true/false` - Enables/disables whether spell slots reset on a Short Rest.\n`embedimage true/false` - Enables/disables whether a character's image is automatically embedded.\n`crittype 2x/default` - Sets whether crits double damage or dice.\n`critdice <number>` - Adds additional dice for to critical attacks.",
+          "args": [
+            {
+              "name": "args",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!csettings <args>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "cvar",
+          "short": "Commands to manage character variables for use in snippets and aliases.",
+          "docs": "Commands to manage character variables for use in snippets and aliases.\nCharacter variables can be called in the `-phrase` tag by surrounding the variable name with `{}` (calculates) or `<>` (prints).\nArguments surrounded with `{{}}` will be evaluated as a custom script.\nSee http://avrae.io/cheatsheets/aliasing for more help.\nDicecloud `statMod` and `stat` variables are also available.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "value",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!cvar [name] [value]",
+          "subcommands": [
+            {
+              "name": "remove",
+              "short": "Deletes a cvar from the currently active character.",
+              "docs": "Deletes a cvar from the currently active character.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!cvar [remove|delete] <name>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "deleteall",
+              "short": "Deletes ALL character variables for the active character.",
+              "docs": "Deletes ALL character variables for the active character.",
+              "args": [],
+              "signature": "!cvar [deleteall|removeall]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "list",
+              "short": "Lists all cvars for the currently active character.",
+              "docs": "Lists all cvars for the currently active character.",
+              "args": [],
+              "signature": "!cvar list",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "desc",
+          "short": "Prints or edits a description of your currently active character.",
+          "docs": "Prints or edits a description of your currently active character.",
+          "args": [],
+          "signature": "!desc",
+          "subcommands": [
+            {
+              "name": "update",
+              "short": "Updates the character description.",
+              "docs": "Updates the character description.",
+              "args": [
+                {
+                  "name": "desc",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!desc [update|edit] <desc>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "remove",
+              "short": "Removes the character description, returning to the default.",
+              "docs": "Removes the character description, returning to the default.",
+              "args": [],
+              "signature": "!desc [remove|delete]",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "dicecloud",
+          "short": "Loads a character sheet from [Dicecloud](https://dicecloud.com/), resetting all settings.",
+          "docs": "Loads a character sheet from [Dicecloud](https://dicecloud.com/), resetting all settings.\nShare your character with `avrae` on Dicecloud (edit perms) for live updates.\n__Valid Arguments__\n`-cc` - Will automatically create custom counters for class resources and features.",
+          "args": [
+            {
+              "name": "url",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!dicecloud <url> [args]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "gsheet",
+          "short": "Loads a character sheet from [this Google sheet](https://docs.google.com/spreadsheets/d/1etrBJ0qCDXACovYHUM4XvjE0erndThwRLcUQzX6ts8w/edit?usp=sharing), resetting all settings. The sheet must be shared with Avrae (see specific command help) for this to work.",
+          "docs": "Loads a character sheet from [this Google sheet](https://docs.google.com/spreadsheets/d/1etrBJ0qCDXACovYHUM4XvjE0erndThwRLcUQzX6ts8w/edit?usp=sharing), resetting all settings. The sheet must be shared with Avrae (see specific command help) for this to work.\nAvrae's google account is `avrae-320@avrae-bot.iam.gserviceaccount.com`.",
+          "args": [
+            {
+              "name": "url",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!gsheet <url>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "portrait",
+          "short": "Shows or edits the image of your currently active character.",
+          "docs": "Shows or edits the image of your currently active character.",
+          "args": [],
+          "signature": "!portrait",
+          "subcommands": [
+            {
+              "name": "update",
+              "short": "Updates the character portrait.",
+              "docs": "Updates the character portrait.",
+              "args": [
+                {
+                  "name": "url",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!portrait [update|edit] <url>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "remove",
+              "short": "Removes the character portrait, returning to the default.",
+              "docs": "Removes the character portrait, returning to the default.",
+              "args": [],
+              "signature": "!portrait [remove|delete]",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "save",
+          "short": "Rolls a save for your current active character.",
+          "docs": "Rolls a save for your current active character.\nArgs: adv/dis\n      -b [conditional bonus]\n      -phrase [flavor text]\n      -title [title] *note: [charname] and [sname] will be replaced automatically*\n      -image [image URL]\n      -dc [dc] (does not apply to Death Saves)\n      -rr [iterations] (does not apply to Death Saves)",
+          "args": [
+            {
+              "name": "skill",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![save|s] <skill> [args]",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "sheet",
+          "short": "Prints the embed sheet of your currently active character.",
+          "docs": "Prints the embed sheet of your currently active character.",
+          "args": [],
+          "signature": "!sheet",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "transferchar",
+          "short": "Gives a copy of the active character to another user.",
+          "docs": "Gives a copy of the active character to another user.",
+          "args": [
+            {
+              "name": "user",
+              "required": true,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!transferchar <user>",
+          "subcommands": [],
+          "example": ""
+        },
+        {
+          "name": "update",
+          "short": "Updates the current character sheet, preserving all settings.",
+          "docs": "Updates the current character sheet, preserving all settings.\nValid Arguments: `-v` - Shows character sheet after update is complete.\n`-cc` - Updates custom counters from Dicecloud.",
+          "args": [
+            {
+              "name": "args",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!update [args]",
+          "subcommands": [],
+          "example": ""
+        }
+      ]
+    }
+  ]
+}

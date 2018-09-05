@@ -1,10 +1,10 @@
 import uuid
 
-from bson.json_util import dumps
 from flask import Blueprint, request
 
 from app import mdb, rdb
 from lib.discord import get_user_info
+from lib.utils import jsonify
 
 customizations = Blueprint('customizations', __name__)
 
@@ -17,14 +17,14 @@ def customization_list():
         "snippets": list(mdb.snippets.find({"owner": user.id})),
         "uvars": list(mdb.uvars.find({"owner": user.id}))
     }
-    return dumps(data)
+    return jsonify(data)
 
 
 @customizations.route("/aliases", methods=["GET"])
 def alias_list():
     user = get_user_info()
     data = list(mdb.aliases.find({"owner": user.id}))
-    return dumps(data)
+    return jsonify(data)
 
 
 @customizations.route("/aliases/<name>", methods=["POST"])
@@ -61,7 +61,7 @@ def alias_delete(name):
 def snippet_list():
     user = get_user_info()
     data = list(mdb.snippets.find({"owner": user.id}))
-    return dumps(data)
+    return jsonify(data)
 
 
 @customizations.route("/snippets/<name>", methods=["POST"])
@@ -98,7 +98,7 @@ def snippet_delete(name):
 def uvar_list():
     user = get_user_info()
     data = list(mdb.uvars.find({"owner": user.id}))
-    return dumps(data)
+    return jsonify(data)
 
 
 @customizations.route("/uvars/<name>", methods=["POST"])
@@ -132,21 +132,21 @@ def gvar_list():
     user = get_user_info()
     data = {"owned": list(mdb.gvars.find({"owner": user.id})),
             "editable": list(mdb.gvars.find({"editors": user.id}))}
-    return dumps(data)
+    return jsonify(data)
 
 
 @customizations.route("/gvars/owned", methods=["GET"])
 def gvar_list_owned():
     user = get_user_info()
     data = list(mdb.gvars.find({"owner": user.id}))
-    return dumps(data)
+    return jsonify(data)
 
 
 @customizations.route("/gvars/editable", methods=["GET"])
 def gvar_list_editable():
     user = get_user_info()
     data = list(mdb.gvars.find({"editors": user.id}))
-    return dumps(data)
+    return jsonify(data)
 
 
 @customizations.route("/gvars", methods=["POST"])

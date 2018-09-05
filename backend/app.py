@@ -1,6 +1,6 @@
+import json
 import os
 
-from bson.json_util import dumps
 from flask import Flask
 from flask_cors import CORS
 from flask_pymongo import PyMongo
@@ -8,6 +8,7 @@ from flask_pymongo import PyMongo
 import config
 from lib.discord import get_user_info
 from lib.redisIO import RedisIO
+from lib.utils import jsonify
 
 TESTING = True if os.environ.get("TESTING") else False
 
@@ -35,7 +36,14 @@ def user_info():
         "numCustomizations": sum((mdb.aliases.count_documents({"owner": info.id}),
                                   mdb.snippets.count_documents({"owner": info.id})))
     }
-    return dumps(data)
+    return jsonify(data)
+
+
+@app.route('/commands', methods=["GET"])
+def commands():
+    with open("static/commands.json") as f:
+        data = json.load(f)
+    return jsonify(data)
 
 
 from blueprints.characters import characters
