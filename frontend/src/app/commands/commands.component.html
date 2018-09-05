@@ -25,7 +25,7 @@
     <mat-card class="container" *ngFor="let module of modules">
 
       <h2 class="mat-h2 smallmargin">{{module.name}}</h2>
-      <p>{{module.desc}}</p>
+      <markdown>{{module.desc}}</markdown>
       <avr-command-list [commands]="module.commands"></avr-command-list>
 
     </mat-card>

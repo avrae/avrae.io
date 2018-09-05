@@ -16,9 +16,20 @@ import {LoginComponent} from './login/login.component';
 import {ThemesModule} from "./themes/themes.module";
 import {ErrorComponent} from './error/error.component';
 import {FormsModule} from "@angular/forms";
-import { CommandsComponent } from './commands/commands.component';
-import { CommandListComponent } from './commands/command-list/command-list.component';
+import {CommandsComponent} from './commands/commands.component';
+import {CommandListComponent} from './commands/command-list/command-list.component';
+import {MarkdownModule, MarkedOptions} from "ngx-markdown";
 
+const markdownConfig = {
+  markedOptions: {
+    provide: MarkedOptions,
+    useValue: {
+      gfm: true,
+      breaks: true,
+      sanitize: true
+    },
+  }
+};
 
 @NgModule({
   declarations: [
@@ -37,6 +48,7 @@ import { CommandListComponent } from './commands/command-list/command-list.compo
     BrowserAnimationsModule,
     LayoutModule,
     FormsModule,
+    MarkdownModule.forRoot(markdownConfig),
     MaterialModule,
     DashboardModule,
     AppRoutingModule,

@@ -9,3 +9,7 @@
 th {
   text-align: left;
 }
+
+mat-panel-title > div {
+  margin: auto 0;
+}

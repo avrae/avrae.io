@@ -8,10 +8,10 @@
         </div>
       </mat-panel-title>
       <mat-panel-description>
-        {{command.short}}
+        <markdown>{{command.short}}</markdown>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    {{command.docs}}
+    <markdown>{{command.docs}}</markdown>
     <table *ngIf="command.args.length">
       <tr>
         <th>Arguments</th>
