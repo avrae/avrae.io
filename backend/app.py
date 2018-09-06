@@ -1,11 +1,12 @@
 import json
 import os
 
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 
 import config
+from lib import dice
 from lib.discord import get_user_info
 from lib.redisIO import RedisIO
 from lib.utils import jsonify
@@ -46,11 +47,26 @@ def commands():
     return jsonify(data)
 
 
+@app.route('/roll', methods=['GET'])
+def roll():
+    to_roll = request.args.get('dice') or '1d20'
+    adv = request.args.get('adv', 0)
+    rolled = dice.roll(to_roll, adv)
+
+    result = {'total': rolled.total, 'result': rolled.result,
+              'is_crit': rolled.crit,
+              'dice': [part.to_dict() for part in rolled.raw_dice.parts]}
+
+    return jsonify(result)
+
+
 from blueprints.characters import characters
 from blueprints.customizations import customizations
+from blueprints.bot import bot
 
 app.register_blueprint(characters, url_prefix="/characters")
 app.register_blueprint(customizations, url_prefix="/customizations")
+app.register_blueprint(bot, url_prefix="/bot")
 
 if __name__ == '__main__':
     app.run()
