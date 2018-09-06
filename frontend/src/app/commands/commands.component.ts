@@ -23,4 +23,9 @@ export class CommandsComponent implements OnInit {
       .subscribe(modules => this.modules = modules.modules);
   }
 
+  scrollTo(id: string) {
+    let el = document.getElementById(id);
+    el.scrollIntoView({behavior: "smooth"});
+  }
+
 }
