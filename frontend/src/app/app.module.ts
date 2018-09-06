@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, Provider} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from '@angular/cdk/layout';
 import {HttpClientModule} from "@angular/common/http";
@@ -19,6 +19,8 @@ import {FormsModule} from "@angular/forms";
 import {CommandsComponent} from './commands/commands.component';
 import {CommandListComponent} from './commands/command-list/command-list.component';
 import {MarkdownModule, MarkedOptions} from "ngx-markdown";
+import {InViewportModule, WindowRef} from "@thisissoon/angular-inviewport";
+import {ScrollSpyModule} from "@thisissoon/angular-scrollspy";
 
 const markdownConfig = {
   markedOptions: {
@@ -30,6 +32,10 @@ const markdownConfig = {
     },
   }
 };
+const getWindow = () => window;
+const providers: Provider[] = [
+  {provide: WindowRef, useFactory: (getWindow)},
+];
 
 @NgModule({
   declarations: [
@@ -49,6 +55,8 @@ const markdownConfig = {
     LayoutModule,
     FormsModule,
     MarkdownModule.forRoot(markdownConfig),
+    InViewportModule.forRoot(providers),
+    ScrollSpyModule.forRoot(),
     MaterialModule,
     DashboardModule,
     AppRoutingModule,

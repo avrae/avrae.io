@@ -5,14 +5,15 @@
     class="sidenav mat-elevation-z3"
     fixedInViewport="true"
     fixedTopGap="64"
-    fixedBottomGap="8">
-    <mat-list>
-      <mat-list-item>
-        <button mat-button class="nav-button">Commands</button>
-      </mat-list-item>
-    </mat-list>
+    fixedBottomGap="8"
+    role="navigation">
+    <mat-nav-list snScrollSpy id="sidenav">
+      <a mat-list-item snScrollSpyItem for="sidenav" href="#{{module.name}}" *ngFor="let module of modules">
+        {{module.name}}
+      </a>
+    </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <div>
     <mat-card class="title">
       <h1 class="mat-display-1 smallmargin">Command List</h1>
       <p>This page is a list of all commands, subcommands, and valid arguments that Avrae can parse.</p>
@@ -23,11 +24,11 @@
     </mat-card>
 
     <mat-card class="container" *ngFor="let module of modules">
-
-      <h2 class="mat-h2 smallmargin">{{module.name}}</h2>
-      <markdown>{{module.desc}}</markdown>
-      <avr-command-list [commands]="module.commands"></avr-command-list>
-
+      <sn-scroll-spy-section id="{{module.name}}" for="sidenav">
+        <h2 class="mat-h2 smallmargin">{{module.name}}</h2>
+        <markdown>{{module.desc}}</markdown>
+        <avr-command-list [commands]="module.commands"></avr-command-list>
+      </sn-scroll-spy-section>
     </mat-card>
-  </mat-sidenav-content>
+  </div>
 </mat-sidenav-container>
