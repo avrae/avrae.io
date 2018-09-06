@@ -24,6 +24,11 @@
     color: mat-color($accent);
     text-decoration: none;
     font-weight: lighter;
+    transition: background-color .5s ease-in-out;
+  }
+
+  a.active {
+    background-color: mat-color($foreground, base, 0.04);
   }
 
   .avr-footer {

@@ -5,7 +5,7 @@ import {CommandsService} from "./commands.service";
 @Component({
   selector: 'avr-commands',
   templateUrl: './commands.component.html',
-  styleUrls: ['./commands.component.css']
+  styleUrls: ['./commands.component.scss']
 })
 export class CommandsComponent implements OnInit {
 
