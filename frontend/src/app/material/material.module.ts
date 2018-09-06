@@ -15,7 +15,8 @@ import {
   MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from "@angular/material";
 
 
@@ -35,7 +36,8 @@ import {
     MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ],
   exports: [
     MatGridListModule,
@@ -52,7 +54,8 @@ import {
     MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}

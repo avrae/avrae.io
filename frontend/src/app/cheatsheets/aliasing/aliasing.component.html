@@ -1,0 +1,912 @@
+<div class="container">
+  <mat-card class="mat-typography">
+    <h1>Aliasing</h1>
+    <p>So you want to write aliases for your commonly used commands - cool! This cheatsheet details some of the
+      nitty-gritty syntactical shenanigans that you can use to make your aliases very powerful.</p>
+    <p>When placed inline in an alias, any syntax in the syntax table will have the listed effect. For a list of
+      built-in cvars, see the cvar table.</p>
+
+    <h3>Syntax Table</h3>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Syntax</th>
+        <th>Description</th>
+        <th>Example</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>&#123;CVAR/roll&#125;</code></td>
+        <td>Evaluates the cvar/rolls the input.</td>
+        <td>
+          Input: <code>echo Rolling 1d20: &#123;1d20&#125;</code><br>
+          Output: <code>Rolling 1d20: 7</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&lt;CVAR&gt;</code></td>
+        <td>Prints the value of the cvar.</td>
+        <td>
+          Input: <code>echo My strength modifier is: &lt;strengthMod&gt;</code><br>
+          Output: <code>My strength modifier is: 2</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>%1%</code>, <code>%2%</code>, etc.</td>
+        <td>Replaced with the value of the nth argument passed to the alias.</td>
+        <td>
+          Input: <code>echo %2% %1%</code><br>
+          Output (when called as <code>!(name) first second</code>): <code>second first</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&#123;&#123;code&#125;&#125;</code></td>
+        <td>Runs the statement as raw Python-like code. See the <a (click)="scrollTo('functions')">functions</a> table
+          for a list
+          of allowed
+          functions.
+        </td>
+        <td>
+          Input: <code>echo &#123;&#123;set("strength_plus_one", strength+1)&#125;&#125;1 more than my strength score is
+          &#123;&#123;strength_plus_one&#125;&#125;!</code><br>
+          Output (given a STR of 14): <code>1 more than my strength score is 15!</code><br>
+          <br>
+          Input: <code>echo My roll was &#123;&#123;"greater than" if roll("1d20") > 10 else "less than"&#125;&#125;
+          10!</code><br>
+          Output (assuming the roll was 8): <code>My roll was less than 10!</code>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <mat-divider></mat-divider>
+
+    <h3>Cvar Table</h3>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th><a matTooltip="The type of the variable for scripting.">Type</a></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>armor</code></td>
+        <td>Armor Class.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>charisma</code></td>
+        <td>Charisma score.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>charismaMod</code></td>
+        <td>Charisma modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>charismaSave</code></td>
+        <td>Charisma saving throw modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>constitution</code></td>
+        <td>Constitution score.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>constitutionMod</code></td>
+        <td>Constitution modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>constitutionSave</code></td>
+        <td>Constitution saving throw modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td>Full character description.</td>
+        <td>str</td>
+      </tr>
+      <tr>
+        <td><code>dexterity</code></td>
+        <td>Dexterity score.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>dexterityMod</code></td>
+        <td>Dexterity modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>dexteritySave</code></td>
+        <td>Dexterity saving throw modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>hp</code></td>
+        <td>Maximum hit points.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>image</code></td>
+        <td>Character image URL.</td>
+        <td>str</td>
+      </tr>
+      <tr>
+        <td><code>intelligence</code></td>
+        <td>Intelligence score.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>intelligenceMod</code></td>
+        <td>Intelligence modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>intelligenceSave</code></td>
+        <td>Intelligence saving throw modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>level</code></td>
+        <td>Character level.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>proficiencyBonus</code></td>
+        <td>Proficiency bonus.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>strength</code></td>
+        <td>Strength score.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>strengthMod</code></td>
+        <td>Strength modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>strengthSave</code></td>
+        <td>Strength saving throw modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>wisdom</code></td>
+        <td>Wisdom score.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>wisdomMod</code></td>
+        <td>Wisdom modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>wisdomSave</code></td>
+        <td>Wisdom saving throw modifier.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>XLevel</code></td>
+        <td>(Dicecloud sheets only) How many levels a character has in class X.</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><code>currentHp</code></td>
+        <td>(scripting only) The character's current remaining HP.</td>
+        <td>int</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <mat-divider></mat-divider>
+
+    <h3 id="functions">Functions Table</h3>
+    <p>
+      <b>WARNING</b>: It <i>may</i> be possible to corrupt your character data by incorrectly calling functions.
+      Script at your own risk.
+    </p>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Arguments</th>
+        <th>Returns</th>
+        <th>Syntax</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>randint(x)</code></td>
+        <td>Returns a random integer in the range [0..x).</td>
+        <td><code>x</code> - int - The upper limit (non-inclusive).</td>
+        <td><code>int</code> - The random number.</td>
+        <td><code>randint(10)</code><br></td>
+      </tr>
+      <tr>
+        <td><code>roll(dice)</code></td>
+        <td>Rolls a given string.</td>
+        <td><code>dice</code> - str - The dice to roll.</td>
+        <td><code>int</code> - The result of the roll, or 0 if an error was encountered.</td>
+        <td><code>roll("1d20")</code></td>
+      </tr>
+      <tr>
+        <td><code>vroll(dice[, multiply=1, add=0])</code></td>
+        <td>Verbosely rolls a given string, returning a formatted output.</td>
+        <td>
+          <code>dice</code> - str - The dice to roll.<br>
+          <code>multiply</code> - int, optional, default 1 - How many times to multiply each set of dice by.<br>
+          <code>dice</code> - int, optional, default 0 - How many dice to add to each set of dice.<br>
+        </td>
+        <td><code>Result</code> - The result of the roll.<br>
+          Use <code>Result.dice</code> (str) to access the rolled dice, <code>Result.total</code> (int) for the
+          final total, and <code>str(Result)</code> (str) for the combined output.
+        </td>
+        <td><code>vroll("1d20")</code></td>
+      </tr>
+      <tr>
+        <td><code>int(x)</code></td>
+        <td>Converts x to an int.</td>
+        <td><code>x</code> - str, int, float - The value to convert.</td>
+        <td><code>int</code> - The integer.</td>
+        <td><code>int("10")</code></td>
+      </tr>
+      <tr>
+        <td><code>str(x)</code></td>
+        <td>Converts x to a string.</td>
+        <td><code>x</code> - str, int, float - The value to convert.</td>
+        <td><code>str</code> - The string.</td>
+        <td><code>str(5)</code></td>
+      </tr>
+      <tr>
+        <td><code>len(x)</code></td>
+        <td>Returns the length of a string or list.</td>
+        <td><code>x</code> - str, list - The element to find the length of.</td>
+        <td><code>int</code> - The length.</td>
+        <td><code>len("words")</code></td>
+      </tr>
+      <tr>
+        <td><code>floor(x)</code></td>
+        <td>Rounds a number down to the nearest integer.</td>
+        <td><code>x</code> - float, int - The number to round.</td>
+        <td><code>int</code> - The resulting integer.</td>
+        <td><code>floor(6/5)</code></td>
+      </tr>
+      <tr>
+        <td><code>ceil(x)</code></td>
+        <td>Rounds a number up to the nearest integer.</td>
+        <td><code>x</code> - float, int - The number to round.</td>
+        <td><code>int</code> - The resulting integer.</td>
+        <td><code>ceil(6/5)</code></td>
+      </tr>
+      <tr>
+        <td><code>round(x, digits)</code></td>
+        <td>Rounds x to <code>digits</code> digits. Rounds towards the nearest even number.</td>
+        <td>
+          <code>x</code> - float, int - The number to round.<br>
+          <code>digits</code> - int, optional - How many digits to round to.
+        </td>
+        <td><code>int</code> or <code>float</code> - The resulting number.</td>
+        <td>
+          <code>round(6.5)</code><br>
+          <code>round(3.1415, 2)</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>max(x, y[, z...])</code></td>
+        <td>Returns the largest of all the arguments.</td>
+        <td><code>x</code>, <code>y</code> - float, int - The numbers to compare.</td>
+        <td><code>int</code> or <code>float</code> - The largest argument.</td>
+        <td><code>max(3, 14, 2)</code></td>
+      </tr>
+      <tr>
+        <td><code>min(x, y[, z...])</code></td>
+        <td>Returns the smallest of all the arguments.</td>
+        <td><code>x</code>, <code>y</code> - float, int - The numbers to compare.</td>
+        <td><code>int</code> or <code>float</code> - The smallest argument.</td>
+        <td><code>min(3, -2)</code></td>
+      </tr>
+      <tr>
+        <td><code>set(name, value)</code></td>
+        <td>Sets a temporary variable (for the execution of the command only).</td>
+        <td>
+          <code>name</code> - str - The name of the variable.<br>
+          <code>value</code> - Any - The value of the variable.
+        </td>
+        <td><code>None</code></td>
+        <td><code>set("foo", "bar")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_cc(name)</code></td>
+        <td>Gets the value of a custom counter.</td>
+        <td><code>name</code> - str - The name of the custom counter to get the value of.</td>
+        <td><code>int</code> - The value of the counter.</td>
+        <td><code>get_cc("Ki")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_cc_max(name)</code></td>
+        <td>Gets the maximum value of a custom counter.</td>
+        <td><code>name</code> - str - The name of the custom counter to get the max value of.</td>
+        <td><code>int</code> - The max value of the counter. Returns <code>2^32-1</code> if there is no max.</td>
+        <td><code>get_cc_max("Ki")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_cc_min(name)</code></td>
+        <td>Gets the minimum value of a custom counter.</td>
+        <td><code>name</code> - str - The name of the custom counter to get the min value of.</td>
+        <td><code>int</code> - The min value of the counter. Returns <code>-(2^32)</code> if there is no min.</td>
+        <td><code>get_cc_min("Ki")</code></td>
+      </tr>
+      <tr>
+        <td><code>set_cc(name, value[, strict])</code></td>
+        <td>Sets a custom counter to a new value.</td>
+        <td>
+          <code>name</code> - str - The name of the custom counter to modify.<br>
+          <code>value</code> - int - The new value of the counter.<br>
+          <code>strict</code> - True/False (optional, default False) - if True, error if out of bounds.
+        </td>
+        <td><code>None</code></td>
+        <td><code>set_cc("Ki", 5)</code></td>
+      </tr>
+      <tr>
+        <td><code>mod_cc(name, value[, strict])</code></td>
+        <td>Modifies a custom counter by a certain value.</td>
+        <td>
+          <code>name</code> - str - The name of the custom counter to modify.<br>
+          <code>value</code> - int - The number to modify by of the counter.<br>
+          <code>strict</code> - True/False (optional, default False) - if True, error if out of bounds.
+        </td>
+        <td><code>None</code></td>
+        <td><code>mod_cc("Ki", -2)</code></td>
+      </tr>
+      <tr>
+        <td><code>delete_cc(name)</code></td>
+        <td>Deletes a custom counter.</td>
+        <td>
+          <code>name</code> - str - The name of the custom counter to delete.
+        </td>
+        <td><code>None</code></td>
+        <td><code>delete_cc("Ki")</code></td>
+      </tr>
+      <tr>
+        <td><code>create_cc_nx(name[, minVal, maxVal, reset, dispType])</code></td>
+        <td>Creates a custom counter only if one with the same name doesn't exist.</td>
+        <td>
+          <code>name</code> - str - The name of the cc to create.<br>
+          <code>minVal</code> - str (Optional) - The minimum value of the cc. Default: unlimited.<br>
+          <code>maxVal</code> - str (Optional) - The maximum value of the cc. Default: unlimited.<br>
+          <code>reset</code> - str (Optional) - The reset type of the cc ("short", "long", "none", None). Default:
+          None.<br>
+          <code>dispType</code> - str (Optional) - The display type of the cc ("default", "bubble"). Default:
+          default.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>create_cc_nx("SP", 0, "SorcererLevel", "long", "bubble")</code></td>
+      </tr>
+      <tr>
+        <td><code>cc_exists(name)</code></td>
+        <td>Returns whether a certain cc exists.</td>
+        <td>
+          <code>name</code> - str - The name of the custom counter to check.<br>
+        </td>
+        <td><code>bool</code> - Whether the cc exists.</td>
+        <td><code>cc_exists("Ki")</code></td>
+      </tr>
+      <tr>
+        <td><code>cc_str(name)</code></td>
+        <td>Returns a string representation of a cc.</td>
+        <td>
+          <code>name</code> - str - The name of the custom counter to check.<br>
+        </td>
+        <td><code>str</code> - The status of the cc.</td>
+        <td><code>cc_str("Ki")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_slots(level)</code></td>
+        <td>Gets the number of remaining spell slots of a certain level.</td>
+        <td><code>level</code> - int - The level to get spell slots of.</td>
+        <td><code>int</code> - The number of remaining slots.</td>
+        <td><code>get_slots(3)</code></td>
+      </tr>
+      <tr>
+        <td><code>get_slots_max(level)</code></td>
+        <td>Gets the maximum number of spell slots of a certain level.</td>
+        <td><code>level</code> - int - The level to get the max spell slots of.</td>
+        <td><code>int</code> - The max number of slots.</td>
+        <td><code>get_slots_max(3)</code></td>
+      </tr>
+      <tr>
+        <td><code>slots_str(level)</code></td>
+        <td>Gets a string representation of how many slots of a certain level a character has.</td>
+        <td><code>level</code> - int - The level to get spell slots of.</td>
+        <td><code>str</code> - A string representing the number of slots, in bubble format.</td>
+        <td><code>slots_str(3)</code></td>
+      </tr>
+      <tr>
+        <td><code>set_slots(level, value)</code></td>
+        <td>Sets the number of spell slots of a certain level.</td>
+        <td>
+          <code>level</code> - int - The level of spell slot.<br>
+          <code>value</code> - int - The number of remaining slots.
+        </td>
+        <td><code>None</code></td>
+        <td><code>set_slots(3, 1)</code></td>
+      </tr>
+      <tr>
+        <td><code>use_slot(level)</code></td>
+        <td>Uses one spell slot of a certain level.</td>
+        <td><code>level</code> - int - The level of spell slot.</td>
+        <td><code>None</code></td>
+        <td><code>use_slot(3)</code></td>
+      </tr>
+      <tr>
+        <td><code>get_hp()</code></td>
+        <td>Gets the character's remaining HP.</td>
+        <td>No arguments.</td>
+        <td><code>int</code> - The character's remaining HP.</td>
+        <td><code>get_hp()</code></td>
+      </tr>
+      <tr>
+        <td><code>set_hp(val)</code></td>
+        <td>Sets the character's HP.</td>
+        <td><code>val</code> - int - The remaining HP.</td>
+        <td><code>None</code></td>
+        <td><code>set_hp(7)</code></td>
+      </tr>
+      <tr>
+        <td><code>mod_hp(val)</code></td>
+        <td>Modified the character's HP.</td>
+        <td><code>val</code> - int - The amount to change HP by.</td>
+        <td><code>None</code></td>
+        <td><code>mod_hp(-2)</code></td>
+      </tr>
+      <tr>
+        <td><code>get_temphp()</code></td>
+        <td>Gets the character's temp HP.</td>
+        <td>No arguments.</td>
+        <td><code>int</code> - The character's temp HP.</td>
+        <td><code>get_temphp()</code></td>
+      </tr>
+      <tr>
+        <td><code>set_temphp(val)</code></td>
+        <td>Sets the character's temp HP.</td>
+        <td><code>val</code> - int - The new temp HP.</td>
+        <td><code>None</code></td>
+        <td><code>set_temphp(7)</code></td>
+      </tr>
+      <tr>
+        <td><code>set_cvar(name, value)</code></td>
+        <td>Sets a cvar to a new value.</td>
+        <td>
+          <code>name</code> - str - The name of the cvar to modify.<br>
+          <code>value</code> - str - The new value of the cvar.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>set_cvar("potato", "fifteen")</code></td>
+      </tr>
+      <tr>
+        <td><code>set_cvar_nx(name, value)</code></td>
+        <td>Sets a cvar to a new value, only if it doesn't already exist.</td>
+        <td>
+          <code>name</code> - str - The name of the cvar to create.<br>
+          <code>value</code> - str - The new value of the cvar.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>set_cvar_nx("potato", "fifteen")</code></td>
+      </tr>
+      <tr>
+        <td><code>delete_cvar(name)</code></td>
+        <td>Deletes a cvar. Does nothing if the cvar does not exist.</td>
+        <td>
+          <code>name</code> - str - The name of the cvar to delete.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>delete_cvar("potato")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_gvar(name)</code></td>
+        <td>Gets the value of a global variable.</td>
+        <td>
+          <code>name</code> - str - The name of the gvar to get. Should be a UUID4.<br>
+        </td>
+        <td><code>str</code> - The value of the gvar.</td>
+        <td><code>get_gvar("87228cfb-43b6-4cd4-ac2e-14b59db149c0")</code></td>
+      </tr>
+      <tr>
+        <td><code>exists(name)</code></td>
+        <td>Returns whether a cvar or uvar exists.</td>
+        <td>
+          <code>name</code> - str - The name of the cvar or uvar to check.<br>
+        </td>
+        <td><code>bool</code> - Whether the var exists.</td>
+        <td><code>exists("potato")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_raw()</code></td>
+        <td>Returns the raw character object (see the debug tab of a character in the <a
+          href="/dashboard">dashboard</a>).
+        </td>
+        <td></td>
+        <td><code>dict</code> - The raw character dictionary.</td>
+        <td><code>get_raw()</code></td>
+      </tr>
+      <tr>
+        <td><code>combat()</code></td>
+        <td>Returns a <a (click)="scrollTo('simplecombat')">SimpleCombat</a> object representing the current combat of
+          the
+          channel, if the character is in it.
+        </td>
+        <td></td>
+        <td><code>SimpleCombat</code> - The combat.</td>
+        <td><code>combat()</code></td>
+      </tr>
+      <tr>
+        <td><code>load_json(jsonstr)</code></td>
+        <td>Loads an object from a <a href="https://docs.python.org/3/library/json.html">JSON string</a>.</td>
+        <td>
+          <code>jsonstr</code> - str - The JSON string to load.<br>
+        </td>
+        <td><code>object</code> - The encoded object.</td>
+        <td><code>load_json('&#123;"one": 1&#125;')</code></td>
+      </tr>
+      <tr>
+        <td><code>dump_json(obj)</code></td>
+        <td>Serializes an object to a <a href="https://docs.python.org/3/library/json.html">JSON string</a>.</td>
+        <td>
+          <code>obj</code> - dict, list, str, int - The object to serialize.<br>
+        </td>
+        <td><code>str</code> - The serialized string.</td>
+        <td><code>dump_json(&#123;"one": 1&#125;)</code></td>
+      </tr>
+      </tbody>
+    </table>
+    <p>
+      See also:<br>
+      <a href="https://stackoverflow.com/a/394814">Ternary Operators</a> (<code>x if a else y</code>)<br>
+      <a href="https://stackoverflow.com/a/663175">Slicing</a> (<code>"Hello world!"[2:4]</code>)<br>
+      <a
+        href="https://docs.python.org/3/reference/expressions.html#unary-arithmetic-and-bitwise-operations">Operators</a>
+      (<code>2 + 2</code>, <code>"foo" in "foobar"</code>, etc)<br>
+      <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a>
+    </p>
+
+    <mat-divider></mat-divider>
+
+    <h3>Models</h3>
+    <p>This is the documentation of the miscellaneous models returned through scripting.</p>
+    <h4 id="simplecombat">SimpleCombat</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Arguments</th>
+        <th>Returns</th>
+        <th><a matTooltip="This assumes that 'combat' is an instance of SimpleCombat.">Syntax</a></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>combatants</code></td>
+        <td>
+          A list of all combatants in combat.
+        </td>
+        <td></td>
+        <td><code>list</code> of <code>SimpleCombatant</code> - All combatants in combat.</td>
+        <td><code>combat.combatants</code></td>
+      </tr>
+      <tr>
+        <td><code>current</code></td>
+        <td>
+          The <a (click)="scrollTo('simplecombatant')">SimpleCombatant</a> or <a (click)="scrollTo('simplegroup')">SimpleGroup</a>
+          representing the
+          current turn.
+        </td>
+        <td></td>
+        <td><code>SimpleCombatant</code> or <code>SimpleGroup</code> - The combatant or group.</td>
+        <td><code>combat.current</code></td>
+      </tr>
+      <tr>
+        <td><code>me</code></td>
+        <td>
+          The <a (click)="scrollTo('simplecombatant')">SimpleCombatant</a> representing the current character in combat.
+        </td>
+        <td></td>
+        <td><code>SimpleCombatant</code> - The combatant.</td>
+        <td><code>combat.me</code></td>
+      </tr>
+      <tr>
+        <td><code>round_num</code></td>
+        <td>
+          The round number of the combat.
+        </td>
+        <td></td>
+        <td><code>int</code> - The round number.</td>
+        <td><code>combat.round_num</code></td>
+      </tr>
+      <tr>
+        <td><code>turn_num</code></td>
+        <td>
+          The turn number (current initiative) of the combat.
+        </td>
+        <td></td>
+        <td><code>int</code> - The turn number.</td>
+        <td><code>combat.turn_num</code></td>
+      </tr>
+      <tr>
+        <td><code>get_combatant(name)</code></td>
+        <td>
+          Gets a <a (click)="scrollTo('simplecombatant')">SimpleCombatant</a>, fuzzy searching (partial match) for a
+          match.
+        </td>
+        <td><code>name</code> - The name of the combatant to get.</td>
+        <td><code>SimpleCombatant</code> - The combatant.</td>
+        <td><code>combat.get_combatant("Padellis")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_group(name)</code></td>
+        <td>
+          Gets a <a (click)="scrollTo('simplegroup')">SimpleGroup</a>, searching (full match) for a match.
+        </td>
+        <td><code>name</code> - The name of the group to get.</td>
+        <td><code>SimpleGroup</code> - The group.</td>
+        <td><code>combat.get_group("Zombies")</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <mat-divider></mat-divider>
+
+    <h4 id="simplecombatant">SimpleCombatant</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Arguments</th>
+        <th>Returns</th>
+        <th><a matTooltip="This assumes that 'c' is an instance of SimpleCombatant.">Syntax</a></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>ac</code></td>
+        <td>
+          The combatant's ac. Returns None if not visible.
+        </td>
+        <td></td>
+        <td><code>int</code> or <code>None</code> - The combatant's AC.</td>
+        <td><code>c.ac</code></td>
+      </tr>
+      <tr>
+        <td><code>hp</code></td>
+        <td>
+          The combatant's current hit points. Returns None if not visible.
+        </td>
+        <td></td>
+        <td><code>int</code> or <code>None</code> - The combatant's HP.</td>
+        <td><code>c.hp</code></td>
+      </tr>
+      <tr>
+        <td><code>init</code></td>
+        <td>
+          The combatant's rolled initiative.
+        </td>
+        <td></td>
+        <td><code>int</code> - The combatant's initiative.</td>
+        <td><code>c.init</code></td>
+      </tr>
+      <tr>
+        <td><code>initmod</code></td>
+        <td>
+          The combatant's initiative mod. Returns None if not visible.
+        </td>
+        <td></td>
+        <td><code>int</code> or <code>None</code> - The combatant's init mod.</td>
+        <td><code>c.initmod</code></td>
+      </tr>
+      <tr>
+        <td><code>maxhp</code></td>
+        <td>
+          The combatant's max HP. Returns None if not visible.
+        </td>
+        <td></td>
+        <td><code>int</code> or <code>None</code> - The combatant's max HP.</td>
+        <td><code>c.maxhp</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td>
+          The combatant's name.
+        </td>
+        <td></td>
+        <td><code>str</code> - The combatant's name.</td>
+        <td><code>c.name</code></td>
+      </tr>
+      <tr>
+        <td><code>note</code></td>
+        <td>
+          The note on the combatant. Returns an empty string if there is none.
+        </td>
+        <td></td>
+        <td><code>str</code> - The combatant's notes.</td>
+        <td><code>c.note</code></td>
+      </tr>
+      <tr>
+        <td><code>ratio</code></td>
+        <td>
+          The combatant's health ratio (0%=0.0, 100%=1.0). Shows even if combatant is hidden.
+        </td>
+        <td></td>
+        <td><code>float</code> - The combatant's ratio of health:max health.</td>
+        <td><code>c.ratio</code></td>
+      </tr>
+      <tr>
+        <td><code>temphp</code></td>
+        <td>
+          The combatant's temporary hit points. Returns None if not visible.
+        </td>
+        <td></td>
+        <td><code>int</code> or <code>None</code> - The combatant's temp HP.</td>
+        <td><code>c.temphp</code></td>
+      </tr>
+      <tr>
+        <td><code>set_hp(hp)</code></td>
+        <td>
+          Sets a combatant's remaining hit points to a new value.
+        </td>
+        <td><code>hp</code> - int - The HP to set.</td>
+        <td><code>None</code></td>
+        <td><code>c.set_hp(50)</code></td>
+      </tr>
+      <tr>
+        <td><code>mod_hp(hp)</code></td>
+        <td>
+          Modifies a combatant's remaining hit points by a value.
+        </td>
+        <td><code>hp</code> - int - The amount of HP to add.</td>
+        <td><code>None</code></td>
+        <td><code>c.mod_hp(-7)</code></td>
+      </tr>
+      <tr>
+        <td><code>hp_str()</code></td>
+        <td>
+          Gets a string describing a combatant's HP.
+        </td>
+        <td></td>
+        <td><code>str</code> - The string. Will show HP value if combatant is not hidden, or generalization.</td>
+        <td><code>c.hp_str()</code></td>
+      </tr>
+      <tr>
+        <td><code>save(ability[, adv])</code></td>
+        <td>
+          Rolls a combatant's saving throw.
+        </td>
+        <td>
+          <code>ability</code> - str - The type of save ("str", "dexterity", etc).
+          <code>adv</code> - bool or None (default None) - Whether to roll the save with advantage.
+          Rolls with advantage if True, disadvantage if False, or normally if None.
+        </td>
+        <td><code>Result</code> - The rolled save. See <code>vroll()</code>.</td>
+        <td><code>c.save("str")</code></td>
+      </tr>
+      <tr>
+        <td><code>wouldhit(to_hit)</code></td>
+        <td>
+          Checks whether a roll would hit a combatant.
+        </td>
+        <td><code>to_hit</code> - int - The roll to check against AC.</td>
+        <td><code>bool</code> - Whether the attack would hit or not. None if the combatant's AC is not defined.</td>
+        <td><code>c.wouldhit(18)</code></td>
+      </tr>
+      <tr>
+        <td><code>damage(dice_str, [crit=False, d=None, c=None, critdice=0])</code></td>
+        <td>
+          Does damage to a combatant, and returns the rolled result and total, accounting for resistances.
+        </td>
+        <td>
+          <code>dice_str</code> - str - The damage to do (e.g. "1d6[acid]").<br>
+          <code>crit</code> - bool (optional, default False) - Whether or not the damage should be rolled as a crit.<br>
+          <code>d</code> - str (optional, default None) - Any additional damage to add (equivalent of -d).<br>
+          <code>c</code> - str (optional, default None) - Any additional damage to add to crits (equivalent of -c).<br>
+          <code>critdice</code> - int (optional, default 0) - How many extra weapon dice to roll on a crit (in addition
+          to normal dice).<br>
+        </td>
+        <td><code>dict</code> - A dictionary with two keys, "damage" and "total", detailing the resulting string and
+          total damage, respectively.
+        </td>
+        <td><code>c.damage("2d6+3[slashing]")</code></td>
+      </tr>
+      <tr>
+        <td><code>set_ac(ac)</code></td>
+        <td>
+          Sets a combatant's armor class.
+        </td>
+        <td><code>ac</code> - int or None - The AC to set. (Equivalent to <code>!i opt NAME -ac AC</code>)</td>
+        <td><code>None</code></td>
+        <td><code>c.set_ac(16)</code></td>
+      </tr>
+      <tr>
+        <td><code>set_maxhp(maxhp)</code></td>
+        <td>
+          Sets a combatant's maximum hit points to a new value. (Equivalent to <code>!i hp NAME max MAXHP</code>)
+        </td>
+        <td><code>maxhp</code> - int or None - The max HP to set.</td>
+        <td><code>None</code></td>
+        <td><code>c.set_maxhp(100)</code></td>
+      </tr>
+      <tr>
+        <td><code>set_thp(thp)</code></td>
+        <td>
+          Sets a combatant's temporary hit points to a new value.
+        </td>
+        <td><code>thp</code> - int - The THP to set.</td>
+        <td><code>None</code></td>
+        <td><code>c.set_thp(5)</code></td>
+      </tr>
+      <tr>
+        <td><code>set_init(init)</code></td>
+        <td>
+          Sets a combatant's initiative roll to a new value. (Equivalent to <code>!i opt NAME -p INIT</code>)
+        </td>
+        <td><code>init</code> - int - The initiative to set.</td>
+        <td><code>None</code></td>
+        <td><code>c.set_init(20)</code></td>
+      </tr>
+      <tr>
+        <td><code>set_name(name)</code></td>
+        <td>
+          Sets a combatant's name. Does not check against duplicate names - be careful! (Equivalent to <code>!i opt NAME
+          -name NAME</code>)
+        </td>
+        <td><code>name</code> - str - The new name.</td>
+        <td><code>None</code></td>
+        <td><code>c.set_name("Bob")</code></td>
+      </tr>
+      <tr>
+        <td><code>set_note(note)</code></td>
+        <td>
+          Sets a combatant's note. (Equivalent to <code>!i note NAME NOTE</code>)
+        </td>
+        <td><code>note</code> - str or None - The new note.</td>
+        <td><code>None</code></td>
+        <td><code>c.set_note("This is a note.")</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <mat-divider></mat-divider>
+
+    <h4 id="simplegroup">SimpleGroup</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Arguments</th>
+        <th>Returns</th>
+        <th><a matTooltip="This assumes that 'group' is an instance of SimpleGroup.">Syntax</a></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>get_combatant(name)</code></td>
+        <td>
+          Gets a <a (click)="scrollTo('simplecombatant')">SimpleCombatant</a>, fuzzy searching (partial match) for a
+          match.
+        </td>
+        <td><code>name</code> - The name of the combatant to get.</td>
+        <td><code>SimpleCombatant</code> - The combatant.</td>
+        <td><code>group.get_combatant("Padellis")</code></td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-card>
+</div>

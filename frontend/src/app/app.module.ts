@@ -21,6 +21,7 @@ import {CommandListComponent} from './commands/command-list/command-list.compone
 import {MarkdownModule, MarkedOptions} from "ngx-markdown";
 import {InViewportModule, WindowRef} from "@thisissoon/angular-inviewport";
 import {ScrollSpyModule} from "@thisissoon/angular-scrollspy";
+import {CheatsheetsModule} from "./cheatsheets/cheatsheets.module";
 
 const markdownConfig = {
   markedOptions: {
@@ -59,6 +60,7 @@ const providers: Provider[] = [
     ScrollSpyModule.forRoot(),
     MaterialModule,
     DashboardModule,
+    CheatsheetsModule,
     AppRoutingModule,
     ThemesModule
   ],

@@ -35,4 +35,10 @@
     background: mat-color($primary);
     color: mat-color($primary, default-contrast);
   }
+
+  kbd {
+    color: mat-color($accent, default-contrast);
+    background: mat-color($accent);
+    border-radius: 2px;
+  }
 }

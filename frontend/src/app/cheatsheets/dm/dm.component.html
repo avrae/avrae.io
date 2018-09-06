@@ -1,0 +1,97 @@
+<div class="container">
+  <mat-card class="mat-typography">
+    <h1>DM Combat Guide</h1>
+    <p>Remember, arguments surrounded like &lt;this&gt; are required, and arguments in [brackets] are optional.</p>
+    <p>Don't include the brackets when typing your command, and remember to put quotes around arguments with spaces in
+      them!</p>
+    <p>This guide will move roughly in chronological order, meaning commands near the top should be run first.</p>
+
+    <mat-divider></mat-divider>
+
+    <h2>Starting Combat</h2>
+    <p>First, combat must be started in a channel. All <kbd class="kbd">!init</kbd> commands must be called in the same
+      channel as
+      combat is started in. Then, all the combatants must be added.</p>
+
+    <h3>!init begin</h3>
+    <p>Run this command to start combat. Avrae will output the summary message and pin it, then a quick reminder on how
+      to
+      add yourself to combat.</p>
+
+    <h3>!init madd &lt;monster name&gt; [arguments]</h3>
+    <p>After combat has started, you'll want to add your monsters. If the monsters can be looked up with
+      <code>!monster</code>, they can be added with this command.</p>
+    <p>Common arguments include <kbd class="kbd">-n &lt;number of monsters&gt;</kbd> (ex. <code>-n 5</code>) to add N
+      number of the
+      same
+      monster, and <kbd class="kbd">-name &lt;monster name scheme&gt;</kbd> to rename the monster(s). Any <code>#</code>
+      in the name
+      scheme will be replaced with a number, if <code>-n</code> is used (ex. <code>-name "Orc#" -n 2</code> adds Orc1
+      and
+      Orc2).</p>
+
+    <h3>!init add &lt;initiative modifier&gt; &lt;name&gt; [arguments]</h3>
+    <p>If you're adding a homebrew monster and haven't imported it with <kbd class="kbd">!bestiary</kbd>, but still
+      want to use the integrated tracker, you'll have to use this
+      command.</p>
+    <p>Generally, as a DM, the arguments you'll want to supply are <kbd class="kbd">-h</kbd> to hide HP and AC, <kbd
+      class="kbd">-hp &lt;max
+      HP&gt;</kbd> to set max HP, and <kbd class="kbd">-ac &lt;AC&gt;</kbd> to set AC.</p>
+
+    <mat-divider></mat-divider>
+
+    <h2>Running Combat</h2>
+    <p>Once you've finished setting up your combat (added all monsters, and players have added themselves), run <kbd
+      class="kbd">!init
+      next</kbd> to move to the first turn and begin combat.</p>
+
+    <h3>!init next</h3>
+    <p>This command moves combat to the next turn in order, and prints out a summary of whose turn it is.</p>
+
+    <h3>!init attack &lt;target name&gt; &lt;weapon name&gt; [arguments]</h3>
+    <small>Related: <code>!init aoo &lt;combatant name&gt; &lt;target name&gt; &lt;weapon name&gt; [arguments]</code>
+    </small>
+    <p>This command attacks another combatant, using the attacks of whoever's turn it is (or the supplied name, if using
+      aoo). If applicable, AC comparison and HP will be done automatically.</p>
+    <p>To see valid arguments, see the documentation for <code>!attack</code> and <code>!monster_atk</code>.</p>
+    <p>To see a list of a monster's attacks, run <code>!ma &lt;monster name&gt;</code>.</p>
+
+    <mat-divider></mat-divider>
+
+    <h2>Helper Commands</h2>
+
+    <h3>!init hp &lt;combatant name&gt; [operator] &lt;value&gt;</h3>
+    <p>This command modifies a combatant's HP by <code>value</code> if operator is not passed. The operator can be
+      <code>set</code> to set HP to <code>value</code>, or <code>max</code> to set the max HP to <code>value</code>.</p>
+
+    <h3>!init opt &lt;combatant name&gt; &lt;arguments&gt;</h3>
+    <p>This command modifies the general attributes of a combatant. Most commonly used are <kbd class="kbd">-ac &lt;AC&gt;</kbd>,
+      which
+      sets the combatant's AC to <code>AC</code>, <kbd class="kbd">-resist/immune/vuln &lt;damage type&gt;</kbd>, which
+      gives the
+      combatant resistance/immunity/vulnerability to the passed type, and <kbd class="kbd">-h</kbd>, which toggles
+      whether the
+      combatant's AC and HP are hidden.</p>
+
+    <h3>!init effect &lt;combatant name&gt; &lt;duration&gt; &lt;effect name&gt; [roll arguments]</h3>
+    <p>This command adds an effect to a combatant for <code>duration</code> rounds (pass -1 for infinite). If roll
+      arguments
+      are passed, they will be appended to any calls of <code>!init attack</code> that the combatant makes while the
+      effect
+      is active.</p>
+
+    <h3>!init re &lt;combatant name&gt; [effect name]</h3>
+    <p>This command removes an effect from a combatant, or all of them if the name is not passed.</p>
+
+    <h3>!init remove &lt;combatant name&gt;</h3>
+    <p>This command removes a combatant from combat.</p>
+
+    <mat-divider></mat-divider>
+
+    <h2>Ending Combat</h2>
+
+    <h3>!init end</h3>
+    <p>To end combat, just run this command and reply "yes".</p>
+
+  </mat-card>
+</div>
