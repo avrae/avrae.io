@@ -9,6 +9,19 @@
       <a mat-list-item routerLink="/dashboard/aliases">Customization</a>
       <a mat-list-item routerLink="/dashboard/gvars">Global Variables</a>
       <div class="spacer"></div>
+
+      <mat-expansion-panel class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="nav-panel">
+            Homebrew
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="nav-panel-body">
+          <a mat-list-item routerLink="/dashboard/homebrew/items">Items</a>
+        </div>
+      </mat-expansion-panel>
+
+      <div class="spacer"></div>
       <a mat-list-item (click)="logout()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
