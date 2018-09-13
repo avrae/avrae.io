@@ -26,4 +26,6 @@ mat-expansion-panel-header {
 
 .nav-panel-body > a {
   padding: 0 24px;
+  height: 36px;
+  font-size: 90%;
 }

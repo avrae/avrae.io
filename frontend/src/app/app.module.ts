@@ -22,6 +22,7 @@ import {MarkdownModule, MarkedOptions} from "ngx-markdown";
 import {InViewportModule, WindowRef} from "@thisissoon/angular-inviewport";
 import {ScrollSpyModule} from "@thisissoon/angular-scrollspy";
 import {CheatsheetsModule} from "./cheatsheets/cheatsheets.module";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 const markdownConfig = {
   markedOptions: {
@@ -58,6 +59,7 @@ const providers: Provider[] = [
     MarkdownModule.forRoot(markdownConfig),
     InViewportModule.forRoot(providers),
     ScrollSpyModule.forRoot(),
+    FlexLayoutModule,
     MaterialModule,
     DashboardModule,
     CheatsheetsModule,

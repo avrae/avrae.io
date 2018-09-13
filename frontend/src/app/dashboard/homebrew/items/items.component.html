@@ -1,0 +1,28 @@
+<mat-toolbar color="primary" class="mat-elevation-z2">
+  <span>Your Packs</span>
+  <span class="toolbar-spacer"></span>
+  <span><button mat-icon-button>
+    <mat-icon aria-label="New Pack">add</mat-icon>
+  </button></span>
+</mat-toolbar>
+
+<div class="container" fxLayout="row wrap" fxLayoutAlign="space-around">
+  <div class="pack-tile" *ngFor="let pack of packs" fxFlex="32%">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>NAME</mat-card-title>
+        <mat-card-subtitle>By AUTHOR - NUMITEMS items</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          DESC
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>EDIT</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
