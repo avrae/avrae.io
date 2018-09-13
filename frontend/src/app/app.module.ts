@@ -22,6 +22,7 @@ import {MarkdownModule, MarkedOptions} from "ngx-markdown";
 import {InViewportModule, WindowRef} from "@thisissoon/angular-inviewport";
 import {ScrollSpyModule} from "@thisissoon/angular-scrollspy";
 import {CheatsheetsModule} from "./cheatsheets/cheatsheets.module";
+import {LoginModule} from "./login/login.module";
 
 const markdownConfig = {
   markedOptions: {
@@ -44,7 +45,6 @@ const providers: Provider[] = [
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent,
     ErrorComponent,
     CommandsComponent,
     CommandListComponent
@@ -62,7 +62,8 @@ const providers: Provider[] = [
     DashboardModule,
     CheatsheetsModule,
     AppRoutingModule,
-    ThemesModule
+    ThemesModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import {LoginComponent} from "./login/login.component";
 import {ErrorComponent} from "./error/error.component";
 import {CommandsComponent} from "./commands/commands.component";
 import {CheatsheetsComponent} from "./cheatsheets/cheatsheets.component";
+import {LoginModule} from "./login/login.module";
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
