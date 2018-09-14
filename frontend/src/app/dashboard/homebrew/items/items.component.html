@@ -6,23 +6,30 @@
   </button></span>
 </mat-toolbar>
 
-<div class="container" fxLayout="row wrap" fxLayoutAlign="space-around">
+<div class="container" fxLayout="row wrap" fxLayoutAlign="space-around" *ngIf="packs && packs.length">
   <div class="pack-tile" *ngFor="let pack of packs" fxFlex="32%">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>NAME</mat-card-title>
-        <mat-card-subtitle>By AUTHOR - NUMITEMS items</mat-card-subtitle>
+        <mat-card-title>{{pack.name}}</mat-card-title>
+        <mat-card-subtitle>By {{pack.owner.username}} - {{pack.numItems}} items</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <img mat-card-image [src]="pack.image" alt="Pack Image">
       <mat-card-content>
         <p>
-          DESC
+          {{pack.desc}}
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>EDIT</button>
+        <a mat-button routerLink="{{pack._id.$oid}}">EDIT</a>
         <button mat-button>SHARE</button>
       </mat-card-actions>
     </mat-card>
   </div>
+</div>
+
+<div class="container" *ngIf="packs && !packs.length">
+  <mat-card>
+    <p>Looks like you don't have any packs yet.</p>
+    <button mat-raised-button color="accent">Create One</button>
+  </mat-card>
 </div>

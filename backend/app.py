@@ -71,10 +71,13 @@ def roll():
 from blueprints.characters import characters
 from blueprints.customizations import customizations
 from blueprints.bot import bot
-
 app.register_blueprint(characters, url_prefix="/characters")
 app.register_blueprint(customizations, url_prefix="/customizations")
 app.register_blueprint(bot, url_prefix="/bot")
+
+from blueprints.homebrew.items import items
+app.register_blueprint(items, url_prefix="/homebrew/items")
+
 
 if __name__ == '__main__':
     app.run()

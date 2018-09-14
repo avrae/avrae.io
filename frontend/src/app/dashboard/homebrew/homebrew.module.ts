@@ -6,6 +6,7 @@ import {ItemsComponent} from "./items/items.component";
 import {MaterialModule} from "../../material/material.module";
 import {FormsModule} from "@angular/forms";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {PackDetailComponent} from './items/pack-detail/pack-detail.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
   ],
   declarations: [
     ItemsComponent,
+    PackDetailComponent,
   ]
 })
 export class HomebrewModule {

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Pack} from "../../../schemas/homebrew/Items";
+import {HomebrewService} from "../homebrew.service";
 
 @Component({
   selector: 'avr-items',
@@ -8,12 +9,18 @@ import {Pack} from "../../../schemas/homebrew/Items";
 })
 export class ItemsComponent implements OnInit {
 
-  packs: Pack[] = [new Pack(), new Pack(), new Pack(), new Pack(), new Pack()];
+  packs: Pack[];
 
-  constructor() {
+  constructor(private homebrewService: HomebrewService) {
   }
 
   ngOnInit() {
+    this.getPacks();
+  }
+
+  getPacks(): void {
+    this.homebrewService.getUserPacks()
+      .subscribe(packs => this.packs = packs);
   }
 
 }

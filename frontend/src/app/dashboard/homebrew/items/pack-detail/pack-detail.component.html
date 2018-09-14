@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <span>PACKNAME</span>
+  <span class="toolbar-spacer"></span>
+  <span>
+    <button mat-icon-button>
+      <mat-icon aria-label="Settings">settings</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon aria-label="Share">launch</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>
+
+<div class="container" fxLayout="row" fxLayoutGap="8px">
+  <div class="item-list" fxFlex="grow">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            ITEMNAME
+          </mat-panel-title>
+          <mat-panel-description>
+            ITEMMETA
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>ITEMDESC</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div class="item-preview" fxFlex="grow">
+    A preview goes here.
+  </div>
+</div>

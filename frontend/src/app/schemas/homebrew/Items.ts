@@ -1,11 +1,16 @@
+import {DiscordUser} from "../DiscordUser";
+
 export class Pack {
   name: string;
-  owner: string;
-  editors: string[];
+  owner: DiscordUser;
+  editors: DiscordUser[];
   public: boolean;
   active: string[];
   server_active: string[];
-  items: Item[];
+  desc: string;
+  image: string;
+  items?: Item[];
+  numItems?: number;
   _id: { "$oid": string };
 }
 
