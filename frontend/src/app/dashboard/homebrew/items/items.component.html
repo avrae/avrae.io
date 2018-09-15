@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="mat-elevation-z2">
   <span>Your Packs</span>
   <span class="toolbar-spacer"></span>
-  <span><button mat-icon-button>
+  <span><button mat-icon-button (click)="beginNew()">
     <mat-icon aria-label="New Pack">add</mat-icon>
   </button></span>
 </mat-toolbar>
@@ -21,7 +21,7 @@
       </mat-card-content>
       <mat-card-actions>
         <a mat-button routerLink="{{pack._id.$oid}}">EDIT</a>
-        <button mat-button>SHARE</button>
+        <button mat-button (click)="beginShare(pack)">SHARE</button>
       </mat-card-actions>
     </mat-card>
   </div>
@@ -30,6 +30,6 @@
 <div class="container" *ngIf="packs && !packs.length">
   <mat-card>
     <p>Looks like you don't have any packs yet.</p>
-    <button mat-raised-button color="accent">Create One</button>
+    <button mat-raised-button color="accent" (click)="beginNew()">Create One</button>
   </mat-card>
 </div>

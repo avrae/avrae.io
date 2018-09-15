@@ -1,34 +1,67 @@
-<mat-toolbar color="primary">
-  <span>PACKNAME</span>
-  <span class="toolbar-spacer"></span>
-  <span>
-    <button mat-icon-button>
-      <mat-icon aria-label="Settings">settings</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon aria-label="Share">launch</mat-icon>
-    </button>
-  </span>
-</mat-toolbar>
+<div *ngIf="pack && canEdit">
+  <mat-toolbar color="primary">
+    <span>
+      <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Back">arrow_back</mat-icon>
+      </button>
+    </span>
+    <span>
+      {{pack.name}}
+    </span>
+    <span class="toolbar-spacer"></span>
+    <span>
+      <button mat-icon-button (click)="beginSettings()">
+        <mat-icon aria-label="Settings">settings</mat-icon>
+      </button>
+      <button mat-icon-button (click)="beginShare()">
+        <mat-icon aria-label="Share">launch</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
 
-<div class="container" fxLayout="row" fxLayoutGap="8px">
-  <div class="item-list" fxFlex="grow">
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            ITEMNAME
-          </mat-panel-title>
-          <mat-panel-description>
-            ITEMMETA
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>ITEMDESC</p>
-      </mat-expansion-panel>
-    </mat-accordion>
+  <div class="container" fxLayout="row" fxLayoutGap="8px">
+    <div class="item-list" fxFlex="grow" *ngIf="pack.items.length">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let item of pack.items">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              ITEMNAME
+            </mat-panel-title>
+            <mat-panel-description>
+              ITEMMETA
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>ITEMDESC</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="item-list" fxFlex="grow" *ngIf="!pack.items.length">
+      <mat-card>
+        <p>Looks like this pack is empty.</p>
+        <button mat-raised-button color="accent">Make an Item</button>
+      </mat-card>
+    </div>
+
+    <div class="item-preview" fxFlex="grow">
+      A preview goes here.
+    </div>
   </div>
+</div>
 
-  <div class="item-preview" fxFlex="grow">
-    A preview goes here.
+<div *ngIf="!pack">
+  <div class="container">
+    <mat-card>
+      <mat-spinner [diameter]="24"></mat-spinner>
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="pack && !canEdit">
+  <div class="container">
+    <mat-card>
+      <p>You do not have permission to edit this pack.</p>
+      <button mat-raised-button color="accent" (click)="back()">Go Back</button>
+    </mat-card>
   </div>
 </div>

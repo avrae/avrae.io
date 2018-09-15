@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Share {{data.name}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="form-container">
+
+    <mat-slide-toggle [(ngModel)]="public">Allow public to view</mat-slide-toggle>
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="{public: public}">
+    Done
+  </button>
+</mat-dialog-actions>

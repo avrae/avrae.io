@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{data.name}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="form-container">
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Image URL" [(ngModel)]="image">
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Description" [(ngModel)]="desc"></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="{name: name, image: image, desc: desc}" [disabled]="!name">
+    Save
+  </button>
+  <button mat-raised-button color="warn" (click)="beginDelete()">Delete</button>
+</mat-dialog-actions>
