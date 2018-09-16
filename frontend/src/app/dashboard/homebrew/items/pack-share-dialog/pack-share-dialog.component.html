@@ -1,8 +1,41 @@
 <h2 mat-dialog-title>Share {{data.name}}</h2>
 <mat-dialog-content class="mat-typography">
   <div class="form-container">
+    <p>
+      Owner: {{data.owner.username}}
+    </p>
 
     <mat-slide-toggle [(ngModel)]="public">Allow public to view</mat-slide-toggle>
+    <mat-form-field *ngIf="public">
+      <input matInput readonly [value]="shareLink" placeholder="View Link" #shareLinkElem>
+      <button mat-button matSuffix mat-icon-button aria-label="Copy" (click)="copy(shareLinkElem)"
+              matTooltip="Copy to clipboard">
+        <mat-icon>file_copy</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Editors
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>To add or remove an editor, run the command <kbd>!pack editor @user</kbd> in Discord!</p>
+      <mat-list *ngIf="data.editors.length">
+        <mat-list-item *ngFor="let editor of data.editors">{{editor.username}}</mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Export
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="button-row">
+        <button mat-raised-button color="primary">Export to JSON</button>
+        <button mat-raised-button color="primary">Export to Homebrewery</button>
+      </div>
+    </mat-expansion-panel>
 
   </div>
 </mat-dialog-content>

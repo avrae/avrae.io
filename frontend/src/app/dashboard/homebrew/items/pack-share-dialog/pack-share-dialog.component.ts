@@ -10,12 +10,20 @@ import {Pack} from "../../../../schemas/homebrew/Items";
 export class PackShareDialog implements OnInit {
 
   public: boolean;
+  shareLink: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Pack) {
     this.public = data.public;
+    this.shareLink = `https://avrae.io/homebrew/items/${data._id.$oid}`
   }
 
   ngOnInit() {
+  }
+
+  copy(inputElement) {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
   }
 
 }

@@ -44,9 +44,14 @@ def new_pack():
 
 @items.route('/<pack>', methods=['GET'])
 def get_pack(pack):
+    user_id = None
+    if 'Authorization' in request.headers:
+        user_id = get_user_info().id
     data = mdb.packs.find_one({"_id": ObjectId(pack)})
     if data is None:
         return "Pack not found", 404
+    if not data['public'] and data['owner']['id'] != user_id and user_id not in [e['id'] for e in data['editors']]:
+        return "You do not have permission to view this pack", 403
     return jsonify(data)
 
 
