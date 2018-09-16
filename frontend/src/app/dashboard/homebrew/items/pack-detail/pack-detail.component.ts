@@ -8,6 +8,7 @@ import {DashboardService} from "../../../dashboard.service";
 import {PackShareDialog} from "../pack-share-dialog/pack-share-dialog.component";
 import {MatDialog} from "@angular/material";
 import {PackOptionsDialog} from "../pack-options-dialog/pack-options-dialog.component";
+import {getUser} from "../../../APIHelper";
 
 @Component({
   selector: 'avr-pack-detail',
@@ -17,7 +18,7 @@ import {PackOptionsDialog} from "../pack-options-dialog/pack-options-dialog.comp
 export class PackDetailComponent implements OnInit {
 
   pack: Pack;
-  user: UserInfo;
+  user: UserInfo = getUser();
   canEdit: boolean;
   isOwner: boolean;
 

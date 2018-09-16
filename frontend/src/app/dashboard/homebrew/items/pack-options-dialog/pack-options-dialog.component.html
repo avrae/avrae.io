@@ -19,5 +19,5 @@
   <button mat-button [mat-dialog-close]="{name: name, image: image, desc: desc}" [disabled]="!name">
     Save
   </button>
-  <button mat-raised-button color="warn" (click)="beginDelete()">Delete</button>
+  <button mat-raised-button color="warn" (click)="beginDelete()" *ngIf="isOwner">Delete</button>
 </mat-dialog-actions>

@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {Pack} from "../../../../schemas/homebrew/Items";
 import {PackDeleteDialog} from "../pack-delete-dialog/pack-delete-dialog.component";
+import {getUser} from "../../../APIHelper";
 
 @Component({
   selector: 'avr-pack-options-dialog',
@@ -13,12 +14,14 @@ export class PackOptionsDialog implements OnInit {
   name: string;
   image: string;
   desc: string;
+  isOwner: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Pack, private dialog: MatDialog,
               private dialogRef: MatDialogRef<PackOptionsDialog>) {
     this.name = data.name;
     this.image = data.image;
     this.desc = data.desc;
+    this.isOwner = getUser().id == data.owner.id;
   }
 
   ngOnInit() {
