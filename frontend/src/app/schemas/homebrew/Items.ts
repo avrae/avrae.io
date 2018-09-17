@@ -16,5 +16,16 @@ export class Pack {
 
 export class Item {
   name: string;
+  meta: string;
   desc: string;
+
+  constructor() {
+    this.name = "New Item";
+    this.meta = "";
+    this.desc = "";
+  }
+}
+
+export class StructuredItem extends Item {
+
 }

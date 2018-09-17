@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Pack} from "../../../../schemas/homebrew/Items";
+import {Item, Pack} from "../../../../schemas/homebrew/Items";
 import {HomebrewService} from "../../homebrew.service";
 import {Location} from "@angular/common";
 import {UserInfo} from "../../../../schemas/UserInfo";
 import {DashboardService} from "../../../dashboard.service";
 import {PackShareDialog} from "../pack-share-dialog/pack-share-dialog.component";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
 import {PackOptionsDialog} from "../pack-options-dialog/pack-options-dialog.component";
 import {getUser} from "../../../APIHelper";
 
@@ -15,16 +15,17 @@ import {getUser} from "../../../APIHelper";
   templateUrl: './pack-detail.component.html',
   styleUrls: ['./pack-detail.component.css']
 })
-export class PackDetailComponent implements OnInit {
+export class PackDetailComponent implements OnInit, OnDestroy {
 
   pack: Pack;
   user: UserInfo = getUser();
   canEdit: boolean;
   isOwner: boolean;
+  changesOpen: boolean = false;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewService,
               private dashboardService: DashboardService, private location: Location, private dialog: MatDialog,
-              private router: Router) {
+              private router: Router, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -32,12 +33,18 @@ export class PackDetailComponent implements OnInit {
     this.getPack();
   }
 
+  ngOnDestroy() {
+    this.snackBar.dismiss();
+  }
+
   getUser() {
-    this.dashboardService.getUserInfo()
-      .subscribe(user => {
-        this.user = user;
-        this.calcCanEdit();
-      })
+    if (!this.user) {
+      this.dashboardService.getUserInfo()
+        .subscribe(user => {
+          this.user = user;
+          this.calcCanEdit();
+        })
+    }
   }
 
   getPack() {
@@ -55,6 +62,22 @@ export class PackDetailComponent implements OnInit {
     }
     this.isOwner = this.user.id == this.pack.owner.id;
     this.canEdit = this.isOwner || this.pack.editors.some(e => e.id == this.user.id);
+  }
+
+  newLooseItem() {
+    this.pack.items.push(new Item());
+    this.ensureChangesNotif();
+  }
+
+  ensureChangesNotif() {
+    if (!this.changesOpen) {
+      this.changesOpen = true;
+      let snackBarRef = this.snackBar.open("You have unsaved changes!", "Save", {duration: -1});
+
+      snackBarRef.onAction().subscribe(() => {
+        this.commit();
+      });
+    }
   }
 
   beginShare() {
@@ -98,6 +121,8 @@ export class PackDetailComponent implements OnInit {
     this.homebrewService.putPack(this.pack)
       .subscribe(result => {
         console.log(result);
+        this.changesOpen = false;
+        this.snackBar.open(result);
       });
   }
 

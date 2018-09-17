@@ -1,0 +1,21 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{item.name}}
+    </mat-panel-title>
+    <mat-panel-description>
+      {{item.meta}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="form-container">
+    <mat-form-field>
+      <input matInput placeholder="Name" (change)="emitChange()" [(ngModel)]="item.name">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Meta" (change)="emitChange()" [(ngModel)]="item.meta"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Description" (change)="emitChange()" [(ngModel)]="item.desc"></textarea>
+    </mat-form-field>
+  </div>
+</mat-expansion-panel>

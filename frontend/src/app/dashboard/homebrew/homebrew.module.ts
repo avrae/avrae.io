@@ -11,6 +11,7 @@ import {NewPackDialog} from './items/new-pack-dialog/new-pack-dialog.component';
 import {PackOptionsDialog} from './items/pack-options-dialog/pack-options-dialog.component';
 import {PackShareDialog} from './items/pack-share-dialog/pack-share-dialog.component';
 import {PackDeleteDialog} from './items/pack-delete-dialog/pack-delete-dialog.component';
+import { ItemDetailComponent } from './items/pack-detail/item-detail/item-detail.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {PackDeleteDialog} from './items/pack-delete-dialog/pack-delete-dialog.co
     PackOptionsDialog,
     PackShareDialog,
     PackDeleteDialog,
+    ItemDetailComponent,
   ],
   entryComponents: [
     NewPackDialog,

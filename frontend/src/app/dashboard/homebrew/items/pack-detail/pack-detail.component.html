@@ -10,6 +10,9 @@
     </span>
     <span class="toolbar-spacer"></span>
     <span>
+      <button mat-icon-button (click)="commit()">
+        <mat-icon aria-label="Save">save</mat-icon>
+      </button>
       <button mat-icon-button (click)="beginSettings()">
         <mat-icon aria-label="Settings">settings</mat-icon>
       </button>
@@ -22,24 +25,15 @@
   <div class="container" fxLayout="row" fxLayoutGap="8px">
     <div class="item-list" fxFlex="grow" *ngIf="pack.items.length">
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let item of pack.items">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              ITEMNAME
-            </mat-panel-title>
-            <mat-panel-description>
-              ITEMMETA
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>ITEMDESC</p>
-        </mat-expansion-panel>
+        <avr-item-detail *ngFor="let item of pack.items" [item]="item"
+                         (changed)="ensureChangesNotif()"></avr-item-detail>
       </mat-accordion>
     </div>
 
     <div class="item-list" fxFlex="grow" *ngIf="!pack.items.length">
       <mat-card>
         <p>Looks like this pack is empty.</p>
-        <button mat-raised-button color="accent">Make an Item</button>
+        <button mat-raised-button color="accent" (click)="newLooseItem()">Make an Item</button>
       </mat-card>
     </div>
 
