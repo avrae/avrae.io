@@ -23,6 +23,7 @@ import {InViewportModule, WindowRef} from "@thisissoon/angular-inviewport";
 import {ScrollSpyModule} from "@thisissoon/angular-scrollspy";
 import {CheatsheetsModule} from "./cheatsheets/cheatsheets.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {DiscordEmbedModule} from "./shared/discord-embed/discord-embed.module";
 
 const markdownConfig = {
   markedOptions: {
@@ -48,7 +49,7 @@ const providers: Provider[] = [
     LoginComponent,
     ErrorComponent,
     CommandsComponent,
-    CommandListComponent
+    CommandListComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +64,7 @@ const providers: Provider[] = [
     MaterialModule,
     DashboardModule,
     CheatsheetsModule,
+    DiscordEmbedModule,
     AppRoutingModule,
     ThemesModule
   ],

@@ -27,6 +27,21 @@
       <mat-accordion>
         <avr-item-detail *ngFor="let item of pack.items" [item]="item"
                          (changed)="ensureChangesNotif()"></avr-item-detail>
+        <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-item-card">
+          <span>New...</span>
+          <span class="toolbar-spacer"></span>
+          <span>
+            <button mat-icon-button matTooltip="Import from JSON">
+              <mat-icon aria-label="Import from JSON">import_export</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="From existing item">
+              <mat-icon aria-label="From existing item">scanner</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon aria-label="New">add</mat-icon>
+            </button>
+          </span>
+        </mat-card>
       </mat-accordion>
     </div>
 

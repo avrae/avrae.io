@@ -12,6 +12,7 @@ import {PackOptionsDialog} from './items/pack-options-dialog/pack-options-dialog
 import {PackShareDialog} from './items/pack-share-dialog/pack-share-dialog.component';
 import {PackDeleteDialog} from './items/pack-delete-dialog/pack-delete-dialog.component';
 import { ItemDetailComponent } from './items/pack-detail/item-detail/item-detail.component';
+import {MarkdownModule} from "ngx-markdown";
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { ItemDetailComponent } from './items/pack-detail/item-detail/item-detail
     MaterialModule,
     FormsModule,
     FlexLayoutModule,
+    MarkdownModule.forChild(),
     HomebrewRoutingModule,
   ],
   declarations: [

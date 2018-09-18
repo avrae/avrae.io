@@ -18,6 +18,7 @@ export class Item {
   name: string;
   meta: string;
   desc: string;
+  image?: string;
 
   constructor() {
     this.name = "New Item";
