@@ -1,0 +1,30 @@
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DiscordEmbedComponent} from "./discord-embed.component";
+import {EmbedColorPillComponent} from './embed-color-pill/embed-color-pill.component';
+import { EmbedAuthorComponent } from './embed-author/embed-author.component';
+import { EmbedTitleComponent } from './embed-title/embed-title.component';
+import { EmbedDescriptionComponent } from './embed-description/embed-description.component';
+import { EmbedFieldComponent } from './embed-field/embed-field.component';
+import { EmbedThumbnailComponent } from './embed-thumbnail/embed-thumbnail.component';
+import { EmbedImageComponent } from './embed-image/embed-image.component';
+import { EmbedFooterComponent } from './embed-footer/embed-footer.component';
+
+@NgModule({
+  imports: [
+    CommonModule
+  ],
+  declarations: [
+    DiscordEmbedComponent,
+    EmbedColorPillComponent,
+    EmbedAuthorComponent,
+    EmbedTitleComponent,
+    EmbedDescriptionComponent,
+    EmbedFieldComponent,
+    EmbedThumbnailComponent,
+    EmbedImageComponent,
+    EmbedFooterComponent
+  ]
+})
+export class DiscordEmbedModule {
+}

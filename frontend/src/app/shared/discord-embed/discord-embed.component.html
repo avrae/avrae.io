@@ -1,0 +1,18 @@
+<div class='accessory'>
+  <div class='embed-wrapper'>
+    <avr-embed-color-pill class="embed-color-pill"></avr-embed-color-pill>
+    <div class='embed embed-rich'>
+      <div class='embed-content'>
+        <div class='embed-content-inner'>
+          <EmbedAuthor {...author}/>
+          <EmbedTitle title={title} url={url}/>
+            <EmbedDescription content={description}/>
+              <EmbedFields fields={fields}/>
+        </div>
+        <EmbedThumbnail {...thumbnail}/>
+      </div>
+      <EmbedImage {...image}/>
+      <EmbedFooter timestamp={timestamp} {...footer}/>
+    </div>
+  </div>
+</div>
