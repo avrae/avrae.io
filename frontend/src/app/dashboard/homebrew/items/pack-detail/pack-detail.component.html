@@ -52,9 +52,13 @@
       </mat-card>
     </div>
 
-    <div class="item-preview" fxFlex="grow">
-      <avr-discord-embed *ngIf="selectedItem" [title]="selectedItem.name"
-                         [description]="selectedItem.meta"></avr-discord-embed>
+    <div class="item-preview mat-typography" fxFlex="grow">
+      <avr-discord-embed *ngIf="selectedItem" [author]="{name: user.username, icon_url: user.avatarUrl}"
+                         [title]="selectedItem.name" [description]="selectedItem.meta"
+                         [fields]="[{name: 'Description', value: selectedItem.desc}]"
+                         [thumbnail]="selectedItem.image"
+                         [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
+      </avr-discord-embed>
     </div>
   </div>
 </div>
