@@ -9,6 +9,7 @@ import {PackShareDialog} from "../pack-share-dialog/pack-share-dialog.component"
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {PackOptionsDialog} from "../pack-options-dialog/pack-options-dialog.component";
 import {getUser} from "../../../APIHelper";
+import {PackImportDialog} from "../pack-import-dialog/pack-import-dialog.component";
 
 @Component({
   selector: 'avr-pack-detail',
@@ -70,6 +71,11 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     this.ensureChangesNotif();
   }
 
+  deleteItem(item: Item) {
+    this.pack.items = this.pack.items.filter(obj => obj !== item);
+    this.ensureChangesNotif();
+  }
+
   ensureChangesNotif() {
     if (!this.changesOpen) {
       this.changesOpen = true;
@@ -113,6 +119,26 @@ export class PackDetailComponent implements OnInit, OnDestroy {
           this.pack = Object.assign(this.pack, result);
           this.commit();
         }
+      }
+    });
+  }
+
+  beginNewFromJSON() {
+    const dialogRef = this.dialog.open(PackImportDialog, {
+      width: "60%",
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        let item: Item | Item[] = result;
+        console.log(item);
+        if (item instanceof Array) {
+          this.pack.items.push(...item);
+        } else {
+          this.pack.items.push(item);
+        }
+        this.ensureChangesNotif();
       }
     });
   }

@@ -18,10 +18,10 @@
       </mat-form-field>
     </div>
     <mat-form-field>
-      <textarea matInput placeholder="Meta" (change)="emitChange()" [(ngModel)]="item.meta"></textarea>
+      <textarea matInput placeholder="Meta" rows="3" (change)="emitChange()" [(ngModel)]="item.meta"></textarea>
     </mat-form-field>
     <mat-form-field>
-      <textarea matInput placeholder="Description" (change)="emitChange()" [(ngModel)]="item.desc"></textarea>
+      <textarea matInput placeholder="Description" rows="7" (change)="emitChange()" [(ngModel)]="item.desc"></textarea>
     </mat-form-field>
   </div>
   <div class="actions" fxLayout="row">
@@ -31,13 +31,13 @@
       </button>
     </span>
     <span fxFlex>
-      <button mat-icon-button matTooltip="Export to JSON">
+      <button mat-icon-button matTooltip="Export to JSON" (click)="beginJSONExport()">
         <mat-icon aria-label="Export to JSON">import_export</mat-icon>
       </button>
     </span>
     <span fxFlex="grow"></span>
     <span fxFlex>
-      <button mat-icon-button color="warn">
+      <button mat-icon-button color="warn" (click)="delete.emit()">
         <mat-icon aria-label="Delete">delete</mat-icon>
       </button>
     </span>

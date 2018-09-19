@@ -1,5 +1,7 @@
 import {DiscordUser} from "../DiscordUser";
 
+export const REQUIRED_ITEM_PROPS = ["name"];
+
 export class Pack {
   name: string;
   owner: DiscordUser;

@@ -14,6 +14,8 @@ import {PackDeleteDialog} from './items/pack-delete-dialog/pack-delete-dialog.co
 import {ItemDetailComponent} from './items/pack-detail/item-detail/item-detail.component';
 import {MarkdownModule} from "ngx-markdown";
 import {DiscordEmbedModule} from "../../shared/discord-embed/discord-embed.module";
+import {PackJsonDialog} from './items/pack-json-dialog/pack-json-dialog.component';
+import {PackImportDialog} from './items/pack-import-dialog/pack-import-dialog.component';
 
 @NgModule({
   imports: [
@@ -33,12 +35,16 @@ import {DiscordEmbedModule} from "../../shared/discord-embed/discord-embed.modul
     PackShareDialog,
     PackDeleteDialog,
     ItemDetailComponent,
+    PackJsonDialog,
+    PackImportDialog,
   ],
   entryComponents: [
     NewPackDialog,
     PackOptionsDialog,
     PackShareDialog,
-    PackDeleteDialog
+    PackDeleteDialog,
+    PackJsonDialog,
+    PackImportDialog
   ]
 })
 export class HomebrewModule {
