@@ -4,11 +4,9 @@ import {Component, Input, OnInit} from '@angular/core';
   selector: 'avr-embed-footer',
   styleUrls: ['../discord-embed.component.css'],
   template: `
-    <div *ngIf="footer?.text || footer?.timestamp">
-      <img [src]="footer.icon_url" class="embed-footer-icon" role="presentation" width="20" height="20"
-           *ngIf="footer.icon_url">
-      <span class="embed-footer">{{footerText}}</span>
-    </div>
+    <img [src]="footer.icon_url" class="embed-footer-icon" role="presentation" width="20" height="20"
+         *ngIf="(footer?.text || footer?.timestamp) && footer.icon_url">
+    <span class="embed-footer" *ngIf="footer?.text || footer?.timestamp">{{footerText}}</span>
   `
 })
 export class EmbedFooterComponent implements OnInit {
@@ -17,13 +15,13 @@ export class EmbedFooterComponent implements OnInit {
   footerText: string;
 
   constructor() {
+  }
+
+  ngOnInit() {
     if (this.footer) {
       let time = this.footer.timestamp ? this.footer.timestamp.toLocaleString() : null;
       this.footerText = [this.footer.text, time].filter(Boolean).join(' | ');
     }
-  }
-
-  ngOnInit() {
   }
 
 }

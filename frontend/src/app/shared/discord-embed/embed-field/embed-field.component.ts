@@ -16,10 +16,10 @@ export class EmbedFieldComponent implements OnInit {
   fieldClass: string;
 
   constructor() {
-    this.fieldClass = 'embed-field' + (this.field.inline ? ' embed-field-inline' : '');
   }
 
   ngOnInit() {
+    this.fieldClass = 'embed-field' + (this.field.inline ? ' embed-field-inline' : '');
   }
 
 }

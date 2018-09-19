@@ -1,20 +1,42 @@
-<div class='accessory'>
-  <div class='embed-wrapper'>
-    <avr-embed-color-pill [color]="color"></avr-embed-color-pill>
-    <div class='embed embed-rich'>
-      <div class='embed-content'>
-        <div class='embed-content-inner'>
-          <avr-embed-author [author]="author"></avr-embed-author>
-          <avr-embed-title [title]="title" [url]="url"></avr-embed-title>
-          <avr-embed-description [description]="description"></avr-embed-description>
-          <div class="embed-fields" *ngIf="fields?.length">
-            <avr-embed-field *ngFor="let field of fields" [field]="field"></avr-embed-field>
+<div class='flex-vertical whitney theme-dark'>
+  <div class='chat flex-vertical flex-spacer'>
+    <div class='content flex-spacer flex-horizontal'>
+      <div class='flex-spacer flex-vertical messages-wrapper'>
+        <div class='scroller-wrap'>
+          <div class='scroller messages'>
+            <div class='message-group hide-overflow'>
+              <div class='comment'>
+                <div class='message first'>
+
+                  <div class='accessory'>
+                    <div class='embed-wrapper'>
+                      <avr-embed-color-pill [color]="color"></avr-embed-color-pill>
+                      <div class='embed embed-rich'>
+                        <div class='embed-content'>
+                          <div class='embed-content-inner'>
+                            <avr-embed-author [author]="author"></avr-embed-author>
+                            <avr-embed-title [title]="title" [url]="url" class="embed-title"></avr-embed-title>
+                            <avr-embed-description [description]="description"
+                                                   class="embed-description"></avr-embed-description>
+                            <div class="embed-fields" *ngIf="fields?.length">
+                              <avr-embed-field *ngFor="let field of fields" [field]="field"></avr-embed-field>
+                            </div>
+                          </div>
+                          <avr-embed-thumbnail [thumbnail]="thumbnail" class="embed-thumbnail"></avr-embed-thumbnail>
+                        </div>
+                        <avr-embed-image [image]="image" class="embed-image"></avr-embed-image>
+                        <avr-embed-footer [footer]="footer" class="embed-footer"></avr-embed-footer>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <avr-embed-thumbnail [thumbnail]="thumbnail"></avr-embed-thumbnail>
       </div>
-      <avr-embed-image [image]="image"></avr-embed-image>
-      <avr-embed-footer></avr-embed-footer>
     </div>
   </div>
 </div>
+
