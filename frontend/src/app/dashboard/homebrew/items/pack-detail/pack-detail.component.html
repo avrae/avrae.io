@@ -34,10 +34,12 @@
             <button mat-icon-button matTooltip="Import from JSON">
               <mat-icon aria-label="Import from JSON">import_export</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="From existing item">
-              <mat-icon aria-label="From existing item">scanner</mat-icon>
-            </button>
-            <button mat-icon-button>
+            <span matTooltip="Coming soon!"> <!-- TODO -->
+              <button mat-icon-button matTooltip="From existing item" disabled>
+                <mat-icon aria-label="From existing item">scanner</mat-icon>
+              </button>
+            </span>
+            <button mat-icon-button (click)="newLooseItem()">
               <mat-icon aria-label="New">add</mat-icon>
             </button>
           </span>
@@ -57,6 +59,10 @@
                          [title]="selectedItem.name" [description]="selectedItem.meta"
                          [fields]="[{name: 'Description', value: selectedItem.desc}]"
                          [thumbnail]="selectedItem.image"
+                         [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
+      </avr-discord-embed>
+      <avr-discord-embed *ngIf="!selectedItem" [author]="{name: user.username, icon_url: user.avatarUrl}"
+                         title="No item selected." description="Click on an item on the left to see a preview!"
                          [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
       </avr-discord-embed>
     </div>

@@ -690,7 +690,8 @@
 
 .embed-footer {
   font-size: 12px;
-  letter-spacing: 0
+  letter-spacing: 0;
+  margin-top: -12px;
 }
 
 .embed-footer-icon {
