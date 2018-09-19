@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'avr-embed-title',
-  templateUrl: './embed-title.component.html',
-  styleUrls: ['./embed-title.component.css']
+  styleUrls: ['../discord-embed.component.css'],
+  template: `
+    <div class="embed-title" *ngIf="title && !url" markdown [data]="title"></div>
+    <a [href]="url" class="embed-title" *ngIf="title && url" markdown [data]="title"></a>
+  `
 })
 export class EmbedTitleComponent implements OnInit {
 
-  constructor() { }
+  @Input() title: string;
+  @Input() url: string;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

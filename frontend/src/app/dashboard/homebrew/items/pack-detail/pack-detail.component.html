@@ -26,7 +26,7 @@
     <div class="item-list" fxFlex="grow" *ngIf="pack.items.length">
       <mat-accordion>
         <avr-item-detail *ngFor="let item of pack.items" [item]="item"
-                         (changed)="ensureChangesNotif()"></avr-item-detail>
+                         (changed)="ensureChangesNotif()" (opened)="selectedItem = item"></avr-item-detail>
         <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-item-card">
           <span>New...</span>
           <span class="toolbar-spacer"></span>
@@ -53,7 +53,8 @@
     </div>
 
     <div class="item-preview" fxFlex="grow">
-      A preview goes here.
+      <avr-discord-embed *ngIf="selectedItem" [title]="selectedItem.name"
+                         [description]="selectedItem.meta"></avr-discord-embed>
     </div>
   </div>
 </div>

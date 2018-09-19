@@ -1,18 +1,20 @@
 <div class='accessory'>
   <div class='embed-wrapper'>
-    <avr-embed-color-pill class="embed-color-pill"></avr-embed-color-pill>
+    <avr-embed-color-pill [color]="color"></avr-embed-color-pill>
     <div class='embed embed-rich'>
       <div class='embed-content'>
         <div class='embed-content-inner'>
-          <EmbedAuthor {...author}/>
-          <EmbedTitle title={title} url={url}/>
-            <EmbedDescription content={description}/>
-              <EmbedFields fields={fields}/>
+          <avr-embed-author [author]="author"></avr-embed-author>
+          <avr-embed-title [title]="title" [url]="url"></avr-embed-title>
+          <avr-embed-description [description]="description"></avr-embed-description>
+          <div class="embed-fields" *ngIf="fields?.length">
+            <avr-embed-field *ngFor="let field of fields" [field]="field"></avr-embed-field>
+          </div>
         </div>
-        <EmbedThumbnail {...thumbnail}/>
+        <avr-embed-thumbnail [thumbnail]="thumbnail"></avr-embed-thumbnail>
       </div>
-      <EmbedImage {...image}/>
-      <EmbedFooter timestamp={timestamp} {...footer}/>
+      <avr-embed-image [image]="image"></avr-embed-image>
+      <avr-embed-footer></avr-embed-footer>
     </div>
   </div>
 </div>

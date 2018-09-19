@@ -1,16 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'avr-embed-color-pill',
-  templateUrl: './embed-color-pill.component.html',
-  styleUrls: ['./embed-color-pill.component.css', '../discord-embed.component.css']
+  styleUrls: ['../discord-embed.component.css'],
+  template: "<div class='embed-color-pill' [ngStyle]='style'></div>"
 })
 export class EmbedColorPillComponent implements OnInit {
 
+  @Input() color: number;
+  style: object;
+
   constructor() {
+    let computed;
+    if (this.color) {
+      const c = this.extractRGB(this.color);
+      computed = `rgba(${c.r},${c.g},${c.b},1)`;
+    }
+    this.style = {backgroundColor: computed !== undefined ? computed : '#7289DA'};
   }
 
   ngOnInit() {
   }
 
+  extractRGB(i) {
+    return {
+      r: (i >> 16) & 0xFF,
+      g: (i >> 8) & 0xFF,
+      b: i & 0xFF,
+    };
+  }
 }

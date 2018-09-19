@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'avr-embed-image',
-  templateUrl: './embed-image.component.html',
-  styleUrls: ['./embed-image.component.css']
+  styleUrls: ['../discord-embed.component.css'],
+  template: `
+    <a class="embed-thumbnail embed-thumbnail-rich" *ngIf="image">
+      <img class="image" role="presentation" [src]="image">
+    </a>
+  `
 })
 export class EmbedImageComponent implements OnInit {
 
-  constructor() { }
+  @Input() image: string;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

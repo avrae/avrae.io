@@ -10,6 +10,7 @@ export class ItemDetailComponent implements OnInit {
 
   @Input() item: Item;
   @Output() changed = new EventEmitter();
+  @Output() opened = new EventEmitter();
 
   constructor() {
   }

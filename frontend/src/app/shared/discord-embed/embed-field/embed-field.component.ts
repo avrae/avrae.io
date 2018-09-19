@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'avr-embed-field',
-  templateUrl: './embed-field.component.html',
-  styleUrls: ['./embed-field.component.css']
+  styleUrls: ['../discord-embed.component.css'],
+  template: `
+    <div [ngClass]="fieldClass" *ngIf="field.name && field.value">
+      <div class="embed-field-name" markdown [data]="field.name"></div>
+      <div class="embed-field-value" markdown [data]="field.value"></div>
+    </div>
+  `
 })
 export class EmbedFieldComponent implements OnInit {
 
-  constructor() { }
+  @Input() field: EmbedField;
+  fieldClass: string;
+
+  constructor() {
+    this.fieldClass = 'embed-field' + (this.field.inline ? ' embed-field-inline' : '');
+  }
 
   ngOnInit() {
   }
 
+}
+
+export class EmbedField {
+  name: string;
+  value: string;
+  inline: boolean;
 }

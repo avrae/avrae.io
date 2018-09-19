@@ -22,6 +22,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   canEdit: boolean;
   isOwner: boolean;
   changesOpen: boolean = false;
+  selectedItem: Item;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewService,
               private dashboardService: DashboardService, private location: Location, private dialog: MatDialog,

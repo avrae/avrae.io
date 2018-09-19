@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {EmbedAuthor} from "./embed-author/embed-author.component";
+import {EmbedField} from "./embed-field/embed-field.component";
+import {EmbedFooter} from "./embed-footer/embed-footer.component";
 
 @Component({
   selector: 'avr-discord-embed',
@@ -7,7 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DiscordEmbedComponent implements OnInit {
 
-  constructor() { }
+  @Input() color: number;
+  @Input() author: EmbedAuthor;
+  @Input() title: string;
+  @Input() url: string;
+  @Input() description: string;
+  @Input() fields: EmbedField[];
+  @Input() thumbnail: string;
+  @Input() image: string;
+  @Input() footer: EmbedFooter;
+
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

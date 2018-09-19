@@ -11,8 +11,9 @@ import {NewPackDialog} from './items/new-pack-dialog/new-pack-dialog.component';
 import {PackOptionsDialog} from './items/pack-options-dialog/pack-options-dialog.component';
 import {PackShareDialog} from './items/pack-share-dialog/pack-share-dialog.component';
 import {PackDeleteDialog} from './items/pack-delete-dialog/pack-delete-dialog.component';
-import { ItemDetailComponent } from './items/pack-detail/item-detail/item-detail.component';
+import {ItemDetailComponent} from './items/pack-detail/item-detail/item-detail.component';
 import {MarkdownModule} from "ngx-markdown";
+import {DiscordEmbedModule} from "../../shared/discord-embed/discord-embed.module";
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {MarkdownModule} from "ngx-markdown";
     FormsModule,
     FlexLayoutModule,
     MarkdownModule.forChild(),
+    DiscordEmbedModule,
     HomebrewRoutingModule,
   ],
   declarations: [
