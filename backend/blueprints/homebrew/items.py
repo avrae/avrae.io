@@ -7,6 +7,9 @@ from lib.utils import jsonify
 
 items = Blueprint('homebrew/items', __name__)
 
+PACK_FIELDS = ("name", "owner", "editors", "public", "active", "server_active", "desc", "image", "items", "numItems")
+ITEM_FIELDS = ("name", "meta", "desc", "image")
+
 
 @items.route('/me', methods=['GET'])
 def user_packs():
@@ -64,7 +67,14 @@ def put_pack(pack):
         return "Pack not found", 404
     if user.id != data['owner']['id'] and user.id not in [e['id'] for e in data['editors']]:
         return "You do not have permission to edit this pack", 403
+
     reqdata.pop('_id')  # ID is in the url
+    if not all(k in PACK_FIELDS for k in reqdata):
+        return "Invalid field", 400
+    if "items" in reqdata:
+        for item in reqdata['items']:
+            if not all(k in ITEM_FIELDS for k in item):
+                return f"Invalid item field in {item}", 400
 
     mdb.packs.update_one({"_id": ObjectId(pack)}, {"$set": reqdata})
     return "Pack updated."
