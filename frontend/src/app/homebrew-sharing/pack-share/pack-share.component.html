@@ -14,8 +14,8 @@
       <mat-card>
 
         <mat-list>
-          <mat-list-item *ngFor="let item of pack.items" class="item hoverable">
-            <div fxLayout="row" (click)="selectedItem = item">
+          <mat-list-item *ngFor="let item of pack.items">
+            <div class="item hoverable" fxLayout="row" (click)="selectedItem = item">
               <div fxFlex="1 2 auto" class="item-name">
                 <p>{{item.name}}</p>
               </div>
@@ -53,6 +53,9 @@
   <div class="container">
     <mat-card>
       <mat-spinner [diameter]="24"></mat-spinner>
+      <p>
+        If this is taking too long to load, you may not have permissions to view this pack.
+      </p>
     </mat-card>
   </div>
 </div>
