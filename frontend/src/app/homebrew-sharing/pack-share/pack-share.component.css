@@ -1,0 +1,20 @@
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  margin: 8px;
+}
+
+.item {
+  cursor: pointer;
+}
+
+.item-name {
+  margin-right: 16px;
+  display: flex;
+}
+
+.item-short {
+  display: flex;
+}

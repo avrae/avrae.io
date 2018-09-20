@@ -55,7 +55,7 @@
       </mat-card>
     </div>
 
-    <div class="item-preview mat-typography" fxFlex="grow">
+    <div class="item-preview mat-typography mat-elevation-z3" fxFlex="grow">
       <avr-discord-embed *ngIf="selectedItem" [author]="{name: user.username, icon_url: user.avatarUrl}"
                          [title]="selectedItem.name" [description]="selectedItem.meta"
                          [fields]="[{name: 'Description', value: selectedItem.desc}]"

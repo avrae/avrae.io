@@ -41,4 +41,12 @@
     background: mat-color($accent);
     border-radius: 2px;
   }
+
+  .muted {
+    color: mat-color($foreground, base, 0.62);
+  }
+
+  .hoverable:hover {
+    background-color: mat-color($foreground, base, 0.04);
+  }
 }

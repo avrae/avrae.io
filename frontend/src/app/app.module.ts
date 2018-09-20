@@ -24,6 +24,7 @@ import {ScrollSpyModule} from "@thisissoon/angular-scrollspy";
 import {CheatsheetsModule} from "./cheatsheets/cheatsheets.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {DiscordEmbedModule} from "./shared/discord-embed/discord-embed.module";
+import {HomebrewSharingModule} from "./homebrew-sharing/homebrew-sharing.module";
 
 const markdownConfig = {
   markedOptions: {
@@ -64,6 +65,7 @@ const providers: Provider[] = [
     MaterialModule,
     DashboardModule,
     CheatsheetsModule,
+    HomebrewSharingModule,
     DiscordEmbedModule,
     AppRoutingModule,
     ThemesModule
