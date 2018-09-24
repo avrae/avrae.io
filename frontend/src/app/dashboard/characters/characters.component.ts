@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfo} from "../../schemas/UserInfo";
+import {UserInfo, UserStats} from "../../schemas/UserInfo";
 import {DashboardService} from "../dashboard.service";
 import {CharacterMeta} from "../../schemas/Character";
 
@@ -11,6 +11,7 @@ import {CharacterMeta} from "../../schemas/Character";
 export class CharactersComponent implements OnInit {
 
   userInfo: UserInfo;
+  userStats: UserStats;
   characters: CharacterMeta[];
 
   constructor(private dashboardService: DashboardService) {
@@ -18,12 +19,18 @@ export class CharactersComponent implements OnInit {
 
   ngOnInit() {
     this.getUserInfo();
+    this.getUserStats();
     this.getCharacters();
   }
 
   getUserInfo(): void {
     this.dashboardService.getUserInfo()
       .subscribe(userInfo => this.userInfo = userInfo);
+  }
+
+  getUserStats(): void {
+    this.dashboardService.getUserStats()
+      .subscribe(userStats => this.userStats = userStats);
   }
 
   getCharacters(): void {

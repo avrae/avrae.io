@@ -11,7 +11,9 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatProgressSpinnerModule,
   MatSidenavModule,
+  MatSlideToggleModule,
   MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
@@ -37,7 +39,9 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatGridListModule,
@@ -55,7 +59,9 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}

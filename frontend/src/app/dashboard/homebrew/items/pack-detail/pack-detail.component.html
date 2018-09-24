@@ -1,0 +1,88 @@
+<div *ngIf="pack && canEdit">
+  <mat-toolbar color="primary">
+    <span>
+      <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Back">arrow_back</mat-icon>
+      </button>
+    </span>
+    <span>
+      {{pack.name}}
+    </span>
+    <span class="toolbar-spacer"></span>
+    <span>
+      <button mat-icon-button (click)="commit()">
+        <mat-icon aria-label="Save">save</mat-icon>
+      </button>
+      <button mat-icon-button (click)="beginSettings()">
+        <mat-icon aria-label="Settings">settings</mat-icon>
+      </button>
+      <button mat-icon-button (click)="beginShare()">
+        <mat-icon aria-label="Share">launch</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
+
+  <div class="container" fxLayout="row" fxLayoutGap="8px">
+    <div class="item-list" fxFlex="grow" *ngIf="pack.items.length">
+      <mat-accordion>
+        <avr-item-detail *ngFor="let item of pack.items" [item]="item"
+                         (changed)="ensureChangesNotif()" (opened)="selectedItem = item"
+                         (delete)="deleteItem(item)"></avr-item-detail>
+        <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-item-card">
+          <span class="no-text-cursor">New...</span>
+          <span class="toolbar-spacer"></span>
+          <span>
+            <button mat-icon-button matTooltip="Import from JSON" (click)="beginNewFromJSON()">
+              <mat-icon aria-label="Import from JSON">import_export</mat-icon>
+            </button>
+            <span matTooltip="Coming soon!"> <!-- TODO -->
+              <button mat-icon-button matTooltip="From existing item" disabled>
+                <mat-icon aria-label="From existing item">scanner</mat-icon>
+              </button>
+            </span>
+            <button mat-icon-button (click)="newLooseItem()">
+              <mat-icon aria-label="New">add</mat-icon>
+            </button>
+          </span>
+        </mat-card>
+      </mat-accordion>
+    </div>
+
+    <div class="item-list" fxFlex="grow" *ngIf="!pack.items.length">
+      <mat-card>
+        <p>Looks like this pack is empty.</p>
+        <button mat-raised-button color="accent" (click)="newLooseItem()">Make an Item</button>
+      </mat-card>
+    </div>
+
+    <div class="item-preview mat-typography mat-elevation-z3" fxFlex="grow">
+      <avr-discord-embed *ngIf="selectedItem" [author]="{name: user.username, icon_url: user.avatarUrl}"
+                         [title]="selectedItem.name" [description]="selectedItem.meta"
+                         [fields]="[{name: 'Description', value: selectedItem.desc}]"
+                         [thumbnail]="selectedItem.image"
+                         [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
+      </avr-discord-embed>
+      <avr-discord-embed *ngIf="!selectedItem" [author]="{name: user.username, icon_url: user.avatarUrl}"
+                         title="No item selected." description="Click on an item on the left to see a preview!"
+                         [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
+      </avr-discord-embed>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!pack">
+  <div class="container">
+    <mat-card>
+      <mat-spinner [diameter]="24"></mat-spinner>
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="pack && !canEdit">
+  <div class="container">
+    <mat-card>
+      <p>You do not have permission to edit this pack.</p>
+      <button mat-raised-button color="accent" (click)="back()">Go Back</button>
+    </mat-card>
+  </div>
+</div>
