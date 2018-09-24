@@ -20,7 +20,7 @@
   </p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close tabindex="1">Cancel</button>
   <button mat-button [mat-dialog-close]="{name: name, public: public, image: image, desc: desc}" [disabled]="!name">
     Create
   </button>
