@@ -18,11 +18,17 @@ export class PackImportDialog implements OnInit {
   }
 
   getOutput(): Item[] | Item {
-    return JSON.parse(this.data)
+    return JSON.parse(this.data);
   }
 
   validate() {
-    let parsed = JSON.parse(this.data);
+    let parsed;
+    try {
+      parsed = JSON.parse(this.data);
+    } catch (e) {
+      this.valid = false;
+      return;
+    }
     if (parsed instanceof Array) {
       if (parsed.length < 1) {
         this.valid = false;

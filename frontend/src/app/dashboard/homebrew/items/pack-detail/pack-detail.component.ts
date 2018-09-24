@@ -45,7 +45,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
         .subscribe(user => {
           this.user = user;
           this.calcCanEdit();
-        })
+        });
     }
   }
 
@@ -60,10 +60,10 @@ export class PackDetailComponent implements OnInit, OnDestroy {
 
   calcCanEdit() {
     if (!this.pack || !this.user) {
-      return
+      return;
     }
-    this.isOwner = this.user.id == this.pack.owner.id;
-    this.canEdit = this.isOwner || this.pack.editors.some(e => e.id == this.user.id);
+    this.isOwner = this.user.id === this.pack.owner.id;
+    this.canEdit = this.isOwner || this.pack.editors.some(e => e.id === this.user.id);
   }
 
   newLooseItem() {
@@ -158,11 +158,11 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     this.homebrewService.deletePack(this.pack)
       .subscribe(result => {
         console.log(result);
-        this.router.navigate(["../"], {relativeTo: this.route})
+        this.router.navigate(["../"], {relativeTo: this.route});
       });
   }
 
   back() {
-    this.location.back()
+    this.location.back();
   }
 }

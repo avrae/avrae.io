@@ -21,7 +21,7 @@ export class PackOptionsDialog implements OnInit {
     this.name = data.name;
     this.image = data.image;
     this.desc = data.desc;
-    this.isOwner = getUser().id == data.owner.id;
+    this.isOwner = getUser().id === data.owner.id;
   }
 
   ngOnInit() {

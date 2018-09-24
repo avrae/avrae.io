@@ -5,7 +5,8 @@ import {Pack} from "../../../../schemas/homebrew/Items";
 @Component({
   selector: 'avr-pack-markdown-dialog',
   templateUrl: './pack-markdown-dialog.component.html',
-  styleUrls: ['./pack-markdown-dialog.component.css']
+  styleUrls: ['./pack-markdown-dialog.component.css'],
+  preserveWhitespaces: true
 })
 export class PackMarkdownDialog implements OnInit {
 
