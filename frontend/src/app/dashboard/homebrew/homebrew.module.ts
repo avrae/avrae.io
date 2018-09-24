@@ -16,6 +16,7 @@ import {MarkdownModule} from "ngx-markdown";
 import {DiscordEmbedModule} from "../../shared/discord-embed/discord-embed.module";
 import {PackJsonDialog} from './items/pack-json-dialog/pack-json-dialog.component';
 import {PackImportDialog} from './items/pack-import-dialog/pack-import-dialog.component';
+import {PackMarkdownDialog} from './items/pack-markdown-dialog/pack-markdown-dialog.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import {PackImportDialog} from './items/pack-import-dialog/pack-import-dialog.co
     ItemDetailComponent,
     PackJsonDialog,
     PackImportDialog,
+    PackMarkdownDialog,
   ],
   entryComponents: [
     NewPackDialog,
@@ -44,6 +46,7 @@ import {PackImportDialog} from './items/pack-import-dialog/pack-import-dialog.co
     PackShareDialog,
     PackDeleteDialog,
     PackJsonDialog,
+    PackMarkdownDialog,
     PackImportDialog
   ]
 })

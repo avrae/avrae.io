@@ -31,9 +31,14 @@
           Export
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="button-row">
-        <button mat-raised-button color="primary" (click)="beginJSONExport()">Export to JSON</button>
-        <button mat-raised-button color="primary" disabled>Export to Homebrewery (Soon!)</button>
+      <div class="button-row" *ngIf="loaded">
+        <button mat-raised-button color="primary" (click)="beginJSONExport()">Export to JSON
+        </button>
+        <button mat-raised-button color="primary" (click)="beginMDExport()">Export to Homebrewery
+        </button>
+      </div>
+      <div *ngIf="!loaded">
+        <mat-spinner [diameter]="24"></mat-spinner>
       </div>
     </mat-expansion-panel>
 
