@@ -17,7 +17,7 @@ mat-expansion-panel-header {
 
 .nav-panel {
   text-decoration: none;
-  font-weight: lighter;
+  font-weight: 300;
 }
 
 .nav-panel-body {
