@@ -3,10 +3,10 @@ import {Item, REQUIRED_ITEM_PROPS} from "../../../../schemas/homebrew/Items";
 
 @Component({
   selector: 'avr-pack-import-dialog',
-  templateUrl: './pack-import-dialog.component.html',
-  styleUrls: ['./pack-import-dialog.component.css']
+  templateUrl: './pack-json-import-dialog.component.html',
+  styleUrls: ['./pack-json-import-dialog.component.css']
 })
-export class PackImportDialog implements OnInit {
+export class PackJSONImportDialog implements OnInit {
 
   data: string;
   valid: boolean;
