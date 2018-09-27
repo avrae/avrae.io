@@ -45,6 +45,10 @@
   .muted {
     color: mat-color($foreground, base, 0.62);
   }
+  
+  .hoverable {
+    cursor: pointer;
+  }
 
   .hoverable:hover {
     background-color: mat-color($foreground, base, 0.04);

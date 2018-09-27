@@ -1,3 +1,5 @@
+import json
+
 from bson import ObjectId
 from flask import Blueprint, request
 
@@ -90,3 +92,10 @@ def delete_pack(pack):
         return "You do not have permission to delete this pack", 403
     mdb.packs.delete_one({"_id": ObjectId(pack)})
     return "Pack deleted."
+
+
+@items.route('/srd', methods=['GET'])
+def srd_items():
+    with open('static/template-items.json') as f:
+        _items = json.load(f)
+    return jsonify(_items)

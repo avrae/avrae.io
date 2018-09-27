@@ -9,7 +9,8 @@ import {PackShareDialog} from "../pack-share-dialog/pack-share-dialog.component"
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {PackOptionsDialog} from "../pack-options-dialog/pack-options-dialog.component";
 import {getUser} from "../../../APIHelper";
-import {PackImportDialog} from "../pack-import-dialog/pack-import-dialog.component";
+import {PackJSONImportDialog} from "../pack-json-import-dialog/pack-json-import-dialog.component";
+import {PackSRDImportDialog} from "../pack-srd-import-dialog/pack-srd-import-dialog.component";
 
 @Component({
   selector: 'avr-pack-detail',
@@ -124,7 +125,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   }
 
   beginNewFromJSON() {
-    const dialogRef = this.dialog.open(PackImportDialog, {
+    const dialogRef = this.dialog.open(PackJSONImportDialog, {
       width: "60%",
       disableClose: true
     });
@@ -138,6 +139,21 @@ export class PackDetailComponent implements OnInit, OnDestroy {
         } else {
           this.pack.items.push(item);
         }
+        this.ensureChangesNotif();
+      }
+    });
+  }
+
+  beginNewFromSRD() {
+    const dialogRef = this.dialog.open(PackSRDImportDialog, {
+      width: "60%",
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+        this.pack.items.push(result);
         this.ensureChangesNotif();
       }
     });

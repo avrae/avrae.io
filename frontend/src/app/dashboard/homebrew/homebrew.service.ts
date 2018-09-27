@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {Pack} from "../../schemas/homebrew/Items";
+import {Item, Pack} from "../../schemas/homebrew/Items";
 import {Observable, of} from "rxjs";
 import {defaultOptions, defaultTextOptions} from "../APIHelper";
 import {catchError} from "rxjs/operators";
@@ -45,6 +45,10 @@ export class HomebrewService {
       .pipe(
         catchError(this.handleError('deletePack'))
       );
+  }
+
+  getTemplateItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${itemsUrl}/srd`, defaultOptions());
   }
 
   private handleError<T>(operation = 'operation') {

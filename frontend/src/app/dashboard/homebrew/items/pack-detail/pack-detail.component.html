@@ -35,11 +35,9 @@
             <button mat-icon-button matTooltip="Import from JSON" (click)="beginNewFromJSON()">
               <mat-icon aria-label="Import from JSON">import_export</mat-icon>
             </button>
-            <span matTooltip="Coming soon!"> <!-- TODO -->
-              <button mat-icon-button matTooltip="From existing item" disabled>
-                <mat-icon aria-label="From existing item">scanner</mat-icon>
-              </button>
-            </span>
+            <button mat-icon-button matTooltip="From existing item" (click)="beginNewFromSRD()">
+              <mat-icon aria-label="From existing item">scanner</mat-icon>
+            </button>
             <button mat-icon-button (click)="newLooseItem()">
               <mat-icon aria-label="New">add</mat-icon>
             </button>
