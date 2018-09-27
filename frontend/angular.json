@@ -24,7 +24,8 @@
                 "input": "src/assets",
                 "output": "/assets"
               },
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/sitemap.txt"
             ],
             "styles": [
               {
