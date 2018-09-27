@@ -758,6 +758,24 @@
         <td><code>c.temphp</code></td>
       </tr>
       <tr>
+        <td><code>effects</code></td>
+        <td>
+          All effects on the combatant. Returns an empty list if there is none.
+        </td>
+        <td></td>
+        <td><code>list</code> of <code>SimpleEffect</code> - The combatant's effects.</td>
+        <td><code>c.effects</code></td>
+      </tr>
+      <tr>
+        <td><code>type</code></td>
+        <td>
+          The type of the object (<code>combatant</code>), to determine whether this is a group or not.
+        </td>
+        <td></td>
+        <td><code>str</code> - "combatant".</td>
+        <td><code>c.type</code></td>
+      </tr>
+      <tr>
         <td><code>set_hp(hp)</code></td>
         <td>
           Sets a combatant's remaining hit points to a new value.
@@ -879,6 +897,39 @@
         <td><code>None</code></td>
         <td><code>c.set_note("This is a note.")</code></td>
       </tr>
+      <tr>
+        <td><code>get_effect(name)</code></td>
+        <td>
+          Gets a <a (click)="scrollTo('simpleeffect')">SimpleEffect</a>, fuzzy searching (partial match) for a
+          match.
+        </td>
+        <td><code>name</code> - str - The name of the effect to get.</td>
+        <td><code>SimpleEffect</code> - The effect.</td>
+        <td><code>c.get_effect("Rage")</code></td>
+      </tr>
+      <tr>
+        <td><code>add_effect(name, args[, duration])</code></td>
+        <td>
+          Adds a <a (click)="scrollTo('simpleeffect')">SimpleEffect</a> to a combatant.
+        </td>
+        <td>
+          <code>name</code> - str - The name of the effect to add.<br>
+          <code>args</code> - str - The effect arguments to add (same syntax as init effect).<br>
+          <code>duration</code> - int (optional, default -1) - The duration of the effect.
+        </td>
+        <td><code>None</code></td>
+        <td><code>c.add_effect("Rage", "-d 2", 10)</code></td>
+      </tr>
+      <tr>
+        <td><code>remove_effect(name)</code></td>
+        <td>
+          Removes a <a (click)="scrollTo('simpleeffect')">SimpleEffect</a>, fuzzy searching (partial match) for a
+          match.
+        </td>
+        <td><code>name</code> - str - The name of the effect to remove.</td>
+        <td><code>None</code></td>
+        <td><code>c.remove_effect("Rage")</code></td>
+      </tr>
       </tbody>
     </table>
 
@@ -897,6 +948,15 @@
       </thead>
       <tbody>
       <tr>
+        <td><code>type</code></td>
+        <td>
+          The type of the object (<code>group</code>), to determine whether this is a group or not.
+        </td>
+        <td></td>
+        <td><code>str</code> - "group".</td>
+        <td><code>group.type</code></td>
+      </tr>
+      <tr>
         <td><code>get_combatant(name)</code></td>
         <td>
           Gets a <a (click)="scrollTo('simplecombatant')">SimpleCombatant</a>, fuzzy searching (partial match) for a
@@ -905,6 +965,59 @@
         <td><code>name</code> - The name of the combatant to get.</td>
         <td><code>SimpleCombatant</code> - The combatant.</td>
         <td><code>group.get_combatant("Padellis")</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <mat-divider></mat-divider>
+
+    <h4 id="simpleeffect">SimpleEffect</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Arguments</th>
+        <th>Returns</th>
+        <th><a matTooltip="This assumes that 'effect' is an instance of SimpleEffect.">Syntax</a></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td>
+          The name of the effect.
+        </td>
+        <td></td>
+        <td><code>str</code> - The name.</td>
+        <td><code>effect.name</code></td>
+      </tr>
+      <tr>
+        <td><code>duration</code></td>
+        <td>
+          The initial duration of the effect, in rounds (-1 = infinite).
+        </td>
+        <td></td>
+        <td><code>int</code> - The duration.</td>
+        <td><code>effect.duration</code></td>
+      </tr>
+      <tr>
+        <td><code>remaining</code></td>
+        <td>
+          The remaining duration of the effect, in rounds.
+        </td>
+        <td></td>
+        <td><code>int</code> - The remaining duration.</td>
+        <td><code>effect.remaining</code></td>
+      </tr>
+      <tr>
+        <td><code>effect</code></td>
+        <td>
+          The applied effect of the object.
+        </td>
+        <td></td>
+        <td><code>dict</code> - A dictionary representing the applied effects of the object.</td>
+        <td><code>effect.effect</code></td>
       </tr>
       </tbody>
     </table>
