@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {Meta} from "@angular/platform-browser";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'avr-root',
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit {
       },
       {property: "og:title", content: "Avrae"},
       {property: "og:type", content: "website"},
-      {property: "og:url", content: "https://avrae.io"},
+      {property: "og:url", content: environment.baseURL},
       {property: "og:image", content: "https://avrae.io/assets/img/AvraeSquare.jpg"},
       {
         property: "og:description",
