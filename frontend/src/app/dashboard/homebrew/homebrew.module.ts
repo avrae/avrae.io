@@ -18,6 +18,7 @@ import {PackJsonDialog} from './items/pack-json-dialog/pack-json-dialog.componen
 import {PackJSONImportDialog} from './items/pack-json-import-dialog/pack-json-import-dialog.component';
 import {PackMarkdownDialog} from './items/pack-markdown-dialog/pack-markdown-dialog.component';
 import {PackSRDImportDialog} from './items/pack-srd-import-dialog/pack-srd-import-dialog.component';
+import {SpellsComponent} from './spells/spells.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import {PackSRDImportDialog} from './items/pack-srd-import-dialog/pack-srd-impor
     PackJSONImportDialog,
     PackMarkdownDialog,
     PackSRDImportDialog,
+    SpellsComponent,
   ],
   entryComponents: [
     NewPackDialog,
