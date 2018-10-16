@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PackShareDialog } from './pack-share-dialog.component';
+import { NewTomeDialog } from './new-tome-dialog.component';
 
-describe('TomeShareDialog', () => {
-  let component: PackShareDialog;
-  let fixture: ComponentFixture<PackShareDialog>;
+describe('NewTomeDialog', () => {
+  let component: NewTomeDialog;
+  let fixture: ComponentFixture<NewTomeDialog>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PackShareDialog ]
+      declarations: [ NewTomeDialog ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PackShareDialog);
+    fixture = TestBed.createComponent(NewTomeDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

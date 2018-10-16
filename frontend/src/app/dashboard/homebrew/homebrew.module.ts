@@ -19,6 +19,8 @@ import {PackJSONImportDialog} from './items/pack-json-import-dialog/pack-json-im
 import {PackMarkdownDialog} from './items/pack-markdown-dialog/pack-markdown-dialog.component';
 import {PackSRDImportDialog} from './items/pack-srd-import-dialog/pack-srd-import-dialog.component';
 import {SpellsComponent} from './spells/spells.component';
+import {NewTomeDialog} from "./spells/new-tome-dialog/new-tome-dialog.component";
+import {TomeShareDialog} from "./spells/tome-share-dialog/tome-share-dialog.component";
 
 @NgModule({
   imports: [
@@ -42,7 +44,10 @@ import {SpellsComponent} from './spells/spells.component';
     PackJSONImportDialog,
     PackMarkdownDialog,
     PackSRDImportDialog,
+
     SpellsComponent,
+    NewTomeDialog,
+    TomeShareDialog,
   ],
   entryComponents: [
     NewPackDialog,
@@ -52,7 +57,10 @@ import {SpellsComponent} from './spells/spells.component';
     PackJsonDialog,
     PackMarkdownDialog,
     PackJSONImportDialog,
-    PackSRDImportDialog
+    PackSRDImportDialog,
+
+    NewTomeDialog,
+    TomeShareDialog,
   ]
 })
 export class HomebrewModule {

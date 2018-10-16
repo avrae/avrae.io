@@ -5,8 +5,10 @@ import {Item, Pack} from "../../schemas/homebrew/Items";
 import {Observable, of} from "rxjs";
 import {defaultOptions, defaultTextOptions} from "../APIHelper";
 import {catchError} from "rxjs/operators";
+import {Tome} from "../../schemas/homebrew/Spells";
 
 const itemsUrl = `${environment.apiURL}/homebrew/items`;
+const spellsUrl = `${environment.apiURL}/homebrew/spells`;
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,7 @@ export class HomebrewService {
   constructor(private http: HttpClient) {
   }
 
+  /* -----PACKS----- */
   getUserPacks(): Observable<Pack[]> {
     return this.http.get<Pack[]>(`${itemsUrl}/me`, defaultOptions());
   }
@@ -51,6 +54,20 @@ export class HomebrewService {
     return this.http.get<Item[]>(`${itemsUrl}/srd`, defaultOptions());
   }
 
+  /* -----TOMES----- */
+  getUserTomes(): Observable<Tome[]> {
+    return this.http.get<Tome[]>(`${spellsUrl}/me`, defaultOptions()); // TODO
+  }
+
+  newTome(tome: { name: string, public: boolean, desc: string, image: string }): Observable<any> {
+    return this.http.post<any>(`${spellsUrl}`, tome, defaultOptions()) // TODO
+      .pipe(
+        catchError(this.handleError('newTome'))
+      );
+  }
+
+
+  /* -----META----- */
   private handleError<T>(operation = 'operation') {
     return (error: any): Observable<object> => {
       console.error(error); // log to console and hope for the best
