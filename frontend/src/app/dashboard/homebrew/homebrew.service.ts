@@ -56,13 +56,33 @@ export class HomebrewService {
 
   /* -----TOMES----- */
   getUserTomes(): Observable<Tome[]> {
-    return this.http.get<Tome[]>(`${spellsUrl}/me`, defaultOptions()); // TODO
+    return this.http.get<Tome[]>(`${spellsUrl}/me`, defaultOptions());
   }
 
   newTome(tome: { name: string, public: boolean, desc: string, image: string }): Observable<any> {
-    return this.http.post<any>(`${spellsUrl}`, tome, defaultOptions()) // TODO
+    return this.http.post<any>(`${spellsUrl}`, tome, defaultOptions())
       .pipe(
         catchError(this.handleError('newTome'))
+      );
+  }
+
+  getTome(id): Observable<Tome> {
+    return this.http.get<Tome>(`${spellsUrl}/${id}`, defaultOptions());
+  }
+
+  putTome(tome: Tome): Observable<string> {
+    // @ts-ignore
+    return this.http.put<string>(`${spellsUrl}/${tome._id.$oid}`, tome, defaultTextOptions())
+      .pipe(
+        catchError(this.handleError('putTome'))
+      );
+  }
+
+  deleteTome(tome: Tome): Observable<string> {
+    // @ts-ignore
+    return this.http.delete<string>(`${spellsUrl}/${tome._id.$oid}`, defaultTextOptions())
+      .pipe(
+        catchError(this.handleError('deleteTome'))
       );
   }
 

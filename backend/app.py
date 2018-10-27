@@ -76,7 +76,9 @@ app.register_blueprint(customizations, url_prefix="/customizations")
 app.register_blueprint(bot, url_prefix="/bot")
 
 from blueprints.homebrew.items import items
+from blueprints.homebrew.spells import spells
 app.register_blueprint(items, url_prefix="/homebrew/items")
+app.register_blueprint(spells, url_prefix="/homebrew/spells")
 
 
 if __name__ == '__main__':

@@ -11,6 +11,7 @@ items = Blueprint('homebrew/items', __name__)
 
 PACK_FIELDS = ("name", "owner", "editors", "public", "active", "server_active", "desc", "image", "items", "numItems")
 ITEM_FIELDS = ("name", "meta", "desc", "image")
+IGNORED_FIELDS = ("_id", "active", "server_active")
 
 
 @items.route('/me', methods=['GET'])
@@ -70,7 +71,11 @@ def put_pack(pack):
     if user.id != data['owner']['id'] and user.id not in [e['id'] for e in data['editors']]:
         return "You do not have permission to edit this pack", 403
 
-    reqdata.pop('_id')  # ID is in the url
+    print(reqdata)
+
+    for field in IGNORED_FIELDS:
+        reqdata.pop(field)
+
     if not all(k in PACK_FIELDS for k in reqdata):
         return "Invalid field", 400
     if "items" in reqdata:
