@@ -1,0 +1,38 @@
+<div class="container" fxLayout="row" fxLayoutGap="8px">
+  <div class="spell-list" fxFlex="grow" *ngIf="spells.length">
+    <mat-accordion>
+      <avr-spell-detail *ngFor="let spell of spells" [spell]="spell"
+                        (changed)="changed.emit()" (opened)="select(spell)"
+                        (delete)="deleteSpell(spell)"></avr-spell-detail>
+      <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-spell-card">
+        <span class="no-text-cursor">New...</span>
+        <span class="toolbar-spacer"></span>
+        <span>
+            <button mat-icon-button matTooltip="Import from JSON" (click)="newFromJSON()">
+              <mat-icon aria-label="Import from JSON">import_export</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="From existing spell" (click)="newFromSRD()">
+              <mat-icon aria-label="From existing spell">scanner</mat-icon>
+            </button>
+            <button mat-icon-button (click)="newSpell()">
+              <mat-icon aria-label="New">add</mat-icon>
+            </button>
+          </span>
+      </mat-card>
+    </mat-accordion>
+  </div>
+
+  <div class="spell-list" fxFlex="grow" *ngIf="!spells.length">
+    <mat-card>
+      <p>Looks like this tome is empty.</p>
+      <button mat-raised-button color="accent" (click)="newSpell()">Make an Spell</button>
+    </mat-card>
+  </div>
+
+  <div class="spell-preview mat-typography mat-elevation-z3" fxFlex="grow">
+    <avr-discord-embed *ngIf="!selectedSpell" [author]="{name: user.username, icon_url: user.avatarUrl}"
+                       title="No spell selected." description="Click on an spell on the left to see a preview!"
+                       [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
+    </avr-discord-embed>
+  </div>
+</div>

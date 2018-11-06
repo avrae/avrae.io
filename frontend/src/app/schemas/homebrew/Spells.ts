@@ -31,6 +31,7 @@ export class Spell {
   higherlevels: string;
   concentration: boolean;
   automation: SpellAutomation;
+  image?: string;
 }
 
 export class SpellComponents {

@@ -28,7 +28,12 @@ export class TomeShareDialog implements OnInit {
   }
 
   loadSpells() {
-    // TODO
+    const id = this.data._id.$oid;
+    this.hbService.getTome(id)
+      .subscribe(tome => {
+        this.data = tome;
+        this.loaded = true;
+      });
   }
 
   copy(inputElement) {

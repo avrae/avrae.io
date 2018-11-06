@@ -21,6 +21,11 @@ import {PackSRDImportDialog} from './items/pack-srd-import-dialog/pack-srd-impor
 import {SpellsComponent} from './spells/spells.component';
 import {NewTomeDialog} from "./spells/new-tome-dialog/new-tome-dialog.component";
 import {TomeShareDialog} from "./spells/tome-share-dialog/tome-share-dialog.component";
+import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
+import {SpellDetailComponent} from './spells/tome-detail/spell-detail/spell-detail.component';
+import {SpellListComponent} from './spells/tome-detail/spell-list/spell-list.component';
+import {TomeOptionsDialog} from './spells/tome-options-dialog/tome-options-dialog.component';
+import {TomeDeleteDialog} from './spells/tome-delete-dialog/tome-delete-dialog.component';
 
 @NgModule({
   imports: [
@@ -48,6 +53,11 @@ import {TomeShareDialog} from "./spells/tome-share-dialog/tome-share-dialog.comp
     SpellsComponent,
     NewTomeDialog,
     TomeShareDialog,
+    TomeDetailComponent,
+    SpellDetailComponent,
+    SpellListComponent,
+    TomeOptionsDialog,
+    TomeDeleteDialog,
   ],
   entryComponents: [
     NewPackDialog,
@@ -61,6 +71,8 @@ import {TomeShareDialog} from "./spells/tome-share-dialog/tome-share-dialog.comp
 
     NewTomeDialog,
     TomeShareDialog,
+    TomeOptionsDialog,
+    TomeDeleteDialog,
   ]
 })
 export class HomebrewModule {

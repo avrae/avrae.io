@@ -8,7 +8,8 @@ from lib.utils import jsonify
 spells = Blueprint('homebrew/spells', __name__)
 
 TOME_FIELDS = ("name", "owner", "editors", "public", "active", "server_active", "desc", "image", "spells", "numSpells")
-SPELL_FIELDS = ()
+SPELL_FIELDS = ("name", "level", "school", "classes", "subclasses", "time", "range", "components", "duration", "ritual",
+                "description", "higherlevels", "concentration", "automation", "image")
 IGNORED_FIELDS = ("_id", "active", "server_active")
 
 

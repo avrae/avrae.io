@@ -4,6 +4,7 @@ import {DashboardComponent} from "../dashboard.component";
 import {ItemsComponent} from "./items/items.component";
 import {PackDetailComponent} from "./items/pack-detail/pack-detail.component";
 import {SpellsComponent} from "./spells/spells.component";
+import {TomeDetailComponent} from "./spells/tome-detail/tome-detail.component";
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
           {path: "items/:pack", component: PackDetailComponent},
 
           {path: "spells", component: SpellsComponent},
+          {path: "spells/:tome", component: TomeDetailComponent},
         ]
       }
     ]
