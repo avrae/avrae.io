@@ -1,4 +1,5 @@
 import {DiscordUser} from "../DiscordUser";
+import {SpellEffect} from "./SpellEffects";
 
 export const REQUIRED_SPELL_PROPS = ["name", "level", "school"];
 export const SPELL_SCHOOLS = ["A", "V", "E", "I", "D", "N", "T", "C"];
@@ -20,7 +21,7 @@ export class Tome {
 export class Spell {
   name: string;
   level: number;
-  school: "A" | "V" | "E" | "I" | "D" | "N" | "T" | "C";
+  school: string;
   classes: string;
   subclasses: string;
   time: string;
@@ -65,7 +66,11 @@ export class SpellComponents {
 }
 
 export class SpellAutomation {
+  effects: SpellEffect[];
 
+  constructor() {
+    this.effects = [];
+  }
 }
 
 export function parseLevel(level) {
