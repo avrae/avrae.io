@@ -26,6 +26,7 @@ import {SpellDetailComponent} from './spells/tome-detail/spell-detail/spell-deta
 import {SpellListComponent} from './spells/tome-detail/spell-list/spell-list.component';
 import {TomeOptionsDialog} from './spells/tome-options-dialog/tome-options-dialog.component';
 import {TomeDeleteDialog} from './spells/tome-delete-dialog/tome-delete-dialog.component';
+import {SpellPanelDescriptionComponent} from './spells/tome-detail/spell-detail/spell-panel-description/spell-panel-description.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import {TomeDeleteDialog} from './spells/tome-delete-dialog/tome-delete-dialog.c
     SpellListComponent,
     TomeOptionsDialog,
     TomeDeleteDialog,
+    SpellPanelDescriptionComponent,
   ],
   entryComponents: [
     NewPackDialog,

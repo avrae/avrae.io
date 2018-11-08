@@ -21,8 +21,8 @@ export class Spell {
   name: string;
   level: number;
   school: "A" | "V" | "E" | "I" | "D" | "N" | "T" | "C";
-  classes: string[];
-  subclasses: string[];
+  classes: string;
+  subclasses: string;
   time: string;
   range: string;
   components: SpellComponents;
@@ -38,8 +38,8 @@ export class Spell {
     this.name = "New Spell";
     this.level = 1;
     this.school = "A";
-    this.classes = [];
-    this.subclasses = [];
+    this.classes = "";
+    this.subclasses = "";
     this.time = "";
     this.range = "";
     this.components = new SpellComponents();

@@ -6,7 +6,7 @@
         {{spell.name}}
       </div>
     </mat-panel-title>
-    <mat-panel-description markdown [data]="'placeholder'"></mat-panel-description>
+    <avr-spell-panel-description [level]="spell.level" [school]="spell.school"></avr-spell-panel-description>
   </mat-expansion-panel-header>
 
   <div class="form-container">
@@ -91,6 +91,17 @@
       <textarea matInput placeholder="Description" rows="7" (change)="emitChange()"
                 [(ngModel)]="spell.description"></textarea>
     </mat-form-field>
+
+    <!-- CLASSES AND SUBCLASSES -->
+    <div fxLayout="row" fxLayoutGap="6px">
+      <mat-form-field fxFlex matTooltip="Separate classes with commas.">
+        <input matInput placeholder="Classes" (change)="emitChange()" [(ngModel)]="spell.classes">
+      </mat-form-field>
+
+      <mat-form-field fxFlex matTooltip="Separate subclasses with commas.">
+        <input matInput placeholder="Subclasses" (change)="emitChange()" [(ngModel)]="spell.subclasses">
+      </mat-form-field>
+    </div>
   </div>
 
   <div class="actions" fxLayout="row">
