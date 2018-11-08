@@ -5,7 +5,7 @@ import {EmbedColorPillComponent} from './embed-color-pill/embed-color-pill.compo
 import {EmbedAuthorComponent} from './embed-author/embed-author.component';
 import {EmbedTitleComponent} from './embed-title/embed-title.component';
 import {EmbedDescriptionComponent} from './embed-description/embed-description.component';
-import {EmbedFieldComponent} from './embed-field/embed-field.component';
+import {EmbedFieldsComponent} from './embed-fields/embed-fields.component';
 import {EmbedThumbnailComponent} from './embed-thumbnail/embed-thumbnail.component';
 import {EmbedImageComponent} from './embed-image/embed-image.component';
 import {EmbedFooterComponent} from './embed-footer/embed-footer.component';
@@ -22,7 +22,7 @@ import {MarkdownModule} from "ngx-markdown";
     EmbedAuthorComponent,
     EmbedTitleComponent,
     EmbedDescriptionComponent,
-    EmbedFieldComponent,
+    EmbedFieldsComponent,
     EmbedThumbnailComponent,
     EmbedImageComponent,
     EmbedFooterComponent
