@@ -1,7 +1,7 @@
 <div class="container" fxLayout="row" fxLayoutGap="8px">
-  <div class="spell-list" fxFlex="grow" *ngIf="spells.length">
+  <div class="spell-list" fxFlex="grow" *ngIf="tome.spells.length">
     <mat-accordion>
-      <avr-spell-detail *ngFor="let spell of spells" [spell]="spell"
+      <avr-spell-detail *ngFor="let spell of tome.spells" [spell]="spell"
                         (changed)="changed.emit()" (opened)="select(spell)"
                         (delete)="deleteSpell(spell)"></avr-spell-detail>
       <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-spell-card">
@@ -22,7 +22,7 @@
     </mat-accordion>
   </div>
 
-  <div class="spell-list" fxFlex="grow" *ngIf="!spells.length">
+  <div class="spell-list" fxFlex="grow" *ngIf="!tome.spells.length">
     <mat-card>
       <p>Looks like this tome is empty.</p>
       <button mat-raised-button color="accent" (click)="newSpell()">Make an Spell</button>

@@ -24,7 +24,7 @@
 
   <mat-tab-group backgroundColor="primary">
     <mat-tab label="Spells">
-      <avr-spell-list [spells]="tome.spells" [user]="user" (selected)="selectedSpell = $event"
+      <avr-spell-list [tome]="tome" [user]="user" (selected)="selectedSpell = $event"
                       (changed)="ensureChangesNotif()"></avr-spell-list>
     </mat-tab>
     <mat-tab label="Editor">

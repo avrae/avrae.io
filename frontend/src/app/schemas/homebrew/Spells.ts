@@ -1,6 +1,7 @@
 import {DiscordUser} from "../DiscordUser";
 
-export const REQUIRED_SPELL_PROPS = ["name"];
+export const REQUIRED_SPELL_PROPS = ["name", "level", "school"];
+export const SPELL_SCHOOLS = ["A", "V", "E", "I", "D", "N", "T", "C"];
 
 export class Tome {
   name: string;
@@ -19,7 +20,7 @@ export class Tome {
 export class Spell {
   name: string;
   level: number;
-  school: string;
+  school: "A" | "V" | "E" | "I" | "D" | "N" | "T" | "C";
   classes: string[];
   subclasses: string[];
   time: string;
@@ -32,12 +33,35 @@ export class Spell {
   concentration: boolean;
   automation: SpellAutomation;
   image?: string;
+
+  constructor() {
+    this.name = "New Spell";
+    this.level = 1;
+    this.school = "A";
+    this.classes = [];
+    this.subclasses = [];
+    this.time = "";
+    this.range = "";
+    this.components = new SpellComponents();
+    this.duration = "";
+    this.ritual = false;
+    this.description = "";
+    this.higherlevels = "";
+    this.concentration = false;
+    this.automation = new SpellAutomation();
+  }
 }
 
 export class SpellComponents {
   verbal: boolean;
   somatic: boolean;
   material: string;
+
+  constructor() {
+    this.verbal = false;
+    this.somatic = false;
+    this.material = "";
+  }
 }
 
 export class SpellAutomation {

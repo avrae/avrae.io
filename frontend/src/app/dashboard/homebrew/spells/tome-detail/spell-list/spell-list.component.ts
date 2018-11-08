@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Spell} from "../../../../../schemas/homebrew/Spells";
+import {Spell, Tome} from "../../../../../schemas/homebrew/Spells";
 import {UserInfo} from "../../../../../schemas/UserInfo";
 import {MatDialog} from "@angular/material";
 
@@ -10,7 +10,7 @@ import {MatDialog} from "@angular/material";
 })
 export class SpellListComponent implements OnInit {
 
-  @Input() spells: Spell[];
+  @Input() tome: Tome;
   @Input() user: UserInfo;
   @Output() selected = new EventEmitter();
   @Output() changed = new EventEmitter();
@@ -29,7 +29,7 @@ export class SpellListComponent implements OnInit {
   }
 
   newSpell() {
-    this.spells.push(new Spell());
+    this.tome.spells.push(new Spell());
     this.changed.emit();
   }
 
@@ -69,7 +69,7 @@ export class SpellListComponent implements OnInit {
   // }
 
   deleteSpell(spell: Spell) {
-    this.spells = this.spells.filter(obj => obj !== spell);
+    this.tome.spells = this.tome.spells.filter(obj => obj !== spell);
     this.changed.emit();
   }
 
