@@ -92,6 +92,12 @@
                 [(ngModel)]="spell.description"></textarea>
     </mat-form-field>
 
+    <!-- HIGHER LEVELS -->
+    <mat-form-field>
+      <textarea matInput placeholder="At Higher Levels" rows="3" (change)="emitChange()"
+                [(ngModel)]="spell.higherlevels"></textarea>
+    </mat-form-field>
+
     <!-- CLASSES AND SUBCLASSES -->
     <div fxLayout="row" fxLayoutGap="6px">
       <mat-form-field fxFlex matTooltip="Separate classes with commas.">

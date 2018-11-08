@@ -68,3 +68,22 @@ export class SpellAutomation {
 
 }
 
+export function parseLevel(level) {
+  if (level == 0) return "Cantrip";
+  else if (level == 1) return "1st level";
+  else if (level == 2) return "2nd level";
+  else if (level == 3) return "3rd level";
+  return `${level}th level`;
+}
+
+export function parseSchool(school) {
+  if (school == "A") return "Abjuration";
+  else if (school == "V") return "Evocation";
+  else if (school == "E") return "Enchantment";
+  else if (school == "I") return "Illusion";
+  else if (school == "D") return "Divination";
+  else if (school == "N") return "Necromancy";
+  else if (school == "T") return "Transmutation";
+  else if (school == "C") return "Conjuration";
+  return school;
+}

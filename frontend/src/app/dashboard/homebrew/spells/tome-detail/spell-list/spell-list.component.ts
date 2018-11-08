@@ -23,11 +23,6 @@ export class SpellListComponent implements OnInit {
   ngOnInit() {
   }
 
-  select(spell: Spell) {
-    this.selectedSpell = spell;
-    this.selected.emit(spell);
-  }
-
   newSpell() {
     this.tome.spells.push(new Spell());
     this.changed.emit();

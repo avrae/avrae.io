@@ -2,7 +2,7 @@
   <div class="spell-list" fxFlex="grow" *ngIf="tome.spells.length">
     <mat-accordion>
       <avr-spell-detail *ngFor="let spell of tome.spells" [spell]="spell"
-                        (changed)="changed.emit()" (opened)="select(spell)"
+                        (changed)="changed.emit()" (opened)="selectedSpell = spell; selected.emit()"
                         (delete)="deleteSpell(spell)"></avr-spell-detail>
       <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-spell-card">
         <span class="no-text-cursor">New...</span>
@@ -30,9 +30,13 @@
   </div>
 
   <div class="spell-preview mat-typography mat-elevation-z3" fxFlex="grow">
-    <avr-discord-embed *ngIf="!selectedSpell" [author]="{name: user.username, icon_url: user.avatarUrl}"
-                       title="No spell selected." description="Click on an spell on the left to see a preview!"
-                       [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
-    </avr-discord-embed>
+    <avr-spell-embed [name]="selectedSpell?.name" [image]="selectedSpell?.image" [level]="selectedSpell?.level"
+                     [school]="selectedSpell?.school" [classes]="selectedSpell?.classes"
+                     [subclasses]="selectedSpell?.subclasses" [verbal]="selectedSpell?.components.verbal"
+                     [somatic]="selectedSpell?.components.somatic" [material]="selectedSpell?.components.material"
+                     [time]="selectedSpell?.time" [ritual]="selectedSpell?.ritual" [range]="selectedSpell?.range"
+                     [concentration]="selectedSpell?.concentration" [duration]="selectedSpell?.duration"
+                     [description]="selectedSpell?.description" [higherlevels]="selectedSpell?.higherlevels"
+                     [user]="user"></avr-spell-embed>
   </div>
 </div>
