@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Spell, Tome} from "../../../../../schemas/homebrew/Spells";
 import {UserInfo} from "../../../../../schemas/UserInfo";
 import {MatDialog} from "@angular/material";
+import {TomeSRDImportDialog} from "../../dialogs/tome-srd-import-dialog.component";
 
 @Component({
   selector: 'avr-spell-list',
@@ -48,21 +49,21 @@ export class SpellListComponent implements OnInit {
   //     }
   //   });
   // }
-  //
-  // beginNewFromSRD() {
-  //   const dialogRef = this.dialog.open(TomeSRDImportDialog, {
-  //     width: "60%",
-  //     disableClose: true
-  //   });
-  //
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result) {
-  //       console.log(result);
-  //       this.spells.push(result);
-  //       this.changed.emit();
-  //     }
-  //   });
-  // }
+
+  newFromSRD() {
+    const dialogRef = this.dialog.open(TomeSRDImportDialog, {
+      width: "60%",
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+        this.tome.spells.push(result);
+        this.changed.emit();
+      }
+    });
+  }
 
   deleteSpell(spell: Spell) {
     this.tome.spells = this.tome.spells.filter(obj => obj !== spell);

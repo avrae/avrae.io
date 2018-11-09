@@ -1,3 +1,5 @@
+import json
+
 from bson import ObjectId
 from flask import Blueprint, request
 
@@ -8,8 +10,8 @@ from lib.utils import jsonify
 spells = Blueprint('homebrew/spells', __name__)
 
 TOME_FIELDS = ("name", "owner", "editors", "public", "active", "server_active", "desc", "image", "spells", "numSpells")
-SPELL_FIELDS = ("name", "level", "school", "classes", "subclasses", "time", "range", "components", "duration", "ritual",
-                "description", "higherlevels", "concentration", "automation", "image")
+SPELL_FIELDS = ("name", "level", "school", "classes", "subclasses", "casttime", "range", "components", "duration",
+                "ritual", "description", "higherlevels", "concentration", "automation", "image")
 IGNORED_FIELDS = ("_id", "active", "server_active")
 
 
@@ -95,8 +97,9 @@ def delete_tome(tome):
     mdb.tomes.delete_one({"_id": ObjectId(tome)})
     return "Tome deleted."
 
-# @spells.route('/srd', methods=['GET'])
-# def srd_spells():
-#     with open('static/template-spells.json') as f:
-#         _spells = json.load(f)
-#     return jsonify(_spells)
+
+@spells.route('/srd', methods=['GET'])
+def srd_spells():
+    with open('static/template-spells.json') as f:
+        _spells = json.load(f)
+    return jsonify(_spells)

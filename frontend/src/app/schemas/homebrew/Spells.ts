@@ -24,7 +24,7 @@ export class Spell {
   school: string;
   classes: string;
   subclasses: string;
-  time: string;
+  casttime: string;
   range: string;
   components: SpellComponents;
   duration: string;
@@ -41,7 +41,7 @@ export class Spell {
     this.school = "A";
     this.classes = "";
     this.subclasses = "";
-    this.time = "";
+    this.casttime = "";
     this.range = "";
     this.components = new SpellComponents();
     this.duration = "";

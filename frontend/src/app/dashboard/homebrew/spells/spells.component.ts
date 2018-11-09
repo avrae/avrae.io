@@ -3,8 +3,8 @@ import {HomebrewService} from "../homebrew.service";
 import {MatDialog} from "@angular/material";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Tome} from "../../../schemas/homebrew/Spells";
-import {NewTomeDialog} from "./new-tome-dialog/new-tome-dialog.component";
-import {TomeShareDialog} from "./tome-share-dialog/tome-share-dialog.component";
+import {NewTomeDialog} from "./dialogs/new-tome-dialog.component";
+import {TomeShareDialog} from "./dialogs/tome-share-dialog.component";
 
 @Component({
   selector: 'avr-spells',

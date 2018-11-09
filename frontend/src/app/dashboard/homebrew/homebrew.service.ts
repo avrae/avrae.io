@@ -5,7 +5,7 @@ import {Item, Pack} from "../../schemas/homebrew/Items";
 import {Observable, of} from "rxjs";
 import {defaultOptions, defaultTextOptions} from "../APIHelper";
 import {catchError} from "rxjs/operators";
-import {Tome} from "../../schemas/homebrew/Spells";
+import {Spell, Tome} from "../../schemas/homebrew/Spells";
 
 const itemsUrl = `${environment.apiURL}/homebrew/items`;
 const spellsUrl = `${environment.apiURL}/homebrew/spells`;
@@ -84,6 +84,10 @@ export class HomebrewService {
       .pipe(
         catchError(this.handleError('deleteTome'))
       );
+  }
+
+  getTemplateSpells(): Observable<Spell[]> {
+    return this.http.get<Spell[]>(`${spellsUrl}/srd`, defaultOptions());
   }
 
 

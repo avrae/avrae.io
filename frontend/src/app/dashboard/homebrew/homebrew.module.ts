@@ -19,16 +19,17 @@ import {PackJSONImportDialog} from './items/pack-json-import-dialog/pack-json-im
 import {PackMarkdownDialog} from './items/pack-markdown-dialog/pack-markdown-dialog.component';
 import {PackSRDImportDialog} from './items/pack-srd-import-dialog/pack-srd-import-dialog.component';
 import {SpellsComponent} from './spells/spells.component';
-import {NewTomeDialog} from "./spells/new-tome-dialog/new-tome-dialog.component";
-import {TomeShareDialog} from "./spells/tome-share-dialog/tome-share-dialog.component";
+import {NewTomeDialog} from "./spells/dialogs/new-tome-dialog.component";
+import {TomeShareDialog} from "./spells/dialogs/tome-share-dialog.component";
 import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
 import {SpellDetailComponent} from './spells/tome-detail/spell-detail/spell-detail.component';
 import {SpellListComponent} from './spells/tome-detail/spell-list/spell-list.component';
-import {TomeOptionsDialog} from './spells/tome-options-dialog/tome-options-dialog.component';
-import {TomeDeleteDialog} from './spells/tome-delete-dialog/tome-delete-dialog.component';
+import {TomeOptionsDialog} from './spells/dialogs/tome-options-dialog.component';
+import {TomeDeleteDialog} from './spells/dialogs/tome-delete-dialog.component';
 import {SpellPanelDescriptionComponent} from './spells/tome-detail/spell-detail/spell-panel-description/spell-panel-description.component';
 import {SpellEmbedComponent} from './spells/tome-detail/spell-list/spell-embed/spell-embed.component';
 import {SpellEditorComponent} from './spells/tome-detail/spell-editor/spell-editor.component';
+import {TomeSRDImportDialog} from './spells/dialogs/tome-srd-import-dialog.component';
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import {SpellEditorComponent} from './spells/tome-detail/spell-editor/spell-edit
     SpellPanelDescriptionComponent,
     SpellEmbedComponent,
     SpellEditorComponent,
+    TomeSRDImportDialog,
   ],
   entryComponents: [
     NewPackDialog,
@@ -79,6 +81,7 @@ import {SpellEditorComponent} from './spells/tome-detail/spell-editor/spell-edit
     TomeShareDialog,
     TomeOptionsDialog,
     TomeDeleteDialog,
+    TomeSRDImportDialog,
   ]
 })
 export class HomebrewModule {

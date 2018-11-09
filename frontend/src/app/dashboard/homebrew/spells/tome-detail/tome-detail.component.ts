@@ -6,12 +6,12 @@ import {HomebrewService} from "../../homebrew.service";
 import {DashboardService} from "../../../dashboard.service";
 import {Location} from "@angular/common";
 import {MatDialog, MatSnackBar} from "@angular/material";
-import {TomeShareDialog} from "../tome-share-dialog/tome-share-dialog.component";
+import {TomeShareDialog} from "../dialogs/tome-share-dialog.component";
 // import {TomeOptionsDialog} from "../../spells/tome-options-dialog/tome-options-dialog.component";
 // import {TomeJSONImportDialog} from "../../spells/tome-json-import-dialog/tome-json-import-dialog.component";
 // import {TomeSRDImportDialog} from "../../spells/tome-srd-import-dialog/tome-srd-import-dialog.component";
 import {Spell, Tome} from "../../../../schemas/homebrew/Spells";
-import {TomeOptionsDialog} from "../tome-options-dialog/tome-options-dialog.component";
+import {TomeOptionsDialog} from "../dialogs/tome-options-dialog.component";
 
 @Component({
   selector: 'avr-tome-detail',
