@@ -13,6 +13,7 @@ export class SpellDetailComponent implements OnInit {
   @Output() changed = new EventEmitter();
   @Output() opened = new EventEmitter();
   @Output() delete = new EventEmitter();
+  @Output() moveToEditor = new EventEmitter();
 
   constructor(private dialog: MatDialog) {
   }

@@ -14,6 +14,7 @@ export class SpellListComponent implements OnInit {
   @Input() user: UserInfo;
   @Output() selected = new EventEmitter();
   @Output() changed = new EventEmitter();
+  @Output() moveToEditor = new EventEmitter();
 
   selectedSpell: Spell;
 

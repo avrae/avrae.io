@@ -28,6 +28,7 @@ import {TomeOptionsDialog} from './spells/tome-options-dialog/tome-options-dialo
 import {TomeDeleteDialog} from './spells/tome-delete-dialog/tome-delete-dialog.component';
 import {SpellPanelDescriptionComponent} from './spells/tome-detail/spell-detail/spell-panel-description/spell-panel-description.component';
 import {SpellEmbedComponent} from './spells/tome-detail/spell-list/spell-embed/spell-embed.component';
+import {SpellEditorComponent} from './spells/tome-detail/spell-editor/spell-editor.component';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import {SpellEmbedComponent} from './spells/tome-detail/spell-list/spell-embed/s
     TomeDeleteDialog,
     SpellPanelDescriptionComponent,
     SpellEmbedComponent,
+    SpellEditorComponent,
   ],
   entryComponents: [
     NewPackDialog,

@@ -2,8 +2,8 @@
   <div class="spell-list" fxFlex="grow" *ngIf="tome.spells.length">
     <mat-accordion>
       <avr-spell-detail *ngFor="let spell of tome.spells" [spell]="spell"
-                        (changed)="changed.emit()" (opened)="selectedSpell = spell; selected.emit()"
-                        (delete)="deleteSpell(spell)"></avr-spell-detail>
+                        (changed)="changed.emit()" (opened)="selectedSpell = spell; selected.emit(spell)"
+                        (delete)="deleteSpell(spell)" (moveToEditor)="moveToEditor.emit()"></avr-spell-detail>
       <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-spell-card">
         <span class="no-text-cursor">New...</span>
         <span class="toolbar-spacer"></span>

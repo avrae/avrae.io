@@ -22,13 +22,13 @@
     </span>
   </mat-toolbar>
 
-  <mat-tab-group backgroundColor="primary">
+  <mat-tab-group backgroundColor="primary" #tabGroup>
     <mat-tab label="Spells">
       <avr-spell-list [tome]="tome" [user]="user" (selected)="selectedSpell = $event"
-                      (changed)="ensureChangesNotif()"></avr-spell-list>
+                      (changed)="ensureChangesNotif()" (moveToEditor)="tabGroup.selectedIndex = 1"></avr-spell-list>
     </mat-tab>
     <mat-tab label="Editor">
-      TODO Spell editor here
+      <avr-spell-editor [spell]="selectedSpell"></avr-spell-editor>
     </mat-tab>
   </mat-tab-group>
 </div>
