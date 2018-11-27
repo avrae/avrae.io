@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Item, Pack} from "../../schemas/homebrew/Items";
-import {Observable, of} from "rxjs";
-import {defaultOptions, defaultTextOptions} from "../APIHelper";
-import {catchError} from "rxjs/operators";
-import {Spell, Tome} from "../../schemas/homebrew/Spells";
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Item, Pack} from '../../schemas/homebrew/Items';
+import {Observable, of} from 'rxjs';
+import {defaultOptions, defaultTextOptions} from '../APIHelper';
+import {catchError} from 'rxjs/operators';
+import {Spell, Tome} from '../../schemas/homebrew/Spells';
 
 const itemsUrl = `${environment.apiURL}/homebrew/items`;
 const spellsUrl = `${environment.apiURL}/homebrew/spells`;

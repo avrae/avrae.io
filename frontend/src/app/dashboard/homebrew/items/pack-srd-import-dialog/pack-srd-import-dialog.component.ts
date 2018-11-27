@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Item} from "../../../../schemas/homebrew/Items";
-import {HomebrewService} from "../../homebrew.service";
-import {MatDialogRef} from "@angular/material";
+import {Item} from '../../../../schemas/homebrew/Items';
+import {HomebrewService} from '../../homebrew.service';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'avr-pack-srd-import-dialog',
@@ -10,7 +10,7 @@ import {MatDialogRef} from "@angular/material";
 })
 export class PackSRDImportDialog implements OnInit {
 
-  search: string = "";
+  search: string = '';
   templateItems: Item[];
   filteredTemplateItems: Item[];
 

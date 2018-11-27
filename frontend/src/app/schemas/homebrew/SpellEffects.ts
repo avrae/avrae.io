@@ -14,7 +14,7 @@ export class Target extends SpellEffect {
   effects: SpellEffect[];
 
   constructor(target, effects, meta?) {
-    super("target", meta);
+    super('target', meta);
     this.target = target;
     this.effects = effects;
   }
@@ -25,7 +25,7 @@ export class Attack extends SpellEffect {
   miss: SpellEffect[];
 
   constructor(hit, miss, meta?) {
-    super("attack", meta);
+    super('attack', meta);
     this.hit = hit;
     this.miss = miss;
   }
@@ -37,7 +37,7 @@ export class Save extends SpellEffect {
   success: SpellEffect[];
 
   constructor(stat, fail, success, meta?) {
-    super("save", meta);
+    super('save', meta);
     this.stat = stat;
     this.fail = fail;
     this.success = success;
@@ -50,7 +50,7 @@ export class Damage extends SpellEffect {
   cantripScale?: boolean;
 
   constructor(damage, higher?, cantripScale?, meta?) {
-    super("damage", meta);
+    super('damage', meta);
     this.damage = damage;
     this.higher = higher;
     this.cantripScale = cantripScale;
@@ -64,7 +64,7 @@ export class IEffect extends SpellEffect {
   effects: string;
 
   constructor(name, duration, effects, meta?) {
-    super("ieffect", meta);
+    super('ieffect', meta);
     this.name = name;
     this.duration = duration;
     this.effects = effects;
@@ -78,7 +78,7 @@ export class Roll extends SpellEffect {
   cantripScale?: boolean;
 
   constructor(dice, higher?, cantripScale?, meta?) {
-    super("roll", meta);
+    super('roll', meta);
     this.dice = dice;
     this.higher = higher;
     this.cantripScale = cantripScale;
@@ -90,7 +90,7 @@ export class Text extends SpellEffect {
   text: string;
 
   constructor(text, meta?) {
-    super("text", meta);
+    super('text', meta);
     this.text = text;
   }
 }

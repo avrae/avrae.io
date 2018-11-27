@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {HomebrewService} from "../homebrew.service";
-import {MatDialog} from "@angular/material";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Tome} from "../../../schemas/homebrew/Spells";
-import {NewTomeDialog} from "./dialogs/new-tome-dialog.component";
-import {TomeShareDialog} from "./dialogs/tome-share-dialog.component";
+import {HomebrewService} from '../homebrew.service';
+import {MatDialog} from '@angular/material';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Tome} from '../../../schemas/homebrew/Spells';
+import {NewTomeDialog} from './dialogs/new-tome-dialog.component';
+import {TomeShareDialog} from './dialogs/tome-share-dialog.component';
 
 @Component({
   selector: 'avr-spells',
@@ -30,7 +30,7 @@ export class SpellsComponent implements OnInit {
 
   beginNew() {
     const dialogRef = this.dialog.open(NewTomeDialog, {
-      width: "60%",
+      width: '60%',
       disableClose: true
     });
 
@@ -45,7 +45,7 @@ export class SpellsComponent implements OnInit {
   beginShare(tome: Tome) {
     const dialogRef = this.dialog.open(TomeShareDialog, {
       data: tome,
-      width: "40%",
+      width: '40%',
       disableClose: true
     });
 

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NewTomeDialog } from './new-tome-dialog.component';
+import {NewTomeDialog} from './new-tome-dialog.component';
 
 describe('NewTomeDialog', () => {
   let component: NewTomeDialog;
@@ -8,9 +8,9 @@ describe('NewTomeDialog', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewTomeDialog ]
+      declarations: [NewTomeDialog]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

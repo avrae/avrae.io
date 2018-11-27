@@ -1,17 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserInfo} from "../../../../schemas/UserInfo";
-import {getUser} from "../../../APIHelper";
-import {ActivatedRoute, Router} from "@angular/router";
-import {HomebrewService} from "../../homebrew.service";
-import {DashboardService} from "../../../dashboard.service";
-import {Location} from "@angular/common";
-import {MatDialog, MatSnackBar} from "@angular/material";
-import {TomeShareDialog} from "../dialogs/tome-share-dialog.component";
+import {UserInfo} from '../../../../schemas/UserInfo';
+import {getUser} from '../../../APIHelper';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HomebrewService} from '../../homebrew.service';
+import {DashboardService} from '../../../dashboard.service';
+import {Location} from '@angular/common';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {TomeShareDialog} from '../dialogs/tome-share-dialog.component';
 // import {TomeOptionsDialog} from "../../spells/tome-options-dialog/tome-options-dialog.component";
 // import {TomeJSONImportDialog} from "../../spells/tome-json-import-dialog/tome-json-import-dialog.component";
 // import {TomeSRDImportDialog} from "../../spells/tome-srd-import-dialog/tome-srd-import-dialog.component";
-import {Spell, Tome} from "../../../../schemas/homebrew/Spells";
-import {TomeOptionsDialog} from "../dialogs/tome-options-dialog.component";
+import {Spell, Tome} from '../../../../schemas/homebrew/Spells';
+import {TomeOptionsDialog} from '../dialogs/tome-options-dialog.component';
 
 @Component({
   selector: 'avr-tome-detail',
@@ -71,7 +71,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   ensureChangesNotif() {
     if (!this.changesOpen) {
       this.changesOpen = true;
-      let snackBarRef = this.snackBar.open("You have unsaved changes!", "Save", {duration: -1});
+      let snackBarRef = this.snackBar.open('You have unsaved changes!', 'Save', {duration: -1});
 
       snackBarRef.onAction().subscribe(() => {
         this.commit();
@@ -82,7 +82,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   beginShare() {
     const dialogRef = this.dialog.open(TomeShareDialog, {
       data: this.tome,
-      width: "40%",
+      width: '40%',
       disableClose: true
     });
 
@@ -98,7 +98,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   beginSettings() {
     const dialogRef = this.dialog.open(TomeOptionsDialog, {
       data: this.tome,
-      width: "40%",
+      width: '40%',
       disableClose: true
     });
 
@@ -130,7 +130,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
     this.homebrewService.deleteTome(this.tome)
       .subscribe(result => {
         console.log(result);
-        this.router.navigate(["../"], {relativeTo: this.route});
+        this.router.navigate(['../'], {relativeTo: this.route});
       });
   }
 

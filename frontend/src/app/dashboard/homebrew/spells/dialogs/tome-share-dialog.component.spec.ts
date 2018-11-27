@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TomeShareDialog } from './tome-share-dialog.component';
+import {TomeShareDialog} from './tome-share-dialog.component';
 
 describe('TomeShareDialog', () => {
   let component: TomeShareDialog;
@@ -8,9 +8,9 @@ describe('TomeShareDialog', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TomeShareDialog ]
+      declarations: [TomeShareDialog]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

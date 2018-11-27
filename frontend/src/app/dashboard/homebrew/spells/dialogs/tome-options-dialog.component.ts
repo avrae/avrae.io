@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
-import {getUser} from "../../../APIHelper";
-import {Tome} from "../../../../schemas/homebrew/Spells";
-import {TomeDeleteDialog} from "./tome-delete-dialog.component";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {getUser} from '../../../APIHelper';
+import {Tome} from '../../../../schemas/homebrew/Spells';
+import {TomeDeleteDialog} from './tome-delete-dialog.component';
 
 @Component({
   selector: 'avr-tome-options-dialog',
@@ -30,7 +30,7 @@ export class TomeOptionsDialog implements OnInit {
   beginDelete() {
     const dialogRef = this.dialog.open(TomeDeleteDialog, {
       data: this.data,
-      width: "40%"
+      width: '40%'
     });
 
     dialogRef.afterClosed().subscribe(result => {

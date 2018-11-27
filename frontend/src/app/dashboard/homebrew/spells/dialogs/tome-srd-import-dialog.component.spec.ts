@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TomeSRDImportDialog } from './tome-srd-import-dialog.component';
+import {TomeSRDImportDialog} from './tome-srd-import-dialog.component';
 
 describe('TomeSRDImportDialog', () => {
   let component: TomeSRDImportDialog;
@@ -8,9 +8,9 @@ describe('TomeSRDImportDialog', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TomeSRDImportDialog ]
+      declarations: [TomeSRDImportDialog]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

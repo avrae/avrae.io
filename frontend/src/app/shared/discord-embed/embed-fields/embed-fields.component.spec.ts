@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmbedFieldsComponent } from './embed-fields.component';
+import {EmbedFieldsComponent} from './embed-fields.component';
 
 describe('EmbedFieldsComponent', () => {
   let component: EmbedFieldsComponent;
@@ -8,9 +8,9 @@ describe('EmbedFieldsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmbedFieldsComponent ]
+      declarations: [EmbedFieldsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

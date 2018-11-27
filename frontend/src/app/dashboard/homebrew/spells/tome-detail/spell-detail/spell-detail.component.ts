@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Spell} from "../../../../../schemas/homebrew/Spells";
-import {MatDialog} from "@angular/material";
+import {Spell} from '../../../../../schemas/homebrew/Spells';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'avr-spell-detail',

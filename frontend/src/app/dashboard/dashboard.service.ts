@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {UserInfo, UserStats} from "../schemas/UserInfo";
-import {Observable} from "rxjs";
+import {UserInfo, UserStats} from '../schemas/UserInfo';
+import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {environment} from "../../environments/environment";
-import {defaultOptions} from "./APIHelper";
-import {CharacterMeta} from "../schemas/Character";
-import {Customizations, GlobalVar} from "../schemas/Customization";
+import {environment} from '../../environments/environment';
+import {defaultOptions} from './APIHelper';
+import {CharacterMeta} from '../schemas/Character';
+import {Customizations, GlobalVar} from '../schemas/Customization';
 
 const userInfoUrl = `${environment.apiURL}/user`;
 const userStatsUrl = `${environment.apiURL}/userStats`;

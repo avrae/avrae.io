@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SpellEditorComponent } from './spell-editor.component';
+import {SpellEditorComponent} from './spell-editor.component';
 
 describe('SpellEditorComponent', () => {
   let component: SpellEditorComponent;
@@ -8,9 +8,9 @@ describe('SpellEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpellEditorComponent ]
+      declarations: [SpellEditorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

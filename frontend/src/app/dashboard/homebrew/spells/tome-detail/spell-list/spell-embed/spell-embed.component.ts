@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {parseLevel, parseSchool, Spell} from "../../../../../../schemas/homebrew/Spells";
-import {UserInfo} from "../../../../../../schemas/UserInfo";
-import {EmbedField} from "../../../../../../shared/discord-embed/embed-fields/embed-fields.component";
+import {parseLevel, parseSchool} from '../../../../../../schemas/homebrew/Spells';
+import {UserInfo} from '../../../../../../schemas/UserInfo';
+import {EmbedField} from '../../../../../../shared/discord-embed/embed-fields/embed-fields.component';
 
 @Component({
   selector: 'avr-spell-embed',
@@ -32,10 +32,10 @@ export class SpellEmbedComponent implements OnInit, OnChanges {
   @Input() higherlevels: string;
   @Input() user: UserInfo;
 
-  embedTitle: string = "No spell selected.";
-  embedDescription: string = "Click on a spell on the left to see a preview!";
+  embedTitle: string = 'No spell selected.';
+  embedDescription: string = 'Click on a spell on the left to see a preview!';
   fields: EmbedField[] = [];
-  embedImage: string = "";
+  embedImage: string = '';
 
 
   constructor() {
@@ -44,47 +44,47 @@ export class SpellEmbedComponent implements OnInit, OnChanges {
   updateEmbed() {
     if (!this.name) return;
     this.embedTitle = this.name;
-    this.embedImage = this.image ? this.image : "";
+    this.embedImage = this.image ? this.image : '';
 
     this.embedDescription = `*${parseLevel(this.level)} ${parseSchool(this.school).toLowerCase()}.`;
     if (this.classes || this.subclasses) {
-      this.embedDescription += " (";
+      this.embedDescription += ' (';
       if (this.classes) {
         this.embedDescription += this.classes;
       }
       if (this.classes && this.subclasses) {
-        this.embedDescription += ", ";
+        this.embedDescription += ', ';
       }
       if (this.subclasses) {
         this.embedDescription += this.subclasses;
       }
-      this.embedDescription += ")";
+      this.embedDescription += ')';
     }
-    this.embedDescription += "*"; // ending asterisk
+    this.embedDescription += '*'; // ending asterisk
 
     let components = [];
     if (this.verbal)
-      components.push("V");
+      components.push('V');
     if (this.somatic)
-      components.push("S");
+      components.push('S');
     if (this.material)
       components.push(`M (${this.material})`);
 
     let newFields = [];
     newFields.push({
-      name: "Casting Time",
-      value: this.time + (this.ritual ? " (ritual)" : "")
+      name: 'Casting Time',
+      value: this.time + (this.ritual ? ' (ritual)' : '')
     });
-    newFields.push({name: "Range", value: this.range});
-    newFields.push({name: "Components", value: components.join(", ")});
+    newFields.push({name: 'Range', value: this.range});
+    newFields.push({name: 'Components', value: components.join(', ')});
     newFields.push({
-      name: "Duration",
-      value: (this.concentration ? "Concentration, up to " : "") + this.duration
+      name: 'Duration',
+      value: (this.concentration ? 'Concentration, up to ' : '') + this.duration
     });
-    newFields.push({name: "Description", value: this.description, inline: false});
+    newFields.push({name: 'Description', value: this.description, inline: false});
 
     if (this.higherlevels)
-      newFields.push({name: "At Higher Levels", value: this.higherlevels, inline: false});
+      newFields.push({name: 'At Higher Levels', value: this.higherlevels, inline: false});
 
     this.fields = newFields;
   }

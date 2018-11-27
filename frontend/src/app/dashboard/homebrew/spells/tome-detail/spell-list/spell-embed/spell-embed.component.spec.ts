@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SpellEmbedComponent } from './spell-embed.component';
+import {SpellEmbedComponent} from './spell-embed.component';
 
 describe('SpellEmbedComponent', () => {
   let component: SpellEmbedComponent;
@@ -8,9 +8,9 @@ describe('SpellEmbedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpellEmbedComponent ]
+      declarations: [SpellEmbedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

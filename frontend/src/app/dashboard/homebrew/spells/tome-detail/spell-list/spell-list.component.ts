@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Spell, Tome} from "../../../../../schemas/homebrew/Spells";
-import {UserInfo} from "../../../../../schemas/UserInfo";
-import {MatDialog} from "@angular/material";
-import {TomeSRDImportDialog} from "../../dialogs/tome-srd-import-dialog.component";
+import {Spell, Tome} from '../../../../../schemas/homebrew/Spells';
+import {UserInfo} from '../../../../../schemas/UserInfo';
+import {MatDialog} from '@angular/material';
+import {TomeSRDImportDialog} from '../../dialogs/tome-srd-import-dialog.component';
 
 @Component({
   selector: 'avr-spell-list',
@@ -52,7 +52,7 @@ export class SpellListComponent implements OnInit {
 
   newFromSRD() {
     const dialogRef = this.dialog.open(TomeSRDImportDialog, {
-      width: "60%",
+      width: '60%',
       disableClose: true
     });
 

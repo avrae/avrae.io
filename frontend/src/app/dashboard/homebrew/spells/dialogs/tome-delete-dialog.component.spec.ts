@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TomeDeleteDialog } from './tome-delete-dialog.component';
+import {TomeDeleteDialog} from './tome-delete-dialog.component';
 
 describe('TomeDeleteDialog', () => {
   let component: TomeDeleteDialog;
@@ -8,9 +8,9 @@ describe('TomeDeleteDialog', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TomeDeleteDialog ]
+      declarations: [TomeDeleteDialog]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

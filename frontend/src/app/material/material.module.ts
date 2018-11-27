@@ -21,7 +21,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
-} from "@angular/material";
+} from '@angular/material';
 
 
 @NgModule({

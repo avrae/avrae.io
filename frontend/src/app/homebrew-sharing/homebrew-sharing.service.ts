@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {Observable, of} from "rxjs";
-import {Pack} from "../schemas/homebrew/Items";
-import {catchError} from "rxjs/operators";
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Pack} from '../schemas/homebrew/Items';
 
 const itemsUrl = `${environment.apiURL}/homebrew/items`;
 

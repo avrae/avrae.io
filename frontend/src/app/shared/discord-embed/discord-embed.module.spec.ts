@@ -1,4 +1,4 @@
-import { DiscordEmbedModule } from './discord-embed.module';
+import {DiscordEmbedModule} from './discord-embed.module';
 
 describe('DiscordEmbedModule', () => {
   let discordEmbedModule: DiscordEmbedModule;

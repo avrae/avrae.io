@@ -1,8 +1,8 @@
-import {DiscordUser} from "../DiscordUser";
-import {SpellEffect} from "./SpellEffects";
+import {DiscordUser} from '../DiscordUser';
+import {SpellEffect} from './SpellEffects';
 
-export const REQUIRED_SPELL_PROPS = ["name", "level", "school"];
-export const SPELL_SCHOOLS = ["A", "V", "E", "I", "D", "N", "T", "C"];
+export const REQUIRED_SPELL_PROPS = ['name', 'level', 'school'];
+export const SPELL_SCHOOLS = ['A', 'V', 'E', 'I', 'D', 'N', 'T', 'C'];
 
 export class Tome {
   name: string;
@@ -15,7 +15,7 @@ export class Tome {
   image: string;
   spells?: Spell[];
   numSpells?: number;
-  _id: { "$oid": string };
+  _id: { '$oid': string };
 }
 
 export class Spell {
@@ -36,18 +36,18 @@ export class Spell {
   image?: string;
 
   constructor() {
-    this.name = "New Spell";
+    this.name = 'New Spell';
     this.level = 1;
-    this.school = "A";
-    this.classes = "";
-    this.subclasses = "";
-    this.casttime = "";
-    this.range = "";
+    this.school = 'A';
+    this.classes = '';
+    this.subclasses = '';
+    this.casttime = '';
+    this.range = '';
     this.components = new SpellComponents();
-    this.duration = "";
+    this.duration = '';
     this.ritual = false;
-    this.description = "";
-    this.higherlevels = "";
+    this.description = '';
+    this.higherlevels = '';
     this.concentration = false;
     this.automation = new SpellAutomation();
   }
@@ -61,7 +61,7 @@ export class SpellComponents {
   constructor() {
     this.verbal = false;
     this.somatic = false;
-    this.material = "";
+    this.material = '';
   }
 }
 
@@ -74,21 +74,21 @@ export class SpellAutomation {
 }
 
 export function parseLevel(level) {
-  if (level == 0) return "Cantrip";
-  else if (level == 1) return "1st level";
-  else if (level == 2) return "2nd level";
-  else if (level == 3) return "3rd level";
+  if (level == 0) return 'Cantrip';
+  else if (level == 1) return '1st level';
+  else if (level == 2) return '2nd level';
+  else if (level == 3) return '3rd level';
   return `${level}th level`;
 }
 
 export function parseSchool(school) {
-  if (school == "A") return "Abjuration";
-  else if (school == "V") return "Evocation";
-  else if (school == "E") return "Enchantment";
-  else if (school == "I") return "Illusion";
-  else if (school == "D") return "Divination";
-  else if (school == "N") return "Necromancy";
-  else if (school == "T") return "Transmutation";
-  else if (school == "C") return "Conjuration";
+  if (school == 'A') return 'Abjuration';
+  else if (school == 'V') return 'Evocation';
+  else if (school == 'E') return 'Enchantment';
+  else if (school == 'I') return 'Illusion';
+  else if (school == 'D') return 'Divination';
+  else if (school == 'N') return 'Necromancy';
+  else if (school == 'T') return 'Transmutation';
+  else if (school == 'C') return 'Conjuration';
   return school;
 }

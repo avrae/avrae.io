@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GvarListComponent } from './gvar-list.component';
+import {GvarListComponent} from './gvar-list.component';
 
 describe('GvarListComponent', () => {
   let component: GvarListComponent;
@@ -8,9 +8,9 @@ describe('GvarListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GvarListComponent ]
+      declarations: [GvarListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

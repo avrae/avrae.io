@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TomeOptionsDialog } from './tome-options-dialog.component';
+import {TomeOptionsDialog} from './tome-options-dialog.component';
 
 describe('TomeOptionsDialog', () => {
   let component: TomeOptionsDialog;
@@ -8,9 +8,9 @@ describe('TomeOptionsDialog', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TomeOptionsDialog ]
+      declarations: [TomeOptionsDialog]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

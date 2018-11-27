@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Spell} from "../../../../schemas/homebrew/Spells";
-import {HomebrewService} from "../../homebrew.service";
-import {MatDialogRef} from "@angular/material";
+import {Spell} from '../../../../schemas/homebrew/Spells';
+import {HomebrewService} from '../../homebrew.service';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'avr-tome-srd-import-dialog',
@@ -10,7 +10,7 @@ import {MatDialogRef} from "@angular/material";
 })
 export class TomeSRDImportDialog implements OnInit {
 
-  search: string = "";
+  search: string = '';
   templateSpells: Spell[];
   filteredTemplateSpells: Spell[];
 

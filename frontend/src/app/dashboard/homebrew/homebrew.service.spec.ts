@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { HomebrewService } from './homebrew.service';
+import {HomebrewService} from './homebrew.service';
 
 describe('HomebrewService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

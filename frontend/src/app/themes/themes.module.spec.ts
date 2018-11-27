@@ -1,4 +1,4 @@
-import { ThemesModule } from './themes.module';
+import {ThemesModule} from './themes.module';
 
 describe('ThemesModule', () => {
   let themesModule: ThemesModule;
