@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CommandModule} from "../schemas/Commands";
-import {CommandsService} from "./commands.service";
-import {Meta} from "@angular/platform-browser";
+import {CommandModule} from '../schemas/Commands';
+import {CommandsService} from './commands.service';
+import {Meta} from '@angular/platform-browser';
 
 @Component({
   selector: 'avr-commands',
@@ -14,7 +14,7 @@ export class CommandsComponent implements OnInit {
 
   constructor(private commandService: CommandsService, private meta: Meta) {
     this.meta.updateTag({
-      name: "description", content: "A list of Avrae's commands, arguments, and features."
+      name: 'description', content: 'A list of Avrae\'s commands, arguments, and features.'
     });
   }
 
@@ -28,8 +28,8 @@ export class CommandsComponent implements OnInit {
   }
 
   scrollTo(id: string) {
-    let el = document.getElementById(id);
-    el.scrollIntoView({behavior: "smooth"});
+    const el = document.getElementById(id);
+    el.scrollIntoView({behavior: 'smooth'});
   }
 
 }

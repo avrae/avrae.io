@@ -117,15 +117,15 @@ export class DeathSaves {
 }
 
 export class SpellSlotsConsumable {
-  "1": Counter;
-  "2": Counter;
-  "3": Counter;
-  "4": Counter;
-  "5": Counter;
-  "6": Counter;
-  "7": Counter;
-  "8": Counter;
-  "9": Counter;
+  '1': Counter;
+  '2': Counter;
+  '3': Counter;
+  '4': Counter;
+  '5': Counter;
+  '6': Counter;
+  '7': Counter;
+  '8': Counter;
+  '9': Counter;
 }
 
 export class Spellbook {
@@ -137,13 +137,13 @@ export class Spellbook {
 }
 
 export class SpellSlots {
-  "1": number;
-  "2": number;
-  "3": number;
-  "4": number;
-  "5": number;
-  "6": number;
-  "7": number;
-  "8": number;
-  "9": number;
+  '1': number;
+  '2': number;
+  '3': number;
+  '4': number;
+  '5': number;
+  '6': number;
+  '7': number;
+  '8': number;
+  '9': number;
 }

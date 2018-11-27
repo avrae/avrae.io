@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Spell} from "../../../../../schemas/homebrew/Spells";
+import {Spell} from '../../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-spell-editor',

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DiscordEmbedComponent} from "./discord-embed.component";
+import {DiscordEmbedComponent} from './discord-embed.component';
 import {EmbedColorPillComponent} from './embed-color-pill/embed-color-pill.component';
 import {EmbedAuthorComponent} from './embed-author/embed-author.component';
 import {EmbedTitleComponent} from './embed-title/embed-title.component';
@@ -9,7 +9,7 @@ import {EmbedFieldsComponent} from './embed-fields/embed-fields.component';
 import {EmbedThumbnailComponent} from './embed-thumbnail/embed-thumbnail.component';
 import {EmbedImageComponent} from './embed-image/embed-image.component';
 import {EmbedFooterComponent} from './embed-footer/embed-footer.component';
-import {MarkdownModule} from "ngx-markdown";
+import {MarkdownModule} from 'ngx-markdown';
 
 @NgModule({
   imports: [
