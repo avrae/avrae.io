@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Spell} from '../../../../../schemas/homebrew/Spells';
 
 @Component({
@@ -9,11 +9,13 @@ import {Spell} from '../../../../../schemas/homebrew/Spells';
 export class SpellEditorComponent implements OnInit {
 
   @Input() spell: Spell;
+  @Output() changed = new EventEmitter();
 
   constructor() {
   }
 
   ngOnInit() {
   }
+
 
 }

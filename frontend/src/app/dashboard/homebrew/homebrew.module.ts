@@ -30,6 +30,8 @@ import {SpellPanelDescriptionComponent} from './spells/tome-detail/spell-detail/
 import {SpellEmbedComponent} from './spells/tome-detail/spell-list/spell-embed/spell-embed.component';
 import {SpellEditorComponent} from './spells/tome-detail/spell-editor/spell-editor.component';
 import {TomeSRDImportDialog} from './spells/dialogs/tome-srd-import-dialog.component';
+import {EffectEditorComponent} from './spells/tome-detail/spell-editor/effect-editor/effect-editor.component';
+import { NewEffectCardComponent } from './spells/tome-detail/spell-editor/new-effect-card/new-effect-card.component';
 
 @NgModule({
   imports: [
@@ -66,6 +68,8 @@ import {TomeSRDImportDialog} from './spells/dialogs/tome-srd-import-dialog.compo
     SpellEmbedComponent,
     SpellEditorComponent,
     TomeSRDImportDialog,
+    EffectEditorComponent,
+    NewEffectCardComponent,
   ],
   entryComponents: [
     NewPackDialog,

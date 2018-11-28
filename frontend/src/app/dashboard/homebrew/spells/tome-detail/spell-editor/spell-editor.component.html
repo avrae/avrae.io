@@ -1,1 +1,18 @@
-<input [(ngModel)]="spell.name" *ngIf="spell">
+<div *ngIf="spell" class="container">
+  <mat-card>
+    <p>Editing {{spell.name}}...</p>
+    <mat-accordion multi="true">
+      <avr-effect-editor *ngFor="let effect of spell.automation" [effect]="effect"
+                         (changed)="changed.emit()"></avr-effect-editor>
+      <avr-new-effect-card [parent]="spell.automation" [parentType]="'root'"></avr-new-effect-card>
+    </mat-accordion>
+  </mat-card>
+</div>
+
+<div *ngIf="!spell" class="container">
+  <mat-card>
+    <p>
+      No spell selected.
+    </p>
+  </mat-card>
+</div>

@@ -32,7 +32,7 @@ export class Spell {
   description: string;
   higherlevels: string;
   concentration: boolean;
-  automation: SpellAutomation;
+  automation: SpellEffect[];
   image?: string;
 
   constructor() {
@@ -49,7 +49,7 @@ export class Spell {
     this.description = '';
     this.higherlevels = '';
     this.concentration = false;
-    this.automation = new SpellAutomation();
+    this.automation = [];
   }
 }
 
@@ -62,14 +62,6 @@ export class SpellComponents {
     this.verbal = false;
     this.somatic = false;
     this.material = '';
-  }
-}
-
-export class SpellAutomation {
-  effects: SpellEffect[];
-
-  constructor() {
-    this.effects = [];
   }
 }
 

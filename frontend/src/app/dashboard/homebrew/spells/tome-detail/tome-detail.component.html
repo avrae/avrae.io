@@ -28,7 +28,7 @@
                       (changed)="ensureChangesNotif()" (moveToEditor)="tabGroup.selectedIndex = 1"></avr-spell-list>
     </mat-tab>
     <mat-tab label="Editor">
-      <avr-spell-editor [spell]="selectedSpell"></avr-spell-editor>
+      <avr-spell-editor [spell]="selectedSpell" (changed)="ensureChangesNotif()"></avr-spell-editor>
     </mat-tab>
   </mat-tab-group>
 </div>
