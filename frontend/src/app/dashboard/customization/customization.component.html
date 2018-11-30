@@ -2,13 +2,13 @@
   <mat-card>
     <mat-tab-group>
       <mat-tab label="Aliases">
-        <avr-alias-list [data]="aliases"></avr-alias-list>
+        <avr-alias-list [data]="(customizations | async)?.aliases"></avr-alias-list>
       </mat-tab>
       <mat-tab label="Snippets">
-        <avr-snippet-list [data]="snippets"></avr-snippet-list>
+        <avr-snippet-list [data]="(customizations | async)?.snippets"></avr-snippet-list>
       </mat-tab>
       <mat-tab label="Uvars">
-        <avr-uvar-list [data]="uvars"></avr-uvar-list>
+        <avr-uvar-list [data]="(customizations | async)?.uvars"></avr-uvar-list>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
