@@ -13,7 +13,7 @@ export class Target extends SpellEffect {
   target: string | number;
   effects: SpellEffect[];
 
-  constructor(target, effects, meta?) {
+  constructor(target = 'all', effects = [], meta?) {
     super('target', meta);
     this.target = target;
     this.effects = effects;
@@ -24,7 +24,7 @@ export class Attack extends SpellEffect {
   hit: SpellEffect[];
   miss: SpellEffect[];
 
-  constructor(hit, miss, meta?) {
+  constructor(hit = [], miss = [], meta?) {
     super('attack', meta);
     this.hit = hit;
     this.miss = miss;
@@ -36,7 +36,7 @@ export class Save extends SpellEffect {
   fail: SpellEffect[];
   success: SpellEffect[];
 
-  constructor(stat, fail, success, meta?) {
+  constructor(stat = 'str', fail = [], success = [], meta?) {
     super('save', meta);
     this.stat = stat;
     this.fail = fail;
@@ -49,7 +49,7 @@ export class Damage extends SpellEffect {
   higher?: Map<number, string>;
   cantripScale?: boolean;
 
-  constructor(damage, higher?, cantripScale?, meta?) {
+  constructor(damage = '', higher?, cantripScale?, meta?) {
     super('damage', meta);
     this.damage = damage;
     this.higher = higher;
@@ -63,7 +63,7 @@ export class IEffect extends SpellEffect {
   duration: number | string;
   effects: string;
 
-  constructor(name, duration, effects, meta?) {
+  constructor(name = '', duration = '', effects = '', meta?) {
     super('ieffect', meta);
     this.name = name;
     this.duration = duration;
@@ -77,9 +77,10 @@ export class Roll extends SpellEffect {
   higher?: Map<number, string>;
   cantripScale?: boolean;
 
-  constructor(dice, higher?, cantripScale?, meta?) {
+  constructor(dice = '', name = '', higher?, cantripScale?, meta?) {
     super('roll', meta);
     this.dice = dice;
+    this.name = name;
     this.higher = higher;
     this.cantripScale = cantripScale;
     this.meta = meta;
@@ -89,7 +90,7 @@ export class Roll extends SpellEffect {
 export class Text extends SpellEffect {
   text: string;
 
-  constructor(text, meta?) {
+  constructor(text = '', meta?) {
     super('text', meta);
     this.text = text;
   }

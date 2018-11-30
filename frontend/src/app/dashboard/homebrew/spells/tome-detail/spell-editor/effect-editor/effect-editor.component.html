@@ -27,7 +27,8 @@
       </div>
       <avr-effect-editor *ngFor="let subeffect of effect.effects" [effect]="subeffect"
                          (changed)="changed.emit()"></avr-effect-editor>
-      <avr-new-effect-card [parent]="effect.effects" [parentType]="effect.type"></avr-new-effect-card>
+      <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.effects"
+                           [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
     </div>
 
     <div *ngSwitchCase="'attack'">
@@ -38,7 +39,8 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <avr-effect-editor *ngFor="let subeffect of effect.hit" [effect]="subeffect"></avr-effect-editor>
-        <avr-new-effect-card [parent]="effect.hit" [parentType]="effect.type"></avr-new-effect-card>
+        <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.hit"
+                             [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -47,7 +49,8 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <avr-effect-editor *ngFor="let subeffect of effect.miss" [effect]="subeffect"></avr-effect-editor>
-        <avr-new-effect-card [parent]="effect.miss" [parentType]="effect.type"></avr-new-effect-card>
+        <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.miss"
+                             [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
       </mat-expansion-panel>
     </div>
 
@@ -70,7 +73,8 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <avr-effect-editor *ngFor="let subeffect of effect.fail" [effect]="subeffect"></avr-effect-editor>
-        <avr-new-effect-card [parent]="effect.fail" [parentType]="effect.type"></avr-new-effect-card>
+        <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.fail"
+                             [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -79,7 +83,8 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <avr-effect-editor *ngFor="let subeffect of effect.success" [effect]="subeffect"></avr-effect-editor>
-        <avr-new-effect-card [parent]="effect.success" [parentType]="effect.type"></avr-new-effect-card>
+        <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.success"
+                             [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
       </mat-expansion-panel>
     </div>
 
@@ -145,5 +150,5 @@
   </div>
 
   <avr-effect-editor *ngFor="let meta of effect.meta" [effect]="meta"></avr-effect-editor>
-  <avr-new-effect-card [parent]="effect.meta" [parentType]="'meta'"></avr-new-effect-card>
+
 </mat-expansion-panel>
