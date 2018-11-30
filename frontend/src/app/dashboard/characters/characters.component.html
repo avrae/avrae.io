@@ -1,17 +1,17 @@
 <div class="characterList">
-  <mat-card class="user-card" *ngIf="userInfo">
+  <mat-card class="user-card" *ngIf="(userInfo | async)">
     <mat-grid-list cols="4" rowHeight="1:1">
       <mat-grid-tile>
-        <img [src]="userInfo.avatarUrl" class="avatarImg mat-elevation-z1">
+        <img alt="avatar" [src]="(userInfo | async)?.avatarUrl" class="avatarImg mat-elevation-z1">
       </mat-grid-tile>
       <mat-grid-tile colspan="3">
         <div>
           <h1 class="mat-display-2 smallmargin">
-            {{userInfo.username}}<span class="mat-small">#{{userInfo.discriminator}}</span>
+            {{(userInfo | async)?.username}}<span class="mat-small">#{{(userInfo | async)?.discriminator}}</span>
           </h1>
           <p class="mat-h3">
-            Characters: {{userStats.numCharacters}}<br>
-            Customizations: {{userStats.numCustomizations}}
+            Characters: {{(userStats | async)?.numCharacters}}<br>
+            Customizations: {{(userStats | async)?.numCustomizations}}
           </p>
         </div>
       </mat-grid-tile>
@@ -21,7 +21,7 @@
   <div class="spacer-8px"></div>
 
   <mat-grid-list cols="4" gutterSize="8px" rowHeight="5:6">
-    <mat-grid-tile *ngFor="let character of characters" class="mat-elevation-z3">
+    <mat-grid-tile *ngFor="let character of characters | async" class="mat-elevation-z3">
       <mat-card class="char-card">
         <mat-card-header>
           <mat-card-title class="char-name">
