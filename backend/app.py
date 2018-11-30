@@ -25,14 +25,22 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/userInfo', methods=["GET"])
-def user_info():
+@app.route('/user', methods=["GET"])
+def user():
     info = get_user_info()
     data = {
         "username": info.username,
         "discriminator": info.discriminator,
         "id": info.id,
-        "avatarUrl": info.get_avatar_url(),
+        "avatarUrl": info.get_avatar_url()
+    }
+    return jsonify(data)
+
+
+@app.route('/userStats', methods=["GET"])
+def user_stats():
+    info = get_user_info()
+    data = {
         "numCharacters": mdb.characters.count_documents({"owner": info.id}),
         "numCustomizations": sum((mdb.aliases.count_documents({"owner": info.id}),
                                   mdb.snippets.count_documents({"owner": info.id})))
@@ -63,10 +71,13 @@ def roll():
 from blueprints.characters import characters
 from blueprints.customizations import customizations
 from blueprints.bot import bot
-
 app.register_blueprint(characters, url_prefix="/characters")
 app.register_blueprint(customizations, url_prefix="/customizations")
 app.register_blueprint(bot, url_prefix="/bot")
+
+from blueprints.homebrew.items import items
+app.register_blueprint(items, url_prefix="/homebrew/items")
+
 
 if __name__ == '__main__':
     app.run()

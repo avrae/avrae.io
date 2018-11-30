@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Markdown - {{data.name}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="form-container">
+    <mat-form-field>
+      <textarea matInput readonly [value]="mdData" placeholder="Markdown" rows="10" #mdElem></textarea>
+      <button mat-button matSuffix mat-icon-button aria-label="Copy" (click)="copy(mdElem)"
+              matTooltip="Copy to clipboard">
+        <mat-icon>file_copy</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Done</button>
+</mat-dialog-actions>

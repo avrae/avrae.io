@@ -21,6 +21,9 @@ class UserInfo:
         else:
             return f"{DISCORD_CDN}/embed/avatars/{int(self.discriminator) % 5}.png?size=512"
 
+    def to_dict(self):
+        return {'id': self.id, 'username': f"{self.username}#{self.discriminator}", 'avatarUrl': self.get_avatar_url()}
+
 
 def get(endpoint, token):
     headers = HEADERS.copy()
@@ -35,4 +38,7 @@ def get_user_info():
     except KeyError:
         abort(403)
     r = get("/users/@me", token)
-    return UserInfo(r.json())
+    try:
+        return UserInfo(r.json())
+    except KeyError:
+        abort(403)

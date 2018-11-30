@@ -9,3 +9,23 @@
 .spacer {
   height: 32px;
 }
+
+mat-expansion-panel-header {
+  transition: background-color .5s ease-in-out;
+  padding-left: 16px;
+}
+
+.nav-panel {
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.nav-panel-body {
+  margin: 0 -24px -16px;
+}
+
+.nav-panel-body > a {
+  padding: 0 24px;
+  height: 36px;
+  font-size: 90%;
+}

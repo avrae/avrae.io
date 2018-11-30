@@ -22,6 +22,9 @@ import {MarkdownModule, MarkedOptions} from "ngx-markdown";
 import {InViewportModule, WindowRef} from "@thisissoon/angular-inviewport";
 import {ScrollSpyModule} from "@thisissoon/angular-scrollspy";
 import {CheatsheetsModule} from "./cheatsheets/cheatsheets.module";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {DiscordEmbedModule} from "./shared/discord-embed/discord-embed.module";
+import {HomebrewSharingModule} from "./homebrew-sharing/homebrew-sharing.module";
 import {LoginModule} from "./login/login.module";
 
 const markdownConfig = {
@@ -47,7 +50,7 @@ const providers: Provider[] = [
     FooterComponent,
     ErrorComponent,
     CommandsComponent,
-    CommandListComponent
+    CommandListComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,9 +61,12 @@ const providers: Provider[] = [
     MarkdownModule.forRoot(markdownConfig),
     InViewportModule.forRoot(providers),
     ScrollSpyModule.forRoot(),
+    FlexLayoutModule,
     MaterialModule,
     DashboardModule,
     CheatsheetsModule,
+    HomebrewSharingModule,
+    DiscordEmbedModule,
     AppRoutingModule,
     ThemesModule,
     LoginModule

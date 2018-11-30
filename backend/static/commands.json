@@ -301,7 +301,7 @@
         {
           "name": "multiline",
           "short": "Runs each line as a separate command, with a 1 second delay between commands.",
-          "docs": "Runs each line as a separate command, with a 1 second delay between commands.\nLimited to 1 multiline every 20 seconds due to abuse.\nUsage:\n\"!multiline\n!roll 1d20\n!spell Fly\n!monster Rat\"",
+          "docs": "Runs each line as a separate command, with a 1 second delay between commands.\nLimited to 1 multiline every 20 seconds, with a max of 20 commands, due to abuse.\nUsage:\n\"!multiline\n!roll 1d20\n!spell Fly\n!monster Rat\"",
           "args": [
             {
               "name": "cmds",
@@ -1171,8 +1171,8 @@
             },
             {
               "name": "import",
-              "short": "Imports a published bestiary from [CritterDB](http://www.critterdb.com/).",
-              "docs": "Imports a published bestiary from [CritterDB](http://www.critterdb.com/).",
+              "short": "Imports a published bestiary from [CritterDB](https://critterdb.com/).",
+              "docs": "Imports a published bestiary from [CritterDB](https://critterdb.com/).",
               "args": [
                 {
                   "name": "url",
@@ -1193,6 +1193,88 @@
               "args": [],
               "signature": "!bestiary update",
               "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "server",
+              "short": "Toggles whether the active bestiary should be viewable by anyone on the server.",
+              "docs": "Toggles whether the active bestiary should be viewable by anyone on the server.\nRequires __Manage Server__ permissions or a role named \"Server Brewer\" to run.",
+              "args": [],
+              "signature": "!bestiary server",
+              "subcommands": [
+                {
+                  "name": "list",
+                  "short": "Shows what bestiaries are currently active on the server.",
+                  "docs": "Shows what bestiaries are currently active on the server.",
+                  "args": [],
+                  "signature": "!bestiary server list",
+                  "subcommands": [],
+                  "example": ""
+                }
+              ],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "pack",
+          "short": "Commands to manage homebrew items.",
+          "docs": "Commands to manage homebrew items.\nWhen called without an argument, lists the current pack and its description.\nWhen called with a name, switches to a different pack.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!pack [name]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists your available packs.",
+              "docs": "Lists your available packs.",
+              "args": [],
+              "signature": "!pack list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "editor",
+              "short": "Allows another user to edit your active pack.",
+              "docs": "Allows another user to edit your active pack.",
+              "args": [
+                {
+                  "name": "user",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!pack editor <user>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "server",
+              "short": "Toggles whether the active pack should be viewable by anyone on the server.",
+              "docs": "Toggles whether the active pack should be viewable by anyone on the server.\nRequires __Manage Server__ permissions or a role named \"Server Brewer\" to run.",
+              "args": [],
+              "signature": "!pack server",
+              "subcommands": [
+                {
+                  "name": "list",
+                  "short": "Shows what packs are currently active on the server.",
+                  "docs": "Shows what packs are currently active on the server.",
+                  "args": [],
+                  "signature": "!pack server list",
+                  "subcommands": [],
+                  "example": ""
+                }
+              ],
               "example": ""
             }
           ],
@@ -1388,7 +1470,7 @@
             {
               "name": "opt",
               "short": "Edits the options of a combatant.",
-              "docs": "Edits the options of a combatant.\nValid Arguments:    -h (hides HP)\n                    -p (changes init)\n                    -name <NAME> (changes combatant name)\n                    -controller <CONTROLLER> (pings a different person on turn)\n                    -ac <AC> (changes combatant AC)\n                    -resist <RESISTANCE>\n                    -immune <IMMUNITY>\n                    -vuln <VULNERABILITY>\n                    -group <GROUP> (changes group)",
+              "docs": "Edits the options of a combatant.\nValid Arguments:    -h (hides HP)\n                    -p (changes init)\n                    -name <NAME> (changes combatant name)\n                    -controller <CONTROLLER> (pings a different person on turn)\n                    -ac <AC> (changes combatant AC)\n                    -resist <DMGTYPE>\n                    -immune <DMGTYPE>\n                    -vuln <DMGTYPE>\n                    -neutral <DMGTYPE>\n                    -group <GROUP> (changes group)",
               "args": [
                 {
                   "name": "name",
@@ -1491,17 +1573,10 @@
             {
               "name": "effect",
               "short": "Attaches a status effect to a combatant.",
-              "docs": "Attaches a status effect to a combatant.\n[effect] is a set of args that will be appended to every `!i a` the combatant makes.\nValid Arguments: -b [bonus] (see !a)\n                 -d [damage bonus] (see !a)\n                 -ac [ac] (modifies ac temporarily; adds if starts with +/- or sets otherwise)",
+              "docs": "Attaches a status effect to a combatant.\n[args] is a set of args that affects a combatant in combat.\n__**Valid Arguments**__\n-dur [duration]\nconc (makes effect require conc)\n__Attacks__\n-b [bonus] (see !a)\n-d [damage bonus] (see !a)\n__General__\n-ac [ac] (modifies ac temporarily; adds if starts with +/- or sets otherwise)",
               "args": [
                 {
                   "name": "name",
-                  "required": true,
-                  "default": null,
-                  "multiple": false,
-                  "desc": ""
-                },
-                {
-                  "name": "duration",
                   "required": true,
                   "default": null,
                   "multiple": false,
@@ -1515,14 +1590,14 @@
                   "desc": ""
                 },
                 {
-                  "name": "effect",
+                  "name": "args",
                   "required": false,
                   "default": null,
                   "multiple": false,
                   "desc": ""
                 }
               ],
-              "signature": "!init effect <name> <duration> <effect_name> [effect]",
+              "signature": "!init effect <name> <effect_name> [args]",
               "subcommands": [],
               "example": ""
             },
@@ -1695,8 +1770,16 @@
               "name": "end",
               "short": "Ends combat in the channel.",
               "docs": "Ends combat in the channel.",
-              "args": [],
-              "signature": "!init end",
+              "args": [
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init end [args]",
               "subcommands": [],
               "example": ""
             }
@@ -2117,12 +2200,12 @@
         {
           "name": "attack",
           "short": "Rolls an attack for the current active character.",
-          "docs": "Rolls an attack for the current active character.\nValid Arguments: adv/dis\n                 adv#/dis# (applies adv to the first # attacks)\n                 -ac [target ac]\n                 -b [to hit bonus]\n                 -d [damage bonus]\n                 -d# [applies damage to the first # hits]\n                 -rr [times to reroll]\n                 -t [target]\n                 -c [damage bonus on crit]\n                 -criton [a number to crit on if rolled on or above]\n                 -phrase [flavor text]\n                 -title [title] *note: [charname], [aname], and [target] will be replaced automatically*\n                 -resist [damage resistance]\n                 -immune [damage immunity]\n                 -vuln [damage vulnerability]\n                 -hit (automatically hits)\n                 -miss (automatically misses)\n                 crit (automatically crit)\n                 ea (Elven Accuracy double advantage)\n                 -f \"Field Title|Field Text\" (see !embed)\n                 [user snippet]",
+          "docs": "Rolls an attack for the current active character.\n__Valid Arguments__\nadv/dis\nadv#/dis# (applies adv to the first # attacks)\n-ac [target ac]\n-b [to hit bonus]\n-d [damage bonus]\n-d# [applies damage to the first # hits]\n-rr [times to reroll]\n-t [target]\n-c [damage bonus on crit]\n-criton [a number to crit on if rolled on or above]\n-phrase [flavor text]\n-title [title] *note: [charname], [aname], and [target] will be replaced automatically*\n-resist [damage resistance]\n-immune [damage immunity]\n-vuln [damage vulnerability]\n-neutral [damage non-resistance]\n-hit (automatically hits)\n-miss (automatically misses)\ncrit (automatically crit)\nea (Elven Accuracy double advantage)\n-f \"Field Title|Field Text\" (see !embed)\n[user snippet]",
           "args": [
             {
               "name": "atk_name",
               "required": false,
-              "default": "list",
+              "default": null,
               "multiple": false,
               "desc": ""
             },
@@ -2134,8 +2217,59 @@
               "desc": ""
             }
           ],
-          "signature": "![attack|a] [atk_name=list] [args]",
-          "subcommands": [],
+          "signature": "![attack|a] [atk_name] [args]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists the active character's attacks.",
+              "docs": "Lists the active character's attacks.",
+              "args": [],
+              "signature": "!attack list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "add",
+              "short": "Adds an attack to the active character.",
+              "docs": "Adds an attack to the active character.\n__Arguments__\n-d [damage]: How much damage the attack should do.\n-b [to-hit]: The to-hit bonus of the attack.\n-desc [description]: A description of the attack.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                },
+                {
+                  "name": "args",
+                  "required": false,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!attack [add|create] <name> [args]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "delete",
+              "short": "Deletes an attack override.",
+              "docs": "Deletes an attack override.",
+              "args": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!attack [delete|remove] <name>",
+              "subcommands": [],
+              "example": ""
+            }
+          ],
           "example": ""
         },
         {

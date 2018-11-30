@@ -13,14 +13,16 @@ import {EditDialog} from './edit-dialog/edit-dialog.component';
 import {NewDialog} from './new-dialog/new-dialog.component';
 import {FormsModule} from "@angular/forms";
 import {GvarsComponent} from './gvars/gvars.component';
-import { GvarListComponent } from './gvars/gvar-list/gvar-list.component';
+import {GvarListComponent} from './gvars/gvar-list/gvar-list.component';
+import {HomebrewModule} from "./homebrew/homebrew.module";
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    HomebrewModule
   ],
   declarations: [
     DashboardComponent,
