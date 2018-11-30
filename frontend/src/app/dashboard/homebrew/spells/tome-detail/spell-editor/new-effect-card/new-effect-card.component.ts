@@ -72,11 +72,19 @@ export class NewEffectCardComponent implements OnInit {
         return;
     }
     if (this.toAddType.meta) {
-      this.parent.push(effect);
+      this.newMeta(effect);
     } else {
-      this.metaParent.push(effect);
+      this.newEffect(effect);
     }
     this.changed.emit();
+  }
+
+  newEffect(effect: SpellEffect) {
+    this.parent.push(effect);
+  }
+
+  newMeta(effect: SpellEffect) {
+    this.metaParent.push(effect);
   }
 }
 

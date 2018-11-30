@@ -4,7 +4,8 @@
     <mat-accordion multi="true">
       <avr-effect-editor *ngFor="let effect of spell.automation" [effect]="effect"
                          (changed)="changed.emit()"></avr-effect-editor>
-      <avr-new-effect-card [parent]="spell.automation" [parentType]="'root'"></avr-new-effect-card>
+      <avr-new-effect-card [parent]="spell.automation" [parentType]="'root'"
+                           (changed)="changed.emit()"></avr-new-effect-card>
     </mat-accordion>
   </mat-card>
 </div>

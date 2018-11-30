@@ -38,7 +38,8 @@
             On Hit
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <avr-effect-editor *ngFor="let subeffect of effect.hit" [effect]="subeffect"></avr-effect-editor>
+        <avr-effect-editor *ngFor="let subeffect of effect.hit" [effect]="subeffect"
+                           (changed)="changed.emit()"></avr-effect-editor>
         <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.hit"
                              [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
       </mat-expansion-panel>
@@ -48,7 +49,8 @@
             On Miss
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <avr-effect-editor *ngFor="let subeffect of effect.miss" [effect]="subeffect"></avr-effect-editor>
+        <avr-effect-editor *ngFor="let subeffect of effect.miss" [effect]="subeffect"
+                           (changed)="changed.emit()"></avr-effect-editor>
         <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.miss"
                              [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
       </mat-expansion-panel>
@@ -72,7 +74,8 @@
             On Fail
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <avr-effect-editor *ngFor="let subeffect of effect.fail" [effect]="subeffect"></avr-effect-editor>
+        <avr-effect-editor *ngFor="let subeffect of effect.fail" [effect]="subeffect"
+                           (changed)="changed.emit()"></avr-effect-editor>
         <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.fail"
                              [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
       </mat-expansion-panel>
@@ -82,14 +85,15 @@
             On Success
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <avr-effect-editor *ngFor="let subeffect of effect.success" [effect]="subeffect"></avr-effect-editor>
+        <avr-effect-editor *ngFor="let subeffect of effect.success" [effect]="subeffect"
+                           (changed)="changed.emit()"></avr-effect-editor>
         <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.success"
                              [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
       </mat-expansion-panel>
     </div>
 
     <div *ngSwitchCase="'damage'">
-      <div fxLayout="row" fxLayoutGap="4px">
+      <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
         <mat-form-field>
           <input matInput placeholder="Damage" (change)="changed.emit()" [(ngModel)]="effect.damage">
         </mat-form-field>
@@ -97,8 +101,7 @@
           <!--Higher level stuff here TODO-->
           asdf
         </div>
-        <mat-checkbox *ngIf="effect.cantripScale != undefined" [(ngModel)]="effect.cantripScale"
-                      (change)="changed.emit()">
+        <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
           Scales like Cantrip
         </mat-checkbox>
       </div>
@@ -119,7 +122,7 @@
     </div>
 
     <div *ngSwitchCase="'roll'">
-      <div fxLayout="row" fxLayoutGap="4px">
+      <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
         <mat-form-field>
           <input matInput placeholder="Name" (change)="changed.emit()" [(ngModel)]="effect.name">
         </mat-form-field>
@@ -130,8 +133,7 @@
           <!--Higher level stuff here TODO-->
           asdf
         </div>
-        <mat-checkbox *ngIf="effect.cantripScale != undefined" [(ngModel)]="effect.cantripScale"
-                      (change)="changed.emit()">
+        <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
           Scales like Cantrip
         </mat-checkbox>
       </div>
@@ -149,6 +151,6 @@
     </div>
   </div>
 
-  <avr-effect-editor *ngFor="let meta of effect.meta" [effect]="meta"></avr-effect-editor>
+  <avr-effect-editor *ngFor="let meta of effect.meta" [effect]="meta" (changed)="changed.emit()"></avr-effect-editor>
 
 </mat-expansion-panel>

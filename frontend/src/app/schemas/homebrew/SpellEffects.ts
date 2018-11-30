@@ -2,9 +2,9 @@ export class SpellEffect {
   type: string;
   meta: SpellEffect[];
 
-  constructor(type, meta?) {
+  constructor(type, meta = []) {
     this.type = type;
-    this.meta = meta || null;
+    this.meta = meta;
   }
 
 }
