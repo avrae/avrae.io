@@ -25,6 +25,7 @@ import {CheatsheetsModule} from "./cheatsheets/cheatsheets.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {DiscordEmbedModule} from "./shared/discord-embed/discord-embed.module";
 import {HomebrewSharingModule} from "./homebrew-sharing/homebrew-sharing.module";
+import {LoginModule} from "./login/login.module";
 
 const markdownConfig = {
   markedOptions: {
@@ -47,7 +48,6 @@ const providers: Provider[] = [
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent,
     ErrorComponent,
     CommandsComponent,
     CommandListComponent,
@@ -68,7 +68,8 @@ const providers: Provider[] = [
     HomebrewSharingModule,
     DiscordEmbedModule,
     AppRoutingModule,
-    ThemesModule
+    ThemesModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
