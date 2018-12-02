@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SpellEffect} from '../../../../../../schemas/homebrew/SpellEffects';
+import {moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'avr-effect-editor',
@@ -8,7 +9,7 @@ import {SpellEffect} from '../../../../../../schemas/homebrew/SpellEffects';
 })
 export class EffectEditorComponent implements OnInit {
 
-  @Input() effect: SpellEffect;
+  @Input() parent: SpellEffect[];
   @Output() changed = new EventEmitter();
 
   constructor() {
@@ -17,8 +18,30 @@ export class EffectEditorComponent implements OnInit {
   ngOnInit() {
   }
 
-  isNumber(val) {
-    return typeof val === 'number';
+  moveUp(effect) {
+    const index = this.parent.indexOf(effect);
+    const newIndex = index - 1;
+    if (newIndex > -1) {
+      moveItemInArray(this.parent, index, newIndex);
+      this.changed.emit();
+    }
+  }
+
+  moveDown(effect) {
+    const index = this.parent.indexOf(effect);
+    const newIndex = index + 1;
+    if (newIndex < this.parent.length) {
+      moveItemInArray(this.parent, index, newIndex);
+      this.changed.emit();
+    }
+  }
+
+  delete(effect) {
+    const index = this.parent.indexOf(effect);
+    if (index > -1) {
+      this.parent.splice(index, 1);
+      this.changed.emit();
+    }
   }
 
 }

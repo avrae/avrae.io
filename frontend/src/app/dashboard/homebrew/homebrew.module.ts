@@ -32,6 +32,13 @@ import {SpellEditorComponent} from './spells/tome-detail/spell-editor/spell-edit
 import {TomeSRDImportDialog} from './spells/dialogs/tome-srd-import-dialog.component';
 import {EffectEditorComponent} from './spells/tome-detail/spell-editor/effect-editor/effect-editor.component';
 import { NewEffectCardComponent } from './spells/tome-detail/spell-editor/new-effect-card/new-effect-card.component';
+import { TargetEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/target-effect/target-effect.component';
+import { AttackEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/attack-effect/attack-effect.component';
+import { SaveEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/save-effect/save-effect.component';
+import { DamageEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/damage-effect/damage-effect.component';
+import { IEffectEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/ieffect-effect/ieffect-effect.component';
+import { RollEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/roll-effect/roll-effect.component';
+import { TextEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/text-effect/text-effect.component';
 
 @NgModule({
   imports: [
@@ -70,6 +77,13 @@ import { NewEffectCardComponent } from './spells/tome-detail/spell-editor/new-ef
     TomeSRDImportDialog,
     EffectEditorComponent,
     NewEffectCardComponent,
+    TargetEffectComponent,
+    AttackEffectComponent,
+    SaveEffectComponent,
+    DamageEffectComponent,
+    IEffectEffectComponent,
+    RollEffectComponent,
+    TextEffectComponent,
   ],
   entryComponents: [
     NewPackDialog,
