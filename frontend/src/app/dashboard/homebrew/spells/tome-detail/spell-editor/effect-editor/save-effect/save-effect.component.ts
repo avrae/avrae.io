@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Save} from '../../../../../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-save-effect',
@@ -21,7 +22,7 @@ import {Save} from '../../../../../../../schemas/homebrew/SpellEffects';
           On Fail
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.fail" (changed)="changed.emit()"></avr-effect-editor>
+      <avr-effect-editor [parent]="effect.fail" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
       <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.fail"
                            [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
     </mat-expansion-panel>
@@ -31,7 +32,7 @@ import {Save} from '../../../../../../../schemas/homebrew/SpellEffects';
           On Success
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.success" (changed)="changed.emit()"></avr-effect-editor>
+      <avr-effect-editor [parent]="effect.success" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
       <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.success"
                            [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
     </mat-expansion-panel>
@@ -41,6 +42,7 @@ import {Save} from '../../../../../../../schemas/homebrew/SpellEffects';
 export class SaveEffectComponent implements OnInit {
 
   @Input() effect: Save;
+  @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 
   constructor() {

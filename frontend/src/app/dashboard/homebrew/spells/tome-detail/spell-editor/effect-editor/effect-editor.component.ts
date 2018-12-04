@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SpellEffect} from '../../../../../../schemas/homebrew/SpellEffects';
 import {moveItemInArray} from '@angular/cdk/drag-drop';
+import {Spell} from '../../../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-effect-editor',
@@ -10,6 +11,7 @@ import {moveItemInArray} from '@angular/cdk/drag-drop';
 export class EffectEditorComponent implements OnInit {
 
   @Input() parent: SpellEffect[];
+  @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 
   constructor() {

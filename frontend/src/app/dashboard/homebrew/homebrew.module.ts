@@ -39,6 +39,7 @@ import { DamageEffectComponent } from './spells/tome-detail/spell-editor/effect-
 import { IEffectEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/ieffect-effect/ieffect-effect.component';
 import { RollEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/roll-effect/roll-effect.component';
 import { TextEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/text-effect/text-effect.component';
+import { HigherLevelComponent } from './spells/tome-detail/spell-editor/effect-editor/higher-level/higher-level.component';
 
 @NgModule({
   imports: [
@@ -84,6 +85,7 @@ import { TextEffectComponent } from './spells/tome-detail/spell-editor/effect-ed
     IEffectEffectComponent,
     RollEffectComponent,
     TextEffectComponent,
+    HigherLevelComponent,
   ],
   entryComponents: [
     NewPackDialog,

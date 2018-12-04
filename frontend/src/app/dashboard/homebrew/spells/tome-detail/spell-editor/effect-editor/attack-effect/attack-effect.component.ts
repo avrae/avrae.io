@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Attack} from '../../../../../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-attack-effect',
@@ -10,7 +11,7 @@ import {Attack} from '../../../../../../../schemas/homebrew/SpellEffects';
           On Hit
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.hit" (changed)="changed.emit()"></avr-effect-editor>
+      <avr-effect-editor [parent]="effect.hit" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
       <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.hit"
                            [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
     </mat-expansion-panel>
@@ -20,7 +21,7 @@ import {Attack} from '../../../../../../../schemas/homebrew/SpellEffects';
           On Miss
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.miss" (changed)="changed.emit()"></avr-effect-editor>
+      <avr-effect-editor [parent]="effect.miss" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
       <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.miss"
                            [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
     </mat-expansion-panel>
@@ -30,6 +31,7 @@ import {Attack} from '../../../../../../../schemas/homebrew/SpellEffects';
 export class AttackEffectComponent implements OnInit {
 
   @Input() effect: Attack;
+  @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 
   constructor() {

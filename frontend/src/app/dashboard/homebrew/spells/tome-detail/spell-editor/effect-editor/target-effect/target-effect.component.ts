@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Target} from '../../../../../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-target-effect',
@@ -19,7 +20,7 @@ import {Target} from '../../../../../../../schemas/homebrew/SpellEffects';
                (change)="changed.emit()">
       </mat-form-field>
     </div>
-    <avr-effect-editor [parent]="effect.effects" (changed)="changed.emit()"></avr-effect-editor>
+    <avr-effect-editor [parent]="effect.effects" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
     <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.effects"
                          [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
   `,
@@ -28,6 +29,7 @@ import {Target} from '../../../../../../../schemas/homebrew/SpellEffects';
 export class TargetEffectComponent implements OnInit {
 
   @Input() effect: Target;
+  @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 
   constructor() {

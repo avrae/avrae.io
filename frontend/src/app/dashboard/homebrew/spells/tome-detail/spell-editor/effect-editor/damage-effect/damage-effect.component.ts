@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Damage} from '../../../../../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-damage-effect',
@@ -8,10 +9,7 @@ import {Damage} from '../../../../../../../schemas/homebrew/SpellEffects';
       <mat-form-field>
         <input matInput placeholder="Damage" (change)="changed.emit()" [(ngModel)]="effect.damage">
       </mat-form-field>
-      <div *ngIf="effect.higher != undefined">
-        <!--Higher level stuff here TODO-->
-        asdf
-      </div>
+      <avr-higher-level [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
       <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
         Scales like Cantrip
       </mat-checkbox>
@@ -22,6 +20,7 @@ import {Damage} from '../../../../../../../schemas/homebrew/SpellEffects';
 export class DamageEffectComponent implements OnInit {
 
   @Input() effect: Damage;
+  @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 
   constructor() {

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IEffect} from '../../../../../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-ieffect-effect',
@@ -21,6 +22,7 @@ import {IEffect} from '../../../../../../../schemas/homebrew/SpellEffects';
 export class IEffectEffectComponent implements OnInit {
 
   @Input() effect: IEffect;
+  @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 
   constructor() {
