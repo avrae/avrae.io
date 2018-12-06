@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 import {HomebrewService} from '../../homebrew.service';
 import {Tome} from '../../../../schemas/homebrew/Spells';
+import {TomeJSONDialog} from './tome-json-dialog/tome-json-dialog.component';
+import {TomeMarkdownDialog} from './tome-markdown-dialog/tome-markdown-dialog.component';
 
 @Component({
   selector: 'avr-pack-share-dialog',
@@ -43,11 +45,17 @@ export class TomeShareDialog implements OnInit {
   }
 
   beginJSONExport() {
-    // TODO
+    this.dialog.open(TomeJSONDialog, {
+      data: {name: this.data.name, data: this.data.spells},
+      width: '60%'
+    });
   }
 
   beginMDExport() {
-    // TODO
+    this.dialog.open(TomeMarkdownDialog, {
+      data: {name: this.data.name, data: this.data},
+      width: '60%'
+    });
   }
 
 }

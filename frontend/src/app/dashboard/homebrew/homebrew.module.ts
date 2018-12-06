@@ -31,15 +31,17 @@ import {SpellEmbedComponent} from './spells/tome-detail/spell-list/spell-embed/s
 import {SpellEditorComponent} from './spells/tome-detail/spell-editor/spell-editor.component';
 import {TomeSRDImportDialog} from './spells/dialogs/tome-srd-import-dialog.component';
 import {EffectEditorComponent} from './spells/tome-detail/spell-editor/effect-editor/effect-editor.component';
-import { NewEffectCardComponent } from './spells/tome-detail/spell-editor/new-effect-card/new-effect-card.component';
-import { TargetEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/target-effect/target-effect.component';
-import { AttackEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/attack-effect/attack-effect.component';
-import { SaveEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/save-effect/save-effect.component';
-import { DamageEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/damage-effect/damage-effect.component';
-import { IEffectEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/ieffect-effect/ieffect-effect.component';
-import { RollEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/roll-effect/roll-effect.component';
-import { TextEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/text-effect/text-effect.component';
-import { HigherLevelComponent } from './spells/tome-detail/spell-editor/effect-editor/higher-level/higher-level.component';
+import {NewEffectCardComponent} from './spells/tome-detail/spell-editor/new-effect-card/new-effect-card.component';
+import {TargetEffectComponent} from './spells/tome-detail/spell-editor/effect-editor/target-effect/target-effect.component';
+import {AttackEffectComponent} from './spells/tome-detail/spell-editor/effect-editor/attack-effect/attack-effect.component';
+import {SaveEffectComponent} from './spells/tome-detail/spell-editor/effect-editor/save-effect/save-effect.component';
+import {DamageEffectComponent} from './spells/tome-detail/spell-editor/effect-editor/damage-effect/damage-effect.component';
+import {IEffectEffectComponent} from './spells/tome-detail/spell-editor/effect-editor/ieffect-effect/ieffect-effect.component';
+import {RollEffectComponent} from './spells/tome-detail/spell-editor/effect-editor/roll-effect/roll-effect.component';
+import {TextEffectComponent} from './spells/tome-detail/spell-editor/effect-editor/text-effect/text-effect.component';
+import {HigherLevelComponent} from './spells/tome-detail/spell-editor/effect-editor/higher-level/higher-level.component';
+import {TomeJSONDialog} from './spells/dialogs/tome-json-dialog/tome-json-dialog.component';
+import {TomeMarkdownDialog} from './spells/dialogs/tome-markdown-dialog/tome-markdown-dialog.component';
 
 @NgModule({
   imports: [
@@ -86,6 +88,8 @@ import { HigherLevelComponent } from './spells/tome-detail/spell-editor/effect-e
     RollEffectComponent,
     TextEffectComponent,
     HigherLevelComponent,
+    TomeJSONDialog,
+    TomeMarkdownDialog,
   ],
   entryComponents: [
     NewPackDialog,
@@ -102,6 +106,8 @@ import { HigherLevelComponent } from './spells/tome-detail/spell-editor/effect-e
     TomeOptionsDialog,
     TomeDeleteDialog,
     TomeSRDImportDialog,
+    TomeJSONDialog,
+    TomeMarkdownDialog,
   ]
 })
 export class HomebrewModule {

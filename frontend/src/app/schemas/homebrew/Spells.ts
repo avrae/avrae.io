@@ -84,3 +84,14 @@ export function parseSchool(school) {
   else if (school == 'C') return 'Conjuration';
   return school;
 }
+
+export function parseComponents(spell) {
+  let components = [];
+  if (spell.components.verbal)
+    components.push('V');
+  if (spell.components.somatic)
+    components.push('S');
+  if (spell.components.material)
+    components.push(`M (${spell.components.material})`);
+  return components.join(', ');
+}

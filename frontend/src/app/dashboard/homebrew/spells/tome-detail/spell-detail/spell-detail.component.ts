@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Spell} from '../../../../../schemas/homebrew/Spells';
 import {MatDialog} from '@angular/material';
+import {TomeJSONDialog} from '../../dialogs/tome-json-dialog/tome-json-dialog.component';
 
 @Component({
   selector: 'avr-spell-detail',
@@ -26,10 +27,10 @@ export class SpellDetailComponent implements OnInit {
   }
 
   beginJSONExport() {
-    // this.dialog.open(SpellJsonDialog, {
-    //   data: {name: this.spell.name, data: this.spell},
-    //   width: '60%'
-    // });
+    this.dialog.open(TomeJSONDialog, {
+      data: {name: this.spell.name, data: this.spell},
+      width: '60%'
+    });
   }
 
 }
