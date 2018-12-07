@@ -1,12 +1,12 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {parseLevel, parseSchool} from '../../../../../../schemas/homebrew/Spells';
-import {UserInfo} from '../../../../../../schemas/UserInfo';
-import {EmbedField} from '../../../../../../shared/discord-embed/embed-fields/embed-fields.component';
+import {parseLevel, parseSchool} from '../../schemas/homebrew/Spells';
+import {UserInfo} from '../../schemas/UserInfo';
+import {EmbedField} from '../discord-embed/embed-fields/embed-fields.component';
 
 @Component({
   selector: 'avr-spell-embed',
   template: `
-    <avr-discord-embed [author]="{name: user.username, icon_url: user.avatarUrl}"
+    <avr-discord-embed [author]="user ? {name: user.username, icon_url: user.avatarUrl} : undefined"
                        [title]="embedTitle" [description]="embedDescription" [fields]="fields" [thumbnail]="embedImage"
                        [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
     </avr-discord-embed>
@@ -36,6 +36,8 @@ export class SpellEmbedComponent implements OnInit, OnChanges {
   embedDescription: string = 'Click on a spell on the left to see a preview!';
   fields: EmbedField[] = [];
   embedImage: string = '';
+
+  undefined = undefined;
 
 
   constructor() {

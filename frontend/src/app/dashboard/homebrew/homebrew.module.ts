@@ -27,7 +27,6 @@ import {SpellListComponent} from './spells/tome-detail/spell-list/spell-list.com
 import {TomeOptionsDialog} from './spells/dialogs/tome-options-dialog.component';
 import {TomeDeleteDialog} from './spells/dialogs/tome-delete-dialog.component';
 import {SpellPanelDescriptionComponent} from './spells/tome-detail/spell-detail/spell-panel-description/spell-panel-description.component';
-import {SpellEmbedComponent} from './spells/tome-detail/spell-list/spell-embed/spell-embed.component';
 import {SpellEditorComponent} from './spells/tome-detail/spell-editor/spell-editor.component';
 import {TomeSRDImportDialog} from './spells/dialogs/tome-srd-import-dialog.component';
 import {EffectEditorComponent} from './spells/tome-detail/spell-editor/effect-editor/effect-editor.component';
@@ -43,6 +42,7 @@ import {HigherLevelComponent} from './spells/tome-detail/spell-editor/effect-edi
 import {TomeJSONDialog} from './spells/dialogs/tome-json-dialog/tome-json-dialog.component';
 import {TomeMarkdownDialog} from './spells/dialogs/tome-markdown-dialog/tome-markdown-dialog.component';
 import {TomeJSONImportDialog} from './spells/dialogs/tome-json-import-dialog/tome-json-import-dialog.component';
+import {SpellEmbedModule} from '../../shared/spell-embed/spell-embed.module';
 
 @NgModule({
   imports: [
@@ -52,6 +52,7 @@ import {TomeJSONImportDialog} from './spells/dialogs/tome-json-import-dialog/tom
     FlexLayoutModule,
     MarkdownModule.forChild(),
     DiscordEmbedModule,
+    SpellEmbedModule,
     HomebrewRoutingModule,
   ],
   declarations: [
@@ -76,7 +77,6 @@ import {TomeJSONImportDialog} from './spells/dialogs/tome-json-import-dialog/tom
     TomeOptionsDialog,
     TomeDeleteDialog,
     SpellPanelDescriptionComponent,
-    SpellEmbedComponent,
     SpellEditorComponent,
     TomeSRDImportDialog,
     EffectEditorComponent,
