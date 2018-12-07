@@ -42,6 +42,7 @@ import {TextEffectComponent} from './spells/tome-detail/spell-editor/effect-edit
 import {HigherLevelComponent} from './spells/tome-detail/spell-editor/effect-editor/higher-level/higher-level.component';
 import {TomeJSONDialog} from './spells/dialogs/tome-json-dialog/tome-json-dialog.component';
 import {TomeMarkdownDialog} from './spells/dialogs/tome-markdown-dialog/tome-markdown-dialog.component';
+import {TomeJSONImportDialog} from './spells/dialogs/tome-json-import-dialog/tome-json-import-dialog.component';
 
 @NgModule({
   imports: [
@@ -90,6 +91,7 @@ import {TomeMarkdownDialog} from './spells/dialogs/tome-markdown-dialog/tome-mar
     HigherLevelComponent,
     TomeJSONDialog,
     TomeMarkdownDialog,
+    TomeJSONImportDialog,
   ],
   entryComponents: [
     NewPackDialog,
@@ -108,6 +110,7 @@ import {TomeMarkdownDialog} from './spells/dialogs/tome-markdown-dialog/tome-mar
     TomeSRDImportDialog,
     TomeJSONDialog,
     TomeMarkdownDialog,
+    TomeJSONImportDialog,
   ]
 })
 export class HomebrewModule {

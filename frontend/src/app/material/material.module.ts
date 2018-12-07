@@ -12,6 +12,7 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
@@ -47,7 +48,8 @@ import {
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatTreeModule
+    MatTreeModule,
+    MatProgressBarModule
   ],
   exports: [
     MatGridListModule,
@@ -70,7 +72,8 @@ import {
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatTreeModule
+    MatTreeModule,
+    MatProgressBarModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}

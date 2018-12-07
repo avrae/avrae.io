@@ -90,6 +90,12 @@ export class HomebrewService {
     return this.http.get<Spell[]>(`${spellsUrl}/srd`, defaultOptions());
   }
 
+  validateSpellJSON(data: object): Observable<{success: boolean, result: string}> {
+    return this.http.post<{success: boolean, result: string}>(`${spellsUrl}/validate`, data, defaultOptions())
+      .pipe(
+        catchError(err => of({success: false, result: err.error}))
+      );
+  }
 
   /* -----META----- */
   private handleError<T>(operation = 'operation') {

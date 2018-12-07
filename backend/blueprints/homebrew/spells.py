@@ -76,10 +76,16 @@ def put_tome(tome):
     for field in IGNORED_FIELDS:
         reqdata.pop(field)
 
-    try:
-        validate(reqdata)
-    except ValidationError as e:
-        return str(e), 400
+    if not all(k in TOME_FIELDS for k in reqdata):
+        return "Invalid field", 400
+    if "spells" in reqdata:
+        for spell in reqdata['spells']:
+            if not all(k in SPELL_FIELDS for k in spell):
+                return f"Invalid spell field in {spell}", 400
+            try:
+                validate(spell)
+            except ValidationError as e:
+                return str(e), 400
 
     mdb.tomes.update_one({"_id": ObjectId(tome)}, {"$set": reqdata})
     return "Tome updated."
@@ -107,23 +113,20 @@ def srd_spells():
 @spells.route('/validate', methods=['POST'])
 def validate_import():
     reqdata = request.json
+    if not isinstance(reqdata, list):
+        reqdata = [reqdata]
+    for spell in reqdata:
+        try:
+            validate(spell)
+        except ValidationError as e:
+            return str(e), 400
+    return jsonify({'success': True, 'result': "OK"})
+
+
+def validate(spell):
     try:
-        validate(reqdata)
-    except ValidationError as e:
-        return str(e), 400
-    return "OK", 200
-
-
-def validate(data):
-    if not all(k in TOME_FIELDS for k in data):
-        raise ValidationError("Invalid field")
-    if "spells" in data:
-        for spell in data['spells']:
-            if not all(k in SPELL_FIELDS for k in spell):
-                raise ValidationError(f"Invalid spell field in {spell}")
-            try:
-                ensure_keys(spell)
-                if spell['automation'] is not None:
-                    check_automation(spell['automation'])
-            except AssertionError as e:
-                raise ValidationError(str(e))
+        ensure_keys(spell)
+        if spell['automation'] is not None:
+            check_automation(spell['automation'])
+    except AssertionError as e:
+        raise ValidationError(str(e))
