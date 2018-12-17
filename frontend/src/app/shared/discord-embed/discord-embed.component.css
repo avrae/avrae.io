@@ -520,7 +520,7 @@
   color: hsla(0, 0%, 100%, .6)
 }
 
-/*.theme-dark .message-group .embed .embed-fields .embed-field-name {*/
+/*.theme-dark .message-group .embed .embed-fields .embed-fields-name {*/
 /*color: #fff*/
 /*}*/
 
@@ -733,7 +733,7 @@
   max-width: 100% !important
 }
 
-.embed .embed-fields {
+.embed-fields {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -742,15 +742,12 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   color: #36393e;
-  margin-top: -10px;
-  margin-bottom: 10px
 }
 
-.embed .embed-fields .embed-field {
+.embed-field {
   -webkit-box-flex: 0;
   -ms-flex: 0;
   flex: 0;
-  padding-top: 10px;
   min-width: 100%;
   max-width: 506px
 }
@@ -764,17 +761,20 @@
   flex-basis: auto
 }
 
+
 .embed-field-name {
   font-size: 14px;
   margin-bottom: 4px;
   font-weight: 400;
   color: #fff;
+  margin-top: -10px;
 }
 
 .embed-field-value {
   font-size: 14px;
   font-weight: 300;
   margin-top: -10px;
+  color: hsla(0, 0%, 100%, .6);
 }
 
 .embed .embed-thumbnail,

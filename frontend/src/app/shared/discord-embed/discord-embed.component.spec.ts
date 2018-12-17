@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DiscordEmbedComponent } from './discord-embed.component';
+import {DiscordEmbedComponent} from './discord-embed.component';
 
 describe('DiscordEmbedComponent', () => {
   let component: DiscordEmbedComponent;
@@ -8,9 +8,9 @@ describe('DiscordEmbedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DiscordEmbedComponent ]
+      declarations: [DiscordEmbedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { CheatsheetsModule } from './cheatsheets.module';
+import {CheatsheetsModule} from './cheatsheets.module';
 
 describe('CheatsheetsModule', () => {
   let cheatsheetsModule: CheatsheetsModule;

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UvarListComponent } from './uvar-list.component';
+import {UvarListComponent} from './uvar-list.component';
 
 describe('UvarListComponent', () => {
   let component: UvarListComponent;
@@ -8,9 +8,9 @@ describe('UvarListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UvarListComponent ]
+      declarations: [UvarListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Snippet} from "../../../schemas/Customization";
-import {MatDialog, MatSnackBar} from "@angular/material";
-import {CustomizationService} from "../customization.service";
-import {NewDialog} from "../../new-dialog/new-dialog.component";
-import {EditDialog} from "../../edit-dialog/edit-dialog.component";
-import {ConfirmDeleteDialog} from "../../confirm-delete-dialog/confirm-delete-dialog.component";
+import {Snippet} from '../../../schemas/Customization';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {CustomizationService} from '../customization.service';
+import {NewDialog} from '../../new-dialog/new-dialog.component';
+import {EditDialog} from '../../edit-dialog/edit-dialog.component';
+import {ConfirmDeleteDialog} from '../../confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'avr-snippet-list',
@@ -15,7 +15,7 @@ export class SnippetListComponent implements OnInit {
 
   @Input() data: Snippet[];
 
-  columnsToDisplay: string[] = ["name", "snippet", "buttons"];
+  columnsToDisplay: string[] = ['name', 'snippet', 'buttons'];
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private custService: CustomizationService) {
   }
@@ -30,24 +30,24 @@ export class SnippetListComponent implements OnInit {
 
   beginNew() {
     const dialogRef = this.dialog.open(NewDialog, {
-      data: {showName: true, type: "snippet"},
-      width: "60%"
+      data: {showName: true, type: 'snippet'},
+      width: '60%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (!result.name || !result.value) {
-          this.snackBar.open("Name or value cannot be empty.");
-          return
+          this.snackBar.open('Name or value cannot be empty.');
+          return;
         }
         let data = {name: result.name, snippet: result.value};
-        if (data.name.includes(" ")) {
-          this.snackBar.open("Name cannot contain whitespace.");
-          return
+        if (data.name.includes(' ')) {
+          this.snackBar.open('Name cannot contain whitespace.');
+          return;
         }
         if (data.name.length < 2) {
-          this.snackBar.open("Name must be at least 2 characters.");
-          return
+          this.snackBar.open('Name must be at least 2 characters.');
+          return;
         }
         this.post(data);
       }
@@ -57,7 +57,7 @@ export class SnippetListComponent implements OnInit {
   beginEdit(snippet: Snippet) {
     const dialogRef = this.dialog.open(EditDialog, {
       data: {name: snippet.name, content: snippet.snippet},
-      width: "60%"
+      width: '60%'
     });
 
     dialogRef.afterClosed().subscribe(result => {

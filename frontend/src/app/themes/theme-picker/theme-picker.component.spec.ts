@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ThemePickerComponent } from './theme-picker.component';
+import {ThemePickerComponent} from './theme-picker.component';
 
 describe('ThemePickerComponent', () => {
   let component: ThemePickerComponent;
@@ -8,9 +8,9 @@ describe('ThemePickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThemePickerComponent ]
+      declarations: [ThemePickerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

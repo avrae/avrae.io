@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserVar} from "../../../schemas/Customization";
-import {MatDialog, MatSnackBar} from "@angular/material";
-import {CustomizationService} from "../customization.service";
-import {NewDialog} from "../../new-dialog/new-dialog.component";
-import {EditDialog} from "../../edit-dialog/edit-dialog.component";
-import {ConfirmDeleteDialog} from "../../confirm-delete-dialog/confirm-delete-dialog.component";
+import {UserVar} from '../../../schemas/Customization';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {CustomizationService} from '../customization.service';
+import {NewDialog} from '../../new-dialog/new-dialog.component';
+import {EditDialog} from '../../edit-dialog/edit-dialog.component';
+import {ConfirmDeleteDialog} from '../../confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'avr-uvar-list',
@@ -15,7 +15,7 @@ export class UvarListComponent implements OnInit {
 
   @Input() data: UserVar[];
 
-  columnsToDisplay: string[] = ["name", "value", "buttons"];
+  columnsToDisplay: string[] = ['name', 'value', 'buttons'];
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private custService: CustomizationService) {
   }
@@ -30,15 +30,15 @@ export class UvarListComponent implements OnInit {
 
   beginNew() {
     const dialogRef = this.dialog.open(NewDialog, {
-      data: {showName: true, type: "uvar"},
-      width: "60%"
+      data: {showName: true, type: 'uvar'},
+      width: '60%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (!result.name || !result.value) {
-          this.snackBar.open("Name or value cannot be empty.");
-          return
+          this.snackBar.open('Name or value cannot be empty.');
+          return;
         }
         let data = {name: result.name, value: result.value};
         this.post(data);
@@ -49,7 +49,7 @@ export class UvarListComponent implements OnInit {
   beginEdit(uvar: UserVar) {
     const dialogRef = this.dialog.open(EditDialog, {
       data: {name: uvar.name, content: uvar.value},
-      width: "60%"
+      width: '60%'
     });
 
     dialogRef.afterClosed().subscribe(result => {

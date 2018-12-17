@@ -9,8 +9,8 @@ export class NewPackDialog implements OnInit {
 
   name: string;
   public: boolean = false;
-  desc: string = "";
-  image: string = "";
+  desc: string = '';
+  image: string = '';
 
   constructor() {
   }

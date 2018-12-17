@@ -1,16 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NewPackDialog } from './new-pack-dialog.component';
+import {NewPackDialog} from './new-pack-dialog.component';
 
-describe('NewPackDialog', () => {
+describe('NewTomeDialog', () => {
   let component: NewPackDialog;
   let fixture: ComponentFixture<NewPackDialog>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewPackDialog ]
+      declarations: [NewPackDialog]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

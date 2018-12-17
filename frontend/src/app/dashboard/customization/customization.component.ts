@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Alias, CharVar, Snippet, UserVar} from "../../schemas/Customization";
-import {DashboardService} from "../dashboard.service";
+import {Alias, CharVar, Snippet, UserVar} from '../../schemas/Customization';
+import {DashboardService} from '../dashboard.service';
 
 @Component({
   selector: 'avr-customization',

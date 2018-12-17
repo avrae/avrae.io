@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
-import {Pack} from "../../../../schemas/homebrew/Items";
-import {PackDeleteDialog} from "../pack-delete-dialog/pack-delete-dialog.component";
-import {getUser} from "../../../APIHelper";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {Pack} from '../../../../schemas/homebrew/Items';
+import {PackDeleteDialog} from '../pack-delete-dialog/pack-delete-dialog.component';
+import {getUser} from '../../../APIHelper';
 
 @Component({
   selector: 'avr-pack-options-dialog',
@@ -30,7 +30,7 @@ export class PackOptionsDialog implements OnInit {
   beginDelete() {
     const dialogRef = this.dialog.open(PackDeleteDialog, {
       data: this.data,
-      width: "40%"
+      width: '40%'
     });
 
     dialogRef.afterClosed().subscribe(result => {

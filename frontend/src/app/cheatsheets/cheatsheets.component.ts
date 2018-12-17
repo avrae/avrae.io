@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Meta} from "@angular/platform-browser";
+import {Meta} from '@angular/platform-browser';
+import {CheatsheetMeta, CheatsheetsService} from './cheatsheets.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'avr-cheatsheets',
@@ -8,14 +10,17 @@ import {Meta} from "@angular/platform-browser";
 })
 export class CheatsheetsComponent implements OnInit {
 
-  constructor(private meta: Meta) {
+  cheatsheets: Observable<CheatsheetMeta[]>;
+
+  constructor(private meta: Meta, private csService: CheatsheetsService) {
     this.meta.updateTag({
-      name: "description", content: "Need help using some of the more advanced features of Avrae? " +
-        "You'll find cheatsheets here."
+      name: 'description', content: 'Need help using some of the more advanced features of Avrae? ' +
+        'You\'ll find cheatsheets here.'
     });
   }
 
   ngOnInit() {
+    this.cheatsheets = this.csService.getCheatsheetList();
   }
 
 }

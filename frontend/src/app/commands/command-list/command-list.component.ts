@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Command, CommandArgument} from "../../schemas/Commands";
+import {Command, CommandArgument} from '../../schemas/Commands';
 
 @Component({
   selector: 'avr-command-list',
@@ -18,11 +18,11 @@ export class CommandListComponent implements OnInit {
 
   getArgDescriptors(arg: CommandArgument): string {
     if (!arg.required && arg.default) {
-      return ` (optional, default ${arg.default})`
+      return ` (optional, default ${arg.default})`;
     } else if (!arg.required) {
-      return " (optional)"
+      return ' (optional)';
     }
-    return ""
+    return '';
   }
 
 }

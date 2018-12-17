@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PackMarkdownDialog } from './pack-markdown-dialog.component';
+import {PackMarkdownDialog} from './pack-markdown-dialog.component';
 
 describe('PackMarkdownDialog', () => {
   let component: PackMarkdownDialog;
@@ -8,9 +8,9 @@ describe('PackMarkdownDialog', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PackMarkdownDialog ]
+      declarations: [PackMarkdownDialog]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

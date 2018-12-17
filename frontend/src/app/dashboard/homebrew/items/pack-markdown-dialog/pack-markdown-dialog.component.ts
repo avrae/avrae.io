@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material";
-import {Pack} from "../../../../schemas/homebrew/Items";
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {Pack} from '../../../../schemas/homebrew/Items';
 
 @Component({
   selector: 'avr-pack-markdown-dialog',
@@ -20,9 +20,9 @@ export class PackMarkdownDialog implements OnInit {
   }
 
   generateMD(pack: Pack) {
-    let markdown: string = "";
+    let markdown: string = '';
     let title = `# ${pack.name}`;
-    let desc = pack.desc || "";
+    let desc = pack.desc || '';
 
     markdown += `${title}\n${desc}\n\n`;
 
@@ -30,7 +30,7 @@ export class PackMarkdownDialog implements OnInit {
       let itemtitle = `#### ${item.name}`;
       markdown += `${itemtitle}\n${item.meta}\n___\n${item.desc}\n\n`;
     }
-    markdown = markdown.replace("\n", "\n  "); // markdown newlines
+    markdown = markdown.replace('\n', '\n  '); // markdown newlines
 
     this.mdData = markdown;
   }

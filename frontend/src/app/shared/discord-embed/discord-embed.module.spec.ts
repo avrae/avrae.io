@@ -1,6 +1,6 @@
-import { DiscordEmbedModule } from './discord-embed.module';
+import {DiscordEmbedModule} from './discord-embed.module';
 
-describe('DiscordEmbedModule', () => {
+describe('SpellEmbedModule', () => {
   let discordEmbedModule: DiscordEmbedModule;
 
   beforeEach(() => {

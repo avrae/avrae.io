@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PackJSONImportDialog } from './pack-json-import-dialog.component';
+import {PackJSONImportDialog} from './pack-json-import-dialog.component';
 
 describe('PackJSONImportDialog', () => {
   let component: PackJSONImportDialog;
@@ -8,9 +8,9 @@ describe('PackJSONImportDialog', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PackJSONImportDialog ]
+      declarations: [PackJSONImportDialog]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

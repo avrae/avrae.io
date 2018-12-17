@@ -3,6 +3,7 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -11,15 +12,18 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatProgressBarModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
-} from "@angular/material";
+  MatTooltipModule,
+  MatTreeModule
+} from '@angular/material';
 
 
 @NgModule({
@@ -41,7 +45,11 @@ import {
     MatExpansionModule,
     MatTooltipModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatTreeModule,
+    MatProgressBarModule
   ],
   exports: [
     MatGridListModule,
@@ -61,7 +69,11 @@ import {
     MatExpansionModule,
     MatTooltipModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatTreeModule,
+    MatProgressBarModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}

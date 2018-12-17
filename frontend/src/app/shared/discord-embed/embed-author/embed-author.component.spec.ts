@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmbedAuthorComponent } from './embed-author.component';
+import {EmbedAuthorComponent} from './embed-author.component';
 
 describe('EmbedAuthorComponent', () => {
   let component: EmbedAuthorComponent;
@@ -8,9 +8,9 @@ describe('EmbedAuthorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmbedAuthorComponent ]
+      declarations: [EmbedAuthorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -17,7 +17,7 @@ export class Command {
 export class CommandArgument {
   name: string;
   required: boolean;
-  default: string|null;
+  default: string | null;
   multiple: boolean;
   desc: string;
 }

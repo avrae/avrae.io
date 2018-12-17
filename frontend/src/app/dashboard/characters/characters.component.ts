@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfo, UserStats} from "../../schemas/UserInfo";
-import {DashboardService} from "../dashboard.service";
-import {CharacterMeta} from "../../schemas/Character";
+import {UserInfo, UserStats} from '../../schemas/UserInfo';
+import {DashboardService} from '../dashboard.service';
+import {CharacterMeta} from '../../schemas/Character';
 
 @Component({
   selector: 'avr-characters',

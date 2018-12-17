@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmbedColorPillComponent } from './embed-color-pill.component';
+import {EmbedColorPillComponent} from './embed-color-pill.component';
 
 describe('EmbedColorPillComponent', () => {
   let component: EmbedColorPillComponent;
@@ -8,9 +8,9 @@ describe('EmbedColorPillComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmbedColorPillComponent ]
+      declarations: [EmbedColorPillComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
