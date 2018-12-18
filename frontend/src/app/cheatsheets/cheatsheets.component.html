@@ -8,9 +8,9 @@
   </p>
 </mat-card>
 
-<div class="container">
+<div class="container" *ngIf="cheatsheets">
   <mat-grid-list cols="3" rowHeight="2:1" gutterSize="8">
-    <mat-grid-tile class="mat-elevation-z3" *ngFor="let cheatsheet of (cheatsheets | async)">
+    <mat-grid-tile class="mat-elevation-z3" *ngFor="let cheatsheet of cheatsheets">
       <mat-card class="cheatsheet">
         <div class="container">
           <h1 class="mat-h1">
@@ -24,4 +24,8 @@
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
+</div>
+
+<div class="container" *ngIf="!cheatsheets">
+  <mat-spinner class="centered"></mat-spinner>
 </div>

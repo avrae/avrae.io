@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Meta} from '@angular/platform-browser';
 import {CheatsheetMeta, CheatsheetsService} from './cheatsheets.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'avr-cheatsheets',
@@ -10,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class CheatsheetsComponent implements OnInit {
 
-  cheatsheets: Observable<CheatsheetMeta[]>;
+  cheatsheets: CheatsheetMeta[];
 
   constructor(private meta: Meta, private csService: CheatsheetsService) {
     this.meta.updateTag({
@@ -20,7 +19,8 @@ export class CheatsheetsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cheatsheets = this.csService.getCheatsheetList();
+    this.csService.getCheatsheetList()
+      .subscribe(result => this.cheatsheets = result);
   }
 
 }
