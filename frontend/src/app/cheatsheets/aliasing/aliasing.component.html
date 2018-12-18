@@ -314,14 +314,18 @@
         <td><code>min(3, -2)</code></td>
       </tr>
       <tr>
-        <td><code>set(name, value)</code></td>
-        <td>Sets a temporary variable (for the execution of the command only).</td>
-        <td>
-          <code>name</code> - str - The name of the variable.<br>
-          <code>value</code> - Any - The value of the variable.
-        </td>
+        <td><code>time()</code></td>
+        <td>Gets the UNIX epoch time (seconds since Jan 1, 1970).</td>
+        <td>No arguments.</td>
+        <td><code>float</code> - The time.</td>
+        <td><code>time()</code></td>
+      </tr>
+      <tr>
+        <td><code>err(msg)</code></td>
+        <td>Stops evaluation of an alias and shows the user an error.</td>
+        <td><code>msg</code> - str - The error to show.</td>
         <td><code>None</code></td>
-        <td><code>set("foo", "bar")</code></td>
+        <td><code>err("Something went wrong.")</code></td>
       </tr>
       <tr>
         <td><code>get_cc(name)</code></td>
