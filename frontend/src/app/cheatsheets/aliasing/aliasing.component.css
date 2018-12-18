@@ -1,3 +1,7 @@
 a {
   cursor: pointer;
 }
+
+th, td {
+  border-bottom: 1px solid #ddd;
+}
