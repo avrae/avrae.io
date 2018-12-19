@@ -10,10 +10,11 @@ from lib.utils import jsonify
 
 spells = Blueprint('homebrew/spells', __name__)
 
-TOME_FIELDS = ("name", "owner", "editors", "public", "active", "server_active", "desc", "image", "spells", "numSpells")
+TOME_FIELDS = ("name", "owner", "editors", "subscribers", "public", "active", "server_active", "desc", "image",
+               "spells", "numSpells")
 SPELL_FIELDS = ("name", "level", "school", "classes", "subclasses", "casttime", "range", "components", "duration",
                 "ritual", "description", "higherlevels", "concentration", "automation", "image")
-IGNORED_FIELDS = ("_id", "active", "server_active")
+IGNORED_FIELDS = ("_id", "active", "server_active", "subscribers")
 
 
 @spells.route('/me', methods=['GET'])
@@ -41,6 +42,7 @@ def new_tome():
         'image': reqdata.get('image', ''),
         'owner': user.to_dict(),
         'editors': [],
+        'subscribers': [],
         'active': [],
         'server_active': [],
         'spells': []

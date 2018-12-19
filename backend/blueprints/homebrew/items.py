@@ -9,9 +9,10 @@ from lib.utils import jsonify
 
 items = Blueprint('homebrew/items', __name__)
 
-PACK_FIELDS = ("name", "owner", "editors", "public", "active", "server_active", "desc", "image", "items", "numItems")
+PACK_FIELDS = ("name", "owner", "editors", "subscribers", "public", "active", "server_active", "desc", "image", "items",
+               "numItems")
 ITEM_FIELDS = ("name", "meta", "desc", "image")
-IGNORED_FIELDS = ("_id", "active", "server_active")
+IGNORED_FIELDS = ("_id", "active", "server_active", "subscribers")
 
 
 @items.route('/me', methods=['GET'])
@@ -39,6 +40,7 @@ def new_pack():
         'image': reqdata.get('image', ''),
         'owner': user.to_dict(),
         'editors': [],
+        'subscribers': [],
         'active': [],
         'server_active': [],
         'items': []

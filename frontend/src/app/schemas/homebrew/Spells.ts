@@ -8,6 +8,7 @@ export class Tome {
   name: string;
   owner: DiscordUser;
   editors: DiscordUser[];
+  subscribers: DiscordUser[];
   public: boolean;
   active: string[];
   server_active: string[];
