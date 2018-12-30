@@ -76,7 +76,8 @@ def put_tome(tome):
         return "You do not have permission to edit this tome", 403
 
     for field in IGNORED_FIELDS:
-        reqdata.pop(field)
+        if field in reqdata:
+            reqdata.pop(field)
 
     if not all(k in TOME_FIELDS for k in reqdata):
         return "Invalid field", 400

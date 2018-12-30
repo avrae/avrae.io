@@ -76,7 +76,8 @@ def put_pack(pack):
     print(reqdata)
 
     for field in IGNORED_FIELDS:
-        reqdata.pop(field)
+        if field in reqdata:
+            reqdata.pop(field)
 
     if not all(k in PACK_FIELDS for k in reqdata):
         return "Invalid field", 400
