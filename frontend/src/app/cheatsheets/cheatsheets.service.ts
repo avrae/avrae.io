@@ -15,12 +15,12 @@ export class CheatsheetsService {
   }
 
   getCheatsheetList(): Observable<CheatsheetMeta[]> {
-    return this.http.get<CheatsheetMeta[]>(cheatsheetsUrl, defaultOptions());
+    return this.http.get<CheatsheetMeta[]>(cheatsheetsUrl);
   }
 
   getCheatsheet(title): Observable<string> {
     // @ts-ignore
-    return this.http.get<string>(`${cheatsheetsUrl}/${title}`, defaultTextOptions());
+    return this.http.get<string>(`${cheatsheetsUrl}/${title}`, {responseType: "text"});
   }
 }
 
