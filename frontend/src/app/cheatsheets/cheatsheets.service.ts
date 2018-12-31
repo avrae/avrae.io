@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import {defaultOptions, defaultTextOptions} from '../dashboard/APIHelper';
 
 const cheatsheetsUrl = `${environment.apiURL}/cheatsheets`;
 
