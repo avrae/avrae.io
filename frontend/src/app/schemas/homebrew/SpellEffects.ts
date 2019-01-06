@@ -23,11 +23,13 @@ export class Target extends SpellEffect {
 export class Attack extends SpellEffect {
   hit: SpellEffect[];
   miss: SpellEffect[];
+  attackBonus?: string;
 
-  constructor(hit = [], miss = [], meta?) {
+  constructor(hit = [], miss = [], attackBonus?, meta?) {
     super('attack', meta);
     this.hit = hit;
     this.miss = miss;
+    this.attackBonus = attackBonus;
   }
 }
 
@@ -35,12 +37,14 @@ export class Save extends SpellEffect {
   stat: string;
   fail: SpellEffect[];
   success: SpellEffect[];
+  dc: string;
 
-  constructor(stat = 'str', fail = [], success = [], meta?) {
+  constructor(stat = 'str', fail = [], success = [], dc?, meta?) {
     super('save', meta);
     this.stat = stat;
     this.fail = fail;
     this.success = success;
+    this.dc = dc;
   }
 }
 
@@ -76,14 +80,16 @@ export class Roll extends SpellEffect {
   name: string;
   higher?: Map<number, string>;
   cantripScale?: boolean;
+  hidden?: boolean;
 
-  constructor(dice = '', name = '', higher?, cantripScale?, meta?) {
+  constructor(dice = '', name = '', higher?, cantripScale?, hidden?, meta?) {
     super('roll', meta);
     this.dice = dice;
     this.name = name;
     this.higher = higher;
     this.cantripScale = cantripScale;
     this.meta = meta;
+    this.hidden = hidden;
   }
 }
 
