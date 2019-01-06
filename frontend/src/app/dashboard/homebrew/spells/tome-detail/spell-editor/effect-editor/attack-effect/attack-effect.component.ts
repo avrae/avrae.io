@@ -5,6 +5,14 @@ import {Spell} from '../../../../../../../schemas/homebrew/Spells';
 @Component({
   selector: 'avr-attack-effect',
   template: `
+    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+      <mat-checkbox [(ngModel)]="custom" (change)="changed.emit(); onCustomChange()">
+        Has custom attack bonus
+      </mat-checkbox>
+      <mat-form-field *ngIf="custom">
+        <input matInput placeholder="Custom Bonus" (change)="changed.emit()" [(ngModel)]="effect.attackBonus">
+      </mat-form-field>
+    </div>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -33,11 +41,21 @@ export class AttackEffectComponent implements OnInit {
   @Input() effect: Attack;
   @Input() spell: Spell;
   @Output() changed = new EventEmitter();
+  custom = false;
 
   constructor() {
   }
 
   ngOnInit() {
+    if (this.effect.attackBonus) {
+      this.custom = true;
+    }
+  }
+
+  onCustomChange() {
+    if (!this.custom) {
+      this.effect.attackBonus = '';
+    }
   }
 
 }

@@ -16,6 +16,9 @@ import {Spell} from '../../../../../../../schemas/homebrew/Spells';
       <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
         Scales like Cantrip
       </mat-checkbox>
+      <mat-checkbox [(ngModel)]="effect.hidden" (change)="changed.emit()">
+        Hidden
+      </mat-checkbox>
     </div>
   `,
   styleUrls: ['../effect-editor.component.css']

@@ -39,6 +39,8 @@ def check_attack(effect):
         check_effect(effect_)
     for effect_ in effect['miss']:
         check_effect(effect_)
+    if 'attackBonus' in effect:
+        assert isinstance(effect['attackBonus'], str), "AttackBonus must be str"
 
 
 def check_save(effect):
@@ -50,6 +52,8 @@ def check_save(effect):
         check_effect(effect_)
     for effect_ in effect['success']:
         check_effect(effect_)
+    if 'dc' in effect:
+        assert isinstance(effect['dc'], str), "DC must be str"
 
 
 def check_damage(effect):
@@ -78,6 +82,8 @@ def check_roll(effect):
         check_higher(effect['higher'])
     if 'cantripScale' in effect:
         assert isinstance(effect['cantripScale'], bool), "CantripScale must be boolean"
+    if 'hidden' in effect:
+        assert isinstance(effect['hidden'], bool), "Hidden must be boolean"
 
 
 def check_text(effect):
