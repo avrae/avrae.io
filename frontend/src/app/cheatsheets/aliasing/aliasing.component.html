@@ -515,13 +515,33 @@
         <td><code>delete_cvar("potato")</code></td>
       </tr>
       <tr>
-        <td><code>get_gvar(name)</code></td>
-        <td>Gets the value of a global variable.</td>
+        <td><code>set_uvar(name, value)</code></td>
+        <td>Sets a uvar to a new value.</td>
         <td>
-          <code>name</code> - str - The name of the gvar to get. Should be a UUID4.<br>
+          <code>name</code> - str - The name of the uvar to modify.<br>
+          <code>value</code> - str - The new value of the uvar.<br>
         </td>
-        <td><code>str</code> - The value of the gvar.</td>
-        <td><code>get_gvar("87228cfb-43b6-4cd4-ac2e-14b59db149c0")</code></td>
+        <td><code>None</code></td>
+        <td><code>set_uvar("potato", "fifteen")</code></td>
+      </tr>
+      <tr>
+        <td><code>set_uvar_nx(name, value)</code></td>
+        <td>Sets a uvar to a new value, only if a cvar or uvar with the same name doesn't exist.</td>
+        <td>
+          <code>name</code> - str - The name of the uvar to create.<br>
+          <code>value</code> - str - The new value of the uvar.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>set_uvar_nx("potato", "fifteen")</code></td>
+      </tr>
+      <tr>
+        <td><code>delete_uvar(name)</code></td>
+        <td>Deletes a uvar. Does nothing if the uvar does not exist.</td>
+        <td>
+          <code>name</code> - str - The name of the uvar to delete.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>delete_uvar("potato")</code></td>
       </tr>
       <tr>
         <td><code>exists(name)</code></td>
@@ -531,6 +551,24 @@
         </td>
         <td><code>bool</code> - Whether the var exists.</td>
         <td><code>exists("potato")</code></td>
+      </tr>
+      <tr>
+        <td><code>uvar_exists(name)</code></td>
+        <td>Returns whether a uvar exists.</td>
+        <td>
+          <code>name</code> - str - The name of the uvar to check.<br>
+        </td>
+        <td><code>bool</code> - Whether the uvar exists.</td>
+        <td><code>uvar_exists("potato")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_gvar(name)</code></td>
+        <td>Gets the value of a global variable.</td>
+        <td>
+          <code>name</code> - str - The name of the gvar to get. Should be a UUID4.<br>
+        </td>
+        <td><code>str</code> - The value of the gvar.</td>
+        <td><code>get_gvar("87228cfb-43b6-4cd4-ac2e-14b59db149c0")</code></td>
       </tr>
       <tr>
         <td><code>get_raw()</code></td>
