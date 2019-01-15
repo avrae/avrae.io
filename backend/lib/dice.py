@@ -1,14 +1,13 @@
 """
 Created on Dec 25, 2016
 
-@author: andrew
+@author: zhu.exe#4211 (187421759484592128)
 """
 
 import logging
 import random
 import re
 import traceback
-from copy import copy
 from heapq import nlargest, nsmallest
 from math import floor
 from re import IGNORECASE
@@ -84,8 +83,7 @@ class Roll(object):
         try:
             if '**' in rollStr:
                 raise Exception("Exponents are currently disabled.")
-            results = self
-            results.parts = []
+            self.parts = []
             # split roll string into XdYoptsSel [comment] or Op
             # set remainder to comment
             # parse each, returning a SingleDiceResult
@@ -98,29 +96,32 @@ class Roll(object):
                 # check if it's dice
                 if match.group(1):
                     roll = self.roll_one(dice.replace(match.group(5), ''), adv)
-                    results.parts.append(roll)
+                    self.parts.append(roll)
                 # or a constant
                 elif match.group(2):
-                    results.parts.append(Constant(value=int(match.group(2)), annotation=match.group(4)))
+                    self.parts.append(Constant(value=int(match.group(2)), annotation=match.group(4)))
                 # or an operator
-                else:
-                    results.parts.append(Operator(op=match.group(3), annotation=match.group(4)))
+                elif not match.group(5):
+                    self.parts.append(Operator(op=match.group(3), annotation=match.group(4)))
 
                 if match.group(5):
-                    results.parts.append(Comment(match.group(5) + ''.join(dice_set[index + 1:])))
+                    self.parts.append(Comment(match.group(5) + ''.join(dice_set[index + 1:])))
                     break
 
             # calculate total
-            crit = results.get_crit()
-            total = results.get_total()
-            rolled = ' '.join(str(res) for res in results.parts if not isinstance(res, Comment))
+            crit = self.get_crit()
+            try:
+                total = self.get_total()
+            except SyntaxError:
+                raise Exception("No dice found to roll.")
+            rolled = ' '.join(str(res) for res in self.parts if not isinstance(res, Comment))
             if rollFor is '':
-                rollFor = ''.join(str(c) for c in results.parts if isinstance(c, Comment))
+                rollFor = ''.join(str(c) for c in self.parts if isinstance(c, Comment))
             # return final solution
             if not inline:
                 # Builds end result while showing rolls
                 reply = ' '.join(
-                    str(res) for res in results.parts if not isinstance(res, Comment)) + '\n**Total:** ' + str(
+                    str(res) for res in self.parts if not isinstance(res, Comment)) + '\n**Total:** ' + str(
                     floor(total))
                 skeletonReply = reply
                 rollFor = rollFor if rollFor is not '' else 'Result'
@@ -138,7 +139,7 @@ class Roll(object):
                         reply += critStr
             else:
                 # Builds end result while showing rolls
-                reply = ' '.join(str(res) for res in results.parts if not isinstance(res, Comment)) + ' = `' + str(
+                reply = ' '.join(str(res) for res in self.parts if not isinstance(res, Comment)) + ' = `' + str(
                     floor(total)) + '`'
                 skeletonReply = reply
                 rollFor = rollFor if rollFor is not '' else 'Result'
@@ -157,7 +158,7 @@ class Roll(object):
             reply = re.sub(' +', ' ', reply)
             skeletonReply = re.sub(' +', ' ', str(skeletonReply))
             return DiceResult(result=int(floor(total)), verbose_result=reply, crit=crit, rolled=rolled,
-                              skeleton=skeletonReply, raw_dice=results)
+                              skeleton=skeletonReply, raw_dice=self)
         except Exception as ex:
             if not isinstance(ex, (SyntaxError, KeyError)):
                 log.error('Error in roll() caused by roll {}:'.format(rollStr))
@@ -232,7 +233,7 @@ class Roll(object):
                 if last_operator is not None and op in valid_operators and not op == last_operator:
                     result.reroll(reroll_once, 1)
                     reroll_once = []
-                    result.reroll(rerollList)
+                    result.reroll(rerollList, greedy=True)
                     rerollList = []
                     result.keep(keep)
                     keep = None
@@ -264,7 +265,7 @@ class Roll(object):
                 if op in valid_operators:
                     last_operator = op
             result.reroll(reroll_once, 1)
-            result.reroll(rerollList)
+            result.reroll(rerollList, greedy=True)
             result.keep(keep)
             result.reroll(to_reroll_add, 1, keep_rerolled=True, unique=True)
             result.reroll(to_explode, greedy=True, keep_rerolled=True)
@@ -299,21 +300,25 @@ class SingleDiceGroup(Part):
             elif _roll.kept:
                 rolls_to_keep.remove(_roll.value)
 
-    def reroll(self, rerollList, iterations=250, greedy=False, keep_rerolled=False, unique=False):
+    def reroll(self, rerollList, max_iterations=1000, greedy=False, keep_rerolled=False, unique=False):
         if not rerollList: return  # don't reroll nothing - minor optimization
         if unique:
             rerollList = list(set(rerollList))  # remove duplicates
         if len(rerollList) > 100:
             raise OverflowError("Too many dice to reroll (max 100)")
-        for i in range(iterations):  # let's only iterate 250 times for sanity
-            temp = copy(rerollList)
-            breakCheck = True
-            for r in rerollList:
-                if r in (d.value for d in self.rolled if d.kept and not d.exploded):
-                    breakCheck = False
+        last_index = 0
+        count = 0
+        should_continue = True
+        while should_continue:  # let's only iterate 250 times for sanity
+            should_continue = False
+            if any(d.value in set(rerollList) for d in self.rolled[last_index:] if d.kept and not d.exploded):
+                should_continue = True
             to_extend = []
-            for r in self.rolled:
-                if r.value in temp and r.kept and not r.exploded:
+            for r in self.rolled[last_index:]:  # no need to recheck everything
+                count += 1
+                if count > max_iterations:
+                    should_continue = False
+                if r.value in rerollList and r.kept and not r.exploded:
                     try:
                         tempdice = SingleDice()
                         tempdice.value = random.randint(1, self.max_value)
@@ -332,10 +337,9 @@ class SingleDiceGroup(Part):
                         else:
                             r.explode()
                     if not greedy:
-                        temp.remove(r.value)
+                        rerollList.remove(r.value)
+            last_index = len(self.rolled)
             self.rolled.extend(to_extend)
-            if breakCheck:
-                break
 
     def get_total(self):
         """Returns:
@@ -493,6 +497,38 @@ class DiceResult:
 
     def __repr__(self):
         return '<DiceResult object: total={}>'.format(self.total)
+
+    def consolidated(self):
+        """Gets the most simplified version of the roll string."""
+        if self.raw_dice is None:
+            return "0"
+        parts = []  # list of (part, annotation)
+        last_part = ""
+        for p in self.raw_dice.parts:
+            if isinstance(p, SingleDiceGroup):
+                last_part += str(p.get_total())
+            else:
+                last_part += str(p)
+            if not isinstance(p, Comment) and p.annotation:
+                parts.append((last_part, p.annotation))
+                last_part = ""
+        if last_part:
+            parts.append((last_part, ""))
+
+        to_roll = ""
+        last_annotation = ""
+        out = ""
+        for numbers, annotation in parts:
+            if annotation and annotation != last_annotation and to_roll:
+                out += f"{roll(to_roll).total:+} {last_annotation}"
+                to_roll = ""
+            if annotation:
+                last_annotation = annotation
+            to_roll += numbers
+        if to_roll:
+            out += f"{roll(to_roll).total:+} {last_annotation}"
+        out = out.strip('+ ')
+        return out
 
 
 if __name__ == '__main__':
