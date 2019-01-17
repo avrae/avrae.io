@@ -194,7 +194,7 @@
       </tr>
       <tr>
         <td><code>XLevel</code></td>
-        <td>(Dicecloud sheets only) How many levels a character has in class X.</td>
+        <td>How many levels a character has in class X.</td>
         <td>int</td>
       </tr>
       <tr>
@@ -582,12 +582,27 @@
       <tr>
         <td><code>combat()</code></td>
         <td>Returns a <a (click)="scrollTo('simplecombat')">SimpleCombat</a> object representing the current combat of
-          the
-          channel, if the character is in it.
+          the channel, if the character is in it.
         </td>
         <td></td>
         <td><code>SimpleCombat</code> - The combat.</td>
         <td><code>combat()</code></td>
+      </tr>
+      <tr>
+        <td><code>chanid()</code></td>
+        <td>Returns the Discord channel ID of the channel the command was called in.</td>
+        <td></td>
+        <td><code>str</code> - The ID.</td>
+        <td><code>chanid()</code></td>
+      </tr>
+      <tr>
+        <td><code>servid()</code></td>
+        <td>Returns the Discord server ID of the server the command was called in, or None if the command was called in
+          PMs.
+        </td>
+        <td></td>
+        <td><code>str</code> - The ID.</td>
+        <td><code>servid()</code></td>
       </tr>
       <tr>
         <td><code>load_json(jsonstr)</code></td>
