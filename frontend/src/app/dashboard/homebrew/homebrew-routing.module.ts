@@ -5,10 +5,11 @@ import {ItemsComponent} from './items/items.component';
 import {PackDetailComponent} from './items/pack-detail/pack-detail.component';
 import {SpellsComponent} from './spells/spells.component';
 import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
+import {AuthGuard} from '../../auth.guard';
 
 const routes: Routes = [
   {
-    path: 'dashboard', component: DashboardComponent, children: [
+    path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent, children: [
       {
         path: 'homebrew', children: [
           {path: 'items', component: ItemsComponent},
