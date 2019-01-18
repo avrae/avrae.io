@@ -1,0 +1,137 @@
+<mat-expansion-panel (opened)="opened.emit()">
+  <!-- PANEL HEADER -->
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <div>
+        {{spell.name}}
+      </div>
+    </mat-panel-title>
+    <avr-spell-panel-description [level]="spell.level" [school]="spell.school"></avr-spell-panel-description>
+  </mat-expansion-panel-header>
+
+  <div class="form-container">
+    <!-- NAME AND IMAGE -->
+    <div fxLayout="row" fxLayoutGap="4px">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Name" (change)="emitChange()" [(ngModel)]="spell.name">
+      </mat-form-field>
+      <mat-form-field fxFlex *ngIf="spell.image != undefined">
+        <input matInput placeholder="Image URL" (change)="emitChange()" [(ngModel)]="spell.image">
+      </mat-form-field>
+    </div>
+
+    <!-- LEVEL, SCHOOL, RITUAL -->
+    <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+      <mat-form-field fxFlex>
+        <mat-label>Level</mat-label>
+        <mat-select [(value)]="spell.level" (selectionChange)="emitChange()">
+          <mat-option [value]="0">Cantrip</mat-option>
+          <mat-option [value]="1">1st Level</mat-option>
+          <mat-option [value]="2">2nd Level</mat-option>
+          <mat-option [value]="3">3rd Level</mat-option>
+          <mat-option [value]="4">4th Level</mat-option>
+          <mat-option [value]="5">5th Level</mat-option>
+          <mat-option [value]="6">6th Level</mat-option>
+          <mat-option [value]="7">7th Level</mat-option>
+          <mat-option [value]="8">8th Level</mat-option>
+          <mat-option [value]="9">9th Level</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>School</mat-label>
+        <mat-select [(value)]="spell.school" (selectionChange)="emitChange()">
+          <mat-option value="A">Abjuration</mat-option>
+          <mat-option value="C">Conjuration</mat-option>
+          <mat-option value="D">Divination</mat-option>
+          <mat-option value="E">Enchantment</mat-option>
+          <mat-option value="V">Evocation</mat-option>
+          <mat-option value="I">Illusion</mat-option>
+          <mat-option value="N">Necromancy</mat-option>
+          <mat-option value="T">Transmutation</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-checkbox fxFlex="nogrow" [(ngModel)]="spell.ritual" (change)="emitChange()">Ritual</mat-checkbox>
+    </div>
+
+    <!-- TIME, RANGE, DURATION -->
+    <div fxLayout="row" fxLayoutGap="6px">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Casting Time" (change)="emitChange()" [(ngModel)]="spell.casttime">
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Range" (change)="emitChange()" [(ngModel)]="spell.range">
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Duration" (change)="emitChange()" [(ngModel)]="spell.duration">
+      </mat-form-field>
+    </div>
+
+    <!-- COMPONENTS AND CONCENTRATION -->
+    <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+      <mat-checkbox fxFlex="nogrow" [(ngModel)]="spell.components.verbal" (change)="emitChange()">
+        Verbal
+      </mat-checkbox>
+      <mat-checkbox fxFlex="nogrow" [(ngModel)]="spell.components.somatic" (change)="emitChange()">
+        Somatic
+      </mat-checkbox>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Material" (change)="emitChange()" [(ngModel)]="spell.components.material">
+      </mat-form-field>
+      <mat-checkbox fxFlex="nogrow" [(ngModel)]="spell.concentration" (change)="emitChange()">
+        Concentration
+      </mat-checkbox>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <mat-form-field>
+      <textarea matInput placeholder="Description" rows="7" (change)="emitChange()"
+                [(ngModel)]="spell.description"></textarea>
+    </mat-form-field>
+
+    <!-- HIGHER LEVELS -->
+    <mat-form-field>
+      <textarea matInput placeholder="At Higher Levels" rows="3" (change)="emitChange()"
+                [(ngModel)]="spell.higherlevels"></textarea>
+    </mat-form-field>
+
+    <!-- CLASSES AND SUBCLASSES -->
+    <div fxLayout="row" fxLayoutGap="6px">
+      <mat-form-field fxFlex matTooltip="Separate classes with commas.">
+        <input matInput placeholder="Classes" (change)="emitChange()" [(ngModel)]="spell.classes">
+      </mat-form-field>
+
+      <mat-form-field fxFlex matTooltip="Separate subclasses with commas.">
+        <input matInput placeholder="Subclasses" (change)="emitChange()" [(ngModel)]="spell.subclasses">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="actions" fxLayout="row">
+    <span fxFlex *ngIf="spell.image === undefined">
+      <button mat-icon-button matTooltip="Add image" (click)="spell.image=''; emitChange()">
+        <mat-icon aria-label="Add image">add_photo_alternate</mat-icon>
+      </button>
+    </span>
+    <span fxFlex>
+      <button mat-icon-button matTooltip="Export to JSON" (click)="beginJSONExport()">
+        <mat-icon aria-label="Export to JSON">vertical_align_top</mat-icon>
+      </button>
+    </span>
+    <span fxFlex>
+      <button mat-icon-button matTooltip="Edit Automation" (click)="moveToEditor.emit()">
+        <mat-icon aria-label="Edit Automation">build</mat-icon>
+      </button>
+    </span>
+    <span fxFlex="grow"></span>
+    <span fxFlex>
+      <button mat-icon-button color="warn" (click)="delete.emit()">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </span>
+  </div>
+</mat-expansion-panel>

@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material";
-import {Pack} from "../../../../schemas/homebrew/Items";
-import {PackJsonDialog} from "../pack-json-dialog/pack-json-dialog.component";
-import {PackMarkdownDialog} from "../pack-markdown-dialog/pack-markdown-dialog.component";
-import {HomebrewService} from "../../homebrew.service";
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
+import {Pack} from '../../../../schemas/homebrew/Items';
+import {PackJsonDialog} from '../pack-json-dialog/pack-json-dialog.component';
+import {PackMarkdownDialog} from '../pack-markdown-dialog/pack-markdown-dialog.component';
+import {HomebrewService} from '../../homebrew.service';
 
 @Component({
   selector: 'avr-pack-share-dialog',
@@ -46,14 +46,14 @@ export class PackShareDialog implements OnInit {
   beginJSONExport() {
     this.dialog.open(PackJsonDialog, {
       data: {name: this.data.name, data: this.data.items},
-      width: "60%"
+      width: '60%'
     });
   }
 
   beginMDExport() {
     this.dialog.open(PackMarkdownDialog, {
       data: {name: this.data.name, data: this.data},
-      width: "60%"
+      width: '60%'
     });
   }
 

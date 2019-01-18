@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Location} from "@angular/common";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'avr-error',
@@ -15,7 +15,7 @@ export class ErrorComponent implements OnInit {
   }
 
   back() {
-    this.location.back()
+    this.location.back();
   }
 
 }

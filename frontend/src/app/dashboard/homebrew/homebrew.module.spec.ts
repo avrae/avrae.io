@@ -1,4 +1,4 @@
-import { HomebrewModule } from './homebrew.module';
+import {HomebrewModule} from './homebrew.module';
 
 describe('HomebrewModule', () => {
   let homebrewModule: HomebrewModule;

@@ -194,7 +194,7 @@
       </tr>
       <tr>
         <td><code>XLevel</code></td>
-        <td>(Dicecloud sheets only) How many levels a character has in class X.</td>
+        <td>How many levels a character has in class X.</td>
         <td>int</td>
       </tr>
       <tr>
@@ -314,14 +314,18 @@
         <td><code>min(3, -2)</code></td>
       </tr>
       <tr>
-        <td><code>set(name, value)</code></td>
-        <td>Sets a temporary variable (for the execution of the command only).</td>
-        <td>
-          <code>name</code> - str - The name of the variable.<br>
-          <code>value</code> - Any - The value of the variable.
-        </td>
+        <td><code>time()</code></td>
+        <td>Gets the UNIX epoch time (seconds since Jan 1, 1970).</td>
+        <td>No arguments.</td>
+        <td><code>float</code> - The time.</td>
+        <td><code>time()</code></td>
+      </tr>
+      <tr>
+        <td><code>err(msg)</code></td>
+        <td>Stops evaluation of an alias and shows the user an error.</td>
+        <td><code>msg</code> - str - The error to show.</td>
         <td><code>None</code></td>
-        <td><code>set("foo", "bar")</code></td>
+        <td><code>err("Something went wrong.")</code></td>
       </tr>
       <tr>
         <td><code>get_cc(name)</code></td>
@@ -511,13 +515,33 @@
         <td><code>delete_cvar("potato")</code></td>
       </tr>
       <tr>
-        <td><code>get_gvar(name)</code></td>
-        <td>Gets the value of a global variable.</td>
+        <td><code>set_uvar(name, value)</code></td>
+        <td>Sets a uvar to a new value.</td>
         <td>
-          <code>name</code> - str - The name of the gvar to get. Should be a UUID4.<br>
+          <code>name</code> - str - The name of the uvar to modify.<br>
+          <code>value</code> - str - The new value of the uvar.<br>
         </td>
-        <td><code>str</code> - The value of the gvar.</td>
-        <td><code>get_gvar("87228cfb-43b6-4cd4-ac2e-14b59db149c0")</code></td>
+        <td><code>None</code></td>
+        <td><code>set_uvar("potato", "fifteen")</code></td>
+      </tr>
+      <tr>
+        <td><code>set_uvar_nx(name, value)</code></td>
+        <td>Sets a uvar to a new value, only if a cvar or uvar with the same name doesn't exist.</td>
+        <td>
+          <code>name</code> - str - The name of the uvar to create.<br>
+          <code>value</code> - str - The new value of the uvar.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>set_uvar_nx("potato", "fifteen")</code></td>
+      </tr>
+      <tr>
+        <td><code>delete_uvar(name)</code></td>
+        <td>Deletes a uvar. Does nothing if the uvar does not exist.</td>
+        <td>
+          <code>name</code> - str - The name of the uvar to delete.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>delete_uvar("potato")</code></td>
       </tr>
       <tr>
         <td><code>exists(name)</code></td>
@@ -527,6 +551,24 @@
         </td>
         <td><code>bool</code> - Whether the var exists.</td>
         <td><code>exists("potato")</code></td>
+      </tr>
+      <tr>
+        <td><code>uvar_exists(name)</code></td>
+        <td>Returns whether a uvar exists.</td>
+        <td>
+          <code>name</code> - str - The name of the uvar to check.<br>
+        </td>
+        <td><code>bool</code> - Whether the uvar exists.</td>
+        <td><code>uvar_exists("potato")</code></td>
+      </tr>
+      <tr>
+        <td><code>get_gvar(name)</code></td>
+        <td>Gets the value of a global variable.</td>
+        <td>
+          <code>name</code> - str - The name of the gvar to get. Should be a UUID4.<br>
+        </td>
+        <td><code>str</code> - The value of the gvar.</td>
+        <td><code>get_gvar("87228cfb-43b6-4cd4-ac2e-14b59db149c0")</code></td>
       </tr>
       <tr>
         <td><code>get_raw()</code></td>
@@ -540,12 +582,27 @@
       <tr>
         <td><code>combat()</code></td>
         <td>Returns a <a (click)="scrollTo('simplecombat')">SimpleCombat</a> object representing the current combat of
-          the
-          channel, if the character is in it.
+          the channel, if the character is in it.
         </td>
         <td></td>
         <td><code>SimpleCombat</code> - The combat.</td>
         <td><code>combat()</code></td>
+      </tr>
+      <tr>
+        <td><code>chanid()</code></td>
+        <td>Returns the Discord channel ID of the channel the command was called in.</td>
+        <td></td>
+        <td><code>str</code> - The ID.</td>
+        <td><code>chanid()</code></td>
+      </tr>
+      <tr>
+        <td><code>servid()</code></td>
+        <td>Returns the Discord server ID of the server the command was called in, or None if the command was called in
+          PMs.
+        </td>
+        <td></td>
+        <td><code>str</code> - The ID.</td>
+        <td><code>servid()</code></td>
       </tr>
       <tr>
         <td><code>load_json(jsonstr)</code></td>
@@ -908,7 +965,7 @@
         <td><code>c.get_effect("Rage")</code></td>
       </tr>
       <tr>
-        <td><code>add_effect(name, args[, duration, conc])</code></td>
+        <td><code>add_effect(name, args[, duration, conc, parent])</code></td>
         <td>
           Adds a <a (click)="scrollTo('simpleeffect')">SimpleEffect</a> to a combatant.
         </td>
@@ -916,7 +973,8 @@
           <code>name</code> - str - The name of the effect to add.<br>
           <code>args</code> - str - The effect arguments to add (same syntax as init effect).<br>
           <code>duration</code> - int (optional, default -1) - The duration of the effect.<br>
-          <code>conc</code> - bool (optional, default False) - Whether the effect requires concentration.
+          <code>conc</code> - bool (optional, default False) - Whether the effect requires concentration.<br>
+          <code>parent</code> - SimpleEffect (optional) - The parent of the effect.
         </td>
         <td><code>None</code></td>
         <td><code>c.add_effect("Rage", "-d 2", 10, False)</code></td>
@@ -1028,6 +1086,15 @@
         <td></td>
         <td><code>bool</code> - Whether the effect requires concentration.</td>
         <td><code>effect.conc</code></td>
+      </tr>
+      <tr>
+        <td><code>set_parent(parent)</code></td>
+        <td>
+          Sets the parent effect of this effect.
+        </td>
+        <td><code>parent</code> - SimpleEffect - The parent effect.</td>
+        <td><code>None</code></td>
+        <td><code>effect.set_parent(effect2)</code></td>
       </tr>
       </tbody>
     </table>

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Alias, Snippet, UserVar} from "../../schemas/Customization";
-import {Observable, of} from "rxjs";
-import {defaultOptions, defaultTextOptions} from "../APIHelper";
-import {catchError} from "rxjs/operators";
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Alias, Snippet, UserVar} from '../../schemas/Customization';
+import {Observable, of} from 'rxjs';
+import {defaultOptions, defaultTextOptions} from '../APIHelper';
+import {catchError} from 'rxjs/operators';
 
 const aliasUrl = `${environment.apiURL}/customizations/aliases`;
 const snippetUrl = `${environment.apiURL}/customizations/snippets`;
@@ -20,7 +20,7 @@ export class CustomizationService {
   }
 
   getAliases(): Observable<Alias[]> {
-    return this.http.get<Alias[]>(aliasUrl, defaultOptions())
+    return this.http.get<Alias[]>(aliasUrl, defaultOptions());
   }
 
   updateAlias(alias: { name: string, commands: string }): Observable<string> {
@@ -40,7 +40,7 @@ export class CustomizationService {
   }
 
   getSnippets(): Observable<Snippet[]> {
-    return this.http.get<Snippet[]>(snippetUrl, defaultOptions())
+    return this.http.get<Snippet[]>(snippetUrl, defaultOptions());
   }
 
   updateSnippet(snippet: { name: string, snippet: string }): Observable<string> {
@@ -60,7 +60,7 @@ export class CustomizationService {
   }
 
   getUvars(): Observable<UserVar[]> {
-    return this.http.get<UserVar[]>(uvarUrl, defaultOptions())
+    return this.http.get<UserVar[]>(uvarUrl, defaultOptions());
   }
 
   updateUvar(uvar: { name: string, value: string }): Observable<string> {

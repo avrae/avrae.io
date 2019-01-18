@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DashboardService} from "../dashboard.service";
-import {GlobalVar} from "../../schemas/Customization";
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
+import {GlobalVar} from '../../schemas/Customization';
+import {DashboardService} from '../dashboard.service';
 
 @Component({
   selector: 'avr-gvars',

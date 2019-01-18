@@ -1,6 +1,6 @@
-import {Component, ViewEncapsulation, ChangeDetectionStrategy, NgModule} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 import {StyleManager} from '../style-manager';
-import {ThemeStorage, DocsSiteTheme} from './theme-storage/theme-storage';
+import {DocsSiteTheme, ThemeStorage} from './theme-storage/theme-storage';
 
 @Component({
   selector: 'avr-theme-picker',

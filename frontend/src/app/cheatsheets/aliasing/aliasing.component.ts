@@ -16,7 +16,7 @@ export class AliasingComponent implements OnInit {
 
   scrollTo(id: string) {
     let el = document.getElementById(id);
-    el.scrollIntoView({behavior: "smooth"});
+    el.scrollIntoView({behavior: 'smooth'});
   }
 
 }

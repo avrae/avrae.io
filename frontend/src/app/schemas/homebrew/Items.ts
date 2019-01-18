@@ -1,11 +1,12 @@
-import {DiscordUser} from "../DiscordUser";
+import {DiscordUser} from '../DiscordUser';
 
-export const REQUIRED_ITEM_PROPS = ["name"];
+export const REQUIRED_ITEM_PROPS = ['name'];
 
 export class Pack {
   name: string;
   owner: DiscordUser;
   editors: DiscordUser[];
+  subscribers: DiscordUser[];
   public: boolean;
   active: string[];
   server_active: string[];
@@ -13,7 +14,7 @@ export class Pack {
   image: string;
   items?: Item[];
   numItems?: number;
-  _id: { "$oid": string };
+  _id: { '$oid': string };
 }
 
 export class Item {
@@ -23,9 +24,9 @@ export class Item {
   image?: string;
 
   constructor() {
-    this.name = "New Item";
-    this.meta = "";
-    this.desc = "";
+    this.name = 'New Item';
+    this.meta = '';
+    this.desc = '';
   }
 }
 

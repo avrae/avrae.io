@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SnippetListComponent } from './snippet-list.component';
+import {SnippetListComponent} from './snippet-list.component';
 
 describe('SnippetListComponent', () => {
   let component: SnippetListComponent;
@@ -8,9 +8,9 @@ describe('SnippetListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SnippetListComponent ]
+      declarations: [SnippetListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

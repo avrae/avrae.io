@@ -3,8 +3,8 @@ import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'avr-embed-color-pill',
   styleUrls: ['../discord-embed.component.css'],
-  template: "<div class='embed-color-pill' [ngStyle]='style'></div>",
-  styles: ["div {height: 100%; border-radius: 3px 0 0 3px;}"]
+  template: '<div class=\'embed-color-pill\' [ngStyle]=\'style\'></div>',
+  styles: ['div {height: 100%; border-radius: 3px 0 0 3px;}']
 })
 export class EmbedColorPillComponent implements OnInit {
 

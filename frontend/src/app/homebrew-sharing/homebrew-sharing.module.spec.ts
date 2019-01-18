@@ -1,4 +1,4 @@
-import { HomebrewSharingModule } from './homebrew-sharing.module';
+import {HomebrewSharingModule} from './homebrew-sharing.module';
 
 describe('HomebrewSharingModule', () => {
   let homebrewSharingModule: HomebrewSharingModule;

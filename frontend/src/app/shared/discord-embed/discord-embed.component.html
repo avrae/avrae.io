@@ -18,9 +18,7 @@
                             <avr-embed-title [title]="title" [url]="url" class="embed-title"></avr-embed-title>
                             <avr-embed-description [description]="description"
                                                    class="embed-description"></avr-embed-description>
-                            <div class="embed-fields" *ngIf="fields?.length">
-                              <avr-embed-field *ngFor="let field of fields" [field]="field"></avr-embed-field>
-                            </div>
+                            <avr-embed-fields [fields]="fields"></avr-embed-fields>
                           </div>
                           <avr-embed-thumbnail [thumbnail]="thumbnail" class="embed-thumbnail"></avr-embed-thumbnail>
                         </div>

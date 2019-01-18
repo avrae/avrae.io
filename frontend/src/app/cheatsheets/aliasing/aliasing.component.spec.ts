@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AliasingComponent } from './aliasing.component';
+import {AliasingComponent} from './aliasing.component';
 
 describe('AliasingComponent', () => {
   let component: AliasingComponent;
@@ -8,9 +8,9 @@ describe('AliasingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AliasingComponent ]
+      declarations: [AliasingComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

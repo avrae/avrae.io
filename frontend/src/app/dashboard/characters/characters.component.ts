@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfo, UserStats} from "../../schemas/UserInfo";
-import {DashboardService} from "../dashboard.service";
-import {CharacterMeta} from "../../schemas/Character";
-import {Observable} from "rxjs";
+import {UserInfo, UserStats} from '../../schemas/UserInfo';
+import {DashboardService} from '../dashboard.service';
+import {CharacterMeta} from '../../schemas/Character';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'avr-characters',

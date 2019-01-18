@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Item, Pack} from "../../../../schemas/homebrew/Items";
-import {HomebrewService} from "../../homebrew.service";
-import {Location} from "@angular/common";
-import {UserInfo} from "../../../../schemas/UserInfo";
-import {DashboardService} from "../../../dashboard.service";
-import {PackShareDialog} from "../pack-share-dialog/pack-share-dialog.component";
-import {MatDialog, MatSnackBar} from "@angular/material";
-import {PackOptionsDialog} from "../pack-options-dialog/pack-options-dialog.component";
-import {getUser} from "../../../APIHelper";
-import {PackJSONImportDialog} from "../pack-json-import-dialog/pack-json-import-dialog.component";
-import {PackSRDImportDialog} from "../pack-srd-import-dialog/pack-srd-import-dialog.component";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Item, Pack} from '../../../../schemas/homebrew/Items';
+import {HomebrewService} from '../../homebrew.service';
+import {Location} from '@angular/common';
+import {UserInfo} from '../../../../schemas/UserInfo';
+import {DashboardService} from '../../../dashboard.service';
+import {PackShareDialog} from '../pack-share-dialog/pack-share-dialog.component';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {PackOptionsDialog} from '../pack-options-dialog/pack-options-dialog.component';
+import {getUser} from '../../../APIHelper';
+import {PackJSONImportDialog} from '../pack-json-import-dialog/pack-json-import-dialog.component';
+import {PackSRDImportDialog} from '../pack-srd-import-dialog/pack-srd-import-dialog.component';
 
 @Component({
   selector: 'avr-pack-detail',
@@ -80,7 +80,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   ensureChangesNotif() {
     if (!this.changesOpen) {
       this.changesOpen = true;
-      let snackBarRef = this.snackBar.open("You have unsaved changes!", "Save", {duration: -1});
+      let snackBarRef = this.snackBar.open('You have unsaved changes!', 'Save', {duration: -1});
 
       snackBarRef.onAction().subscribe(() => {
         this.commit();
@@ -91,7 +91,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   beginShare() {
     const dialogRef = this.dialog.open(PackShareDialog, {
       data: this.pack,
-      width: "40%",
+      width: '40%',
       disableClose: true
     });
 
@@ -107,7 +107,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   beginSettings() {
     const dialogRef = this.dialog.open(PackOptionsDialog, {
       data: this.pack,
-      width: "40%",
+      width: '40%',
       disableClose: true
     });
 
@@ -126,7 +126,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
 
   beginNewFromJSON() {
     const dialogRef = this.dialog.open(PackJSONImportDialog, {
-      width: "60%",
+      width: '60%',
       disableClose: true
     });
 
@@ -146,7 +146,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
 
   beginNewFromSRD() {
     const dialogRef = this.dialog.open(PackSRDImportDialog, {
-      width: "60%",
+      width: '60%',
       disableClose: true
     });
 
@@ -174,7 +174,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     this.homebrewService.deletePack(this.pack)
       .subscribe(result => {
         console.log(result);
-        this.router.navigate(["../"], {relativeTo: this.route});
+        this.router.navigate(['../'], {relativeTo: this.route});
       });
   }
 

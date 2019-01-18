@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 
 export interface DocsSiteTheme {
   href: string;
@@ -18,7 +18,8 @@ export class ThemeStorage {
   storeTheme(theme: DocsSiteTheme) {
     try {
       window.localStorage[ThemeStorage.storageKey] = JSON.stringify(theme);
-    } catch (e) { }
+    } catch (e) {
+    }
 
     this.onThemeUpdate.emit(theme);
   }
@@ -34,6 +35,7 @@ export class ThemeStorage {
   clearStorage() {
     try {
       window.localStorage.removeItem(ThemeStorage.storageKey);
-    } catch (e) { }
+    } catch (e) {
+    }
   }
 }

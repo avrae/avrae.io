@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Pack} from "../../../schemas/homebrew/Items";
-import {HomebrewService} from "../homebrew.service";
-import {MatDialog} from "@angular/material";
-import {NewPackDialog} from "./new-pack-dialog/new-pack-dialog.component";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PackShareDialog} from "./pack-share-dialog/pack-share-dialog.component";
+import {Pack} from '../../../schemas/homebrew/Items';
+import {HomebrewService} from '../homebrew.service';
+import {MatDialog} from '@angular/material';
+import {NewPackDialog} from './new-pack-dialog/new-pack-dialog.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PackShareDialog} from './pack-share-dialog/pack-share-dialog.component';
 
 @Component({
   selector: 'avr-items',
@@ -30,7 +30,7 @@ export class ItemsComponent implements OnInit {
 
   beginNew() {
     const dialogRef = this.dialog.open(NewPackDialog, {
-      width: "60%",
+      width: '60%',
       disableClose: true
     });
 
@@ -45,7 +45,7 @@ export class ItemsComponent implements OnInit {
   beginShare(pack: Pack) {
     const dialogRef = this.dialog.open(PackShareDialog, {
       data: pack,
-      width: "40%",
+      width: '40%',
       disableClose: true
     });
 
