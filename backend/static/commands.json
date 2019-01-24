@@ -57,10 +57,25 @@
         },
         {
           "name": "randname",
-          "short": "Generates a random name, as per DMG rules.",
-          "docs": "Generates a random name, as per DMG rules.",
-          "args": [],
-          "signature": "!randname",
+          "short": "Generates a random name, optionally from a given race.",
+          "docs": "Generates a random name, optionally from a given race.",
+          "args": [
+            {
+              "name": "race",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            },
+            {
+              "name": "option",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "![randname|name] [race] [option]",
           "subcommands": [],
           "example": ""
         }
@@ -563,7 +578,7 @@
         {
           "name": "monster_atk",
           "short": "Rolls a monster's attack.",
-          "docs": "Rolls a monster's attack.\nAttack name can be \"list\" for a list of all of the monster's attacks.\nValid Arguments: adv/dis\n                 -ac [target ac]\n                 -b [to hit bonus]\n                 -d [damage bonus]\n                 -d# [applies damage to the first # hits]\n                 -rr [times to reroll]\n                 -t [target]\n                 -phrase [flavor text]\n                 crit (automatically crit)",
+          "docs": "Rolls a monster's attack.\nAttack name can be \"list\" for a list of all of the monster's attacks.\n__Valid Arguments__\nadv/dis\n-ac [target ac]\n-b [to hit bonus]\n-d [damage bonus]\n-d# [applies damage to the first # hits]\n-rr [times to reroll]\n-t [target]\n-phrase [flavor text]\ncrit (automatically crit)\n-h (hides monster name, image, and attack details)",
           "args": [
             {
               "name": "monster_name",
@@ -594,7 +609,7 @@
         {
           "name": "monster_check",
           "short": "Rolls a check for a monster.",
-          "docs": "Rolls a check for a monster.\nArgs: adv/dis\n      -b [conditional bonus]\n      -phrase [flavor text]\n      -title [title] *note: [mname] and [cname] will be replaced automatically*\n      -dc [dc]\n      -rr [iterations]\n      str/dex/con/int/wis/cha (different skill base; e.g. Strength (Intimidation))",
+          "docs": "Rolls a check for a monster.\n__Valid Arguments__\nadv/dis\n-b [conditional bonus]\n-phrase [flavor text]\n-title [title] *note: [mname] and [cname] will be replaced automatically*\n-dc [dc]\n-rr [iterations]\nstr/dex/con/int/wis/cha (different skill base; e.g. Strength (Intimidation))\n-h (hides name and image of monster)",
           "args": [
             {
               "name": "monster_name",
@@ -614,18 +629,18 @@
               "name": "args",
               "required": false,
               "default": null,
-              "multiple": true,
+              "multiple": false,
               "desc": ""
             }
           ],
-          "signature": "![monster_check|mc] <monster_name> <check> [args...]",
+          "signature": "![monster_check|mc] <monster_name> <check> [args]",
           "subcommands": [],
           "example": ""
         },
         {
           "name": "monster_save",
           "short": "Rolls a save for a monster.",
-          "docs": "Rolls a save for a monster.\nArgs: adv/dis\n      -b [conditional bonus]\n      -phrase [flavor text]\n      -title [title] *note: [mname] and [cname] will be replaced automatically*\n      -dc [dc]\n      -rr [iterations]",
+          "docs": "Rolls a save for a monster.\n__Valid Arguments__\nadv/dis\n-b [conditional bonus]\n-phrase [flavor text]\n-title [title] *note: [mname] and [cname] will be replaced automatically*\n-dc [dc]\n-rr [iterations]\n-h (hides name and image of monster)",
           "args": [
             {
               "name": "monster_name",
@@ -645,18 +660,18 @@
               "name": "args",
               "required": false,
               "default": null,
-              "multiple": true,
+              "multiple": false,
               "desc": ""
             }
           ],
-          "signature": "![monster_save|ms] <monster_name> <save> [args...]",
+          "signature": "![monster_save|ms] <monster_name> <save> [args]",
           "subcommands": [],
           "example": ""
         },
         {
           "name": "roll",
           "short": "Rolls dice in xdy format.",
-          "docs": "Rolls dice in xdy format.\nUsage: !r xdy Attack!\n       !r xdy+z adv Attack with Advantage!\n       !r xdy-z dis Hide with Heavy Armor!\n       !r xdy+xdy*z\n       !r XdYkhZ\n       !r 4d6mi2[fire] Elemental Adept, Fire\n       !r 2d6e6 Explode on 6\n       !r 10d6ra6 Spell Bombardment\n       !r 4d6ro<3 Great Weapon Master\nSupported Operators: k (keep)\n                     ro (reroll once)\n                     rr (reroll infinitely)\n                     mi/ma (min/max result)\n                     e (explode dice of value)\n                     ra (reroll and add)\nSupported Selectors: lX (lowest X)\n                     hX (highest X)\n                     >X/<X (greater than or less than X)",
+          "docs": "Rolls dice in xdy format.\n__Examples__\n!r xdy Attack!\n!r xdy+z adv Attack with Advantage!\n!r xdy-z dis Hide with Heavy Armor!\n!r xdy+xdy*z\n!r XdYkhZ\n!r 4d6mi2[fire] Elemental Adept, Fire\n!r 2d6e6 Explode on 6\n!r 10d6ra6 Spell Bombardment\n!r 4d6ro<3 Great Weapon Master\n__Supported Operators__\nk (keep)\nro (reroll once)\nrr (reroll infinitely)\nmi/ma (min/max result)\ne (explode dice of value)\nra (reroll and add)\n__Supported Selectors_\nlX (lowest X)\nhX (highest X)\n>X/<X (greater than or less than X)",
           "args": [
             {
               "name": "rollStr",
@@ -748,7 +763,7 @@
         {
           "name": "cast",
           "short": "Casts a spell.",
-          "docs": "Casts a spell.\n__Valid Arguments:__\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.",
+          "docs": "Casts a spell.\n__Valid Arguments:__\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.\n-title [title] - changes the title of the cast. Replaces [sname] with spell name.\n-dur [duration] - changes the duration of any effect applied by the spell.\nint/wis/cha - different skill base for DC/AB (will not account for extra bonuses)",
           "args": [
             {
               "name": "spell_name",
@@ -1259,6 +1274,23 @@
               "example": ""
             },
             {
+              "name": "subscribe",
+              "short": "Subscribes to another user's pack.",
+              "docs": "Subscribes to another user's pack.",
+              "args": [
+                {
+                  "name": "url",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!pack [subscribe|sub] <url>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
               "name": "server",
               "short": "Toggles whether the active pack should be viewable by anyone on the server.",
               "docs": "Toggles whether the active pack should be viewable by anyone on the server.\nRequires __Manage Server__ permissions or a role named \"Server Brewer\" to run.",
@@ -1271,6 +1303,86 @@
                   "docs": "Shows what packs are currently active on the server.",
                   "args": [],
                   "signature": "!pack server list",
+                  "subcommands": [],
+                  "example": ""
+                }
+              ],
+              "example": ""
+            }
+          ],
+          "example": ""
+        },
+        {
+          "name": "tome",
+          "short": "Commands to manage homebrew spells.",
+          "docs": "Commands to manage homebrew spells.\nWhen called without an argument, lists the current tome and its description.\nWhen called with a name, switches to a different tome.",
+          "args": [
+            {
+              "name": "name",
+              "required": false,
+              "default": null,
+              "multiple": false,
+              "desc": ""
+            }
+          ],
+          "signature": "!tome [name]",
+          "subcommands": [
+            {
+              "name": "list",
+              "short": "Lists your available tomes.",
+              "docs": "Lists your available tomes.",
+              "args": [],
+              "signature": "!tome list",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "editor",
+              "short": "Allows another user to edit your active tome.",
+              "docs": "Allows another user to edit your active tome.",
+              "args": [
+                {
+                  "name": "user",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!tome editor <user>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "subscribe",
+              "short": "Subscribes to another user's tome.",
+              "docs": "Subscribes to another user's tome.",
+              "args": [
+                {
+                  "name": "url",
+                  "required": true,
+                  "default": null,
+                  "multiple": false,
+                  "desc": ""
+                }
+              ],
+              "signature": "!tome [subscribe|sub] <url>",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "server",
+              "short": "Toggles whether the active tome should be viewable by anyone on the server.",
+              "docs": "Toggles whether the active tome should be viewable by anyone on the server.\nRequires __Manage Server__ permissions or a role named \"Server Brewer\" to run.",
+              "args": [],
+              "signature": "!tome server",
+              "subcommands": [
+                {
+                  "name": "list",
+                  "short": "Shows what tomes are currently active on the server.",
+                  "docs": "Shows what tomes are currently active on the server.",
+                  "args": [],
+                  "signature": "!tome server list",
                   "subcommands": [],
                   "example": ""
                 }
@@ -1435,6 +1547,15 @@
               "example": ""
             },
             {
+              "name": "reroll",
+              "short": "Rerolls initiative for all combatants.",
+              "docs": "Rerolls initiative for all combatants.",
+              "args": [],
+              "signature": "!init [reroll|shuffle]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
               "name": "list",
               "short": "Lists the combatants.",
               "docs": "Lists the combatants.",
@@ -1470,7 +1591,7 @@
             {
               "name": "opt",
               "short": "Edits the options of a combatant.",
-              "docs": "Edits the options of a combatant.\nValid Arguments:    -h (hides HP)\n                    -p (changes init)\n                    -name <NAME> (changes combatant name)\n                    -controller <CONTROLLER> (pings a different person on turn)\n                    -ac <AC> (changes combatant AC)\n                    -resist <DMGTYPE>\n                    -immune <DMGTYPE>\n                    -vuln <DMGTYPE>\n                    -neutral <DMGTYPE>\n                    -group <GROUP> (changes group)",
+              "docs": "Edits the options of a combatant.\n__Valid Arguments__\n-h (hides HP)\n-p (changes init)\n-name <NAME> (changes combatant name)\n-controller <CONTROLLER> (pings a different person on turn)\n-ac <AC> (changes combatant AC)\n-resist <DMGTYPE>\n-immune <DMGTYPE>\n-vuln <DMGTYPE>\n-neutral <DMGTYPE>\n-group <GROUP> (changes group)\n-max <MAXHP> (sets max hp)\n-hp <HP> (sets current hp)",
               "args": [
                 {
                   "name": "name",
@@ -1494,7 +1615,7 @@
             {
               "name": "status",
               "short": "Gets the status of a combatant or group.",
-              "docs": "Gets the status of a combatant or group.",
+              "docs": "Gets the status of a combatant or group.\n__Valid Arguments__\nprivate - PMs the controller of the combatant a more detailed status.",
               "args": [
                 {
                   "name": "name",
@@ -1573,7 +1694,7 @@
             {
               "name": "effect",
               "short": "Attaches a status effect to a combatant.",
-              "docs": "Attaches a status effect to a combatant.\n[args] is a set of args that affects a combatant in combat.\n__**Valid Arguments**__\n-dur [duration]\nconc (makes effect require conc)\n__Attacks__\n-b [bonus] (see !a)\n-d [damage bonus] (see !a)\n__General__\n-ac [ac] (modifies ac temporarily; adds if starts with +/- or sets otherwise)",
+              "docs": "Attaches a status effect to a combatant.\n[args] is a set of args that affects a combatant in combat.\n__**Valid Arguments**__\n-dur [duration]\nconc (makes effect require conc)\n__Attacks__\n-b [bonus] (see !a)\n-d [damage bonus] (see !a)\n__General__\n-ac [ac] (modifies ac temporarily; adds if starts with +/- or sets otherwise)\n-sb [save bonus] (Adds a bonus to saving throws)",
               "args": [
                 {
                   "name": "name",
@@ -1653,7 +1774,17 @@
                 }
               ],
               "signature": "!init [attack|a] <target_name> <atk_name> [args]",
-              "subcommands": [],
+              "subcommands": [
+                {
+                  "name": "list",
+                  "short": "Lists the active combatant's attacks.",
+                  "docs": "Lists the active combatant's attacks.",
+                  "args": [],
+                  "signature": "!init attack list",
+                  "subcommands": [],
+                  "example": ""
+                }
+              ],
               "example": ""
             },
             {
@@ -1697,7 +1828,7 @@
             {
               "name": "cast",
               "short": "Casts a spell against another combatant.",
-              "docs": "Casts a spell against another combatant.\n__Valid Arguments__\n-t [target (chainable)] - Required\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\nadv/dis - forces all saves to be at adv/dis.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.",
+              "docs": "Casts a spell against another combatant.\n__Valid Arguments__\n-t [target (chainable)]\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\nadv/dis - forces all saves to be at adv/dis.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.\n-title [title] - changes the title of the cast. Replaces [sname] with spell name.\n-dur [duration] - changes duration of spell effects.\nint/wis/cha - different skill base for DC/AB",
               "args": [
                 {
                   "name": "spell_name",
@@ -1721,7 +1852,7 @@
             {
               "name": "reactcast",
               "short": "Casts a spell against another combatant.",
-              "docs": "Casts a spell against another combatant.\n__Valid Arguments__\n-t [target (chainable)] - Required\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\nadv/dis - forces all saves to be at adv/dis.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.",
+              "docs": "Casts a spell against another combatant.\n__Valid Arguments__\n-t [target (chainable)]\n-i - Ignores Spellbook restrictions, for demonstrations or rituals.\n-l [level] - Specifies the level to cast the spell at.\n**__Save Spells__**\n-dc [Save DC] - Default: Pulls a cvar called `dc`.\n-save [Save type] - Default: The spell's default save.\n-d [damage] - adds additional damage.\nadv/dis - forces all saves to be at adv/dis.\n**__Attack Spells__**\nSee `!a`.\n**__All Spells__**\n-phrase [phrase] - adds flavor text.\n-title [title] - changes the title of the cast. Replaces [sname] with spell name.\nint/wis/cha - different skill base for DC/AB",
               "args": [
                 {
                   "name": "combatant_name",
@@ -2200,7 +2331,7 @@
         {
           "name": "attack",
           "short": "Rolls an attack for the current active character.",
-          "docs": "Rolls an attack for the current active character.\n__Valid Arguments__\nadv/dis\nadv#/dis# (applies adv to the first # attacks)\n-ac [target ac]\n-b [to hit bonus]\n-d [damage bonus]\n-d# [applies damage to the first # hits]\n-rr [times to reroll]\n-t [target]\n-c [damage bonus on crit]\n-criton [a number to crit on if rolled on or above]\n-phrase [flavor text]\n-title [title] *note: [charname], [aname], and [target] will be replaced automatically*\n-resist [damage resistance]\n-immune [damage immunity]\n-vuln [damage vulnerability]\n-neutral [damage non-resistance]\n-hit (automatically hits)\n-miss (automatically misses)\ncrit (automatically crit)\nea (Elven Accuracy double advantage)\n-f \"Field Title|Field Text\" (see !embed)\n[user snippet]",
+          "docs": "Rolls an attack for the current active character.\n__Valid Arguments__\nadv/dis\nadv#/dis# (applies adv to the first # attacks)\n-ac [target ac]\n-b [to hit bonus]\n-d [damage bonus]\n-d# [applies damage to the first # hits]\n-rr [times to reroll]\n-t [target]\n-c [damage bonus on crit]\n-criton [a number to crit on if rolled on or above]\n-phrase [flavor text]\n-title [title] *note: [charname], [aname], and [target] will be replaced automatically*\n-resist [damage resistance]\n-immune [damage immunity]\n-vuln [damage vulnerability]\n-neutral [damage non-resistance]\nhit (automatically hits)\nmiss (automatically misses)\ncrit (automatically crit)\nea (Elven Accuracy double advantage)\nmax (deals max damage)\n-f \"Field Title|Field Text\" (see !embed)\n-h (hides attack details)\n[user snippet]",
           "args": [
             {
               "name": "atk_name",
@@ -2496,8 +2627,8 @@
         },
         {
           "name": "gsheet",
-          "short": "Loads a character sheet from [this Google sheet](https://docs.google.com/spreadsheets/d/1etrBJ0qCDXACovYHUM4XvjE0erndThwRLcUQzX6ts8w/edit?usp=sharing), resetting all settings. The sheet must be shared with Avrae (see specific command help) for this to work.",
-          "docs": "Loads a character sheet from [this Google sheet](https://docs.google.com/spreadsheets/d/1etrBJ0qCDXACovYHUM4XvjE0erndThwRLcUQzX6ts8w/edit?usp=sharing), resetting all settings. The sheet must be shared with Avrae (see specific command help) for this to work.\nAvrae's google account is `avrae-320@avrae-bot.iam.gserviceaccount.com`.",
+          "short": "Loads a character sheet from [GSheet v2.0](http://gsheet2.avrae.io) (auto) or [GSheet v1.3](http://gsheet.avrae.io) (manual), resetting all settings.",
+          "docs": "Loads a character sheet from [GSheet v2.0](http://gsheet2.avrae.io) (auto) or [GSheet v1.3](http://gsheet.avrae.io) (manual), resetting all settings.\nThe sheet must be shared with Avrae for this to work.\nAvrae's google account is `avrae-320@avrae-bot.iam.gserviceaccount.com`.",
           "args": [
             {
               "name": "url",
@@ -2550,7 +2681,7 @@
         {
           "name": "save",
           "short": "Rolls a save for your current active character.",
-          "docs": "Rolls a save for your current active character.\nArgs: adv/dis\n      -b [conditional bonus]\n      -phrase [flavor text]\n      -title [title] *note: [charname] and [sname] will be replaced automatically*\n      -image [image URL]\n      -dc [dc] (does not apply to Death Saves)\n      -rr [iterations] (does not apply to Death Saves)",
+          "docs": "Rolls a save for your current active character.\n__Valid Arguments__\nadv/dis\n-b [conditional bonus]\n-phrase [flavor text]\n-title [title] *note: [charname] and [sname] will be replaced automatically*\n-image [image URL]\n-dc [dc] (does not apply to Death Saves)\n-rr [iterations] (does not apply to Death Saves)",
           "args": [
             {
               "name": "skill",
