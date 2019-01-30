@@ -71,6 +71,8 @@ def check_ieffect(effect):
     assert isinstance(effect['name'], str), "IEffect name must be string"
     assert isinstance(effect['duration'], (int, str)), "IEffect duration must be int or string"
     assert isinstance(effect['effects'], str), "IEffect effects must be string"
+    if 'end' in effect:
+        assert isinstance(effect['end'], bool), "IEffect end must be bool"
 
 
 def check_roll(effect):

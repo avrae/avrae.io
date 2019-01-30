@@ -15,6 +15,9 @@ import {Spell} from '../../../../../../../schemas/homebrew/Spells';
       <mat-form-field fxFlex="2 1 auto">
         <input matInput placeholder="Effects" (change)="changed.emit()" [(ngModel)]="effect.effects">
       </mat-form-field>
+      <mat-checkbox [(ngModel)]="effect.end" (change)="changed.emit();">
+        Ticks on end?
+      </mat-checkbox>
     </div>
   `,
   styleUrls: ['../effect-editor.component.css']

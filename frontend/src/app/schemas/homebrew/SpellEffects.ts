@@ -66,12 +66,14 @@ export class IEffect extends SpellEffect {
   name: string;
   duration: number | string;
   effects: string;
+  end?: boolean;
 
-  constructor(name = '', duration = '', effects = '', meta?) {
+  constructor(name = '', duration = '', effects = '', end=false, meta?) {
     super('ieffect', meta);
     this.name = name;
     this.duration = duration;
     this.effects = effects;
+    this.end = end;
   }
 }
 
