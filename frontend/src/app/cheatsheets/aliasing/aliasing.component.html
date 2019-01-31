@@ -5,6 +5,9 @@
       nitty-gritty syntactical shenanigans that you can use to make your aliases very powerful.</p>
     <p>When placed inline in an alias, any syntax in the syntax table will have the listed effect. For a list of
       built-in cvars, see the cvar table.</p>
+    <p>For a list of user-created aliases, plus help aliasing, join the <a href="http://support.avrae.io"
+                                                                           target="_blank">Avrae
+      Discord</a>!</p>
 
     <h3>Syntax Table</h3>
     <table class="table table-striped table-bordered">
@@ -20,7 +23,7 @@
         <td><code>&#123;CVAR/roll&#125;</code></td>
         <td>Evaluates the cvar/rolls the input.</td>
         <td>
-          Input: <code>echo Rolling 1d20: &#123;1d20&#125;</code><br>
+          Input: <code>!test Rolling 1d20: &#123;1d20&#125;</code><br>
           Output: <code>Rolling 1d20: 7</code>
         </td>
       </tr>
@@ -28,7 +31,7 @@
         <td><code>&lt;CVAR&gt;</code></td>
         <td>Prints the value of the cvar.</td>
         <td>
-          Input: <code>echo My strength modifier is: &lt;strengthMod&gt;</code><br>
+          Input: <code>!test My strength modifier is: &lt;strengthMod&gt;</code><br>
           Output: <code>My strength modifier is: 2</code>
         </td>
       </tr>
@@ -36,23 +39,53 @@
         <td><code>%1%</code>, <code>%2%</code>, etc.</td>
         <td>Replaced with the value of the nth argument passed to the alias.</td>
         <td>
-          Input: <code>echo %2% %1%</code><br>
-          Output (when called as <code>!(name) first second</code>): <code>second first</code>
+          Input: <code>!alias asdf echo %2% %1%</code><br>
+          Output (when called as <code>!asdf first "second arg"</code>): <code>"second arg" first</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>%*%</code></td>
+        <td>Replaced with the string following the alias.</td>
+        <td>
+          Input: <code>!alias asdf echo %*% first</code><br>
+          Output (when called as <code>!asdf second "third word"</code>): <code>second "third word" first</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&1&</code>, <code>&2&</code>, etc.</td>
+        <td>Replaced with the raw value of the nth argument passed to the alias.</td>
+        <td>
+          Input: <code>!alias asdf echo &1& was the first arg</code><br>
+          Output (when called as <code>!asdf "hello world"</code>): <code>hello world was the first arg</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&*&</code></td>
+        <td>Replaced with the escaped value of the string following the alias.</td>
+        <td>
+          Input: <code>!alias asdf echo &*& words</code><br>
+          Output (when called as <code>!asdf second "third word"</code>): <code>second \"third word\"</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&ARGS&</code></td>
+        <td>Replaced with a list of all arguments.</td>
+        <td>
+          Input: <code>!alias asdf echo &ARGS&</code><br>
+          Output (when called as <code>!asdf first "second arg"</code>): <code>['first', 'second arg']</code>
         </td>
       </tr>
       <tr>
         <td><code>&#123;&#123;code&#125;&#125;</code></td>
         <td>Runs the statement as raw Python-like code. See the <a (click)="scrollTo('functions')">functions</a> table
-          for a list
-          of allowed
-          functions.
+          for a list of allowed functions.
         </td>
         <td>
           Input: <code>echo &#123;&#123;set("strength_plus_one", strength+1)&#125;&#125;1 more than my strength score is
           &#123;&#123;strength_plus_one&#125;&#125;!</code><br>
           Output (given a STR of 14): <code>1 more than my strength score is 15!</code><br>
           <br>
-          Input: <code>echo My roll was &#123;&#123;"greater than" if roll("1d20") > 10 else "less than"&#125;&#125;
+          Input: <code>!test My roll was &#123;&#123;"greater than" if roll("1d20") > 10 else "less than"&#125;&#125;
           10!</code><br>
           Output (assuming the roll was 8): <code>My roll was less than 10!</code>
         </td>
