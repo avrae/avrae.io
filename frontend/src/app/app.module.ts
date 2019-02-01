@@ -12,7 +12,6 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {FooterComponent} from './footer/footer.component';
-import {LoginComponent} from './login/login.component';
 import {ThemesModule} from './themes/themes.module';
 import {ErrorComponent} from './error/error.component';
 import {FormsModule} from '@angular/forms';
@@ -25,6 +24,7 @@ import {CheatsheetsModule} from './cheatsheets/cheatsheets.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {DiscordEmbedModule} from './shared/discord-embed/discord-embed.module';
 import {HomebrewSharingModule} from './homebrew-sharing/homebrew-sharing.module';
+import {LoginModule} from './login/login.module';
 
 const markdownConfig = {
   markedOptions: {
@@ -47,7 +47,6 @@ const providers: Provider[] = [
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent,
     ErrorComponent,
     CommandsComponent,
     CommandListComponent,
@@ -68,7 +67,8 @@ const providers: Provider[] = [
     HomebrewSharingModule,
     DiscordEmbedModule,
     AppRoutingModule,
-    ThemesModule
+    ThemesModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

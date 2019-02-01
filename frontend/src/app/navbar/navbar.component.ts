@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {isLoggedIn} from '../SecurityHelper';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'avr-navbar',
@@ -10,10 +12,17 @@ export class NavbarComponent implements OnInit {
   @Input()
   mobile: boolean = true;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
+  }
+
+  loggedIn() {
+    return isLoggedIn();
+  }
+
+  getLoginLink() {
+    return environment.loginURL;
   }
 
 }

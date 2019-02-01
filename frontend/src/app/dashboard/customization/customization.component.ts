@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Alias, CharVar, Snippet, UserVar} from '../../schemas/Customization';
+import {CharVar, Customizations} from '../../schemas/Customization';
 import {DashboardService} from '../dashboard.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'avr-customization',
@@ -9,10 +10,8 @@ import {DashboardService} from '../dashboard.service';
 })
 export class CustomizationComponent implements OnInit {
 
-  aliases: Alias[];
-  snippets: Snippet[];
-  uvars: UserVar[];
   cvars: CharVar[];
+  customizations: Observable<Customizations>;
 
   constructor(private dashboardService: DashboardService) {
   }
@@ -22,12 +21,7 @@ export class CustomizationComponent implements OnInit {
   }
 
   getCustomizations(): void {
-    this.dashboardService.getCustomizations()
-      .subscribe(customizations => {
-        this.aliases = customizations.aliases;
-        this.snippets = customizations.snippets;
-        this.uvars = customizations.uvars;
-      });
+    this.customizations = this.dashboardService.getCustomizations();
   }
 
 }

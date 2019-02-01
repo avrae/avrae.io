@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserInfo, UserStats} from '../../schemas/UserInfo';
 import {DashboardService} from '../dashboard.service';
 import {CharacterMeta} from '../../schemas/Character';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'avr-characters',
@@ -10,9 +11,9 @@ import {CharacterMeta} from '../../schemas/Character';
 })
 export class CharactersComponent implements OnInit {
 
-  userInfo: UserInfo;
-  userStats: UserStats;
-  characters: CharacterMeta[];
+  userInfo: Observable<UserInfo>;
+  userStats: Observable<UserStats>;
+  characters: Observable<CharacterMeta[]>;
 
   constructor(private dashboardService: DashboardService) {
   }
@@ -24,18 +25,15 @@ export class CharactersComponent implements OnInit {
   }
 
   getUserInfo(): void {
-    this.dashboardService.getUserInfo()
-      .subscribe(userInfo => this.userInfo = userInfo);
+    this.userInfo = this.dashboardService.getUserInfo();
   }
 
   getUserStats(): void {
-    this.dashboardService.getUserStats()
-      .subscribe(userStats => this.userStats = userStats);
+    this.userStats = this.dashboardService.getUserStats();
   }
 
   getCharacters(): void {
-    this.dashboardService.getCharacterMeta()
-      .subscribe(characters => this.characters = characters);
+    this.characters = this.dashboardService.getCharacterMeta();
   }
 
 }
