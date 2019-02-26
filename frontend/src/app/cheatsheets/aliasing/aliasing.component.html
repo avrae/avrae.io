@@ -306,6 +306,16 @@
         <td><code>typeof(18)</code></td>
       </tr>
       <tr>
+        <td><code>get(name[, default])</code></td>
+        <td>Gets the value of a variable, or default if it does not exist.</td>
+        <td>
+          <code>name</code> - str - The name of the variable.<br>
+          <code>default</code> - any, optional - What to return if the variable does not exist.
+        </td>
+        <td><code>any</code> - The value of the variable or default.</td>
+        <td><code>get("ClericLevel", 0)</code></td>
+      </tr>
+      <tr>
         <td><code>len(x)</code></td>
         <td>Returns the length of a string or list.</td>
         <td><code>x</code> - str, list - The element to find the length of.</td>
@@ -880,6 +890,15 @@
         <td><code>c.type</code></td>
       </tr>
       <tr>
+        <td><code>level</code></td>
+        <td>
+          The combatant's spellcaster level. 0 if the combatant is not a player or spellcaster.
+        </td>
+        <td></td>
+        <td><code>int</code> - The combatant's caster level.</td>
+        <td><code>c.level</code></td>
+      </tr>
+      <tr>
         <td><code>set_hp(hp)</code></td>
         <td>
           Sets a combatant's remaining hit points to a new value.
@@ -1053,6 +1072,15 @@
       </tr>
       </thead>
       <tbody>
+      <tr>
+        <td><code>combatants</code></td>
+        <td>
+          A list of <a (click)="scrollTo('simplecombatant')">SimpleCombatants</a> in this group.
+        </td>
+        <td></td>
+        <td><code>list</code> - The combatants.</td>
+        <td><code>group.combatants</code></td>
+      </tr>
       <tr>
         <td><code>type</code></td>
         <td>
