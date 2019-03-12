@@ -62,13 +62,27 @@ export class Damage extends SpellEffect {
   }
 }
 
+export class TempHP extends SpellEffect {
+  amount: string;
+  higher?: Map<number, string>;
+  cantripScale?: boolean;
+
+  constructor(amount = '', higher?, cantripScale?, meta?) {
+    super('temphp', meta);
+    this.amount = amount;
+    this.higher = higher;
+    this.cantripScale = cantripScale;
+    this.meta = meta;
+  }
+}
+
 export class IEffect extends SpellEffect {
   name: string;
   duration: number | string;
   effects: string;
   end?: boolean;
 
-  constructor(name = '', duration = '', effects = '', end=false, meta?) {
+  constructor(name = '', duration = '', effects = '', end = false, meta?) {
     super('ieffect', meta);
     this.name = name;
     this.duration = duration;

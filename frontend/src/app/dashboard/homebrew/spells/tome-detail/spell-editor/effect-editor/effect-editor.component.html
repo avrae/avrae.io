@@ -20,6 +20,9 @@
     <avr-damage-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
                        *ngSwitchCase="'damage'"></avr-damage-effect>
 
+    <avr-temphp-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                       *ngSwitchCase="'temphp'"></avr-temphp-effect>
+
     <avr-ieffect-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
                         *ngSwitchCase="'ieffect'"></avr-ieffect-effect>
 
@@ -30,7 +33,8 @@
                      *ngSwitchCase="'text'"></avr-text-effect>
 
     <div *ngSwitchDefault>
-      You should not see this text. If you do, that's a bug!
+      You should not see this text. If you do, that's a bug! Please report that {{effect.type}} is not handled on the
+      dev server!
     </div>
   </div>
 

@@ -1,14 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Attack, Damage, IEffect, Roll, Save, SpellEffect, Target, Text} from '../../../../../../schemas/homebrew/SpellEffects';
+import {Attack, Damage, IEffect, Roll, Save, SpellEffect, Target, TempHP, Text} from '../../../../../../schemas/homebrew/SpellEffects';
 
 const typeOptions = new Map<string, Array<string>>(
   [
     ['root', ['target', 'text', 'attack and damage (Preset)', 'save for half (Preset)']],
     ['meta', ['roll']],
-    ['target', ['attack', 'save', 'damage', 'ieffect']],
-    ['attack', ['attack', 'save', 'damage', 'ieffect', 'text']],
-    ['save', ['attack', 'save', 'damage', 'ieffect', 'text']],
+    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect']],
+    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'text']],
+    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'text']],
     ['damage', []],
+    ['temphp', []],
     ['ieffect', []],
     ['roll', []],
     ['text', []]
@@ -52,6 +53,9 @@ export class NewEffectCardComponent implements OnInit {
         break;
       case 'damage':
         effect = new Damage();
+        break;
+      case 'temphp':
+        effect = new TempHP();
         break;
       case 'ieffect':
         effect = new IEffect();

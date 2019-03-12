@@ -64,6 +64,14 @@ def check_damage(effect):
         assert isinstance(effect['cantripScale'], bool), "CantripScale must be boolean"
 
 
+def check_temphp(effect):
+    assert 'amount' in effect, "TempHP effect must have amount"
+    if 'higher' in effect:
+        check_higher(effect['higher'])
+    if 'cantripScale' in effect:
+        assert isinstance(effect['cantripScale'], bool), "CantripScale must be boolean"
+
+
 def check_ieffect(effect):
     assert 'name' in effect, "IEffect effect must have name"
     assert 'duration' in effect, "IEffect effect must have duration"
@@ -98,6 +106,7 @@ EFFECT_TYPES = {
     "attack": check_attack,
     "save": check_save,
     "damage": check_damage,
+    "temphp": check_temphp,
     "ieffect": check_ieffect,
     "roll": check_roll,
     "text": check_text
