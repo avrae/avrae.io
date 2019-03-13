@@ -639,7 +639,7 @@
       <tr>
         <td><code>combat()</code></td>
         <td>Returns a <a (click)="scrollTo('simplecombat')">SimpleCombat</a> object representing the current combat of
-          the channel, if the character is in it.
+          the channel.
         </td>
         <td></td>
         <td><code>SimpleCombat</code> - The combat.</td>
@@ -720,8 +720,7 @@
         <td><code>current</code></td>
         <td>
           The <a (click)="scrollTo('simplecombatant')">SimpleCombatant</a> or <a (click)="scrollTo('simplegroup')">SimpleGroup</a>
-          representing the
-          current turn.
+          representing the current turn.
         </td>
         <td></td>
         <td><code>SimpleCombatant</code> or <code>SimpleGroup</code> - The combatant or group.</td>
@@ -730,7 +729,8 @@
       <tr>
         <td><code>me</code></td>
         <td>
-          The <a (click)="scrollTo('simplecombatant')">SimpleCombatant</a> representing the current character in combat.
+          The <a (click)="scrollTo('simplecombatant')">SimpleCombatant</a> representing the active character in combat,
+          or None if the character is not in this combat.
         </td>
         <td></td>
         <td><code>SimpleCombatant</code> - The combatant.</td>
