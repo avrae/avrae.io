@@ -29,10 +29,10 @@ tr:nth-child(even) {
 
 
 .mat-tab-body-content {
-      max-width: 968px;
+  max-width: 968px;
 }
 
-td.mat-cell, td.mat-footer-ce   ll, th.mat-header-cell {
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
   max-width: 400px;
 }
 
