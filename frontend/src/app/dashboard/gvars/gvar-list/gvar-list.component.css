@@ -8,4 +8,12 @@
 
 pre {
   white-space: pre-wrap;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+@media only screen and (max-width: 840px) {
+  pre {
+    max-height: 100px;
+  }
 }

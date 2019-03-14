@@ -2,3 +2,7 @@ mat-form-field {
   width: 100%;
   font-family: "Courier New", monospace;
 }
+
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill){
+  min-height: 200px;
+}

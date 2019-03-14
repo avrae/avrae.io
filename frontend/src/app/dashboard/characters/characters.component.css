@@ -26,3 +26,12 @@
   margin-top: 16px;
 }
 
+@media only screen and (max-width: 840px) {
+  .char-image{
+    display: none;
+  }
+  
+  .mat-card-header .mat-card-title{
+    font-size: 15px;
+  }
+}

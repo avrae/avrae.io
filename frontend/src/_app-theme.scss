@@ -53,4 +53,33 @@
   .hoverable:hover {
     background-color: mat-color($foreground, base, 0.04);
   }
+
+  body.avr-app-background {
+        max-width: 77em;
+        margin: auto
+  }
+
+  td {
+      vertical-align: top;
+      padding: 3px;
+  }
+
+  tr:nth-child(even) {
+      background: rgba(204, 204, 204, .15);
+  }
+
+
+  .mat-tab-body-content {
+          max-width: 968px;
+  }
+
+  td.mat-cell, td.mat-footer-ce   ll, th.mat-header-cell {
+      max-width: 400px;
+  }
+
+
+  th {
+      min-width: 120px;
+  }
+
 }
