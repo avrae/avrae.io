@@ -95,23 +95,6 @@
           "example": ""
         },
         {
-          "name": "bug",
-          "short": "Reports a bug to the developer.",
-          "docs": "Reports a bug to the developer.",
-          "args": [
-            {
-              "name": "report",
-              "required": true,
-              "default": null,
-              "multiple": false,
-              "desc": ""
-            }
-          ],
-          "signature": "![bug|feedback] <report>",
-          "subcommands": [],
-          "example": ""
-        },
-        {
           "name": "donate",
           "short": "Prints a link to donate to the bot developer.",
           "docs": "Prints a link to donate to the bot developer.",
@@ -1187,7 +1170,7 @@
             {
               "name": "import",
               "short": "Imports a published bestiary from [CritterDB](https://critterdb.com/).",
-              "docs": "Imports a published bestiary from [CritterDB](https://critterdb.com/).",
+              "docs": "Imports a published bestiary from [CritterDB](https://critterdb.com/).\nIf your attacks don't seem to be importing properly, you can add a hidden line to the description to set it:\n`<avrae hidden>NAME|TOHITBONUS|DAMAGE</avrae>",
               "args": [
                 {
                   "name": "url",
@@ -1408,17 +1391,17 @@
             {
               "name": "begin",
               "short": "Begins combat in the channel the command is invoked.",
-              "docs": "Begins combat in the channel the command is invoked.\nUsage: !init begin <ARGS (opt)>\nValid Arguments: -dyn (dynamic init; rerolls all initiatives at the start of a round)\n                 -name <NAME> (names the combat)\n                 -turnnotif (notifies the next player)",
+              "docs": "Begins combat in the channel the command is invoked.\nUsage: !init begin <ARGS (opt)>\n__Valid Arguments__\ndyn (dynamic init; rerolls all initiatives at the start of a round)\nturnnotif (notifies the next player)\n-name <NAME> (names the combat)",
               "args": [
                 {
                   "name": "args",
                   "required": false,
                   "default": null,
-                  "multiple": false,
+                  "multiple": true,
                   "desc": ""
                 }
               ],
-              "signature": "!init begin [args]",
+              "signature": "!init begin [args...]",
               "subcommands": [],
               "example": ""
             },
@@ -1552,6 +1535,23 @@
               "docs": "Rerolls initiative for all combatants.",
               "args": [],
               "signature": "!init [reroll|shuffle]",
+              "subcommands": [],
+              "example": ""
+            },
+            {
+              "name": "meta",
+              "short": "Changes the settings of the active combat.",
+              "docs": "Changes the settings of the active combat.",
+              "args": [
+                {
+                  "name": "settings",
+                  "required": false,
+                  "default": null,
+                  "multiple": true,
+                  "desc": ""
+                }
+              ],
+              "signature": "!init [meta|metaset] [settings...]",
               "subcommands": [],
               "example": ""
             },
@@ -1694,7 +1694,7 @@
             {
               "name": "effect",
               "short": "Attaches a status effect to a combatant.",
-              "docs": "Attaches a status effect to a combatant.\n[args] is a set of args that affects a combatant in combat.\n__**Valid Arguments**__\n-dur [duration]\nconc (makes effect require conc)\n__Attacks__\n-b [bonus] (see !a)\n-d [damage bonus] (see !a)\n__General__\n-ac [ac] (modifies ac temporarily; adds if starts with +/- or sets otherwise)\n-sb [save bonus] (Adds a bonus to saving throws)",
+              "docs": "Attaches a status effect to a combatant.\n[args] is a set of args that affects a combatant in combat.\n__**Valid Arguments**__\n-dur [duration]\nconc (makes effect require conc)\nend (makes effect tick on end of turn)\n__Attacks__\n-b [bonus] (see !a)\n-d [damage bonus] (see !a)\n-attack \"[hit]|[damage]|[description]\" (Adds an attack to the combatant)\n__Resists__\n-resist [resist] (gives the combatant resistance)\n-immune [immune] (gives the combatant immunity)\n-vuln [vulnability] (gives the combatant vulnerability)\n-neutral [neutral] (removes immune/resist/vuln)\n__General__\n-ac [ac] (modifies ac temporarily; adds if starts with +/- or sets otherwise)\n-sb [save bonus] (Adds a bonus to saving throws)",
               "args": [
                 {
                   "name": "name",
@@ -2035,7 +2035,7 @@
         {
           "name": "lookup_settings",
           "short": "Changes settings for the lookup module.",
-          "docs": "Changes settings for the lookup module.\nUsage: !lookup_settings -req_dm_monster True\nCurrent settings are: -req_dm_monster [True/False] - Requires a Game Master role to show a full monster stat block.\n                      -pm_result [True/False] - PMs the result of the lookup to reduce spam.\n                      -srd [True/False] - toggles SRD lookup restriction in a server.",
+          "docs": "Changes settings for the lookup module.\n__Valid Settings__\n-req_dm_monster [True/False] - Requires a Game Master role to show a full monster stat block.\n    -pm_dm [True/False] - PMs a DM the full monster stat block instead of outputting to chat, if req_dm_monster is True.\n-pm_result [True/False] - PMs the result of the lookup to reduce spam.",
           "args": [
             {
               "name": "args",
@@ -2218,30 +2218,6 @@
           "example": ""
         },
         {
-          "name": "pythag",
-          "short": "Performs a pythagorean theorem calculation to calculate diagonals.",
-          "docs": "Performs a pythagorean theorem calculation to calculate diagonals.",
-          "args": [
-            {
-              "name": "num1",
-              "required": true,
-              "default": null,
-              "multiple": false,
-              "desc": ""
-            },
-            {
-              "name": "num2",
-              "required": true,
-              "default": null,
-              "multiple": false,
-              "desc": ""
-            }
-          ],
-          "signature": "!pythag <num1> <num2>",
-          "subcommands": [],
-          "example": ""
-        },
-        {
           "name": "techo",
           "short": "Echos a message, and deletes it after a few seconds.",
           "docs": "Echos a message, and deletes it after a few seconds.",
@@ -2274,7 +2250,7 @@
         {
           "name": "disable",
           "short": "Disables a command for this server. Case-sensitive.",
-          "docs": "Disables a command for this server. Case-sensitive.\n\nYou must have Manage Server permissions or the\nBot Admin role to use this command.",
+          "docs": "Disables a command for this server. Case-sensitive.\n\nYou must have Manage Server permissions or a role called \"Bot Admin\" to use this command.",
           "args": [
             {
               "name": "command",
@@ -2291,7 +2267,7 @@
         {
           "name": "enable",
           "short": "Enables a command for this server.",
-          "docs": "Enables a command for this server.\n\nYou must have Manage Server permissions or the\nBot Admin role to use this command.",
+          "docs": "Enables a command for this server.\n\nYou must have Manage Server permissions or a role called \"Bot Admin\" to use this command.",
           "args": [
             {
               "name": "command",
@@ -2308,7 +2284,7 @@
         {
           "name": "prefix",
           "short": "Sets the bot's prefix for this server.",
-          "docs": "Sets the bot's prefix for this server.\n\nYou must have Manage Server permissions or the\nBot Admin role to use this command.\n\nForgot the prefix? Reset it with \"@Avrae#6944 prefix !\".",
+          "docs": "Sets the bot's prefix for this server.\n\nYou must have Manage Server permissions or a role called \"Bot Admin\" to use this command.\n\nForgot the prefix? Reset it with \"@Avrae#6944 prefix !\".",
           "args": [
             {
               "name": "prefix",
@@ -2331,7 +2307,7 @@
         {
           "name": "attack",
           "short": "Rolls an attack for the current active character.",
-          "docs": "Rolls an attack for the current active character.\n__Valid Arguments__\nadv/dis\nadv#/dis# (applies adv to the first # attacks)\n-ac [target ac]\n-b [to hit bonus]\n-d [damage bonus]\n-d# [applies damage to the first # hits]\n-rr [times to reroll]\n-t [target]\n-c [damage bonus on crit]\n-criton [a number to crit on if rolled on or above]\n-phrase [flavor text]\n-title [title] *note: [charname], [aname], and [target] will be replaced automatically*\n-resist [damage resistance]\n-immune [damage immunity]\n-vuln [damage vulnerability]\n-neutral [damage non-resistance]\nhit (automatically hits)\nmiss (automatically misses)\ncrit (automatically crit)\nea (Elven Accuracy double advantage)\nmax (deals max damage)\n-f \"Field Title|Field Text\" (see !embed)\n-h (hides attack details)\n[user snippet]",
+          "docs": "Rolls an attack for the current active character.\n__Valid Arguments__\nadv/dis\nadv#/dis# (applies adv to the first # attacks)\nea (Elven Accuracy double advantage)\n\n-ac [target ac]\n-t [target]\n\n-b [to hit bonus]\n-criton [a number to crit on if rolled on or above]\n-d [damage bonus]\n-d# [applies damage to the first # hits]\n-c [damage bonus on crit]\n-rr [times to reroll]\n-mi [minimum weapon dice roll]\n\n-resist [damage resistance]\n-immune [damage immunity]\n-vuln [damage vulnerability]\n-neutral [damage non-resistance]\n\nhit (automatically hits)\nmiss (automatically misses)\ncrit (automatically crit)\nmax (deals max damage)\n\n-phrase [flavor text]\n-title [title] *note: [charname], [aname], and [target] will be replaced automatically*\n-f \"Field Title|Field Text\" (see !embed)\n-h (hides attack details)\n[user snippet]",
           "args": [
             {
               "name": "atk_name",
@@ -2467,7 +2443,7 @@
         {
           "name": "check",
           "short": "Rolls a check for your current active character.",
-          "docs": "Rolls a check for your current active character.\nArgs: adv/dis\n      -b [conditional bonus]\n      -mc [minimum roll]\n      -phrase [flavor text]\n      -title [title] *note: [charname] and [cname] will be replaced automatically*\n      -dc [dc]\n      -rr [iterations]\n      str/dex/con/int/wis/cha (different skill base; e.g. Strength (Intimidation))",
+          "docs": "Rolls a check for your current active character.\n__Valid Arguments__\nadv/dis\n-b [conditional bonus]\n-mc [minimum roll]\n-phrase [flavor text]\n-title [title] *note: [charname] and [cname] will be replaced automatically*\n-dc [dc]\n-rr [iterations]\nstr/dex/con/int/wis/cha (different skill base; e.g. Strength (Intimidation))",
           "args": [
             {
               "name": "check",
