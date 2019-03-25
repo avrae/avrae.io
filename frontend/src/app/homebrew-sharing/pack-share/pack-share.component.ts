@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Item, Pack} from '../../schemas/homebrew/Items';
+import {Item, Pack} from '../../schemas/homebrew/item.model';
 import {ActivatedRoute} from '@angular/router';
 import {HomebrewSharingService} from '../homebrew-sharing.service';
 import {Meta} from '@angular/platform-browser';

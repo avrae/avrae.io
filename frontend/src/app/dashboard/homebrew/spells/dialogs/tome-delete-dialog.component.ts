@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {Tome} from '../../../../schemas/homebrew/Spells';
+import {Tome} from '../../../../schemas/homebrew/spell.model';
 
 @Component({
   selector: 'avr-tome-delete-dialog',

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {Pack} from '../../../../schemas/homebrew/Items';
+import {Pack} from '../../../../schemas/homebrew/item.model';
 
 @Component({
   selector: 'avr-pack-markdown-dialog',

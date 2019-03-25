@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Pack} from '../../../schemas/homebrew/Items';
+import {Pack} from '../../../schemas/homebrew/item.model';
 import {HomebrewService} from '../homebrew.service';
 import {MatDialog} from '@angular/material';
 import {NewPackDialog} from './new-pack-dialog/new-pack-dialog.component';

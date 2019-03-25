@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Attack} from '../../../../../../../schemas/homebrew/SpellEffects';
-import {Spell} from '../../../../../../../schemas/homebrew/Spells';
+import {Spell} from '../../../../../../../schemas/homebrew/spell.model';
 
 @Component({
   selector: 'avr-attack-effect',

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HomebrewSharingService} from '../homebrew-sharing.service';
 import {Meta} from '@angular/platform-browser';
-import {parseLevel, parseSchool, Spell, Tome} from '../../schemas/homebrew/Spells';
+import {parseLevel, parseSchool, Spell, Tome} from '../../schemas/homebrew/spell.model';
 import {environment} from '../../../environments/environment';
 
 @Component({

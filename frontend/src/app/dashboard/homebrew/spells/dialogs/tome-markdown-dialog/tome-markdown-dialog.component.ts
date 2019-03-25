@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {parseComponents, parseLevel, parseSchool, Spell, Tome} from '../../../../../schemas/homebrew/Spells';
+import {parseComponents, parseLevel, parseSchool, Spell, Tome} from '../../../../../schemas/homebrew/spell.model';
 
 @Component({
   selector: 'avr-tome-markdown-dialog',

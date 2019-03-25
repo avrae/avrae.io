@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Item, REQUIRED_ITEM_PROPS} from '../../../../schemas/homebrew/Items';
+import {Item, REQUIRED_ITEM_PROPS} from '../../../../schemas/homebrew/item.model';
 
 @Component({
   selector: 'avr-pack-import-dialog',

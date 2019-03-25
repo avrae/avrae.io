@@ -10,7 +10,7 @@ import {TomeShareDialog} from '../dialogs/tome-share-dialog.component';
 // import {TomeOptionsDialog} from "../../spells/tome-options-dialog/tome-options-dialog.component";
 // import {TomeJSONImportDialog} from "../../spells/tome-json-import-dialog/tome-json-import-dialog.component";
 // import {TomeSRDImportDialog} from "../../spells/tome-srd-import-dialog/tome-srd-import-dialog.component";
-import {Spell, Tome} from '../../../../schemas/homebrew/Spells';
+import {Spell, Tome} from '../../../../schemas/homebrew/spell.model';
 import {TomeOptionsDialog} from '../dialogs/tome-options-dialog.component';
 
 @Component({

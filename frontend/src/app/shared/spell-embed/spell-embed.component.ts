@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {parseLevel, parseSchool} from '../../schemas/homebrew/Spells';
+import {parseLevel, parseSchool} from '../../schemas/homebrew/spell.model';
 import {UserInfo} from '../../schemas/UserInfo';
 import {EmbedField} from '../discord-embed/embed-fields/embed-fields.component';
 

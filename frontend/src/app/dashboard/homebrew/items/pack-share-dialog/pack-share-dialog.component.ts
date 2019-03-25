@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
-import {Pack} from '../../../../schemas/homebrew/Items';
+import {Pack} from '../../../../schemas/homebrew/item.model';
 import {PackJsonDialog} from '../pack-json-dialog/pack-json-dialog.component';
 import {PackMarkdownDialog} from '../pack-markdown-dialog/pack-markdown-dialog.component';
 import {HomebrewService} from '../../homebrew.service';

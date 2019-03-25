@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Item} from '../../../../../schemas/homebrew/Items';
+import {Item} from '../../../../../schemas/homebrew/item.model';
 import {PackJsonDialog} from '../../pack-json-dialog/pack-json-dialog.component';
 import {MatDialog} from '@angular/material';
 

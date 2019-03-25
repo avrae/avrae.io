@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Item} from '../../../../schemas/homebrew/Items';
+import {Item} from '../../../../schemas/homebrew/item.model';
 import {HomebrewService} from '../../homebrew.service';
 import {MatDialogRef} from '@angular/material';
 

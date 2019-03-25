@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {parseLevel, parseSchool} from '../../../../../../schemas/homebrew/Spells';
+import {parseLevel, parseSchool} from '../../../../../../schemas/homebrew/spell.model';
 
 @Component({
   selector: 'avr-spell-panel-description',

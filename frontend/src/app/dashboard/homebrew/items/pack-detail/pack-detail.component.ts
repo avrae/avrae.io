@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Item, Pack} from '../../../../schemas/homebrew/Items';
+import {Item, Pack} from '../../../../schemas/homebrew/item.model';
 import {HomebrewService} from '../../homebrew.service';
 import {Location} from '@angular/common';
 import {UserInfo} from '../../../../schemas/UserInfo';

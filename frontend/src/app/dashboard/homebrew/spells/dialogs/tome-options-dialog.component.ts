@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {getUser} from '../../../APIHelper';
-import {Tome} from '../../../../schemas/homebrew/Spells';
+import {Tome} from '../../../../schemas/homebrew/spell.model';
 import {TomeDeleteDialog} from './tome-delete-dialog.component';
 
 @Component({

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {Pack} from '../../../../schemas/homebrew/Items';
+import {Pack} from '../../../../schemas/homebrew/item.model';
 import {PackDeleteDialog} from '../pack-delete-dialog/pack-delete-dialog.component';
 import {getUser} from '../../../APIHelper';
 

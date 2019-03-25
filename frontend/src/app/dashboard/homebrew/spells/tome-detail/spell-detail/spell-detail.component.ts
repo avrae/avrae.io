@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Spell} from '../../../../../schemas/homebrew/Spells';
+import {Spell} from '../../../../../schemas/homebrew/spell.model';
 import {MatDialog} from '@angular/material';
 import {TomeJSONDialog} from '../../dialogs/tome-json-dialog/tome-json-dialog.component';
 

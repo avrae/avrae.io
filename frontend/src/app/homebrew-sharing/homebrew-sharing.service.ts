@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Pack} from '../schemas/homebrew/Items';
-import {Tome} from '../schemas/homebrew/Spells';
+import {Pack} from '../schemas/homebrew/item.model';
+import {Tome} from '../schemas/homebrew/spell.model';
 
 const itemsUrl = `${environment.apiURL}/homebrew/items`;
 const spellsUrl = `${environment.apiURL}/homebrew/spells`;
