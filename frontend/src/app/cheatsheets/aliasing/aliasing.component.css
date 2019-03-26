@@ -5,3 +5,26 @@ a {
 th, td {
   border-bottom: 1px solid #ddd;
 }
+
+td {
+  vertical-align: top;
+  padding: 3px;
+}
+
+tr:nth-child(even) {
+  background: rgba(204, 204, 204, .15);
+}
+
+
+.mat-tab-body-content {
+      max-width: 968px;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  max-width: 400px;
+}
+
+
+th {
+  min-width: 120px;
+}

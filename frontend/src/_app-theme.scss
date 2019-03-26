@@ -53,4 +53,11 @@
   .hoverable:hover {
     background-color: mat-color($foreground, base, 0.04);
   }
+
+  body.avr-app-background {
+        max-width: 90em;
+        margin: auto
+  }
+
+
 }

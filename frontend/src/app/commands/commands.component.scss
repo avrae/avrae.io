@@ -22,3 +22,8 @@
   margin-bottom: 8px;
 }
 
+@media only screen and (max-width: 840px) {
+  .sidenav{
+    width:150px;
+  }
+}
