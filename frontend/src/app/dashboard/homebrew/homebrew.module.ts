@@ -44,6 +44,7 @@ import {TomeMarkdownDialog} from './spells/dialogs/tome-markdown-dialog/tome-mar
 import {TomeJSONImportDialog} from './spells/dialogs/tome-json-import-dialog/tome-json-import-dialog.component';
 import {SpellEmbedModule} from '../../shared/spell-embed/spell-embed.module';
 import { TempHPEffectComponent } from './spells/tome-detail/spell-editor/effect-editor/temphp-effect/temphp-effect.component';
+import { CompendiumListComponent } from './compendium-list/compendium-list.component';
 
 @NgModule({
   imports: [
@@ -94,6 +95,7 @@ import { TempHPEffectComponent } from './spells/tome-detail/spell-editor/effect-
     TomeMarkdownDialog,
     TomeJSONImportDialog,
     TempHPEffectComponent,
+    CompendiumListComponent,
   ],
   entryComponents: [
     NewPackDialog,

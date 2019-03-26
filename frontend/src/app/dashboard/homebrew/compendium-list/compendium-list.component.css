@@ -1,0 +1,67 @@
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  margin: 4px;
+}
+
+.compendium-tile {
+  border-radius: 10px;
+}
+
+.ignore-theme {
+  color: #fff;
+}
+
+/* styles for overlay text */
+.compendium-text {
+  margin: 1em;
+}
+
+.compendium-text h3 {
+  margin-bottom: 0;
+}
+
+.compendium-text p {
+  margin-bottom: 4px;
+  word-wrap: break-word;
+  overflow: scroll;
+}
+
+/* <i> for compendiums, effects on hover */
+.compendium-tile .compendium-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.compendium-tile:hover .compendium-image {
+  webkit-filter: blur(4px) brightness(0.7); /* Chrome, Safari, Opera */
+  filter: blur(3px) brightness(0.7);
+  transform: scale(1.05);
+}
+
+/* compendium meta overlay */
+.compendium-meta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.compendium-meta:hover {
+  opacity: 1;
+}
