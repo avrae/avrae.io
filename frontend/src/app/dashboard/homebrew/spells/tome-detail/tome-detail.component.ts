@@ -7,9 +7,9 @@ import {DashboardService} from '../../../dashboard.service';
 import {Location} from '@angular/common';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {TomeShareDialog} from '../dialogs/tome-share-dialog.component';
-// import {TomeOptionsDialog} from "../../spells/tome-options-dialog/tome-options-dialog.component";
-// import {TomeJSONImportDialog} from "../../spells/tome-json-import-dialog/tome-json-import-dialog.component";
-// import {TomeSRDImportDialog} from "../../spells/tome-srd-import-dialog/tome-srd-import-dialog.component";
+// import {TomeOptionsDialog} from "../../spells/compendium-options-dialog/compendium-options-dialog.component";
+// import {TomeJSONImportDialog} from "../../spells/compendium-json-import-dialog/compendium-json-import-dialog.component";
+// import {TomeSRDImportDialog} from "../../spells/compendium-srd-import-dialog/compendium-srd-import-dialog.component";
 import {Spell, Tome} from '../../../../schemas/homebrew/spell.model';
 import {TomeOptionsDialog} from '../dialogs/tome-options-dialog.component';
 
@@ -116,7 +116,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   }
 
   commit() {
-    // HTTP PUT /homebrew/spells/:tome
+    // HTTP PUT /homebrew/spells/:compendium
     this.homebrewService.putTome(this.tome)
       .subscribe(result => {
         console.log(result);
@@ -126,7 +126,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-    // HTTP DELETE /homebrew/spells/:tome
+    // HTTP DELETE /homebrew/spells/:compendium
     this.homebrewService.deleteTome(this.tome)
       .subscribe(result => {
         console.log(result);

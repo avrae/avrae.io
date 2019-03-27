@@ -51,10 +51,6 @@ export class CompendiumListComponent implements OnInit {
     });
   }
 
-  beginShare() {
-    // TODO
-  }
-
   // HTTP
   new(compendium: { name: string, public: boolean, desc: string, image: string }) {
     // HTTP POST /homebrew

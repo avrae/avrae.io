@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'homebrew', children: [
       {path: 'items/:pack', component: PackShareComponent},
-      {path: 'spells/:tome', component: TomeShareComponent}
+      {path: 'spells/:compendium', component: TomeShareComponent}
     ]
   }
 ];

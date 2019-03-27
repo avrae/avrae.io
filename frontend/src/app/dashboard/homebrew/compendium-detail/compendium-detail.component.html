@@ -1,3 +1,47 @@
-<p>
-  compendium-detail works!
-</p>
+<div *ngIf="compendium && canEdit">
+  <mat-toolbar color="primary">
+    <span>
+      <button mat-icon-button (click)="back()">
+        <mat-icon aria-label="Back">arrow_back</mat-icon>
+      </button>
+    </span>
+    <span>
+      {{compendium.name}}
+    </span>
+    <span class="toolbar-spacer"></span>
+    <span>
+      <button mat-icon-button (click)="commit()">
+        <mat-icon aria-label="Save">save</mat-icon>
+      </button>
+      <button mat-icon-button (click)="beginSettings()">
+        <mat-icon aria-label="Settings">settings</mat-icon>
+      </button>
+      <button mat-icon-button (click)="beginShare()">
+        <mat-icon aria-label="Share">launch</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
+
+  <mat-tab-group backgroundColor="primary" #tabGroup>
+    <mat-tab label="Compendium">
+      Well, something goes here
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div *ngIf="!compendium">
+  <div class="container">
+    <mat-card>
+      <mat-spinner [diameter]="24"></mat-spinner>
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="compendium && !canEdit">
+  <div class="container">
+    <mat-card>
+      <p>You do not have permission to edit this compendium.</p>
+      <button mat-raised-button color="accent" (click)="back()">Go Back</button>
+    </mat-card>
+  </div>
+</div>

@@ -69,7 +69,7 @@ export class SpellsComponent implements OnInit {
   }
 
   commit(tome: Tome) {
-    // HTTP PUT /homebrew/spells/:tome
+    // HTTP PUT /homebrew/spells/:compendium
     this.homebrewService.putTome(tome)
       .subscribe(result => {
         console.log(result);

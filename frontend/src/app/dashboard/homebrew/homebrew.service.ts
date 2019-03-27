@@ -36,17 +36,17 @@ export class HomebrewService {
     return this.http.get<Compendium>(`${compendiumsUrl}/${id}`, defaultOptions());
   }
 
-  // putTome(tome: Tome): Observable<string> {
+  // putTome(compendium: Tome): Observable<string> {
   //   // @ts-ignore
-  //   return this.http.put<string>(`${spellsUrl}/${tome._id.$oid}`, tome, defaultTextOptions())
+  //   return this.http.put<string>(`${spellsUrl}/${compendium._id.$oid}`, compendium, defaultTextOptions())
   //     .pipe(
   //       catchError(this.handleError('putTome'))
   //     );
   // }
   //
-  // deleteTome(tome: Tome): Observable<string> {
+  // deleteTome(compendium: Tome): Observable<string> {
   //   // @ts-ignore
-  //   return this.http.delete<string>(`${spellsUrl}/${tome._id.$oid}`, defaultTextOptions())
+  //   return this.http.delete<string>(`${spellsUrl}/${compendium._id.$oid}`, defaultTextOptions())
   //     .pipe(
   //       catchError(this.handleError('deleteTome'))
   //     );
