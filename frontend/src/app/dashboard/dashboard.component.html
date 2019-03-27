@@ -11,18 +11,6 @@
       <div class="spacer"></div>
       <a mat-list-item [routerLink]="['homebrew']">Compendiums</a>
 
-      <mat-expansion-panel class="mat-elevation-z0">
-        <mat-expansion-panel-header>
-          <mat-panel-title class="nav-panel">
-            Homebrew
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="nav-panel-body">
-          <a mat-list-item routerLink="/dashboard/homebrewbrew/items">Items</a>
-          <a mat-list-item routerLink="/dashboard/homebrewbrew/spells">Spells</a>
-        </div>
-      </mat-expansion-panel>
-
       <div class="spacer"></div>
       <a mat-list-item (click)="logout()">Logout</a>
     </mat-nav-list>

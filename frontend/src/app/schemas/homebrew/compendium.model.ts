@@ -18,6 +18,8 @@ export class Compendium {
   server_active: string[];
   desc: string;
   image: string;
+  created: number;
+  lastEdit: number;
 
   // MongoDB id
   _id: { '$oid': string };

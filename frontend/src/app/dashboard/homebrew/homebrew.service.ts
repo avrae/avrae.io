@@ -1,14 +1,16 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {Item, Pack} from '../../schemas/homebrew/item.model';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {defaultOptions, defaultTextOptions} from '../APIHelper';
 import {catchError} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
+import {Compendium} from '../../schemas/homebrew/compendium.model';
+import {Item, Pack} from '../../schemas/homebrew/item.model';
 import {Spell, Tome} from '../../schemas/homebrew/spell.model';
+import {defaultOptions, defaultTextOptions} from '../APIHelper';
 
 const itemsUrl = `${environment.apiURL}/homebrew/items`;
 const spellsUrl = `${environment.apiURL}/homebrew/spells`;
+const compendiumsUrl = `${environment.apiURL}/homebrew`;
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,45 @@ export class HomebrewService {
 
   constructor(private http: HttpClient) {
   }
+
+  /* -----COMPENDIUMS----- */
+  getUserCompendiums(): Observable<Compendium[]> {
+    return this.http.get<Compendium[]>(`${compendiumsUrl}/me`, defaultOptions());
+  }
+
+  newCompendium(compendium: { name: string, public: boolean, desc: string, image: string }): Observable<any> {
+    return this.http.post<any>(`${compendiumsUrl}`, compendium, defaultOptions())
+      .pipe(
+        catchError(this.handleError('newCompendiums'))
+      );
+  }
+
+  getCompendium(id): Observable<Compendium> {
+    return this.http.get<Compendium>(`${compendiumsUrl}/${id}`, defaultOptions());
+  }
+
+  // putTome(tome: Tome): Observable<string> {
+  //   // @ts-ignore
+  //   return this.http.put<string>(`${spellsUrl}/${tome._id.$oid}`, tome, defaultTextOptions())
+  //     .pipe(
+  //       catchError(this.handleError('putTome'))
+  //     );
+  // }
+  //
+  // deleteTome(tome: Tome): Observable<string> {
+  //   // @ts-ignore
+  //   return this.http.delete<string>(`${spellsUrl}/${tome._id.$oid}`, defaultTextOptions())
+  //     .pipe(
+  //       catchError(this.handleError('deleteTome'))
+  //     );
+  // }
+  //
+  // validateSpellJSON(data: object): Observable<{success: boolean, result: string}> {
+  //   return this.http.post<{success: boolean, result: string}>(`${spellsUrl}/validate`, data, defaultOptions())
+  //     .pipe(
+  //       catchError(err => of({success: false, result: err.error}))
+  //     );
+  // }
 
   /* -----PACKS----- */
   getUserPacks(): Observable<Pack[]> {
@@ -90,8 +131,8 @@ export class HomebrewService {
     return this.http.get<Spell[]>(`${spellsUrl}/srd`, defaultOptions());
   }
 
-  validateSpellJSON(data: object): Observable<{success: boolean, result: string}> {
-    return this.http.post<{success: boolean, result: string}>(`${spellsUrl}/validate`, data, defaultOptions())
+  validateSpellJSON(data: object): Observable<{ success: boolean, result: string }> {
+    return this.http.post<{ success: boolean, result: string }>(`${spellsUrl}/validate`, data, defaultOptions())
       .pipe(
         catchError(err => of({success: false, result: err.error}))
       );
