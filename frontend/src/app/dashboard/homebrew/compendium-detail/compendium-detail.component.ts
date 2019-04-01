@@ -1,3 +1,7 @@
+/**
+ * The main container for a compendium toolbar, as well as save bar. Also handles all the meta dialogs.
+ */
+
 import {Location} from '@angular/common';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatSnackBar} from '@angular/material';

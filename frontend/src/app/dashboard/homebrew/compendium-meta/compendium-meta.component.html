@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="half-width">
+    <div class="container">
+      <div class="meta-text">
+        <h1>
+          {{compendium.name}}
+        </h1>
+        <p>
+          {{compendium.desc}}
+        </p>
+      </div>
+      <div class="compendium-image-container">
+        <img [src]="compendium.image || '../../../../assets/img/AvraeSquare.jpg'" class="compendium-image"
+             alt="Compendium image">
+        <div class="compendium-image-buttons">
+          <button mat-icon-button>
+            <mat-icon class="ignore-theme">edit</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="half-width">
+    <div class="container">
+      sharing stuff here
+    </div>
+  </div>
+</div>
+

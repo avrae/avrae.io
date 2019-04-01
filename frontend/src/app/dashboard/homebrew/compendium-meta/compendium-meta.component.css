@@ -1,0 +1,62 @@
+.container {
+  margin: 2px;
+}
+
+.half-width {
+  float: left;
+  width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .half-width {
+    width: 100%;
+  }
+}
+
+.ignore-theme {
+  color: #fff;
+}
+
+/* Inline image and hover effects */
+.meta-text {
+  width: 75%;
+  float: left;
+}
+
+.compendium-image-container {
+  position: relative;
+  float: right;
+  width: 25%;
+}
+
+.compendium-image-container .compendium-image {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5px;
+  -webkit-transition: all .25s ease;
+  -moz-transition: all .25s ease;
+  -o-transition: all .25s ease;
+  transition: all .25s ease;
+}
+
+.compendium-image-container:hover .compendium-image {
+  webkit-filter: blur(3px) brightness(0.7); /* Chrome, Safari, Opera */
+  filter: blur(3px) brightness(0.7);
+}
+
+/* compendium button overlay */
+.compendium-image-container .compendium-image-buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  -webkit-transition: all .25s ease;
+  -moz-transition: all .25s ease;
+  -o-transition: all .25s ease;
+  transition: all .25s ease;
+}
+
+.compendium-image-container:hover .compendium-image-buttons {
+  opacity: 1;
+}

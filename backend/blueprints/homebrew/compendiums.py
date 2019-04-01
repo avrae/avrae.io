@@ -11,6 +11,7 @@ from lib.utils import jsonify
 CONTENT_KEYS = (
     "background", "characterClasses", "feats", "items", "monsters", "races", "spells"
 )
+IGNORED_KEYS = ("_id", "active", "server_active", "editors", "subscribers", "created", "stargazers", "comments")
 EXCLUDE_CONTENT = {k: False for k in CONTENT_KEYS}
 DEFAULT_COMPENDIUM = {
     "name": "Unknown Compendium",

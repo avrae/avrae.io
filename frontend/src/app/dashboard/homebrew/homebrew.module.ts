@@ -8,6 +8,7 @@ import {DiscordEmbedModule} from '../../shared/discord-embed/discord-embed.modul
 import {SpellEmbedModule} from '../../shared/spell-embed/spell-embed.module';
 import {CompendiumDetailComponent} from './compendium-detail/compendium-detail.component';
 import {CompendiumListComponent} from './compendium-list/compendium-list.component';
+import {CompendiumMetaComponent} from './compendium-meta/compendium-meta.component';
 import {NewCompendiumDialog} from './dialogs/new-compendium-dialog.component';
 
 import {HomebrewRoutingModule} from './homebrew-routing.module';
@@ -100,6 +101,7 @@ import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
     CompendiumListComponent,
     CompendiumDetailComponent,
     NewCompendiumDialog,
+    CompendiumMetaComponent,
   ],
   entryComponents: [
     NewPackDialog,
