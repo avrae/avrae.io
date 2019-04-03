@@ -881,6 +881,15 @@
         <td><code>c.effects</code></td>
       </tr>
       <tr>
+        <td><code>attacks</code></td>
+        <td>
+          A list of the combatant's attacks. Returns None if not visible.
+        </td>
+        <td></td>
+        <td><code>list</code> of <code>dict</code> - The combatant's attacks.</td>
+        <td><code>c.attacks</code></td>
+      </tr>
+      <tr>
         <td><code>type</code></td>
         <td>
           The type of the object (<code>combatant</code>), to determine whether this is a group or not.
@@ -1031,7 +1040,7 @@
         <td><code>c.get_effect("Rage")</code></td>
       </tr>
       <tr>
-        <td><code>add_effect(name, args[, duration, conc, parent])</code></td>
+        <td><code>add_effect(name, args[, duration, conc, parent, end])</code></td>
         <td>
           Adds a <a (click)="scrollTo('simpleeffect')">SimpleEffect</a> to a combatant.
         </td>
@@ -1040,7 +1049,8 @@
           <code>args</code> - str - The effect arguments to add (same syntax as init effect).<br>
           <code>duration</code> - int (optional, default -1) - The duration of the effect.<br>
           <code>conc</code> - bool (optional, default False) - Whether the effect requires concentration.<br>
-          <code>parent</code> - SimpleEffect (optional) - The parent of the effect.
+          <code>parent</code> - SimpleEffect (optional) - The parent of the effect.<br>
+          <code>end</code> - bool (optional, default False) - Whether the effect ticks on the end of turn.
         </td>
         <td><code>None</code></td>
         <td><code>c.add_effect("Rage", "-d 2", 10, False)</code></td>
