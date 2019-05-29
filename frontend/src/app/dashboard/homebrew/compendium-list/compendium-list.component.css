@@ -41,7 +41,7 @@
 }
 
 .compendium-tile:hover .compendium-image {
-  webkit-filter: blur(4px) brightness(0.7); /* Chrome, Safari, Opera */
+  webkit-filter: blur(3px) brightness(0.7); /* Chrome, Safari, Opera */
   filter: blur(3px) brightness(0.7);
   transform: scale(1.05);
 }
