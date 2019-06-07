@@ -21,14 +21,14 @@
   <div class="spacer-8px"></div>
 
   <mat-grid-list cols="4" gutterSize="8px" rowHeight="5:6">
-    <mat-grid-tile *ngFor="let character of characters | async" class="mat-elevation-z3">
+    <mat-grid-tile *ngFor="let character of (characters | async)" class="mat-elevation-z3">
       <mat-card class="char-card">
         <mat-card-header>
           <mat-card-title class="char-name">
-            {{character.stats.name}}
+            {{character.name}}
           </mat-card-title>
         </mat-card-header>
-        <img mat-card-image class="char-image" [src]="character.stats.image || '../../../assets/img/AvraeSquare.jpg'">
+        <img mat-card-image class="char-image" [src]="character.image || '../../../assets/img/AvraeSquare.jpg'">
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

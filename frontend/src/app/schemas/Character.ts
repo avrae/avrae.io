@@ -23,7 +23,10 @@ export class Character {
 
 export class CharacterMeta {
   upstream: string;
-  stats: Stats;
+  active: boolean;
+  name: string;
+  description: string;
+  image: string;
 }
 
 export class Stats {
