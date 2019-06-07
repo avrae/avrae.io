@@ -27,6 +27,7 @@ export class CharacterMeta {
   name: string;
   description: string;
   image: string;
+  levels: { total_level: number, classes: Map<string, number> };
 }
 
 export class Stats {
