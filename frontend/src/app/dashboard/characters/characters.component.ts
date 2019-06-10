@@ -14,6 +14,7 @@ export class CharactersComponent implements OnInit {
   userInfo: Observable<UserInfo>;
   userStats: Observable<UserStats>;
   characters: Observable<CharacterMeta[]>;
+  numCols: number;
 
   constructor(private dashboardService: DashboardService) {
   }
@@ -22,6 +23,13 @@ export class CharactersComponent implements OnInit {
     this.getUserInfo();
     this.getUserStats();
     this.getCharacters();
+    if (window.innerWidth <= 960) {
+      this.numCols = 1;
+    } else if (window.innerWidth <= 1600) {
+      this.numCols = 4;
+    } else {
+      this.numCols = 6;
+    }
   }
 
   getUserInfo(): void {
@@ -34,6 +42,33 @@ export class CharactersComponent implements OnInit {
 
   getCharacters(): void {
     this.characters = this.dashboardService.getCharacterMeta();
+  }
+
+  getInitials(name: string): string {
+    const match = name.match(/\b\w/g) || [];
+    return ((match.shift() || '') + (match.pop() || '')).toUpperCase();
+  }
+
+  getUpstreamURL(upstream: string): string {
+    if (upstream.startsWith("dicecloud-")) {
+      return `https://dicecloud.com/character/${upstream.slice(10)}`;
+    } else if (upstream.startsWith("google-")) {
+      return `https://docs.google.com/spreadsheets/d/${upstream.slice(7)}`;
+    } else if (upstream.startsWith("beyond-")) {
+      return `https://ddb.ac/characters/${upstream.slice(7)}`;
+    }
+    return '';
+  }
+
+  // Responsiveness
+  onResize(event) {
+    if (event.target.innerWidth <= 960) {
+      this.numCols = 1;
+    } else if (event.target.innerWidth <= 1600) {
+      this.numCols = 4;
+    } else {
+      this.numCols = 6;
+    }
   }
 
 }

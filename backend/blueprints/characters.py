@@ -17,5 +17,6 @@ def character_list():
 @characters.route('/meta', methods=["GET"])
 def meta():
     user = get_user_info()
-    data = list(mdb.characters.find({"owner": user.id}, ["upstream", "stats"]))
+    data = list(mdb.characters.find({"owner": user.id},
+                                    ["upstream", "active", "name", "description", "image", "levels"]))
     return jsonify(data)

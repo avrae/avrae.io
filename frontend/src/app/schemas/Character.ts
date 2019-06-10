@@ -23,7 +23,11 @@ export class Character {
 
 export class CharacterMeta {
   upstream: string;
-  stats: Stats;
+  active: boolean;
+  name: string;
+  description: string;
+  image: string;
+  levels: { total_level: number, classes: Map<string, number> };
 }
 
 export class Stats {
