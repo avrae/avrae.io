@@ -13,6 +13,7 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
+  fqdn: avrae.dev
   on:
     branch: master
 notifications:
