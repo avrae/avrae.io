@@ -4,7 +4,6 @@
 /dist
 /tmp
 /out-tsc
-/frontend/src/assets/*.css
 
 # dependencies
 /node_modules
@@ -35,11 +34,6 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-/dump.rdb
-
-# for firebase test deployment unless zhu wishes to start using firebase himself
-/.firebaserc
-/firebase.json
 
 # System Files
 .DS_Store
