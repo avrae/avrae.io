@@ -1,0 +1,42 @@
+.list-table {
+  width: 100%;
+}
+
+.table-data-cell {
+  width: 70%;
+}
+
+pre {
+  white-space: pre-wrap;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+@media only screen and (max-width: 840px) {
+  pre {
+    max-height: 100px;
+  }
+}
+
+td {
+  vertical-align: top;
+  padding: 3px;
+}
+
+tr:nth-child(even) {
+  background: rgba(204, 204, 204, .15);
+}
+
+
+.mat-tab-body-content {
+      max-width: 968px;
+}
+
+td.mat-cell, td.mat-footer-ce   ll, th.mat-header-cell {
+  max-width: 400px;
+}
+
+
+th {
+  min-width: 120px;
+}

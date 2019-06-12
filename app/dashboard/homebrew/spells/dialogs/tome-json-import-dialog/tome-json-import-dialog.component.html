@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Importing spell from JSON...</h2>
+<mat-dialog-content class="mat-typography">
+  <p>
+    Paste your spell JSON here. This can be either a tome or spell exported from this site.
+  </p>
+  <div class="form-container">
+    <mat-form-field>
+      <textarea matInput placeholder="JSON" rows="10" [(ngModel)]="data"></textarea>
+    </mat-form-field>
+  </div>
+  <mat-error *ngIf="error">{{error}}</mat-error>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="validateAndExit()">
+    Import
+  </button>
+  <mat-spinner [diameter]="18" *ngIf="loading"></mat-spinner>
+</mat-dialog-actions>

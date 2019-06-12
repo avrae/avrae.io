@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>New {{data.type}}...</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="form-container">
+    <mat-form-field *ngIf="data.showName">
+      <input matInput placeholder="Name" [(ngModel)]="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Value" [(ngModel)]="value"></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="{name: name, value: value}">Done</button>
+</mat-dialog-actions>

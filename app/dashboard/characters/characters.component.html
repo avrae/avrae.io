@@ -1,0 +1,44 @@
+<div class="characterList">
+  <mat-card class="user-card" *ngIf="(userInfo | async)">
+    <mat-grid-list cols="4" rowHeight="1:1">
+      <mat-grid-tile>
+        <img alt="avatar" [src]="(userInfo | async)?.avatarUrl" class="avatarImg mat-elevation-z1">
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3">
+        <div>
+          <h1 class="mat-display-2 smallmargin">
+            {{(userInfo | async)?.username}}<span class="mat-small">#{{(userInfo | async)?.discriminator}}</span>
+          </h1>
+          <p class="mat-h3">
+            Characters: {{(userStats | async)?.numCharacters}}<br>
+            Customizations: {{(userStats | async)?.numCustomizations}}
+          </p>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+
+  <div class="spacer-8px"></div>
+
+  <mat-grid-list [cols]="numCols" rowHeight="5:6" gutterSize="8" (window:resize)="onResize($event)">
+    <mat-grid-tile class="character-tile" *ngFor="let character of characters | async">
+      <div class="character-name-underlay mat-typography character-image" *ngIf="!character.image">
+        <p class="ignore-theme">
+          {{getInitials(character.name)}}
+        </p>
+      </div>
+      <img class="character-image" [src]="character.image" [alt]="'Image for ' + character.name"
+           *ngIf="character.image">
+      <a class="character-meta" [href]="getUpstreamURL(character.upstream)" target="_blank">
+        <div class="mat-typography ignore-theme character-text">
+          <h3>
+            {{character.name}}
+          </h3>
+          <p>
+            {{character.description}}
+          </p>
+        </div>
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,33 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    [(opened)]="opened"
+    mode="side"
+    class="sidenav mat-elevation-z3"
+    fixedTopGap="56px">
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['characters']">Characters</a>
+      <a mat-list-item [routerLink]="['aliases']">Customization</a>
+      <a mat-list-item [routerLink]="['gvars']">Global Variables</a>
+      <div class="spacer"></div>
+
+      <mat-expansion-panel class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="nav-panel">
+            Homebrew
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="nav-panel-body">
+          <a mat-list-item routerLink="/dashboard/homebrew/items">Items</a>
+          <a mat-list-item routerLink="/dashboard/homebrew/spells">Spells</a>
+        </div>
+      </mat-expansion-panel>
+
+      <div class="spacer"></div>
+      <a mat-list-item (click)="logout()">Logout</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

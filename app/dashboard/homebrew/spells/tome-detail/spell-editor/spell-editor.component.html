@@ -1,0 +1,20 @@
+<div *ngIf="spell" class="container">
+  <mat-card>
+    <p>Editing {{spell.name}}...</p>
+    <p>You can find help on how to use the spell editor
+      <a target="_blank" href="https://github.com/avrae/avrae-spells/blob/master/README.md">here</a>.</p>
+    <mat-accordion multi="true">
+      <avr-effect-editor [parent]="spell.automation" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
+      <avr-new-effect-card [parent]="spell.automation" [parentType]="'root'"
+                           (changed)="changed.emit()"></avr-new-effect-card>
+    </mat-accordion>
+  </mat-card>
+</div>
+
+<div *ngIf="!spell" class="container">
+  <mat-card>
+    <p>
+      No spell selected.
+    </p>
+  </mat-card>
+</div>

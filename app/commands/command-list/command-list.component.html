@@ -1,0 +1,28 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let command of commands">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div>
+          <code>{{command.signature}}</code>
+          <p class="mat-small nomargin" *ngIf="command.subcommands.length">Has subcommands.</p>
+        </div>
+      </mat-panel-title>
+      <mat-panel-description>
+        <markdown>{{command.short}}</markdown>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <markdown>{{command.docs}}</markdown>
+    <table *ngIf="command.args.length">
+      <tr>
+        <th>Arguments</th>
+      </tr>
+      <tr *ngFor="let arg of command.args">
+        <td><code>{{arg.name}}</code>{{getArgDescriptors(arg)}} - {{arg.desc}}</td>
+      </tr>
+    </table>
+    <div class="subcommands" *ngIf="command.subcommands.length">
+      <h4 class="mat-h4 smallmargin"><b>Subcommands</b></h4>
+      <avr-command-list [commands]="command.subcommands"></avr-command-list>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

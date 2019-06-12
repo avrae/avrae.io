@@ -1,0 +1,61 @@
+<div *ngIf="pack">
+  <mat-toolbar color="primary">
+    <span>
+      {{pack.name}}
+    </span>
+    <span class="toolbar-spacer"></span>
+    <span>
+      By {{pack.owner.username}}
+    </span>
+  </mat-toolbar>
+
+  <div class="container" fxLayout="row" fxLayoutGap="8px">
+    <div class="item-list" fxFlex="grow" *ngIf="pack.items.length">
+      <mat-card>
+
+        <mat-list>
+          <mat-list-item *ngFor="let item of pack.items">
+            <div class="item hoverable" fxLayout="row" (click)="selectedItem = item">
+              <div fxFlex="1 2 auto" class="item-name">
+                <p>{{item.name}}</p>
+              </div>
+              <div fxFlex="2 1 auto" fxFlexAlign="center" class="item-short muted" markdown
+                   [data]="item.meta.split('\n')[0]"></div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+
+      </mat-card>
+    </div>
+
+    <div class="item-list" fxFlex="grow" *ngIf="!pack.items.length">
+      <mat-card>
+        <p>Looks like this pack is empty.</p>
+      </mat-card>
+    </div>
+
+    <div class="item-preview mat-typography mat-elevation-z3" fxFlex="grow">
+      <avr-discord-embed *ngIf="selectedItem"
+                         [title]="selectedItem.name" [description]="selectedItem.meta"
+                         [fields]="[{name: 'Description', value: selectedItem.desc}]"
+                         [thumbnail]="selectedItem.image"
+                         [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
+      </avr-discord-embed>
+      <avr-discord-embed *ngIf="!selectedItem"
+                         title="No item selected." description="Click on an item on the left to see a preview!"
+                         [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
+      </avr-discord-embed>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!pack">
+  <div class="container">
+    <mat-card>
+      <mat-spinner [diameter]="24"></mat-spinner>
+      <p>
+        If this is taking too long to load, you may not have permissions to view this pack.
+      </p>
+    </mat-card>
+  </div>
+</div>
