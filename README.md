@@ -22,6 +22,8 @@ To build for production:
 
 Run `ng build --prod` or `npm run build-prod`
 
+**Prior to running `ng build` you will need to build themes by running `npm run build` or running the build themes script
+
 ## Run
 
 Run `ng serve` or `npm start`
