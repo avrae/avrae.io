@@ -1,27 +1,41 @@
-# Frontend
+# Avrae.io [![Build Status](https://travis-ci.org/avrae/avrae.io.svg?branch=master)](https://travis-ci.org/avrae/avrae.io)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+![Avrae.io](docs/avrae.png)
 
-## Development server
+## Important Links
+- [avrae.io](https://avrae.io)
+- [Support Discord Server](http://support.avrae.io)
+- [D&D Beyond Discord Server](https://dndbeyond.com/discord)
+- [Build](https://travis-ci.org/avrae/avrae.io)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Overview
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This is the source code for the Angular website located at https://avrae.io.  It serves as a web portal for users of the D&D Beyond Avrae Discord Bot to manage their data.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+To build for development:
 
-## Running unit tests
+Run `ng build` or `npm run build`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To build for production:
 
-## Running end-to-end tests
+Run `ng build --prod` or `npm run build-prod`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Run
 
-## Further help
+Run `ng serve` or `npm start`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Run tests
+
+To run unit tests:
+
+Run `ng test` or `npm test`
+
+To run end to end tests:
+
+Run `ng e2e` or `npm run e2e`
+
+## Lint
+
+Run `ng lint` or `npm run lint`
