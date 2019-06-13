@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     let snapshot = this.activatedRoute.snapshot;
     let paramMap = queryString.parse(snapshot.fragment);
     if ('access_token' in paramMap && 'expires_in' in paramMap) {
-      setToken(paramMap.access_token, +paramMap.expires_in);
+      setToken(paramMap.access_token.toString(), +paramMap.expires_in);
       this.router.navigate(['dashboard']);
     }
   }
