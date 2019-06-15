@@ -23,13 +23,7 @@ export class CharactersComponent implements OnInit {
     this.getUserInfo();
     this.getUserStats();
     this.getCharacters();
-    if (window.innerWidth <= 960) {
-      this.numCols = 1;
-    } else if (window.innerWidth <= 1600) {
-      this.numCols = 4;
-    } else {
-      this.numCols = 6;
-    }
+    this.onResize(null);
   }
 
   getUserInfo(): void {
@@ -61,13 +55,16 @@ export class CharactersComponent implements OnInit {
   }
 
   // Responsiveness
-  onResize(event) {
-    if (event.target.innerWidth <= 960) {
-      this.numCols = 1;
-    } else if (event.target.innerWidth <= 1600) {
-      this.numCols = 4;
+  onResize(_) {
+    // reflects Material Design's breakpoints (https://material.io/design/layout/responsive-layout-grid.html#breakpoints)
+    if (window.innerWidth < 600) {
+      this.numCols = 1; // xsmall
+    } else if (window.innerWidth < 1024) {
+      this.numCols = 2; // small
+    } else if (window.innerWidth < 1440) {
+      this.numCols = 4; // medium
     } else {
-      this.numCols = 6;
+      this.numCols = 6; // large
     }
   }
 
