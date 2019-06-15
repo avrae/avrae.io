@@ -50,6 +50,7 @@
   height: 100%;
   width: 100%;
   background: #424242;
+  z-index: -1;
 }
 
 .character-name-underlay p {

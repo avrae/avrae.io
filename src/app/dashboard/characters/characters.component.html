@@ -22,8 +22,8 @@
 
   <mat-grid-list [cols]="numCols" rowHeight="5:6" gutterSize="8" (window:resize)="onResize($event)">
     <mat-grid-tile class="character-tile" *ngFor="let character of characters | async">
-      <div class="character-name-underlay mat-typography character-image" *ngIf="!character.image">
-        <p class="ignore-theme">
+      <div class="character-name-underlay mat-typography character-image">
+        <p class="ignore-theme" *ngIf="!character.image">
           {{getInitials(character.name)}}
         </p>
       </div>
