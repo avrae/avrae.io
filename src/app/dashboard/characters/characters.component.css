@@ -35,9 +35,8 @@
 }
 
 .character-text p {
-  margin-bottom: 4px;
   word-wrap: break-word;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 /* styles for underlay text */
