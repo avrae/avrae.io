@@ -445,6 +445,21 @@
         <td><code>create_cc_nx("SP", 0, "SorcererLevel", "long", "bubble")</code></td>
       </tr>
       <tr>
+        <td><code>create_cc(name[, minVal, maxVal, reset, dispType])</code></td>
+        <td>Creates a custom counter, overwriting any with the same name.</td>
+        <td>
+          <code>name</code> - str - The name of the cc to create.<br>
+          <code>minVal</code> - str (Optional) - The minimum value of the cc. Default: unlimited.<br>
+          <code>maxVal</code> - str (Optional) - The maximum value of the cc. Default: unlimited.<br>
+          <code>reset</code> - str (Optional) - The reset type of the cc ("short", "long", "none", None). Default:
+          None.<br>
+          <code>dispType</code> - str (Optional) - The display type of the cc ("default", "bubble"). Default:
+          default.<br>
+        </td>
+        <td><code>None</code></td>
+        <td><code>create_cc("SP", 0, "SorcererLevel", "long", "bubble")</code></td>
+      </tr>
+      <tr>
         <td><code>cc_exists(name)</code></td>
         <td>Returns whether a certain cc exists.</td>
         <td>
