@@ -26,6 +26,10 @@ import {DiscordEmbedModule} from './shared/discord-embed/discord-embed.module';
 import {HomebrewSharingModule} from './homebrew-sharing/homebrew-sharing.module';
 import {LoginModule} from './login/login.module';
 
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({ dsn: 'https://af2b06560981446bb55f64b6f79fd520@sentry.io/1486249' });
+
 const markdownConfig = {
   markedOptions: {
     provide: MarkedOptions,
