@@ -6,6 +6,11 @@
   margin: 8px;
 }
 
+.item-list {
+  max-height: calc(100vh - 188px);
+  overflow: scroll;
+}
+
 .item {
   cursor: pointer;
   width: 100%;

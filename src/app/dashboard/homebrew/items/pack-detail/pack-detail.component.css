@@ -2,6 +2,11 @@
   flex: 1 1 auto;
 }
 
+.item-list {
+  max-height: calc(100vh - 188px);
+  overflow: scroll;
+}
+
 .container {
   margin: 8px;
 }

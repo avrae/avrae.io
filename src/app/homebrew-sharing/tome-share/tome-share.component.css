@@ -2,6 +2,11 @@
   flex: 1 1 auto;
 }
 
+.spell-list {
+  max-height: calc(100vh - 188px);
+  overflow: scroll;
+}
+
 .container {
   margin: 8px;
 }
