@@ -7,7 +7,7 @@
 
 .spell-list {
   max-height: calc(100vh - #{$navbar-height + $footer-height + $tome-toolbar-height + $tome-tabs-height + ($container-margin*2)});
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .new-spell-card {
