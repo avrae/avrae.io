@@ -1,5 +1,5 @@
 <div *ngIf="tome">
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" class="tome-toolbar">
     <span>
       {{tome.name}}
     </span>
@@ -11,7 +11,7 @@
 
   <div class="container" fxLayout="row" fxLayoutGap="8px">
     <div class="spell-list" fxFlex="grow" *ngIf="tome.spells.length">
-      <mat-card>
+      <mat-card class="card">
 
         <mat-list>
           <mat-list-item *ngFor="let spell of tome.spells">

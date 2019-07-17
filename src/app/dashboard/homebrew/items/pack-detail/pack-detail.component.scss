@@ -1,0 +1,28 @@
+@import "../../../../_variables.scss";
+@import "../_variables.scss";
+
+.pack-toolbar {
+  height: $pack-toolbar-height;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.item-list {
+  max-height: calc(100vh - #{$navbar-height + $footer-height + $pack-toolbar-height + ($container-margin*2)});
+  overflow: scroll;
+}
+
+.container {
+  margin: $container-margin;
+}
+
+.new-item-card {
+  height: 48px;
+  padding: 0 24px;
+}
+
+.no-text-cursor {
+  cursor: default;
+}

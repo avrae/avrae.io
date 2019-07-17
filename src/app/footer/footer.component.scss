@@ -1,3 +1,9 @@
+@import "../_variables.scss";
+
+.footer {
+  height: $footer-height;
+}
+
 .muted {
   color: #aaa;
 }

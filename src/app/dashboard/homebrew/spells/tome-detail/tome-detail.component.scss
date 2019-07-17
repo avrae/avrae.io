@@ -1,0 +1,17 @@
+@import "../_variables.scss";
+
+.tome-toolbar {
+  height: $tome-toolbar-height;
+}
+
+mat-tab-header {
+  height: $tome-tabs-height;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.no-text-cursor {
+  cursor: default;
+}

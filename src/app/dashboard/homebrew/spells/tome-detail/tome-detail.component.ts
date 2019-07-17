@@ -16,7 +16,7 @@ import {TomeOptionsDialog} from '../dialogs/tome-options-dialog.component';
 @Component({
   selector: 'avr-tome-detail',
   templateUrl: './tome-detail.component.html',
-  styleUrls: ['./tome-detail.component.css']
+  styleUrls: ['./tome-detail.component.scss']
 })
 export class TomeDetailComponent implements OnInit, OnDestroy {
 

@@ -8,7 +8,7 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'avr-pack-share',
   templateUrl: './pack-share.component.html',
-  styleUrls: ['./pack-share.component.css']
+  styleUrls: ['./pack-share.component.scss']
 })
 export class PackShareComponent implements OnInit {
 

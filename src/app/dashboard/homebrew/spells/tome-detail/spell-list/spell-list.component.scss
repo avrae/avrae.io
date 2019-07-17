@@ -1,0 +1,20 @@
+@import "../../../../../_variables.scss";
+@import "../../_variables.scss";
+
+.container {
+  margin: $container-margin;
+}
+
+.spell-list {
+  max-height: calc(100vh - #{$navbar-height + $footer-height + $tome-toolbar-height + $tome-tabs-height + ($container-margin*2)});
+  overflow: scroll;
+}
+
+.new-spell-card {
+  height: 48px;
+  padding: 0 24px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}

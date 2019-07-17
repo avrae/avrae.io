@@ -8,7 +8,7 @@ import {TomeJSONImportDialog} from '../../dialogs/tome-json-import-dialog/tome-j
 @Component({
   selector: 'avr-spell-list',
   templateUrl: './spell-list.component.html',
-  styleUrls: ['./spell-list.component.css']
+  styleUrls: ['./spell-list.component.scss']
 })
 export class SpellListComponent implements OnInit {
 

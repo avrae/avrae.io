@@ -15,7 +15,7 @@ import {PackSRDImportDialog} from '../pack-srd-import-dialog/pack-srd-import-dia
 @Component({
   selector: 'avr-pack-detail',
   templateUrl: './pack-detail.component.html',
-  styleUrls: ['./pack-detail.component.css']
+  styleUrls: ['./pack-detail.component.scss']
 })
 export class PackDetailComponent implements OnInit, OnDestroy {
 

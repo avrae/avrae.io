@@ -8,7 +8,7 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'avr-tome-share',
   templateUrl: './tome-share.component.html',
-  styleUrls: ['./tome-share.component.css']
+  styleUrls: ['./tome-share.component.scss']
 })
 export class TomeShareComponent implements OnInit {
 
