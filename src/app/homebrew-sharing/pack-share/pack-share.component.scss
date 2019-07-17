@@ -15,7 +15,7 @@
 
 .item-list {
   max-height: calc(100vh - #{$navbar-height + $footer-height + $pack-toolbar-height + ($container-margin*2)});
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .item {
