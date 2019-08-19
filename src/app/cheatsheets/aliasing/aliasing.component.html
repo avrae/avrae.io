@@ -231,9 +231,9 @@
         <td>int</td>
       </tr>
       <tr>
-        <td><code>currentHp</code></td>
-        <td>(scripting only) The character's current remaining HP.</td>
-        <td>int</td>
+        <td><code>name</code></td>
+        <td>The character's name.</td>
+        <td>str</td>
       </tr>
       </tbody>
     </table>
@@ -276,7 +276,7 @@
         <td>
           <code>dice</code> - str - The dice to roll.<br>
           <code>multiply</code> - int, optional, default 1 - How many times to multiply each set of dice by.<br>
-          <code>dice</code> - int, optional, default 0 - How many dice to add to each set of dice.<br>
+          <code>add</code> - int, optional, default 0 - How many dice to add to each set of dice.<br>
         </td>
         <td><code>Result</code> - The result of the roll.<br>
           Use <code>Result.dice</code> (str) to access the rolled dice, <code>Result.total</code> (int) for the
@@ -644,8 +644,7 @@
       </tr>
       <tr>
         <td><code>get_raw()</code></td>
-        <td>Returns the raw character object (see the debug tab of a character in the <a
-          href="/dashboard">dashboard</a>).
+        <td>Returns the raw character object.
         </td>
         <td></td>
         <td><code>dict</code> - The raw character dictionary.</td>
