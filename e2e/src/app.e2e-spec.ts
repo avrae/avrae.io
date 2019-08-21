@@ -1,6 +1,6 @@
-import { AppPage } from './app.po';
+import {AppPage} from './app.po';
 
-describe('workspace-project App', () => {
+describe('avrae frontpage', () => {
   let page: AppPage;
 
   beforeEach(() => {
