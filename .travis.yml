@@ -11,8 +11,7 @@ install:
   - npm install
 script:
   - npm run build-themes
-  - ng e2e --protractor-config=e2e/protractor-ci.conf.js
-  - ng build
+  - ng e2e --protractor-config=e2e/protractor-ci.conf.js --prod
   - ng build --prod
   - cp dist/index.html dist/404.html
 deploy:
