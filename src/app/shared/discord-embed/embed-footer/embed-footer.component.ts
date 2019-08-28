@@ -1,5 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 
+export class EmbedFooter {
+  timestamp: Date;
+  text: string;
+  icon_url: string;
+}
+
 @Component({
   selector: 'avr-embed-footer',
   styleUrls: ['../discord-embed.component.css'],
@@ -24,10 +30,4 @@ export class EmbedFooterComponent implements OnInit {
     }
   }
 
-}
-
-export class EmbedFooter {
-  timestamp: Date;
-  text: string;
-  icon_url: string;
 }
