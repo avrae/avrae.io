@@ -6,8 +6,8 @@ import {Location} from '@angular/common';
 import {UserInfo} from '../../../../schemas/UserInfo';
 import {DashboardService} from '../../../dashboard.service';
 import {PackShareDialog} from '../pack-share-dialog/pack-share-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {PackOptionsDialog} from '../pack-options-dialog/pack-options-dialog.component';
 import {getUser} from '../../../APIHelper';
 import {PackJSONImportDialog} from '../pack-json-import-dialog/pack-json-import-dialog.component';
@@ -81,7 +81,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   ensureChangesNotif() {
     if (!this.changesOpen) {
       this.changesOpen = true;
-      let snackBarRef = this.snackBar.open('You have unsaved changes!', 'Save', {duration: -1});
+      let snackBarRef = this.snackBar.open('You have unsaved changes!', 'Save', {duration: -1, horizontalPosition: 'right'});
 
       snackBarRef.onAction().subscribe(() => {
         this.commit();
@@ -166,7 +166,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         console.log(result);
         this.changesOpen = false;
-        this.snackBar.open(result);
+        this.snackBar.open(result, null, {horizontalPosition: 'right'});
       });
   }
 
