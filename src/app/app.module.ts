@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, Provider} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from '@angular/cdk/layout';
 import {HttpClientModule} from '@angular/common/http';
@@ -18,7 +18,6 @@ import {FormsModule} from '@angular/forms';
 import {CommandsComponent} from './commands/commands.component';
 import {CommandListComponent} from './commands/command-list/command-list.component';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
-import {InViewportModule, WindowRef} from '@thisissoon/angular-inviewport';
 import {ScrollSpyModule} from '@thisissoon/angular-scrollspy';
 import {CheatsheetsModule} from './cheatsheets/cheatsheets.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -28,7 +27,7 @@ import {LoginModule} from './login/login.module';
 
 import * as Sentry from '@sentry/browser';
 
-Sentry.init({ dsn: 'https://af2b06560981446bb55f64b6f79fd520@sentry.io/1486249' });
+Sentry.init({dsn: 'https://af2b06560981446bb55f64b6f79fd520@sentry.io/1486249'});
 
 const markdownConfig = {
   markedOptions: {
@@ -40,10 +39,6 @@ const markdownConfig = {
     },
   }
 };
-const getWindow = () => window;
-const providers: Provider[] = [
-  {provide: WindowRef, useFactory: (getWindow)},
-];
 
 @NgModule({
   declarations: [
@@ -62,7 +57,6 @@ const providers: Provider[] = [
     LayoutModule,
     FormsModule,
     MarkdownModule.forRoot(markdownConfig),
-    InViewportModule.forRoot(providers),
     ScrollSpyModule.forRoot(),
     FlexLayoutModule,
     MaterialModule,
