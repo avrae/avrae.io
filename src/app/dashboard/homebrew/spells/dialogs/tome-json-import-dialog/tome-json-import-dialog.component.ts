@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import {HomebrewService} from '../../../homebrew.service';
 import {FormControl} from '@angular/forms';
 

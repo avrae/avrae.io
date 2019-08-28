@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HomebrewService} from '../homebrew.service';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Tome} from '../../../schemas/homebrew/Spells';
 import {NewTomeDialog} from './dialogs/new-tome-dialog.component';

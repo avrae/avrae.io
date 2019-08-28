@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import {HomebrewService} from '../../homebrew.service';
 import {Tome} from '../../../../schemas/homebrew/Spells';
 import {TomeJSONDialog} from './tome-json-dialog/tome-json-dialog.component';

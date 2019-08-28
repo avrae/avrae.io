@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Pack} from '../../../schemas/homebrew/Items';
 import {HomebrewService} from '../homebrew.service';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {NewPackDialog} from './new-pack-dialog/new-pack-dialog.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PackShareDialog} from './pack-share-dialog/pack-share-dialog.component';
