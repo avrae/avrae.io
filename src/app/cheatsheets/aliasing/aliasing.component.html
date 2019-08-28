@@ -5,9 +5,8 @@
       nitty-gritty syntactical shenanigans that you can use to make your aliases very powerful.</p>
     <p>When placed inline in an alias, any syntax in the syntax table will have the listed effect. For a list of
       built-in cvars, see the cvar table.</p>
-    <p>For a list of user-created aliases, plus help aliasing, join the <a href="http://support.avrae.io"
-                                                                           target="_blank">Avrae
-      Discord</a>!</p>
+    <p>For a list of user-created aliases, plus help aliasing, join the
+      <a href="http://support.avrae.io" target="_blank">Avrae Discord</a>!</p>
 
     <h3>Syntax Table</h3>
     <table class="table table-striped table-bordered">
@@ -376,6 +375,15 @@
         <td><code>msg</code> - str - The error to show.</td>
         <td><code>None</code></td>
         <td><code>err("Something went wrong.")</code></td>
+      </tr>
+      <tr>
+        <td><code>argparse(args)</code></td>
+        <td>Returns a <a (click)="scrollTo('parsedarguments')">ParsedArguments</a> object representing parsed
+          user arguments.
+        </td>
+        <td><code>args</code> - str or list - The arguments to parse.</td>
+        <td><code>ParsedArguments</code> - The arguments.</td>
+        <td><code>argparse("adv -rr 2 -b 1d4[bless]")</code></td>
       </tr>
       <tr>
         <td><code>get_cc(name)</code></td>
@@ -1196,6 +1204,97 @@
         <td><code>parent</code> - SimpleEffect - The parent effect.</td>
         <td><code>None</code></td>
         <td><code>effect.set_parent(effect2)</code></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <mat-divider></mat-divider>
+
+    <h4 id="parsedarguments">ParsedArguments</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Arguments</th>
+        <th>Returns</th>
+        <th><a matTooltip="This assumes that 'args' is an instance of ParsedArguments.">Syntax</a></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>parsed</code></td>
+        <td>
+          A raw dictionary representing the parsed arguments.
+        </td>
+        <td></td>
+        <td><code>dict</code> mapping <code>str</code> to <code>list</code> - All parsed arguments.</td>
+        <td><code>args.parsed</code></td>
+      </tr>
+      <tr>
+        <td><code>ephemeral</code></td>
+        <td>
+          A raw dictionary representing parsed ephemeral arguments.
+        </td>
+        <td></td>
+        <td><code>dict</code> mapping <code>str</code> to <code>list</code> - All parsed ephemeral arguments.</td>
+        <td><code>args.ephemeral</code></td>
+      </tr>
+      <tr>
+        <td><code>get(arg, default=None, type_=str, ephem=False)</code></td>
+        <td>
+          Gets a list of all values of an argument.
+        </td>
+        <td>
+          <code>arg</code> - str - The name of the argument to get.<br>
+          <code>default</code> - any - The default value to return if the arg is not found. Not cast to type.<br>
+          <code>type_</code> - type - The type that each value in the list should be returned as.<br>
+          <code>ephem</code> - bool - Whether to add applicable ephemeral arguments to the returned list.<br>
+        </td>
+        <td><code>list</code> - The values of the argument.</td>
+        <td><code>args.get("b")</code></td>
+      </tr>
+      <tr>
+        <td><code>last(arg, default=None, type_=str, ephem=False)</code></td>
+        <td>
+          Gets the last value of an arg.
+        </td>
+        <td>
+          <code>arg</code> - str - The name of the argument to get.<br>
+          <code>default</code> - any - The default value to return if the arg is not found. Not cast to type.<br>
+          <code>type_</code> - type - The type that the value should be returned as.<br>
+          <code>ephem</code> - bool - Whether to return applicable ephemeral arguments.<br>
+        </td>
+        <td><code>any</code> - The most recent value of an arg.</td>
+        <td><code>args.last("phrase")</code></td>
+      </tr>
+      <tr>
+        <td><code>adv(ea=False, boolwise=False, ephem=False)</code></td>
+        <td>
+          Determines whether to roll with advantage, disadvantage, Elven Accuracy, or no special effect.
+        </td>
+        <td>
+          <code>ea</code> - bool - Whether to account for Elven Accuracy.<br>
+          <code>boolwise</code> - bool - Whether to return an integer or tribool representation.<br>
+          <code>ephem</code> - bool - Whether to return an ephemeral argument if such exists.<br>
+        </td>
+        <td><code>int</code> or <code>bool</code> - -1/False for dis, 0/None for normal, 1/True for adv, 2 for ea</td>
+        <td><code>args.adv()</code></td>
+      </tr>
+      <tr>
+        <td><code>join(arg, connector, default=None, ephem=False)</code></td>
+        <td>
+          Returns a str formed from all of one arg, joined by a connector. Equivalent to
+          <code>connector.join(args.get(arg))</code>.
+        </td>
+        <td>
+          <code>arg</code> - str - The name of the argument to get.<br>
+          <code>connector</code> - str - What to join the arg by.<br>
+          <code>default</code> - any - The default value to return if the arg is not found. Not cast to type.<br>
+          <code>ephem</code> - bool - Whether to return applicable ephemeral arguments.<br>
+        </td>
+        <td><code>str</code> - The joined str.</td>
+        <td><code>args.join("d", "+")</code></td>
       </tr>
       </tbody>
     </table>
