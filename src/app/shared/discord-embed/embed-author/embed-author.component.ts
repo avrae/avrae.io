@@ -1,5 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 
+export class EmbedAuthor {
+  name: string;
+  url: string;
+  icon_url: string;
+}
+
 @Component({
   selector: 'avr-embed-author',
   styleUrls: ['../discord-embed.component.css'],
@@ -21,10 +27,4 @@ export class EmbedAuthorComponent implements OnInit {
   ngOnInit() {
   }
 
-}
-
-export class EmbedAuthor {
-  name: string;
-  url: string;
-  icon_url: string;
 }

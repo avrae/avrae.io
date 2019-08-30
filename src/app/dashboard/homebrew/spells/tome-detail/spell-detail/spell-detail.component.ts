@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Spell} from '../../../../../schemas/homebrew/Spells';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {TomeJSONDialog} from '../../dialogs/tome-json-dialog/tome-json-dialog.component';
 
 @Component({

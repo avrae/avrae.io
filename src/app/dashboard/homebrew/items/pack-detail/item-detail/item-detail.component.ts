@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Item} from '../../../../../schemas/homebrew/Items';
 import {PackJsonDialog} from '../../pack-json-dialog/pack-json-dialog.component';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'avr-item-detail',

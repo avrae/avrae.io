@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserVar} from '../../../schemas/Customization';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {CustomizationService} from '../customization.service';
 import {NewDialog} from '../../new-dialog/new-dialog.component';
 import {EditDialog} from '../../edit-dialog/edit-dialog.component';

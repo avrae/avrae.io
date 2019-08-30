@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Spell} from '../../../../schemas/homebrew/Spells';
 import {HomebrewService} from '../../homebrew.service';
-import {MatDialogRef} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'avr-tome-srd-import-dialog',

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Alias} from '../../../schemas/Customization';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {ConfirmDeleteDialog} from '../../confirm-delete-dialog/confirm-delete-dialog.component';
 import {CustomizationService} from '../customization.service';
 import {EditDialog} from '../../edit-dialog/edit-dialog.component';

@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HomebrewService} from '../../homebrew.service';
 import {DashboardService} from '../../../dashboard.service';
 import {Location} from '@angular/common';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {TomeShareDialog} from '../dialogs/tome-share-dialog.component';
 // import {TomeOptionsDialog} from "../../spells/tome-options-dialog/tome-options-dialog.component";
 // import {TomeJSONImportDialog} from "../../spells/tome-json-import-dialog/tome-json-import-dialog.component";
@@ -71,7 +72,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   ensureChangesNotif() {
     if (!this.changesOpen) {
       this.changesOpen = true;
-      let snackBarRef = this.snackBar.open('You have unsaved changes!', 'Save', {duration: -1});
+      let snackBarRef = this.snackBar.open('You have unsaved changes!', 'Save', {duration: -1, horizontalPosition: 'right'});
 
       snackBarRef.onAction().subscribe(() => {
         this.commit();
@@ -121,7 +122,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         console.log(result);
         this.changesOpen = false;
-        this.snackBar.open(result);
+        this.snackBar.open(result, null, {horizontalPosition: 'right'});
       });
   }
 
