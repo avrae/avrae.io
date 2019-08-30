@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 import {CommandModule} from '../schemas/Commands';
 
-const commandsUrl = `${environment.apiURL}/commands`;
+const commandsUrl = `${environment.mediaURL}/commands.json`;
 
 @Injectable({
   providedIn: 'root'
