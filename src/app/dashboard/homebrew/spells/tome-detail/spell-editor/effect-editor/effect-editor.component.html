@@ -6,58 +6,58 @@
       </div>
     </mat-panel-title>
   </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <div [ngSwitch]="effect.type">
+      <avr-target-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                         *ngSwitchCase="'target'"></avr-target-effect>
 
-  <div [ngSwitch]="effect.type">
-    <avr-target-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
-                       *ngSwitchCase="'target'"></avr-target-effect>
+      <avr-attack-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                         *ngSwitchCase="'attack'"></avr-attack-effect>
 
-    <avr-attack-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
-                       *ngSwitchCase="'attack'"></avr-attack-effect>
+      <avr-save-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                       *ngSwitchCase="'save'"></avr-save-effect>
 
-    <avr-save-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
-                     *ngSwitchCase="'save'"></avr-save-effect>
+      <avr-damage-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                         *ngSwitchCase="'damage'"></avr-damage-effect>
 
-    <avr-damage-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
-                       *ngSwitchCase="'damage'"></avr-damage-effect>
+      <avr-temphp-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                         *ngSwitchCase="'temphp'"></avr-temphp-effect>
 
-    <avr-temphp-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
-                       *ngSwitchCase="'temphp'"></avr-temphp-effect>
+      <avr-ieffect-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                          *ngSwitchCase="'ieffect'"></avr-ieffect-effect>
 
-    <avr-ieffect-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
-                        *ngSwitchCase="'ieffect'"></avr-ieffect-effect>
+      <avr-roll-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                       *ngSwitchCase="'roll'"></avr-roll-effect>
 
-    <avr-roll-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
-                     *ngSwitchCase="'roll'"></avr-roll-effect>
+      <avr-text-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                       *ngSwitchCase="'text'"></avr-text-effect>
 
-    <avr-text-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
-                     *ngSwitchCase="'text'"></avr-text-effect>
-
-    <div *ngSwitchDefault>
-      You should not see this text. If you do, that's a bug! Please report that {{effect.type}} is not handled on the
-      dev server!
+      <div *ngSwitchDefault>
+        You should not see this text. If you do, that's a bug! Please report that {{effect.type}} is not handled on the
+        dev server!
+      </div>
     </div>
-  </div>
 
-  <avr-effect-editor [parent]="effect.meta" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
+    <avr-effect-editor [parent]="effect.meta" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
 
-  <!-- ACTION BUTTONS -->
-  <div class="actions" fxLayout="row">
-    <span fxFlex *ngIf="!isFirst">
-      <button mat-icon-button matTooltip="Move Up" (click)="moveUp(effect)">
-        <mat-icon aria-label="Move Up">arrow_upward</mat-icon>
-      </button>
-    </span>
-    <span fxFlex *ngIf="!isLast">
-      <button mat-icon-button matTooltip="Move Down" (click)="moveDown(effect)">
-        <mat-icon aria-label="Move Down">arrow_downward</mat-icon>
-      </button>
-    </span>
-    <span fxFlex="grow"></span>
-    <span fxFlex>
-      <button mat-icon-button color="warn" (click)="delete(effect)">
-        <mat-icon aria-label="Delete">delete</mat-icon>
-      </button>
-    </span>
-  </div>
-
+    <!-- ACTION BUTTONS -->
+    <div class="actions" fxLayout="row">
+      <span fxFlex *ngIf="!isFirst">
+        <button mat-icon-button matTooltip="Move Up" (click)="moveUp(effect)">
+          <mat-icon aria-label="Move Up">arrow_upward</mat-icon>
+        </button>
+      </span>
+      <span fxFlex *ngIf="!isLast">
+        <button mat-icon-button matTooltip="Move Down" (click)="moveDown(effect)">
+          <mat-icon aria-label="Move Down">arrow_downward</mat-icon>
+        </button>
+      </span>
+      <span fxFlex="grow"></span>
+      <span fxFlex>
+        <button mat-icon-button color="warn" (click)="delete(effect)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </span>
+    </div>
+  </ng-template>
 </mat-expansion-panel>
