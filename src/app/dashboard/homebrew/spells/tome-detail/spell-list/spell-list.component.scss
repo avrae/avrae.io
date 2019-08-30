@@ -1,17 +1,25 @@
 @import "../../../../../_variables.scss";
 @import "../../_variables.scss";
 
+$new-spell-card-height: 48px;
+$viewport-height: calc(100vh - #{$navbar-height + $footer-height + $tome-toolbar-height + $tome-tabs-height + ($container-margin*2)});
+
 .container {
   margin: $container-margin;
 }
 
 .spell-list {
-  max-height: calc(100vh - #{$navbar-height + $footer-height + $tome-toolbar-height + $tome-tabs-height + ($container-margin*2)});
+  max-height: $viewport-height;
+  overflow-y: auto;
+}
+
+.spell-preview {
+  max-height: $viewport-height;
   overflow-y: auto;
 }
 
 .new-spell-card {
-  height: 48px;
+  height: $new-spell-card-height;
   padding: 0 24px;
 }
 
