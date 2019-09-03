@@ -1,6 +1,8 @@
 @import "../../../../_variables.scss";
 @import "../_variables.scss";
 
+$viewport-height: calc(100vh - #{$navbar-height + $footer-height + $pack-toolbar-height + ($container-margin*2)});
+
 .pack-toolbar {
   height: $pack-toolbar-height;
 }
@@ -10,7 +12,12 @@
 }
 
 .item-list {
-  max-height: calc(100vh - #{$navbar-height + $footer-height + $pack-toolbar-height + ($container-margin*2)});
+  max-height: $viewport-height;
+  overflow-y: auto;
+}
+
+.item-preview {
+  max-height: $viewport-height;
   overflow-y: auto;
 }
 
