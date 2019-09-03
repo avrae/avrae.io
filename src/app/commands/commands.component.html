@@ -21,8 +21,6 @@
       <p>This page is a list of all commands, subcommands, and valid arguments that Avrae can parse.</p>
       <p>Avrae's command system is split into distinct modules. All commands are called by starting a message with the
         message prefix (default <kbd>!</kbd>, but can be configured), followed by the command name.</p>
-      <p class="mat-small">This list is current as of Build 845. An updated version is always provided in
-        <kbd>!help</kbd>.</p>
     </mat-card>
 
     <mat-card class="container" *ngFor="let module of modules" id="{{module.name.toLowerCase()}}">
