@@ -47,7 +47,7 @@ export class AttackEffectComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.effect.attackBonus) {
+    if (this.effect.attackBonus || this.spell == null) {
       this.custom = true;
     }
   }

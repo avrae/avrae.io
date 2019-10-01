@@ -58,7 +58,7 @@ export class SaveEffectComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.effect.dc) {
+    if (this.effect.dc || this.spell == null) {
       this.custom = true;
     }
   }
