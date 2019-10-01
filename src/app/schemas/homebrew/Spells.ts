@@ -1,5 +1,5 @@
 import {DiscordUser} from '../DiscordUser';
-import {SpellEffect} from './SpellEffects';
+import {AutomationEffect} from './AutomationEffects';
 
 export const REQUIRED_SPELL_PROPS = ['name', 'level', 'school'];
 export const SPELL_SCHOOLS = ['A', 'V', 'E', 'I', 'D', 'N', 'T', 'C'];
@@ -33,7 +33,7 @@ export class Spell {
   description: string;
   higherlevels: string;
   concentration: boolean;
-  automation: SpellEffect[];
+  automation: AutomationEffect[];
   image?: string;
 
   constructor() {

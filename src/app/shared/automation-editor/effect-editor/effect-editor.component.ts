@@ -1,6 +1,6 @@
 import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SpellEffect} from '../../../schemas/homebrew/SpellEffects';
+import {AutomationEffect} from '../../../schemas/homebrew/AutomationEffects';
 import {Spell} from '../../../schemas/homebrew/Spells';
 
 @Component({
@@ -10,7 +10,7 @@ import {Spell} from '../../../schemas/homebrew/Spells';
 })
 export class EffectEditorComponent implements OnInit {
 
-  @Input() parent: SpellEffect[];
+  @Input() parent: AutomationEffect[];
   @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 

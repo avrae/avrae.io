@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TempHP} from '../../../../schemas/homebrew/SpellEffects';
+import {TempHP} from '../../../../schemas/homebrew/AutomationEffects';
 import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({

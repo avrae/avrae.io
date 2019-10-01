@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Attack} from '../../../../schemas/homebrew/SpellEffects';
+import {Attack} from '../../../../schemas/homebrew/AutomationEffects';
 import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({
