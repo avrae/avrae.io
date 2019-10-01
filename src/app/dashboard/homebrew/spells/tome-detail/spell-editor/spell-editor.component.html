@@ -3,11 +3,7 @@
     <p>Editing {{spell.name}}...</p>
     <p>You can find help on how to use the spell editor
       <a target="_blank" href="https://avrae.readthedocs.io/en/latest/automation.html">here</a>.</p>
-    <mat-accordion multi="true">
-      <avr-effect-editor [parent]="spell.automation" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
-      <avr-new-effect-card [parent]="spell.automation" [parentType]="'root'"
-                           (changed)="changed.emit()"></avr-new-effect-card>
-    </mat-accordion>
+    <avr-automation-editor></avr-automation-editor>
   </mat-card>
 </div>
 

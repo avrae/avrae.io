@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SpellEffect} from '../../../../../../schemas/homebrew/SpellEffects';
 import {moveItemInArray} from '@angular/cdk/drag-drop';
-import {Spell} from '../../../../../../schemas/homebrew/Spells';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SpellEffect} from '../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-effect-editor',

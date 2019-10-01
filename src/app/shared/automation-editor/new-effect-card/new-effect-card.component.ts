@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Attack, Damage, IEffect, Roll, Save, SpellEffect, Target, TempHP, Text} from '../../../../../../schemas/homebrew/SpellEffects';
+import {Attack, Damage, IEffect, Roll, Save, SpellEffect, Target, TempHP, Text} from '../../../schemas/homebrew/SpellEffects';
 
 const typeOptions = new Map<string, Array<string>>(
   [

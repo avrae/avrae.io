@@ -1,25 +1,31 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TempHP} from '../../../../../../../schemas/homebrew/SpellEffects';
-import {Spell} from '../../../../../../../schemas/homebrew/Spells';
+import {Roll} from '../../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({
-  selector: 'avr-temphp-effect',
+  selector: 'avr-roll-effect',
   template: `
     <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
       <mat-form-field>
-        <input matInput placeholder="Amount" (change)="changed.emit()" [(ngModel)]="effect.amount">
+        <input matInput placeholder="Name" (change)="changed.emit()" [(ngModel)]="effect.name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Dice" (change)="changed.emit()" [(ngModel)]="effect.dice">
       </mat-form-field>
       <avr-higher-level [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
       <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
         Scales like Cantrip
       </mat-checkbox>
+      <mat-checkbox [(ngModel)]="effect.hidden" (change)="changed.emit()">
+        Hidden
+      </mat-checkbox>
     </div>
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class TempHPEffectComponent implements OnInit {
+export class RollEffectComponent implements OnInit {
 
-  @Input() effect: TempHP;
+  @Input() effect: Roll;
   @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 

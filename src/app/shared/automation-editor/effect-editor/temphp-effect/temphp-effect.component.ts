@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Damage} from '../../../../../../../schemas/homebrew/SpellEffects';
-import {Spell} from '../../../../../../../schemas/homebrew/Spells';
+import {TempHP} from '../../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({
-  selector: 'avr-damage-effect',
+  selector: 'avr-temphp-effect',
   template: `
     <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
       <mat-form-field>
-        <input matInput placeholder="Damage" (change)="changed.emit()" [(ngModel)]="effect.damage">
+        <input matInput placeholder="Amount" (change)="changed.emit()" [(ngModel)]="effect.amount">
       </mat-form-field>
       <avr-higher-level [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
       <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
@@ -17,9 +17,9 @@ import {Spell} from '../../../../../../../schemas/homebrew/Spells';
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class DamageEffectComponent implements OnInit {
+export class TempHPEffectComponent implements OnInit {
 
-  @Input() effect: Damage;
+  @Input() effect: TempHP;
   @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 

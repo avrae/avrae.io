@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Spell} from '../../../../../../../schemas/homebrew/Spells';
-import {Damage, Roll} from '../../../../../../../schemas/homebrew/SpellEffects';
+import {Spell} from '../../../../schemas/homebrew/Spells';
+import {Damage, Roll} from '../../../../schemas/homebrew/SpellEffects';
 
 const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
 
