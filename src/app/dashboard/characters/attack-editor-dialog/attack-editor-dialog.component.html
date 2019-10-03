@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Editing Attacks: {{character.name}}</h2>
+
+<mat-dialog-content class="mat-typography" *ngIf="allAttacks">
+  <mat-form-field>
+    <mat-label>Select an attack</mat-label>
+    <mat-select [(value)]="selectedAttack">
+      <mat-option *ngFor="let attack of allAttacks" [value]="attack">
+        {{attack.name}}
+      </mat-option>
+      <mat-option (click)="addAndSelectNewAttack()">New...</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-divider class="beefy-divider"></mat-divider>
+
+  <p *ngIf="!selectedAttack">Please select an attack.</p>
+
+  <div *ngIf="selectedAttack">
+    <div fxLayout="row" fxLayoutGap="4px">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Attack Name" [(ngModel)]="selectedAttack.name">
+      </mat-form-field>
+      <button mat-icon-button color="warn" (click)="deleteAttack(selectedAttack)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <avr-automation-editor [automation]="selectedAttack.automation"></avr-automation-editor>
+  </div>
+
+  <p *ngIf="errorValue" class="error-text">
+    {{errorValue}}
+  </p>
+</mat-dialog-content>
+
+<!-- Loading Spinner -->
+<mat-dialog-content class="mat-typography" *ngIf="!allAttacks">
+  <mat-spinner [diameter]="24"></mat-spinner>
+  <p>
+    Loading attacks...
+  </p>
+</mat-dialog-content>
+
+<!-- Buttons -->
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="saveAndExit()" [disabled]="saveButtonDisabled">{{saveButtonValue}}</button>
+</mat-dialog-actions>

@@ -29,16 +29,25 @@
       </div>
       <img class="character-image" [src]="character.image" [alt]="'Image for ' + character.name"
            *ngIf="character.image">
-      <a class="character-meta" [href]="getUpstreamURL(character.upstream)" target="_blank">
+      <div class="character-meta">
         <div class="mat-typography ignore-theme character-text">
           <h3>
             {{character.name}}
           </h3>
-          <p>
-            {{character.description}}
-          </p>
+          {{character.description}}
         </div>
-      </a>
+        <div class="mat-typography ignore-theme character-actions">
+          <a mat-icon-button matTooltip="View Sheet"
+             [href]="getUpstreamURL(character.upstream)" target="_blank">
+            <mat-icon>menu_book</mat-icon>
+          </a>
+          <button mat-icon-button
+                  [matTooltip]="character.import_version < MIN_CHARACTER_AUTOMATION_VERSION ? 'Please !update your character to use Automation.' : 'Edit Attacks'"
+                  (click)="beginEditAttacks(character)">
+            <mat-icon>build</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

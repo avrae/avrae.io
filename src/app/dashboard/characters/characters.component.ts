@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
 import {UserInfo, UserStats} from '../../schemas/UserInfo';
 import {DashboardService} from '../dashboard.service';
 import {CharacterMeta} from '../../schemas/Character';
 import {Observable} from 'rxjs';
+import {AttackEditorDialog} from './attack-editor-dialog/attack-editor-dialog.component';
 
 @Component({
   selector: 'avr-characters',
@@ -16,7 +18,9 @@ export class CharactersComponent implements OnInit {
   characters: Observable<CharacterMeta[]>;
   numCols: number;
 
-  constructor(private dashboardService: DashboardService) {
+  MIN_CHARACTER_AUTOMATION_VERSION = 17;
+
+  constructor(private dashboardService: DashboardService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -44,14 +48,29 @@ export class CharactersComponent implements OnInit {
   }
 
   getUpstreamURL(upstream: string): string {
-    if (upstream.startsWith("dicecloud-")) {
+    if (upstream.startsWith('dicecloud-')) {
       return `https://dicecloud.com/character/${upstream.slice(10)}`;
-    } else if (upstream.startsWith("google-")) {
+    } else if (upstream.startsWith('google-')) {
       return `https://docs.google.com/spreadsheets/d/${upstream.slice(7)}`;
-    } else if (upstream.startsWith("beyond-")) {
+    } else if (upstream.startsWith('beyond-')) {
       return `https://ddb.ac/characters/${upstream.slice(7)}`;
     }
     return '';
+  }
+
+  // Attack Editor
+  beginEditAttacks(character: CharacterMeta) {
+    if (character.import_version < this.MIN_CHARACTER_AUTOMATION_VERSION) {
+      return;
+    }
+
+    this.dialog.open(AttackEditorDialog, {
+      width: '75%', disableClose: true,
+      data: character
+    })
+      .afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   // Responsiveness

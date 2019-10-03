@@ -27,16 +27,27 @@
 
 /* styles for overlay text */
 .character-text {
-  margin: 1em;
+  margin: 1em 1em 0;
+  height: calc(100% - (3em + 40px));
+  word-wrap: break-word;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.character-text::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
 }
 
 .character-text h3 {
   margin-bottom: 0;
 }
 
-.character-text p {
-  word-wrap: break-word;
-  overflow: hidden;
+/* styles for overlay buttons */
+.character-actions {
+  margin: 1em;
+  height: 40px; /* icon button height */
 }
 
 /* styles for underlay text */
