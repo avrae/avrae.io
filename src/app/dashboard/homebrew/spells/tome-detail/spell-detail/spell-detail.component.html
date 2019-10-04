@@ -66,7 +66,7 @@
         </mat-form-field>
       </div>
 
-      <!-- COMPONENTS AND CONCENTRATION -->
+      <!-- COMPONENTS -->
       <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
         <mat-checkbox fxFlex="nogrow" [(ngModel)]="spell.components.verbal" (change)="emitChange()">
           Verbal
@@ -77,15 +77,18 @@
         <mat-form-field fxFlex>
           <input matInput placeholder="Material" (change)="emitChange()" [(ngModel)]="spell.components.material">
         </mat-form-field>
+      </div>
+
+      <!-- DURATION AND CONC -->
+      <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Duration" (change)="emitChange()" [(ngModel)]="spell.duration">
+        </mat-form-field>
+
         <mat-checkbox fxFlex="nogrow" [(ngModel)]="spell.concentration" (change)="emitChange()">
           Concentration
         </mat-checkbox>
       </div>
-      
-      <!-- DURATION -->
-      <mat-form-field>
-        <input matInput placeholder="Duration" (change)="emitChange()" [(ngModel)]="spell.duration">
-      </mat-form-field>
 
       <!-- DESCRIPTION -->
       <mat-form-field>
