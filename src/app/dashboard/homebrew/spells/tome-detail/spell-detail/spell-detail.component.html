@@ -55,20 +55,15 @@
         <mat-checkbox fxFlex="nogrow" [(ngModel)]="spell.ritual" (change)="emitChange()">Ritual</mat-checkbox>
       </div>
 
-      <!-- TIME, RANGE, DURATION -->
-      <div fxLayout="row" fxLayoutGap="6px">
-        <mat-form-field fxFlex>
-          <input matInput placeholder="Casting Time" (change)="emitChange()" [(ngModel)]="spell.casttime">
-        </mat-form-field>
+      <!-- TIME -->
+      <mat-form-field>
+        <input matInput placeholder="Casting Time" (change)="emitChange()" [(ngModel)]="spell.casttime">
+      </mat-form-field>
 
-        <mat-form-field fxFlex>
-          <input matInput placeholder="Range" (change)="emitChange()" [(ngModel)]="spell.range">
-        </mat-form-field>
-
-        <mat-form-field fxFlex>
-          <input matInput placeholder="Duration" (change)="emitChange()" [(ngModel)]="spell.duration">
-        </mat-form-field>
-      </div>
+      <!-- RANGE -->
+      <mat-form-field>
+        <input matInput placeholder="Range" (change)="emitChange()" [(ngModel)]="spell.range">
+      </mat-form-field>
 
       <!-- COMPONENTS AND CONCENTRATION -->
       <div fxLayout="row" fxLayoutGap="6px" fxLayoutAlign="center center">
@@ -85,6 +80,11 @@
           Concentration
         </mat-checkbox>
       </div>
+      
+      <!-- DURATION -->
+      <mat-form-field>
+        <input matInput placeholder="Duration" (change)="emitChange()" [(ngModel)]="spell.duration">
+      </mat-form-field>
 
       <!-- DESCRIPTION -->
       <mat-form-field>
