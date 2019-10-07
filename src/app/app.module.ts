@@ -25,6 +25,7 @@ import {HomebrewSharingModule} from './homebrew-sharing/homebrew-sharing.module'
 import {LoginModule} from './login/login.module';
 import {MaterialModule} from './material/material.module';
 import {NavbarComponent} from './navbar/navbar.component';
+import {AutomationEditorModule} from './shared/automation-editor/automation-editor.module';
 import {DiscordEmbedModule} from './shared/discord-embed/discord-embed.module';
 import {ThemesModule} from './themes/themes.module';
 
@@ -66,6 +67,7 @@ const markdownConfig = {
     CheatsheetsModule,
     HomebrewSharingModule,
     DiscordEmbedModule,
+    AutomationEditorModule,
     AppRoutingModule,
     ThemesModule,
     LoginModule

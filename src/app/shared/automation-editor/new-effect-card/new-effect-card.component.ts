@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Attack, Damage, IEffect, Roll, Save, SpellEffect, Target, TempHP, Text} from '../../../../../../schemas/homebrew/SpellEffects';
+import {Attack, Damage, IEffect, Roll, Save, AutomationEffect, Target, TempHP, Text} from '../../../schemas/homebrew/AutomationEffects';
 
 const typeOptions = new Map<string, Array<string>>(
   [
@@ -23,8 +23,8 @@ const typeOptions = new Map<string, Array<string>>(
 })
 export class NewEffectCardComponent implements OnInit {
 
-  @Input() parent: Array<SpellEffect>;
-  @Input() metaParent: Array<SpellEffect>;
+  @Input() parent: Array<AutomationEffect>;
+  @Input() metaParent: Array<AutomationEffect>;
   @Input() parentType: string;
   @Output() changed = new EventEmitter();
   toAddType: { option: string, meta: boolean };
@@ -40,7 +40,7 @@ export class NewEffectCardComponent implements OnInit {
   }
 
   addEffect() {
-    let effect: SpellEffect;
+    let effect: AutomationEffect;
     switch (this.toAddType.option) {
       case 'target':
         effect = new Target();
@@ -83,18 +83,18 @@ export class NewEffectCardComponent implements OnInit {
     this.changed.emit();
   }
 
-  newEffect(effect: SpellEffect) {
+  newEffect(effect: AutomationEffect) {
     this.parent.push(effect);
   }
 
-  newMeta(effect: SpellEffect) {
+  newMeta(effect: AutomationEffect) {
     this.metaParent.push(effect);
   }
 }
 
 class AttackAndDamagePreset extends Target {
   constructor() {
-    const effects: SpellEffect[] = [
+    const effects: AutomationEffect[] = [
       new Attack([
         new Damage('1d10[fire]')
       ])
@@ -105,14 +105,14 @@ class AttackAndDamagePreset extends Target {
 
 class SaveForHalfPreset extends Target {
   constructor() {
-    const effects: SpellEffect[] = [
+    const effects: AutomationEffect[] = [
       new Save('dex', [
         new Damage('{damage}')
       ], [
         new Damage('({damage})/2')
       ])
     ];
-    const meta: SpellEffect[] = [
+    const meta: AutomationEffect[] = [
       new Roll('8d6[fire]', 'damage')
     ];
     super('all', effects, meta);

@@ -1,15 +1,19 @@
-import {Injectable} from '@angular/core';
-import {UserInfo, UserStats} from '../schemas/UserInfo';
-import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import {defaultOptions} from './APIHelper';
-import {CharacterMeta} from '../schemas/Character';
+import {Attack, CharacterMeta} from '../schemas/Character';
 import {Customizations, GlobalVar} from '../schemas/Customization';
+import {UserInfo, UserStats} from '../schemas/UserInfo';
+import {defaultOptions, defaultTextOptions} from './APIHelper';
 
 const userInfoUrl = `${environment.apiURL}/user`;
 const userStatsUrl = `${environment.apiURL}/userStats`;
-const characterMetaUrl = `${environment.apiURL}/characters/meta`;
+
+const characterBaseUrl = `${environment.apiURL}/characters`;
+const characterMetaUrl = `${characterBaseUrl}/meta`;
+
 const customizationsUrl = `${environment.apiURL}/customizations`;
 const gvarsUrl = `${environment.apiURL}/customizations/gvars`;
 
@@ -32,6 +36,23 @@ export class DashboardService {
 
   getCharacterMeta(): Observable<CharacterMeta[]> {
     return this.http.get<CharacterMeta[]>(characterMetaUrl, defaultOptions());
+  }
+
+  getCharacterAttacks(upstream: string): Observable<Attack[]> {
+    const endpt = `${characterBaseUrl}/${upstream}/attacks`;
+    return this.http.get<Attack[]>(endpt, defaultOptions());
+  }
+
+  putCharacterAttacks(upstream: string, attacks: Attack[]): Observable<string> {
+    // Returns false if the put fails.
+    const endpt = `${characterBaseUrl}/${upstream}/attacks`;
+    // @ts-ignore
+    return this.http.put<string>(endpt, attacks, defaultTextOptions())
+      .pipe(
+        catchError(_ => {
+          return of(false);
+        })
+      );
   }
 
   getCustomizations(): Observable<Customizations> {

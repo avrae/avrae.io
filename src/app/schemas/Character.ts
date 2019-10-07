@@ -1,3 +1,5 @@
+import {AutomationEffect} from './homebrew/AutomationEffects';
+
 export class Character {
   owner: string;
   active: boolean;
@@ -28,6 +30,7 @@ export class CharacterMeta {
   description: string;
   image: string;
   levels: { total_level: number, classes: Map<string, number> };
+  import_version: number;
 }
 
 export class Stats {
@@ -51,9 +54,14 @@ export class Stats {
 
 export class Attack {
   name: string;
-  attackBonus?: string;
-  damage?: string;
-  details?: string;
+  automation: AutomationEffect[];
+  _v: 2;
+
+  constructor(name = '', automation: AutomationEffect[] = []) {
+    this.name = name;
+    this.automation = automation;
+    this._v = 2;
+  }
 }
 
 export class Skills {

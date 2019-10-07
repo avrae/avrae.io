@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Save} from '../../../../../../../schemas/homebrew/SpellEffects';
-import {Spell} from '../../../../../../../schemas/homebrew/Spells';
+import {Save} from '../../../../schemas/homebrew/AutomationEffects';
+import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-save-effect',
@@ -58,7 +58,7 @@ export class SaveEffectComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.effect.dc) {
+    if (this.effect.dc || this.spell == null) {
       this.custom = true;
     }
   }

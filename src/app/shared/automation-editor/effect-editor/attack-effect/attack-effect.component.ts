@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Attack} from '../../../../../../../schemas/homebrew/SpellEffects';
-import {Spell} from '../../../../../../../schemas/homebrew/Spells';
+import {Attack} from '../../../../schemas/homebrew/AutomationEffects';
+import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-attack-effect',
@@ -47,7 +47,7 @@ export class AttackEffectComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.effect.attackBonus) {
+    if (this.effect.attackBonus || this.spell == null) {
       this.custom = true;
     }
   }

@@ -1,6 +1,6 @@
-export class SpellEffect {
+export class AutomationEffect {
   type: string;
-  meta: SpellEffect[];
+  meta: AutomationEffect[];
 
   constructor(type, meta = []) {
     this.type = type;
@@ -9,9 +9,9 @@ export class SpellEffect {
 
 }
 
-export class Target extends SpellEffect {
+export class Target extends AutomationEffect {
   target: string | number;
-  effects: SpellEffect[];
+  effects: AutomationEffect[];
 
   constructor(target = 'all', effects = [], meta?) {
     super('target', meta);
@@ -20,9 +20,9 @@ export class Target extends SpellEffect {
   }
 }
 
-export class Attack extends SpellEffect {
-  hit: SpellEffect[];
-  miss: SpellEffect[];
+export class Attack extends AutomationEffect {
+  hit: AutomationEffect[];
+  miss: AutomationEffect[];
   attackBonus?: string;
 
   constructor(hit = [], miss = [], attackBonus?, meta?) {
@@ -33,10 +33,10 @@ export class Attack extends SpellEffect {
   }
 }
 
-export class Save extends SpellEffect {
+export class Save extends AutomationEffect {
   stat: string;
-  fail: SpellEffect[];
-  success: SpellEffect[];
+  fail: AutomationEffect[];
+  success: AutomationEffect[];
   dc: string;
 
   constructor(stat = 'str', fail = [], success = [], dc?, meta?) {
@@ -48,7 +48,7 @@ export class Save extends SpellEffect {
   }
 }
 
-export class Damage extends SpellEffect {
+export class Damage extends AutomationEffect {
   damage: string;
   higher?: Map<number, string>;
   cantripScale?: boolean;
@@ -62,7 +62,7 @@ export class Damage extends SpellEffect {
   }
 }
 
-export class TempHP extends SpellEffect {
+export class TempHP extends AutomationEffect {
   amount: string;
   higher?: Map<number, string>;
   cantripScale?: boolean;
@@ -76,7 +76,7 @@ export class TempHP extends SpellEffect {
   }
 }
 
-export class IEffect extends SpellEffect {
+export class IEffect extends AutomationEffect {
   name: string;
   duration: number | string;
   effects: string;
@@ -91,7 +91,7 @@ export class IEffect extends SpellEffect {
   }
 }
 
-export class Roll extends SpellEffect {
+export class Roll extends AutomationEffect {
   dice: string;
   name: string;
   higher?: Map<number, string>;
@@ -109,7 +109,7 @@ export class Roll extends SpellEffect {
   }
 }
 
-export class Text extends SpellEffect {
+export class Text extends AutomationEffect {
   text: string;
 
   constructor(text = '', meta?) {

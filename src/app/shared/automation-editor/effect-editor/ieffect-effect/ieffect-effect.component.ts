@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IEffect} from '../../../../../../../schemas/homebrew/SpellEffects';
-import {Spell} from '../../../../../../../schemas/homebrew/Spells';
+import {IEffect} from '../../../../schemas/homebrew/AutomationEffects';
+import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-ieffect-effect',

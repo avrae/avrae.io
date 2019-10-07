@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TempHP} from '../../../../../../../schemas/homebrew/SpellEffects';
-import {Spell} from '../../../../../../../schemas/homebrew/Spells';
+import {TempHP} from '../../../../schemas/homebrew/AutomationEffects';
+import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({
   selector: 'avr-temphp-effect',
@@ -9,8 +9,8 @@ import {Spell} from '../../../../../../../schemas/homebrew/Spells';
       <mat-form-field>
         <input matInput placeholder="Amount" (change)="changed.emit()" [(ngModel)]="effect.amount">
       </mat-form-field>
-      <avr-higher-level [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
-      <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
+      <avr-higher-level *ngIf="spell != null" [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
+      <mat-checkbox *ngIf="spell != null" [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
         Scales like Cantrip
       </mat-checkbox>
     </div>
