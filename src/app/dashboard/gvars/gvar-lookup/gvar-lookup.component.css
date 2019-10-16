@@ -1,0 +1,19 @@
+.lookup-id-input {
+  margin-right: 4px;
+  width: 50%;
+}
+
+.gvar-value-container {
+  padding-top: 1em;
+}
+
+.gvar-value-display {
+  white-space: pre-wrap;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0;
+
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.15);
+  border-width: 1px;
+  border-radius: 6px;
+}

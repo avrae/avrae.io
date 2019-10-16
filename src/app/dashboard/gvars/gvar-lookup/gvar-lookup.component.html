@@ -1,0 +1,25 @@
+<mat-form-field class="lookup-id-input">
+  <input matInput placeholder="Gvar ID" #lookupIdInput>
+</mat-form-field>
+<button mat-flat-button color="primary" (click)="lookupGvar(lookupIdInput.value)">Lookup</button>
+
+<div *ngIf="activeGvar">
+  <p>
+    {{activeGvar.key}}
+  </p>
+  <p>
+    <i>Owned by: {{activeGvar.owner_name}}</i>
+  </p>
+
+  <mat-divider></mat-divider>
+
+  <div class="gvar-value-container">
+    <pre class="gvar-value-display">{{activeGvar.value}}</pre>
+  </div>
+</div>
+
+<div *ngIf="error">
+  <p style="color: red">
+    {{error}}
+  </p>
+</div>

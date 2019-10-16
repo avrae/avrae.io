@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Attack, CharacterMeta} from '../schemas/Character';
-import {Customizations, GlobalVar} from '../schemas/Customization';
+import {Customizations} from '../schemas/Customization';
 import {UserInfo, UserStats} from '../schemas/UserInfo';
 import {defaultOptions, defaultTextOptions} from './APIHelper';
 
@@ -57,9 +57,5 @@ export class DashboardService {
 
   getCustomizations(): Observable<Customizations> {
     return this.http.get<Customizations>(customizationsUrl, defaultOptions());
-  }
-
-  getGvars(): Observable<{ owned: GlobalVar[], editable: GlobalVar[] }> {
-    return this.http.get<{ owned: GlobalVar[], editable: GlobalVar[] }>(gvarsUrl, defaultOptions());
   }
 }

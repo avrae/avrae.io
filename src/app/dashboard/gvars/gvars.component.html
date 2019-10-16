@@ -7,6 +7,9 @@
       <mat-tab label="Editable">
         <avr-gvar-list [data]="(gvars | async)?.editable" [owned]="false"></avr-gvar-list>
       </mat-tab>
+      <mat-tab label="Lookup">
+        <avr-gvar-lookup></avr-gvar-lookup>
+      </mat-tab>
     </mat-tab-group>
   </mat-card>
 </div>

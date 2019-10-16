@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {GlobalVar} from '../../schemas/Customization';
-import {DashboardService} from '../dashboard.service';
+import {GvarService} from './gvar.service';
 
 @Component({
   selector: 'avr-gvars',
@@ -12,7 +12,7 @@ export class GvarsComponent implements OnInit {
 
   gvars: Observable<{ owned: GlobalVar[]; editable: GlobalVar[] }>;
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private gvarService: GvarService) {
   }
 
   ngOnInit() {
@@ -20,7 +20,6 @@ export class GvarsComponent implements OnInit {
   }
 
   getCustomizations(): void {
-    this.gvars = this.dashboardService.getGvars();
+    this.gvars = this.gvarService.getAllGvars();
   }
-
 }
