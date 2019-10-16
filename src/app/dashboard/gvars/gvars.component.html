@@ -1,6 +1,6 @@
 <div class="container">
   <mat-card>
-    <mat-tab-group>
+    <mat-tab-group [(selectedIndex)]="forcedTabIndex">
       <mat-tab label="Owned">
         <avr-gvar-list [data]="(gvars | async)?.owned" [owned]="true"></avr-gvar-list>
       </mat-tab>
