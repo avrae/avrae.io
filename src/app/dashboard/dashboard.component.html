@@ -6,9 +6,18 @@
     fixedTopGap="56px">
     <mat-nav-list>
       <a mat-list-item [routerLink]="['characters']">Characters</a>
-      <a mat-list-item [routerLink]="['aliases']">Customization</a>
-      <a mat-list-item [routerLink]="['gvars']">Global Variables</a>
-      <div class="spacer"></div>
+
+      <mat-expansion-panel class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="nav-panel">
+            Customization
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="nav-panel-body">
+          <a mat-list-item [routerLink]="['aliases']">Your Customizations</a>
+          <a mat-list-item [routerLink]="['gvars']">Global Variables</a>
+        </div>
+      </mat-expansion-panel>
 
       <mat-expansion-panel class="mat-elevation-z0">
         <mat-expansion-panel-header>
@@ -19,6 +28,9 @@
         <div class="nav-panel-body">
           <a mat-list-item routerLink="/dashboard/homebrew/items">Items</a>
           <a mat-list-item routerLink="/dashboard/homebrew/spells">Spells</a>
+          <a mat-list-item href="https://critterdb.com/#/index" target="_blank">Creatures
+            <mat-icon class="icon-in-panel">launch</mat-icon>
+          </a>
         </div>
       </mat-expansion-panel>
 
