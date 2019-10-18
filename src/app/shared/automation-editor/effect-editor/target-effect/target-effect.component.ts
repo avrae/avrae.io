@@ -12,12 +12,12 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
           <mat-option value="all">All (usually saves)</mat-option>
           <mat-option value="each">Each (usually attacks)</mat-option>
           <mat-option value="self">Caster</mat-option>
-          <mat-option [value]="targetPosInput.value">Position</mat-option>
+          <mat-option [value]="targetPosInput.value" (click)="effect.target=1">Position</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field [ngClass]="!isNumber(effect.target) ? 'hidden' : ''">
         <input matInput placeholder="Target Position" type="number" [value]="effect.target" #targetPosInput
-               (change)="onTargetPosChange(targetPosInput)">
+               (change)="onTargetPosChange(targetPosInput)" min="1">
       </mat-form-field>
     </div>
     <avr-effect-editor [parent]="effect.effects" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
