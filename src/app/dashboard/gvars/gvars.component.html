@@ -1,11 +1,14 @@
 <div class="container">
   <mat-card>
-    <mat-tab-group>
+    <mat-tab-group [(selectedIndex)]="forcedTabIndex">
       <mat-tab label="Owned">
         <avr-gvar-list [data]="(gvars | async)?.owned" [owned]="true"></avr-gvar-list>
       </mat-tab>
       <mat-tab label="Editable">
         <avr-gvar-list [data]="(gvars | async)?.editable" [owned]="false"></avr-gvar-list>
+      </mat-tab>
+      <mat-tab label="Lookup">
+        <avr-gvar-lookup></avr-gvar-lookup>
       </mat-tab>
     </mat-tab-group>
   </mat-card>

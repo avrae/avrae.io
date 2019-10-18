@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 import {GlobalVar} from '../../schemas/Customization';
 import {defaultOptions, defaultTextOptions} from '../APIHelper';
-import {catchError} from 'rxjs/operators';
 
 const gvarUrl = `${environment.apiURL}/customizations/gvars`;
 
@@ -16,6 +16,10 @@ export class GvarService {
   constructor(private http: HttpClient) {
   }
 
+  getAllGvars(): Observable<{ owned: GlobalVar[], editable: GlobalVar[] }> {
+    return this.http.get<{ owned: GlobalVar[], editable: GlobalVar[] }>(gvarUrl, defaultOptions());
+  }
+
   getGvars(owned: boolean): Observable<GlobalVar[]> {
     return this.http.get<GlobalVar[]>(`${gvarUrl}/${owned ? 'owned' : 'editable'}`, defaultOptions());
   }
@@ -25,6 +29,13 @@ export class GvarService {
     return this.http.post<string>(`${gvarUrl}`, gvar, defaultTextOptions())
       .pipe(
         catchError(this.handleTextError('newGvar'))
+      );
+  }
+
+  getGvar(key: string): Observable<GlobalVar | boolean> {
+    return this.http.get<GlobalVar>(`${gvarUrl}/${key}`, defaultOptions())
+      .pipe(
+        catchError(_ => of(false))
       );
   }
 
