@@ -1,18 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserInfo} from '../../../../schemas/UserInfo';
-import {getUser} from '../../../APIHelper';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HomebrewService} from '../../homebrew.service';
-import {DashboardService} from '../../../dashboard.service';
 import {Location} from '@angular/common';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {TomeShareDialog} from '../dialogs/tome-share-dialog.component';
-// import {TomeOptionsDialog} from "../../spells/tome-options-dialog/tome-options-dialog.component";
-// import {TomeJSONImportDialog} from "../../spells/tome-json-import-dialog/tome-json-import-dialog.component";
-// import {TomeSRDImportDialog} from "../../spells/tome-srd-import-dialog/tome-srd-import-dialog.component";
+import {ActivatedRoute, Router} from '@angular/router';
+
 import {Spell, Tome} from '../../../../schemas/homebrew/Spells';
+import {UserInfo} from '../../../../schemas/UserInfo';
+import {getUser} from '../../../APIHelper';
+import {DashboardService} from '../../../dashboard.service';
+import {HomebrewService} from '../../homebrew.service';
 import {TomeOptionsDialog} from '../dialogs/tome-options-dialog.component';
+import {TomeShareDialog} from '../dialogs/tome-share-dialog.component';
 
 @Component({
   selector: 'avr-tome-detail',

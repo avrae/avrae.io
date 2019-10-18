@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TomeJSONImportDialog } from './tome-json-import-dialog.component';
+import { JSONExportDialog } from './json-export-dialog.component';
 
-describe('TomeJSONImportDialog', () => {
-  let component: TomeJSONImportDialog;
-  let fixture: ComponentFixture<TomeJSONImportDialog>;
+describe('TomeJSONDialog', () => {
+  let component: JSONExportDialog;
+  let fixture: ComponentFixture<JSONExportDialog>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TomeJSONImportDialog ]
+      declarations: [ JSONExportDialog ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TomeJSONImportDialog);
+    fixture = TestBed.createComponent(JSONExportDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
-  selector: 'avr-tome-json-dialog',
-  templateUrl: './tome-json-dialog.component.html',
-  styleUrls: ['./tome-json-dialog.component.css']
+  selector: 'avr-json-export-dialog',
+  templateUrl: './json-export-dialog.component.html',
+  styleUrls: ['./json-export-dialog.component.css']
 })
-export class TomeJSONDialog implements OnInit {
+export class JSONExportDialog implements OnInit {
 
   jsonData: string;
 

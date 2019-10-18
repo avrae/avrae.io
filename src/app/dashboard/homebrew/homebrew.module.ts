@@ -22,8 +22,6 @@ import {PackShareDialog} from './items/pack-share-dialog/pack-share-dialog.compo
 import {PackSRDImportDialog} from './items/pack-srd-import-dialog/pack-srd-import-dialog.component';
 import {NewTomeDialog} from './spells/dialogs/new-tome-dialog.component';
 import {TomeDeleteDialog} from './spells/dialogs/tome-delete-dialog.component';
-import {TomeJSONDialog} from './spells/dialogs/tome-json-dialog/tome-json-dialog.component';
-import {TomeJSONImportDialog} from './spells/dialogs/tome-json-import-dialog/tome-json-import-dialog.component';
 import {TomeMarkdownDialog} from './spells/dialogs/tome-markdown-dialog/tome-markdown-dialog.component';
 import {TomeOptionsDialog} from './spells/dialogs/tome-options-dialog.component';
 import {TomeShareDialog} from './spells/dialogs/tome-share-dialog.component';
@@ -71,9 +69,7 @@ import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
     SpellPanelDescriptionComponent,
     SpellEditorComponent,
     TomeSRDImportDialog,
-    TomeJSONDialog,
     TomeMarkdownDialog,
-    TomeJSONImportDialog,
   ],
   entryComponents: [
     NewPackDialog,
@@ -90,9 +86,7 @@ import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
     TomeOptionsDialog,
     TomeDeleteDialog,
     TomeSRDImportDialog,
-    TomeJSONDialog,
     TomeMarkdownDialog,
-    TomeJSONImportDialog,
   ]
 })
 export class HomebrewModule {
