@@ -147,23 +147,18 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   }
 
   // validation
-  validatePackJSON(dialogRef, parsed) {
-    let valid;
-
+  packIsValid(parsed) {
     if (parsed instanceof Array) {
-      if (parsed.length < 1) {
-        valid = false;
-      } else {
-        valid = parsed.every(item => this.objectIsItem(item));
-      }
+      return Boolean(parsed.length) && parsed.every(item => this.objectIsItem(item));
     } else if (parsed) {
-      valid = this.objectIsItem(parsed);
-    } else {
-      valid = false;
+      return this.objectIsItem(parsed);
     }
+    return false;
+  }
 
+  validatePackJSON(dialogRef, parsed) {
     dialogRef.componentInstance.loading = false;
-    if (valid) {
+    if (this.packIsValid(parsed)) {
       dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
     } else {
       dialogRef.componentInstance.error = 'Invalid pack data';
