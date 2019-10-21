@@ -86,7 +86,6 @@ export class AttackEditorDialog implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const attack: Attack | Attack[] = result;
-        console.log(attack);
         if (attack instanceof Array) {
           this.allAttacks.push(...attack);
         } else {
