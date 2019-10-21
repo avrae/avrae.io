@@ -14,8 +14,6 @@ import {NewPackDialog} from './items/new-pack-dialog/new-pack-dialog.component';
 import {PackDeleteDialog} from './items/pack-delete-dialog/pack-delete-dialog.component';
 import {ItemDetailComponent} from './items/pack-detail/item-detail/item-detail.component';
 import {PackDetailComponent} from './items/pack-detail/pack-detail.component';
-import {PackJsonDialog} from './items/pack-json-dialog/pack-json-dialog.component';
-import {PackJSONImportDialog} from './items/pack-json-import-dialog/pack-json-import-dialog.component';
 import {PackMarkdownDialog} from './items/pack-markdown-dialog/pack-markdown-dialog.component';
 import {PackOptionsDialog} from './items/pack-options-dialog/pack-options-dialog.component';
 import {PackShareDialog} from './items/pack-share-dialog/pack-share-dialog.component';
@@ -53,8 +51,6 @@ import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
     PackShareDialog,
     PackDeleteDialog,
     ItemDetailComponent,
-    PackJsonDialog,
-    PackJSONImportDialog,
     PackMarkdownDialog,
     PackSRDImportDialog,
 
@@ -76,9 +72,7 @@ import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
     PackOptionsDialog,
     PackShareDialog,
     PackDeleteDialog,
-    PackJsonDialog,
     PackMarkdownDialog,
-    PackJSONImportDialog,
     PackSRDImportDialog,
 
     NewTomeDialog,

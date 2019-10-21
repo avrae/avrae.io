@@ -1,16 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Item, Pack} from '../../../../schemas/homebrew/Items';
-import {HomebrewService} from '../../homebrew.service';
 import {Location} from '@angular/common';
-import {UserInfo} from '../../../../schemas/UserInfo';
-import {DashboardService} from '../../../dashboard.service';
-import {PackShareDialog} from '../pack-share-dialog/pack-share-dialog.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {PackOptionsDialog} from '../pack-options-dialog/pack-options-dialog.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Item, Pack, REQUIRED_ITEM_PROPS} from '../../../../schemas/homebrew/Items';
+import {UserInfo} from '../../../../schemas/UserInfo';
+import {JSONImportDialog} from '../../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
 import {getUser} from '../../../APIHelper';
-import {PackJSONImportDialog} from '../pack-json-import-dialog/pack-json-import-dialog.component';
+import {DashboardService} from '../../../dashboard.service';
+import {HomebrewService} from '../../homebrew.service';
+import {PackOptionsDialog} from '../pack-options-dialog/pack-options-dialog.component';
+import {PackShareDialog} from '../pack-share-dialog/pack-share-dialog.component';
 import {PackSRDImportDialog} from '../pack-srd-import-dialog/pack-srd-import-dialog.component';
 
 @Component({
@@ -126,14 +126,15 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   }
 
   beginNewFromJSON() {
-    const dialogRef = this.dialog.open(PackJSONImportDialog, {
+    const dialogRef = this.dialog.open(JSONImportDialog, {
       width: '60%',
-      disableClose: true
+      disableClose: true,
+      data: {validator: (data) => this.validatePackJSON(dialogRef, data)}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        let item: Item | Item[] = result;
+        const item: Item | Item[] = result;
         console.log(item);
         if (item instanceof Array) {
           this.pack.items.push(...item);
@@ -145,6 +146,35 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  // validation
+  validatePackJSON(dialogRef, parsed) {
+    let valid;
+
+    if (parsed instanceof Array) {
+      if (parsed.length < 1) {
+        valid = false;
+      } else {
+        valid = parsed.every(item => this.objectIsItem(item));
+      }
+    } else if (parsed) {
+      valid = this.objectIsItem(parsed);
+    } else {
+      valid = false;
+    }
+
+    dialogRef.componentInstance.loading = false;
+    if (valid) {
+      dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
+    } else {
+      dialogRef.componentInstance.error = 'Invalid pack data';
+    }
+  }
+
+  objectIsItem(obj: any): obj is Item {
+    return REQUIRED_ITEM_PROPS.every(v => v in obj);
+  }
+
+  // SRD import
   beginNewFromSRD() {
     const dialogRef = this.dialog.open(PackSRDImportDialog, {
       width: '60%',

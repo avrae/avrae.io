@@ -99,17 +99,15 @@ export class AttackEditorDialog implements OnInit {
   validateAttackJSON(dialogRef: MatDialogRef<JSONImportDialog>, data) {
     this.charService.validateAttackJSON(data)
       .subscribe(
-        result => this.onValidationReply(dialogRef, result)
+        result => {
+          console.log(result);
+          dialogRef.componentInstance.loading = false;
+          if (result.success) {
+            dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
+          } else {
+            dialogRef.componentInstance.error = result.result;
+          }
+        }
       );
-  }
-
-  onValidationReply(dialogRef: MatDialogRef<JSONImportDialog>, result) {
-    console.log(result);
-    dialogRef.componentInstance.loading = false;
-    if (result.success) {
-      dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
-    } else {
-      dialogRef.componentInstance.error = result.result;
-    }
   }
 }
