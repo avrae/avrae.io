@@ -15,7 +15,6 @@ const characterBaseUrl = `${environment.apiURL}/characters`;
 const characterMetaUrl = `${characterBaseUrl}/meta`;
 
 const customizationsUrl = `${environment.apiURL}/customizations`;
-const gvarsUrl = `${environment.apiURL}/customizations/gvars`;
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +50,17 @@ export class DashboardService {
       .pipe(
         catchError(_ => {
           return of(false);
+        })
+      );
+  }
+
+  validateAttackJSON(attacks: Attack | Attack[]): Observable<{ success: boolean, result: string }> {
+    const endpt = `${characterBaseUrl}/attacks/validate`;
+    return this.http.post<{ success: boolean, result: string }>(endpt, attacks, defaultOptions())
+      .pipe(
+        catchError(err => {
+          console.error(err);
+          return of({success: false, result: err.error});
         })
       );
   }

@@ -1,7 +1,5 @@
-import {HttpClient} from '@angular/common/http';
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'avr-json-import-dialog',
@@ -39,7 +37,7 @@ export class JSONImportDialog implements OnInit {
     if (this.input.validator) {
       this.input.validator(parsed);
     } else {
-      this.dialogRef.close(JSON.parse(this.data));
+      this.dialogRef.close(parsed);
     }
   }
 }

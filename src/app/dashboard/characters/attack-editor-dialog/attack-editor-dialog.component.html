@@ -1,15 +1,29 @@
 <h2 mat-dialog-title>Editing Attacks: {{character.name}}</h2>
 
 <mat-dialog-content class="mat-typography" *ngIf="allAttacks">
-  <mat-form-field>
-    <mat-label>Select an attack</mat-label>
-    <mat-select [(value)]="selectedAttack">
-      <mat-option *ngFor="let attack of allAttacks" [value]="attack">
-        {{attack.name}}
-      </mat-option>
-      <mat-option (click)="addAndSelectNewAttack()">New...</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div fxLayout="row">
+    <mat-form-field>
+      <mat-label>Select an attack</mat-label>
+      <mat-select [(value)]="selectedAttack">
+        <mat-option *ngFor="let attack of allAttacks" [value]="attack">
+          {{attack.name}}
+        </mat-option>
+        <mat-option (click)="addAndSelectNewAttack()">New...</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span fxFlex>
+      <button mat-icon-button matTooltip="Import JSON" (click)="beginJSONImport()">
+        <mat-icon aria-label="Import from JSON">vertical_align_bottom</mat-icon>
+      </button>
+    </span>
+    <span fxFlex>
+      <button mat-icon-button matTooltip="Export All to JSON" (click)="beginJSONExport(allAttacks)">
+        <mat-icon aria-label="Export All to JSON">vertical_align_top</mat-icon>
+      </button>
+    </span>
+    <span fxFlex="grow"></span>
+  </div>
 
   <mat-divider class="beefy-divider"></mat-divider>
 
@@ -20,9 +34,19 @@
       <mat-form-field fxFlex>
         <input matInput placeholder="Attack Name" [(ngModel)]="selectedAttack.name">
       </mat-form-field>
-      <button mat-icon-button color="warn" (click)="deleteAttack(selectedAttack)">
-        <mat-icon>delete</mat-icon>
-      </button>
+
+      <span fxFlex="grow"></span>
+
+      <span fxFlex>
+        <button mat-icon-button color="warn" (click)="deleteAttack(selectedAttack)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </span>
+      <span fxFlex>
+        <button mat-icon-button matTooltip="Export to JSON" (click)="beginJSONExport(selectedAttack)">
+          <mat-icon aria-label="Export to JSON">vertical_align_top</mat-icon>
+        </button>
+      </span>
     </div>
 
     <avr-automation-editor [automation]="selectedAttack.automation"></avr-automation-editor>
