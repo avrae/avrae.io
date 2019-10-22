@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Spell, Tome} from '../../../../../schemas/homebrew/Spells';
 import {UserInfo} from '../../../../../schemas/UserInfo';
-import { MatDialog } from '@angular/material/dialog';
+import {JSONImportDialog} from '../../../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
+import {HomebrewService} from '../../../homebrew.service';
 import {TomeSRDImportDialog} from '../../dialogs/tome-srd-import-dialog.component';
-import {TomeJSONImportDialog} from '../../dialogs/tome-json-import-dialog/tome-json-import-dialog.component';
 
 @Component({
   selector: 'avr-spell-list',
@@ -20,7 +21,7 @@ export class SpellListComponent implements OnInit {
 
   selectedSpell: Spell;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private hbService: HomebrewService) {
   }
 
   ngOnInit() {
@@ -32,9 +33,11 @@ export class SpellListComponent implements OnInit {
   }
 
   newFromJSON() {
-    const dialogRef = this.dialog.open(TomeJSONImportDialog, {
+
+    const dialogRef = this.dialog.open(JSONImportDialog, {
       width: '60%',
-      disableClose: true
+      disableClose: true,
+      data: {validator: (data) => this.validateSpellJSON(dialogRef, data)}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,4 +74,21 @@ export class SpellListComponent implements OnInit {
     this.changed.emit();
   }
 
+  // spell import validation
+  validateSpellJSON(dialogRef: MatDialogRef<JSONImportDialog>, data) {
+    this.hbService.validateSpellJSON(data)
+      .subscribe(
+        result => this.onValidationReply(dialogRef, result)
+      );
+  }
+
+  onValidationReply(dialogRef: MatDialogRef<JSONImportDialog>, result) {
+    console.log(result);
+    dialogRef.componentInstance.loading = false;
+    if (result.success) {
+      dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
+    } else {
+      dialogRef.componentInstance.error = result.result;
+    }
+  }
 }

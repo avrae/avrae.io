@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import {HomebrewService} from '../../homebrew.service';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {Tome} from '../../../../schemas/homebrew/Spells';
-import {TomeJSONDialog} from './tome-json-dialog/tome-json-dialog.component';
+import {JSONExportDialog} from '../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
+import {HomebrewService} from '../../homebrew.service';
 import {TomeMarkdownDialog} from './tome-markdown-dialog/tome-markdown-dialog.component';
 
 @Component({
@@ -45,7 +45,7 @@ export class TomeShareDialog implements OnInit {
   }
 
   beginJSONExport() {
-    this.dialog.open(TomeJSONDialog, {
+    this.dialog.open(JSONExportDialog, {
       data: {name: this.data.name, data: this.data.spells},
       width: '60%'
     });

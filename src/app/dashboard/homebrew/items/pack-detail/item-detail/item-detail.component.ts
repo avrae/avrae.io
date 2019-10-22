@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {Item} from '../../../../../schemas/homebrew/Items';
-import {PackJsonDialog} from '../../pack-json-dialog/pack-json-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import {JSONExportDialog} from '../../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 
 @Component({
   selector: 'avr-item-detail',
@@ -26,7 +26,7 @@ export class ItemDetailComponent implements OnInit {
   }
 
   beginJSONExport() {
-    this.dialog.open(PackJsonDialog, {
+    this.dialog.open(JSONExportDialog, {
       data: {name: this.item.name, data: this.item},
       width: '60%'
     });
