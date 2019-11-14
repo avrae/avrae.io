@@ -50,12 +50,14 @@ export class Save extends AutomationEffect {
 
 export class Damage extends AutomationEffect {
   damage: string;
+  overheal: boolean;
   higher?: Map<number, string>;
   cantripScale?: boolean;
 
-  constructor(damage = '', higher?, cantripScale?, meta?) {
+  constructor(damage = '', overheal?, higher?, cantripScale?, meta?) {
     super('damage', meta);
     this.damage = damage;
+    this.overheal = overheal;
     this.higher = higher;
     this.cantripScale = cantripScale;
     this.meta = meta;

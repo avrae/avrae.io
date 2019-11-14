@@ -9,6 +9,9 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
       <mat-form-field>
         <input matInput placeholder="Damage" (change)="changed.emit()" [(ngModel)]="effect.damage">
       </mat-form-field>
+      <mat-checkbox [(ngModel)]="effect.overheal" (change)="changed.emit()">
+        Allow Overheal
+      </mat-checkbox>
       <avr-higher-level *ngIf="spell != null" [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
       <mat-checkbox *ngIf="spell != null" [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
         Scales like Cantrip
