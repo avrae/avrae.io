@@ -56,11 +56,15 @@ export class Attack {
   name: string;
   automation: AutomationEffect[];
   _v: 2;
+  proper?: boolean;
+  verb?: string;
 
-  constructor(name = '', automation: AutomationEffect[] = []) {
+  constructor(name = '', automation: AutomationEffect[] = [], proper: boolean = false, verb: string = null) {
     this.name = name;
     this.automation = automation;
     this._v = 2;
+    this.proper = proper;
+    this.verb = verb;
   }
 }
 
