@@ -36,7 +36,7 @@ export class NewEffectCardComponent implements OnInit {
 
   ngOnInit() {
     this.availableTypes = typeOptions.get(this.parentType);
-    this.availableMetaTypes = typeOptions.get('meta');
+    this.availableMetaTypes = this.parentType === 'root' ? [] : typeOptions.get('meta');
   }
 
   addEffect() {

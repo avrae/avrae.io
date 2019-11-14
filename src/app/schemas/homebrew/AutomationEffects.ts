@@ -4,7 +4,7 @@ export class AutomationEffect {
 
   constructor(type, meta = []) {
     this.type = type;
-    this.meta = meta;
+    this.meta = meta || [];
   }
 
 }
@@ -60,7 +60,6 @@ export class Damage extends AutomationEffect {
     this.overheal = overheal;
     this.higher = higher;
     this.cantripScale = cantripScale;
-    this.meta = meta;
   }
 }
 
@@ -74,7 +73,6 @@ export class TempHP extends AutomationEffect {
     this.amount = amount;
     this.higher = higher;
     this.cantripScale = cantripScale;
-    this.meta = meta;
   }
 }
 
@@ -106,7 +104,6 @@ export class Roll extends AutomationEffect {
     this.name = name;
     this.higher = higher;
     this.cantripScale = cantripScale;
-    this.meta = meta;
     this.hidden = hidden;
   }
 }
