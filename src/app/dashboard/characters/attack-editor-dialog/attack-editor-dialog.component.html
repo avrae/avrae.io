@@ -1,6 +1,14 @@
 <h2 mat-dialog-title>Editing Attacks: {{character.name}}</h2>
 
 <mat-dialog-content class="mat-typography" *ngIf="allAttacks">
+  <div>
+    <p>
+      Need help using the editor? Check out the docs
+      <a href="https://avrae.readthedocs.io/en/latest/automation.html" target="_blank"
+         rel="noopener noreferrer">here</a>!
+    </p>
+  </div>
+
   <div fxLayout="row">
     <mat-form-field>
       <mat-label>Select an attack</mat-label>
@@ -31,7 +39,7 @@
 
   <div *ngIf="selectedAttack">
     <div fxLayout="row" fxLayoutGap="4px">
-      <mat-form-field fxFlex>
+      <mat-form-field fxFlex="grow">
         <input matInput placeholder="Attack Name" [(ngModel)]="selectedAttack.name">
       </mat-form-field>
 
@@ -47,6 +55,19 @@
           <mat-icon aria-label="Export to JSON">vertical_align_top</mat-icon>
         </button>
       </span>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="center center">
+      <mat-checkbox fxFlex [(ngModel)]="selectedAttack.proper">Proper Noun</mat-checkbox>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Verb" [(ngModel)]="selectedAttack.verb">
+      </mat-form-field>
+
+      <span fxFlex="noshrink">
+        Display: {{character.name}} {{selectedAttack.verb || 'attacks with'}} {{selectedAttack.proper ? selectedAttack.name : 'a ' + selectedAttack.name}}!
+      </span>
+
+      <span fxFlex="grow"></span>
     </div>
 
     <avr-automation-editor [automation]="selectedAttack.automation"></avr-automation-editor>

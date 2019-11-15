@@ -6,7 +6,7 @@
           <mat-option *ngFor="let option of availableTypes"
                       [value]="{option: option, meta: false}">Add {{option}}</mat-option>
         </mat-optgroup>
-        <mat-optgroup label="Meta">
+        <mat-optgroup label="Meta" *ngIf="availableMetaTypes.length">
           <mat-option *ngFor="let option of availableMetaTypes"
                       [value]="{option: option, meta: true}">Add meta {{option}}</mat-option>
         </mat-optgroup>
