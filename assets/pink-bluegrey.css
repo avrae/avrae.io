@@ -1510,3 +1510,8 @@ kbd {
 body.avr-app-background {
   max-width: 90em;
   margin: auto; }
+
+blockquote {
+  border-left: 4px solid rgba(128, 128, 128, 0.3);
+  margin: 1.5em 10px;
+  padding: 0 8px; }
