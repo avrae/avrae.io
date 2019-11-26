@@ -6,10 +6,7 @@ export class Pack {
   name: string;
   owner: DiscordUser;
   editors: DiscordUser[];
-  subscribers: DiscordUser[];
   public: boolean;
-  active: string[];
-  server_active: string[];
   desc: string;
   image: string;
   items?: Item[];
