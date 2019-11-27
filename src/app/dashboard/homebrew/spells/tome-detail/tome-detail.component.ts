@@ -64,7 +64,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
       return;
     }
     this.isOwner = this.user.id === this.tome.owner;
-    this.canEdit = this.isOwner; // || this.tome.editors.some(e => e.id === this.user.id);
+    this.canEdit = this.isOwner; // todo || this.tome.editors.some(e => e.id === this.user.id);
   }
 
   ensureChangesNotif() {

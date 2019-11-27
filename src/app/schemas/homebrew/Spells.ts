@@ -7,7 +7,6 @@ export const SPELL_SCHOOLS = ['A', 'V', 'E', 'I', 'D', 'N', 'T', 'C'];
 export class Tome {
   name: string;
   owner: string;
-  editors: DiscordUser[];
   public: boolean;
   desc: string;
   image: string;

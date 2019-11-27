@@ -51,6 +51,10 @@ export class HomebrewService {
       );
   }
 
+  getPackEditors(id: string): Observable<string[]> {
+    return this.http.get<string[]>(`${itemsUrl}/${id}/editors`, defaultOptions());
+  }
+
   getTemplateItems(): Observable<Item[]> {
     return this.http.get<Item[]>(`${itemsUrl}/srd`, defaultOptions());
   }
