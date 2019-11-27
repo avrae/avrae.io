@@ -2,7 +2,7 @@
 <mat-dialog-content class="mat-typography">
   <div class="form-container">
     <p>
-      Owner: {{data.owner.username}}
+      Owner: {{(owner | async)?.username}}
     </p>
 
     <mat-slide-toggle [(ngModel)]="public">Allow public to view</mat-slide-toggle>
@@ -21,8 +21,8 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <p>To add or remove an editor, run the command <kbd>!tome editor @user</kbd> in Discord!</p>
-      <mat-list *ngIf="data.editors.length">
-        <mat-list-item *ngFor="let editor of data.editors">{{editor.username}}</mat-list-item>
+      <mat-list *ngIf="editors?.length">
+        <mat-list-item *ngFor="let editor of editors">{{(editor | async)?.username}}</mat-list-item>
       </mat-list>
     </mat-expansion-panel>
     <mat-expansion-panel class="mat-elevation-z0">
