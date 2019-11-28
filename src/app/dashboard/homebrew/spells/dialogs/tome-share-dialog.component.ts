@@ -42,7 +42,7 @@ export class TomeShareDialog implements OnInit {
     this.hbService.getTomeEditors(id)
       .subscribe(editors => {
         const out = [];
-        editors.forEach(eid => out.push(this.discord.userById(eid)));
+        editors.forEach(eid => out.push(this.discord.getUser(eid)));
         this.editors = out;
       });
   }

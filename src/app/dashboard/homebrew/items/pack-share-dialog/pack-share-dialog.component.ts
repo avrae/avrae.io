@@ -51,7 +51,7 @@ export class PackShareDialog implements OnInit {
     this.hbService.getPackEditors(id)
       .subscribe(editors => {
         const out = [];
-        editors.forEach(eid => out.push(this.discord.userById(eid)));
+        editors.forEach(eid => out.push(this.discord.getUser(eid)));
         this.editors = out;
       });
   }

@@ -65,7 +65,13 @@ export class PackDetailComponent implements OnInit, OnDestroy {
       return;
     }
     this.isOwner = this.user.id === this.pack.owner;
-    this.canEdit = this.isOwner; // todo || this.pack.editors.some(e => e.id === this.user.id);
+    if (this.isOwner) {
+      this.canEdit = true;
+    } else {
+      const id = this.pack._id.$oid;
+      this.homebrewService.getPackEditors(id)
+        .subscribe(editors => this.canEdit = editors.some(e => e === this.user.id));
+    }
   }
 
   newLooseItem() {
