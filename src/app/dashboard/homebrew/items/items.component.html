@@ -11,7 +11,8 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{pack.name}}</mat-card-title>
-        <mat-card-subtitle>By {{pack.owner.username}} - {{pack.numItems}} items</mat-card-subtitle>
+        <mat-card-subtitle>By {{owners.get(pack.owner)?.username || 'loading...'}} - {{pack.numItems}} items
+        </mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image [src]="pack.image || '../../../../assets/img/pack.png'" alt="Pack Image">
       <mat-card-content *ngIf="pack.desc">

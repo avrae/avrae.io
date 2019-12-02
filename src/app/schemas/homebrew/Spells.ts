@@ -6,12 +6,8 @@ export const SPELL_SCHOOLS = ['A', 'V', 'E', 'I', 'D', 'N', 'T', 'C'];
 
 export class Tome {
   name: string;
-  owner: DiscordUser;
-  editors: DiscordUser[];
-  subscribers: DiscordUser[];
+  owner: string;
   public: boolean;
-  active: string[];
-  server_active: string[];
   desc: string;
   image: string;
   spells?: Spell[];

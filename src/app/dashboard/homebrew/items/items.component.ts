@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Pack} from '../../../schemas/homebrew/Items';
-import {HomebrewService} from '../homebrew.service';
-import { MatDialog } from '@angular/material/dialog';
-import {NewPackDialog} from './new-pack-dialog/new-pack-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Pack} from '../../../schemas/homebrew/Items';
+import {UserInfo} from '../../../schemas/UserInfo';
+import {DiscordService} from '../../../shared/discord.service';
+import {HomebrewService} from '../homebrew.service';
+import {NewPackDialog} from './new-pack-dialog/new-pack-dialog.component';
 import {PackShareDialog} from './pack-share-dialog/pack-share-dialog.component';
 
 @Component({
@@ -14,9 +16,10 @@ import {PackShareDialog} from './pack-share-dialog/pack-share-dialog.component';
 export class ItemsComponent implements OnInit {
 
   packs: Pack[];
+  owners: Map<string, UserInfo> = new Map<string, UserInfo>();
 
-  constructor(private homebrewService: HomebrewService, private dialog: MatDialog, private router: Router,
-              private route: ActivatedRoute) {
+  constructor(private homebrewService: HomebrewService, private discord: DiscordService,
+              private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -25,7 +28,17 @@ export class ItemsComponent implements OnInit {
 
   getPacks(): void {
     this.homebrewService.getUserPacks()
-      .subscribe(packs => this.packs = packs);
+      .subscribe(packs => {
+        this.packs = packs;
+        const requested = new Set();
+        for (const pack of packs) {
+          if (!requested.has(pack.owner)) {
+            requested.add(pack.owner);
+            this.discord.getUser(pack.owner)
+              .subscribe(user => this.owners.set(pack.owner, user));
+          }
+        }
+      });
   }
 
   beginNew() {

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Item, Pack} from '../../schemas/homebrew/Items';
 import {Observable, of} from 'rxjs';
+import {UserInfo} from '../../schemas/UserInfo';
 import {defaultOptions, defaultTextOptions} from '../APIHelper';
 import {catchError} from 'rxjs/operators';
 import {Spell, Tome} from '../../schemas/homebrew/Spells';
@@ -50,6 +51,10 @@ export class HomebrewService {
       );
   }
 
+  getPackEditors(id: string): Observable<string[]> {
+    return this.http.get<string[]>(`${itemsUrl}/${id}/editors`, defaultOptions());
+  }
+
   getTemplateItems(): Observable<Item[]> {
     return this.http.get<Item[]>(`${itemsUrl}/srd`, defaultOptions());
   }
@@ -86,12 +91,16 @@ export class HomebrewService {
       );
   }
 
+  getTomeEditors(id: string): Observable<string[]> {
+    return this.http.get<string[]>(`${spellsUrl}/${id}/editors`, defaultOptions());
+  }
+
   getTemplateSpells(): Observable<Spell[]> {
     return this.http.get<Spell[]>(`${spellsUrl}/srd`, defaultOptions());
   }
 
-  validateSpellJSON(data: object): Observable<{success: boolean, result: string}> {
-    return this.http.post<{success: boolean, result: string}>(`${spellsUrl}/validate`, data, defaultOptions())
+  validateSpellJSON(data: object): Observable<{ success: boolean, result: string }> {
+    return this.http.post<{ success: boolean, result: string }>(`${spellsUrl}/validate`, data, defaultOptions())
       .pipe(
         catchError(err => of({success: false, result: err.error}))
       );

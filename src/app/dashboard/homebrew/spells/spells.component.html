@@ -11,7 +11,8 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{tome.name}}</mat-card-title>
-        <mat-card-subtitle>By {{tome.owner.username}} - {{tome.numSpells}} spells</mat-card-subtitle>
+        <mat-card-subtitle>By {{owners.get(tome.owner)?.username || 'loading...'}} - {{tome.numSpells}} spells
+        </mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image [src]="tome.image || '../../../../assets/img/tome.png'" alt="Tome Image">
       <mat-card-content *ngIf="tome.desc">

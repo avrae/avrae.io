@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {HomebrewService} from '../homebrew.service';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
+import {of} from 'rxjs';
 import {Tome} from '../../../schemas/homebrew/Spells';
+import {UserInfo} from '../../../schemas/UserInfo';
+import {DiscordService} from '../../../shared/discord.service';
+import {HomebrewService} from '../homebrew.service';
 import {NewTomeDialog} from './dialogs/new-tome-dialog.component';
 import {TomeShareDialog} from './dialogs/tome-share-dialog.component';
 
@@ -14,9 +17,10 @@ import {TomeShareDialog} from './dialogs/tome-share-dialog.component';
 export class SpellsComponent implements OnInit {
 
   tomes: Tome[];
+  owners: Map<string, UserInfo> = new Map<string, UserInfo>();
 
-  constructor(private homebrewService: HomebrewService, private dialog: MatDialog, private router: Router,
-              private route: ActivatedRoute) {
+  constructor(private homebrewService: HomebrewService, private discord: DiscordService,
+              private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -25,7 +29,17 @@ export class SpellsComponent implements OnInit {
 
   getTomes(): void {
     this.homebrewService.getUserTomes()
-      .subscribe(tomes => this.tomes = tomes);
+      .subscribe(tomes => {
+        this.tomes = tomes;
+        const requested = new Set();
+        for (const tome of tomes) {
+          if (!requested.has(tome.owner)) {
+            requested.add(tome.owner);
+            this.discord.getUser(tome.owner)
+              .subscribe(user => this.owners.set(tome.owner, user));
+          }
+        }
+      });
   }
 
   beginNew() {

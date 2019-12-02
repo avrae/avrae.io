@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Item, Pack} from '../../schemas/homebrew/Items';
 import {ActivatedRoute} from '@angular/router';
+import {UserInfo} from '../../schemas/UserInfo';
+import {DiscordService} from '../../shared/discord.service';
 import {HomebrewSharingService} from '../homebrew-sharing.service';
 import {Meta} from '@angular/platform-browser';
 import {environment} from '../../../environments/environment';
@@ -13,9 +15,11 @@ import {environment} from '../../../environments/environment';
 export class PackShareComponent implements OnInit {
 
   pack: Pack;
+  owner: UserInfo;
   selectedItem: Item;
 
-  constructor(private route: ActivatedRoute, private homebrewService: HomebrewSharingService, private meta: Meta) {
+  constructor(private route: ActivatedRoute, private homebrewService: HomebrewSharingService, private discord: DiscordService,
+              private meta: Meta) {
   }
 
   ngOnInit() {
@@ -49,7 +53,13 @@ export class PackShareComponent implements OnInit {
     this.homebrewService.getPack(id)
       .subscribe(pack => {
         this.pack = pack;
+        this.getOwner();
         this.updateMeta();
       });
+  }
+
+  getOwner() {
+    this.discord.getUser(this.pack.owner)
+      .subscribe(owner => this.owner = owner);
   }
 }

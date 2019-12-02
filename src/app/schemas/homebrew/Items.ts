@@ -4,12 +4,8 @@ export const REQUIRED_ITEM_PROPS = ['name'];
 
 export class Pack {
   name: string;
-  owner: DiscordUser;
-  editors: DiscordUser[];
-  subscribers: DiscordUser[];
+  owner: string;
   public: boolean;
-  active: string[];
-  server_active: string[];
   desc: string;
   image: string;
   items?: Item[];

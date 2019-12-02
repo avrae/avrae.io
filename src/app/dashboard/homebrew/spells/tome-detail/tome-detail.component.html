@@ -1,4 +1,4 @@
-<div *ngIf="tome && canEdit">
+<div *ngIf="tome && canEdit != undefined">
   <mat-toolbar color="primary" class="tome-toolbar">
     <span>
       <button mat-icon-button (click)="back()">

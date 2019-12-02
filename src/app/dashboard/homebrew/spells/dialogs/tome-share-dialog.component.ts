@@ -1,7 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
 import {Tome} from '../../../../schemas/homebrew/Spells';
+import {UserInfo} from '../../../../schemas/UserInfo';
 import {JSONExportDialog} from '../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
+import {DiscordService} from '../../../../shared/discord.service';
 import {HomebrewService} from '../../homebrew.service';
 import {TomeMarkdownDialog} from './tome-markdown-dialog/tome-markdown-dialog.component';
 
@@ -16,17 +19,32 @@ export class TomeShareDialog implements OnInit {
   shareLink: string;
   loaded: boolean;
 
+  owner: Observable<UserInfo>;
+  editors: Observable<UserInfo>[];
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: Tome, private dialog: MatDialog,
-              private hbService: HomebrewService) {
+              private hbService: HomebrewService, private discord: DiscordService) {
     this.public = data.public;
     this.shareLink = `https://avrae.io/homebrew/spells/${data._id.$oid}`;
     this.loaded = data.spells !== undefined;
   }
 
   ngOnInit() {
+    this.owner = this.discord.getUser(this.data.owner);
+    this.loadEditors();
     if (!this.loaded) {
       this.loadSpells();
     }
+  }
+
+  loadEditors() {
+    const id = this.data._id.$oid;
+    this.hbService.getTomeEditors(id)
+      .subscribe(editors => {
+        const out = [];
+        editors.forEach(eid => out.push(this.discord.getUser(eid)));
+        this.editors = out;
+      });
   }
 
   loadSpells() {
