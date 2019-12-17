@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {RedirectGuard} from '../shared/redirect-guard/redirect.guard';
-import {CheatsheetDetailComponent} from './cheatsheet-detail/cheatsheet-detail.component';
 import {CheatsheetsComponent} from './cheatsheets.component';
 
 const cheatsheetRoutes: Routes = [
@@ -12,7 +11,12 @@ const cheatsheetRoutes: Routes = [
     component: RedirectGuard,
     data: {externalUrl: 'https://avrae.readthedocs.io/en/latest/aliasing/api.html'}
   },
-  {path: 'cheatsheets/:title', component: CheatsheetDetailComponent}
+  {
+    path: 'cheatsheets/:title',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {externalUrl: 'https://avrae.readthedocs.io/en/latest/'}
+  }
 ];
 
 
