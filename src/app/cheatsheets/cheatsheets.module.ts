@@ -1,10 +1,9 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {MarkdownModule} from 'ngx-markdown';
 import {MaterialModule} from '../material/material.module';
 import {CheatsheetsRoutingModule} from './cheatsheets-routing.module';
 import {CheatsheetsComponent} from './cheatsheets.component';
-import {CheatsheetDetailComponent} from './cheatsheet-detail/cheatsheet-detail.component';
-import {MarkdownModule} from 'ngx-markdown';
 
 @NgModule({
   imports: [
@@ -14,8 +13,7 @@ import {MarkdownModule} from 'ngx-markdown';
     CheatsheetsRoutingModule
   ],
   declarations: [
-    CheatsheetsComponent,
-    CheatsheetDetailComponent
+    CheatsheetsComponent
   ]
 })
 export class CheatsheetsModule {
