@@ -1,0 +1,29 @@
+<mat-expansion-panel [id]="getQualifiedId()" [expanded]="shouldBeExpanded()" (afterExpand)="setHash()">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <div>
+        <code>{{command.signature}}</code>
+        <p class="mat-small nomargin" *ngIf="command.subcommands.length">Has subcommands.</p>
+      </div>
+    </mat-panel-title>
+    <mat-panel-description>
+      <markdown>{{command.short}}</markdown>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <markdown>{{command.docs}}</markdown>
+  <table *ngIf="command.args.length">
+    <tr>
+      <th>Arguments</th>
+    </tr>
+    <tr *ngFor="let arg of command.args">
+      <td><code>{{arg.name}}</code>{{getArgDescriptors(arg)}} - {{arg.desc}}</td>
+    </tr>
+  </table>
+  <div class="subcommands" *ngIf="command.subcommands.length">
+    <h4 class="mat-h4 smallmargin"><b>Subcommands</b></h4>
+    <mat-accordion>
+      <avr-command-display *ngFor="let subcommand of command.subcommands" [command]="subcommand"
+                           [parentId]="getQualifiedId()"></avr-command-display>
+    </mat-accordion>
+  </div>
+</mat-expansion-panel>

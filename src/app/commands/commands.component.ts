@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Meta} from '@angular/platform-browser';
 import {CommandModule} from '../schemas/Commands';
 import {CommandsService} from './commands.service';
-import {Meta} from '@angular/platform-browser';
 
 @Component({
   selector: 'avr-commands',
@@ -29,7 +29,9 @@ export class CommandsComponent implements OnInit {
 
   scrollTo(id: string) {
     const el = document.getElementById(id);
-    el.scrollIntoView({behavior: 'smooth'});
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }
   }
 
 }
