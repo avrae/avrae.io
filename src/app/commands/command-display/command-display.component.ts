@@ -37,7 +37,11 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
   }
 
   shouldBeExpanded() {
-    return this.activatedRoute.snapshot.fragment.includes(this.getQualifiedId());
+    const fragment = this.activatedRoute.snapshot.fragment;
+    if (fragment) {
+      return fragment.includes(this.getQualifiedId());
+    }
+    return false;
   }
 
   setHash() {
