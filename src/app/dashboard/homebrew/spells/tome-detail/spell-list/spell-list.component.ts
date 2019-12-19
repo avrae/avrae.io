@@ -1,3 +1,4 @@
+import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Spell, Tome} from '../../../../../schemas/homebrew/Spells';
@@ -89,6 +90,26 @@ export class SpellListComponent implements OnInit {
       dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
     } else {
       dialogRef.componentInstance.error = result.result;
+    }
+  }
+
+
+  // move items in list
+  moveUp(spell: Spell) {
+    const index = this.tome.spells.indexOf(spell);
+    const newIndex = index - 1;
+    if (newIndex > -1) {
+      moveItemInArray(this.tome.spells, index, newIndex);
+      this.changed.emit();
+    }
+  }
+
+  moveDown(spell: Spell) {
+    const index = this.tome.spells.indexOf(spell);
+    const newIndex = index + 1;
+    if (newIndex < this.tome.spells.length) {
+      moveItemInArray(this.tome.spells, index, newIndex);
+      this.changed.emit();
     }
   }
 }

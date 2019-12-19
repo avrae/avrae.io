@@ -25,7 +25,8 @@
   <div class="container" fxLayout="row" fxLayoutGap="8px">
     <div class="item-list" fxFlex="grow" *ngIf="pack.items.length">
       <mat-accordion>
-        <avr-item-detail *ngFor="let item of pack.items" [item]="item"
+        <avr-item-detail *ngFor="let item of pack.items; first as isFirst; last as isLast" [item]="item"
+                         [isFirst]="isFirst" [isLast]="isLast" (moveUp)="moveUp(item)" (moveDown)="moveDown(item)"
                          (changed)="ensureChangesNotif()" (opened)="selectedItem = item"
                          (delete)="deleteItem(item)"></avr-item-detail>
         <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-item-card">

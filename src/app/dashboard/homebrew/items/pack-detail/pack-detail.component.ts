@@ -1,3 +1,4 @@
+import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {Location} from '@angular/common';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
@@ -212,5 +213,24 @@ export class PackDetailComponent implements OnInit, OnDestroy {
 
   back() {
     this.location.back();
+  }
+
+  // move items in list
+  moveUp(item: Item) {
+    const index = this.pack.items.indexOf(item);
+    const newIndex = index - 1;
+    if (newIndex > -1) {
+      moveItemInArray(this.pack.items, index, newIndex);
+      this.ensureChangesNotif();
+    }
+  }
+
+  moveDown(item: Item) {
+    const index = this.pack.items.indexOf(item);
+    const newIndex = index + 1;
+    if (newIndex < this.pack.items.length) {
+      moveItemInArray(this.pack.items, index, newIndex);
+      this.ensureChangesNotif();
+    }
   }
 }

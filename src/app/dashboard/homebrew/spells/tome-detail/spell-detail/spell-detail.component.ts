@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Spell} from '../../../../../schemas/homebrew/Spells';
+import {UserInfo} from '../../../../../schemas/UserInfo';
 import {JSONExportDialog} from '../../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 
 @Component({
@@ -11,6 +12,10 @@ import {JSONExportDialog} from '../../../../../shared/dialogs/json-export-dialog
 export class SpellDetailComponent implements OnInit {
 
   @Input() spell: Spell;
+  @Input() isFirst: boolean;
+  @Input() isLast: boolean;
+  @Output() moveUp = new EventEmitter();
+  @Output() moveDown = new EventEmitter();
   @Output() changed = new EventEmitter();
   @Output() opened = new EventEmitter();
   @Output() delete = new EventEmitter();
