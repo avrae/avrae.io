@@ -28,7 +28,7 @@ describe('avrae commands page', () => {
 
   it('should show some commands in each module', () => {
     renderedModules.each(moduleElement => {
-      const moduleCommands = moduleElement.all(by.css('mat-expansion-panel'));
+      const moduleCommands = moduleElement.all(by.tagName('avr-command-display'));
       expect(moduleCommands.count()).toBeGreaterThan(0);
     });
   });

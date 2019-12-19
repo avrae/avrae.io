@@ -27,7 +27,9 @@
       <sn-scroll-spy-section id="{{module.name.toLowerCase()}}-spy" for="sidenav">
         <h2 class="mat-h2 smallmargin">{{module.name}}</h2>
         <markdown>{{module.desc}}</markdown>
-        <avr-command-list [commands]="module.commands"></avr-command-list>
+        <mat-accordion>
+          <avr-command-display *ngFor="let command of module.commands" [command]="command"></avr-command-display>
+        </mat-accordion>
       </sn-scroll-spy-section>
     </mat-card>
   </div>

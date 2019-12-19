@@ -15,7 +15,7 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
 import {CheatsheetsModule} from './cheatsheets/cheatsheets.module';
-import {CommandListComponent} from './commands/command-list/command-list.component';
+import {CommandDisplayComponent} from './commands/command-display/command-display.component';
 import {CommandsComponent} from './commands/commands.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {ErrorComponent} from './error/error.component';
@@ -37,8 +37,7 @@ const markdownConfig = {
     provide: MarkedOptions,
     useValue: {
       gfm: true,
-      breaks: true,
-      sanitize: true
+      breaks: true
     },
   }
 };
@@ -51,7 +50,7 @@ const markdownConfig = {
     FooterComponent,
     ErrorComponent,
     CommandsComponent,
-    CommandListComponent,
+    CommandDisplayComponent,
   ],
   imports: [
     BrowserModule,
