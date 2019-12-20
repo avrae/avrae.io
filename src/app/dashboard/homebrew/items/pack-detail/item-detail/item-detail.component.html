@@ -36,6 +36,16 @@
           <mat-icon aria-label="Export to JSON">vertical_align_top</mat-icon>
         </button>
       </span>
+      <span fxFlex *ngIf="!isFirst">
+        <button mat-icon-button matTooltip="Move Up" (click)="moveUp.emit()">
+          <mat-icon aria-label="Move Up">arrow_upward</mat-icon>
+        </button>
+      </span>
+      <span fxFlex *ngIf="!isLast">
+        <button mat-icon-button matTooltip="Move Down" (click)="moveDown.emit()">
+          <mat-icon aria-label="Move Down">arrow_downward</mat-icon>
+        </button>
+      </span>
       <span fxFlex="grow"></span>
       <span fxFlex>
         <button mat-icon-button color="warn" (click)="delete.emit()">

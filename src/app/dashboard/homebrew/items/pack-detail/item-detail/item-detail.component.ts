@@ -11,6 +11,10 @@ import {JSONExportDialog} from '../../../../../shared/dialogs/json-export-dialog
 export class ItemDetailComponent implements OnInit {
 
   @Input() item: Item;
+  @Input() isFirst: boolean;
+  @Input() isLast: boolean;
+  @Output() moveUp = new EventEmitter();
+  @Output() moveDown = new EventEmitter();
   @Output() changed = new EventEmitter();
   @Output() opened = new EventEmitter();
   @Output() delete = new EventEmitter();

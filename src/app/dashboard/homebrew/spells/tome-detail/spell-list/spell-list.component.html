@@ -1,9 +1,10 @@
 <div class="container" fxLayout="row" fxLayoutGap="8px">
   <div class="spell-list" fxFlex="grow" *ngIf="tome.spells.length">
     <mat-accordion>
-      <avr-spell-detail *ngFor="let spell of tome.spells" [spell]="spell"
+      <avr-spell-detail *ngFor="let spell of tome.spells; first as isFirst; last as isLast" [spell]="spell"
+                        [isFirst]="isFirst" [isLast]="isLast" (moveUp)="moveUp(spell)" (moveDown)="moveDown(spell)"
                         (changed)="changed.emit()" (opened)="selectedSpell = spell; selected.emit(spell)"
-                        (delete)="deleteSpell(spell)" (moveToEditor)="moveToEditor.emit()"></avr-spell-detail>
+                        (delete)="deleteSpell(spell)" (moveToEditor)="moveToEditor.emit()" ></avr-spell-detail>
       <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-spell-card">
         <span class="no-text-cursor">New...</span>
         <span class="toolbar-spacer"></span>
