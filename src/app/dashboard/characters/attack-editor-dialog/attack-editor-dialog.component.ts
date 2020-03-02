@@ -45,12 +45,13 @@ export class AttackEditorDialog implements OnInit {
     const dialogRef = this.dialog.open(SRDCopyDialog, {
       width: '60%',
       disableClose: true,
-      data: {getter: null, namer: a => a.name}
+      data: {getter: () => this.charService.getTemplateAttacks(), namer: a => a.name}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.allAttacks.push(result);
+        this.selectedAttack = result;
       }
     });
   }
