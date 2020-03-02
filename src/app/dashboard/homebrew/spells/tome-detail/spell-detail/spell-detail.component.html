@@ -40,7 +40,7 @@
 
         <mat-form-field fxFlex>
           <mat-label>School</mat-label>
-          <mat-select [(value)]="spell.school" (selectionChange)="emitChange()">
+          <mat-select [(value)]="spell.school" (selectionChange)="emitChange()" *ngIf="!customSpellSchool">
             <mat-option value="A">Abjuration</mat-option>
             <mat-option value="C">Conjuration</mat-option>
             <mat-option value="D">Divination</mat-option>
@@ -49,7 +49,14 @@
             <mat-option value="I">Illusion</mat-option>
             <mat-option value="N">Necromancy</mat-option>
             <mat-option value="T">Transmutation</mat-option>
+            <mat-option value="Custom" (click)="customSpellSchool = true">Custom</mat-option>
           </mat-select>
+          <input matInput placeholder="School" (change)="emitChange()" [(ngModel)]="spell.school"
+                 *ngIf="customSpellSchool">
+          <button mat-icon-button matSuffix matTooltip="Delete custom school" (click)="customSpellSchool = false"
+                  *ngIf="customSpellSchool">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
         </mat-form-field>
 
         <mat-checkbox fxFlex="nogrow" [(ngModel)]="spell.ritual" (change)="emitChange()">Ritual</mat-checkbox>
