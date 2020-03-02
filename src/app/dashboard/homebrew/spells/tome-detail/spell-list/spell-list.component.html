@@ -12,7 +12,7 @@
             <button mat-icon-button matTooltip="Import from JSON" (click)="newFromJSON()">
               <mat-icon aria-label="Import from JSON">vertical_align_bottom</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="From existing spell" (click)="newFromSRD()">
+            <button mat-icon-button matTooltip="Copy SRD spell" (click)="newFromSRD()">
               <mat-icon aria-label="From existing spell">scanner</mat-icon>
             </button>
             <button mat-icon-button (click)="newSpell()">
@@ -27,6 +27,12 @@
     <mat-card>
       <p>Looks like this tome is empty.</p>
       <button mat-raised-button color="accent" (click)="newSpell()">Make a Spell</button>
+      <button mat-icon-button matTooltip="Import from JSON" (click)="newFromJSON()">
+        <mat-icon aria-label="Import from JSON">vertical_align_bottom</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Copy SRD spell" (click)="newFromSRD()">
+        <mat-icon aria-label="From existing spell">scanner</mat-icon>
+      </button>
     </mat-card>
   </div>
 

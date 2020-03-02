@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Attack, CharacterMeta} from '../../../schemas/Character';
-import {Spell} from '../../../schemas/homebrew/Spells';
 import {JSONExportDialog} from '../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 import {JSONImportDialog} from '../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
+import {SRDCopyDialog} from '../../../shared/dialogs/srd-copy-dialog/srd-copy-dialog.component';
 import {DashboardService} from '../../dashboard.service';
 
 @Component({
@@ -39,6 +39,20 @@ export class AttackEditorDialog implements OnInit {
     const atk = new Attack();
     this.allAttacks.push(atk);
     this.selectedAttack = atk;
+  }
+
+  newFromSRD() {
+    const dialogRef = this.dialog.open(SRDCopyDialog, {
+      width: '60%',
+      disableClose: true,
+      data: {getter: null, namer: a => a.name}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.allAttacks.push(result);
+      }
+    });
   }
 
   deleteAttack(attack: Attack) {

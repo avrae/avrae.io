@@ -7,12 +7,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Item, Pack, REQUIRED_ITEM_PROPS} from '../../../../schemas/homebrew/Items';
 import {UserInfo} from '../../../../schemas/UserInfo';
 import {JSONImportDialog} from '../../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
+import {SRDCopyDialog} from '../../../../shared/dialogs/srd-copy-dialog/srd-copy-dialog.component';
 import {getUser} from '../../../APIHelper';
 import {DashboardService} from '../../../dashboard.service';
 import {HomebrewService} from '../../homebrew.service';
 import {PackOptionsDialog} from '../pack-options-dialog/pack-options-dialog.component';
 import {PackShareDialog} from '../pack-share-dialog/pack-share-dialog.component';
-import {PackSRDImportDialog} from '../pack-srd-import-dialog/pack-srd-import-dialog.component';
 
 @Component({
   selector: 'avr-pack-detail',
@@ -153,6 +153,22 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  // SRD import
+  beginNewFromSRD() {
+    const dialogRef = this.dialog.open(SRDCopyDialog, {
+      width: '60%',
+      disableClose: true,
+      data: {getter: () => this.homebrewService.getTemplateItems(), namer: a => a.name}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.pack.items.push(result);
+        this.ensureChangesNotif();
+      }
+    });
+  }
+
   // validation
   packIsValid(parsed) {
     if (parsed instanceof Array) {
@@ -174,22 +190,6 @@ export class PackDetailComponent implements OnInit, OnDestroy {
 
   objectIsItem(obj: any): obj is Item {
     return REQUIRED_ITEM_PROPS.every(v => v in obj);
-  }
-
-  // SRD import
-  beginNewFromSRD() {
-    const dialogRef = this.dialog.open(PackSRDImportDialog, {
-      width: '60%',
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log(result);
-        this.pack.items.push(result);
-        this.ensureChangesNotif();
-      }
-    });
   }
 
   commit() {

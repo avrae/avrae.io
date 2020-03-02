@@ -4,8 +4,8 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Spell, Tome} from '../../../../../schemas/homebrew/Spells';
 import {UserInfo} from '../../../../../schemas/UserInfo';
 import {JSONImportDialog} from '../../../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
+import {SRDCopyDialog} from '../../../../../shared/dialogs/srd-copy-dialog/srd-copy-dialog.component';
 import {HomebrewService} from '../../../homebrew.service';
-import {TomeSRDImportDialog} from '../../dialogs/tome-srd-import-dialog.component';
 
 @Component({
   selector: 'avr-spell-list',
@@ -56,14 +56,14 @@ export class SpellListComponent implements OnInit {
   }
 
   newFromSRD() {
-    const dialogRef = this.dialog.open(TomeSRDImportDialog, {
+    const dialogRef = this.dialog.open(SRDCopyDialog, {
       width: '60%',
-      disableClose: true
+      disableClose: true,
+      data: {getter: () => this.hbService.getTemplateSpells(), namer: a => a.name}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
         this.tome.spells.push(result);
         this.changed.emit();
       }
