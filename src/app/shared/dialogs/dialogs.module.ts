@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {MaterialModule} from '../../material/material.module';
 import {JSONExportDialog} from './json-export-dialog/json-export-dialog.component';
 import {JSONImportDialog} from './json-import-dialog/json-import-dialog.component';
+import {SRDCopyDialog} from './srd-copy-dialog/srd-copy-dialog.component';
 
 @NgModule({
   imports: [
@@ -15,11 +16,13 @@ import {JSONImportDialog} from './json-import-dialog/json-import-dialog.componen
   ],
   declarations: [
     JSONExportDialog,
-    JSONImportDialog
+    JSONImportDialog,
+    SRDCopyDialog
   ],
   entryComponents: [
     JSONExportDialog,
-    JSONImportDialog
+    JSONImportDialog,
+    SRDCopyDialog
   ]
 })
 export class DialogsModule {

@@ -36,7 +36,7 @@
             <button mat-icon-button matTooltip="Import from JSON" (click)="beginNewFromJSON()">
               <mat-icon aria-label="Import from JSON">vertical_align_bottom</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="From existing item" (click)="beginNewFromSRD()">
+            <button mat-icon-button matTooltip="Copy SRD item" (click)="beginNewFromSRD()">
               <mat-icon aria-label="From existing item">scanner</mat-icon>
             </button>
             <button mat-icon-button (click)="newLooseItem()">
@@ -51,6 +51,12 @@
       <mat-card>
         <p>Looks like this pack is empty.</p>
         <button mat-raised-button color="accent" (click)="newLooseItem()">Make an Item</button>
+        <button mat-icon-button matTooltip="Import from JSON" (click)="beginNewFromJSON()">
+          <mat-icon aria-label="Import from JSON">vertical_align_bottom</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Copy SRD item" (click)="beginNewFromSRD()">
+          <mat-icon aria-label="From existing item">scanner</mat-icon>
+        </button>
       </mat-card>
     </div>
 

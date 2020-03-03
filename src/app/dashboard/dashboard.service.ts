@@ -5,6 +5,7 @@ import {catchError} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Attack, CharacterMeta} from '../schemas/Character';
 import {Customizations} from '../schemas/Customization';
+import {Spell} from '../schemas/homebrew/Spells';
 import {UserInfo, UserStats} from '../schemas/UserInfo';
 import {defaultOptions, defaultTextOptions} from './APIHelper';
 
@@ -37,9 +38,14 @@ export class DashboardService {
     return this.http.get<CharacterMeta[]>(characterMetaUrl, defaultOptions());
   }
 
+  // character attack stuff
   getCharacterAttacks(upstream: string): Observable<Attack[]> {
     const endpt = `${characterBaseUrl}/${upstream}/attacks`;
     return this.http.get<Attack[]>(endpt, defaultOptions());
+  }
+
+  getTemplateAttacks(): Observable<Attack[]> {
+    return this.http.get<Attack[]>(`${characterBaseUrl}/attacks/srd`, defaultOptions());
   }
 
   putCharacterAttacks(upstream: string, attacks: Attack[]): Observable<string> {
