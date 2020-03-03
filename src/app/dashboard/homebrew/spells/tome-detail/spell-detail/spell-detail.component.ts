@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {Spell} from '../../../../../schemas/homebrew/Spells';
+import {Spell, SPELL_SCHOOLS} from '../../../../../schemas/homebrew/Spells';
 import {UserInfo} from '../../../../../schemas/UserInfo';
 import {JSONExportDialog} from '../../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 
@@ -21,10 +21,13 @@ export class SpellDetailComponent implements OnInit {
   @Output() delete = new EventEmitter();
   @Output() moveToEditor = new EventEmitter();
 
+  customSpellSchool: boolean;
+
   constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    this.customSpellSchool = !SPELL_SCHOOLS.includes(this.spell.school);
   }
 
   emitChange() {
