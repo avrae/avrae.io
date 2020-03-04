@@ -62,19 +62,6 @@ import {TomeDetailComponent} from './spells/tome-detail/tome-detail.component';
     SpellPanelDescriptionComponent,
     SpellEditorComponent,
     TomeMarkdownDialog,
-  ],
-  entryComponents: [
-    NewPackDialog,
-    PackOptionsDialog,
-    PackShareDialog,
-    PackDeleteDialog,
-    PackMarkdownDialog,
-
-    NewTomeDialog,
-    TomeShareDialog,
-    TomeOptionsDialog,
-    TomeDeleteDialog,
-    TomeMarkdownDialog,
   ]
 })
 export class HomebrewModule {

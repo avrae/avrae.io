@@ -34,19 +34,23 @@
               {
                 "input": "src/highlightjs/material-light.scss"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/pink-bluegrey.css",
                 "bundleName": "pink-bluegrey"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/deeppurple-amber.css",
                 "bundleName": "deeppurple-amber"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/indigo-pink.css",
                 "bundleName": "indigo-pink"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/purple-green.css",
                 "bundleName": "purple-green"
               }
@@ -135,19 +139,23 @@
               {
                 "input": "src/highlightjs/material-light.scss"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/pink-bluegrey.css",
                 "bundleName": "pink-bluegrey"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/deeppurple-amber.css",
                 "bundleName": "deeppurple-amber"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/indigo-pink.css",
                 "bundleName": "indigo-pink"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/purple-green.css",
                 "bundleName": "purple-green"
               }
@@ -214,5 +222,8 @@
     "@schematics/angular:directive": {
       "prefix": "avr"
     }
+  },
+  "cli": {
+    "analytics": "7c97ef82-6e05-4ea4-9604-8dd942812a00"
   }
 }

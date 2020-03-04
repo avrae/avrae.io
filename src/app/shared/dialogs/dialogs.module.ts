@@ -18,11 +18,6 @@ import {SRDCopyDialog} from './srd-copy-dialog/srd-copy-dialog.component';
     JSONExportDialog,
     JSONImportDialog,
     SRDCopyDialog
-  ],
-  entryComponents: [
-    JSONExportDialog,
-    JSONImportDialog,
-    SRDCopyDialog
   ]
 })
 export class DialogsModule {
