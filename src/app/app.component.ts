@@ -11,28 +11,21 @@ import {environment} from '../environments/environment';
 export class AppComponent implements OnInit {
 
   title = 'Avrae';
+  description = 'Avrae is a Discord bot designed to streamline playing D&D over Discord. ' +
+    'Featuring advanced dice, SRD and character sheet integration, and initiative tracking, ' +
+    'you\'ll never need another D&D bot.';
 
   // Initialise with mobile true - Mobile First
   mobile = true;
 
   constructor(private breakpointObserver: BreakpointObserver, private meta: Meta) {
     this.meta.addTags([
-      {
-        name: 'description',
-        content: 'Avrae is a Discord bot designed to streamline playing D&D over Discord. ' +
-          'Featuring advanced dice, SRD and character sheet integration, and initiative tracking, ' +
-          'you\'ll never need another D&D bot.'
-      },
-      {property: 'og:title', content: 'Avrae'},
+      {name: 'description', content: this.description},
+      {property: 'og:title', content: this.title},
       {property: 'og:type', content: 'website'},
       {property: 'og:url', content: environment.baseURL},
       {property: 'og:image', content: 'https://avrae.io/assets/img/AvraeSquare.jpg'},
-      {
-        property: 'og:description',
-        content: 'Avrae is a Discord bot designed to streamline playing D&D over Discord. ' +
-          'Featuring advanced dice, SRD and character sheet integration, and initiative tracking, ' +
-          'you\'ll never need another D&D bot.'
-      }
+      {property: 'og:description', content: this.description}
     ]);
   }
 
