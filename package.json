@@ -28,7 +28,7 @@
     "@thisissoon/angular-inviewport": "^4.2.2",
     "@thisissoon/angular-scrollspy": "^2.2.0",
     "core-js": "^2.6.11",
-    "ngx-markdown": "^8.2.2",
+    "ngx-markdown": "^9.0.0",
     "query-string": "^6.11.1",
     "rxjs": "^6.5.4",
     "tslib": "^1.11.1",

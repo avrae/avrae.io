@@ -37,8 +37,7 @@ const markdownConfig = {
     provide: MarkedOptions,
     useValue: {
       gfm: true,
-      breaks: true,
-      sanitize: true
+      breaks: true
     },
   }
 };
