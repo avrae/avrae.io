@@ -51,4 +51,11 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
   getQualifiedId() {
     return this.parentId ? `${this.parentId}-${this.command.name}` : this.command.name;
   }
+
+  debrace(value: string) {
+    if (!value) {
+      return value;
+    }
+    return value.replace(/>/g, '&gt;').replace(/</g, '&lt;');
+  }
 }
