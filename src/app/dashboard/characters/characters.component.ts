@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {UserInfo, UserStats} from '../../schemas/UserInfo';
 import {DashboardService} from '../dashboard.service';
 import {CharacterMeta} from '../../schemas/Character';
