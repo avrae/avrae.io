@@ -44,12 +44,6 @@ import { GvarLookupComponent } from './gvars/gvar-lookup/gvar-lookup.component';
     AttackEditorDialog,
     GvarListComponent,
     GvarLookupComponent,
-  ],
-  entryComponents: [
-    ConfirmDeleteDialog,
-    EditDialog,
-    NewDialog,
-    AttackEditorDialog
   ]
 })
 

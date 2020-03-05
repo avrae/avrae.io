@@ -38,9 +38,8 @@ const markdownConfig = {
     useValue: {
       gfm: true,
       breaks: true,
-      sanitize: true
     },
-  }
+  },
 };
 
 @NgModule({

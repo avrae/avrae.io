@@ -10,7 +10,7 @@
       <markdown>{{command.short}}</markdown>
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <markdown>{{command.docs}}</markdown>
+  <div [innerHTML]="debrace(command.docs) | markdown"></div>
   <table *ngIf="command.args.length">
     <tr>
       <th>Arguments</th>

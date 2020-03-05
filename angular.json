@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -34,23 +35,23 @@
                 "input": "src/highlightjs/material-light.scss"
               },
               {
+                "inject": false,
                 "input": "src/assets/pink-bluegrey.css",
-                "lazy": true,
                 "bundleName": "pink-bluegrey"
               },
               {
+                "inject": false,
                 "input": "src/assets/deeppurple-amber.css",
-                "lazy": true,
                 "bundleName": "deeppurple-amber"
               },
               {
+                "inject": false,
                 "input": "src/assets/indigo-pink.css",
-                "lazy": true,
                 "bundleName": "indigo-pink"
               },
               {
+                "inject": false,
                 "input": "src/assets/purple-green.css",
-                "lazy": true,
                 "bundleName": "purple-green"
               }
             ],
@@ -60,6 +61,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -77,6 +84,12 @@
               "buildOptimizer": true
             },
             "beta": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -127,23 +140,23 @@
                 "input": "src/highlightjs/material-light.scss"
               },
               {
+                "inject": false,
                 "input": "src/assets/pink-bluegrey.css",
-                "lazy": true,
                 "bundleName": "pink-bluegrey"
               },
               {
+                "inject": false,
                 "input": "src/assets/deeppurple-amber.css",
-                "lazy": true,
                 "bundleName": "deeppurple-amber"
               },
               {
+                "inject": false,
                 "input": "src/assets/indigo-pink.css",
-                "lazy": true,
                 "bundleName": "indigo-pink"
               },
               {
+                "inject": false,
                 "input": "src/assets/purple-green.css",
-                "lazy": true,
                 "bundleName": "purple-green"
               }
             ],
@@ -204,10 +217,13 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "avr",
-      "styleext": "css"
+      "style": "css"
     },
     "@schematics/angular:directive": {
       "prefix": "avr"
     }
+  },
+  "cli": {
+    "analytics": "7c97ef82-6e05-4ea4-9604-8dd942812a00"
   }
 }
