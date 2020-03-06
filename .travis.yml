@@ -10,10 +10,9 @@ script:
   - ng e2e --protractor-config=e2e/protractor-ci.conf.js --prod
   - npm run build:ssr
   - cp dist/frontend/browser/index.html dist/frontend/browser/404.html
-  - cp -r dist/frontend/browser/ dist/
 deploy:
   provider: pages
-  local_dir: dist
+  local_dir: dist/frontend/browser
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
