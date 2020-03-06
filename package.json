@@ -34,6 +34,7 @@
     "@thisissoon/angular-inviewport": "^4.2.2",
     "@thisissoon/angular-scrollspy": "^2.2.0",
     "core-js": "^2.6.11",
+    "domino": "^2.1.4",
     "express": "^4.15.2",
     "ngx-markdown": "^9.0.0",
     "query-string": "^6.11.1",

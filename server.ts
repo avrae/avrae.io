@@ -1,12 +1,18 @@
+import {APP_BASE_HREF} from '@angular/common';
+
+import {ngExpressEngine} from '@nguniversal/express-engine';
+import * as express from 'express';
+import {existsSync, readFileSync} from 'fs';
+import {join} from 'path';
 import 'zone.js/dist/zone-node';
 
-import { ngExpressEngine } from '@nguniversal/express-engine';
-import * as express from 'express';
-import { join } from 'path';
+import {AppServerModule} from './src/main.server';
 
-import { AppServerModule } from './src/main.server';
-import { APP_BASE_HREF } from '@angular/common';
-import { existsSync } from 'fs';
+const domino = require('domino');
+const template = readFileSync(join(__dirname, '..', 'browser', 'index.html')).toString();
+const win = domino.createWindow(template);
+global['window'] = win;
+global['document'] = win.document;
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {

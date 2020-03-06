@@ -8,9 +8,11 @@ export function setToken(token: string, expires: number) {
 }
 
 export function getToken() {
-  if (localStorage.getItem('token') && +localStorage.getItem('expires') > Math.floor(Date.now() / 1000)) {
-    return localStorage.getItem('token');
-  } else {
+  try {
+    if (localStorage.getItem('token') && +localStorage.getItem('expires') > Math.floor(Date.now() / 1000)) {
+      return localStorage.getItem('token');
+    }
+  } catch (e) {
     return null;
   }
 }
