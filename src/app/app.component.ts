@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Component, OnInit} from '@angular/core';
 import {Meta} from '@angular/platform-browser';
 import {environment} from '../environments/environment';
 
@@ -31,17 +31,8 @@ export class AppComponent implements OnInit {
 
   // On init function (make sure to implement OnInit is called when component is initialized
   ngOnInit() {
-    this.breakpointObserver.observe(Breakpoints.Handset).subscribe(({matches}) => {
-      if (matches) {
-        // Is Handset (Phone)
-        this.mobile = true;
-      }
-    });
-    this.breakpointObserver.observe(Breakpoints.Web).subscribe(({matches}) => {
-      if (matches) {
-        // Is Web (Desktop?)
-        this.mobile = false;
-      }
+    this.breakpointObserver.observe(Breakpoints.XSmall).subscribe(({matches}) => {
+      this.mobile = matches;
     });
   }
 }

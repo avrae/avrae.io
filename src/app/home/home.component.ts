@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'avr-home',
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breakpointObserver.observe(Breakpoints.Handset).subscribe(({matches}) => {
+    this.breakpointObserver.observe(Breakpoints.XSmall).subscribe(({matches}) => {
       this.mobile = matches;
       matches ? this.columnCount = 1 : this.columnCount = 3;
     });
