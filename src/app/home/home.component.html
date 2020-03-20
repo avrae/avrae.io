@@ -1,5 +1,5 @@
 <mat-card class="greetings mat-elevation-z6">
-  <mat-grid-list cols="4" rowHeight="1:1">
+  <mat-grid-list cols="4" rowHeight="1:1" *ngIf="!mobile">
     <mat-grid-tile>
       <img src="../../assets/img/AvraeSquare.jpg" class="circular-greetings mat-elevation-z1" alt="Avrae" />
     </mat-grid-tile>
@@ -14,6 +14,49 @@
       </div>
     </mat-grid-tile>
   </mat-grid-list>
+
+  <div *ngIf="mobile">
+    <img src="../../assets/img/AvraeSquare.jpg" class="mobile-circular-greetings mat-elevation-z1" alt="Avrae"/>
+    <div>
+      <h1 class="mat-display-2 nomargin">
+        Hello.
+      </h1>
+      <p class="mat-h3">
+        I am Avrae, a Discord bot designed to help you and your friends play D&D online.
+      </p>
+    </div>
+  </div>
+</mat-card>
+
+<mat-card>
+  <mat-grid-list cols="3" rowHeight="350px" *ngIf="!mobile">
+    <mat-grid-tile colspan="2">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/IhdxML6xZB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      <div>
+        <h3 class="mat-h1 nomargin">
+          How to Train Your Dice Dragon
+        </h3>
+        <p class="mat-h3">
+          Need help getting started with Avrae? Check out this video!
+        </p>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div *ngIf="mobile">
+    <iframe width="100%" src="https://www.youtube.com/embed/IhdxML6xZB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <div>
+      <h3 class="mat-h1 nomargin">
+        How to Train Your Dice Dragon
+      </h3>
+      <p class="mat-h3">
+        Need help getting started with Avrae? Check out this video!
+      </p>
+    </div>
+  </div>
 </mat-card>
 
 <div class="grid-container">
