@@ -24,7 +24,7 @@
     "@angular/platform-browser": "^9.0.5",
     "@angular/platform-browser-dynamic": "^9.0.5",
     "@angular/router": "^9.0.5",
-    "@sentry/browser": "^5.13.0",
+    "@sentry/browser": "^5.15.0",
     "@thisissoon/angular-inviewport": "^4.2.2",
     "@thisissoon/angular-scrollspy": "^2.2.0",
     "core-js": "^2.6.11",
