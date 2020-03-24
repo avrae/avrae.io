@@ -2,6 +2,7 @@ import {APP_BASE_HREF} from '@angular/common';
 
 import {ngExpressEngine} from '@nguniversal/express-engine';
 import * as express from 'express';
+import * as compression from 'compression';
 import {existsSync, readFileSync} from 'fs';
 import {join} from 'path';
 import 'zone.js/dist/zone-node';
@@ -17,6 +18,7 @@ global['document'] = win.document;
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();
+  server.use(compression());
   const distFolder = join(process.cwd(), 'dist/frontend/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
