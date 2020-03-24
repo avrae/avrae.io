@@ -10,6 +10,7 @@ script:
   - ng e2e --protractor-config=e2e/protractor-ci.conf.js --prod
   - npm run build-prod:ssr
   - cp dist/frontend/browser/index.html dist/frontend/browser/404.html
+  - docker build -t avrae-io .
 deploy:
   provider: script
   script: bash scripts/ecr_push.sh
