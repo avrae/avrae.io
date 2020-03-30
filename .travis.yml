@@ -11,7 +11,7 @@ script:
   - npm run build-prod:ssr
   - cp dist/frontend/browser/index.html dist/frontend/browser/404.html
   - docker build -t avrae-io .
-pre_deploy:
+before_deploy:
   - pip install --user awscli
 deploy:
   provider: script
