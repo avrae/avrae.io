@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
+import {AfterViewInit, Component, Inject, Input, OnInit, PLATFORM_ID} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Command, CommandArgument} from '../../schemas/Commands';
 
@@ -12,14 +13,17 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
   @Input() command: Command;
   @Input() parentId: string;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private activatedRoute: ActivatedRoute) {
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
   }
 
   ngAfterViewInit(): void {
-    if (this.getQualifiedId() === this.activatedRoute.snapshot.fragment) {
+    if (this.isBrowser && this.getQualifiedId() === this.activatedRoute.snapshot.fragment) {
       const el = document.getElementById(this.getQualifiedId());
       // puts the scroll on the end of the render queue, so it only scrolls once the element is on the page
       // this took way too long to figure out
@@ -45,7 +49,9 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
   }
 
   setHash() {
-    history.pushState(null, null, `${window.location.pathname}#${this.getQualifiedId()}`);
+    if (this.isBrowser) {
+      history.pushState(null, null, `${window.location.pathname}#${this.getQualifiedId()}`);
+    }
   }
 
   getQualifiedId() {

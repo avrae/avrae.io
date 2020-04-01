@@ -17,7 +17,7 @@ export class ThemeStorage {
 
   storeTheme(theme: DocsSiteTheme) {
     try {
-      window.localStorage[ThemeStorage.storageKey] = JSON.stringify(theme);
+      localStorage[ThemeStorage.storageKey] = JSON.stringify(theme);
     } catch (e) {
     }
 
@@ -26,7 +26,7 @@ export class ThemeStorage {
 
   getStoredTheme(): DocsSiteTheme {
     try {
-      return JSON.parse(window.localStorage[ThemeStorage.storageKey] || null);
+      return JSON.parse(localStorage[ThemeStorage.storageKey] || null);
     } catch (e) {
       return null;
     }
@@ -34,7 +34,7 @@ export class ThemeStorage {
 
   clearStorage() {
     try {
-      window.localStorage.removeItem(ThemeStorage.storageKey);
+      localStorage.removeItem(ThemeStorage.storageKey);
     } catch (e) {
     }
   }

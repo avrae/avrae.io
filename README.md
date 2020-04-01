@@ -16,17 +16,15 @@ This is the source code for the Angular website located at https://avrae.io.  It
 
 To build for development:
 
-Run `ng build` or `npm run build`
+Run `npm run build:ssr`
 
 To build for production:
 
-Run `ng build --prod` or `npm run build-prod`
+Run `npm run build-prod:ssr`
 
-**Prior to running `ng build` you will need to build themes by running `npm run build` or running the build themes script
+## Run (Dev)
 
-## Run
-
-Run `ng serve` or `npm start`
+Run `npm run dev:ssr`
 
 ## Run tests
 

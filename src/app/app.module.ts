@@ -53,7 +53,7 @@ const markdownConfig = {
     CommandDisplayComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     BrowserAnimationsModule,
     LayoutModule,
