@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {UserInfo, UserStats} from '../../schemas/UserInfo';
 import {DashboardService} from '../dashboard.service';
 import {CharacterMeta} from '../../schemas/Character';
@@ -45,6 +45,14 @@ export class CharactersComponent implements OnInit {
   getInitials(name: string): string {
     const match = name.match(/\b\w/g) || [];
     return ((match.shift() || '') + (match.pop() || '')).toUpperCase();
+  }
+
+  getImage(character: CharacterMeta): string {
+    return character.overrides.image || character.image;
+  }
+
+  getDescription(character: CharacterMeta): string {
+    return character.overrides.desc || character.description;
   }
 
   getUpstreamURL(upstream: string): string {
