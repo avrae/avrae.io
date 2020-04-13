@@ -135,14 +135,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         console.log(result);
         this.changesOpen = false;
-
-        if (this.isFirstSave) {
-          this.updateFirstSaveState();
-          result = `${result} Use !tome ${this.tome.name} to activate the tome in Discord!`;
-        }
-
-        this.snackBar.open(result, null, {horizontalPosition: 'right'});
-        this.isFirstSave = false;
+        this.snackBar.open(`${result} Use "!tome ${this.tome.name}" to activate the tome in Discord!`, null, {horizontalPosition: 'right'});
       });
   }
 
