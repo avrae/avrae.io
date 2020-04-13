@@ -10,6 +10,7 @@
       <markdown>{{command.short}}</markdown>
     </mat-panel-description>
   </mat-expansion-panel-header>
+
   <div [innerHTML]="debrace(command.docs) | markdown"></div>
   <table *ngIf="command.args.length">
     <tr>
@@ -23,7 +24,7 @@
     <h4 class="mat-h4 smallmargin"><b>Subcommands</b></h4>
     <mat-accordion>
       <avr-command-display *ngFor="let subcommand of command.subcommands" [command]="subcommand"
-                           [parentId]="getQualifiedId()"></avr-command-display>
+                           [parentId]="getQualifiedId()" [depth]="depth + 1"></avr-command-display>
     </mat-accordion>
   </div>
 </mat-expansion-panel>

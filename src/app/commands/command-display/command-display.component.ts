@@ -6,12 +6,13 @@ import {Command, CommandArgument} from '../../schemas/Commands';
 @Component({
   selector: 'avr-command-display',
   templateUrl: './command-display.component.html',
-  styleUrls: ['./command-display.component.css']
+  styleUrls: ['./command-display.component.scss']
 })
 export class CommandDisplayComponent implements OnInit, AfterViewInit {
 
   @Input() command: Command;
   @Input() parentId: string;
+  @Input() depth = 0;
 
   isBrowser: boolean;
 
