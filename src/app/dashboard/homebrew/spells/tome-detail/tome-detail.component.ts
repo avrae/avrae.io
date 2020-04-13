@@ -23,7 +23,8 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   user: UserInfo = getUser();
   canEdit: boolean;
   isOwner: boolean;
-  changesOpen: boolean = false;
+  isFirstSave: boolean;
+  changesOpen = false;
   selectedSpell: Spell;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewService,
@@ -34,6 +35,8 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUser();
     this.getTome();
+    // this is the first save if the array in tomeFirstSaves does not include the tome ID
+    this.isFirstSave = !(JSON.parse(localStorage.getItem('tomeFirstSaves')) || []).includes(this.route.snapshot.paramMap.get('tome'));
   }
 
   ngOnDestroy() {
@@ -120,13 +123,26 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  updateFirstSaveState() {
+    const firstSaves: Array<string> = JSON.parse(localStorage.getItem('tomeFirstSaves')) || [];
+    firstSaves.push(this.tome._id.$oid);
+    localStorage.setItem('tomeFirstSaves', JSON.stringify(firstSaves));
+  }
+
   commit() {
     // HTTP PUT /homebrew/spells/:tome
     this.homebrewService.putTome(this.tome)
       .subscribe(result => {
         console.log(result);
         this.changesOpen = false;
+
+        if (this.isFirstSave) {
+          this.updateFirstSaveState();
+          result = `${result} Use !tome ${this.tome.name} to activate the tome in Discord!`;
+        }
+
         this.snackBar.open(result, null, {horizontalPosition: 'right'});
+        this.isFirstSave = false;
       });
   }
 
