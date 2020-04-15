@@ -29,7 +29,7 @@ export class Spell {
   description: string;
   higherlevels: string;
   concentration: boolean;
-  automation: AutomationEffect[];
+  automation: AutomationEffect[] | null;
   image?: string;
 
   constructor() {

@@ -3,7 +3,7 @@
     <p>Editing {{spell.name}}...</p>
     <p>You can find help on how to use the spell editor
       <a target="_blank" href="https://avrae.readthedocs.io/en/latest/automation_ref.html">here</a>.</p>
-    <avr-automation-editor [automation]="spell.automation" [spell]="spell"
+    <avr-automation-editor [automation]="getAutomation(spell)" [spell]="spell"
                            (changed)="changed.emit()"></avr-automation-editor>
   </mat-card>
 </div>

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AutomationEffect} from '../../../../../schemas/homebrew/AutomationEffects';
 import {Spell} from '../../../../../schemas/homebrew/Spells';
 
 @Component({
@@ -15,6 +16,13 @@ export class SpellEditorComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getAutomation(spell: Spell): AutomationEffect[] {
+    if (spell.automation === null) {
+      spell.automation = [];
+    }
+    return spell.automation;
   }
 
 
