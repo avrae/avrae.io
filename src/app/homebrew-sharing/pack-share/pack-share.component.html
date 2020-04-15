@@ -16,7 +16,7 @@
 
         <mat-list>
           <mat-list-item *ngFor="let item of pack.items">
-            <div class="item hoverable" fxLayout="row" (click)="selectedItem = item">
+            <div class="item hoverable pointer" fxLayout="row" (click)="selectedItem = item">
               <div fxFlex="1 2 auto" class="item-name">
                 <p>{{item.name}}</p>
               </div>

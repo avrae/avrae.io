@@ -1,4 +1,5 @@
-<mat-expansion-panel [id]="getQualifiedId()" [expanded]="shouldBeExpanded()" (afterExpand)="setHash()">
+<mat-expansion-panel [id]="getQualifiedId()" [expanded]="shouldBeExpanded()" (afterExpand)="setHash()"
+                     class="hoverable">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <div>
@@ -24,7 +25,7 @@
     <h4 class="mat-h4 smallmargin"><b>Subcommands</b></h4>
     <mat-accordion>
       <avr-command-display *ngFor="let subcommand of command.subcommands" [command]="subcommand"
-                           [parentId]="getQualifiedId()" [depth]="depth + 1"></avr-command-display>
+                           [parentId]="getQualifiedId()"></avr-command-display>
     </mat-accordion>
   </div>
 </mat-expansion-panel>

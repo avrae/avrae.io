@@ -12,8 +12,6 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
 
   @Input() command: Command;
   @Input() parentId: string;
-  @Input() depth = 0;
-
   isBrowser: boolean;
 
   constructor(@Inject(PLATFORM_ID) platformId: Object, private activatedRoute: ActivatedRoute) {

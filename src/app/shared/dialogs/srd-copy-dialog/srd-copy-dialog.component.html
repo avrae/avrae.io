@@ -7,7 +7,7 @@
   </div>
   <div class="results" *ngIf="filteredTemplates?.length">
     <mat-list>
-      <mat-list-item *ngFor="let obj of filteredTemplates" class="hoverable"
+      <mat-list-item *ngFor="let obj of filteredTemplates" class="hoverable pointer"
                      (click)="select(obj)">
         {{data.namer(obj)}}
       </mat-list-item>
