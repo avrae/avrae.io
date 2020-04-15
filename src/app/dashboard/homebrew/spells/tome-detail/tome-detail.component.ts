@@ -23,7 +23,6 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   user: UserInfo = getUser();
   canEdit: boolean;
   isOwner: boolean;
-  isFirstSave: boolean;
   changesOpen = false;
   selectedSpell: Spell;
 
@@ -35,8 +34,6 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUser();
     this.getTome();
-    // this is the first save if the array in tomeFirstSaves does not include the tome ID
-    this.isFirstSave = !(JSON.parse(localStorage.getItem('tomeFirstSaves')) || []).includes(this.route.snapshot.paramMap.get('tome'));
   }
 
   ngOnDestroy() {
@@ -121,12 +118,6 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
         }
       }
     });
-  }
-
-  updateFirstSaveState() {
-    const firstSaves: Array<string> = JSON.parse(localStorage.getItem('tomeFirstSaves')) || [];
-    firstSaves.push(this.tome._id.$oid);
-    localStorage.setItem('tomeFirstSaves', JSON.stringify(firstSaves));
   }
 
   commit() {
