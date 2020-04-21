@@ -31,6 +31,7 @@ export class CharacterMeta {
   image: string;
   levels: { total_level: number, classes: Map<string, number> };
   import_version: number;
+  overrides: { desc: string, image: string, attacks: Array<any>, spells: Array<any> };
 }
 
 export class Stats {

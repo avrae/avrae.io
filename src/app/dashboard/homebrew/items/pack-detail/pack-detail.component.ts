@@ -25,7 +25,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   user: UserInfo = getUser();
   canEdit: boolean;
   isOwner: boolean;
-  changesOpen: boolean = false;
+  changesOpen = false;
   selectedItem: Item;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewService,
@@ -198,7 +198,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         console.log(result);
         this.changesOpen = false;
-        this.snackBar.open(result, null, {horizontalPosition: 'right'});
+        this.snackBar.open(`${result} Use "!tome ${this.pack.name}" to activate the pack in Discord!`, null, {horizontalPosition: 'right'});
       });
   }
 

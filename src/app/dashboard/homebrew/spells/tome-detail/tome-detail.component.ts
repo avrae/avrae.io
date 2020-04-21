@@ -23,7 +23,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   user: UserInfo = getUser();
   canEdit: boolean;
   isOwner: boolean;
-  changesOpen: boolean = false;
+  changesOpen = false;
   selectedSpell: Spell;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewService,
@@ -126,7 +126,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         console.log(result);
         this.changesOpen = false;
-        this.snackBar.open(result, null, {horizontalPosition: 'right'});
+        this.snackBar.open(`${result} Use "!tome ${this.tome.name}" to activate the tome in Discord!`, null, {horizontalPosition: 'right'});
       });
   }
 

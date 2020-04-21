@@ -23,18 +23,18 @@
   <mat-grid-list [cols]="numCols" rowHeight="5:6" gutterSize="8" (window:resize)="onResize($event)">
     <mat-grid-tile class="character-tile" *ngFor="let character of characters | async">
       <div class="character-name-underlay mat-typography character-image">
-        <p class="ignore-theme" *ngIf="!character.image">
+        <p class="ignore-theme" *ngIf="!getImage(character)">
           {{getInitials(character.name)}}
         </p>
       </div>
-      <img class="character-image" [src]="character.image" [alt]="'Image for ' + character.name"
-           *ngIf="character.image">
+      <img class="character-image" [src]="getImage(character)" [alt]="'Image for ' + character.name"
+           *ngIf="getImage(character)">
       <div class="character-meta">
         <div class="mat-typography ignore-theme character-text">
           <h3>
             {{character.name}}
           </h3>
-          {{character.description}}
+          {{getDescription(character)}}
         </div>
         <div class="mat-typography ignore-theme character-actions">
           <a mat-icon-button matTooltip="View Sheet"

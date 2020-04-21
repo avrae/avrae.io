@@ -16,7 +16,7 @@
 
         <mat-list>
           <mat-list-item *ngFor="let spell of tome.spells">
-            <div class="spell hoverable" (click)="selectedSpell = spell">
+            <div class="spell hoverable pointer" (click)="selectedSpell = spell">
               <span class="spell-name">
                 {{spell.name}}
               </span>
