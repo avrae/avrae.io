@@ -38,7 +38,7 @@
   bottom: 0;
   z-index: 101; // even over the navbar!
 
-  background: #182026;
+  background: $gray-dark1;
   font-family: Roboto, sans-serif;
   font-style: normal;
 }
@@ -77,6 +77,6 @@
   font-size: 18px;
 
   line-height: 65px;
-  background: #7077E5;
+  background: $blurple;
   text-align: center;
 }

@@ -2,13 +2,13 @@
 
 .footer {
   height: $footer-height;
-  background: #182026;
+  background: $gray-dark1;
   text-align: center;
 }
 
 .footer-body {
   padding: 16px;
   z-index: 100;
-  color: #CED9E0;
+  color: $gray-light1;
   margin: 0;
 }
