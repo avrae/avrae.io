@@ -37,7 +37,6 @@
   right: 0;
   bottom: 0;
   z-index: 101; // even over the navbar!
-
   background: $gray-dark1;
   font-family: Roboto, sans-serif;
   font-style: normal;
@@ -55,7 +54,6 @@
   display: flex;
   align-items: flex-end;
   margin: 37px 42px;
-
   color: white;
   font-weight: bold;
   letter-spacing: 0.06em;
@@ -70,12 +68,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-
   color: white;
   font-weight: bold;
   letter-spacing: 0.06em;
   font-size: 18px;
-
   line-height: 65px;
   background: $blurple;
   text-align: center;

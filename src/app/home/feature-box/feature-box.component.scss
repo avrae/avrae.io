@@ -37,11 +37,9 @@
 // large feature box
 .large-feature-box {
   margin: 20px 130px 0;
-
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 30px;
-
   text-align: left;
 
   div {
