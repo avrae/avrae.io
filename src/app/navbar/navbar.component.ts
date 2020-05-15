@@ -9,10 +9,11 @@ import {environment} from '../../environments/environment';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input()
-  mobile: boolean = true;
+  @Input() mobile = true;
+  mobileMenuOpen = false;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
