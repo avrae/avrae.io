@@ -17,7 +17,7 @@
   </div>
 
   <div class="grid-container">
-    <mat-grid-list [cols]="columnCount" rowHeight="900px">
+    <mat-grid-list [cols]="getColCount()" rowHeight="900px">
       <mat-grid-tile>
         <div [class]="mobile ? 'dashboard-card' : 'dashboard-card card-left'">
           <mat-card>

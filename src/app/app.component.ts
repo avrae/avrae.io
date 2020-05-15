@@ -1,4 +1,3 @@
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
 import {Meta} from '@angular/platform-browser';
 import {environment} from '../environments/environment';
@@ -15,10 +14,7 @@ export class AppComponent implements OnInit {
     'Featuring advanced dice, SRD and character sheet integration, and initiative tracking, ' +
     'you\'ll never need another D&D bot.';
 
-  // Initialise with mobile true - Mobile First
-  mobile = true;
-
-  constructor(private breakpointObserver: BreakpointObserver, private meta: Meta) {
+  constructor(private meta: Meta) {
     this.meta.addTags([
       {name: 'description', content: this.description},
       {property: 'og:title', content: this.title},
@@ -31,8 +27,5 @@ export class AppComponent implements OnInit {
 
   // On init function (make sure to implement OnInit is called when component is initialized
   ngOnInit() {
-    this.breakpointObserver.observe(Breakpoints.XSmall).subscribe(({matches}) => {
-      this.mobile = matches;
-    });
   }
 }
