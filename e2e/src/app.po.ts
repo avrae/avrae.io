@@ -6,6 +6,6 @@ export class AppPage {
   }
 
   getParagraphText() {
-    return element(by.css('avr-root h1')).getText();
+    return element(by.css('avr-root .about-avrae')).getText();
   }
 }

@@ -9,6 +9,6 @@ describe('avrae frontpage', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Hello.');
+    expect(page.getParagraphText()).toContain('I am Avrae');
   });
 });
