@@ -1,7 +1,10 @@
-<div class="feature-box mat-typography">
-  <h2>{{title}}</h2>
-  <p>
-    <ng-content></ng-content>
-  </p>
-  <img [src]="image" alt="Feature image"/>
+<div class="mat-typography" [class]="medium ? 'large-feature-box' : 'feature-box'">
+  <img [src]="image" alt="Feature image" *ngIf="image_left && medium"/>
+  <div>
+    <h2>{{title}}</h2>
+    <p>
+      <ng-content></ng-content>
+    </p>
+  </div>
+  <img [src]="image" alt="Feature image" *ngIf="!(image_left && medium)"/>
 </div>
