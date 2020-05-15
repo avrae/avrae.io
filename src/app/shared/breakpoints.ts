@@ -17,7 +17,7 @@ export abstract class BreakpointBaseComponent {
       this.small = matches;
       this.onSmall();
     });
-    bp.observe(Breakpoints.Medium).subscribe(({matches}) => {
+    bp.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge]).subscribe(({matches}) => {
       this.medium = matches;
       this.onMedium();
     });

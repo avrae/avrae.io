@@ -17,41 +17,38 @@
             allowfullscreen></iframe>
   </div>
 
-  <div class="feature-box mat-typography">
-    <h2>Advanced Dice Roller</h2>
-    <p>
-      With a custom dice parser, Avrae is one of the most advanced dice rollers on Discord, capable of
-      supporting pretty much every type of roll needed to play D&D. Advantage, disadvantage, and crits are built in, you
-      can keep, drop, or reroll dice as needed, dice can explode, and dice can be bounded.
-    </p>
-    <img src="../../assets/img/dicedemo.png" alt="Avrae Dice Roller"/>
-  </div>
+  <avr-feature-box
+    title="Advanced Dice Roller"
+    image="../../assets/img/dicedemo.png"
+  >
+    With a custom dice parser, Avrae is one of the most advanced dice rollers on Discord, capable of
+    supporting pretty much every type of roll needed to play D&D. Advantage, disadvantage, and crits are built in, you
+    can keep, drop, or reroll dice as needed, dice can explode, and dice can be bounded.
+  </avr-feature-box>
 
-  <div class="feature-box mat-typography">
-    <h2>Character Sheet Integration</h2>
-    <p>
-      Avrae can read character sheets from
-      <a target="_blank" href="https://www.dndbeyond.com/" rel="noopener noreferrer">D&amp;D Beyond</a>,
-      <a target="_blank" href="https://dicecloud.com/" rel="noopener noreferrer">Dicecloud</a>, or
-      <a target="_blank" href="http://gsheet2.avrae.io" rel="noopener noreferrer">a Google Sheet</a>,
-      automatically
-      generating macros to roll attacks, ability checks, and saving throws. A player can then simply use a
-      command to make a check, save, attack, or cast, and all necessary rolls will be resolved automatically.
-    </p>
-    <img src="../../assets/img/integration.png" alt="Avrae Character Sheet Integration"/>
-  </div>
+  <avr-feature-box
+    title="Character Sheet Integration"
+    image="../../assets/img/integration.png"
+  >
+    Avrae can read character sheets from
+    <a target="_blank" href="https://www.dndbeyond.com/" rel="noopener noreferrer">D&amp;D Beyond</a>,
+    <a target="_blank" href="https://dicecloud.com/" rel="noopener noreferrer">Dicecloud</a>, or
+    <a target="_blank" href="http://gsheet2.avrae.io" rel="noopener noreferrer">a Google Sheet</a>,
+    automatically
+    generating macros to roll attacks, ability checks, and saving throws. A player can then simply use a
+    command to make a check, save, attack, or cast, and all necessary rolls will be resolved automatically.
+  </avr-feature-box>
 
-  <div class="feature-box mat-typography">
-    <h2>Initiative Tracking</h2>
-    <p>
-      The initiative tracker is a fast way to track combat in a text channel. It supports automatic combatant
-      sorting, HP, AC, resistance, and status effect tracking, and integration with the character sheet
-      manager and 5e content to further streamline combat.
-    </p>
-    <img src="../../assets/img/initdemo.png" alt="Avrae Initiative Tracker"/>
-  </div>
+  <avr-feature-box
+    title="Initiative Tracking"
+    image="../../assets/img/initdemo.png"
+  >
+    The initiative tracker is a fast way to track combat in a text channel. It supports automatic combatant
+    sorting, HP, AC, resistance, and status effect tracking, and integration with the character sheet
+    manager and 5e content to further streamline combat.
+  </avr-feature-box>
 
-  <div class="cta-connect-avrae mat-typography">
+  <div class="cta-connect-avrae mat-typography" [class]="medium ? 'cta-large' : 'cta-small'">
     <h2>Connect Avrae</h2>
     <p>
       You can invite Avrae to your server here! Just select your server in the dropdown menu,

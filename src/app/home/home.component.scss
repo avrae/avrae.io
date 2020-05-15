@@ -41,35 +41,8 @@
   height: 147px;
 }
 
-.feature-box {
-  background: $gray-dark1;
-  text-align: center;
-  margin: 20px 16px 0;
-  padding: 18px 13px;
-  border-radius: 3px;
-
-  h2 {
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 42px;
-  }
-
-  p {
-    font-size: 18px;
-    line-height: 140%;
-  }
-
-  img {
-    border-radius: 3px;
-    width: 95%;
-    max-width: 450px;
-    max-height: 500px;
-  }
-}
-
 .cta-connect-avrae {
   text-align: center;
-  margin: 40px 28px 36px;
 
   h2 {
     font-weight: bold;
@@ -88,6 +61,16 @@
     height: 32px;
     background: $blurple;
   }
+}
+
+.cta-small {
+  margin: 40px 28px 36px;
+}
+
+.cta-large {
+  background: $gray-dark1;
+  margin: 40px 0 36px;
+  padding: 21px 305px;
 }
 
 @media only screen and (min-width: 768px) { // desktop
@@ -112,12 +95,7 @@
     height: 291px;
   }
 
-  .feature-box {
-    margin: 20px 60px 0;
-    padding: 35px 56px;
-  }
-
-  .cta-connect-avrae {
+  .cta-small {
     margin: 40px 116px 36px;
   }
 }
