@@ -12,7 +12,7 @@
 
 .landing-page {
   background: $black;
-  font-family: Roboto, sans-serif;
+  font-family: $font;
   text-align: center;
   color: white;
 }
@@ -33,7 +33,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: normal;
-  line-height: 140%;
+  line-height: 1.4;
 }
 
 .intro-video {
@@ -52,7 +52,7 @@
 
   p {
     font-size: 18px;
-    line-height: 140%;
+    line-height: 1.4;
   }
 
   a {

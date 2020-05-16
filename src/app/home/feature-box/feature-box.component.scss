@@ -16,7 +16,7 @@
 
   p {
     font-size: 18px;
-    line-height: 140%;
+    line-height: 1.4;
   }
 
   img {
@@ -42,18 +42,18 @@
   grid-gap: 30px;
   text-align: left;
 
-  div {
+  .feature-box-text {
     padding-top: 50px;
 
     h2 {
       font-weight: bold;
       font-size: 48px;
-      line-height: 100%;
+      line-height: 1;
     }
 
     p {
       font-size: 18px;
-      line-height: 140%;
+      line-height: 1.4;
     }
   }
 
