@@ -1,24 +1,25 @@
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
+import {BreakpointBaseComponent} from '../shared/breakpoints';
 
 @Component({
   selector: 'avr-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends BreakpointBaseComponent implements OnInit {
 
-  mobile = true;
-  columnCount = 1;
-
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private bp: BreakpointObserver) {
+    super(bp);
   }
 
   ngOnInit() {
-    this.breakpointObserver.observe(Breakpoints.XSmall).subscribe(({matches}) => {
-      this.mobile = matches;
-      matches ? this.columnCount = 1 : this.columnCount = 3;
-    });
   }
 
+  getColCount() {
+    if (this.mobile) {
+      return 1;
+    }
+    return 3;
+  }
 }

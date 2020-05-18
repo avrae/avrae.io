@@ -1,6 +1,6 @@
 @import "../_variables.scss";
 
-.navbar-header {
+.navbar-header {  // the mat-toolbar
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -11,23 +11,68 @@
   z-index: 100;
 }
 
-.avrae-icon {
-  margin-left: 20px;
-  margin-right: 25px;
-}
-
 .flex-spacer {
   flex: 1 1;
   //flex-grow: 1;
 }
 
-.navbar-link {
-  text-decoration: inherit;
-  flex: 1;
+.logo-center { // mobile: center logo in middle of screen horizontally
+  position: fixed;
+  left: 50%;
+  top: 5px;
+  transform: translate(-50%, 0);
 }
 
-.home-img {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
+.more-arrow { // more (arrow)
+  padding-bottom: 2px;
+}
+
+/* ==== mobile menu ==== */
+.mobile-menu { // mobile menu overlay
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 101; // even over the navbar!
+  background: $gray-dark1;
+  font-family: $font;
+  font-style: normal;
+}
+
+.mobile-menu-header {
+  padding: 8px 16px;
+  height: $navbar-height;
+  color: white;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.mobile-menu-link {
+  display: flex;
+  align-items: flex-end;
+  margin: 37px 42px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.mobile-menu-login {
+  position: fixed;
+  width: 100%;
+  height: 65px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  font-size: 18px;
+  line-height: 65px;
+  background: $blurple;
+  text-align: center;
 }

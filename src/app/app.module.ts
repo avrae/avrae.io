@@ -20,6 +20,7 @@ import {CommandsComponent} from './commands/commands.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {ErrorComponent} from './error/error.component';
 import {FooterComponent} from './footer/footer.component';
+import {FeatureBoxComponent} from './home/feature-box/feature-box.component';
 import {HomeComponent} from './home/home.component';
 import {HomebrewSharingModule} from './homebrew-sharing/homebrew-sharing.module';
 import {LoginModule} from './login/login.module';
@@ -45,6 +46,7 @@ const markdownConfig = {
 @NgModule({
   declarations: [
     AppComponent,
+    FeatureBoxComponent,
     HomeComponent,
     NavbarComponent,
     FooterComponent,
@@ -53,7 +55,7 @@ const markdownConfig = {
     CommandDisplayComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({appId: 'serverApp'}),
     HttpClientModule,
     BrowserAnimationsModule,
     LayoutModule,

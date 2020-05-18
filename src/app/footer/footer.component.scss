@@ -2,17 +2,13 @@
 
 .footer {
   height: $footer-height;
-}
-
-.muted {
-  color: #aaa;
-}
-
-.footer-card {
-  padding: 16px;
-  z-index: 100;
+  background: $gray-dark1;
+  text-align: center;
 }
 
 .footer-body {
-  margin: 16px;
+  padding: 16px;
+  z-index: 100;
+  color: $gray-light1;
+  margin: 0;
 }

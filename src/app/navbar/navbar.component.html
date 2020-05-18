@@ -1,36 +1,70 @@
 <mat-toolbar class="navbar-header mat-elevation-z4" color="primary">
-  <button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="mobile">
+  <!-- LOGO (horiz. center) -->
+  <a mat-button class="button" routerLink="/" aria-label="Avrae Home" [class]="mobile ? 'logo-center' : ''">
+    <img src="../../assets/img/LogoFlat.svg" alt="Avrae"/>
+  </a>
+
+  <!-- Mobile Menu hamburger -->
+  <button mat-icon-button *ngIf="mobile" (click)="mobileMenuOpen = !mobileMenuOpen">
     <mat-icon>menu</mat-icon>
   </button>
-  <a mat-icon-button class="button avrae-icon" routerLink="/" aria-label="Avrae Home">
-    <img src="../../assets/img/AvraeSquare.jpg" class="home-img mat-elevation-z1" alt="Avrae"/>
-  </a>
-  <a *ngIf="!mobile" mat-button class="button" routerLink="/commands">Commands</a>
-  <a *ngIf="!mobile" mat-button class="button" href="https://avrae.readthedocs.io/en/latest/" target="_blank"
-     rel="noopener noreferrer">Cheatsheets</a>
-  <button *ngIf="!mobile" mat-button [matMenuTriggerFor]="appMenu">
-    More
-  </button>
+
+  <!-- non-mobile nav links -->
+  <ng-container *ngIf="!mobile">
+    <a mat-button class="button" routerLink="/commands">COMMANDS</a>
+    <a mat-button class="button" href="https://avrae.readthedocs.io/en/latest/" target="_blank"
+       rel="noopener noreferrer">CHEATSHEETS</a>
+    <button mat-button [matMenuTriggerFor]="appMenu">
+      MORE
+      <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="more-arrow">
+        <path d="M8 0H0L4 5L8 0Z" fill="#fff"/>
+      </svg>
+    </button>
+  </ng-container>
+
+  <!-- TODO remove theme picker -->
   <div class="flex-spacer"></div>
   <avr-theme-picker></avr-theme-picker>
-  <ng-container *ngIf="loggedIn()">
-    <a *ngIf="!mobile" mat-button class="button" routerLink="/dashboard">Dashboard</a>
-    <a *ngIf="mobile" mat-icon-button class="button" routerLink="/dashboard">
-      <mat-icon>settings</mat-icon>
-    </a>
-  </ng-container>
-  <ng-container *ngIf="!loggedIn()">
-    <a *ngIf="!mobile" mat-button class="button" [href]="getLoginLink()">Log In</a>
-    <a *ngIf="mobile" mat-icon-button class="button" routerLink="/login">
-      <mat-icon>vpn_key</mat-icon>
-    </a>
+
+  <ng-container *ngIf="!mobile">
+    <a *ngIf="loggedIn()" mat-button class="button" routerLink="/dashboard">DASHBOARD</a>
+    <a *ngIf="!loggedIn()" mat-button class="button" [href]="getLoginLink()">LOG IN</a>
   </ng-container>
 </mat-toolbar>
 
+<!-- Mobile Menu -->
+<div class="mobile-menu" *ngIf="mobileMenuOpen">
+  <div class="mobile-menu-header">
+    <!-- exit button -->
+    <button mat-icon-button aria-label="Close mobile menu" (click)="mobileMenuOpen = !mobileMenuOpen">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <!-- horiz center logo -->
+    <img src="../../assets/img/LogoFlat.svg" alt="Avrae Logo" class="logo-center"/>
+  </div>
+
+  <!-- nav links -->
+  <a class="button mobile-menu-link" routerLink="/commands" style="color: #7077E5"
+     (click)="mobileMenuOpen = !mobileMenuOpen">COMMANDS</a>
+  <a class="button mobile-menu-link" href="https://avrae.readthedocs.io/en/latest/" target="_blank"
+     rel="noopener noreferrer">CHEATSHEETS</a>
+  <a class="button mobile-menu-link" href="http://invite.avrae.io">INVITE LINK</a>
+  <a class="button mobile-menu-link" href="http://support.avrae.io">SUPPORT SERVER</a>
+
+  <!-- log in -->
+  <a class="button mobile-menu-login" *ngIf="!loggedIn()" routerLink="/login"
+     (click)="mobileMenuOpen = !mobileMenuOpen">
+    LOG IN
+  </a>
+  <a class="button mobile-menu-login" *ngIf="loggedIn()" routerLink="/dashboard"
+     (click)="mobileMenuOpen = !mobileMenuOpen">
+    DASHBOARD
+  </a>
+</div>
+
+<!-- MORE menu -->
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-  <a *ngIf="mobile" mat-menu-item class="button" routerLink="/commands">Commands</a>
-  <a *ngIf="mobile" mat-menu-item class="button" href="https://avrae.readthedocs.io/en/latest/" target="_blank"
-     rel="noopener noreferrer">Cheatsheets</a>
   <a mat-menu-item class="button" href="http://invite.avrae.io">Invite Link</a>
   <a mat-menu-item class="button" href="http://support.avrae.io">Support Server</a>
 </mat-menu>

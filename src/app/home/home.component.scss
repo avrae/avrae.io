@@ -1,107 +1,101 @@
+@import "../_variables.scss";
 
-.greetings {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.greetings-hero-img {
-  position: center;
-  height: 80%;
-  width: 80%;
-  border-radius: 50%;
-}
-
-.mobile-greetings-hero-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  position: center;
-  height: 40%;
-  width: 40%;
-  border-radius: 50%;
-}
-
-.nomargin {
-  margin: 0;
-}
-
-.grid-container {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  bottom: 15px;
-}
-
-.dashboard-card mat-card {
-  height: 95%;
-}
-
-.card-center {
-  left: 5px;
-  right: 5px;
-}
-
-.card-left {
+.background {
+  position: fixed;
+  top: 0;
   left: 0;
-  right: 10px;
-}
-
-.card-right {
+  bottom: 0;
   right: 0;
-  left: 10px;
+  background: $black;
+  z-index: -999; // hacky way to override app background color for now
 }
 
-.dashboard-card-content {
+.landing-page {
+  background: $black;
+  font-family: $font;
   text-align: center;
+  color: white;
 }
 
-.feature-header {
-  font-size: 30px;
-  font-weight: 300;
+// mobile default
+.ddb-logo {
+  margin: 37px 0 6px;
+  width: 90px;
 }
 
-.muted {
-  color: #aaa;
+.avrae-logo {
+  margin: 6px 0 21px;
+  width: 177px;
 }
 
-.feature-desc {
+.about-avrae {
+  margin: 0 29px 39px;
   font-size: 18px;
-  font-weight: 300;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.4;
 }
 
-a {
-  // color: #3489c7;
-  // text-decoration: none;
+.intro-video {
+  width: 262px;
+  height: 147px;
 }
 
-.end {
+.cta-connect-avrae {
   text-align: center;
-  margin: 30px;
+
+  h2 {
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  a {
+    margin: 0 auto;
+    width: 138px;
+    height: 32px;
+    background: $blurple;
+  }
 }
 
-.circular-end {
-  height: 40%;
-  width: 40%;
-  border-radius: 50%;
-  margin-bottom: 10px;
-  background: transparent;
+.cta-small {
+  margin: 40px 28px 36px;
 }
 
-.end-card {
-  width: 100%;
-  height: 100%;
+.cta-large {
+  background: $gray-dark1;
+  margin: 40px 0 36px;
+  padding: 21px 305px;
 }
 
-.end-h3 {
-  margin: 8px;
-}
+@media only screen and (min-width: 768px) { // desktop
+  .ddb-logo {
+    margin: 67px 0 12px;
+    width: 15%;
+  }
 
-.mat-card-image{
-  max-width: 100%;
-  margin-left: 0px;
-  border-radius: 10px;
+  .avrae-logo {
+    margin: 12px 0 24px;
+    width: 40%;
+  }
+
+  .about-avrae {
+    width: 55%;
+    margin: 0 auto 45px;
+    font-size: 22px;
+  }
+
+  .intro-video {
+    width: 536px;
+    height: 291px;
+  }
+
+  .cta-small {
+    margin: 40px 116px 36px;
+  }
 }

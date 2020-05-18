@@ -1,165 +1,61 @@
-<mat-card class="greetings mat-elevation-z6">
-  <mat-grid-list cols="4" rowHeight="1:1" *ngIf="!mobile">
-    <mat-grid-tile>
-      <img src="../../assets/img/AvraeSquare.jpg" class="greetings-hero-img mat-elevation-z1" alt="Avrae" />
-    </mat-grid-tile>
-    <mat-grid-tile colspan="3">
-      <div>
-        <h1 class="mat-display-2 nomargin">
-          Hello.
-        </h1>
-        <p class="mat-h3">
-          I am Avrae, a Discord bot designed to help you and your friends play D&D online.
-        </p>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-  <div *ngIf="mobile">
-    <img src="../../assets/img/AvraeSquare.jpg" class="mobile-greetings-hero-img mat-elevation-z1" alt="Avrae"/>
-    <div>
-      <h1 class="mat-display-2 nomargin">
-        Hello.
-      </h1>
-      <p class="mat-h3">
-        I am Avrae, a Discord bot designed to help you and your friends play D&D online.
-      </p>
-    </div>
+<div class="background"></div>
+<div class="landing-page">
+  <div>
+    <img class="ddb-logo" src="../../assets/img/DDBLogo.svg" alt="D&D Beyond Logo"/>
   </div>
-</mat-card>
-
-<mat-card>
-  <mat-grid-list cols="3" rowHeight="350px" *ngIf="!mobile">
-    <mat-grid-tile colspan="2">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/exm4p2HFLXc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-      <div>
-        <h3 class="mat-h1 nomargin">
-          Getting Started with Avrae
-        </h3>
-        <p class="mat-h3">
-          Need help getting started with Avrae? Check out this video!
-        </p>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-  <div *ngIf="mobile">
-    <iframe width="100%" src="https://www.youtube.com/embed/exm4p2HFLXc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-    <div>
-      <h3 class="mat-h1 nomargin">
-        Getting Started with Avrae
-      </h3>
-      <p class="mat-h3">
-        Need help getting started with Avrae? Check out this video!
-      </p>
-    </div>
+  <div>
+    <img class="avrae-logo" src="../../assets/img/LogoFlat.svg" alt="Avrae Logo"/>
   </div>
-</mat-card>
 
-<div class="grid-container">
-  <mat-grid-list [cols]="columnCount" rowHeight="900px">
-    <mat-grid-tile>
-      <div [class]="mobile ? 'dashboard-card' : 'dashboard-card card-left'">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <h2 class="feature-header mat-h2">
-                Advanced Dice Roller.
-                <span class="muted">Need to reroll dice? Drop them? Pick them back up? Have them explode?</span>
-              </h2>
-            </mat-card-title>
-          </mat-card-header>
-          <img mat-card-image src="../../assets/img/dicedemo.png" alt="Avrae Dice Roller" />
-          <mat-card-content class="dashboard-card-content">
-            <p class="feature-desc mat-body">
-              With a custom dice parser, Avrae is one of the most advanced dice rollers on Discord, capable of
-              supporting
-              pretty much every type of roll needed to play D&D. Advantage, disadvantage, and crits are built in, you
-              can
-              keep, drop, or reroll dice as needed, dice can explode, and dice can be bounded.
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </mat-grid-tile>
+  <p class="mat-typography about-avrae">
+    I am <b><i>Avrae</i></b>, a <b>Discord bot</b> designed to help you and your friends play D&D online.
+  </p>
 
-    <mat-grid-tile>
-      <div [class]="mobile ? 'dashboard-card' : 'dashboard-card card-center'">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <h2 class="feature-header mat-h2">
-                Character Sheet Integration.
-                <span class="muted">You'll never have to memorize a modifier again.</span>
-              </h2>
-            </mat-card-title>
-          </mat-card-header>
-          <img mat-card-image src="../../assets/img/integration.png" alt="Avrae Character Sheet Integration" />
-          <mat-card-content class="dashboard-card-content">
-            <p class="feature-desc mat-body">
-              Avrae can read character sheets from
-              <a target="_blank" href="https://www.dndbeyond.com/" rel="noopener noreferrer">D&amp;D Beyond</a>,
-              <a target="_blank" href="https://dicecloud.com/" rel="noopener noreferrer">Dicecloud</a>, or
-              <a target="_blank" href="http://gsheet2.avrae.io" rel="noopener noreferrer">a Google Sheet</a>, automatically
-              generating macros to roll attacks, ability checks, and saving throws. A player can then simply use a
-              command to make a check, save, attack, or cast, and all necessary rolls will be resolved automatically.
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </mat-grid-tile>
+  <div>
+    <iframe class="intro-video" src="https://www.youtube.com/embed/exm4p2HFLXc" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+  </div>
 
-    <mat-grid-tile>
-      <div [class]="mobile ? 'dashboard-card' : 'dashboard-card card-right'">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <h2 class="feature-header mat-h2">
-                Initiative Tracking.
-                <span class="muted">How long left on my spell? How injured is the dragon?</span>
-              </h2>
-            </mat-card-title>
-          </mat-card-header>
-          <img mat-card-image src="../../assets/img/initdemo.png" alt="Avrae Initiative Tracker" />
-          <mat-card-content class="dashboard-card-content">
-            <p class="feature-desc mat-body">
-              The initiative tracker is a fast way to track combat in a text channel. It supports automatic combatant
-              sorting, HP, AC, resistance, and status effect tracking, and integration with the character sheet manager
-              and 5e SRD to further streamline combat.
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
+  <avr-feature-box
+    title="Advanced Dice Roller"
+    image="../../assets/img/dicedemo.png"
+  >
+    With a custom dice parser, Avrae is one of the most advanced dice rollers on Discord, capable of
+    supporting pretty much every type of roll needed to play D&D. Advantage, disadvantage, and crits are built in, you
+    can keep, drop, or reroll dice as needed, dice can explode, and dice can be bounded.
+  </avr-feature-box>
 
-<mat-divider></mat-divider>
+  <avr-feature-box
+    title="Character Sheet Integration"
+    image="../../assets/img/integration.png"
+    [image_left]="false"
+  >
+    Avrae can read character sheets from
+    <a target="_blank" href="https://www.dndbeyond.com/" rel="noopener noreferrer">D&amp;D Beyond</a>,
+    <a target="_blank" href="https://dicecloud.com/" rel="noopener noreferrer">Dicecloud</a>, or
+    <a target="_blank" href="http://gsheet2.avrae.io" rel="noopener noreferrer">a Google Sheet</a>,
+    automatically
+    generating macros to roll attacks, ability checks, and saving throws. A player can then simply use a
+    command to make a check, save, attack, or cast, and all necessary rolls will be resolved automatically.
+  </avr-feature-box>
 
-<div class="end">
-  <mat-grid-list cols="2" rowHeight="200px" gutterSize="15px">
-    <mat-grid-tile class="mat-elevation-z3">
-      <mat-card class="end-card">
-        <div>
-          <h3 class="mat-h3 end-h3">Invite</h3>
-          <p class="mat-body">You can invite Avrae to your server here! Just select your server in the dropdown menu,
-            and
-            ensure that "Read Messages", "Send Messages", "Embed Links", and "Manage Messages" are enabled!</p>
-          <a mat-stroked-button color="primary" href="http://invite.avrae.io/">Invite</a>
-        </div>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile class="mat-elevation-z3">
-      <mat-card class="end-card">
-        <div>
-          <h3 class="mat-h3 end-h3">Support</h3>
-          <p class="mat-body">Join the official support server here!</p>
-          <a mat-stroked-button color="primary" href="http://support.avrae.io/">Support</a>
-        </div>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <avr-feature-box
+    title="Initiative Tracking"
+    image="../../assets/img/initdemo.png"
+  >
+    The initiative tracker is a fast way to track combat in a text channel. It supports automatic combatant
+    sorting, HP, AC, resistance, and status effect tracking, and integration with the character sheet
+    manager and 5e content to further streamline combat.
+  </avr-feature-box>
+
+  <div class="cta-connect-avrae mat-typography" [class]="medium ? 'cta-large' : 'cta-small'">
+    <h2>Connect Avrae</h2>
+    <p>
+      You can invite Avrae to your server here! Just select your server in the dropdown menu,
+      and ensure that "Read Messages", "Send Messages", "Embed Links", and "Manage Messages" are enabled!
+    </p>
+
+    <a mat-flat-button href="http://invite.avrae.io">INVITE</a>
+  </div>
 </div>

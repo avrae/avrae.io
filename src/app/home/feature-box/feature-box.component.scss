@@ -1,0 +1,66 @@
+@import "../../_variables.scss";
+
+// inline image feature box
+.feature-box {
+  background: $gray-dark1;
+  text-align: center;
+  margin: 20px 16px 0;
+  padding: 18px 13px;
+  border-radius: 3px;
+
+  h2 {
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  img {
+    border-radius: 3px;
+    width: 95%;
+    max-width: 450px;
+    max-height: 500px;
+  }
+}
+
+@media only screen and (min-width: 768px) { // desktop
+  .feature-box {
+    margin: 20px 60px 0;
+    padding: 35px 56px;
+  }
+}
+
+// large feature box
+.large-feature-box {
+  margin: 20px 130px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  text-align: left;
+
+  .feature-box-text {
+    padding-top: 50px;
+
+    h2 {
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.4;
+    }
+  }
+
+  img {
+    border-radius: 3px;
+    width: 95%;
+    max-width: 450px;
+    max-height: 500px;
+  }
+}
