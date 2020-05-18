@@ -6,6 +6,7 @@
   align-items: center;
   padding: 8px 16px;
   height: $navbar-height;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 100;
