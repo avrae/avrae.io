@@ -1,20 +1,4 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    opened
-    mode="side"
-    class="sidenav mat-elevation-z3"
-    fixedInViewport="true"
-    fixedTopGap="64"
-    fixedBottomGap="8"
-    role="navigation">
-    <mat-nav-list snScrollSpy id="sidenav">
-      <a mat-list-item snScrollSpyItem for="sidenav" href="#{{module.name.toLowerCase()}}-spy"
-         (click)="scrollTo(module.name.toLowerCase())"
-         *ngFor="let module of modules">
-        {{module.name}}
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
   <div>
     <mat-card class="title" id="commands">
       <h1 class="mat-display-1 smallmargin">Command List</h1>

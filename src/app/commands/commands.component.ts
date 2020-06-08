@@ -1,7 +1,9 @@
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
 import {Meta} from '@angular/platform-browser';
 import {environment} from '../../environments/environment';
 import {CommandModule} from '../schemas/Commands';
+import {BreakpointBaseComponent} from '../shared/breakpoints';
 import {CommandsService} from './commands.service';
 
 @Component({
@@ -9,14 +11,15 @@ import {CommandsService} from './commands.service';
   templateUrl: './commands.component.html',
   styleUrls: ['./commands.component.scss']
 })
-export class CommandsComponent implements OnInit {
+export class CommandsComponent extends BreakpointBaseComponent implements OnInit {
 
   title = 'Avrae Commands';
   description = 'A list of Avrae\'s commands, arguments, and features.';
 
   modules: CommandModule[];
 
-  constructor(private commandService: CommandsService, private meta: Meta) {
+  constructor(private commandService: CommandsService, private meta: Meta, private bp: BreakpointObserver) {
+    super(bp);
     this.meta.updateTag({name: 'description', content: this.description});
     this.meta.updateTag({property: 'og:title', content: this.title});
     this.meta.updateTag({property: 'og:description', content: this.description});

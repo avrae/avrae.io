@@ -1,20 +1,23 @@
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {isPlatformBrowser} from '@angular/common';
 import {AfterViewInit, Component, Inject, Input, OnInit, PLATFORM_ID} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Command, CommandArgument} from '../../schemas/Commands';
+import {BreakpointBaseComponent} from '../../shared/breakpoints';
 
 @Component({
   selector: 'avr-command-display',
   templateUrl: './command-display.component.html',
   styleUrls: ['./command-display.component.scss']
 })
-export class CommandDisplayComponent implements OnInit, AfterViewInit {
+export class CommandDisplayComponent extends BreakpointBaseComponent implements OnInit, AfterViewInit {
 
   @Input() command: Command;
   @Input() parentId: string;
   isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object, private activatedRoute: ActivatedRoute) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private activatedRoute: ActivatedRoute, private bp: BreakpointObserver) {
+    super(bp);
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
