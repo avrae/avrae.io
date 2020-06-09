@@ -1,31 +1,37 @@
-<mat-expansion-panel [id]="getQualifiedId()" [expanded]="shouldBeExpanded()" (afterExpand)="setHash()"
-                     class="hoverable">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      <div>
-        <code>{{command.signature}}</code>
-        <p class="mat-small nomargin" *ngIf="command.subcommands.length">Has subcommands.</p>
-      </div>
-    </mat-panel-title>
-    <mat-panel-description>
-      <markdown>{{command.short}}</markdown>
-    </mat-panel-description>
-  </mat-expansion-panel-header>
+<mat-divider></mat-divider>
 
-  <div [innerHTML]="debrace(command.docs) | markdown"></div>
-  <table *ngIf="command.args.length">
-    <tr>
-      <th>Arguments</th>
-    </tr>
-    <tr *ngFor="let arg of command.args">
-      <td><code>{{arg.name}}</code>{{getArgDescriptors(arg)}} - {{arg.desc}}</td>
-    </tr>
-  </table>
-  <div class="subcommands" *ngIf="command.subcommands.length">
-    <h4 class="mat-h4 smallmargin"><b>Subcommands</b></h4>
-    <mat-accordion>
-      <avr-command-display *ngFor="let subcommand of command.subcommands" [command]="subcommand"
-                           [parentId]="getQualifiedId()"></avr-command-display>
-    </mat-accordion>
+<div class="command-display" [id]="getQualifiedId()">
+  <div class="click-to-expand" (click)="toggleOpen()">
+    <div class="command-header">
+      <p>
+        <code>{{command.signature}}</code>
+        <mat-icon>{{isOpen ? 'expand_less' : 'expand_more'}}</mat-icon>
+      </p>
+    </div>
+    <div class="command-closed-desc" *ngIf="!isOpen">
+      <markdown>{{debrace(command.short)}}</markdown>
+      <p class="mat-small has-subcommands" *ngIf="command.subcommands.length"><i>Has subcommands.</i></p>
+    </div>
   </div>
-</mat-expansion-panel>
+
+  <div class="command-desc" *ngIf="isOpen">
+    <markdown>{{debrace(command.docs)}}</markdown>
+
+    <table class="command-arguments" *ngIf="command.args.length">
+      <tr>
+        <th>Arguments</th>
+      </tr>
+      <tr *ngFor="let arg of command.args">
+        <td><code>{{arg.name}}</code>{{getArgDescriptors(arg)}} - {{arg.desc}}</td>
+      </tr>
+    </table>
+
+    <div class="command-subcommands" *ngIf="command.subcommands.length">
+      <h4><b>Subcommands</b></h4>
+      <mat-accordion>
+        <avr-command-display *ngFor="let subcommand of command.subcommands" [command]="subcommand"
+                             [parentId]="getQualifiedId()"></avr-command-display>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

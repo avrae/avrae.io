@@ -1,27 +1,26 @@
-import {BreakpointObserver} from '@angular/cdk/layout';
 import {isPlatformBrowser} from '@angular/common';
 import {AfterViewInit, Component, Inject, Input, OnInit, PLATFORM_ID} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Command, CommandArgument} from '../../schemas/Commands';
-import {BreakpointBaseComponent} from '../../shared/breakpoints';
 
 @Component({
   selector: 'avr-command-display',
   templateUrl: './command-display.component.html',
   styleUrls: ['./command-display.component.scss']
 })
-export class CommandDisplayComponent extends BreakpointBaseComponent implements OnInit, AfterViewInit {
+export class CommandDisplayComponent implements OnInit, AfterViewInit {
 
   @Input() command: Command;
   @Input() parentId: string;
   isBrowser: boolean;
+  isOpen: boolean;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object, private activatedRoute: ActivatedRoute, private bp: BreakpointObserver) {
-    super(bp);
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private activatedRoute: ActivatedRoute) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
+    this.isOpen = this.shouldBeExpanded();
   }
 
   ngAfterViewInit(): void {
@@ -30,6 +29,13 @@ export class CommandDisplayComponent extends BreakpointBaseComponent implements 
       // puts the scroll on the end of the render queue, so it only scrolls once the element is on the page
       // this took way too long to figure out
       window.setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}), 0);
+    }
+  }
+
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      this.setHash();
     }
   }
 
@@ -64,6 +70,6 @@ export class CommandDisplayComponent extends BreakpointBaseComponent implements 
     if (!value) {
       return value;
     }
-    return value.replace(/>/g, '&gt;').replace(/</g, '&lt;');
+    return value.replace(/>(?!`)/g, '&gt;').replace(/(?<!`)</g, '&lt;');
   }
 }

@@ -1,9 +1,7 @@
-import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
 import {Meta} from '@angular/platform-browser';
 import {environment} from '../../environments/environment';
 import {CommandModule} from '../schemas/Commands';
-import {BreakpointBaseComponent} from '../shared/breakpoints';
 import {CommandsService} from './commands.service';
 
 @Component({
@@ -11,15 +9,14 @@ import {CommandsService} from './commands.service';
   templateUrl: './commands.component.html',
   styleUrls: ['./commands.component.scss']
 })
-export class CommandsComponent extends BreakpointBaseComponent implements OnInit {
+export class CommandsComponent implements OnInit {
 
   title = 'Avrae Commands';
   description = 'A list of Avrae\'s commands, arguments, and features.';
 
   modules: CommandModule[];
 
-  constructor(private commandService: CommandsService, private meta: Meta, private bp: BreakpointObserver) {
-    super(bp);
+  constructor(private commandService: CommandsService, private meta: Meta) {
     this.meta.updateTag({name: 'description', content: this.description});
     this.meta.updateTag({property: 'og:title', content: this.title});
     this.meta.updateTag({property: 'og:description', content: this.description});
@@ -38,7 +35,8 @@ export class CommandsComponent extends BreakpointBaseComponent implements OnInit
   scrollTo(id: string) {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({behavior: 'smooth', block: 'center'});
+      // do this *after* any dialog closing/animations
+      window.setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}), 0);
     }
   }
 

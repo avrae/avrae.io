@@ -1,29 +1,60 @@
-.title {
-  margin: 8px;
+@import "../_variables.scss";
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: $black;
+  z-index: -999; // hacky way to override app background color for now
+}
+
+.commands-page {
+  background: $black;
+  font-family: $font;
+  color: white;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 48px;
+
+  h1 {
+    letter-spacing: 0.02em;
+  }
+
+  p {
+    line-height: 1.4;
+  }
 }
 
 .container {
-  margin: 8px;
+  margin: 16px;
 }
 
-.sidenav-container {
-  height: 100%;
+.module-dropdown {
+  font-size: 18px;
+  padding: 0;
+
+  mat-icon {
+    color: $blurple;
+  }
 }
 
-.sidenav {
-  width: 200px;
-}
+.module-container {
+  background: $gray-dark1;
+  border-radius: 3px;
+  padding: 16px 24px;
+  margin: 12px 0;
 
-.nav-button {
-  width: 100%
-}
+  h2 {
+    color: $blurple;
+    margin: 8px 0;
+  }
 
-.smallmargin {
-  margin-bottom: 8px;
-}
-
-@media only screen and (max-width: 840px) {
-  .sidenav{
-    width:150px;
+  .module-description {
+    margin-top: -0.8em;  // ngx-markdown forces an internal <p> with margin 1em
   }
 }
