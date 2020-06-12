@@ -36,7 +36,7 @@ export class CommandsComponent implements OnInit {
     const el = document.getElementById(id);
     if (el) {
       // do this *after* any dialog closing/animations
-      window.setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}), 0);
+      window.requestAnimationFrame(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}));
     }
   }
 

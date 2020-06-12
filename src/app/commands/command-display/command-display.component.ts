@@ -26,9 +26,7 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.isBrowser && this.getQualifiedId() === this.activatedRoute.snapshot.fragment) {
       const el = document.getElementById(this.getQualifiedId());
-      // puts the scroll on the end of the render queue, so it only scrolls once the element is on the page
-      // this took way too long to figure out
-      window.setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}), 0);
+      window.requestAnimationFrame(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}));
     }
   }
 
