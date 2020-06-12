@@ -25,7 +25,7 @@
     </table>
 
     <div class="command-subcommands" *ngIf="command.subcommands.length">
-      <h4><b>Subcommands</b></h4>
+      <h4>Subcommands</h4>
       <mat-accordion>
         <avr-command-display *ngFor="let subcommand of command.subcommands" [command]="subcommand"
                              [parentId]="getQualifiedId()"></avr-command-display>
