@@ -13,14 +13,12 @@ mat-divider {
 .command-header {
   color: white;
 
-  p {
-    code {
-      font-size: 16px;
-    }
+  code {
+    font-size: 16px;
+  }
 
-    mat-icon {
-      float: right;
-    }
+  mat-icon {
+    float: right;
   }
 }
 

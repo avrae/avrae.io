@@ -2,12 +2,10 @@
 
 <div class="command-display" [id]="getQualifiedId()">
   <div class="click-to-expand" (click)="toggleOpen()">
-    <div class="command-header">
-      <p>
-        <code>{{command.signature}}</code>
-        <mat-icon>{{isOpen ? 'expand_less' : 'expand_more'}}</mat-icon>
-      </p>
-    </div>
+    <p class="command-header">
+      <code>{{command.signature}}</code>
+      <mat-icon>{{isOpen ? 'expand_less' : 'expand_more'}}</mat-icon>
+    </p>
     <div class="command-closed-desc" *ngIf="!isOpen">
       <markdown>{{debrace(command.short)}}</markdown>
       <p class="mat-small has-subcommands" *ngIf="command.subcommands.length"><i>Has subcommands.</i></p>
