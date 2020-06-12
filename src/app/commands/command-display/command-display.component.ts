@@ -65,9 +65,16 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
   }
 
   debrace(value: string) {
-    if (!value || value.includes('`')) {  // funky <> handling
+    if (!value) {
       return value;
     }
-    return value.replace(/>/g, '&gt;').replace(/</g, '&lt;');
+    let renderedValue = value.replace(/>/g, '&gt;').replace(/</g, '&lt;');
+
+    // if it replaced a <> in a markdown code block, change it back
+    renderedValue = renderedValue.replace(/`.+?`/g, match => {
+      return match.replace(/&gt;/, '>').replace(/&lt;/, '<');
+    });
+
+    return renderedValue;
   }
 }
