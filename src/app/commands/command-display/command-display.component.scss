@@ -1,23 +1,57 @@
-.smallmargin {
-  margin-bottom: 8px;
+@import "../../_variables.scss";
+
+mat-divider {
+  margin: 12px 0;
+  border-top-color: $gray2;
 }
 
-.nomargin {
-  margin: 1px;
+// ==== header ====
+.click-to-expand {
+  cursor: pointer;
 }
 
-th {
-  text-align: left;
+.command-header {
+  color: white;
+
+  code {
+    font-size: 16px;
+  }
+
+  mat-icon {
+    float: right;
+  }
 }
 
-mat-panel-title > div {
-  margin: auto 0;
+.command-closed-desc {
+  color: $gray4;
+  font-size: 16px;
+
+  .has-subcommands {
+    margin-top: -1em;
+    color: $blurple;
+  }
 }
 
-.depth-even {
-  background: rgba(255, 255, 255, 0.06);
+// ==== content ====
+
+.command-desc {
+  color: $gray4;
+  font-size: 16px;
 }
 
-.depth-odd {
-  background: rgba(0, 0, 0, 0.06);
+.command-arguments {
+  color: white;
+
+  th {
+    text-align: left;
+  }
+}
+
+.command-subcommands {
+  padding: 0 20px;
+
+  h4 {
+    color: $blurple;
+    font-weight: bold;
+  }
 }

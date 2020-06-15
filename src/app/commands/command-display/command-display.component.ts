@@ -13,20 +13,27 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
   @Input() command: Command;
   @Input() parentId: string;
   isBrowser: boolean;
+  isOpen: boolean;
 
   constructor(@Inject(PLATFORM_ID) platformId: Object, private activatedRoute: ActivatedRoute) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
+    this.isOpen = this.shouldBeExpanded();
   }
 
   ngAfterViewInit(): void {
     if (this.isBrowser && this.getQualifiedId() === this.activatedRoute.snapshot.fragment) {
       const el = document.getElementById(this.getQualifiedId());
-      // puts the scroll on the end of the render queue, so it only scrolls once the element is on the page
-      // this took way too long to figure out
-      window.setTimeout(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}), 0);
+      window.requestAnimationFrame(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}));
+    }
+  }
+
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      this.setHash();
     }
   }
 
@@ -61,6 +68,13 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
     if (!value) {
       return value;
     }
-    return value.replace(/>/g, '&gt;').replace(/</g, '&lt;');
+    let renderedValue = value.replace(/>/g, '&gt;').replace(/</g, '&lt;');
+
+    // if it replaced a <> in a markdown code block, change it back
+    renderedValue = renderedValue.replace(/`.+?`/g, match => {
+      return match.replace(/&gt;/, '>').replace(/&lt;/, '<');
+    });
+
+    return renderedValue;
   }
 }

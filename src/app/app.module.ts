@@ -7,8 +7,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import * as Sentry from '@sentry/browser';
-import {InViewportModule} from '@thisissoon/angular-inviewport';
-import {ScrollSpyModule} from '@thisissoon/angular-scrollspy';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -61,8 +59,6 @@ const markdownConfig = {
     LayoutModule,
     FormsModule,
     MarkdownModule.forRoot(markdownConfig),
-    InViewportModule,
-    ScrollSpyModule.forRoot(),
     FlexLayoutModule,
     MaterialModule,
     DashboardModule,

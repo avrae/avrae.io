@@ -35,7 +35,8 @@ export class CommandsComponent implements OnInit {
   scrollTo(id: string) {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({behavior: 'smooth', block: 'center'});
+      // do this *after* any dialog closing/animations
+      window.requestAnimationFrame(() => el.scrollIntoView({behavior: 'smooth', block: 'center'}));
     }
   }
 

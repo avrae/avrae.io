@@ -1,36 +1,28 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    opened
-    mode="side"
-    class="sidenav mat-elevation-z3"
-    fixedInViewport="true"
-    fixedTopGap="64"
-    fixedBottomGap="8"
-    role="navigation">
-    <mat-nav-list snScrollSpy id="sidenav">
-      <a mat-list-item snScrollSpyItem for="sidenav" href="#{{module.name.toLowerCase()}}-spy"
-         (click)="scrollTo(module.name.toLowerCase())"
-         *ngFor="let module of modules">
-        {{module.name}}
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <div>
-    <mat-card class="title" id="commands">
-      <h1 class="mat-display-1 smallmargin">Command List</h1>
+<div class="background"></div>
+<div class="commands-page">
+  <div class="container">
+    <div class="header" id="commands">
+      <h1>Avrae Commands</h1>
       <p>This page is a list of all commands, subcommands, and valid arguments that Avrae can parse.</p>
       <p>Avrae's command system is split into distinct modules. All commands are called by starting a message with the
         message prefix (default <kbd>!</kbd>, but can be configured), followed by the command name.</p>
-    </mat-card>
+    </div>
 
-    <mat-card class="container" *ngFor="let module of modules" id="{{module.name.toLowerCase()}}">
-      <sn-scroll-spy-section id="{{module.name.toLowerCase()}}-spy" for="sidenav">
-        <h2 class="mat-h2 smallmargin">{{module.name}}</h2>
-        <markdown>{{module.desc}}</markdown>
-        <mat-accordion>
-          <avr-command-display *ngFor="let command of module.commands" [command]="command"></avr-command-display>
-        </mat-accordion>
-      </sn-scroll-spy-section>
-    </mat-card>
+    <button mat-button class="module-dropdown" [matMenuTriggerFor]="moduleMenu">
+      Commands by Category
+      <mat-icon>expand_more</mat-icon>
+    </button>
+
+    <div class="module-container" *ngFor="let module of modules" id="{{module.name.toLowerCase()}}">
+      <h2>{{module.name}}</h2>
+      <p markdown class="module-description" [data]="module.desc"></p>
+      <avr-command-display *ngFor="let command of module.commands" [command]="command"></avr-command-display>
+    </div>
   </div>
-</mat-sidenav-container>
+</div>
+
+<mat-menu #moduleMenu="matMenu">
+  <button mat-menu-item *ngFor="let module of modules" (click)="scrollTo(module.name.toLowerCase())">
+    {{module.name}}
+  </button>
+</mat-menu>
