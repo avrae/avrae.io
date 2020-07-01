@@ -4,11 +4,12 @@
   <div class="click-to-expand" (click)="toggleOpen()">
     <p class="command-header">
       <code>{{command.signature}}</code>
-      <mat-icon>{{isOpen ? 'expand_less' : 'expand_more'}}</mat-icon>
+      <mat-icon *ngIf="canBeOpened()">
+        {{isOpen ? 'expand_less' : 'expand_more'}}
+      </mat-icon>
     </p>
     <div class="command-closed-desc" *ngIf="!isOpen">
       <markdown>{{debrace(command.short)}}</markdown>
-      <p class="mat-small has-subcommands" *ngIf="command.subcommands.length"><i>Has subcommands.</i></p>
     </div>
   </div>
 
@@ -23,13 +24,13 @@
         <td><code>{{arg.name}}</code>{{getArgDescriptors(arg)}} - {{arg.desc}}</td>
       </tr>
     </table>
+  </div>
 
-    <div class="command-subcommands" *ngIf="command.subcommands.length">
-      <h4>Subcommands</h4>
-      <mat-accordion>
-        <avr-command-display *ngFor="let subcommand of command.subcommands" [command]="subcommand"
-                             [parentId]="getQualifiedId()"></avr-command-display>
-      </mat-accordion>
-    </div>
+  <div class="command-subcommands" *ngIf="command.subcommands.length">
+    <h4>Subcommands</h4>
+    <mat-accordion>
+      <avr-command-display *ngFor="let subcommand of command.subcommands" [command]="subcommand"
+                           [parentId]="getQualifiedId()"></avr-command-display>
+    </mat-accordion>
   </div>
 </div>
