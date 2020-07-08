@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {isLoggedIn, removeToken, setToken} from '../SecurityHelper';
-import {environment} from '../../environments/environment';
 
 import * as queryString from 'query-string';
+import {environment} from '../../environments/environment';
+import {isLoggedIn, removeToken, setToken} from '../SecurityHelper';
 
 @Component({
   selector: 'avr-login',
@@ -17,11 +17,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    let snapshot = this.activatedRoute.snapshot;
-    let paramMap = queryString.parse(snapshot.fragment);
+    const snapshot = this.activatedRoute.snapshot;
+    const paramMap = queryString.parse(snapshot.fragment);
+
+    const postLoginRedirect = sessionStorage.getItem('after-login-redirect') || '/dashboard/characters';
+
     if ('access_token' in paramMap && 'expires_in' in paramMap) {
       setToken(paramMap.access_token.toString(), +paramMap.expires_in);
-      this.router.navigate(['dashboard']);
+      this.router.navigateByUrl(postLoginRedirect)
+        .then(() => {
+          sessionStorage.removeItem('after-login-redirect');
+        });
     }
   }
 
