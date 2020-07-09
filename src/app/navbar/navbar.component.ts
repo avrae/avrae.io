@@ -1,7 +1,6 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
-import {environment} from '../../environments/environment';
-import {isLoggedIn} from '../SecurityHelper';
+import {isLoggedIn, navigateToDiscordOauth} from '../SecurityHelper';
 import {BreakpointBaseComponent} from '../shared/breakpoints';
 
 @Component({
@@ -24,8 +23,8 @@ export class NavbarComponent extends BreakpointBaseComponent implements OnInit {
     return isLoggedIn();
   }
 
-  getLoginLink() {
-    return environment.loginURL;
+  doLogin() {
+    navigateToDiscordOauth();
   }
 
 }

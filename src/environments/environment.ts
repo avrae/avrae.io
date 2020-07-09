@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  loginURL: "https://discordapp.com/api/oauth2/authorize?client_id=261302296103747584&redirect_uri=http%3A%2F%2F127.0.0.1%3A4200%2Flogin&response_type=token&scope=identify",
-  apiURL: "http://127.0.0.1:5000",
-  mediaURL: "https://media.avrae.io",
-  baseURL: "http://127.0.0.1:4200"
+  clientId: '219251784445591553',
+  loginURL: 'https://discordapp.com/api/oauth2/authorize',
+  apiURL: 'http://127.0.0.1:5000',
+  mediaURL: 'https://media.avrae.io',
+  baseURL: 'http://127.0.0.1:4200'
 };
 
 /*

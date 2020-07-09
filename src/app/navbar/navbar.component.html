@@ -28,7 +28,7 @@
 
   <ng-container *ngIf="!mobile">
     <a *ngIf="loggedIn()" mat-button class="button" routerLink="/dashboard">DASHBOARD</a>
-    <a *ngIf="!loggedIn()" mat-button class="button" [href]="getLoginLink()">LOG IN</a>
+    <a *ngIf="!loggedIn()" mat-button class="button" (click)="doLogin()">LOG IN</a>
   </ng-container>
 </mat-toolbar>
 
@@ -53,8 +53,7 @@
   <a class="button mobile-menu-link" href="http://support.avrae.io">SUPPORT SERVER</a>
 
   <!-- log in -->
-  <a class="button mobile-menu-login" *ngIf="!loggedIn()" routerLink="/login"
-     (click)="mobileMenuOpen = !mobileMenuOpen">
+  <a class="button mobile-menu-login" *ngIf="!loggedIn()" (click)="doLogin()">
     LOG IN
   </a>
   <a class="button mobile-menu-login" *ngIf="loggedIn()" routerLink="/dashboard"

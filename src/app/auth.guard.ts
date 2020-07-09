@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {environment} from '../environments/environment';
-import {isLoggedIn} from './SecurityHelper';
+import {getDiscordOauthUrl, isLoggedIn, navigateToDiscordOauth} from './SecurityHelper';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,7 @@ export class AuthGuard implements CanActivate {
     } else {
       // the discord auth endpoint requires an exact redirect_uri (no after param) so we store where the user wanted to go in sessionStorage
       sessionStorage.setItem('after-login-redirect', state.url);
-      window.location.href = environment.loginURL;
+      navigateToDiscordOauth();
       // > Note: The guard can also tell the router to navigate elsewhere, effectively canceling the current navigation.
       // > When doing so inside a guard, the guard should return false;
       // https://angular.io/guide/router#milestone-5-route-guards
