@@ -5,7 +5,6 @@ import {catchError} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Attack, CharacterMeta} from '../schemas/Character';
 import {Customizations} from '../schemas/Customization';
-import {Spell} from '../schemas/homebrew/Spells';
 import {UserInfo, UserStats} from '../schemas/UserInfo';
 import {defaultOptions, defaultTextOptions} from './APIHelper';
 
