@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {MaterialModule} from '../material/material.module';
 
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginWidgetComponent } from './login-widget/login-widget.component';
-import {LoginComponent} from "./login.component";
-import {MaterialModule} from "../material/material.module";
+import {LoginRoutingModule} from './login-routing.module';
+import {LoginComponent} from './login.component';
 
 @NgModule({
   imports: [
@@ -12,7 +11,8 @@ import {MaterialModule} from "../material/material.module";
     LoginRoutingModule,
     MaterialModule
   ],
-  declarations: [LoginComponent, LoginWidgetComponent],
-  exports: [LoginWidgetComponent]
+  declarations: [LoginComponent],
+  exports: []
 })
-export class LoginModule { }
+export class LoginModule {
+}

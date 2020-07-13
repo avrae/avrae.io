@@ -1,13 +1,10 @@
-<mat-card *ngIf="loggedIn()">
+<mat-card>
   <mat-card-content>
-    Welcome to the redirect page! I don't know how you ended up here, but...
+    <div class="container">
+      <mat-spinner class="centered" *ngIf="working" [diameter]="36"></mat-spinner>
+      <p class="mat-error" *ngIf="error">
+        {{error}}
+      </p>
+    </div>
   </mat-card-content>
-  <a mat-raised-button color="primary" routerLink="/dashboard">Dashboard</a>
-  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
-</mat-card>
-<mat-card *ngIf="!loggedIn()">
-  <mat-card-content>
-    You must be logged in to use this app.
-  </mat-card-content>
-  <a mat-raised-button color="primary" [href]="getLoginLink()">Login with Discord</a>
 </mat-card>
