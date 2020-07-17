@@ -9,9 +9,10 @@ const scope = encodeURIComponent(oAuthScope);
 
 /// generates and saves an oauth state to sessionStorage (oauth-state) and returns url of discord oauth
 export function navigateToDiscordOauth() {
-  // set oauth state in session storage
+  // set oauth state in local storage
+  // Discord OAuth2 opens a new tab on Android Chrome, so we use localStorage instead of sessionStorage
   const state = generateOauthState();
-  sessionStorage.setItem('oauth-state', state);
+  localStorage.setItem('expected-oauth-state', state);
 
   // do navigation
   window.location.href = getDiscordOauthUrl(state);

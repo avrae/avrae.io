@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     const paramMap = this.activatedRoute.snapshot.queryParamMap;
-    const state = sessionStorage.getItem('oauth-state');
+    const state = localStorage.getItem('expected-oauth-state');
 
     // validate state
     if (state === null || paramMap.get('state') !== state) {
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       this.working = false;
       return;
     }
-    sessionStorage.removeItem('oauth-state');
+    localStorage.removeItem('expected-oauth-state');
 
     // get code
     const code = paramMap.get('code');
@@ -51,10 +51,10 @@ export class LoginComponent implements OnInit {
       setToken(response.data.jwt);
 
       // login finished, redirect to requested page
-      const postLoginRedirect = sessionStorage.getItem('after-login-redirect') || '/dashboard/characters';
+      const postLoginRedirect = localStorage.getItem('after-login-redirect') || '/dashboard/characters';
       this.router.navigateByUrl(postLoginRedirect)
         .then(() => {
-          sessionStorage.removeItem('after-login-redirect');
+          localStorage.removeItem('after-login-redirect');
         });
     }
   }
