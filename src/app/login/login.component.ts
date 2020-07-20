@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiResponse} from '../dashboard/APIHelper';
 import {removeToken, setToken} from '../SecurityHelper';
+import {getLocalStorage, removeLocalStorage} from '../shared/StorageUtils';
 import {AuthService} from './auth.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     const paramMap = this.activatedRoute.snapshot.queryParamMap;
-    const state = sessionStorage.getItem('oauth-state');
+    const state = getLocalStorage('expected-oauth-state');
 
     // validate state
     if (state === null || paramMap.get('state') !== state) {
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
       this.working = false;
       return;
     }
-    sessionStorage.removeItem('oauth-state');
+    removeLocalStorage('expected-oauth-state');
 
     // get code
     const code = paramMap.get('code');
@@ -51,10 +52,10 @@ export class LoginComponent implements OnInit {
       setToken(response.data.jwt);
 
       // login finished, redirect to requested page
-      const postLoginRedirect = sessionStorage.getItem('after-login-redirect') || '/dashboard/characters';
+      const postLoginRedirect = getLocalStorage('after-login-redirect') || '/dashboard/characters';
       this.router.navigateByUrl(postLoginRedirect)
         .then(() => {
-          sessionStorage.removeItem('after-login-redirect');
+          removeLocalStorage('after-login-redirect');
         });
     }
   }
