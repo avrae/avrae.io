@@ -1,4 +1,5 @@
 import {environment} from '../environments/environment';
+import {getLocalStorage, removeLocalStorage, setLocalStorage} from './shared/StorageUtils';
 
 // oauth helpers
 export const oAuthRedirectUri = `${environment.baseURL}/login`;
@@ -12,7 +13,7 @@ export function navigateToDiscordOauth() {
   // set oauth state in local storage
   // Discord OAuth2 opens a new tab on Android Chrome, so we use localStorage instead of sessionStorage
   const state = generateOauthState();
-  localStorage.setItem('expected-oauth-state', state);
+  setLocalStorage('expected-oauth-state', state);
 
   // do navigation
   window.location.href = getDiscordOauthUrl(state);
@@ -38,15 +39,13 @@ export function isLoggedIn() {
 }
 
 export function setToken(token: string) {
-  localStorage.setItem('avrae-token', token);
+  setLocalStorage('avrae-token', token);
 }
 
 export function getToken() {
-  return localStorage.getItem('avrae-token');
+  return getLocalStorage('avrae-token');
 }
 
 export function removeToken() {
-  if (localStorage.getItem('avrae-token')) {
-    localStorage.removeItem('avrae-token');
-  }
+  removeLocalStorage('avrae-token');
 }
