@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {isBoolean} from 'util';
 import {GlobalVar} from '../../../schemas/Customization';
 import {GvarService} from '../gvar.service';
 
@@ -36,7 +35,7 @@ export class GvarLookupComponent implements OnInit {
       .subscribe(gvar => {
         this.activeGvar = null;
         this.error = null;
-        if (isBoolean(gvar) && !gvar) {
+        if (gvar === false) {
           this.error = 'Failed to get gvar.';
         } else {
           this.activeGvar = gvar as GlobalVar;
