@@ -11,6 +11,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
       </mat-checkbox>
       <mat-form-field *ngIf="custom">
         <input matInput placeholder="Custom Bonus" (change)="changed.emit()" [(ngModel)]="effect.attackBonus">
+        <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
     <mat-expansion-panel>

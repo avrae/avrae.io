@@ -8,6 +8,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
     <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
       <mat-form-field>
         <input matInput placeholder="Damage" (change)="changed.emit()" [(ngModel)]="effect.damage">
+        <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
       </mat-form-field>
       <mat-checkbox [(ngModel)]="effect.overheal" (change)="changed.emit()">
         Allow Overheal
