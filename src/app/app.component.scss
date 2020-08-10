@@ -1,3 +1,5 @@
+@import "variables";
+
 /* Application-wide Styles */
 .spacer {
   height: 56px;
@@ -11,4 +13,8 @@
 .page-wrapper-mobile {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.content {
+  min-height: calc(100vh - (#{$navbar-height} + #{$footer-height}));
 }
