@@ -2,6 +2,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FlexModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
+import {MatBadgeModule} from '@angular/material/badge';
 import {MaterialModule} from '../material/material.module';
 import {AutomationEditorModule} from '../shared/automation-editor/automation-editor.module';
 import {AttackEditorDialog} from './characters/attack-editor-dialog/attack-editor-dialog.component';
@@ -26,7 +27,7 @@ import {NewDialog} from './new-dialog/new-dialog.component';
     FormsModule,
     DashboardRoutingModule,
     FlexModule,
-    AutomationEditorModule
+    AutomationEditorModule,
   ],
   declarations: [
     DashboardComponent,

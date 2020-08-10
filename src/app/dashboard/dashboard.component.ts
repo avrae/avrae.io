@@ -11,8 +11,6 @@ import {DashboardService} from './dashboard.service';
 })
 export class DashboardComponent {
 
-  opened = true;
-
   constructor(private router: Router, private dashboardService: DashboardService) {
     if (!isLoggedIn()) {
       this.router.navigate(['login']);
