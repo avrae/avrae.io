@@ -20,3 +20,8 @@ export class WorkshopCollection {
   tags: string[];
 }
 
+export class WorkshopTag {
+  slug: string;
+  name: string;
+  category: string;
+}

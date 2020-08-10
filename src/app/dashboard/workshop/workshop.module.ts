@@ -1,8 +1,10 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MaterialModule} from '../../material/material.module';
+import {WorkshopExploreComponent} from './workshop-explore.component';
 
 import {WorkshopRoutingModule} from './workshop-routing.module';
-import {WorkshopExploreComponent} from './workshop-explore.component';
 
 
 @NgModule({
@@ -11,7 +13,10 @@ import {WorkshopExploreComponent} from './workshop-explore.component';
   ],
   imports: [
     CommonModule,
-    WorkshopRoutingModule
+    WorkshopRoutingModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class WorkshopModule {

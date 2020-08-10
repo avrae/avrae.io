@@ -1,3 +1,44 @@
-<p>workshop works!</p>
+<mat-toolbar color="primary">
+  <span>Explore Aliases</span>
+  <span class="toolbar-spacer"></span>
 
-<p *ngFor="let collection of collections">{{collection.name}} ({{collection._id}})</p>
+  <mat-spinner *ngIf="loading" color="accent" diameter="24"></mat-spinner>
+
+  <!-- order -->
+  <mat-form-field appearance="fill">
+    <mat-label>Order</mat-label>
+    <mat-select [(value)]="order" (selectionChange)="onOrderChange()">
+      <mat-option value="popular-1w">Most Popular (1 week)</mat-option>
+      <mat-option value="popular-1m">Most Popular (1 month)</mat-option>
+      <mat-option value="popular-6m">Most Popular (6 months)</mat-option>
+      <mat-option value="popular-all">Most Popular (all time)</mat-option>
+      <mat-option value="relevance">Relevance</mat-option>
+      <mat-option value="newest">Newest</mat-option>
+      <mat-option value="edittime">Recently Updated</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- search + tags -->
+  <mat-form-field>
+    <mat-label>Search...</mat-label>
+    <input type="text" matInput autocomplete="off" [matAutocomplete]="auto"
+           [(ngModel)]="q" (ngModelChange)="filterTags()" (keyup.enter)="onSearch()">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let tag of filteredTags" [value]="">
+        {{tag.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+</mat-toolbar>
+
+<div class="container">
+  <mat-card>
+    welcome to the workshop blah blah header here
+  </mat-card>
+
+  <p *ngIf="!loading && collections.length === 0">No results</p>
+
+  <p *ngFor="let collection of collections">{{collection.name}} ({{collection._id}})</p>
+</div>
+
