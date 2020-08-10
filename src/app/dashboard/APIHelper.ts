@@ -11,12 +11,19 @@ export interface ApiResponse<T> {
 }
 
 // api options
-export function defaultOptions() {
-  return {headers: new HttpHeaders({'Authorization': getToken()})};
+export function defaultOptions(additionalOptions = {}) {
+  return {
+    headers: new HttpHeaders({'Authorization': getToken()}),
+    ...additionalOptions
+  };
 }
 
-export function defaultTextOptions() {
-  return {responseType: 'text', headers: new HttpHeaders({'Authorization': getToken()})};
+export function defaultTextOptions(additionalOptions = {}) {
+  return {
+    responseType: 'text',
+    headers: new HttpHeaders({'Authorization': getToken()}),
+    ...additionalOptions
+  };
 }
 
 // user session
@@ -40,5 +47,5 @@ export function removeUser() {
 // error handling
 export function defaultErrorHandler(err): Observable<ApiResponse<any>> {
   console.error(err);
-  return of({success: false, error: err.error});
+  return of({success: false, error: err.error} as ApiResponse<any>);
 }

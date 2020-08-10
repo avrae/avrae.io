@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {AuthGuard} from '../../auth.guard';
-import {DashboardComponent} from '../dashboard.component';
-import {WorkshopComponent} from './workshop.component';
+import {RouterModule, Routes} from '@angular/router';
+import {WorkshopExploreComponent} from './workshop-explore.component';
 
 const routes: Routes = [
-  {path: '', component: WorkshopComponent}
+  {path: '', component: WorkshopExploreComponent},
+  {path: ':id', component: WorkshopExploreComponent},
+  {path: ':id/edit', component: WorkshopExploreComponent},
+  {path: 'my-subscriptions', component: WorkshopExploreComponent},
+  {path: 'my-work', component: WorkshopExploreComponent}
 ];
 
 @NgModule({

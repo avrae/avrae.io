@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorkshopComponent } from './workshop.component';
+import { WorkshopExploreComponent } from './workshop-explore.component';
 
 describe('WorkshopComponent', () => {
-  let component: WorkshopComponent;
-  let fixture: ComponentFixture<WorkshopComponent>;
+  let component: WorkshopExploreComponent;
+  let fixture: ComponentFixture<WorkshopExploreComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkshopComponent ]
+      declarations: [ WorkshopExploreComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WorkshopComponent);
+    fixture = TestBed.createComponent(WorkshopExploreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
