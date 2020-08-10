@@ -15,7 +15,6 @@ import {AppComponent} from './app.component';
 import {CheatsheetsModule} from './cheatsheets/cheatsheets.module';
 import {CommandDisplayComponent} from './commands/command-display/command-display.component';
 import {CommandsComponent} from './commands/commands.component';
-import {DashboardModule} from './dashboard/dashboard.module';
 import {ErrorComponent} from './error/error.component';
 import {FooterComponent} from './footer/footer.component';
 import {FeatureBoxComponent} from './home/feature-box/feature-box.component';
@@ -61,7 +60,6 @@ const markdownConfig = {
     MarkdownModule.forRoot(markdownConfig),
     FlexLayoutModule,
     MaterialModule,
-    DashboardModule,
     CheatsheetsModule,
     HomebrewSharingModule,
     DiscordEmbedModule,
