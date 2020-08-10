@@ -22,6 +22,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
       </mat-checkbox>
       <mat-form-field *ngIf="custom">
         <input matInput placeholder="Custom DC" (change)="changed.emit()" [(ngModel)]="effect.dc">
+        <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
     <mat-expansion-panel>

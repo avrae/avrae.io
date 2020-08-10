@@ -11,6 +11,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Dice" (change)="changed.emit()" [(ngModel)]="effect.dice">
+        <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
       </mat-form-field>
       <avr-higher-level *ngIf="spell != null" [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
       <mat-checkbox *ngIf="spell != null" [(ngModel)]="effect.cantripScale" (change)="changed.emit()">

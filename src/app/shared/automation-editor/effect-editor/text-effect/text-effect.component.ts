@@ -8,6 +8,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
     <mat-form-field class="wide">
         <textarea matInput placeholder="Description" rows="5" (change)="changed.emit()"
                   [(ngModel)]="effect.text"></textarea>
+      <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
     </mat-form-field>
   `,
   styleUrls: ['../effect-editor.component.css']

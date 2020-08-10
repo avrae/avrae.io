@@ -8,6 +8,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
     <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
       <mat-form-field>
         <input matInput placeholder="Amount" (change)="changed.emit()" [(ngModel)]="effect.amount">
+        <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
       </mat-form-field>
       <avr-higher-level *ngIf="spell != null" [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
       <mat-checkbox *ngIf="spell != null" [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
