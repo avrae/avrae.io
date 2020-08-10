@@ -13,6 +13,7 @@ const dashboardRoutes: Routes = [
       {path: 'characters', component: CharactersComponent},
       {path: 'aliases', component: CustomizationComponent},
       {path: 'gvars', component: GvarsComponent},
+      {path: 'homebrew', loadChildren: () => import('./homebrew/homebrew.module').then(mod => mod.HomebrewModule)},
       {path: 'workshop', loadChildren: () => import('./workshop/workshop.module').then(mod => mod.WorkshopModule)},
       {path: '', redirectTo: 'characters', pathMatch: 'full'}
     ]
