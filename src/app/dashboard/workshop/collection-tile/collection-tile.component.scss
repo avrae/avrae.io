@@ -35,7 +35,8 @@
 
 /* meta portion */
 .collection-meta {
-  margin: 0 8px 8px;
+  margin: 0 8px;
+  padding-bottom: 8px;
 
   h2 {
     margin: 0;
@@ -62,94 +63,61 @@
   }
 }
 
+// ---- non-hovered styles ----
 .collection-numbers-grid {
-  margin: 8px 0;
+  margin: 8px 0 0;
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto auto;
+
+  .numbers-alias {
+    grid-row-start: 1;
+    grid-column-start: 1;
+  }
+
+  .numbers-snippet {
+    grid-row-start: 2;
+    grid-column-start: 1;
+  }
+
+  .numbers-subscriptions-number {
+    height: 24px;
+    grid-row-start: span 2;
+    grid-column-start: 2;
+    margin: auto 0 auto auto;
+    padding-top: 4px;
+  }
+
+  .numbers-subscriptions-icon {
+    height: 24px;
+    grid-row-start: span 2;
+    grid-column-start: 3;
+    margin: auto;
+  }
 }
 
-.numbers-alias {
-  grid-row-start: 1;
-  grid-column-start: 1;
+// ---- hovered styles ----
+.hover-meta-grid {
+  margin: 8px 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+
+  .hover-subscriptions-number {
+    height: 24px;
+    grid-column-start: 1;
+    margin: auto 0 auto auto;
+    padding-top: 4px;
+  }
+
+  .hover-subscriptions-icon {
+    height: 24px;
+    grid-column-start: 2;
+    margin: auto auto auto 0;
+  }
+
+  .hover-buttons {
+    grid-column-start: 3;
+  }
 }
 
-.numbers-snippet {
-  grid-row-start: 2;
-  grid-column-start: 1;
-}
 
-.numbers-subscriptions-number {
-  height: 24px;
-  grid-row-start: span 2;
-  grid-column-start: 2;
-  margin: auto 0 auto auto;
-  padding-top: 4px;
-}
-
-.numbers-subscriptions-icon {
-  height: 24px;
-  grid-row-start: span 2;
-  grid-column-start: 3;
-  margin: auto;
-}
-
-/* name underlay */
-/*.collection-name-underlay {*/
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  right: 0;*/
-/*  bottom: 0;*/
-/*  height: 100%;*/
-/*  width: 100%;*/
-/*  background: #424242;*/
-/*  z-index: -1;*/
-/*}*/
-
-/*.collection-name-underlay p {*/
-/*  text-align: center;*/
-/*  vertical-align: middle;*/
-/*  position: relative;*/
-/*  top: 50%;*/
-/*  transform: translateY(-50%);*/
-/*  font-size: xx-large;*/
-/*}*/
-
-
-/*!* <i> for compendiums, effects on hover *!*/
-/*.collection-tile .collection-image {*/
-/*  object-fit: cover;*/
-/*  width: 100%;*/
-/*  height: 100%;*/
-/*  -webkit-transition: all .5s ease;*/
-/*  -moz-transition: all .5s ease;*/
-/*  -o-transition: all .5s ease;*/
-/*  transition: all .5s ease;*/
-/*}*/
-
-/*.collection-tile:hover .collection-image {*/
-/*  webkit-filter: blur(3px) brightness(0.7); !* Chrome, Safari, Opera *!*/
-/*  filter: blur(3px) brightness(0.7);*/
-/*  transform: scale(1.05);*/
-/*}*/
-
-/* compendium meta overlay */
-//.collection-hover-overlay {
-//  position: absolute;
-//  top: 0;
-//  left: 0;
-//  right: 0;
-//  bottom: 0;
-//  height: 100%;
-//  width: 100%;
-//  opacity: 0;
-//  -webkit-transition: all .5s ease;
-//  -moz-transition: all .5s ease;
-//  -o-transition: all .5s ease;
-//  transition: all .5s ease;
-//}
-//
-//.collection-hover-overlay:hover {
-//  opacity: 1;
-//}

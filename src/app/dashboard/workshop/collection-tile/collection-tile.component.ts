@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as numeral from 'numeral';
 import {DiscordUser} from '../../../schemas/DiscordUser';
 import {WorkshopCollection, WorkshopTag} from '../../../schemas/Workshop';
@@ -13,8 +13,12 @@ import {WorkshopService} from '../workshop.service';
 export class CollectionTileComponent implements OnInit {
 
   @Input() collection: WorkshopCollection;
+  @Input() isSubscribed: boolean;
+  @Output() subscribe = new EventEmitter();
+  @Output() unsubscribe = new EventEmitter();
   author: DiscordUser;
   tags: WorkshopTag[];
+  isHovered = false;
 
   constructor(private discord: DiscordService, private workshopService: WorkshopService) {
   }

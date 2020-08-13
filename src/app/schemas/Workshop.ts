@@ -25,3 +25,8 @@ export class WorkshopTag {
   name: string;
   category: string;
 }
+
+export class WorkshopBindings {
+  alias_bindings: { name: string, id: string }[];
+  snippet_bindings: { name: string, id: string }[];
+}

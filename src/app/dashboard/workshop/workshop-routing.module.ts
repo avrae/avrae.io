@@ -4,10 +4,10 @@ import {WorkshopExploreComponent} from './workshop-explore.component';
 
 const routes: Routes = [
   {path: '', component: WorkshopExploreComponent},
-  {path: ':id', component: WorkshopExploreComponent},
-  {path: ':id/edit', component: WorkshopExploreComponent},
-  {path: 'my-subscriptions', component: WorkshopExploreComponent},
-  {path: 'my-work', component: WorkshopExploreComponent}
+  // {path: ':id', component: WorkshopExploreComponent},
+  // {path: ':id/edit', component: WorkshopExploreComponent},
+  // {path: 'my-subscriptions', component: WorkshopExploreComponent},
+  // {path: 'my-work', component: WorkshopExploreComponent}
 ];
 
 @NgModule({

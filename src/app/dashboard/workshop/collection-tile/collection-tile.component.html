@@ -1,49 +1,90 @@
-<div class="tile mat-elevation-z3 ignore-theme">
+<div class="tile mat-elevation-z3"
+     (mouseover)="isHovered=true" (mouseout)="isHovered=false">
   <!-- image/initials -->
-  <div class="collection-image-container">
-    <div class="collection-name-underlay mat-typography collection-image">
-      <p *ngIf="!collection.image">
-        {{getInitials(collection.name)}}
-      </p>
+  <a [routerLink]="[collection._id]" class="ignore-theme">
+    <div class="collection-image-container">
+      <div class="collection-name-underlay mat-typography collection-image">
+        <p *ngIf="!collection.image">
+          {{getInitials(collection.name)}}
+        </p>
+      </div>
+      <img class="collection-image" [src]="collection.image" [alt]="'Image for ' + collection.name"
+           *ngIf="collection.image">
     </div>
-    <img class="collection-image" [src]="collection.image" [alt]="'Image for ' + collection.name"
-         *ngIf="collection.image">
-  </div>
+  </a>
 
   <div class="collection-meta mat-typography">
     <mat-divider></mat-divider>
     <h2>
       {{collection.name}}
     </h2>
+
     <div class="collection-author">
       <img class="collection-author-avatar" [src]="author.avatarUrl" alt="avatar">
       <span class="collection-author-username">by {{author.username}}</span>
     </div>
 
-    <mat-chip-list aria-label="Fish selection" class="collection-tags" *ngIf="tags?.length && collection.tags.length">
-      <mat-chip *ngFor="let tag of collection.tags">{{tagNameFromSlug(tag)}}</mat-chip>
-    </mat-chip-list>
+    <!-- non-hover: basic metadata -->
+    <div class="non-hover" *ngIf="false && !isHovered">
+      <mat-chip-list aria-label="Tag list" class="collection-tags" *ngIf="tags?.length && collection.tags.length">
+        <mat-chip *ngFor="let tag of collection.tags">{{tagNameFromSlug(tag)}}</mat-chip>
+      </mat-chip-list>
 
-    <div class="collection-numbers-grid">
-      <span class="numbers-alias">
-        {{collection.alias_ids.length}} {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}}
-      </span>
-      <span class="numbers-snippet">
-        {{collection.snippet_ids.length}} {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}
-      </span>
+      <div class="collection-numbers-grid">
+        <span class="numbers-alias">
+          {{collection.alias_ids.length}} {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}}
+        </span>
+        <span class="numbers-snippet">
+            {{collection.snippet_ids.length}} {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}
+        </span>
 
-      <div class="numbers-subscriptions-number">
-        {{getNumberString(collection.num_subscribers + collection.num_guild_subscribers)}}
+        <div class="numbers-subscriptions-number">
+          {{getNumberString(collection.num_subscribers + collection.num_guild_subscribers)}}
+        </div>
+        <div class="numbers-subscriptions-icon">
+          <mat-icon>get_app</mat-icon>
+        </div>
       </div>
-      <div class="numbers-subscriptions-icon">
-        <mat-icon>get_app</mat-icon>
+    </div>
+
+    <!-- on hover: display description, actions -->
+    <div class="hover" *ngIf="true || isHovered">
+      {{collection.description}}
+
+      <div class="hover-meta-grid">
+        <!-- # of subscriptions -->
+        <div class="hover-subscriptions-number">
+          {{getNumberString(collection.num_subscribers + collection.num_guild_subscribers)}}
+        </div>
+        <div class="hover-subscriptions-icon">
+          <mat-icon>get_app</mat-icon>
+        </div>
+
+        <div class="hover-buttons">
+          <!-- read more -->
+          <a mat-icon-button aria-label="More details" matTooltip="More details" [routerLink]="collection._id">
+            <mat-icon>read_more</mat-icon>
+          </a>
+
+          <!-- todo: server sub -->
+          <button mat-icon-button aria-label="Server subscribe" matTooltip="Add to server">
+            <mat-icon>post_add</mat-icon>
+          </button>
+
+          <!-- personal sub -->
+          <button mat-icon-button aria-label="Personal subscribe" matTooltip="Add to personal collection"
+                  *ngIf="!isSubscribed">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="Personal unsubscribe" matTooltip="Remove from personal collection"
+                  *ngIf="isSubscribed">
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!--  <div class="collection-hover-overlay mat-typography">-->
-  <!--    this is the overlay-->
-  <!--  </div>-->
 </div>
 
 
