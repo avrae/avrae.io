@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {share} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import {DiscordUser} from '../schemas/DiscordUser';
+import {DiscordUser} from '../schemas/Discord';
 
 const discordUrl = `${environment.apiURL}/discord`;
 

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import * as numeral from 'numeral';
-import {DiscordUser} from '../../../schemas/DiscordUser';
+import {DiscordUser} from '../../../schemas/Discord';
 import {WorkshopCollection, WorkshopTag} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
 import {WorkshopService} from '../workshop.service';

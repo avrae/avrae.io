@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {of} from 'rxjs';
-import {DiscordUser} from '../../../schemas/DiscordUser';
+import {DiscordUser} from '../../../schemas/Discord';
 import {Tome} from '../../../schemas/homebrew/Spells';
 import {UserInfo} from '../../../schemas/UserInfo';
 import {DiscordService} from '../../../shared/discord.service';

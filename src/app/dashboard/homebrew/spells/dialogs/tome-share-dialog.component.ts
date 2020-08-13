@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {Observable} from 'rxjs';
-import {DiscordUser} from '../../../../schemas/DiscordUser';
+import {DiscordUser} from '../../../../schemas/Discord';
 import {Tome} from '../../../../schemas/homebrew/Spells';
 import {JSONExportDialog} from '../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 import {DiscordService} from '../../../../shared/discord.service';

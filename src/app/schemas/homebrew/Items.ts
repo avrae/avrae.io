@@ -1,4 +1,4 @@
-import {DiscordUser} from '../DiscordUser';
+import {DiscordUser} from '../Discord';
 
 export const REQUIRED_ITEM_PROPS = ['name'];
 

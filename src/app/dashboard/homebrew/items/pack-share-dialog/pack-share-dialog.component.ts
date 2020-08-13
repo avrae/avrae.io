@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {Observable} from 'rxjs';
-import {DiscordUser} from '../../../../schemas/DiscordUser';
+import {DiscordUser} from '../../../../schemas/Discord';
 import {Pack} from '../../../../schemas/homebrew/Items';
 import {UserInfo} from '../../../../schemas/UserInfo';
 import {JSONExportDialog} from '../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';

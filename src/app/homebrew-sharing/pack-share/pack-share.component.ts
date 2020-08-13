@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Meta} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {DiscordUser} from '../../schemas/DiscordUser';
+import {DiscordUser} from '../../schemas/Discord';
 import {Item, Pack} from '../../schemas/homebrew/Items';
 import {DiscordService} from '../../shared/discord.service';
 import {HomebrewSharingService} from '../homebrew-sharing.service';

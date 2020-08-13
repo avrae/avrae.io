@@ -3,3 +3,7 @@ export class DiscordUser {
   username: string;
   avatarUrl: string;
 }
+
+export class PartialGuild {
+  
+}
