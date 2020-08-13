@@ -5,11 +5,13 @@ import {MaterialModule} from '../../material/material.module';
 import {WorkshopExploreComponent} from './workshop-explore.component';
 
 import {WorkshopRoutingModule} from './workshop-routing.module';
+import { CollectionTileComponent } from './collection-tile/collection-tile.component';
 
 
 @NgModule({
   declarations: [
-    WorkshopExploreComponent
+    WorkshopExploreComponent,
+    CollectionTileComponent
   ],
   imports: [
     CommonModule,

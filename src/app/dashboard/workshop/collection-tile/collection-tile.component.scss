@@ -1,0 +1,155 @@
+@import "../../../variables";
+
+.tile {
+  position: relative;
+  background: $gray-dark1;
+  border-radius: 8px;
+}
+
+.ignore-theme {
+  color: #fff;
+}
+
+/* image portion */
+.collection-image-container {
+  padding-top: 56.25%; // 16:9 aspect ratio from square tile
+  position: relative;
+}
+
+.collection-image {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.collection-name-underlay p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+}
+
+/* meta portion */
+.collection-meta {
+  margin: 0 8px 8px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.collection-author {
+  height: 24px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 8px;
+
+  .collection-author-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+
+  .collection-author-username {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.collection-numbers-grid {
+  margin: 8px 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+}
+
+.numbers-alias {
+  grid-row-start: 1;
+  grid-column-start: 1;
+}
+
+.numbers-snippet {
+  grid-row-start: 2;
+  grid-column-start: 1;
+}
+
+.numbers-subscriptions-number {
+  height: 24px;
+  grid-row-start: span 2;
+  grid-column-start: 2;
+  margin: auto 0 auto auto;
+  padding-top: 4px;
+}
+
+.numbers-subscriptions-icon {
+  height: 24px;
+  grid-row-start: span 2;
+  grid-column-start: 3;
+  margin: auto;
+}
+
+/* name underlay */
+/*.collection-name-underlay {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  bottom: 0;*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*  background: #424242;*/
+/*  z-index: -1;*/
+/*}*/
+
+/*.collection-name-underlay p {*/
+/*  text-align: center;*/
+/*  vertical-align: middle;*/
+/*  position: relative;*/
+/*  top: 50%;*/
+/*  transform: translateY(-50%);*/
+/*  font-size: xx-large;*/
+/*}*/
+
+
+/*!* <i> for compendiums, effects on hover *!*/
+/*.collection-tile .collection-image {*/
+/*  object-fit: cover;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  -webkit-transition: all .5s ease;*/
+/*  -moz-transition: all .5s ease;*/
+/*  -o-transition: all .5s ease;*/
+/*  transition: all .5s ease;*/
+/*}*/
+
+/*.collection-tile:hover .collection-image {*/
+/*  webkit-filter: blur(3px) brightness(0.7); !* Chrome, Safari, Opera *!*/
+/*  filter: blur(3px) brightness(0.7);*/
+/*  transform: scale(1.05);*/
+/*}*/
+
+/* compendium meta overlay */
+//.collection-hover-overlay {
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  right: 0;
+//  bottom: 0;
+//  height: 100%;
+//  width: 100%;
+//  opacity: 0;
+//  -webkit-transition: all .5s ease;
+//  -moz-transition: all .5s ease;
+//  -o-transition: all .5s ease;
+//  transition: all .5s ease;
+//}
+//
+//.collection-hover-overlay:hover {
+//  opacity: 1;
+//}

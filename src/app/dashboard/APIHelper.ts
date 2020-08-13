@@ -1,4 +1,4 @@
-import {HttpHeaders} from '@angular/common/http';
+import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {UserInfo} from '../schemas/UserInfo';
 import {getToken} from '../SecurityHelper';
@@ -45,7 +45,7 @@ export function removeUser() {
 }
 
 // error handling
-export function defaultErrorHandler(err): Observable<ApiResponse<any>> {
+export function defaultErrorHandler(err: HttpErrorResponse): Observable<ApiResponse<any>> {
   console.error(err);
-  return of({success: false, error: err.error} as ApiResponse<any>);
+  return of(err.error as ApiResponse<any>);
 }

@@ -37,6 +37,7 @@
     "domino": "^2.1.6",
     "express": "^4.15.2",
     "ngx-markdown": "^10.1.0",
+    "numeral": "^2.0.6",
     "query-string": "^6.13.1",
     "rxjs": "^6.6.2",
     "tslib": "^2.0.0",

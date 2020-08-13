@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Item, Pack} from '../../schemas/homebrew/Items';
+import {Meta} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
-import {UserInfo} from '../../schemas/UserInfo';
+import {environment} from '../../../environments/environment';
+import {DiscordUser} from '../../schemas/DiscordUser';
+import {Item, Pack} from '../../schemas/homebrew/Items';
 import {DiscordService} from '../../shared/discord.service';
 import {HomebrewSharingService} from '../homebrew-sharing.service';
-import {Meta} from '@angular/platform-browser';
-import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'avr-pack-share',
@@ -15,7 +15,7 @@ import {environment} from '../../../environments/environment';
 export class PackShareComponent implements OnInit {
 
   pack: Pack;
-  owner: UserInfo;
+  owner: DiscordUser;
   selectedItem: Item;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewSharingService, private discord: DiscordService,

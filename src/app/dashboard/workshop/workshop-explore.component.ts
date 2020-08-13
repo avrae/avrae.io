@@ -6,19 +6,20 @@ import {WorkshopService} from './workshop.service';
 @Component({
   selector: 'avr-workshop',
   templateUrl: './workshop-explore.component.html',
-  styleUrls: ['./workshop-explore.component.css']
+  styleUrls: ['./workshop-explore.component.scss']
 })
 export class WorkshopExploreComponent implements OnInit {
+  COLLECTIONS_PER_PAGE = 48;
 
   // explore params
   order: string;
-  tags: string[];
+  tags: WorkshopTag[] = [];
   q: string;
   page: number;
 
   // state
-  loading = false;
-  collections: WorkshopCollection[];
+  loading = true;
+  collections: WorkshopCollection[] = [];
   validTags: WorkshopTag[];
   filteredTags: WorkshopTag[] = [];
   error: string;
@@ -29,38 +30,73 @@ export class WorkshopExploreComponent implements OnInit {
   ngOnInit(): void {
     // populate options from query string
     this.order = this.route.snapshot.queryParamMap.get('order') || 'popular-1w';
-    this.tags = this.route.snapshot.queryParamMap.get('tags')?.split(',') || [];
     this.q = this.route.snapshot.queryParamMap.get('q');
     this.page = parseInt(this.route.snapshot.queryParamMap.get('page') || '1');
+    // tags populated after tag loading
 
-    // populate page
+    // populate page (tag load also refreshes)
     this.loadValidTags();
-    this.refresh();
   }
 
   // event handlers
   onOrderChange() {
-    this.addQueryParams({order: this.order});
     this.refresh();
   }
 
-  onSearch() {
-    this.addQueryParams({q: this.q || null});
+  onSearch(search) {
+    this.q = search;
+    if (search) {
+      this.order = 'relevance';
+    } else if (this.order === 'relevance') {
+      this.order = 'popular-1w';
+    }
     this.refresh();
   }
 
-  onTagAdd(tag) {
-
+  onSearchClear() {
+    this.tags = [];
+    this.onSearch(null);
   }
 
-  onTagRemove(tag) {
+  onTagAdd(tag: WorkshopTag) {
+    if (!this.tags.includes(tag)) {
+      this.tags.push(tag);
+      this.refresh();
+    }
+  }
 
+  onTagRemove(tag: WorkshopTag) {
+    if (this.tags.includes(tag)) {
+      this.tags.splice(this.tags.indexOf(tag), 1);
+      this.refresh();
+    }
+  }
+
+  onPreviousPage() {
+    this.page--;
+    this.refresh();
+  }
+
+  onNextPage() {
+    this.page++;
+    this.refresh();
   }
 
   // data loaders
   refresh() {
+    this.error = null;
+
+    // set query params
+    this.addQueryParams({
+      order: this.order,
+      q: this.q || null,
+      tags: this.tags.map(tag => tag.slug).join(',') || null,
+      page: this.page
+    });
+
     this.loading = true;
-    this.workshopService.getWorkshopExplore(this.order, this.tags, this.q, this.page)
+    const tags = this.tags.map(tag => tag.slug);
+    this.workshopService.getWorkshopExplore(this.order, tags, this.q, this.page)
       .subscribe(response => {
         if (response.success) {
           this.collections = [];
@@ -98,7 +134,13 @@ export class WorkshopExploreComponent implements OnInit {
       .subscribe(result => {
         if (result.success) {
           this.validTags = result.data;
-          this.filterTags();
+
+          // load tags from query string
+          const querySlugs = this.route.snapshot.queryParamMap.get('tags')?.split(',') || [];
+          this.tags.push(...this.validTags.filter(t => querySlugs.includes(t.slug)));
+
+          this.filterTags(this.q);
+          this.refresh();
         } else {
           this.error = result.error;
         }
@@ -106,16 +148,16 @@ export class WorkshopExploreComponent implements OnInit {
   }
 
   // helpers
-  filterTags() {
+  filterTags(search) {
     if (!this.validTags) {
       this.filteredTags = [];
       return;
     }
-    if (!this.q) {
+    if (!search) {
       this.filteredTags = this.validTags;
       return;
     }
-    this.filteredTags = this.validTags.filter(tag => tag.name.toLowerCase().startsWith(this.q.toLowerCase()));
+    this.filteredTags = this.validTags.filter(tag => tag.name.toLowerCase().startsWith(search.toLowerCase()));
   }
 
   addQueryParams(params) {

@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {Observable} from 'rxjs';
+import {DiscordUser} from '../../../../schemas/DiscordUser';
 import {Pack} from '../../../../schemas/homebrew/Items';
 import {UserInfo} from '../../../../schemas/UserInfo';
 import {JSONExportDialog} from '../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
@@ -19,8 +20,8 @@ export class PackShareDialog implements OnInit {
   shareLink: string;
   loaded: boolean;
 
-  owner: Observable<UserInfo>;
-  editors: Observable<UserInfo>[];
+  owner: Observable<DiscordUser>;
+  editors: Observable<DiscordUser>[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Pack, private dialog: MatDialog,
               private hbService: HomebrewService, private discord: DiscordService) {

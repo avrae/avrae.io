@@ -1,7 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {catchError, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {WorkshopCollection, WorkshopTag} from '../../schemas/Workshop';
 import {ApiResponse, defaultErrorHandler, defaultOptions} from '../APIHelper';
@@ -12,6 +12,9 @@ const baseUrl = `${environment.apiURL}/workshop`;
   providedIn: 'root'
 })
 export class WorkshopService {
+
+  // cached stuff
+  tags: Observable<ApiResponse<WorkshopTag[]>>;
 
   constructor(private http: HttpClient) {
   }
@@ -29,13 +32,25 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  getMySubscriptions(): Observable<ApiResponse<string[]>> {
+    return this.http.get<ApiResponse<string[]>>(`${baseUrl}/subscribed/me`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   getCollection(id: string): Observable<ApiResponse<WorkshopCollection>> {
     return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
 
-  getTags(): Observable<ApiResponse<WorkshopTag[]>> {
-    return this.http.get<ApiResponse<WorkshopTag[]>>(`${baseUrl}/tags`, defaultOptions())
+  getTags(): Observable<ApiResponse<WorkshopTag[]>> {  // cached since multiple components might want to get tags at once
+    if (this.tags) {
+      return this.tags;
+    }
+    const req = this.http.get<ApiResponse<WorkshopTag[]>>(`${baseUrl}/tags`, defaultOptions())
+      .pipe(share())
       .pipe(catchError(defaultErrorHandler));
+    this.tags = req;
+    req.subscribe(result => this.tags = of(result));
+    return req;
   }
 }

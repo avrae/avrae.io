@@ -4,6 +4,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -51,6 +52,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatProgressBarModule,
     MatBadgeModule,
     MatAutocompleteModule,
+    MatChipsModule,
   ],
   exports: [
     MatGridListModule,
@@ -77,6 +79,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatProgressBarModule,
     MatBadgeModule,
     MatAutocompleteModule,
+    MatChipsModule,
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
