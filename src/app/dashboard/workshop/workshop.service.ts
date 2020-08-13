@@ -16,6 +16,7 @@ export class WorkshopService {
   // cached stuff
   tags: Observable<ApiResponse<WorkshopTag[]>>;
   personalSubscribedIds: string[];
+  personalSubscribedIdsInflight = false;
 
   constructor(private http: HttpClient) {
   }
@@ -33,7 +34,9 @@ export class WorkshopService {
   // ==== subscription operations ====
   // ---- api endpoints ----
   personalSubscribe(id: string): Observable<ApiResponse<WorkshopBindings>> {
-    return this.http.put<ApiResponse<WorkshopBindings>>(`${baseUrl}/collection/${id}/subscription/me`, defaultOptions())
+    return this.http.put<ApiResponse<WorkshopBindings>>(`${baseUrl}/collection/${id}/subscription/me`,
+      {alias_bindings: null, snippet_bindings: null},
+      defaultOptions())
       .pipe(catchError(defaultErrorHandler))
       .pipe(map(resp => {
         if (resp.success && this.personalSubscribedIds !== undefined) {
@@ -66,12 +69,12 @@ export class WorkshopService {
   }
 
   // ---- helpers ----
-  getPersonalSubscribedIds(): Observable<string[]> {
-    if (this.personalSubscribedIds !== undefined) {
-      return of(this.personalSubscribedIds);
+  loadPersonalSubscribedIds() {
+    if (this.personalSubscribedIds !== undefined || this.personalSubscribedIdsInflight) {
+      return;
     } else {
-      return this.getMySubscriptions()
-        .pipe(map(resp => resp.success ? resp.data : null));
+      this.personalSubscribedIdsInflight = true;
+      this.getMySubscriptions().subscribe();  // the map should populate this
     }
   }
 

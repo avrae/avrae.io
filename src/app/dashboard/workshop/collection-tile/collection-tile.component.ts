@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import * as numeral from 'numeral';
 import {DiscordUser} from '../../../schemas/DiscordUser';
 import {WorkshopCollection, WorkshopTag} from '../../../schemas/Workshop';
@@ -13,22 +14,36 @@ import {WorkshopService} from '../workshop.service';
 export class CollectionTileComponent implements OnInit {
 
   @Input() collection: WorkshopCollection;
-  @Input() isSubscribed: boolean;
-  @Output() subscribe = new EventEmitter();
-  @Output() unsubscribe = new EventEmitter();
   author: DiscordUser;
   tags: WorkshopTag[];
-  isHovered = false;
 
-  constructor(private discord: DiscordService, private workshopService: WorkshopService) {
+  constructor(private discord: DiscordService, private workshopService: WorkshopService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
     this.author = {id: this.collection.owner, username: 'Loading...', avatarUrl: '../../../../assets/img/AvraeSquare.jpg'};
     this.loadAuthor();
     this.loadTags();
+    this.workshopService.loadPersonalSubscribedIds();
   }
 
+  // event handlers
+  onSubscribe() {
+    this.workshopService.personalSubscribe(this.collection._id)
+      .subscribe(resp => {
+        resp.success ? this.snackBar.open(`Subscribed to ${this.collection.name}!`) : this.snackBar.open(resp.error);
+      });
+  }
+
+  onUnsubscribe() {
+    this.workshopService.personalUnsubscribe(this.collection._id)
+      .subscribe(resp => {
+        resp.success ? this.snackBar.open(`Unsubscribed from ${this.collection.name}!`) : this.snackBar.open(resp.error);
+      });
+  }
+
+  // helpers
   getInitials(name: string): string {
     const match = name.match(/\b\w/g) || [];
     return (match.join('')).toUpperCase();
@@ -44,6 +59,10 @@ export class CollectionTileComponent implements OnInit {
     } else {
       return slug;
     }
+  }
+
+  isSubscribed() {
+    return this.workshopService.personalSubscribedIds?.includes(this.collection._id);
   }
 
   // data loaders

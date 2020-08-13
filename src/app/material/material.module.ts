@@ -82,7 +82,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatChipsModule,
   ],
   providers: [
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, horizontalPosition: 'right'}}
   ]
 })
 export class MaterialModule {

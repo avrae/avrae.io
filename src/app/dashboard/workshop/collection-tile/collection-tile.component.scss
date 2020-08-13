@@ -63,40 +63,17 @@
   }
 }
 
-// ---- non-hovered styles ----
-.collection-numbers-grid {
-  margin: 8px 0 0;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto auto;
-
-  .numbers-alias {
-    grid-row-start: 1;
-    grid-column-start: 1;
-  }
-
-  .numbers-snippet {
-    grid-row-start: 2;
-    grid-column-start: 1;
-  }
-
-  .numbers-subscriptions-number {
-    height: 24px;
-    grid-row-start: span 2;
-    grid-column-start: 2;
-    margin: auto 0 auto auto;
-    padding-top: 4px;
-  }
-
-  .numbers-subscriptions-icon {
-    height: 24px;
-    grid-row-start: span 2;
-    grid-column-start: 3;
-    margin: auto;
-  }
+.description {
+  // line-clamp is not 100% supported by all browsers yet
+  // https://caniuse.com/#search=line-clamp = 95% (no ie11)
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 
-// ---- hovered styles ----
 .hover-meta-grid {
   margin: 8px 0 0;
   display: grid;
