@@ -1,9 +1,9 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {catchError, share} from 'rxjs/operators';
+import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {WorkshopCollection, WorkshopTag} from '../../schemas/Workshop';
+import {WorkshopBindings, WorkshopCollection, WorkshopTag} from '../../schemas/Workshop';
 import {ApiResponse, defaultErrorHandler, defaultOptions} from '../APIHelper';
 
 const baseUrl = `${environment.apiURL}/workshop`;
@@ -15,10 +15,67 @@ export class WorkshopService {
 
   // cached stuff
   tags: Observable<ApiResponse<WorkshopTag[]>>;
+  personalSubscribedIds: string[];
 
   constructor(private http: HttpClient) {
   }
 
+  // ==== collection operations ====
+  getCollection(id: string): Observable<ApiResponse<WorkshopCollection>> {
+    return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  // ==== alias operations ====
+
+  // ==== snippet operations ====
+
+  // ==== subscription operations ====
+  // ---- api endpoints ----
+  personalSubscribe(id: string): Observable<ApiResponse<WorkshopBindings>> {
+    return this.http.put<ApiResponse<WorkshopBindings>>(`${baseUrl}/collection/${id}/subscription/me`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler))
+      .pipe(map(resp => {
+        if (resp.success && this.personalSubscribedIds !== undefined) {
+          this.personalSubscribedIds.push(id);
+        }
+        return resp;
+      }));
+  }
+
+  personalUnsubscribe(id: string): Observable<ApiResponse<string>> {
+    return this.http.delete<ApiResponse<string>>(`${baseUrl}/collection/${id}/subscription/me`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler))
+      .pipe(map(resp => {
+        if (resp.success && this.personalSubscribedIds !== undefined) {
+          this.personalSubscribedIds.splice(this.personalSubscribedIds.indexOf(id), 1);
+        }
+        return resp;
+      }));
+  }
+
+  getMySubscriptions(): Observable<ApiResponse<string[]>> {
+    return this.http.get<ApiResponse<string[]>>(`${baseUrl}/subscribed/me`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler))
+      .pipe(map(resp => {
+        if (resp.success) {
+          this.personalSubscribedIds = resp.data;
+        }
+        return resp;
+      }));
+  }
+
+  // ---- helpers ----
+  getPersonalSubscribedIds(): Observable<string[]> {
+    if (this.personalSubscribedIds !== undefined) {
+      return of(this.personalSubscribedIds);
+    } else {
+      return this.getMySubscriptions()
+        .pipe(map(resp => resp.success ? resp.data : null));
+    }
+  }
+
+  // ==== other ====
   getWorkshopExplore(order: string = 'popular-1w', tags: string[] = null,
                      q: string = null, page: number = 1): Observable<ApiResponse<string[]>> {
     let exploreParams = new HttpParams({fromObject: {order, page: page.toString()}});
@@ -32,15 +89,6 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
-  getMySubscriptions(): Observable<ApiResponse<string[]>> {
-    return this.http.get<ApiResponse<string[]>>(`${baseUrl}/subscribed/me`, defaultOptions())
-      .pipe(catchError(defaultErrorHandler));
-  }
-
-  getCollection(id: string): Observable<ApiResponse<WorkshopCollection>> {
-    return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`, defaultOptions())
-      .pipe(catchError(defaultErrorHandler));
-  }
 
   getTags(): Observable<ApiResponse<WorkshopTag[]>> {  // cached since multiple components might want to get tags at once
     if (this.tags) {
