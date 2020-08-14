@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import * as lodash from 'lodash';
 import {WorkshopCollection, WorkshopTag} from '../../schemas/Workshop';
 import {WorkshopService} from './workshop.service';
 
@@ -13,15 +14,15 @@ export class WorkshopExploreComponent implements OnInit {
 
   // explore params
   order: string;
-  tags: WorkshopTag[] = [];
+  tags: WorkshopTag[] = [];  // tags in current query
   q: string;
   page: number;
 
   // state
   loading = true;
   collections: WorkshopCollection[] = [];
-  validTags: WorkshopTag[];
-  filteredTags: WorkshopTag[] = [];
+  validTags: WorkshopTag[];  // all valid tags
+  filteredTags: [string, WorkshopTag[]][] = [];  // list of tuples of (category, tags) of tags that match query in search
   error: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private workshopService: WorkshopService) {
@@ -133,7 +134,8 @@ export class WorkshopExploreComponent implements OnInit {
     this.workshopService.getTags()
       .subscribe(result => {
         if (result.success) {
-          this.validTags = result.data;
+          // tags are alphabetically sorted
+          this.validTags = result.data.sort((a, b) => a.name.localeCompare(b.name));
 
           // load tags from query string
           const querySlugs = this.route.snapshot.queryParamMap.get('tags')?.split(',') || [];
@@ -154,10 +156,13 @@ export class WorkshopExploreComponent implements OnInit {
       return;
     }
     if (!search) {
-      this.filteredTags = this.validTags;
+      this.filteredTags = Object.entries(lodash.groupBy(this.validTags, tag => tag.category));
       return;
     }
-    this.filteredTags = this.validTags.filter(tag => tag.name.toLowerCase().startsWith(search.toLowerCase()));
+    this.filteredTags = Object.entries(lodash.groupBy(
+      this.validTags.filter(tag => tag.name.toLowerCase().startsWith(search.toLowerCase())),
+      tag => tag.category
+    ));
   }
 
   addQueryParams(params) {

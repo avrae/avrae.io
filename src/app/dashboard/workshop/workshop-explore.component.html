@@ -35,9 +35,11 @@
         <mat-icon>cancel</mat-icon>
       </button>
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let tag of filteredTags" [value]="" (click)="onTagAdd(tag)">
-          {{tag.name}}
-        </mat-option>
+        <mat-optgroup *ngFor="let tup of filteredTags" [label]="tup[0]">
+          <mat-option *ngFor="let tag of tup[1]" [value]="" (click)="onTagAdd(tag)">
+            {{tag.name}}
+          </mat-option>
+        </mat-optgroup>
       </mat-autocomplete>
     </mat-form-field>
   </div>
