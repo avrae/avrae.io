@@ -27,8 +27,8 @@
 
     <!-- tags -->
     <mat-chip-list aria-label="Tag list" class="collection-tags" *ngIf="tags?.length && collection.tags.length">
-      <mat-chip *ngFor="let tag of collection.tags.slice(0, 6)">{{tagNameFromSlug(tag)}}</mat-chip>
-      <mat-chip *ngIf="collection.tags.length > 6">{{collection.tags.length - 6}} more...</mat-chip>
+      <mat-chip *ngFor="let tag of collection.tags.slice(0, 5)">{{tagNameFromSlug(tag)}}</mat-chip>
+      <mat-chip *ngIf="collection.tags.length > 5">{{collection.tags.length - 5}} more...</mat-chip>
     </mat-chip-list>
 
     <!-- description, actions -->
