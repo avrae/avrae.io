@@ -58,7 +58,9 @@
     </p>
   </mat-card>
 
-  <p *ngIf="!loading && collections.length === 0">No results</p>
+  <mat-card *ngIf="!loading && collections.length === 0">
+    <p>There are no results. Try a different search!</p>
+  </mat-card>
 
   <div class="collections-grid">
     <avr-collection-tile *ngFor="let collection of collections" [collection]="collection"></avr-collection-tile>
