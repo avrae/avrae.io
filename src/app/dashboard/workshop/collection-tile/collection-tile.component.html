@@ -14,6 +14,8 @@
 
   <div class="collection-meta mat-typography">
     <mat-divider></mat-divider>
+
+    <!-- name, author -->
     <h2>
       {{collection.name}}
     </h2>
@@ -23,9 +25,10 @@
       <span class="collection-author-username">by {{author.username}}</span>
     </div>
 
-    <!-- basic metadata -->
+    <!-- tags -->
     <mat-chip-list aria-label="Tag list" class="collection-tags" *ngIf="tags?.length && collection.tags.length">
-      <mat-chip *ngFor="let tag of collection.tags">{{tagNameFromSlug(tag)}}</mat-chip>
+      <mat-chip *ngFor="let tag of collection.tags.slice(0, 6)">{{tagNameFromSlug(tag)}}</mat-chip>
+      <mat-chip *ngIf="collection.tags.length > 6">{{collection.tags.length - 6}} more...</mat-chip>
     </mat-chip-list>
 
     <!-- description, actions -->
@@ -48,10 +51,16 @@
           <mat-icon>read_more</mat-icon>
         </a>
 
-        <!-- todo: server sub -->
-        <button mat-icon-button aria-label="Server subscribe" matTooltip="Add to server">
+        <!-- server sub -->
+        <button mat-icon-button aria-label="Server subscribe" matTooltip="Add to server"
+                [matMenuTriggerFor]="serverSubMenu">
           <mat-icon>post_add</mat-icon>
         </button>
+        <mat-menu #serverSubMenu="matMenu">
+          <button mat-menu-item *ngFor="let guild of getGuilds() | async" (click)="onGuildSubscribe(guild)">
+            {{guild.name}}
+          </button>
+        </mat-menu>
 
         <!-- personal sub -->
         <button mat-icon-button aria-label="Personal subscribe" matTooltip="Add to personal collection"
@@ -65,7 +74,4 @@
       </div>
     </div>
   </div>
-
 </div>
-
-

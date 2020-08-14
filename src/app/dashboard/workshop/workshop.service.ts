@@ -33,8 +33,8 @@ export class WorkshopService {
 
   // ==== subscription operations ====
   // ---- api endpoints ----
-  personalSubscribe(id: string): Observable<ApiResponse<WorkshopBindings>> {
-    return this.http.put<ApiResponse<WorkshopBindings>>(`${baseUrl}/collection/${id}/subscription/me`,
+  personalSubscribe(id: string): Observable<ApiResponse<SubscriptionResponse>> {
+    return this.http.put<ApiResponse<SubscriptionResponse>>(`${baseUrl}/collection/${id}/subscription/me`,
       {alias_bindings: null, snippet_bindings: null},
       defaultOptions())
       .pipe(catchError(defaultErrorHandler))
@@ -55,6 +55,18 @@ export class WorkshopService {
         }
         return resp;
       }));
+  }
+
+  guildSubscribe(id: string, guildId: string): Observable<ApiResponse<SubscriptionResponse>> {
+    return this.http.put<ApiResponse<SubscriptionResponse>>(`${baseUrl}/collection/${id}/subscription/${guildId}`,
+      {alias_bindings: null, snippet_bindings: null},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  guildUnsubscribe(id: string, guildId: string): Observable<ApiResponse<string>> {
+    return this.http.delete<ApiResponse<string>>(`${baseUrl}/collection/${id}/subscription/${guildId}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
   getMySubscriptions(): Observable<ApiResponse<string[]>> {
@@ -104,4 +116,9 @@ export class WorkshopService {
     req.subscribe(result => this.tags = of(result));
     return req;
   }
+}
+
+
+export class SubscriptionResponse extends WorkshopBindings {
+  new_subscription: boolean;
 }

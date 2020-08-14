@@ -63,6 +63,9 @@
   }
 }
 
+.collection-tags {
+}
+
 .description {
   // line-clamp is not 100% supported by all browsers yet
   // https://caniuse.com/#search=line-clamp = 95% (no ie11)
@@ -72,10 +75,10 @@
   display: -webkit-box;
   -webkit-line-clamp: 4; /* number of lines to show */
   -webkit-box-orient: vertical;
+  margin: 4px 0;
 }
 
 .hover-meta-grid {
-  margin: 8px 0 0;
   display: grid;
   grid-template-columns: auto 1fr auto;
 
