@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+  <span>My Work</span>
+  <span class="toolbar-spacer"></span>
+
+  <mat-spinner *ngIf="loadingOwned || loadingEditable" color="accent" diameter="24"></mat-spinner>
+
+  <div class="toolbar-search-form">
+    <!-- order -->
+    <mat-form-field appearance="fill" class="toolbar-search-form-order">
+      <mat-label>Order</mat-label>
+      <mat-select [(value)]="order" (selectionChange)="onOrderChange()">
+        <mat-option value="edittime">Last Updated</mat-option>
+        <mat-option value="newest">Creation Time</mat-option>
+        <mat-option value="alphabetical">Alphabetical</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</mat-toolbar>
+
+<!-- CONTENT -->
+<div class="container">
+  <mat-card class="workshop-header">
+    welcome to the workshop blah blah header here
+
+    <p class="mat-error" *ngIf="error">
+      {{error}}
+    </p>
+  </mat-card>
+
+  <mat-card *ngIf="!(loadingOwned || loadingEditable) && collections.length === 0">
+    <p>You have no collections.</p>
+  </mat-card>
+
+  <div class="collections-grid">
+    <avr-collection-tile *ngFor="let collection of collections" [collection]="collection"></avr-collection-tile>
+  </div>
+</div>
+

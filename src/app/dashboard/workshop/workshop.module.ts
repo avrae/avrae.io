@@ -6,12 +6,14 @@ import {WorkshopExploreComponent} from './workshop-explore.component';
 
 import {WorkshopRoutingModule} from './workshop-routing.module';
 import { CollectionTileComponent } from './collection-tile/collection-tile.component';
+import { MyWorkComponent } from './my-work/my-work.component';
 
 
 @NgModule({
   declarations: [
     WorkshopExploreComponent,
-    CollectionTileComponent
+    CollectionTileComponent,
+    MyWorkComponent
   ],
   imports: [
     CommonModule,

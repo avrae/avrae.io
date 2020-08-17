@@ -116,6 +116,16 @@ export class WorkshopService {
     req.subscribe(result => this.tags = of(result));
     return req;
   }
+
+  getOwnedCollectionIds(): Observable<ApiResponse<string[]>> {
+    return this.http.get<ApiResponse<string[]>>(`${baseUrl}/owned`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  getEditableCollectionIds(): Observable<ApiResponse<string[]>> {
+    return this.http.get<ApiResponse<string[]>>(`${baseUrl}/editable`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
 }
 
 
