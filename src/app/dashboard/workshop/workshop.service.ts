@@ -80,6 +80,11 @@ export class WorkshopService {
       }));
   }
 
+  getGuildSubscriptions(id: string): Observable<ApiResponse<string[]>> {
+    return this.http.get<ApiResponse<string[]>>(`${baseUrl}/subscribed/${id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   // ---- helpers ----
   loadPersonalSubscribedIds() {
     if (this.personalSubscribedIds !== undefined || this.personalSubscribedIdsInflight) {
@@ -124,6 +129,12 @@ export class WorkshopService {
 
   getEditableCollectionIds(): Observable<ApiResponse<string[]>> {
     return this.http.get<ApiResponse<string[]>>(`${baseUrl}/editable`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  getGuildPermissionCheck(id: string): Observable<ApiResponse<{ can_edit: boolean, message: string | null }>> {
+    return this.http.get<ApiResponse<{ can_edit: boolean, message: string | null }>>(`${baseUrl}/guild-check`,
+      defaultOptions({params: {g: id}}))
       .pipe(catchError(defaultErrorHandler));
   }
 }

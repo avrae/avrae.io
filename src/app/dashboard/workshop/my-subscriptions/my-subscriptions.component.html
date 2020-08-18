@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+  <span>My Subscriptions</span>
+  <span class="toolbar-spacer"></span>
+
+  <mat-spinner *ngIf="loading" color="accent" diameter="24"></mat-spinner>
+
+  <div class="toolbar-search-form">
+    <!-- order -->
+    <mat-form-field appearance="fill" class="toolbar-search-form-order">
+      <mat-label>Order</mat-label>
+      <mat-select [(value)]="order" (selectionChange)="onOrderChange()">
+        <mat-option value="edittime">Last Updated</mat-option>
+        <mat-option value="newest">Creation Time</mat-option>
+        <mat-option value="alphabetical">Alphabetical</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- guild context -->
+    <mat-form-field appearance="fill" class="toolbar-search-form-guild-context">
+      <mat-label>Server</mat-label>
+      <mat-select [(value)]="guildContext" (selectionChange)="onGuildContextChange()">
+        <mat-option [value]="sentinel">Personal Collection</mat-option>
+        <mat-option *ngFor="let guild of getUserGuilds() | async" [value]="guild">
+          <img *ngIf="getGuildAvatarUrl(guild)" [src]="getGuildAvatarUrl(guild)" alt="Guild icon" class="guild-icon">
+          {{guild.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</mat-toolbar>
+
+<!-- CONTENT -->
+<div class="container">
+  <mat-card class="workshop-header">
+    <p *ngIf="guildContext === sentinel">
+      Here are all the collections you're subscribed to. You can view them or unsubscribe from them here!
+    </p>
+    <p *ngIf="guildContext !== sentinel">
+      Here are all the collections on {{guildContext.name}}. You can view them or unsubscribe from them here!
+    </p>
+
+    <p class="mat-error" *ngIf="error">
+      {{error}}
+    </p>
+  </mat-card>
+
+  <mat-card *ngIf="!loading && collections.length === 0">
+    <p>
+      You have not subscribed to any collections. Try switching server contexts in the top right or exploring
+      collections in the workshop!
+    </p>
+  </mat-card>
+
+  <div class="collections-grid">
+    <avr-collection-tile *ngFor="let collection of collections" [collection]="collection">
+      <button mat-icon-button aria-label="Remove from server" matTooltip="Remove from server"
+              *ngIf="guildContext !== sentinel && guildSubscribedIds.includes(collection._id)"
+              (click)="onGuildRemove(collection)">
+        <mat-icon>link_off</mat-icon>
+      </button>
+    </avr-collection-tile>
+  </div>
+</div>
+

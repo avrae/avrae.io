@@ -53,6 +53,9 @@
       </div>
 
       <div class="hover-buttons">
+        <!-- custom buttons (define in parent) -->
+        <ng-content></ng-content>
+
         <!-- read more/edit -->
         <a mat-icon-button aria-label="More details" matTooltip="More details"
            [routerLink]="['/dashboard/workshop/', collection._id]"

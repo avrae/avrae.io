@@ -21,7 +21,6 @@ export class MyWorkComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // populate page (tag load also refreshes)
     this.loadCollections();
   }
 
@@ -92,16 +91,4 @@ export class MyWorkComponent implements OnInit {
     }
     this.collections.sort(sorter);
   }
-
-  addQueryParams(params) {
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: params,
-        queryParamsHandling: 'merge',
-        replaceUrl: true
-      });
-  }
-
 }
