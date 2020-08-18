@@ -26,6 +26,11 @@
       <img class="collection-author-avatar" [src]="author.avatarUrl" alt="avatar">
       <span class="collection-author-username">
         by {{author.username}}
+        
+        <span class="collection-edit-date">
+          • {{collection.last_edited | dateAgo}}
+        </span>
+
         <i class="collection-publication-state" *ngIf="collection.publish_state !== 'PUBLISHED'">
           ({{collection.publish_state.toLowerCase()}})
         </i>
