@@ -7,7 +7,7 @@ import {WorkshopService} from './workshop.service';
 @Component({
   selector: 'avr-workshop',
   templateUrl: './workshop-explore.component.html',
-  styleUrls: ['./workshop-explore.component.scss']
+  styleUrls: ['./common.scss', './workshop-explore.component.scss']
 })
 export class WorkshopExploreComponent implements OnInit {
   COLLECTIONS_PER_PAGE = 48;

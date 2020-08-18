@@ -7,13 +7,15 @@ import {WorkshopExploreComponent} from './workshop-explore.component';
 import {WorkshopRoutingModule} from './workshop-routing.module';
 import { CollectionTileComponent } from './collection-tile/collection-tile.component';
 import { MyWorkComponent } from './my-work/my-work.component';
+import { MySubscriptionsComponent } from './my-subscriptions/my-subscriptions.component';
 
 
 @NgModule({
   declarations: [
     WorkshopExploreComponent,
     CollectionTileComponent,
-    MyWorkComponent
+    MyWorkComponent,
+    MySubscriptionsComponent
   ],
   imports: [
     CommonModule,

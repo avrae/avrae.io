@@ -1,38 +1,11 @@
 @import "../../variables";
 
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-
-.toolbar-search-form {
-  font-size: 16px;
-  padding-top: 8px;
-}
-
 .toolbar-search-form-order {
   margin: 0 8px;
 }
 
 .toolbar-search-form-search {
   width: 25vw;
-}
-
-.workshop-header {
-  margin-bottom: 8px;
-}
-
-.container {
-  margin: 8px;
-}
-
-.collections-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 1rem;
-}
-
-.ignore-theme {
-  color: #fff;
 }
 
 .paginator {

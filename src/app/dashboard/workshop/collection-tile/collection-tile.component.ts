@@ -9,7 +9,7 @@ import {WorkshopService} from '../workshop.service';
 @Component({
   selector: 'avr-collection-tile',
   templateUrl: './collection-tile.component.html',
-  styleUrls: ['./collection-tile.component.scss']
+  styleUrls: ['../common.scss', './collection-tile.component.scss']
 })
 export class CollectionTileComponent implements OnInit {
 

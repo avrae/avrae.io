@@ -6,7 +6,7 @@ import {WorkshopService} from '../workshop.service';
 @Component({
   selector: 'avr-my-work',
   templateUrl: './my-work.component.html',
-  styleUrls: ['./my-work.component.scss']
+  styleUrls: ['../common.scss', './my-work.component.scss']
 })
 export class MyWorkComponent implements OnInit {
 
