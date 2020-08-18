@@ -21,7 +21,8 @@
 <!-- CONTENT -->
 <div class="container">
   <mat-card class="workshop-header">
-    welcome to the workshop blah blah header here
+    Here are all the collections you own or have access to. You can subscribe to your own work to use it on Avrae,
+    or click on a collection to edit it.
 
     <p class="mat-error" *ngIf="error">
       {{error}}
@@ -33,7 +34,8 @@
   </mat-card>
 
   <div class="collections-grid">
-    <avr-collection-tile *ngFor="let collection of collections" [collection]="collection"></avr-collection-tile>
+    <avr-collection-tile *ngFor="let collection of collections"
+                         [collection]="collection" [showEdit]="true"></avr-collection-tile>
   </div>
 </div>
 

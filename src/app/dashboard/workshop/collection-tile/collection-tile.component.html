@@ -1,6 +1,8 @@
 <div class="tile mat-elevation-z3">
   <!-- image/initials -->
-  <a [routerLink]="[collection._id]" class="ignore-theme">
+  <a
+    [routerLink]="showEdit ? ['/dashboard/workshop/', collection._id, 'edit'] : ['/dashboard/workshop/', collection._id]"
+    class="ignore-theme">
     <div class="collection-image-container">
       <div class="collection-name-underlay mat-typography collection-image">
         <p *ngIf="!collection.image">
@@ -22,7 +24,12 @@
 
     <div class="collection-author">
       <img class="collection-author-avatar" [src]="author.avatarUrl" alt="avatar">
-      <span class="collection-author-username">by {{author.username}}</span>
+      <span class="collection-author-username">
+        by {{author.username}}
+        <i class="collection-publication-state" *ngIf="collection.publish_state !== 'PUBLISHED'">
+          ({{collection.publish_state.toLowerCase()}})
+        </i>
+      </span>
     </div>
 
     <!-- tags -->
@@ -46,9 +53,17 @@
       </div>
 
       <div class="hover-buttons">
-        <!-- read more -->
-        <a mat-icon-button aria-label="More details" matTooltip="More details" [routerLink]="collection._id">
+        <!-- read more/edit -->
+        <a mat-icon-button aria-label="More details" matTooltip="More details"
+           [routerLink]="['/dashboard/workshop/', collection._id]"
+           *ngIf="!showEdit">
           <mat-icon>read_more</mat-icon>
+        </a>
+
+        <a mat-icon-button aria-label="Edit" matTooltip="Edit"
+           [routerLink]="['/dashboard/workshop/', collection._id, 'edit']"
+           *ngIf="showEdit">
+          <mat-icon>edit</mat-icon>
         </a>
 
         <!-- server sub -->

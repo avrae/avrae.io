@@ -14,6 +14,7 @@ import {WorkshopService} from '../workshop.service';
 export class CollectionTileComponent implements OnInit {
 
   @Input() collection: WorkshopCollection;
+  @Input() showEdit: boolean = false;
   author: DiscordUser;
   tags: WorkshopTag[];
 
