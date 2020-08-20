@@ -28,9 +28,15 @@
     <div class="description-etc">
       <img *ngIf="collection.image" [src]="collection.image" alt="Collection Image" class="desc-image">
 
-      <avr-tag-chip-list [collection]="collection"></avr-tag-chip-list>
+      <div class="desc-subscribe">
+        TODO subscribe buttons
+      </div>
 
-      <p>
+      <div class="desc-tags">
+        <avr-tag-chip-list [collection]="collection"></avr-tag-chip-list>
+      </div>
+
+      <p class="desc-text">
         {{collection.description}}
       </p>
     </div>
@@ -39,8 +45,8 @@
     <div> <!-- this is here for grid purposes, it takes up 100% of the grid cell -->
       <div class="metadata">
         <!-- authors/editors -->
-        <div class="meta-author">
-          author
+        <div class="meta-author" *ngFor="let editor of editors">
+          {{editor.username}}
         </div>
 
         <!-- edit/creation time -->

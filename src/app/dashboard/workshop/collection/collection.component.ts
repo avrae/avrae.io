@@ -2,8 +2,9 @@ import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PartialGuild} from '../../../schemas/Discord';
+import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
 import {WorkshopCollection} from '../../../schemas/Workshop';
+import {DiscordService} from '../../../shared/discord.service';
 import {WorkshopService} from '../workshop.service';
 
 @Component({
@@ -18,10 +19,11 @@ export class CollectionComponent implements OnInit {
   loading = true;
   error: string;
   guildContext: PartialGuild | null;
+  editors: DiscordUser[];
 
   constructor(private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar,
               private location: Location,
-              private workshopService: WorkshopService) {
+              private workshopService: WorkshopService, private discordService: DiscordService) {
   }
 
   ngOnInit(): void {
@@ -43,6 +45,12 @@ export class CollectionComponent implements OnInit {
     }
   }
 
+  onCollectionInit(collection: WorkshopCollection) {
+    this.collection = collection;
+    this.editors = [];
+    this.loadOwner();
+    this.loadEditors();
+  }
 
   // data loaders
   loadCollection(id: string) {
@@ -50,9 +58,25 @@ export class CollectionComponent implements OnInit {
       .subscribe(response => {
         this.loading = false;
         if (response.success) {
-          this.collection = response.data;
+          this.onCollectionInit(response.data);
         } else {
           this.error = response.error;
+        }
+      });
+  }
+
+  loadOwner() {
+    this.discordService.getUser(this.collection.owner)
+      .subscribe(response => {
+        this.editors.unshift(response);
+      });
+  }
+
+  loadEditors() {
+    this.workshopService.getCollectionEditors(this.collection._id)
+      .subscribe(response => {
+        if (response.success) {
+          this.editors.push(...response.data);
         }
       });
   }

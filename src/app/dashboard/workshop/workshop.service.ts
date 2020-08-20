@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {DiscordUser} from '../../schemas/Discord';
 import {WorkshopBindings, WorkshopCollection, WorkshopTag} from '../../schemas/Workshop';
 import {ApiResponse, defaultErrorHandler, defaultOptions} from '../APIHelper';
 
@@ -24,6 +25,11 @@ export class WorkshopService {
   // ==== collection operations ====
   getCollection(id: string): Observable<ApiResponse<WorkshopCollection>> {
     return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  getCollectionEditors(id: string): Observable<ApiResponse<DiscordUser[]>> {
+    return this.http.get<ApiResponse<DiscordUser[]>>(`${baseUrl}/collection/${id}/editors`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
 
