@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import * as numeral from 'numeral';
 import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
@@ -16,7 +16,6 @@ export class CollectionTileComponent implements OnInit {
   @Input() collection: WorkshopCollection;
   @Input() showEdit: boolean = false;
   author: DiscordUser;
-  tags: WorkshopTag[];
 
   constructor(private discord: DiscordService, private workshopService: WorkshopService,
               private snackBar: MatSnackBar) {
@@ -25,7 +24,6 @@ export class CollectionTileComponent implements OnInit {
   ngOnInit(): void {
     this.author = {id: this.collection.owner, username: 'Loading...', avatarUrl: '../../../../assets/img/AvraeSquare.jpg'};
     this.loadAuthor();
-    this.loadTags();
     this.workshopService.loadPersonalSubscribedIds();
   }
 
@@ -68,14 +66,6 @@ export class CollectionTileComponent implements OnInit {
     return numeral(number).format('0.[0]a');
   }
 
-  tagNameFromSlug(slug: string): string {
-    if (this.tags.map(tag => tag.slug).includes(slug)) {
-      return this.tags.find(tag => tag.slug === slug).name;
-    } else {
-      return slug;
-    }
-  }
-
   isSubscribed() {
     return this.workshopService.personalSubscribedIds?.includes(this.collection._id);
   }
@@ -84,15 +74,6 @@ export class CollectionTileComponent implements OnInit {
   loadAuthor() {
     this.discord.getUser(this.collection.owner)
       .subscribe(user => this.author = user);
-  }
-
-  loadTags() {
-    this.workshopService.getTags()
-      .subscribe(result => {
-        if (result.success) {
-          this.tags = result.data;
-        }
-      });
   }
 
   getGuilds() {

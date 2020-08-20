@@ -26,7 +26,7 @@
       <img class="collection-author-avatar" [src]="author.avatarUrl" alt="avatar">
       <span class="collection-author-username">
         by {{author.username}}
-        
+
         <span class="collection-edit-date">
           • {{collection.last_edited | dateAgo}}
         </span>
@@ -38,10 +38,7 @@
     </div>
 
     <!-- tags -->
-    <mat-chip-list aria-label="Tag list" class="collection-tags" *ngIf="tags?.length && collection.tags.length">
-      <mat-chip *ngFor="let tag of collection.tags.slice(0, 5)">{{tagNameFromSlug(tag)}}</mat-chip>
-      <mat-chip *ngIf="collection.tags.length > 5">{{collection.tags.length - 5}} more...</mat-chip>
-    </mat-chip-list>
+    <avr-tag-chip-list [collection]="collection" [limit]="5"></avr-tag-chip-list>
 
     <!-- description, actions -->
     <p class="description">

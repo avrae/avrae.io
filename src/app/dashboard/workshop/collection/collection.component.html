@@ -1,0 +1,73 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Back" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <span>{{collection?.name || 'Loading...'}}</span>
+  <span class="toolbar-spacer"></span>
+
+  <mat-spinner *ngIf="loading" color="accent" diameter="24"></mat-spinner>
+
+  <div class="toolbar-search-form">
+    <!-- guild context -->
+    <avr-guild-select-field class="toolbar-search-form-guild-context"
+                            label="View As"
+                            (guildChange)="onGuildContextChange($event)">
+    </avr-guild-select-field>
+  </div>
+
+</mat-toolbar>
+
+<!-- CONTENT -->
+<div class="color-underlay-hack"></div>
+
+<div class="container content mat-typography" *ngIf="collection">
+
+  <div class="metadata-grid">
+    <!-- image, description, tags -->
+    <div class="description-etc">
+      <img *ngIf="collection.image" [src]="collection.image" alt="Collection Image" class="desc-image">
+
+      <avr-tag-chip-list [collection]="collection"></avr-tag-chip-list>
+
+      <p>
+        {{collection.description}}
+      </p>
+    </div>
+
+    <!-- metadata -->
+    <div> <!-- this is here for grid purposes, it takes up 100% of the grid cell -->
+      <div class="metadata">
+        <!-- authors/editors -->
+        <div class="meta-author">
+          author
+        </div>
+
+        <!-- edit/creation time -->
+        <div class="meta-times">
+          times
+        </div>
+
+        <!-- subscriptions -->
+        <div class="meta-subscriptions">
+          subscriptions
+        </div>
+
+        <!-- # alias/snippets -->
+        <div class="meta-numbers">
+          numbers
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  more content
+
+</div>
+
+<div class="container content mat-typography" *ngIf="!collection">
+  Loading...
+</div>
+

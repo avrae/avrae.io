@@ -1,13 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {getGuildAvatarUrl, PartialGuild} from '../../../schemas/Discord';
+import {PartialGuild} from '../../../schemas/Discord';
 import {WorkshopCollection} from '../../../schemas/Workshop';
-import {DiscordService} from '../../../shared/discord.service';
 import {WorkshopService} from '../workshop.service';
-
-const sentinel = new PartialGuild();  // sentinel with no data whatsoever
 
 @Component({
   selector: 'avr-my-subscriptions',
@@ -15,18 +11,17 @@ const sentinel = new PartialGuild();  // sentinel with no data whatsoever
   styleUrls: ['../common.scss', './my-subscriptions.component.scss']
 })
 export class MySubscriptionsComponent implements OnInit {
-  sentinel = sentinel;  // export to component
 
   // state
   loading = true;
   collections: WorkshopCollection[] = [];
   error: string;
   order = 'edittime';
-  guildContext: PartialGuild = sentinel;  // guild or sentinel for personal
+  guildContext: PartialGuild | null;
   guildSubscribedIds: string[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar,
-              private workshopService: WorkshopService, private discordService: DiscordService) {
+              private workshopService: WorkshopService) {
   }
 
   ngOnInit(): void {
@@ -38,9 +33,10 @@ export class MySubscriptionsComponent implements OnInit {
     this.sortCollections();
   }
 
-  onGuildContextChange() {
+  onGuildContextChange(guild: PartialGuild | null) {
+    this.guildContext = guild;
     this.loadCollections();
-    if (this.guildContext !== sentinel) {
+    if (this.guildContext) {
       this.workshopService.getGuildPermissionCheck(this.guildContext.id)
         .subscribe(response => {
           if (response.success && !response.data.can_edit) {
@@ -58,7 +54,7 @@ export class MySubscriptionsComponent implements OnInit {
           this.guildSubscribedIds.splice(this.guildSubscribedIds.indexOf(collection._id), 1);
           this.snackBar.open(`Removed ${collection.name} from ${this.guildContext.name}.`);
         } else {
-          this.snackBar.open(response.error, null, {duration: 5000})
+          this.snackBar.open(response.error, null, {duration: 5000});
         }
       });
   }
@@ -69,7 +65,7 @@ export class MySubscriptionsComponent implements OnInit {
     this.loading = true;
     this.collections = [];
 
-    if (this.guildContext === sentinel) {
+    if (!this.guildContext) {
       this.workshopService.getMySubscriptions()
         .subscribe(response => {
           if (response.success) {
@@ -114,10 +110,6 @@ export class MySubscriptionsComponent implements OnInit {
     });
   }
 
-  getUserGuilds(): Observable<PartialGuild[]> {
-    return this.discordService.getUserGuilds();
-  }
-
   // helpers
   sortCollections() {
     let sorter;
@@ -132,9 +124,5 @@ export class MySubscriptionsComponent implements OnInit {
         sorter = (a, b) => b.last_edited.localeCompare(a.last_edited);
     }
     this.collections.sort(sorter);
-  }
-
-  getGuildAvatarUrl(guild: PartialGuild) {
-    return getGuildAvatarUrl(guild, 32);
   }
 }

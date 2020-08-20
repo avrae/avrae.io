@@ -1,0 +1,33 @@
+@import "../../../variables";
+@import "../variables";
+
+.color-underlay-hack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: $footer-height;
+  right: 0;
+  background: $black;
+  z-index: -999; // hacky way to override app background color for now
+}
+
+.content {
+  color: $gray-light1;
+}
+
+.metadata-grid {
+  display: grid;
+  grid-template-columns: minmax(275px, 1fr) 275px;
+  grid-gap: 1rem;
+
+  .metadata {
+    background: $gray-dark1;
+    padding: 8px;
+    border-radius: 8px;
+  }
+}
+
+.desc-image {
+  width: 100%;
+  border-radius: 8px;
+}
