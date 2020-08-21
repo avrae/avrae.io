@@ -42,26 +42,35 @@
     </div>
 
     <!-- metadata -->
-    <div> <!-- this is here for grid purposes, it takes up 100% of the grid cell -->
+    <div class="metadata-container"> <!-- this is here for grid purposes, it takes up 100% of the grid cell -->
       <div class="metadata">
         <!-- authors/editors -->
         <div class="meta-author" *ngFor="let editor of editors">
-          {{editor.username}}
+          <avr-pretty-user [user]="editor"></avr-pretty-user>
         </div>
 
         <!-- edit/creation time -->
         <div class="meta-times">
-          times
+          <p>
+            Last Edited: {{collection.last_edited | dateAgoLong}} <br>
+            Created: {{collection.created_at | dateAgoLong}}
+          </p>
         </div>
 
         <!-- subscriptions -->
         <div class="meta-subscriptions">
-          subscriptions
+          <p>
+            Added by <strong>{{collection.num_subscribers}}</strong> people
+            and <strong>{{collection.num_guild_subscribers}}</strong> servers
+          </p>
         </div>
 
         <!-- # alias/snippets -->
         <div class="meta-numbers">
-          numbers
+          <p>
+            <strong>{{collection.alias_ids.length}}</strong> {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}} <br>
+            <strong>{{collection.snippet_ids.length}}</strong> {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}
+          </p>
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ import {WorkshopExploreComponent} from './workshop-explore.component';
 
 import {WorkshopRoutingModule} from './workshop-routing.module';
 import { GuildSelectFieldComponent } from './shared/guild-select-field.component';
+import { PrettyUserComponent } from './shared/pretty-user.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { GuildSelectFieldComponent } from './shared/guild-select-field.component
     MySubscriptionsComponent,
     CollectionComponent,
     TagChipListComponent,
-    GuildSelectFieldComponent
+    GuildSelectFieldComponent,
+    PrettyUserComponent
   ],
   imports: [
     CommonModule,
