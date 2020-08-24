@@ -19,17 +19,46 @@
 </mat-toolbar>
 
 <!-- CONTENT -->
-<div class="color-underlay-hack"></div>
-
-<div class="container content mat-typography" *ngIf="collection">
+<div class="content mat-typography" *ngIf="collection">
 
   <div class="metadata-grid">
     <!-- image, description, tags -->
     <div class="description-etc">
       <img *ngIf="collection.image" [src]="collection.image" alt="Collection Image" class="desc-image">
 
-      <div class="desc-subscribe">
-        TODO subscribe buttons
+      <div class="desc-subscribe-container">
+        <div>
+          Subscribe or add <b>{{collection.name}}</b> to a server to instantly gain access to
+          <b>{{collection.alias_ids.length}}</b>
+          {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}} and
+          <b>{{collection.snippet_ids.length}}</b>
+          {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}.
+        </div>
+        <div class="desc-subscribe-buttons">
+          <!-- server sub -->
+          <button mat-raised-button color="accent" [matMenuTriggerFor]="serverSubMenu">
+            <mat-icon>post_add</mat-icon>
+            Add to Server
+          </button>
+          <mat-menu #serverSubMenu="matMenu">
+            <button mat-menu-item *ngFor="let guild of getGuilds() | async" (click)="onGuildSubscribe(guild)">
+              {{guild.name}}
+            </button>
+          </mat-menu>
+          <!-- personal sub -->
+          <button mat-raised-button color="accent" *ngIf="!isSubscribed()" (click)="onSubscribe()">
+            <mat-icon>add</mat-icon>
+            Subscribe
+          </button>
+          <button mat-raised-button color="accent" *ngIf="isSubscribed()" (click)="onUnsubscribe()">
+            <mat-icon>check</mat-icon>
+            Subscribed!
+          </button>
+        </div>
+
+        <div class="desc-error mat-error" *ngIf="error">
+          {{error}}
+        </div>
       </div>
 
       <div class="desc-tags">
@@ -60,16 +89,17 @@
         <!-- subscriptions -->
         <div class="meta-subscriptions">
           <p>
-            Added by <strong>{{collection.num_subscribers}}</strong> people
-            and <strong>{{collection.num_guild_subscribers}}</strong> servers
+            Added by <b>{{collection.num_subscribers}}</b> people
+            and <b>{{collection.num_guild_subscribers}}</b> servers
           </p>
         </div>
 
         <!-- # alias/snippets -->
         <div class="meta-numbers">
           <p>
-            <strong>{{collection.alias_ids.length}}</strong> {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}} <br>
-            <strong>{{collection.snippet_ids.length}}</strong> {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}
+            <b>{{collection.alias_ids.length}}</b> {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}}
+            <br>
+            <b>{{collection.snippet_ids.length}}</b> {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}
           </p>
         </div>
       </div>
@@ -82,7 +112,7 @@
 
 </div>
 
-<div class="container content mat-typography" *ngIf="!collection">
+<div class="content mat-typography" *ngIf="!collection">
   Loading...
 </div>
 

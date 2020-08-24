@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import * as numeral from 'numeral';
-import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
-import {WorkshopCollection, WorkshopTag} from '../../../schemas/Workshop';
+import {DiscordUser} from '../../../schemas/Discord';
+import {WorkshopCollection} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
+import {CollectionSubscriber} from '../shared/collection-subscriber';
 import {WorkshopService} from '../workshop.service';
 
 @Component({
@@ -11,7 +12,7 @@ import {WorkshopService} from '../workshop.service';
   templateUrl: './collection-tile.component.html',
   styleUrls: ['../common.scss', './collection-tile.component.scss']
 })
-export class CollectionTileComponent implements OnInit {
+export class CollectionTileComponent extends CollectionSubscriber implements OnInit {
 
   @Input() collection: WorkshopCollection;
   @Input() showEdit: boolean = false;
@@ -19,41 +20,12 @@ export class CollectionTileComponent implements OnInit {
 
   constructor(private discord: DiscordService, private workshopService: WorkshopService,
               private snackBar: MatSnackBar) {
+    super(snackBar, workshopService, discord);
   }
 
   ngOnInit(): void {
     this.author = {id: this.collection.owner, username: 'Loading...', avatarUrl: '../../../../assets/img/AvraeSquare.jpg'};
     this.loadAuthor();
-    this.workshopService.loadPersonalSubscribedIds();
-  }
-
-  // event handlers
-  onSubscribe() {
-    this.workshopService.personalSubscribe(this.collection._id)
-      .subscribe(resp => {
-        resp.success ? this.snackBar.open(`Subscribed to ${this.collection.name}!`) : this.snackBar.open(resp.error);
-      });
-  }
-
-  onUnsubscribe() {
-    this.workshopService.personalUnsubscribe(this.collection._id)
-      .subscribe(resp => {
-        resp.success ? this.snackBar.open(`Unsubscribed from ${this.collection.name}!`) : this.snackBar.open(resp.error);
-      });
-  }
-
-  onGuildSubscribe(guild: PartialGuild) {
-    this.workshopService.guildSubscribe(this.collection._id, guild.id)
-      .subscribe(resp => {
-        if (!resp.success) {
-          this.snackBar.open(resp.error, null, {duration: 5000});
-        } else if (resp.data.new_subscription) {
-          this.snackBar.open(`Subscribed to ${this.collection.name} on ${guild.name}!`);
-        } else {
-          this.snackBar.open(`${guild.name} is already subscribed to ${this.collection.name}. You can manage
-          server subscriptions in My Subscriptions!`, null, {duration: 5000});
-        }
-      });
   }
 
   // helpers
@@ -74,9 +46,5 @@ export class CollectionTileComponent implements OnInit {
   loadAuthor() {
     this.discord.getUser(this.collection.owner)
       .subscribe(user => this.author = user);
-  }
-
-  getGuilds() {
-    return this.discord.getUserGuilds();
   }
 }

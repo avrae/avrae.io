@@ -3,8 +3,9 @@ import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
-import {WorkshopCollection} from '../../../schemas/Workshop';
+import {WorkshopBindings, WorkshopCollection} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
+import {CollectionSubscriber} from '../shared/collection-subscriber';
 import {WorkshopService} from '../workshop.service';
 
 @Component({
@@ -12,18 +13,22 @@ import {WorkshopService} from '../workshop.service';
   templateUrl: './collection.component.html',
   styleUrls: ['../common.scss', './collection.component.scss']
 })
-export class CollectionComponent implements OnInit {
+export class CollectionComponent extends CollectionSubscriber implements OnInit {
+
+  // data
+  collection: WorkshopCollection;
+  editors: DiscordUser[];
+  bindings: WorkshopBindings | null;  // personal or guild, based on guildContext
 
   // state
-  collection: WorkshopCollection;
   loading = true;
   error: string;
   guildContext: PartialGuild | null;
-  editors: DiscordUser[];
 
   constructor(private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar,
               private location: Location,
               private workshopService: WorkshopService, private discordService: DiscordService) {
+    super(snackBar, workshopService, discordService);
   }
 
   ngOnInit(): void {
@@ -32,8 +37,10 @@ export class CollectionComponent implements OnInit {
     );
   }
 
+  // event listeners
   onGuildContextChange(guild: PartialGuild | null) {
     this.guildContext = guild;
+    this.error = null;
     if (this.guildContext) {
       this.workshopService.getGuildPermissionCheck(this.guildContext.id)
         .subscribe(response => {
@@ -85,5 +92,4 @@ export class CollectionComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-
 }

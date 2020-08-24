@@ -1,18 +1,11 @@
 @import "../../../variables";
 @import "../variables";
 
-.color-underlay-hack {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: $footer-height;
-  right: 0;
-  background: $black;
-  z-index: -999; // hacky way to override app background color for now
-}
-
 .content {
   color: $gray-light1;
+  background: $black;
+  padding: 8px;
+  min-height: calc(100vh - (#{$footer-height} + #{$toolbar-height} + #{$navbar-height} + 16px));
 }
 
 .metadata-grid {
@@ -34,6 +27,25 @@
 .desc-image {
   width: 100%;
   border-radius: 8px;
+}
+
+.desc-subscribe-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  background: $gray-dark1;
+  padding: 8px;
+
+  .desc-subscribe-buttons {
+    button {
+      mat-icon {
+        // helps center the icon relative to the button text
+        margin-top: -2px;
+        margin-left: -6px;
+      }
+
+      margin: 0 8px;
+    }
+  }
 }
 
 .desc-tags {
