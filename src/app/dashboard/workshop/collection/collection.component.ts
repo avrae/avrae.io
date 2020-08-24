@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
-import {WorkshopBindings, WorkshopCollection} from '../../../schemas/Workshop';
+import {WorkshopBindings, WorkshopCollectionFull} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
 import {CollectionSubscriber} from '../shared/collection-subscriber';
 import {WorkshopService} from '../workshop.service';
@@ -16,7 +16,7 @@ import {WorkshopService} from '../workshop.service';
 export class CollectionComponent extends CollectionSubscriber implements OnInit {
 
   // data
-  collection: WorkshopCollection;
+  collection: WorkshopCollectionFull;
   editors: DiscordUser[];
   bindings: WorkshopBindings | null;  // personal or guild, based on guildContext
 
@@ -52,7 +52,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
     }
   }
 
-  onCollectionInit(collection: WorkshopCollection) {
+  onCollectionInit(collection: WorkshopCollectionFull) {
     this.collection = collection;
     this.editors = [];
     this.loadOwner();
@@ -61,7 +61,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
 
   // data loaders
   loadCollection(id: string) {
-    this.workshopService.getCollection(id)
+    this.workshopService.getCollectionFull(id)
       .subscribe(response => {
         this.loading = false;
         if (response.success) {

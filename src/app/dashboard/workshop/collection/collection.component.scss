@@ -55,3 +55,16 @@
 .desc-text {
   margin-top: 8px;
 }
+
+// ==== alias/snippet area ====
+.collectable-container {
+  background: $gray-dark1;
+  padding: 16px 24px;
+  margin: 12px 0;
+
+  h2 {
+    color: $blurple;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+}

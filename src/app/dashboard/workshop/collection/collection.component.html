@@ -107,8 +107,23 @@
   </div>
 
   <mat-divider></mat-divider>
+  <!-- aliases/snippets display -->
 
-  more content
+  <div class="collectable-container" *ngIf="collection.alias_ids.length">
+    <h2>Aliases</h2>
+    <div *ngFor="let alias of collection.aliases">
+      {{alias.name}}
+      <!-- todo: alias display component -->
+    </div>
+  </div>
+
+  <div class="collectable-container" *ngIf="collection.snippet_ids.length">
+    <h2>Snippets</h2>
+    <div *ngFor="let snippet of collection.snippets">
+      snippet: {{snippet.name}}
+      <!-- todo: snippet display component -->
+    </div>
+  </div>
 
 </div>
 

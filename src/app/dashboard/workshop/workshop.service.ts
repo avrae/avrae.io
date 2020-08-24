@@ -4,7 +4,14 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {DiscordUser} from '../../schemas/Discord';
-import {WorkshopBindings, WorkshopCollection, WorkshopTag} from '../../schemas/Workshop';
+import {
+  WorkshopAlias,
+  WorkshopBindings,
+  WorkshopCollection,
+  WorkshopCollectionFull,
+  WorkshopSnippet,
+  WorkshopTag
+} from '../../schemas/Workshop';
 import {ApiResponse, defaultErrorHandler, defaultOptions} from '../APIHelper';
 
 const baseUrl = `${environment.apiURL}/workshop`;
@@ -28,14 +35,27 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  getCollectionFull(id: string): Observable<ApiResponse<WorkshopCollectionFull>> {
+    return this.http.get<ApiResponse<WorkshopCollectionFull>>(`${baseUrl}/collection/${id}/full`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   getCollectionEditors(id: string): Observable<ApiResponse<DiscordUser[]>> {
     return this.http.get<ApiResponse<DiscordUser[]>>(`${baseUrl}/collection/${id}/editors`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
 
   // ==== alias operations ====
+  getAlias(id: string): Observable<ApiResponse<WorkshopAlias>> {
+    return this.http.get<ApiResponse<WorkshopAlias>>(`${baseUrl}/alias/${id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
 
   // ==== snippet operations ====
+  getSnippet(id: string): Observable<ApiResponse<WorkshopSnippet>> {
+    return this.http.get<ApiResponse<WorkshopSnippet>>(`${baseUrl}/snippet/${id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
 
   // ==== subscription operations ====
   // ---- api endpoints ----

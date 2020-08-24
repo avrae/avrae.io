@@ -20,6 +20,37 @@ export class WorkshopCollection {
   tags: string[];
 }
 
+export class WorkshopCollectionFull extends WorkshopCollection {
+  aliases: WorkshopAliasFull[];
+  snippets: WorkshopSnippet[];
+}
+
+export class WorkshopAlias {
+  _id: string;
+  name: string;
+  code: string;
+  versions: CodeVersion[];
+  docs: string;
+  entitlements: WorkshopEntitlement[];
+  collection_id: string;
+  subcommand_ids: string[];
+  parent_id: string | null;
+}
+
+export class WorkshopAliasFull extends WorkshopAlias {
+  subcommands: WorkshopAlias[];
+}
+
+export class WorkshopSnippet {
+  _id: string;
+  name: string;
+  code: string;
+  versions: CodeVersion[];
+  docs: string;
+  entitlements: WorkshopEntitlement[];
+  collection_id: string;
+}
+
 export class WorkshopTag {
   slug: string;
   name: string;
@@ -29,4 +60,17 @@ export class WorkshopTag {
 export class WorkshopBindings {
   alias_bindings: { name: string, id: string }[];
   snippet_bindings: { name: string, id: string }[];
+}
+
+export class CodeVersion {
+  version: number;
+  content: string;
+  created_at: string; // ISO8601
+  is_current: boolean;
+}
+
+export class WorkshopEntitlement {
+  entity_type: string;
+  entity_id: number;
+  required: boolean;
 }
