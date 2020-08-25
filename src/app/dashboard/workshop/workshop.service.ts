@@ -10,6 +10,7 @@ import {
   WorkshopCollection,
   WorkshopCollectionFull,
   WorkshopSnippet,
+  WorkshopSubscription,
   WorkshopTag
 } from '../../schemas/Workshop';
 import {ApiResponse, defaultErrorHandler, defaultOptions} from '../APIHelper';
@@ -83,6 +84,11 @@ export class WorkshopService {
       }));
   }
 
+  getMySubscription(id: string): Observable<ApiResponse<WorkshopSubscription>> {
+    return this.http.get<ApiResponse<WorkshopSubscription>>(`${baseUrl}/collection/${id}/subscription/me`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   guildSubscribe(id: string, guildId: string): Observable<ApiResponse<SubscriptionResponse>> {
     return this.http.put<ApiResponse<SubscriptionResponse>>(`${baseUrl}/collection/${id}/subscription/${guildId}`,
       {alias_bindings: null, snippet_bindings: null},
@@ -92,6 +98,11 @@ export class WorkshopService {
 
   guildUnsubscribe(id: string, guildId: string): Observable<ApiResponse<string>> {
     return this.http.delete<ApiResponse<string>>(`${baseUrl}/collection/${id}/subscription/${guildId}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  getGuildSubscription(id: string, guildId: string): Observable<ApiResponse<WorkshopSubscription>> {
+    return this.http.get<ApiResponse<WorkshopSubscription>>(`${baseUrl}/collection/${id}/subscription/${guildId}`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
 

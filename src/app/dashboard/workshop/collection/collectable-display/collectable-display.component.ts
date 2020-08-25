@@ -30,7 +30,32 @@ export class CollectableDisplayComponent implements OnInit {
   }
 
   // helpers
+  getBoundName() {
+    const bindings = this.isAlias ? this.bindings?.alias_bindings : this.bindings?.snippet_bindings;
+    if (this.bindings && bindings.some(b => b.id === this.collectable._id)) {
+      return bindings.find(b => b.id === this.collectable._id).name;
+    } else {
+      return this.collectable.name;
+    }
+  }
+
+  hasCustomBindings() {
+    return this.getBoundName() !== this.collectable.name;
+  }
+
   getSignature() {
+    const boundName = this.getBoundName();
+    if (this.isAlias) {
+      if (this.parentComponent) {
+        return `${this.parentComponent.getSignature()} ${boundName}`;
+      }
+      return `!${boundName}`;
+    } else {
+      return boundName;
+    }
+  }
+
+  getUnboundSignature() {
     if (this.isAlias) {
       if (this.parentComponent) {
         return `${this.parentComponent.getSignature()} ${this.collectable.name}`;

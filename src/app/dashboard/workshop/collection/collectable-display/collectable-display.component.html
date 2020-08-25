@@ -8,6 +8,9 @@
         {{isOpen ? 'expand_less' : 'expand_more'}}
       </mat-icon>
     </p>
+    <div class="command-bind-message" *ngIf="hasCustomBindings()">
+      Rebound from <code>{{getUnboundSignature()}}</code>
+    </div>
     <div class="command-closed-desc" *ngIf="!isOpen">
       <markdown>{{debrace(getShortDocs())}}</markdown>
     </div>
@@ -22,8 +25,7 @@
     <avr-collectable-display *ngFor="let subcommand of collectable.subcommands"
                              [collectable]="subcommand"
                              [isAlias]="true"
-                             [parentComponent]="this"
-                             [bindings]="bindings">
+                             [parentComponent]="this">
     </avr-collectable-display>
   </div>
 </div>
