@@ -111,18 +111,20 @@
 
   <div class="collectable-container" *ngIf="collection.alias_ids.length">
     <h2>Aliases</h2>
-    <div *ngFor="let alias of collection.aliases">
-      {{alias.name}}
-      <!-- todo: alias display component -->
-    </div>
+    <avr-collectable-display *ngFor="let alias of collection.aliases"
+                             [collectable]="alias"
+                             [isAlias]="true"
+                             [bindings]="bindings">
+    </avr-collectable-display>
   </div>
 
   <div class="collectable-container" *ngIf="collection.snippet_ids.length">
     <h2>Snippets</h2>
-    <div *ngFor="let snippet of collection.snippets">
-      snippet: {{snippet.name}}
-      <!-- todo: snippet display component -->
-    </div>
+    <avr-collectable-display *ngFor="let snippet of collection.snippets"
+                             [collectable]="snippet"
+                             [isAlias]="false"
+                             [bindings]="bindings">
+    </avr-collectable-display>
   </div>
 
 </div>

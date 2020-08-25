@@ -25,7 +25,7 @@ export class WorkshopCollectionFull extends WorkshopCollection {
   snippets: WorkshopSnippet[];
 }
 
-export class WorkshopAlias {
+export abstract class WorkshopCollectable {
   _id: string;
   name: string;
   code: string;
@@ -33,6 +33,9 @@ export class WorkshopAlias {
   docs: string;
   entitlements: WorkshopEntitlement[];
   collection_id: string;
+}
+
+export class WorkshopAlias extends WorkshopCollectable {
   subcommand_ids: string[];
   parent_id: string | null;
 }
@@ -41,14 +44,8 @@ export class WorkshopAliasFull extends WorkshopAlias {
   subcommands: WorkshopAlias[];
 }
 
-export class WorkshopSnippet {
-  _id: string;
-  name: string;
-  code: string;
-  versions: CodeVersion[];
-  docs: string;
-  entitlements: WorkshopEntitlement[];
-  collection_id: string;
+// no extra fields, just not abstract
+export class WorkshopSnippet extends WorkshopCollectable {
 }
 
 export class WorkshopTag {
@@ -60,6 +57,13 @@ export class WorkshopTag {
 export class WorkshopBindings {
   alias_bindings: { name: string, id: string }[];
   snippet_bindings: { name: string, id: string }[];
+}
+
+export class WorkshopSubscription extends WorkshopBindings {
+  _id: string;
+  object_id: string;
+  subscriber_id: number;
+  type: string;
 }
 
 export class CodeVersion {

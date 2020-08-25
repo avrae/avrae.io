@@ -1,0 +1,43 @@
+@import "../../../../variables";
+
+mat-divider {
+  margin: 12px 0;
+  border-top-color: $gray2;
+}
+
+// ==== header ====
+.click-to-expand {
+  cursor: pointer;
+}
+
+.command-header {
+  color: white;
+
+  code {
+    font-size: 16px;
+  }
+
+  mat-icon {
+    float: right;
+  }
+}
+
+.command-closed-desc {
+  color: $gray4;
+  font-size: 16px;
+}
+
+// ==== content ====
+.command-desc {
+  color: $gray4;
+  font-size: 16px;
+}
+
+.command-subcommands {
+  padding: 0 20px;
+
+  h4 {
+    color: $blurple;
+    font-weight: bold;
+  }
+}

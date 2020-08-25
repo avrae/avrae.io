@@ -1,6 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MarkdownModule} from 'ngx-markdown';
 import {MaterialModule} from '../../material/material.module';
 import {PipesModule} from '../../shared/pipes/pipes.module';
 import {CollectionTileComponent} from './collection-tile/collection-tile.component';
@@ -13,6 +14,7 @@ import {WorkshopExploreComponent} from './workshop-explore.component';
 import {WorkshopRoutingModule} from './workshop-routing.module';
 import { GuildSelectFieldComponent } from './shared/guild-select-field.component';
 import { PrettyUserComponent } from './shared/pretty-user.component';
+import { CollectableDisplayComponent } from './collection/collectable-display/collectable-display.component';
 
 
 @NgModule({
@@ -24,16 +26,18 @@ import { PrettyUserComponent } from './shared/pretty-user.component';
     CollectionComponent,
     TagChipListComponent,
     GuildSelectFieldComponent,
-    PrettyUserComponent
+    PrettyUserComponent,
+    CollectableDisplayComponent
   ],
-  imports: [
-    CommonModule,
-    WorkshopRoutingModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    PipesModule
-  ]
+    imports: [
+        CommonModule,
+        WorkshopRoutingModule,
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PipesModule,
+        MarkdownModule
+    ]
 })
 export class WorkshopModule {
 }

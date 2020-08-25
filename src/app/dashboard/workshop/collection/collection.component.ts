@@ -41,6 +41,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
   onGuildContextChange(guild: PartialGuild | null) {
     this.guildContext = guild;
     this.error = null;
+    this.loadBindings();
     if (this.guildContext) {
       this.workshopService.getGuildPermissionCheck(this.guildContext.id)
         .subscribe(response => {
@@ -57,6 +58,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
     this.editors = [];
     this.loadOwner();
     this.loadEditors();
+    this.loadBindings();
   }
 
   // data loaders
@@ -86,6 +88,21 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
           this.editors.push(...response.data);
         }
       });
+  }
+
+  loadBindings() {
+    let bindingRequest;
+    this.bindings = null;
+    if (this.guildContext) {
+      bindingRequest = this.workshopService.getGuildSubscription(this.collection._id, this.guildContext.id);
+    } else {
+      bindingRequest = this.workshopService.getMySubscription(this.collection._id);
+    }
+    bindingRequest.subscribe(response => {
+      if (response.success) {
+        this.bindings = response.data;
+      }
+    });
   }
 
   // helpers
