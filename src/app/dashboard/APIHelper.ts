@@ -8,6 +8,7 @@ export interface ApiResponse<T> {
   success: boolean;
   data?: T;
   error?: string;
+  status?: number;
 }
 
 // api options
@@ -47,5 +48,5 @@ export function removeUser() {
 // error handling
 export function defaultErrorHandler(err: HttpErrorResponse): Observable<ApiResponse<any>> {
   console.error(err);
-  return of(err.error as ApiResponse<any>);
+  return of({...err.error, status: err.status} as ApiResponse<any>);
 }
