@@ -1,6 +1,7 @@
 import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable, of} from 'rxjs';
+import {getUserAvatarUrl} from '../schemas/Discord';
 import {UserInfo} from '../schemas/UserInfo';
 import {getToken} from '../SecurityHelper';
 
@@ -35,7 +36,7 @@ export function getUser(): UserInfo {  // parse from JWT
   return {
     id: decodedToken.id,
     username: decodedToken.username,
-    avatarUrl: decodedToken.avatarUrl,
+    avatarUrl: getUserAvatarUrl(decodedToken.id, decodedToken.avatar),
     discriminator: decodedToken.discriminator
   } as UserInfo;
 }

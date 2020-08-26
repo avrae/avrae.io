@@ -24,3 +24,12 @@ export function getGuildAvatarUrl(guild: PartialGuild, size: number = null): str
   const ext = guild.icon?.startsWith('a_') ? 'gif' : 'png';
   return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${ext}${sizeQ}`;
 }
+
+export function getUserAvatarUrl(userId: string, hash: string, size: number = 1024) {
+  let sizeQ = '';
+  if (size !== null) {
+    sizeQ = `?size=${size}`;
+  }
+  const ext = hash.startsWith('a_') ? 'gif' : 'png';
+  return `https://cdn.discordapp.com/avatars/${userId}/${hash}.${ext}${sizeQ}`;
+}
