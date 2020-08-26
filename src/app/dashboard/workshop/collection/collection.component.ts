@@ -1,5 +1,6 @@
 import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
@@ -8,6 +9,7 @@ import {DiscordService} from '../../../shared/discord.service';
 import {getUser} from '../../APIHelper';
 import {CollectionSubscriber} from '../shared/collection-subscriber';
 import {WorkshopService} from '../workshop.service';
+import {EditBindingsDialogComponent} from './edit-bindings-dialog/edit-bindings-dialog.component';
 
 @Component({
   selector: 'avr-collection',
@@ -27,7 +29,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
   guildContext: PartialGuild | null;
 
   constructor(private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar,
-              private location: Location,
+              private location: Location, private dialog: MatDialog,
               private workshopService: WorkshopService, private discordService: DiscordService) {
     super(snackBar, workshopService, discordService);
   }
@@ -60,6 +62,20 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
     this.loadOwner();
     this.loadEditors();
     this.loadBindings();
+  }
+
+  onEditBindings() {
+    const dialogRef = this.dialog.open(EditBindingsDialogComponent, {
+      disableClose: true,
+      data: {collection: this.collection, guildContext: this.guildContext, bindings: this.bindings},
+    });
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.bindings = result;
+          this.snackBar.open("Updated bindings!")
+        }
+      });
   }
 
   // subscribe methods: update bindings in current context

@@ -60,9 +60,15 @@ export class WorkshopService {
 
   // ==== subscription operations ====
   // ---- api endpoints ----
-  personalSubscribe(id: string): Observable<ApiResponse<SubscriptionResponse>> {
+  personalSubscribe(id: string, bindings: WorkshopBindings = null): Observable<ApiResponse<SubscriptionResponse>> {
+    let body;
+    if (bindings === null) {
+      body = {alias_bindings: null, snippet_bindings: null};
+    } else {
+      body = bindings;
+    }
     return this.http.put<ApiResponse<SubscriptionResponse>>(`${baseUrl}/collection/${id}/subscription/me`,
-      {alias_bindings: null, snippet_bindings: null},
+      body,
       defaultOptions())
       .pipe(catchError(defaultErrorHandler))
       .pipe(map(resp => {
@@ -89,9 +95,15 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
-  guildSubscribe(id: string, guildId: string): Observable<ApiResponse<SubscriptionResponse>> {
+  guildSubscribe(id: string, guildId: string, bindings: WorkshopBindings = null): Observable<ApiResponse<SubscriptionResponse>> {
+    let body;
+    if (bindings === null) {
+      body = {alias_bindings: null, snippet_bindings: null};
+    } else {
+      body = bindings;
+    }
     return this.http.put<ApiResponse<SubscriptionResponse>>(`${baseUrl}/collection/${id}/subscription/${guildId}`,
-      {alias_bindings: null, snippet_bindings: null},
+      body,
       defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }

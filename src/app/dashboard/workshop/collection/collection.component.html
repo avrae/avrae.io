@@ -13,7 +13,7 @@
   </button>
 
   <button mat-icon-button aria-label="Edit Bindings Button" matTooltip="Edit Bindings"
-          *ngIf="bindings">
+          *ngIf="bindings" (click)="onEditBindings()">
     <mat-icon>handyman</mat-icon>
   </button>
 

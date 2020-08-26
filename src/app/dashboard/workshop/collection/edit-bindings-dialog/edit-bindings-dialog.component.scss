@@ -1,0 +1,15 @@
+@import "../../../../variables";
+
+h3 {
+  color: $blurple;
+  margin: 0;
+  font-weight: bold;
+}
+
+.collectable-binding-arrow {
+  margin: 0 4px;
+}
+
+mat-spinner {
+  margin-right: 8px;
+}

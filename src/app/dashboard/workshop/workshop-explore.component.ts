@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as lodash from 'lodash';
+import {groupBy} from 'lodash';
 import {WorkshopCollection, WorkshopTag} from '../../schemas/Workshop';
 import {WorkshopService} from './workshop.service';
 
@@ -156,10 +156,10 @@ export class WorkshopExploreComponent implements OnInit {
       return;
     }
     if (!search) {
-      this.filteredTags = Object.entries(lodash.groupBy(this.validTags, tag => tag.category));
+      this.filteredTags = Object.entries(groupBy(this.validTags, tag => tag.category));
       return;
     }
-    this.filteredTags = Object.entries(lodash.groupBy(
+    this.filteredTags = Object.entries(groupBy(
       this.validTags.filter(tag => tag.name.toLowerCase().startsWith(search.toLowerCase())),
       tag => tag.category
     ));

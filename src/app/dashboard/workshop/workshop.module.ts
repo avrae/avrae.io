@@ -15,6 +15,7 @@ import {WorkshopRoutingModule} from './workshop-routing.module';
 import { GuildSelectFieldComponent } from './shared/guild-select-field.component';
 import { PrettyUserComponent } from './shared/pretty-user.component';
 import { CollectableDisplayComponent } from './collection/collectable-display/collectable-display.component';
+import { EditBindingsDialogComponent } from './collection/edit-bindings-dialog/edit-bindings-dialog.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CollectableDisplayComponent } from './collection/collectable-display/co
     TagChipListComponent,
     GuildSelectFieldComponent,
     PrettyUserComponent,
-    CollectableDisplayComponent
+    CollectableDisplayComponent,
+    EditBindingsDialogComponent
   ],
     imports: [
         CommonModule,
