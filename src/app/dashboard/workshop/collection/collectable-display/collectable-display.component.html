@@ -20,11 +20,10 @@
     <markdown>{{debrace(collectable.docs)}}</markdown>
   </div>
 
-  <div class="command-subcommands" *ngIf="isAlias && collectable.subcommands.length">
+  <div class="command-subcommands" *ngIf="alias && alias.subcommands.length">
     <h4>Subcommands</h4>
-    <avr-collectable-display *ngFor="let subcommand of collectable.subcommands"
-                             [collectable]="subcommand"
-                             [isAlias]="true"
+    <avr-collectable-display *ngFor="let subcommand of alias.subcommands"
+                             [alias]="subcommand"
                              [parentComponent]="this">
     </avr-collectable-display>
   </div>

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WorkshopAlias, WorkshopBindings, WorkshopSnippet} from '../../../../schemas/Workshop';
+import {WorkshopAliasFull, WorkshopBindings, WorkshopCollectable, WorkshopSnippet} from '../../../../schemas/Workshop';
 import {debrace} from '../../../../shared/DisplayUtils';
 
 @Component({
@@ -11,8 +11,8 @@ export class CollectableDisplayComponent implements OnInit {
   // exports
   debrace = debrace;
 
-  @Input() collectable: WorkshopAlias | WorkshopSnippet;
-  @Input() isAlias: boolean;
+  @Input() alias: WorkshopAliasFull;  // alias and snippet are mutually exclusive
+  @Input() snippet: WorkshopSnippet;
   @Input() parentComponent: CollectableDisplayComponent;
   @Input() bindings: WorkshopBindings;
   isOpen = false;
@@ -24,6 +24,10 @@ export class CollectableDisplayComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get collectable(): WorkshopCollectable {
+    return this.alias || this.snippet;
+  }
+
   // event listeners
   toggleOpen() {
     this.isOpen = !this.isOpen;
@@ -31,7 +35,7 @@ export class CollectableDisplayComponent implements OnInit {
 
   // helpers
   getBoundName() {
-    const bindings = this.isAlias ? this.bindings?.alias_bindings : this.bindings?.snippet_bindings;
+    const bindings = this.alias ? this.bindings?.alias_bindings : this.bindings?.snippet_bindings;
     if (this.bindings && bindings.some(b => b.id === this.collectable._id)) {
       return bindings.find(b => b.id === this.collectable._id).name;
     } else {
@@ -45,7 +49,7 @@ export class CollectableDisplayComponent implements OnInit {
 
   getSignature() {
     const boundName = this.getBoundName();
-    if (this.isAlias) {
+    if (this.alias) {
       if (this.parentComponent) {
         return `${this.parentComponent.getSignature()} ${boundName}`;
       }
@@ -56,7 +60,7 @@ export class CollectableDisplayComponent implements OnInit {
   }
 
   getUnboundSignature() {
-    if (this.isAlias) {
+    if (this.alias) {
       if (this.parentComponent) {
         return `${this.parentComponent.getSignature()} ${this.collectable.name}`;
       }

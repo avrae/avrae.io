@@ -41,7 +41,7 @@ export class WorkshopAlias extends WorkshopCollectable {
 }
 
 export class WorkshopAliasFull extends WorkshopAlias {
-  subcommands: WorkshopAlias[];
+  subcommands: WorkshopAliasFull[];
 }
 
 // no extra fields, just not abstract
