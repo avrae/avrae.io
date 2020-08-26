@@ -6,7 +6,19 @@
   <span>{{collection?.name || 'Loading...'}}</span>
   <span class="toolbar-spacer"></span>
 
-  <mat-spinner *ngIf="loading" color="accent" diameter="24"></mat-spinner>
+  <!-- edit, edit bindings -->
+  <button mat-icon-button aria-label="Edit Collection Button" matTooltip="Edit Collection"
+          *ngIf="canEdit()">
+    <mat-icon>edit</mat-icon>
+  </button>
+
+  <button mat-icon-button aria-label="Edit Bindings Button" matTooltip="Edit Bindings"
+          *ngIf="bindings">
+    <mat-icon>handyman</mat-icon>
+  </button>
+
+  <!-- loading, guild select -->
+  <mat-spinner *ngIf="loading" color="accent" diameter="24" class="toolbar-spinner"></mat-spinner>
 
   <div class="toolbar-search-form">
     <!-- guild context -->

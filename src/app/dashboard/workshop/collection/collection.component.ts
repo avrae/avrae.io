@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
 import {WorkshopBindings, WorkshopCollectionFull} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
+import {getUser} from '../../APIHelper';
 import {CollectionSubscriber} from '../shared/collection-subscriber';
 import {WorkshopService} from '../workshop.service';
 
@@ -61,6 +62,31 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
     this.loadBindings();
   }
 
+  // subscribe methods: update bindings in current context
+  onSubscribe() {
+    this.doSubscribe().subscribe(resp => {
+      if (resp.success && !this.guildContext) {
+        this.bindings = resp.data;
+      }
+    });
+  }
+
+  onUnsubscribe() {
+    this.doUnsubscribe().subscribe(resp => {
+      if (resp.success && !this.guildContext) {
+        this.bindings = null;
+      }
+    });
+  }
+
+  onGuildSubscribe(guild: PartialGuild) {
+    this.doGuildSubscribe(guild).subscribe(resp => {
+      if (resp.success && this.guildContext.id === guild.id) {
+        this.bindings = resp.data;
+      }
+    });
+  }
+
   // data loaders
   loadCollection(id: string) {
     this.workshopService.getCollectionFull(id)
@@ -106,6 +132,10 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
   }
 
   // helpers
+  canEdit(): boolean {
+    return this.editors?.some(editor => editor.id === getUser().id);
+  }
+
   goBack() {
     this.location.back();
   }
