@@ -1,4 +1,5 @@
 import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable, of} from 'rxjs';
 import {UserInfo} from '../schemas/UserInfo';
 import {getToken} from '../SecurityHelper';
@@ -28,21 +29,15 @@ export function defaultTextOptions(additionalOptions = {}) {
 }
 
 // user session
-export function setUser(user: UserInfo) {
-  sessionStorage.setItem('user', JSON.stringify(user));
-}
-
-export function getUser(): UserInfo {
-  if (sessionStorage.getItem('user')) {
-    return JSON.parse(sessionStorage.getItem('user'));
-  }
-  return null;
-}
-
-export function removeUser() {
-  if (sessionStorage.getItem('user')) {
-    sessionStorage.removeItem('user');
-  }
+export function getUser(): UserInfo {  // parse from JWT
+  const helper = new JwtHelperService();
+  const decodedToken = helper.decodeToken(getToken());
+  return {
+    id: decodedToken.id,
+    username: decodedToken.username,
+    avatarUrl: decodedToken.avatarUrl,
+    discriminator: decodedToken.discriminator
+  } as UserInfo;
 }
 
 // error handling

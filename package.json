@@ -30,6 +30,7 @@
     "@angular/platform-browser-dynamic": "^10.0.8",
     "@angular/platform-server": "^10.0.8",
     "@angular/router": "^10.0.8",
+    "@auth0/angular-jwt": "^5.0.1",
     "@nguniversal/express-engine": "^10.0.1",
     "@sentry/browser": "^5.20.1",
     "compression": "^1.7.4",
