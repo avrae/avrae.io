@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WorkshopCollection} from '../../../schemas/Workshop';
 import {WorkshopService} from '../workshop.service';
+import {NewCollectionDialogComponent} from './new-collection-dialog/new-collection-dialog.component';
 
 @Component({
   selector: 'avr-my-work',
@@ -17,7 +19,8 @@ export class MyWorkComponent implements OnInit {
   error: string;
   order = 'edittime';
 
-  constructor(private route: ActivatedRoute, private router: Router, private workshopService: WorkshopService) {
+  constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog,
+              private workshopService: WorkshopService) {
   }
 
   ngOnInit(): void {
@@ -27,6 +30,17 @@ export class MyWorkComponent implements OnInit {
   // event handlers
   onOrderChange() {
     this.sortCollections();
+  }
+
+  onCreateCollection() {
+    const dialogRef: MatDialogRef<NewCollectionDialogComponent, WorkshopCollection | null> = this.dialog.open(
+      NewCollectionDialogComponent,
+      {disableClose: true});
+    dialogRef.afterClosed().subscribe(createdCollection => {
+      if (createdCollection !== null) {
+        this.router.navigate(['dashboard', 'workshop', createdCollection._id, 'edit']);
+      }
+    });
   }
 
   // data loaders

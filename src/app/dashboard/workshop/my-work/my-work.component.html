@@ -1,8 +1,13 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="toolbar">
   <span>My Work</span>
   <span class="toolbar-spacer"></span>
 
   <mat-spinner *ngIf="loadingOwned || loadingEditable" color="accent" diameter="24"></mat-spinner>
+
+  <!-- create collection -->
+  <button mat-icon-button matTooltip="Create New Collection" class="toolbar-add-button" (click)="onCreateCollection()">
+    <mat-icon>add</mat-icon>
+  </button>
 
   <div class="toolbar-search-form">
     <!-- order -->
@@ -30,7 +35,10 @@
   </mat-card>
 
   <mat-card *ngIf="!(loadingOwned || loadingEditable) && collections.length === 0">
-    <p>You have no collections.</p>
+    <p>You have no collections. Create one to share your aliases and snippets!</p>
+    <button mat-raised-button color="primary" (click)="onCreateCollection()">
+      Create Collection
+    </button>
   </mat-card>
 
   <div class="collections-grid">

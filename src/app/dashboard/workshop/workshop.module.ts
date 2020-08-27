@@ -16,6 +16,7 @@ import { GuildSelectFieldComponent } from './shared/guild-select-field.component
 import { PrettyUserComponent } from './shared/pretty-user.component';
 import { CollectableDisplayComponent } from './collection/collectable-display/collectable-display.component';
 import { EditBindingsDialogComponent } from './collection/edit-bindings-dialog/edit-bindings-dialog.component';
+import { NewCollectionDialogComponent } from './my-work/new-collection-dialog/new-collection-dialog.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { EditBindingsDialogComponent } from './collection/edit-bindings-dialog/e
     GuildSelectFieldComponent,
     PrettyUserComponent,
     CollectableDisplayComponent,
-    EditBindingsDialogComponent
+    EditBindingsDialogComponent,
+    NewCollectionDialogComponent
   ],
     imports: [
         CommonModule,

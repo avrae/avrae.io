@@ -31,6 +31,13 @@ export class WorkshopService {
   }
 
   // ==== collection operations ====
+  createCollection(name: string, description: string, imageUrl: string | null): Observable<ApiResponse<WorkshopCollection>> {
+    return this.http.post<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection`,
+      {name: name, description: description, image: imageUrl},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   getCollection(id: string): Observable<ApiResponse<WorkshopCollection>> {
     return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));
