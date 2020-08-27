@@ -91,23 +91,19 @@ export class MySubscriptionsComponent implements OnInit {
   loadCollectionsFromIds(ids: string[]) {
     if (ids.length === 0) {
       this.loading = false;
-    }
-
-    ids.forEach(id => {
-      this.workshopService.getCollection(id)
+    } else {
+      this.workshopService.getCollectionsBatched(ids)
         .subscribe(response => {
           if (response.success) {
-            this.collections.push(response.data);
+            this.collections.push(...response.data);
             // ensure the collections populate in the requested order
             this.sortCollections();
-            if (this.collections.length >= ids.length) {
-              this.loading = false;
-            }
+            this.loading = false;
           } else {
             this.error = response.error;
           }
         });
-    });
+    }
   }
 
   // helpers

@@ -71,23 +71,19 @@ export class MyWorkComponent implements OnInit {
   loadCollectionsFromIds(ids: string[], isOwned: boolean) {
     if (ids.length === 0) {
       isOwned ? this.loadingOwned = false : this.loadingEditable = false;
-    }
-
-    ids.forEach(id => {
-      this.workshopService.getCollection(id)
+    } else {
+      this.workshopService.getCollectionsBatched(ids)
         .subscribe(response => {
           if (response.success) {
-            this.collections.push(response.data);
+            this.collections.push(...response.data);
             // ensure the collections populate in the requested order
             this.sortCollections();
-            if (this.collections.length >= ids.length) {
-              isOwned ? this.loadingOwned = false : this.loadingEditable = false;
-            }
+            isOwned ? this.loadingOwned = false : this.loadingEditable = false;
           } else {
             this.error = response.error;
           }
         });
-    });
+    }
   }
 
   // helpers

@@ -111,23 +111,17 @@ export class WorkshopExploreComponent implements OnInit {
   loadCollectionsFromIds(ids: string[]) {
     if (ids.length === 0) {
       this.loading = false;
-    }
-
-    ids.forEach(id => {
-      this.workshopService.getCollection(id)
+    } else {
+      this.workshopService.getCollectionsBatched(ids)
         .subscribe(response => {
           if (response.success) {
-            this.collections.push(response.data);
-            // ensure the collections populate in the order returned by the API
-            this.collections.sort((a, b) => ids.indexOf(a._id) - ids.indexOf(b._id));
-            if (this.collections.length >= ids.length) {
-              this.loading = false;
-            }
+            this.collections.push(...response.data);
+            this.loading = false;
           } else {
             this.error = response.error;
           }
         });
-    });
+    }
   }
 
   loadValidTags() {

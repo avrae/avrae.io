@@ -48,6 +48,12 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  getCollectionsBatched(ids: string[]): Observable<ApiResponse<WorkshopCollection[]>> {
+    return this.http.get<ApiResponse<WorkshopCollection[]>>(`${baseUrl}/collection/batch`,
+      defaultOptions({params: {c: ids.join(',')}}))
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   getCollectionEditors(id: string): Observable<ApiResponse<DiscordUser[]>> {
     return this.http.get<ApiResponse<DiscordUser[]>>(`${baseUrl}/collection/${id}/editors`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));
