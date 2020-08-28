@@ -22,7 +22,7 @@ mat-divider {
   }
 }
 
-.command-bind-message {
+.command-messages {
   color: $blurple;
   font-size: 12px;
   margin-top: -12px;
@@ -46,5 +46,13 @@ mat-divider {
   h4 {
     color: $blurple;
     font-weight: bold;
+  }
+}
+
+.entitlements-header {
+  cursor: pointer;
+
+  mat-icon {
+    font-size: 14px;
   }
 }

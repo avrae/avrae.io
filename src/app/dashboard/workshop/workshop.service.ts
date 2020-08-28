@@ -5,6 +5,7 @@ import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {DiscordUser} from '../../schemas/Discord';
 import {
+  DDBEntity,
   WorkshopAlias,
   WorkshopBindings,
   WorkshopCollection,
@@ -24,6 +25,7 @@ export class WorkshopService {
 
   // cached stuff
   tags: Observable<ApiResponse<WorkshopTag[]>>;
+  entitlements: Observable<ApiResponse<Map<string, DDBEntity>>>;
   personalSubscribedIds: string[];
   personalSubscribedIdsInflight = false;
 
@@ -171,7 +173,6 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
-
   getTags(): Observable<ApiResponse<WorkshopTag[]>> {  // cached since multiple components might want to get tags at once
     if (this.tags) {
       return this.tags;
@@ -198,6 +199,38 @@ export class WorkshopService {
     return this.http.get<ApiResponse<{ can_edit: boolean, message: string | null }>>(`${baseUrl}/guild-check`,
       defaultOptions({params: {g: id}}))
       .pipe(catchError(defaultErrorHandler));
+  }
+
+  getEntitlements(): Observable<ApiResponse<Map<string, DDBEntity>>> {
+    if (this.entitlements) {
+      return this.entitlements;
+    }
+    const req = this.http.get<ApiResponse<Map<string, DDBEntity>>>(`${baseUrl}/entitlements`, defaultOptions())
+      .pipe(map(resp => {
+        if (resp.success) {
+          resp.data = new Map(Object.entries(resp.data));
+        }
+        return resp;
+      }))
+      .pipe(share())
+      .pipe(catchError(defaultErrorHandler));
+    this.entitlements = req;
+    req.subscribe(result => this.entitlements = of(result));
+    return req;
+  }
+
+  // ---- helpers ----
+  entityFromEntitlement(entityType: string, entityId: number): Observable<DDBEntity | null> {
+    return this.getEntitlements()
+      .pipe(map(response => {
+        if (response.success) {
+          const entity = response.data.get(`${entityType}-${entityId.toString()}`);
+          if (entity) {
+            return entity;
+          }
+        }
+        return null;
+      }));
   }
 }
 

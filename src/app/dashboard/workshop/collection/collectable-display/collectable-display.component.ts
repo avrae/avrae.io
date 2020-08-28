@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WorkshopAliasFull, WorkshopBindings, WorkshopCollectable, WorkshopSnippet} from '../../../../schemas/Workshop';
+import {WorkshopAliasFull, WorkshopBindings, WorkshopCollectable, WorkshopEntitlement, WorkshopSnippet} from '../../../../schemas/Workshop';
 import {debrace} from '../../../../shared/DisplayUtils';
+import {WorkshopService} from '../../workshop.service';
 
 @Component({
   selector: 'avr-collectable-display',
@@ -16,9 +17,10 @@ export class CollectableDisplayComponent implements OnInit {
   @Input() parentComponent: CollectableDisplayComponent;
   @Input() bindings: WorkshopBindings;
   isOpen = false;
+  entitlementsIsOpen = false;
 
 
-  constructor() {
+  constructor(private workshopService: WorkshopService) {
   }
 
   ngOnInit(): void {
@@ -31,6 +33,10 @@ export class CollectableDisplayComponent implements OnInit {
   // event listeners
   toggleOpen() {
     this.isOpen = !this.isOpen;
+  }
+
+  toggleEntitlementsOpen() {
+    this.entitlementsIsOpen = !this.entitlementsIsOpen;
   }
 
   // helpers
@@ -75,6 +81,10 @@ export class CollectableDisplayComponent implements OnInit {
   }
 
   canOpen() {
-    return this.getShortDocs() !== this.collectable.docs;
+    return (this.getShortDocs() !== this.collectable.docs) || this.collectable.entitlements.length;
+  }
+
+  getEntity(entitlement: WorkshopEntitlement) {
+    return this.workshopService.entityFromEntitlement(entitlement.entity_type, entitlement.entity_id);
   }
 }

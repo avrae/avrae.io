@@ -5,7 +5,7 @@
     Editing bindings allows you to give custom names to aliases and snippets.
   </p>
   <!-- alias bindings -->
-  <div *ngIf="collection.aliases">
+  <div *ngIf="collection.aliases.length">
     <h3>Aliases</h3>
     <mat-list>
       <mat-list-item *ngFor="let alias of collection.aliases">
@@ -20,7 +20,7 @@
   </div>
 
   <!-- snippet bindings -->
-  <div *ngIf="collection.snippets">
+  <div *ngIf="collection.snippets.length">
     <h3>Snippets</h3>
     <mat-list>
       <mat-list-item *ngFor="let snippet of collection.snippets">

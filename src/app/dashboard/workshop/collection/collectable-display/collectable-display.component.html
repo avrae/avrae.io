@@ -8,7 +8,7 @@
         {{isOpen ? 'expand_less' : 'expand_more'}}
       </mat-icon>
     </p>
-    <div class="command-bind-message" *ngIf="hasCustomBindings()">
+    <div class="command-messages" *ngIf="hasCustomBindings()">
       Rebound from <code>{{getUnboundSignature()}}</code>
     </div>
     <div class="command-closed-desc" *ngIf="!isOpen">
@@ -18,6 +18,23 @@
 
   <div class="command-desc" *ngIf="isOpen">
     <markdown>{{debrace(collectable.docs)}}</markdown>
+  </div>
+
+  <div class="command-entitlements" *ngIf="collectable.entitlements.length && isOpen">
+    <div class="entitlements-header" (click)="toggleEntitlementsOpen()">
+      Uses licensed data.
+      <mat-icon>
+        {{entitlementsIsOpen ? 'expand_less' : 'expand_more'}}
+      </mat-icon>
+    </div>
+    <div class="entitlements-list" *ngIf="entitlementsIsOpen">
+      <div *ngFor="let entitlement of collectable.entitlements">
+        <a [href]="(getEntity(entitlement) | async)?.marketplace_url" target="_blank">
+          {{(getEntity(entitlement) | async)?.name}}
+          ({{(getEntity(entitlement) | async)?.source}})
+        </a>
+      </div>
+    </div>
   </div>
 
   <div class="command-subcommands" *ngIf="alias && alias.subcommands.length">
