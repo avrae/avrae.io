@@ -1,4 +1,3 @@
-import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -27,7 +26,7 @@ export class CollectionEditComponent implements OnInit {
   error: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar,
-              private location: Location, private dialog: MatDialog,
+              private dialog: MatDialog,
               private workshopService: WorkshopService, private discordService: DiscordService) {
   }
 
@@ -79,9 +78,4 @@ export class CollectionEditComponent implements OnInit {
   canEdit(): boolean {
     return this.editors?.some(editor => editor.id === getUser().id);
   }
-
-  goBack() {
-    this.location.back();
-  }
-
 }
