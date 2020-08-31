@@ -17,6 +17,7 @@ import { PrettyUserComponent } from './shared/pretty-user.component';
 import { CollectableDisplayComponent } from './collection/collectable-display/collectable-display.component';
 import { EditBindingsDialogComponent } from './collection/edit-bindings-dialog/edit-bindings-dialog.component';
 import { NewCollectionDialogComponent } from './my-work/new-collection-dialog/new-collection-dialog.component';
+import { CollectionEditComponent } from './collection-edit/collection-edit.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NewCollectionDialogComponent } from './my-work/new-collection-dialog/ne
     PrettyUserComponent,
     CollectableDisplayComponent,
     EditBindingsDialogComponent,
-    NewCollectionDialogComponent
+    NewCollectionDialogComponent,
+    CollectionEditComponent
   ],
     imports: [
         CommonModule,

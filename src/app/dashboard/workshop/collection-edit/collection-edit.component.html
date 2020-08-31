@@ -6,28 +6,17 @@
   <span>{{collection?.name || 'Loading...'}}</span>
   <span class="toolbar-spacer"></span>
 
-  <!-- edit, edit bindings -->
-  <a mat-icon-button aria-label="Edit Collection Button" matTooltip="Edit Collection"
-          *ngIf="canEdit()" [routerLink]="'./edit'">
-    <mat-icon>edit</mat-icon>
+  <!-- finish editing, edit meta -->
+  <a mat-icon-button aria-label="Done Editing Button" matTooltip="Done Editing" [routerLink]="'../'">
+    <mat-icon>check</mat-icon>
   </a>
 
-  <button mat-icon-button aria-label="Edit Bindings Button" matTooltip="Edit Bindings"
-          *ngIf="bindings" (click)="onEditBindings()">
-    <mat-icon>handyman</mat-icon>
+  <button mat-icon-button aria-label="Edit Button" matTooltip="Edit Settings">
+    <mat-icon>settings</mat-icon>
   </button>
 
   <!-- loading, guild select -->
   <mat-spinner *ngIf="loading" color="accent" diameter="24" class="toolbar-spinner"></mat-spinner>
-
-  <div class="toolbar-search-form">
-    <!-- guild context -->
-    <avr-guild-select-field class="toolbar-search-form-guild-context"
-                            label="View As"
-                            (guildChange)="onGuildContextChange($event)">
-    </avr-guild-select-field>
-  </div>
-
 </mat-toolbar>
 
 <!-- CONTENT -->
@@ -38,33 +27,39 @@
     <div class="description-etc">
       <img *ngIf="collection.image" [src]="collection.image" alt="Collection Image" class="desc-image">
 
-      <div class="desc-subscribe-container">
+      <!-- unpublished: publish or edit sharing settings -->
+      <div class="desc-subscribe-container" *ngIf="collection.publish_state !== PublicationState.PUBLISHED">
         <div>
-          Subscribe or add <b>{{collection.name}}</b> to a server to instantly gain access to
-          <b>{{collection.alias_ids.length}}</b>
-          {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}} and
-          <b>{{collection.snippet_ids.length}}</b>
-          {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}.
+          <b>{{collection.name}}</b> is currently {{collection.publish_state.toLowerCase()}}. Ready to share
+          <b>{{collection.name}}</b> with the world? Publish it to let anyone add it to their own
+          collection or server!
         </div>
         <div class="desc-subscribe-buttons">
-          <!-- server sub -->
-          <button mat-raised-button color="accent" [matMenuTriggerFor]="serverSubMenu">
-            <mat-icon>post_add</mat-icon>
-            Add to Server
+          <!-- edit sharing -->
+          <button mat-raised-button color="accent">
+            <mat-icon>share</mat-icon>
+            Sharing Settings
           </button>
-          <mat-menu #serverSubMenu="matMenu">
-            <button mat-menu-item *ngFor="let guild of getGuilds() | async" (click)="onGuildSubscribe(guild)">
-              {{guild.name}}
-            </button>
-          </mat-menu>
-          <!-- personal sub -->
-          <button mat-raised-button color="accent" *ngIf="!isSubscribed()" (click)="onSubscribe()">
-            <mat-icon>add</mat-icon>
-            Subscribe
+          <!-- publish -->
+          <button mat-raised-button color="accent">
+            <mat-icon>publish</mat-icon>
+            Publish
           </button>
-          <button mat-raised-button color="accent" *ngIf="isSubscribed()" (click)="onUnsubscribe()">
-            <mat-icon>check</mat-icon>
-            Subscribed!
+        </div>
+
+        <div class="desc-error mat-error" *ngIf="error">
+          {{error}}
+        </div>
+      </div>
+      <!-- published: view -->
+      <div class="desc-subscribe-container" *ngIf="collection.publish_state === PublicationState.PUBLISHED">
+        <div>
+          <b>{{collection.name}}</b> is published!
+        </div>
+        <div class="desc-subscribe-buttons">
+          <!-- view -->
+          <button mat-raised-button color="accent">
+            View on Workshop
           </button>
         </div>
 
@@ -74,7 +69,7 @@
       </div>
 
       <div class="desc-tags">
-        <avr-tag-chip-list [collection]="collection"></avr-tag-chip-list>
+        <avr-tag-chip-list [collection]="collection" [showEdit]="true"></avr-tag-chip-list>
       </div>
 
       <p class="desc-text">
@@ -124,16 +119,14 @@
   <div class="collectable-container" *ngIf="collection.alias_ids.length">
     <h2>Aliases</h2>
     <avr-collectable-display *ngFor="let alias of collection.aliases"
-                             [alias]="alias"
-                             [bindings]="bindings">
+                             [alias]="alias">
     </avr-collectable-display>
   </div>
 
   <div class="collectable-container" *ngIf="collection.snippet_ids.length">
     <h2>Snippets</h2>
     <avr-collectable-display *ngFor="let snippet of collection.snippets"
-                             [snippet]="snippet"
-                             [bindings]="bindings">
+                             [snippet]="snippet">
     </avr-collectable-display>
   </div>
 

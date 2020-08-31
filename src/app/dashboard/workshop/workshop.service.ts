@@ -61,6 +61,19 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  addCollectionTag(collId: string, tag: string): Observable<ApiResponse<string[]>> {
+    return this.http.post<ApiResponse<string[]>>(`${baseUrl}/collection/${collId}/tag`,
+      {tag},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  removeCollectionTag(collId: string, tag: string): Observable<ApiResponse<string[]>> {
+    return this.http.delete<ApiResponse<string[]>>(`${baseUrl}/collection/${collId}/tag`,
+      defaultOptions({body: {tag}}))
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   // ==== alias operations ====
   getAlias(id: string): Observable<ApiResponse<WorkshopAlias>> {
     return this.http.get<ApiResponse<WorkshopAlias>>(`${baseUrl}/alias/${id}`, defaultOptions())
