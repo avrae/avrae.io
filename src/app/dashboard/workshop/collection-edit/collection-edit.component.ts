@@ -19,6 +19,7 @@ export class CollectionEditComponent implements OnInit {
 
   // data
   collection: WorkshopCollectionFull;
+  owner: DiscordUser;
   editors: DiscordUser[];
 
   // state
@@ -61,7 +62,7 @@ export class CollectionEditComponent implements OnInit {
   loadOwner() {
     this.discordService.getUser(this.collection.owner)
       .subscribe(response => {
-        this.editors.unshift(response);
+        this.owner = response;
       });
   }
 
@@ -69,7 +70,7 @@ export class CollectionEditComponent implements OnInit {
     this.workshopService.getCollectionEditors(this.collection._id)
       .subscribe(response => {
         if (response.success) {
-          this.editors.push(...response.data);
+          this.editors = response.data;
         }
       });
   }

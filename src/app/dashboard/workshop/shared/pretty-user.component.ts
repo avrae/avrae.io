@@ -12,6 +12,12 @@ import {DiscordService} from '../../../shared/discord.service';
       <div class="user-username">
         <strong>{{getUsername()}}</strong>
       </div>
+
+      <!-- extra buttons -->
+      <div class="buttons">
+        <ng-content></ng-content>
+      </div>
+
       <div class="user-discriminator">
         {{getDiscriminator()}}
       </div>

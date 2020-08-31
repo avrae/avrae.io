@@ -1,6 +1,6 @@
 .user-grid {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   grid-template-rows: auto auto;
   grid-column-gap: 8px;
   line-height: 18px;
@@ -23,4 +23,9 @@
 .user-discriminator {
   grid-column-start: 2;
   color: rgba(255, 255, 255, 0.62);  // ignore-theme version of muted
+}
+
+.buttons {
+  grid-column-start: 3;
+  grid-row-start: span 2;
 }
