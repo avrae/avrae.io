@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser} from '../../../schemas/Discord';
-import {PublicationState, WorkshopCollectionFull} from '../../../schemas/Workshop';
+import {PublicationState, WorkshopCollection, WorkshopCollectionFull} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
 import {getUser} from '../../APIHelper';
 import {WorkshopService} from '../workshop.service';
+import {EditSettingsDialogComponent} from './edit-settings-dialog/edit-settings-dialog.component';
 
 @Component({
   selector: 'avr-collection-edit',
@@ -67,8 +68,18 @@ export class CollectionEditComponent implements OnInit {
       });
   }
 
-  onEditSettings() {  // todo dialog
-
+  onEditSettings() {
+    const dialogRef: MatDialogRef<EditSettingsDialogComponent, WorkshopCollection> = this.dialog.open(
+      EditSettingsDialogComponent,
+      {
+        disableClose: true,
+        data: {collection: this.collection}
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.collection = {...this.collection, ...result};
+      }
+    });
   }
 
   onPublish() {  // todo dialog: checklist

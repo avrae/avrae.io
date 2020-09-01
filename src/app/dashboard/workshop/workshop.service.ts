@@ -5,7 +5,7 @@ import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {DiscordUser} from '../../schemas/Discord';
 import {
-  DDBEntity,
+  DDBEntity, PublicationState,
   WorkshopAlias,
   WorkshopBindings,
   WorkshopCollection,
@@ -53,6 +53,25 @@ export class WorkshopService {
   getCollectionsBatched(ids: string[]): Observable<ApiResponse<WorkshopCollection[]>> {
     return this.http.get<ApiResponse<WorkshopCollection[]>>(`${baseUrl}/collection/batch`,
       defaultOptions({params: {c: ids.join(',')}}))
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  deleteCollection(collId: string): Observable<ApiResponse<string>> {
+    return this.http.delete<ApiResponse<string>>(`${baseUrl}/collection/${collId}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  editCollection(collId: string, name: string, description: string, imageUrl: string | null): Observable<ApiResponse<WorkshopCollection>> {
+    return this.http.patch<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${collId}`,
+      {name, description, image: imageUrl},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  editCollectionState(collId: string, state: PublicationState): Observable<ApiResponse<WorkshopCollection>> {
+    return this.http.patch<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${collId}/state`,
+      {state},
+      defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
 

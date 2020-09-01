@@ -19,6 +19,7 @@ import { EditBindingsDialogComponent } from './collection/edit-bindings-dialog/e
 import { NewCollectionDialogComponent } from './my-work/new-collection-dialog/new-collection-dialog.component';
 import { CollectionEditComponent } from './collection-edit/collection-edit.component';
 import { AddEditorComponent } from './collection-edit/add-editor/add-editor.component';
+import { EditSettingsDialogComponent } from './collection-edit/edit-settings-dialog/edit-settings-dialog.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AddEditorComponent } from './collection-edit/add-editor/add-editor.comp
     EditBindingsDialogComponent,
     NewCollectionDialogComponent,
     CollectionEditComponent,
-    AddEditorComponent
+    AddEditorComponent,
+    EditSettingsDialogComponent
   ],
     imports: [
         CommonModule,
