@@ -18,6 +18,7 @@ import { CollectableDisplayComponent } from './collection/collectable-display/co
 import { EditBindingsDialogComponent } from './collection/edit-bindings-dialog/edit-bindings-dialog.component';
 import { NewCollectionDialogComponent } from './my-work/new-collection-dialog/new-collection-dialog.component';
 import { CollectionEditComponent } from './collection-edit/collection-edit.component';
+import { AddEditorComponent } from './collection-edit/add-editor/add-editor.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CollectionEditComponent } from './collection-edit/collection-edit.compo
     CollectableDisplayComponent,
     EditBindingsDialogComponent,
     NewCollectionDialogComponent,
-    CollectionEditComponent
+    CollectionEditComponent,
+    AddEditorComponent
   ],
     imports: [
         CommonModule,

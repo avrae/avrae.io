@@ -1,9 +1,9 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {map, share} from 'rxjs/operators';
+import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import {ApiResponse, defaultOptions} from '../dashboard/APIHelper';
+import {ApiResponse, defaultErrorHandler, defaultOptions} from '../dashboard/APIHelper';
 import {DiscordUser, PartialGuild} from '../schemas/Discord';
 
 const discordUrl = `${environment.apiURL}/discord`;
@@ -26,6 +26,12 @@ export class DiscordService {
 
   fetchCurrentUserGuilds(): Observable<ApiResponse<PartialGuild[]>> {
     return this.http.get<ApiResponse<PartialGuild[]>>(`${discordUrl}/guilds`, defaultOptions());
+  }
+
+  searchUser(username: string): Observable<ApiResponse<DiscordUser>> {
+    return this.http.get<ApiResponse<DiscordUser>>(`${discordUrl}/users`,
+      defaultOptions({params: {username}}))
+      .pipe(catchError(defaultErrorHandler));
   }
 
   // helpers

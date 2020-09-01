@@ -88,13 +88,15 @@
         </div>
         <div class="meta-author" *ngFor="let editor of editors">
           <avr-pretty-user [user]="editor">
-            <button mat-icon-button matTooltip="Remove editor">
-              <!-- todo hook this up -->
+            <button mat-icon-button matTooltip="Remove editor" (click)="onRemoveEditor(editor)">
               <mat-icon class="muted">clear</mat-icon>
             </button>
           </avr-pretty-user>
         </div>
-        <!-- todo add editor -->
+        <!-- search/add editor -->
+        <div class="add-editor">
+          <avr-add-editor (addEditor)="onAddEditor($event)"></avr-add-editor>
+        </div>
       </div>
     </div>
   </div>

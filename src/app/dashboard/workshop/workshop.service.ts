@@ -56,6 +56,19 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  addCollectionEditor(collId: string, editorId: string): Observable<ApiResponse<DiscordUser[]>> {
+    return this.http.put<ApiResponse<DiscordUser[]>>(`${baseUrl}/collection/${collId}/editor/${editorId}`,
+      null,
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  removeCollectionEditor(collId: string, editorId: string): Observable<ApiResponse<DiscordUser[]>> {
+    return this.http.delete<ApiResponse<DiscordUser[]>>(`${baseUrl}/collection/${collId}/editor/${editorId}`,
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   getCollectionEditors(id: string): Observable<ApiResponse<DiscordUser[]>> {
     return this.http.get<ApiResponse<DiscordUser[]>>(`${baseUrl}/collection/${id}/editors`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));

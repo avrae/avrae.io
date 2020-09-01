@@ -45,6 +45,27 @@ export class CollectionEditComponent implements OnInit {
     this.loadEditors();
   }
 
+  onAddEditor(editor: DiscordUser) {
+    this.workshopService.addCollectionEditor(this.collection._id, editor.id)
+      .subscribe(response => {
+        if (response.success) {
+          this.editors = response.data;
+        } else {
+          this.snackBar.open(response.error);
+        }
+      });
+  }
+
+  onRemoveEditor(editor: DiscordUser) {
+    this.workshopService.removeCollectionEditor(this.collection._id, editor.id)
+      .subscribe(response => {
+        if (response.success) {
+          this.editors = response.data;
+        } else {
+          this.snackBar.open(response.error);
+        }
+      });
+  }
 
   // data loaders
   loadCollection(id: string) {
