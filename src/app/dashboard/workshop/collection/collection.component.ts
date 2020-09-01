@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
 import {WorkshopBindings, WorkshopCollectionFull} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
+import {debrace} from '../../../shared/DisplayUtils';
 import {getUser} from '../../APIHelper';
 import {CollectionSubscriber} from '../shared/collection-subscriber';
 import {WorkshopService} from '../workshop.service';
@@ -16,6 +17,8 @@ import {EditBindingsDialogComponent} from './edit-bindings-dialog/edit-bindings-
   styleUrls: ['../common.scss', './collection.component.scss']
 })
 export class CollectionComponent extends CollectionSubscriber implements OnInit {
+  // exports
+  debrace = debrace;
 
   // data
   collection: WorkshopCollectionFull;

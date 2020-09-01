@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser} from '../../../schemas/Discord';
 import {PublicationState, WorkshopCollection, WorkshopCollectionFull} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
+import {debrace} from '../../../shared/DisplayUtils';
 import {getUser} from '../../APIHelper';
 import {WorkshopService} from '../workshop.service';
 import {EditSettingsDialogComponent} from './edit-settings-dialog/edit-settings-dialog.component';
@@ -17,6 +18,7 @@ import {EditSettingsDialogComponent} from './edit-settings-dialog/edit-settings-
 export class CollectionEditComponent implements OnInit {
   // exports
   PublicationState = PublicationState;
+  debrace = debrace;
 
   // data
   collection: WorkshopCollectionFull;
