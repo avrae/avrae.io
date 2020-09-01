@@ -11,8 +11,7 @@
     <mat-icon>check</mat-icon>
   </a>
 
-  <!-- todo -->
-  <button mat-icon-button aria-label="Edit Button" matTooltip="Edit Settings">
+  <button mat-icon-button aria-label="Edit Button" matTooltip="Edit Settings" (click)="onEditSettings()">
     <mat-icon>settings</mat-icon>
   </button>
 
@@ -36,13 +35,13 @@
           collection or server!
         </div>
         <div class="desc-subscribe-buttons">
-          <!-- edit sharing todo -->
-          <button mat-raised-button color="accent">
+          <!-- edit sharing -->
+          <button mat-raised-button color="accent" (click)="onEditSettings()">
             <mat-icon>share</mat-icon>
             Sharing Settings
           </button>
-          <!-- publish todo -->
-          <button mat-raised-button color="accent">
+          <!-- publish -->
+          <button mat-raised-button color="accent" (click)="onPublish()">
             <mat-icon>publish</mat-icon>
             Publish
           </button>
@@ -94,8 +93,15 @@
           </avr-pretty-user>
         </div>
         <!-- search/add editor -->
+        <mat-divider></mat-divider>
         <div class="add-editor">
           <avr-add-editor (addEditor)="onAddEditor($event)"></avr-add-editor>
+        </div>
+        <!-- edit settings -->
+        <div class="meta-buttons">
+          <button mat-raised-button color="accent" (click)="onEditSettings()">
+            Edit Settings
+          </button>
         </div>
       </div>
     </div>

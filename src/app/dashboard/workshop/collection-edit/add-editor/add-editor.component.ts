@@ -15,13 +15,15 @@ import {DiscordService} from '../../../../shared/discord.service';
     <div *ngIf="error" class="mat-error">
       {{error}}
     </div>
-    <avr-pretty-user *ngIf="validEditor" [user]="validEditor">
-      <button mat-icon-button matTooltip="Add editor" (click)="onAddEditor()">
-        <mat-icon class="muted">add</mat-icon>
-      </button>
-    </avr-pretty-user>
+    <div class="valid-user" *ngIf="validEditor">
+      <avr-pretty-user [user]="validEditor">
+        <button mat-icon-button matTooltip="Add editor" (click)="onAddEditor()">
+          <mat-icon class="muted">add</mat-icon>
+        </button>
+      </avr-pretty-user>
+    </div>
   `,
-  styles: []
+  styles: ['.valid-user {margin-bottom: 8px;}']
 })
 export class AddEditorComponent implements OnInit {
 

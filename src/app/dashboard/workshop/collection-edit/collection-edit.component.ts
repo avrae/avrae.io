@@ -67,6 +67,14 @@ export class CollectionEditComponent implements OnInit {
       });
   }
 
+  onEditSettings() {  // todo dialog
+
+  }
+
+  onPublish() {  // todo dialog: checklist
+
+  }
+
   // data loaders
   loadCollection(id: string) {
     this.workshopService.getCollectionFull(id)
