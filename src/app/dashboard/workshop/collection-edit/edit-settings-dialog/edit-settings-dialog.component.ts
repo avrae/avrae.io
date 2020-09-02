@@ -1,9 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 import {forkJoin} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {PublicationState, WorkshopCollection, WorkshopCollectionFull} from '../../../../schemas/Workshop';
 import {ApiResponse} from '../../../APIHelper';
+import {ConfirmDeleteDialog} from '../../../confirm-delete-dialog/confirm-delete-dialog.component';
 import {WorkshopService} from '../../workshop.service';
 
 @Component({
@@ -25,6 +27,7 @@ export class EditSettingsDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { collection: WorkshopCollectionFull },
               private dialogRef: MatDialogRef<EditSettingsDialogComponent>,
+              private dialog: MatDialog, private router: Router,
               private workshopService: WorkshopService) {
     this.collection = data.collection;
     // make copies of this data
@@ -74,6 +77,12 @@ export class EditSettingsDialogComponent implements OnInit {
           return response;
         })));
     }
+    // if we have nothing to do, just close
+    if (!requests.length) {
+      this.dialogRef.close();
+      return;
+    }
+
     // run them
     forkJoin(requests).subscribe((responses: ApiResponse<WorkshopCollection>[]) => {
       this.loading = false;
@@ -86,6 +95,31 @@ export class EditSettingsDialogComponent implements OnInit {
   }
 
   onDelete() {
-    // todo
+    const dialogRef: MatDialogRef<ConfirmDeleteDialog, boolean> = this.dialog.open(
+      ConfirmDeleteDialog,
+      {
+        data: {
+          name: this.collection.name,
+          message: 'Deleting this collection will remove it from all subscribers\' collections and all servers. This is not reversible.'
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.error = null;
+        this.loading = true;
+        // do the delete
+        this.workshopService.deleteCollection(this.collection._id)
+          .subscribe(response => {
+            this.loading = false;
+            if (response.success) {
+              this.dialogRef.close();
+              this.router.navigate(['/dashboard/workshop/my-work']);
+            } else {
+              this.error = response.error;
+            }
+          });
+      }
+    });
   }
 }

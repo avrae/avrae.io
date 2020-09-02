@@ -1,13 +1,14 @@
 <mat-toolbar color="primary">
-  <a mat-icon-button aria-label="Back" [routerLink]="'../../my-work'">
+  <button mat-icon-button aria-label="Back" (click)="goBack()">
     <mat-icon>arrow_back</mat-icon>
-  </a>
+  </button>
 
   <span>{{collection?.name || 'Loading...'}}</span>
   <span class="toolbar-spacer"></span>
 
   <!-- finish editing, edit meta -->
-  <a mat-icon-button aria-label="Done Editing Button" matTooltip="Done Editing" [routerLink]="'../'">
+  <a mat-icon-button aria-label="Done Editing Button" matTooltip="Done Editing" [routerLink]="'../'"
+     [skipLocationChange]="true">
     <mat-icon>check</mat-icon>
   </a>
 
@@ -59,9 +60,9 @@
         </div>
         <div class="desc-subscribe-buttons">
           <!-- view -->
-          <button mat-raised-button color="accent">
+          <a mat-raised-button color="accent" [routerLink]="'../'" [skipLocationChange]="true">
             View on Workshop
-          </button>
+          </a>
         </div>
 
         <div class="desc-error mat-error" *ngIf="error">

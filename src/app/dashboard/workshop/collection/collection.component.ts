@@ -1,3 +1,4 @@
+import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -31,7 +32,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
   guildContext: PartialGuild | null;
 
   constructor(private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar,
-              private dialog: MatDialog,
+              private dialog: MatDialog, private location: Location,
               private workshopService: WorkshopService, private discordService: DiscordService) {
     super(snackBar, workshopService, discordService);
   }
@@ -152,5 +153,9 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
   // helpers
   canEdit(): boolean {
     return this.editors?.some(editor => editor.id === getUser().id);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
