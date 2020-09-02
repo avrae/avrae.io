@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Publishing {{collection.name}}...</h1>
+<div mat-dialog-content class="mat-typography">
+  <p>
+    Make sure the name, description, and image of the collection are correct, then agree to the following to publish:
+  </p>
+
+  <div *ngFor="let step of PUBLISH_STEPS; last as last; index as i;">
+    <section class="publish-agree">
+      <mat-checkbox [(ngModel)]="agreed[i]">
+        <div [innerHTML]="step"></div>
+      </mat-checkbox>
+    </section>
+
+    <mat-divider *ngIf="!last"></mat-divider>
+  </div>
+
+  <p class="mat-error" *ngIf="error">
+    {{error}}
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button (click)="onPublish()" color="primary" [disabled]="!canPublish()">Publish</button>
+  <mat-spinner *ngIf="loading" [diameter]="24"></mat-spinner>
+</div>

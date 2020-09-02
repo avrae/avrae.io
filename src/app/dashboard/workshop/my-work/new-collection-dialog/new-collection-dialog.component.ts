@@ -5,7 +5,7 @@ import {WorkshopService} from '../../workshop.service';
 @Component({
   selector: 'avr-new-collection-dialog',
   templateUrl: './new-collection-dialog.component.html',
-  styleUrls: ['./new-collection-dialog.component.css']
+  styleUrls: ['../../dialog-common.scss']
 })
 export class NewCollectionDialogComponent implements OnInit {
 

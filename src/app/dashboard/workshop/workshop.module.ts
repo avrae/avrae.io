@@ -20,6 +20,7 @@ import {TagChipListComponent} from './shared/tag-chip-list.component';
 import {WorkshopExploreComponent} from './workshop-explore.component';
 
 import {WorkshopRoutingModule} from './workshop-routing.module';
+import { PublishDialogComponent } from './collection-edit/publish-dialog/publish-dialog.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {WorkshopRoutingModule} from './workshop-routing.module';
     CollectionEditComponent,
     AddEditorComponent,
     EditSettingsDialogComponent,
+    PublishDialogComponent,
   ],
   imports: [
     CommonModule,

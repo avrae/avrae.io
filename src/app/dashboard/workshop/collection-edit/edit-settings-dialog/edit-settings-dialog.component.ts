@@ -11,7 +11,7 @@ import {WorkshopService} from '../../workshop.service';
 @Component({
   selector: 'avr-edit-settings-dialog',
   templateUrl: './edit-settings-dialog.component.html',
-  styleUrls: ['./edit-settings-dialog.component.css', '../../common.scss']
+  styleUrls: ['../../dialog-common.scss', '../../common.scss']
 })
 export class EditSettingsDialogComponent implements OnInit {
   PublicationState = PublicationState;

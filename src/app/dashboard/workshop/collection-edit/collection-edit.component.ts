@@ -10,6 +10,7 @@ import {debrace} from '../../../shared/DisplayUtils';
 import {getUser} from '../../APIHelper';
 import {WorkshopService} from '../workshop.service';
 import {EditSettingsDialogComponent} from './edit-settings-dialog/edit-settings-dialog.component';
+import {PublishDialogComponent} from './publish-dialog/publish-dialog.component';
 
 @Component({
   selector: 'avr-collection-edit',
@@ -85,8 +86,20 @@ export class CollectionEditComponent implements OnInit {
     });
   }
 
-  onPublish() {  // todo dialog: checklist
-
+  onPublish() {
+    const dialogRef: MatDialogRef<PublishDialogComponent, WorkshopCollection> = this.dialog.open(
+      PublishDialogComponent,
+      {
+        disableClose: true,
+        maxWidth: 'max(50%, 350px)',
+        data: {collection: this.collection}
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.collection = {...this.collection, ...result};
+      }
+    });
   }
 
   // data loaders
