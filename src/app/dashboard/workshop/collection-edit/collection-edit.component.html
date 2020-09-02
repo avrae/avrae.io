@@ -109,20 +109,38 @@
   </div>
 
   <mat-divider></mat-divider>
-  <!-- aliases/snippets display todo -->
+  <!-- aliases/snippets -->
 
-  <div class="collectable-container" *ngIf="collection.alias_ids.length">
+  <div class="collectable-container">
     <h2>Aliases</h2>
-    <avr-collectable-display *ngFor="let alias of collection.aliases"
-                             [alias]="alias">
-    </avr-collectable-display>
+    <avr-collectable-edit *ngFor="let alias of collection.aliases"
+                          [alias]="alias">
+    </avr-collectable-edit>
+
+    <mat-divider></mat-divider>
+    <div class="create-new clickable" (click)="onCreateNewAlias()"
+         [matTooltip]="collection.publish_state === PublicationState.PUBLISHED
+         ? 'An alias cannot be deleted once created in a published collection.'
+         : null">
+      <div>Create New Alias...</div>
+      <mat-icon>add</mat-icon>
+    </div>
   </div>
 
-  <div class="collectable-container" *ngIf="collection.snippet_ids.length">
+  <div class="collectable-container">
     <h2>Snippets</h2>
-    <avr-collectable-display *ngFor="let snippet of collection.snippets"
-                             [snippet]="snippet">
-    </avr-collectable-display>
+    <avr-collectable-edit *ngFor="let snippet of collection.snippets"
+                          [snippet]="snippet">
+    </avr-collectable-edit>
+
+    <mat-divider></mat-divider>
+    <div class="create-new clickable" (click)="onCreateNewSnippet()"
+         [matTooltip]="collection.publish_state === PublicationState.PUBLISHED
+         ? 'A snippet cannot be deleted once created in a published collection.'
+         : null">
+      <div>Create New Snippet...</div>
+      <mat-icon>add</mat-icon>
+    </div>
   </div>
 
 </div>

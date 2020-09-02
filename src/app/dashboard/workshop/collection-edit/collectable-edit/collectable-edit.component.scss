@@ -1,0 +1,19 @@
+.command-closed-desc {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.command-desc {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.edit-button {
+  height: 18px;
+  margin-top: -12px;
+}
+
+.create-new {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}

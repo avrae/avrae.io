@@ -15,7 +15,7 @@ import {PublishDialogComponent} from './publish-dialog/publish-dialog.component'
 @Component({
   selector: 'avr-collection-edit',
   templateUrl: './collection-edit.component.html',
-  styleUrls: ['../common.scss', './collection-edit.component.css', '../collection/collection.component.scss']
+  styleUrls: ['../common.scss', './collection-edit.component.scss', '../collection/collection.component.scss']
 })
 export class CollectionEditComponent implements OnInit {
   // exports
@@ -100,6 +100,14 @@ export class CollectionEditComponent implements OnInit {
         this.collection = {...this.collection, ...result};
       }
     });
+  }
+
+  onCreateNewAlias() {
+
+  }
+
+  onCreateNewSnippet() {
+
   }
 
   // data loaders

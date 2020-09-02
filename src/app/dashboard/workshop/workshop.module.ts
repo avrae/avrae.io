@@ -8,7 +8,7 @@ import {AddEditorComponent} from './collection-edit/add-editor/add-editor.compon
 import {CollectionEditComponent} from './collection-edit/collection-edit.component';
 import {EditSettingsDialogComponent} from './collection-edit/edit-settings-dialog/edit-settings-dialog.component';
 import {CollectionTileComponent} from './collection-tile/collection-tile.component';
-import {CollectableDisplayComponent} from './collection/collectable-display/collectable-display.component';
+import {CollectableDisplayComponent} from './collectable-display/collectable-display.component';
 import {CollectionComponent} from './collection/collection.component';
 import {EditBindingsDialogComponent} from './collection/edit-bindings-dialog/edit-bindings-dialog.component';
 import {MySubscriptionsComponent} from './my-subscriptions/my-subscriptions.component';
@@ -21,6 +21,7 @@ import {WorkshopExploreComponent} from './workshop-explore.component';
 
 import {WorkshopRoutingModule} from './workshop-routing.module';
 import { PublishDialogComponent } from './collection-edit/publish-dialog/publish-dialog.component';
+import { CollectableEditComponent } from './collection-edit/collectable-edit/collectable-edit.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { PublishDialogComponent } from './collection-edit/publish-dialog/publish
     AddEditorComponent,
     EditSettingsDialogComponent,
     PublishDialogComponent,
+    CollectableEditComponent,
   ],
   imports: [
     CommonModule,
