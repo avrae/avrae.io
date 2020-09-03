@@ -4,11 +4,12 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser} from '../../../schemas/Discord';
-import {PublicationState, WorkshopCollection, WorkshopCollectionFull} from '../../../schemas/Workshop';
+import {PublicationState, WorkshopAliasFull, WorkshopCollection, WorkshopCollectionFull, WorkshopSnippet} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
 import {debrace} from '../../../shared/DisplayUtils';
 import {getUser} from '../../APIHelper';
 import {WorkshopService} from '../workshop.service';
+import {CreateCollectableDialogComponent} from './create-collectable-dialog/create-collectable-dialog.component';
 import {EditSettingsDialogComponent} from './edit-settings-dialog/edit-settings-dialog.component';
 import {PublishDialogComponent} from './publish-dialog/publish-dialog.component';
 
@@ -103,11 +104,33 @@ export class CollectionEditComponent implements OnInit {
   }
 
   onCreateNewAlias() {
-
+    const dialogRef: MatDialogRef<CreateCollectableDialogComponent, WorkshopAliasFull> = this.dialog.open(
+      CreateCollectableDialogComponent,
+      {
+        disableClose: true,
+        data: {collection: this.collection, collectableType: 'alias'}
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.collection.aliases.push(result);
+      }
+    });
   }
 
   onCreateNewSnippet() {
-
+    const dialogRef: MatDialogRef<CreateCollectableDialogComponent, WorkshopSnippet> = this.dialog.open(
+      CreateCollectableDialogComponent,
+      {
+        disableClose: true,
+        data: {collection: this.collection, collectableType: 'snippet'}
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.collection.snippets.push(result);
+      }
+    });
   }
 
   // data loaders

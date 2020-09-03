@@ -22,6 +22,7 @@ import {WorkshopExploreComponent} from './workshop-explore.component';
 import {WorkshopRoutingModule} from './workshop-routing.module';
 import { PublishDialogComponent } from './collection-edit/publish-dialog/publish-dialog.component';
 import { CollectableEditComponent } from './collection-edit/collectable-edit/collectable-edit.component';
+import { CreateCollectableDialogComponent } from './collection-edit/create-collectable-dialog/create-collectable-dialog.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { CollectableEditComponent } from './collection-edit/collectable-edit/col
     EditSettingsDialogComponent,
     PublishDialogComponent,
     CollectableEditComponent,
+    CreateCollectableDialogComponent,
   ],
   imports: [
     CommonModule,

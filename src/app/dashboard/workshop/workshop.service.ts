@@ -5,8 +5,10 @@ import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {DiscordUser} from '../../schemas/Discord';
 import {
-  DDBEntity, PublicationState,
+  DDBEntity,
+  PublicationState,
   WorkshopAlias,
+  WorkshopAliasFull,
   WorkshopBindings,
   WorkshopCollection,
   WorkshopCollectionFull,
@@ -107,12 +109,33 @@ export class WorkshopService {
   }
 
   // ==== alias operations ====
+  createAlias(collId: string, name: string, docs: string): Observable<ApiResponse<WorkshopAliasFull>> {
+    return this.http.post<ApiResponse<WorkshopAliasFull>>(`${baseUrl}/collection/${collId}/alias`,
+      {name, docs},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  createSubalias(parentId: string, name: string, docs: string): Observable<ApiResponse<WorkshopAliasFull>> {
+    return this.http.post<ApiResponse<WorkshopAliasFull>>(`${baseUrl}/alias/${parentId}/alias`,
+      {name, docs},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   getAlias(id: string): Observable<ApiResponse<WorkshopAlias>> {
     return this.http.get<ApiResponse<WorkshopAlias>>(`${baseUrl}/alias/${id}`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
 
   // ==== snippet operations ====
+  createSnippet(collId: string, name: string, docs: string): Observable<ApiResponse<WorkshopSnippet>> {
+    return this.http.post<ApiResponse<WorkshopSnippet>>(`${baseUrl}/collection/${collId}/snippet`,
+      {name, docs},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   getSnippet(id: string): Observable<ApiResponse<WorkshopSnippet>> {
     return this.http.get<ApiResponse<WorkshopSnippet>>(`${baseUrl}/snippet/${id}`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));

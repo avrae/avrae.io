@@ -114,6 +114,7 @@
   <div class="collectable-container">
     <h2>Aliases</h2>
     <avr-collectable-edit *ngFor="let alias of collection.aliases"
+                          [collection]="collection"
                           [alias]="alias">
     </avr-collectable-edit>
 
@@ -130,6 +131,7 @@
   <div class="collectable-container">
     <h2>Snippets</h2>
     <avr-collectable-edit *ngFor="let snippet of collection.snippets"
+                          [collection]="collection"
                           [snippet]="snippet">
     </avr-collectable-edit>
 

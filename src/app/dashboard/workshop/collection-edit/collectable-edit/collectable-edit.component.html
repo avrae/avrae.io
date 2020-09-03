@@ -50,12 +50,13 @@
   <div class="command-subcommands" *ngIf="alias && (alias.subcommands.length || isOpen)">
     <h4>Subcommands</h4>
     <avr-collectable-edit *ngFor="let subcommand of alias.subcommands"
+                          [collection]="collection"
                           [alias]="subcommand"
                           [parentComponent]="this">
     </avr-collectable-edit>
 
     <mat-divider></mat-divider>
-    <div class="create-new click-to-expand" (click)="onCreateNew()">
+    <div class="create-new click-to-expand" (click)="onCreateSubalias()">
       <div>Create New Subalias...</div>
       <mat-icon>add</mat-icon>
     </div>

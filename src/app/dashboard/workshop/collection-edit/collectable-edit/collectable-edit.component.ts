@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {WorkshopAliasFull, WorkshopCollection} from '../../../../schemas/Workshop';
 import {CollectableDisplayComponent} from '../../collectable-display/collectable-display.component';
 import {WorkshopService} from '../../workshop.service';
+import {CreateCollectableDialogComponent} from '../create-collectable-dialog/create-collectable-dialog.component';
 
 @Component({
   selector: 'avr-collectable-edit',
@@ -9,7 +12,10 @@ import {WorkshopService} from '../../workshop.service';
 })
 export class CollectableEditComponent extends CollectableDisplayComponent implements OnInit {
 
-  constructor(public workshopService: WorkshopService) {
+  @Input() collection: WorkshopCollection;
+
+  constructor(public workshopService: WorkshopService,
+              private dialog: MatDialog) {
     super(workshopService);
   }
 
@@ -21,7 +27,18 @@ export class CollectableEditComponent extends CollectableDisplayComponent implem
 
   }
 
-  onCreateNew() {
-
+  onCreateSubalias() {
+    const dialogRef: MatDialogRef<CreateCollectableDialogComponent, WorkshopAliasFull> = this.dialog.open(
+      CreateCollectableDialogComponent,
+      {
+        disableClose: true,
+        data: {collection: this.collection, collectableType: 'subalias', parent: this.alias}
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.alias.subcommands.push(result);
+      }
+    });
   }
 }
