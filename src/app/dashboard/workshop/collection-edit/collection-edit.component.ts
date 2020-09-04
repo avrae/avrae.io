@@ -4,7 +4,14 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser} from '../../../schemas/Discord';
-import {PublicationState, WorkshopAliasFull, WorkshopCollection, WorkshopCollectionFull, WorkshopSnippet} from '../../../schemas/Workshop';
+import {
+  CollectableType,
+  PublicationState,
+  WorkshopAliasFull,
+  WorkshopCollection,
+  WorkshopCollectionFull,
+  WorkshopSnippet
+} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
 import {debrace} from '../../../shared/DisplayUtils';
 import {getUser} from '../../APIHelper';
@@ -108,7 +115,7 @@ export class CollectionEditComponent implements OnInit {
       CreateCollectableDialogComponent,
       {
         disableClose: true,
-        data: {collection: this.collection, collectableType: 'alias'}
+        data: {collection: this.collection, collectableType: CollectableType.ALIAS}
       }
     );
     dialogRef.afterClosed().subscribe(result => {
@@ -123,7 +130,7 @@ export class CollectionEditComponent implements OnInit {
       CreateCollectableDialogComponent,
       {
         disableClose: true,
-        data: {collection: this.collection, collectableType: 'snippet'}
+        data: {collection: this.collection, collectableType: CollectableType.SNIPPET}
       }
     );
     dialogRef.afterClosed().subscribe(result => {

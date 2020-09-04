@@ -89,3 +89,11 @@ export class DDBEntity {
   url: string | null;
   marketplace_url: string;
 }
+
+// helper enums, not exposed in api
+export enum CollectableType {
+  ALIAS = 'ALIAS',
+  SNIPPET = 'SNIPPET',
+  SUBALIAS = 'SUBALIAS',
+  SUBCOMMAND = SUBALIAS
+}

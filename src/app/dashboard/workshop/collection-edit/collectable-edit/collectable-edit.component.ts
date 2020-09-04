@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {WorkshopAliasFull, WorkshopCollection} from '../../../../schemas/Workshop';
+import {CollectableType, WorkshopAliasFull, WorkshopCollectable, WorkshopCollection} from '../../../../schemas/Workshop';
 import {CollectableDisplayComponent} from '../../collectable-display/collectable-display.component';
 import {WorkshopService} from '../../workshop.service';
+import {CollectableEditDialogComponent} from '../collectable-edit-dialog/collectable-edit-dialog.component';
 import {CreateCollectableDialogComponent} from '../create-collectable-dialog/create-collectable-dialog.component';
 
 @Component({
@@ -32,7 +33,7 @@ export class CollectableEditComponent extends CollectableDisplayComponent implem
       CreateCollectableDialogComponent,
       {
         disableClose: true,
-        data: {collection: this.collection, collectableType: 'subalias', parent: this.alias}
+        data: {collection: this.collection, collectableType: CollectableType.SUBALIAS, parent: this.alias}
       }
     );
     dialogRef.afterClosed().subscribe(result => {

@@ -1,13 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {PublicationState, WorkshopAliasFull, WorkshopCollectionFull, WorkshopSnippet} from '../../../../schemas/Workshop';
+import {CollectableType, PublicationState, WorkshopAliasFull, WorkshopCollectionFull, WorkshopSnippet} from '../../../../schemas/Workshop';
 import {ApiResponse} from '../../../APIHelper';
 import {WorkshopService} from '../../workshop.service';
 
 interface CreateCollectableDialogComponentData {
   collection: WorkshopCollectionFull;
   parent?: WorkshopAliasFull | null;
-  collectableType: 'alias' | 'snippet' | 'subalias';
+  collectableType: CollectableType;
 }
 
 @Component({
@@ -18,7 +18,7 @@ interface CreateCollectableDialogComponentData {
 export class CreateCollectableDialogComponent implements OnInit {
   PublicationState = PublicationState;
 
-  collectableType: 'alias' | 'snippet' | 'subalias';
+  collectableType: CollectableType;
   collection: WorkshopCollectionFull;
   parent: WorkshopAliasFull | null;
 
@@ -43,11 +43,11 @@ export class CreateCollectableDialogComponent implements OnInit {
   onCreate() {
     this.loading = true;
     switch (this.collectableType) {
-      case 'alias':
+      case CollectableType.ALIAS:
         return this.onCreateAlias();
-      case 'snippet':
+      case CollectableType.SNIPPET:
         return this.onCreateSnippet();
-      case 'subalias':
+      case CollectableType.SUBALIAS:
         return this.onCreateSubalias();
       default:
         this.error = 'Unknown collectable type (this is a bug)';
