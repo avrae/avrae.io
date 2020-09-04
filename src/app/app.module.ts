@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import * as Sentry from '@sentry/browser';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
+import {MonacoEditorModule} from 'ngx-monaco-editor';
 
 import {AppRoutingModule} from './app-routing.module';
 
@@ -67,7 +68,8 @@ const markdownConfig = {
     DialogsModule,
     AppRoutingModule,
     ThemesModule,
-    LoginModule
+    LoginModule,
+    MonacoEditorModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
