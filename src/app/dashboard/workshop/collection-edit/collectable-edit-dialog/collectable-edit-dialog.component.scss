@@ -1,8 +1,28 @@
+@import "../../../../variables";
+
 mat-form-field {
   margin-bottom: 8px;
+}
+
+.section {
+  margin: 8px 0;
 }
 
 .code-versions-container {
   display: grid;
   grid-template-columns: 1fr auto;
+  background: $gray-dark1;
+  border-radius: 4px;
+}
+
+.code-versions-list {
+  border-left: 1px solid rgba($gray2, 0.3);
+
+  mat-action-list {
+    margin-top: -8px; // undo a forced angular theme
+  }
+}
+
+.active {
+  background: rgba(white, 0.05);
 }

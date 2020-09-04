@@ -20,19 +20,40 @@
   <mat-divider></mat-divider>
 
   <!-- code versions -->
-  <div class="code-versions-container">
-    <div class="code-editor">
-      code editor
-    </div>
-    <div class="code-versions-list">
-      code versions
+  <div class="section">
+    <p>
+      You can view the code version and set the active code version here. To edit the code, create a new code version.
+      It is recommended to test code in a personal alias before publishing a code version, as code versions cannot
+      be edited or deleted.
+    </p>
+    <div class="code-versions-container ignore-theme">
+      <div class="code-editor">
+        code editor
+      </div>
+      <div class="code-versions-list">
+        <mat-action-list>
+          <button mat-list-item (click)="onCreateCodeVersion()" [class.active]="selectedCodeVersionIsNew">
+            Create New Version
+          </button>
+          <button mat-list-item *ngFor="let codeVersion of getSortedVersions()" class="ignore-theme"
+                  (click)="onViewCodeVersion(codeVersion)" [class.active]="selectedCodeVersion === codeVersion">
+            <p matLine>
+              Version {{codeVersion.version}}
+              <em *ngIf="codeVersion.is_current"> (active)</em>
+            </p>
+            <p matLine>{{codeVersion.created_at | date}}</p>
+          </button>
+        </mat-action-list>
+      </div>
     </div>
   </div>
 
   <mat-divider></mat-divider>
 
   <!-- entitlements -->
-  entitlements
+  <div class="section">
+    entitlements
+  </div>
 
   <mat-divider></mat-divider>
 

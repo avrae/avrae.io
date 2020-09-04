@@ -35,6 +35,8 @@ export class CollectableEditDialogComponent implements OnInit {
   name: string;
   docs: string;
   selectedCodeVersion: CodeVersion;
+  selectedCodeVersionIsNew: boolean;
+  newCodeVersionContent: string;
 
   // state
   loading = false;
@@ -68,12 +70,19 @@ export class CollectableEditDialogComponent implements OnInit {
   }
 
   onViewCodeVersion(codeVersion: CodeVersion) {
-
+    this.selectedCodeVersion = codeVersion;
+    this.selectedCodeVersionIsNew = false;
+    this.newCodeVersionContent = null;
   }
 
-  onCreateCodeVersion(content: string) {
-
+  onCreateCodeVersion() {
+    this.selectedCodeVersion = null;
+    this.selectedCodeVersionIsNew = true;
+    this.newCodeVersionContent = '';
   }
 
   // helpers
+  getSortedVersions() {
+    return this.collectable.versions.sort((a, b) => b.version - a.version);
+  }
 }
