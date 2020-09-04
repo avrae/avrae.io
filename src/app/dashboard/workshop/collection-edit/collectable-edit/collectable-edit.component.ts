@@ -33,6 +33,15 @@ export class CollectableEditComponent extends CollectableDisplayComponent implem
         data: {collection: this.collection, alias: this.alias, snippet: this.snippet, parent: this.parentComponent?.alias}
       }
     );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (this.alias) {
+          Object.assign(this.alias, result);  // so that the reference from the collection page holds
+        } else {
+          Object.assign(this.snippet, result);
+        }
+      }
+    });
   }
 
   onCreateSubalias() {

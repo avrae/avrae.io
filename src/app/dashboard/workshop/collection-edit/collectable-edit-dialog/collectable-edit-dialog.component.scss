@@ -13,6 +13,15 @@ mat-form-field {
   grid-template-columns: 1fr auto;
   background: $gray-dark1;
   border-radius: 4px;
+
+  .no-code-version {
+    padding: 8px;
+  }
+}
+
+.code-editor {
+  min-height: 35vh;
+  max-height: 90vh;
 }
 
 .code-versions-list {

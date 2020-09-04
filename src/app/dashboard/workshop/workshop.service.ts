@@ -128,6 +128,18 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  editAlias(aliasId: string, name: string, docs: string): Observable<ApiResponse<WorkshopAlias>> {
+    return this.http.patch<ApiResponse<WorkshopAlias>>(`${baseUrl}/alias/${aliasId}`,
+      {name, docs},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  deleteAlias(aliasId: string): Observable<ApiResponse<string>> {
+    return this.http.delete<ApiResponse<string>>(`${baseUrl}/alias/${aliasId}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   // ==== snippet operations ====
   createSnippet(collId: string, name: string, docs: string): Observable<ApiResponse<WorkshopSnippet>> {
     return this.http.post<ApiResponse<WorkshopSnippet>>(`${baseUrl}/collection/${collId}/snippet`,
@@ -138,6 +150,18 @@ export class WorkshopService {
 
   getSnippet(id: string): Observable<ApiResponse<WorkshopSnippet>> {
     return this.http.get<ApiResponse<WorkshopSnippet>>(`${baseUrl}/snippet/${id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  editSnippet(snippetId: string, name: string, docs: string): Observable<ApiResponse<WorkshopSnippet>> {
+    return this.http.patch<ApiResponse<WorkshopSnippet>>(`${baseUrl}/snippet/${snippetId}`,
+      {name, docs},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  deleteSnippet(snippetId: string): Observable<ApiResponse<string>> {
+    return this.http.delete<ApiResponse<string>>(`${baseUrl}/snippet/${snippetId}`, defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
 
