@@ -2,6 +2,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MarkdownModule} from 'ngx-markdown';
+import {MonacoEditorModule} from 'ngx-monaco-editor';
 import {MaterialModule} from '../../material/material.module';
 import {PipesModule} from '../../shared/pipes/pipes.module';
 import {AddEditorComponent} from './collection-edit/add-editor/add-editor.component';
@@ -54,7 +55,8 @@ import { CollectableEditDialogComponent } from './collection-edit/collectable-ed
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
-    MarkdownModule
+    MarkdownModule,
+    MonacoEditorModule
   ]
 })
 export class WorkshopModule {

@@ -25,6 +25,8 @@ interface CollectableEditDialogComponentData {
 })
 export class CollectableEditDialogComponent implements OnInit {
   PublicationState = PublicationState;
+  editorOptions = {theme: 'vs-dark', language: 'python', scrollBeyondLastLine: false};
+  readonlyEditorOptions = {...this.editorOptions, readOnly: true};
 
   // data
   collection: WorkshopCollectionFull; // root collection
@@ -121,13 +123,23 @@ export class CollectableEditDialogComponent implements OnInit {
   onViewCodeVersion(codeVersion: CodeVersion) {
     this.selectedCodeVersion = codeVersion;
     this.creatingNewCodeVersion = false;
-    this.newCodeVersionContent = null;
   }
 
-  onCreateCodeVersion() {
+  onStartCreatingCodeVersion() {
+    if (this.creatingNewCodeVersion) {
+      return;
+    }
     this.selectedCodeVersion = null;
     this.creatingNewCodeVersion = true;
-    this.newCodeVersionContent = '';
+    this.newCodeVersionContent = this.newCodeVersionContent || '';
+  }
+
+  onSaveNewCodeVersion() {
+
+  }
+
+  onSetCurrentAsActive() {
+
   }
 
   // helpers

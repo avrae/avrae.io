@@ -35,11 +35,12 @@
     <div class="code-versions-container ignore-theme">
       <!-- code editor: display selected, edit new version, or placeholder if nothing selected -->
       <div class="code-editor">
-        <div *ngIf="selectedCodeVersion">
-          viewing code version
+        <div *ngIf="selectedCodeVersion" class="monaco-editor-container">
+          <ngx-monaco-editor [options]="readonlyEditorOptions"
+                             [ngModel]="selectedCodeVersion.content"></ngx-monaco-editor>
         </div>
-        <div *ngIf="creatingNewCodeVersion">
-          creating code version
+        <div *ngIf="creatingNewCodeVersion" class="monaco-editor-container">
+          <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="newCodeVersionContent"></ngx-monaco-editor>
         </div>
         <p *ngIf="!(selectedCodeVersion || creatingNewCodeVersion)" class="no-code-version">
           Looks like this item doesn't have any code yet. Go ahead and create a new code version on the right or
@@ -50,7 +51,7 @@
       <!-- code version viewer -->
       <div class="code-versions-list">
         <mat-action-list>
-          <button mat-list-item (click)="onCreateCodeVersion()" [class.active]="creatingNewCodeVersion">
+          <button mat-list-item (click)="onStartCreatingCodeVersion()" [class.active]="creatingNewCodeVersion">
             Create New Version
           </button>
           <button mat-list-item *ngFor="let codeVersion of getSortedVersions()" class="ignore-theme"
@@ -63,7 +64,15 @@
           </button>
         </mat-action-list>
       </div>
-    </div>
+    </div> <!-- </code-versions-container> -->
+    <!-- buttons: set active code version or save new code version -->
+    <button mat-raised-button *ngIf="selectedCodeVersion && !selectedCodeVersion.is_current" color="accent"
+            (click)="onSetCurrentAsActive()">
+      Set Version {{selectedCodeVersion.version}} as Active Code Version
+    </button>
+    <button mat-raised-button *ngIf="creatingNewCodeVersion" color="accent" (click)="onSaveNewCodeVersion()">
+      Save New Code Version
+    </button>
   </div>
 
   <mat-divider></mat-divider>
