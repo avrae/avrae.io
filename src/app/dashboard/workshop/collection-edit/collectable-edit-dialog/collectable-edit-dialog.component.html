@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>Editing {{collectable.name}}...</h1>
+<div mat-dialog-content class="mat-typography">
+  <p>
+    You can edit the collectible's name, documentation, licenses, and code here.
+  </p>
+
+  <!-- name, description -->
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="name">
+    <mat-hint>This won't change the name of the item for current subscribers.</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Documentation (Markdown Supported)</mat-label>
+    <textarea matInput [(ngModel)]="docs" mat-autosize></textarea>
+    <mat-hint *ngIf="alias">This will appear in your alias' help command.</mat-hint>
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+
+  <!-- code versions -->
+  <div class="code-versions-container">
+    <div class="code-editor">
+      code editor
+    </div>
+    <div class="code-versions-list">
+      code versions
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- entitlements -->
+  entitlements
+
+  <mat-divider></mat-divider>
+
+  <!-- errors -->
+  <p class="mat-error" *ngIf="error">
+    {{error}}
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button (click)="onSave()" color="primary">Save</button>
+  <mat-spinner *ngIf="loading" [diameter]="24"></mat-spinner>
+  <span class="toolbar-spacer"></span>
+  <button mat-flat-button (click)="onDelete()" color="warn"
+          *ngIf="collection.publish_state !== PublicationState.PUBLISHED || parent">
+    Delete
+  </button>
+  <div *ngIf="collection.publish_state === PublicationState.PUBLISHED && !parent"
+       matTooltip="You cannot delete a top-level item of a published collection.">
+    <button mat-flat-button disabled color="warn">Delete</button>
+  </div>
+</div>

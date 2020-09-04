@@ -25,7 +25,14 @@ export class CollectableEditComponent extends CollectableDisplayComponent implem
 
   // event handlers
   onEdit() {
-
+    const dialogRef: MatDialogRef<CollectableEditDialogComponent, WorkshopCollectable> = this.dialog.open(
+      CollectableEditDialogComponent,
+      {
+        disableClose: true,
+        minWidth: '70%',
+        data: {collection: this.collection, alias: this.alias, snippet: this.snippet, parent: this.parentComponent?.alias}
+      }
+    );
   }
 
   onCreateSubalias() {

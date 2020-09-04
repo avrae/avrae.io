@@ -1,11 +1,12 @@
 <h1 mat-dialog-title>Create New {{collectableType | titlecase}}</h1>
 <div mat-dialog-content class="mat-typography">
   <p>
-    First, give the new {{collectableType}} a name and a description. You'll be able to edit the code
+    First, give the new {{collectableType | lowercase}} a name and a description. You'll be able to edit the code
     after it's created.
   </p>
-  <p *ngIf="collection.publish_state === PublicationState.PUBLISHED && collectableType !== 'subalias'">
-    Note: Since your collection is published, you <em>cannot delete</em> this {{collectableType}} once created.
+  <p *ngIf="collection.publish_state === PublicationState.PUBLISHED && collectableType !== CollectableType.SUBALIAS">
+    Note: Since your collection is published, you <em>cannot delete</em> this {{collectableType | lowercase}} once
+    created.
   </p>
 
   <mat-form-field>
@@ -16,6 +17,9 @@
   <mat-form-field>
     <mat-label>Documentation (Markdown Supported)</mat-label>
     <textarea matInput [(ngModel)]="docs" mat-autosize></textarea>
+    <mat-hint *ngIf="collectableType === CollectableType.ALIAS || collectableType === CollectableType.SUBALIAS">
+      This will appear in your alias' help command.
+    </mat-hint>
   </mat-form-field>
 
   <p class="mat-error" *ngIf="error">

@@ -17,6 +17,7 @@ interface CreateCollectableDialogComponentData {
 })
 export class CreateCollectableDialogComponent implements OnInit {
   PublicationState = PublicationState;
+  CollectableType = CollectableType;
 
   collectableType: CollectableType;
   collection: WorkshopCollectionFull;
