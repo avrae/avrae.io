@@ -27,6 +27,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {AutomationEditorModule} from './shared/automation-editor/automation-editor.module';
 import {DialogsModule} from './shared/dialogs/dialogs.module';
 import {DiscordEmbedModule} from './shared/discord-embed/discord-embed.module';
+import {registerDraconicLanguage} from './shared/monacoDraconic';
 import {ThemesModule} from './themes/themes.module';
 
 Sentry.init({dsn: 'https://af2b06560981446bb55f64b6f79fd520@sentry.io/1486249'});
@@ -39,6 +40,12 @@ const markdownConfig = {
       breaks: true,
     },
   },
+};
+
+const monacoConfig = {
+  onMonacoLoad: () => {
+    registerDraconicLanguage(monaco);
+  }
 };
 
 @NgModule({
@@ -69,7 +76,7 @@ const markdownConfig = {
     AppRoutingModule,
     ThemesModule,
     LoginModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(monacoConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

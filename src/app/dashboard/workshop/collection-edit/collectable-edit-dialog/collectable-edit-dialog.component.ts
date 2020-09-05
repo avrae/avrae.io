@@ -25,7 +25,7 @@ interface CollectableEditDialogComponentData {
 })
 export class CollectableEditDialogComponent implements OnInit {
   PublicationState = PublicationState;
-  editorOptions = {theme: 'vs-dark', language: 'python', scrollBeyondLastLine: false};
+  editorOptions = {theme: 'draconicTheme', language: 'draconic', scrollBeyondLastLine: false};
   readonlyEditorOptions = {...this.editorOptions, readOnly: true};
 
   // data
@@ -135,11 +135,11 @@ export class CollectableEditDialogComponent implements OnInit {
   }
 
   onSaveNewCodeVersion() {
-
+    // todo save and clear content in newCodeVersionContent
   }
 
   onSetCurrentAsActive() {
-
+    // todo set selectedCodeVersion as active
   }
 
   // helpers
