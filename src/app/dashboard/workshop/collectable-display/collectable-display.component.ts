@@ -80,10 +80,9 @@ export class CollectableDisplayComponent implements OnInit {
     return this.collectable.docs.split('\n')[0];
   }
 
-  canOpen() {
+  canOpen(): any {
     return (this.getShortDocs() !== this.collectable.docs)
-      || this.collectable.entitlements.length
-      || (this.alias && !this.alias.subcommands.length);
+      || this.collectable.entitlements.length;
   }
 
   getEntity(entitlement: WorkshopEntitlement) {

@@ -58,4 +58,9 @@ export class CollectableEditComponent extends CollectableDisplayComponent implem
       }
     });
   }
+
+  canOpen() {
+    return super.canOpen()
+      || (this.alias && !this.alias.subcommands.length);
+  }
 }
