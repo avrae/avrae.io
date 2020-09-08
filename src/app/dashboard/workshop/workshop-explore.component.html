@@ -49,9 +49,14 @@
 <!-- CONTENT -->
 <div class="container">
   <mat-card *ngIf="page === 1 || error" class="workshop-header">
-    <p *ngIf="page === 1">
-      welcome to the workshop blah blah header here
-    </p>
+    <div *ngIf="page === 1">
+      <h3 class="welcome-header">Welcome to the Alias Workshop!</h3>
+      <p>
+        Here you can find user-made extensions to Avrae to make playing D&amp;D over Discord even easier. Subscribe
+        to a collection to use aliases (commands) and snippets (argument shortcuts) on any server Avrae is in, or
+        add a collection to a server to let anyone in the server use it!
+      </p>
+    </div>
 
     <p class="mat-error" *ngIf="error">
       {{error}}
