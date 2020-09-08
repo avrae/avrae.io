@@ -18,6 +18,8 @@
     <mat-hint *ngIf="alias">This will appear in your alias' help command.</mat-hint>
   </mat-form-field>
 
+  <button mat-flat-button (click)="onSave()" color="primary" class="spaced-button">Save</button>
+
   <mat-divider></mat-divider>
 
   <!-- code versions -->
@@ -71,7 +73,7 @@
       Set Version {{selectedCodeVersion.version}} as Active Code Version
     </button>
     <button mat-raised-button *ngIf="creatingNewCodeVersion" color="accent" (click)="onSaveNewCodeVersion()"
-            class="code-versions-button">
+            class="spaced-button">
       Save New Code Version
     </button>
   </div>
@@ -92,8 +94,7 @@
   </p>
 </div>
 <div mat-dialog-actions>
-  <button mat-flat-button mat-dialog-close>Cancel</button>
-  <button mat-flat-button (click)="onSave()" color="primary">Save</button>
+  <button mat-flat-button [mat-dialog-close]="collectable">Done</button>
   <mat-spinner *ngIf="loading" [diameter]="24"></mat-spinner>
   <span class="toolbar-spacer"></span>
   <button mat-flat-button (click)="onDelete()" color="warn"

@@ -78,13 +78,11 @@ export class CollectableEditDialogComponent implements OnInit {
       request.subscribe(response => {
         this.loading = false;
         if (response.success) {
-          this.dialogRef.close(response.data);
+          Object.assign(this.collectable, response.data);
         } else {
           this.error = response.error;
         }
       });
-    } else {
-      this.dialogRef.close(this.collectable);
     }
   }
 
