@@ -67,10 +67,11 @@
     </div> <!-- </code-versions-container> -->
     <!-- buttons: set active code version or save new code version -->
     <button mat-raised-button *ngIf="selectedCodeVersion && !selectedCodeVersion.is_current" color="accent"
-            (click)="onSetCurrentAsActive()">
+            (click)="onSetCurrentAsActive()" class="code-versions-button">
       Set Version {{selectedCodeVersion.version}} as Active Code Version
     </button>
-    <button mat-raised-button *ngIf="creatingNewCodeVersion" color="accent" (click)="onSaveNewCodeVersion()">
+    <button mat-raised-button *ngIf="creatingNewCodeVersion" color="accent" (click)="onSaveNewCodeVersion()"
+            class="code-versions-button">
       Save New Code Version
     </button>
   </div>

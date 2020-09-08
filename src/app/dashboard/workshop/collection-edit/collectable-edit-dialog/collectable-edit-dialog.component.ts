@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
 import {
   CodeVersion,
   PublicationState,
@@ -8,6 +9,7 @@ import {
   WorkshopCollectionFull,
   WorkshopSnippet
 } from '../../../../schemas/Workshop';
+import {ApiResponse} from '../../../APIHelper';
 import {ConfirmDeleteDialog} from '../../../confirm-delete-dialog/confirm-delete-dialog.component';
 import {WorkshopService} from '../../workshop.service';
 
@@ -135,11 +137,51 @@ export class CollectableEditDialogComponent implements OnInit {
   }
 
   onSaveNewCodeVersion() {
-    // todo save and clear content in newCodeVersionContent
+    this.error = null;
+    this.loading = true;
+    let request: Observable<ApiResponse<CodeVersion>>;
+    if (this.alias) {
+      request = this.workshopService.createAliasCodeVersion(this.alias._id, this.newCodeVersionContent);
+    } else {
+      request = this.workshopService.createSnippetCodeVersion(this.snippet._id, this.newCodeVersionContent);
+    }
+    request.subscribe(response => {
+      this.loading = false;
+      if (response.success) {
+        // select the new version
+        this.collectable.versions.push(response.data);
+        this.onViewCodeVersion(response.data);
+        // clear the editor
+        this.newCodeVersionContent = '';
+      } else {
+        this.error = response.error;
+      }
+    });
   }
 
   onSetCurrentAsActive() {
-    // todo set selectedCodeVersion as active
+    if (!this.selectedCodeVersion) {
+      console.error('tried to set null code version as active');
+      return;
+    }
+    this.error = null;
+    this.loading = true;
+    let request: Observable<ApiResponse<WorkshopCollectable>>;
+    if (this.alias) {
+      request = this.workshopService.setActiveAliasCodeVersion(this.alias._id, this.selectedCodeVersion.version);
+    } else {
+      request = this.workshopService.setActiveSnippetCodeVersion(this.snippet._id, this.selectedCodeVersion.version);
+    }
+    request.subscribe(response => {
+      this.loading = false;
+      if (response.success) {
+        Object.assign(this.collectable, response.data);
+        // refresh the reference from selected
+        this.selectedCodeVersion = this.collectable.versions.find(cv => cv.version === this.selectedCodeVersion.version);
+      } else {
+        this.error = response.error;
+      }
+    });
   }
 
   // helpers

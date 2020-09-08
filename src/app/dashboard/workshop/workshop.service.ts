@@ -5,6 +5,7 @@ import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {DiscordUser} from '../../schemas/Discord';
 import {
+  CodeVersion,
   DDBEntity,
   PublicationState,
   WorkshopAlias,
@@ -140,6 +141,20 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  createAliasCodeVersion(aliasId: string, content: string): Observable<ApiResponse<CodeVersion>> {
+    return this.http.post<ApiResponse<CodeVersion>>(`${baseUrl}/alias/${aliasId}/code`,
+      {content},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  setActiveAliasCodeVersion(aliasId: string, codeVersionVersion: number): Observable<ApiResponse<WorkshopAlias>> {
+    return this.http.put<ApiResponse<WorkshopAlias>>(`${baseUrl}/alias/${aliasId}/active-code`,
+      {version: codeVersionVersion},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   // ==== snippet operations ====
   createSnippet(collId: string, name: string, docs: string): Observable<ApiResponse<WorkshopSnippet>> {
     return this.http.post<ApiResponse<WorkshopSnippet>>(`${baseUrl}/collection/${collId}/snippet`,
@@ -162,6 +177,20 @@ export class WorkshopService {
 
   deleteSnippet(snippetId: string): Observable<ApiResponse<string>> {
     return this.http.delete<ApiResponse<string>>(`${baseUrl}/snippet/${snippetId}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  createSnippetCodeVersion(snippetId: string, content: string): Observable<ApiResponse<CodeVersion>> {
+    return this.http.post<ApiResponse<CodeVersion>>(`${baseUrl}/snippet/${snippetId}/code`,
+      {content},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  setActiveSnippetCodeVersion(snippetId: string, codeVersionVersion: number): Observable<ApiResponse<WorkshopSnippet>> {
+    return this.http.put<ApiResponse<WorkshopSnippet>>(`${baseUrl}/snippet/${snippetId}/active-code`,
+      {version: codeVersionVersion},
+      defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
 
