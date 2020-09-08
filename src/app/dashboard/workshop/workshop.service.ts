@@ -12,7 +12,7 @@ import {
   WorkshopAliasFull,
   WorkshopBindings,
   WorkshopCollection,
-  WorkshopCollectionFull,
+  WorkshopCollectionFull, WorkshopEntitlement,
   WorkshopSnippet,
   WorkshopSubscription,
   WorkshopTag
@@ -155,6 +155,21 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  addAliasEntitlement(aliasId: string, entity: DDBEntity): Observable<ApiResponse<WorkshopEntitlement[]>> {
+    return this.http.post<ApiResponse<WorkshopEntitlement[]>>(`${baseUrl}/alias/${aliasId}/entitlement`,
+      {entity_type: entity.entity_type, entity_id: entity.entity_id},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  removeAliasEntitlement(aliasId: string, entitlement: WorkshopEntitlement): Observable<ApiResponse<WorkshopEntitlement[]>> {
+    return this.http.delete<ApiResponse<WorkshopEntitlement[]>>(`${baseUrl}/alias/${aliasId}/entitlement`,
+      defaultOptions({
+        body: {entity_type: entitlement.entity_type, entity_id: entitlement.entity_id}
+      }))
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   // ==== snippet operations ====
   createSnippet(collId: string, name: string, docs: string): Observable<ApiResponse<WorkshopSnippet>> {
     return this.http.post<ApiResponse<WorkshopSnippet>>(`${baseUrl}/collection/${collId}/snippet`,
@@ -191,6 +206,21 @@ export class WorkshopService {
     return this.http.put<ApiResponse<WorkshopSnippet>>(`${baseUrl}/snippet/${snippetId}/active-code`,
       {version: codeVersionVersion},
       defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  addSnippetEntitlement(snippetId: string, entity: DDBEntity): Observable<ApiResponse<WorkshopEntitlement[]>> {
+    return this.http.post<ApiResponse<WorkshopEntitlement[]>>(`${baseUrl}/snippet/${snippetId}/entitlement`,
+      {entity_type: entity.entity_type, entity_id: entity.entity_id},
+      defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  removeSnippetEntitlement(snippetId: string, entitlement: WorkshopEntitlement): Observable<ApiResponse<WorkshopEntitlement[]>> {
+    return this.http.delete<ApiResponse<WorkshopEntitlement[]>>(`${baseUrl}/snippet/${snippetId}/entitlement`,
+      defaultOptions({
+        body: {entity_type: entitlement.entity_type, entity_id: entitlement.entity_id}
+      }))
       .pipe(catchError(defaultErrorHandler));
   }
 

@@ -1,12 +1,17 @@
 import {Component, Inject, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {groupBy} from 'lodash';
 import {Observable} from 'rxjs';
+import {debounceTime, map} from 'rxjs/operators';
 import {
   CodeVersion,
+  DDBEntity,
   PublicationState,
   WorkshopAliasFull,
   WorkshopCollectable,
   WorkshopCollectionFull,
+  WorkshopEntitlement,
   WorkshopSnippet
 } from '../../../../schemas/Workshop';
 import {ApiResponse} from '../../../APIHelper';
@@ -46,6 +51,9 @@ export class CollectableEditDialogComponent implements OnInit {
   // state
   loading = false;
   error: string;
+  entitlementsControl = new FormControl();
+  allEntities: DDBEntity[];
+  addableEntitlements: Observable<[string, DDBEntity[]][]>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: CollectableEditDialogComponentData,
               private dialogRef: MatDialogRef<CollectableEditDialogComponent>,
@@ -60,6 +68,7 @@ export class CollectableEditDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updateAddableEntitlements();
   }
 
   get collectable(): WorkshopCollectable {
@@ -182,8 +191,77 @@ export class CollectableEditDialogComponent implements OnInit {
     });
   }
 
+  onRemoveEntitlement(entitlement: WorkshopEntitlement) {
+    this.loading = true;
+    this.error = null;
+    let request: Observable<ApiResponse<WorkshopEntitlement[]>>;
+    if (this.alias) {
+      request = this.workshopService.removeAliasEntitlement(this.alias._id, entitlement);
+    } else {
+      request = this.workshopService.removeSnippetEntitlement(this.snippet._id, entitlement);
+    }
+    request.subscribe(response => {
+      this.loading = false;
+      if (response.success) {
+        this.collectable.entitlements = response.data;
+      } else {
+        this.error = response.error;
+      }
+    });
+  }
+
+  onAddEntitlement(entitlement: DDBEntity) {
+    this.loading = true;
+    this.error = null;
+    let request: Observable<ApiResponse<WorkshopEntitlement[]>>;
+    if (this.alias) {
+      request = this.workshopService.addAliasEntitlement(this.alias._id, entitlement);
+    } else {
+      request = this.workshopService.addSnippetEntitlement(this.snippet._id, entitlement);
+    }
+    request.subscribe(response => {
+      this.loading = false;
+      if (response.success) {
+        this.collectable.entitlements = response.data;
+      } else {
+        this.error = response.error;
+      }
+    });
+  }
+
   // helpers
   getSortedVersions() {
     return this.collectable.versions.sort((a, b) => b.version - a.version);
+  }
+
+  getEntity(entitlement: WorkshopEntitlement) {
+    return this.workshopService.entityFromEntitlement(entitlement.entity_type, entitlement.entity_id);
+  }
+
+  updateAddableEntitlements() {
+    // load entitlements
+    this.workshopService.getEntitlements()
+      .subscribe(response => {
+        this.allEntities = Array.from(response.data.values());
+        this.entitlementsControl.setValue(''); // emit a value to get started
+      });
+
+    // subscribe to changes to update autocomplete
+    // debounce 500 because this is actually really expensive
+    this.addableEntitlements = this.entitlementsControl.valueChanges
+      .pipe(debounceTime(500))
+      .pipe(map(value => {
+        const possible = this.allEntities
+          // filter out entities that are already in the entitlement list
+          .filter(entity => !this.collectable.entitlements
+            .find(entitlement => entitlement.entity_type === entity.entity_type && entitlement.entity_id === entity.entity_id))
+          // filter to entities that contain the search
+          .filter(entity => entity.name.toLowerCase().includes(value.toLowerCase()))
+          // sort alphabetically
+          .sort((a, b) => a.name.localeCompare(b.name));
+        // group by entitlement type and sort
+        return Object.entries(groupBy(possible, entity => entity.entity_type))
+          .sort(([categoryA, _], [categoryB, __]) => categoryA.localeCompare(categoryB));
+      }));
   }
 }

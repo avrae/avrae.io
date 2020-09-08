@@ -83,7 +83,31 @@
   <!-- entitlements -->
   <div class="section">
     <h3>Licenses</h3>
-    entitlements
+    <p>
+      If you plan on publishing this collection, make sure to add the relevant licenses if this item uses any licensed
+      rules or data. You don't have to add licenses here for data that is free on D&amp;D Beyond.
+    </p>
+
+    <mat-form-field class="entitlements-list">
+      <mat-chip-list #chipList aria-label="Entitlements selection">
+        <mat-chip
+          *ngFor="let entitlement of collectable.entitlements"
+          [removable]="!entitlement.required"
+          (removed)="onRemoveEntitlement(entitlement)">
+          {{(getEntity(entitlement) | async)?.name}}
+          <mat-icon matChipRemove *ngIf="!entitlement.required">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Add License..." [matAutocomplete]="auto" [matChipInputFor]="chipList"
+               [formControl]="entitlementsControl">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-optgroup *ngFor="let tup of addableEntitlements | async" [label]="tup[0] | titlecase">
+          <mat-option *ngFor="let entitlement of tup[1]" (click)="onAddEntitlement(entitlement)">
+            {{entitlement.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>
   </div>
 
   <mat-divider></mat-divider>
