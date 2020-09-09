@@ -12,7 +12,8 @@ import {
   WorkshopAliasFull,
   WorkshopBindings,
   WorkshopCollection,
-  WorkshopCollectionFull, WorkshopEntitlement,
+  WorkshopCollectionFull,
+  WorkshopEntitlement,
   WorkshopSnippet,
   WorkshopSubscription,
   WorkshopTag
