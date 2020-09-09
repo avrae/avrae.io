@@ -9,8 +9,8 @@ export function debrace(value: string): string {
   let renderedValue = value.replace(/>/g, '&gt;').replace(/</g, '&lt;');
 
   // if it replaced a <> in a markdown code block, change it back
-  renderedValue = renderedValue.replace(/`.+?`/g, match => {
-    return match.replace(/&gt;/, '>').replace(/&lt;/, '<');
+  renderedValue = renderedValue.replace(/(```|`)[\s\S]*?\1/g, match => {
+    return match.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
   });
 
   return renderedValue;
