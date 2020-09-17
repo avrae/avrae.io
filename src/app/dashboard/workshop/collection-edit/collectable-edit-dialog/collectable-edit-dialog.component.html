@@ -53,7 +53,8 @@
       <!-- code version viewer -->
       <div class="code-versions-list">
         <mat-action-list>
-          <button mat-list-item (click)="onStartCreatingCodeVersion()" [class.active]="creatingNewCodeVersion">
+          <button mat-list-item (click)="onStartCreatingCodeVersion()" [class.active]="creatingNewCodeVersion"
+                  class="ignore-theme">
             Create New Version
           </button>
           <button mat-list-item *ngFor="let codeVersion of getSortedVersions()" class="ignore-theme"
