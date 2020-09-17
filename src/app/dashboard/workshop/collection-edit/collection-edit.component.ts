@@ -157,6 +157,7 @@ export class CollectionEditComponent implements OnInit {
     this.discordService.getUser(this.collection.owner)
       .subscribe(response => {
         this.owner = response;
+        this.maybeDoRedirect();
       });
   }
 
@@ -165,6 +166,7 @@ export class CollectionEditComponent implements OnInit {
       .subscribe(response => {
         if (response.success) {
           this.editors = response.data;
+          this.maybeDoRedirect();
         }
       });
   }
@@ -176,5 +178,17 @@ export class CollectionEditComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  maybeDoRedirect() {
+    if (this.owner === undefined || this.editors === undefined) {
+      return;
+    }
+    let currentUser = getUser();
+    // if current user cannot edit
+    if (this.owner.id !== currentUser.id && !this.editors.find(e => e.id === currentUser.id)) {
+      // redirect back to view
+      this.router.navigate(['..'], {skipLocationChange: true});
+    }
   }
 }
