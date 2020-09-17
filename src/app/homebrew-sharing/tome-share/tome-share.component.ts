@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {Meta} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
-import {UserInfo} from '../../schemas/UserInfo';
+import {environment} from '../../../environments/environment';
+import {DiscordUser} from '../../schemas/Discord';
+import {parseLevel, parseSchool, Spell, Tome} from '../../schemas/homebrew/Spells';
 import {DiscordService} from '../../shared/discord.service';
 import {HomebrewSharingService} from '../homebrew-sharing.service';
-import {Meta} from '@angular/platform-browser';
-import {parseLevel, parseSchool, Spell, Tome} from '../../schemas/homebrew/Spells';
-import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'avr-tome-share',
@@ -15,7 +15,7 @@ import {environment} from '../../../environments/environment';
 export class TomeShareComponent implements OnInit {
 
   tome: Tome;
-  owner: UserInfo;
+  owner: DiscordUser;
   selectedSpell: Spell;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewSharingService, private discord: DiscordService,

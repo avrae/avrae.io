@@ -15,10 +15,9 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 import {EditDialog} from './edit-dialog/edit-dialog.component';
 import {GvarListComponent} from './gvars/gvar-list/gvar-list.component';
+import {GvarLookupComponent} from './gvars/gvar-lookup/gvar-lookup.component';
 import {GvarsComponent} from './gvars/gvars.component';
-import {HomebrewModule} from './homebrew/homebrew.module';
 import {NewDialog} from './new-dialog/new-dialog.component';
-import { GvarLookupComponent } from './gvars/gvar-lookup/gvar-lookup.component';
 
 @NgModule({
   imports: [
@@ -26,9 +25,8 @@ import { GvarLookupComponent } from './gvars/gvar-lookup/gvar-lookup.component';
     MaterialModule,
     FormsModule,
     DashboardRoutingModule,
-    HomebrewModule,
     FlexModule,
-    AutomationEditorModule
+    AutomationEditorModule,
   ],
   declarations: [
     DashboardComponent,

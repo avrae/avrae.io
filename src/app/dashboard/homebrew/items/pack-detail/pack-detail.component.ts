@@ -34,22 +34,11 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getUser();
     this.getPack();
   }
 
   ngOnDestroy() {
     this.snackBar.dismiss();
-  }
-
-  getUser() {
-    if (!this.user) {
-      this.dashboardService.getUserInfo()
-        .subscribe(user => {
-          this.user = user;
-          this.calcCanEdit();
-        });
-    }
   }
 
   getPack() {

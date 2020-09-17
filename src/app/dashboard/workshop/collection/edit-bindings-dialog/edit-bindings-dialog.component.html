@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Editing Bindings</h2>
+
+<mat-dialog-content class="mat-typography">
+  <p>
+    Editing bindings allows you to give custom names to aliases and snippets.
+  </p>
+  <!-- alias bindings -->
+  <div *ngIf="collection.aliases.length">
+    <h3>Aliases</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let alias of collection.aliases">
+        <code>!{{alias.name}}</code>
+        <mat-icon class="collectable-binding-arrow">east</mat-icon>
+        <mat-form-field>
+          <span matPrefix>!</span>
+          <input matInput [(ngModel)]="findBinding(true, alias).name">
+        </mat-form-field>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <!-- snippet bindings -->
+  <div *ngIf="collection.snippets.length">
+    <h3>Snippets</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let snippet of collection.snippets">
+        <code>{{snippet.name}}</code>
+        <mat-icon class="collectable-binding-arrow">east</mat-icon>
+        <mat-form-field>
+          <input matInput [(ngModel)]="findBinding(false, snippet).name">
+        </mat-form-field>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <!-- error -->
+  <p class="mat-error" *ngIf="error">
+    {{error}}
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <mat-spinner *ngIf="loading" [diameter]="24"></mat-spinner>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions>

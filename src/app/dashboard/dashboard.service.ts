@@ -25,10 +25,6 @@ export class DashboardService {
   constructor(private http: HttpClient) {
   }
 
-  getUserInfo(): Observable<UserInfo> {
-    return this.http.get<UserInfo>(userInfoUrl, defaultOptions());
-  }
-
   getUserStats(): Observable<UserStats> {
     return this.http.get<UserStats>(userStatsUrl, defaultOptions());
   }

@@ -1,0 +1,88 @@
+<mat-toolbar color="primary">
+  <span>Explore Aliases</span>
+  <span class="toolbar-spacer"></span>
+
+  <mat-spinner *ngIf="loading" color="accent" diameter="24"></mat-spinner>
+
+  <div class="toolbar-search-form">
+    <!-- order -->
+    <mat-form-field appearance="fill" class="toolbar-search-form-order">
+      <mat-label>Order</mat-label>
+      <mat-select [(value)]="order" (selectionChange)="onOrderChange()">
+        <mat-option value="popular-1w">Most Popular (1 week)</mat-option>
+        <mat-option value="popular-1m">Most Popular (1 month)</mat-option>
+        <mat-option value="popular-6m">Most Popular (6 months)</mat-option>
+        <mat-option value="popular-all">Most Popular (all time)</mat-option>
+        <mat-option value="relevance">Relevance</mat-option>
+        <mat-option value="newest">Newest</mat-option>
+        <mat-option value="edittime">Recently Updated</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- search + tags -->
+    <mat-form-field class="toolbar-search-form-search">
+      <mat-label>Search...</mat-label>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let tag of tags" removable (removed)="onTagRemove(tag)">
+          {{tag.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input type="text" matInput autocomplete="off" #search [matAutocomplete]="auto"
+               [value]="q" (keyup)="filterTags(search.value)" (keyup.enter)="onSearch(search.value)"
+               [matChipInputFor]="chipList">
+      </mat-chip-list>
+      <button mat-icon-button matSuffix (click)="onSearchClear()" *ngIf="q || tags?.length">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-optgroup *ngFor="let tup of filteredTags" [label]="tup[0]">
+          <mat-option *ngFor="let tag of tup[1]" [value]="" (click)="onTagAdd(tag)">
+            {{tag.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+</mat-toolbar>
+
+<!-- CONTENT -->
+<div class="container">
+  <mat-card *ngIf="page === 1 || error" class="workshop-header">
+    <div *ngIf="page === 1">
+      <h3 class="welcome-header">Welcome to the Alias Workshop!</h3>
+      <p>
+        Here you can find user-made extensions to Avrae to make playing D&amp;D over Discord even easier. Subscribe
+        to a collection to use aliases (commands) and snippets (argument shortcuts) on any server Avrae is in, or
+        add a collection to a server to let anyone in the server use it!
+      </p>
+    </div>
+
+    <p class="mat-error" *ngIf="error">
+      {{error}}
+    </p>
+  </mat-card>
+
+  <mat-card *ngIf="!loading && collections.length === 0">
+    <p>There are no results. Try a different search!</p>
+  </mat-card>
+
+  <div class="collections-grid">
+    <avr-collection-tile *ngFor="let collection of collections" [collection]="collection"></avr-collection-tile>
+  </div>
+
+  <div class="paginator-container mat-typography ignore-theme"
+       *ngIf="collections?.length === COLLECTIONS_PER_PAGE || page > 1">
+    <div class="paginator mat-elevation-z3">
+      <button mat-icon-button aria-label="Previous page button" *ngIf="page > 1" (click)="onPreviousPage()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <span>Page {{page}}</span>
+      <button mat-icon-button aria-label="Next page button" *ngIf="collections?.length === COLLECTIONS_PER_PAGE"
+              (click)="onNextPage()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+

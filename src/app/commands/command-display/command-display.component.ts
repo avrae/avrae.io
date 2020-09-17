@@ -2,6 +2,7 @@ import {isPlatformBrowser} from '@angular/common';
 import {AfterViewInit, Component, Inject, Input, OnInit, PLATFORM_ID} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Command, CommandArgument} from '../../schemas/Commands';
+import {debrace} from '../../shared/DisplayUtils';
 
 @Component({
   selector: 'avr-command-display',
@@ -9,6 +10,8 @@ import {Command, CommandArgument} from '../../schemas/Commands';
   styleUrls: ['./command-display.component.scss']
 })
 export class CommandDisplayComponent implements OnInit, AfterViewInit {
+  // exports
+  debrace = debrace;
 
   @Input() command: Command;
   @Input() parentId: string;
@@ -66,19 +69,5 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
 
   getQualifiedId() {
     return this.parentId ? `${this.parentId}-${this.command.name}` : this.command.name;
-  }
-
-  debrace(value: string) {
-    if (!value) {
-      return value;
-    }
-    let renderedValue = value.replace(/>/g, '&gt;').replace(/</g, '&lt;');
-
-    // if it replaced a <> in a markdown code block, change it back
-    renderedValue = renderedValue.replace(/`.+?`/g, match => {
-      return match.replace(/&gt;/, '>').replace(/&lt;/, '<');
-    });
-
-    return renderedValue;
   }
 }

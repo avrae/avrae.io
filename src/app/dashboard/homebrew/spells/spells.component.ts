@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {of} from 'rxjs';
+import {DiscordUser} from '../../../schemas/Discord';
 import {Tome} from '../../../schemas/homebrew/Spells';
 import {UserInfo} from '../../../schemas/UserInfo';
 import {DiscordService} from '../../../shared/discord.service';
@@ -17,7 +18,7 @@ import {TomeShareDialog} from './dialogs/tome-share-dialog.component';
 export class SpellsComponent implements OnInit {
 
   tomes: Tome[];
-  owners: Map<string, UserInfo> = new Map<string, UserInfo>();
+  owners: Map<string, DiscordUser> = new Map<string, DiscordUser>();
 
   constructor(private homebrewService: HomebrewService, private discord: DiscordService,
               private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {

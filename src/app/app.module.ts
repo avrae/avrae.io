@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import * as Sentry from '@sentry/browser';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
+import {MonacoEditorModule} from 'ngx-monaco-editor';
 
 import {AppRoutingModule} from './app-routing.module';
 
@@ -15,7 +16,6 @@ import {AppComponent} from './app.component';
 import {CheatsheetsModule} from './cheatsheets/cheatsheets.module';
 import {CommandDisplayComponent} from './commands/command-display/command-display.component';
 import {CommandsComponent} from './commands/commands.component';
-import {DashboardModule} from './dashboard/dashboard.module';
 import {ErrorComponent} from './error/error.component';
 import {FooterComponent} from './footer/footer.component';
 import {FeatureBoxComponent} from './home/feature-box/feature-box.component';
@@ -27,6 +27,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {AutomationEditorModule} from './shared/automation-editor/automation-editor.module';
 import {DialogsModule} from './shared/dialogs/dialogs.module';
 import {DiscordEmbedModule} from './shared/discord-embed/discord-embed.module';
+import {registerDraconicLanguage} from './shared/monacoDraconic';
 import {ThemesModule} from './themes/themes.module';
 
 Sentry.init({dsn: 'https://af2b06560981446bb55f64b6f79fd520@sentry.io/1486249'});
@@ -39,6 +40,12 @@ const markdownConfig = {
       breaks: true,
     },
   },
+};
+
+const monacoConfig = {
+  onMonacoLoad: () => {
+    registerDraconicLanguage(monaco);
+  }
 };
 
 @NgModule({
@@ -61,7 +68,6 @@ const markdownConfig = {
     MarkdownModule.forRoot(markdownConfig),
     FlexLayoutModule,
     MaterialModule,
-    DashboardModule,
     CheatsheetsModule,
     HomebrewSharingModule,
     DiscordEmbedModule,
@@ -69,7 +75,8 @@ const markdownConfig = {
     DialogsModule,
     AppRoutingModule,
     ThemesModule,
-    LoginModule
+    LoginModule,
+    MonacoEditorModule.forRoot(monacoConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

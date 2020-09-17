@@ -64,4 +64,9 @@
     margin: 1.5em 10px;
     padding: 0 8px;
   }
+
+  // fix for angular checkbox not wrapping (https://github.com/angular/components/issues/8416#issuecomment-346380860)
+  .mat-checkbox-layout {
+    white-space: normal !important;
+  }
 }

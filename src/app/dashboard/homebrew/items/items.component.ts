@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DiscordUser} from '../../../schemas/Discord';
 import {Pack} from '../../../schemas/homebrew/Items';
-import {UserInfo} from '../../../schemas/UserInfo';
 import {DiscordService} from '../../../shared/discord.service';
 import {HomebrewService} from '../homebrew.service';
 import {NewPackDialog} from './new-pack-dialog/new-pack-dialog.component';
@@ -16,7 +16,7 @@ import {PackShareDialog} from './pack-share-dialog/pack-share-dialog.component';
 export class ItemsComponent implements OnInit {
 
   packs: Pack[];
-  owners: Map<string, UserInfo> = new Map<string, UserInfo>();
+  owners: Map<string, DiscordUser> = new Map<string, DiscordUser>();
 
   constructor(private homebrewService: HomebrewService, private discord: DiscordService,
               private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {

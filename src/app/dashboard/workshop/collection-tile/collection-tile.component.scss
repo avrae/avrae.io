@@ -1,0 +1,99 @@
+@import "../../../variables";
+
+.tile {
+  position: relative;
+  background: $gray-dark1;
+  border-radius: 8px;
+}
+
+/* image portion */
+.collection-image-container {
+  padding-top: 56.25%; // 16:9 aspect ratio from square tile
+  position: relative;
+}
+
+.collection-image {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.collection-name-underlay p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+}
+
+/* meta portion */
+.collection-meta {
+  margin: 0 8px;
+  padding-bottom: 8px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.collection-author {
+  height: 24px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 8px;
+
+  .collection-author-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+
+  .collection-author-username {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.collection-tags {
+}
+
+.description {
+  // line-clamp is not 100% supported by all browsers yet
+  // https://caniuse.com/#search=line-clamp = 95% (no ie11)
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  margin: 4px 0;
+}
+
+.hover-meta-grid {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+
+  .hover-subscriptions-number {
+    height: 24px;
+    grid-column-start: 1;
+    margin: auto 0 auto auto;
+    padding-top: 4px;
+  }
+
+  .hover-subscriptions-icon {
+    height: 24px;
+    grid-column-start: 2;
+    margin: auto auto auto 0;
+  }
+
+  .hover-buttons {
+    grid-column-start: 3;
+  }
+}
+
+

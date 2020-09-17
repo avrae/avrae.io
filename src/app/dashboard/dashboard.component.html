@@ -1,25 +1,39 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-    [(opened)]="opened"
+    opened
     mode="side"
     class="sidenav mat-elevation-z3"
-    fixedTopGap="56px">
+    fixedTopGap="56px"
+    disableClose="true">
     <mat-nav-list>
       <a mat-list-item [routerLink]="['characters']">Characters</a>
 
-      <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel expanded class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="nav-panel">
+            Alias Workshop
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="nav-panel-body">
+          <a mat-list-item routerLink="/dashboard/workshop">Explore</a>
+          <a mat-list-item routerLink="/dashboard/workshop/my-subscriptions">My Subscriptions</a>
+          <a mat-list-item routerLink="/dashboard/workshop/my-work">My Work</a>
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded class="mat-elevation-z0">
         <mat-expansion-panel-header>
           <mat-panel-title class="nav-panel">
             Customization
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="nav-panel-body">
-          <a mat-list-item [routerLink]="['aliases']">Your Customizations</a>
+          <a mat-list-item [routerLink]="['aliases']">My Customizations</a>
           <a mat-list-item [routerLink]="['gvars']">Global Variables</a>
         </div>
       </mat-expansion-panel>
 
-      <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel expanded class="mat-elevation-z0">
         <mat-expansion-panel-header>
           <mat-panel-title class="nav-panel">
             Homebrew

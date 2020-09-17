@@ -1,5 +1,7 @@
-import {HttpHeaders} from '@angular/common/http';
+import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable, of} from 'rxjs';
+import {getUserAvatarUrl} from '../schemas/Discord';
 import {UserInfo} from '../schemas/UserInfo';
 import {getToken} from '../SecurityHelper';
 
@@ -8,37 +10,39 @@ export interface ApiResponse<T> {
   success: boolean;
   data?: T;
   error?: string;
+  status?: number;
 }
 
 // api options
-export function defaultOptions() {
-  return {headers: new HttpHeaders({'Authorization': getToken()})};
+export function defaultOptions(additionalOptions = {}) {
+  return {
+    headers: new HttpHeaders({'Authorization': getToken()}),
+    ...additionalOptions
+  };
 }
 
-export function defaultTextOptions() {
-  return {responseType: 'text', headers: new HttpHeaders({'Authorization': getToken()})};
+export function defaultTextOptions(additionalOptions = {}) {
+  return {
+    responseType: 'text',
+    headers: new HttpHeaders({'Authorization': getToken()}),
+    ...additionalOptions
+  };
 }
 
 // user session
-export function setUser(user: UserInfo) {
-  sessionStorage.setItem('user', JSON.stringify(user));
-}
-
-export function getUser(): UserInfo {
-  if (sessionStorage.getItem('user')) {
-    return JSON.parse(sessionStorage.getItem('user'));
-  }
-  return null;
-}
-
-export function removeUser() {
-  if (sessionStorage.getItem('user')) {
-    sessionStorage.removeItem('user');
-  }
+export function getUser(): UserInfo {  // parse from JWT
+  const helper = new JwtHelperService();
+  const decodedToken = helper.decodeToken(getToken());
+  return {
+    id: decodedToken.id,
+    username: decodedToken.username,
+    avatarUrl: getUserAvatarUrl(decodedToken.id, decodedToken.avatar),
+    discriminator: decodedToken.discriminator
+  } as UserInfo;
 }
 
 // error handling
-export function defaultErrorHandler(err): Observable<ApiResponse<any>> {
+export function defaultErrorHandler(err: HttpErrorResponse): Observable<ApiResponse<any>> {
   console.error(err);
-  return of({success: false, error: err.error});
+  return of({...err.error, status: err.status} as ApiResponse<any>);
 }

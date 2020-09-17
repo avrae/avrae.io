@@ -1,0 +1,97 @@
+<div class="tile mat-elevation-z3">
+  <!-- image/initials -->
+  <a
+    [routerLink]="showEdit ? ['/dashboard/workshop/', collection._id, 'edit'] : ['/dashboard/workshop/', collection._id]"
+    class="ignore-theme">
+    <div class="collection-image-container">
+      <div class="collection-name-underlay mat-typography collection-image">
+        <p *ngIf="!collection.image">
+          {{getInitials(collection.name)}}
+        </p>
+      </div>
+      <img class="collection-image" [src]="collection.image" [alt]="'Image for ' + collection.name"
+           *ngIf="collection.image">
+    </div>
+  </a>
+
+  <div class="collection-meta mat-typography">
+    <mat-divider></mat-divider>
+
+    <!-- name, author -->
+    <h2>
+      {{collection.name}}
+    </h2>
+
+    <div class="collection-author">
+      <img class="collection-author-avatar" [src]="author.avatarUrl" alt="avatar">
+      <span class="collection-author-username">
+        by {{author.username}}
+
+        <span class="collection-edit-date">
+          • {{collection.last_edited | dateAgo}}
+        </span>
+
+        <i class="collection-publication-state" *ngIf="collection.publish_state !== 'PUBLISHED'">
+          ({{collection.publish_state.toLowerCase()}})
+        </i>
+      </span>
+    </div>
+
+    <!-- tags -->
+    <avr-tag-chip-list [collection]="collection" [limit]="5"></avr-tag-chip-list>
+
+    <!-- description, actions -->
+    <p class="description">
+      {{collection.description}}
+    </p>
+
+    <div class="hover-meta-grid">
+      <!-- # of subscriptions -->
+      <div class="hover-subscriptions-number">
+        {{getNumberString(collection.num_subscribers + collection.num_guild_subscribers)}}
+      </div>
+      <div class="hover-subscriptions-icon">
+        <mat-icon>get_app</mat-icon>
+      </div>
+
+      <div class="hover-buttons">
+        <!-- custom buttons (define in parent) -->
+        <ng-content></ng-content>
+
+        <!-- read more/edit -->
+        <a mat-icon-button aria-label="More details" matTooltip="More details"
+           [routerLink]="['/dashboard/workshop/', collection._id]"
+           *ngIf="!showEdit">
+          <mat-icon>read_more</mat-icon>
+        </a>
+
+        <a mat-icon-button aria-label="Edit" matTooltip="Edit"
+           [routerLink]="['/dashboard/workshop/', collection._id, 'edit']"
+           *ngIf="showEdit">
+          <mat-icon>edit</mat-icon>
+        </a>
+
+        <!-- server sub -->
+        <button mat-icon-button aria-label="Server subscribe" matTooltip="Add to server"
+                [matMenuTriggerFor]="serverSubMenu">
+          <mat-icon>post_add</mat-icon>
+        </button>
+        <mat-menu #serverSubMenu="matMenu">
+          <button mat-menu-item *ngFor="let guild of getGuilds() | async" (click)="onGuildSubscribe(guild)">
+            {{guild.name}}
+          </button>
+        </mat-menu>
+
+        <!-- personal sub -->
+        <button mat-icon-button aria-label="Personal subscribe" matTooltip="Add to personal collection"
+                *ngIf="!isSubscribed()" (click)="onSubscribe()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Personal unsubscribe" matTooltip="Remove from personal collection"
+                *ngIf="isSubscribed()" (click)="onUnsubscribe()">
+          <mat-icon>check</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

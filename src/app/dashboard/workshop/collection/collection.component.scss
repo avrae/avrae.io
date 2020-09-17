@@ -1,0 +1,74 @@
+@import "../../../variables";
+@import "../variables";
+
+.toolbar-search-form {
+  margin-left: 8px;
+}
+
+.content {
+  color: $gray-light1;
+  background: $black;
+  padding: 8px;
+  min-height: calc(100vh - (#{$footer-height} + #{$toolbar-height} + #{$navbar-height} + 16px));
+}
+
+.metadata-grid {
+  display: grid;
+  grid-template-columns: minmax(275px, 1fr) 275px;
+  grid-gap: 1rem;
+
+  .metadata {
+    background: $gray-dark1;
+    padding: 8px;
+    border-radius: 8px;
+  }
+}
+
+.meta-author {
+  margin-bottom: 8px;
+}
+
+.desc-image {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.desc-subscribe-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  background: $gray-dark1;
+  padding: 8px;
+
+  .desc-subscribe-buttons {
+    button {
+      mat-icon {
+        // helps center the icon relative to the button text
+        margin-top: -2px;
+        margin-left: -6px;
+      }
+
+      margin: 0 8px;
+    }
+  }
+}
+
+.desc-tags {
+  margin-top: 8px;
+}
+
+.desc-text {
+  margin-top: 8px;
+}
+
+// ==== alias/snippet area ====
+.collectable-container {
+  background: $gray-dark1;
+  padding: 16px 24px;
+  margin: 12px 0;
+
+  h2 {
+    color: $blurple;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+}
