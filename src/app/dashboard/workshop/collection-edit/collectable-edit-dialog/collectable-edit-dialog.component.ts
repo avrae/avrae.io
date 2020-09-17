@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {groupBy} from 'lodash';
 import {Observable} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
@@ -57,7 +58,8 @@ export class CollectableEditDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: CollectableEditDialogComponentData,
               private dialogRef: MatDialogRef<CollectableEditDialogComponent>,
-              private workshopService: WorkshopService, private dialog: MatDialog) {
+              private workshopService: WorkshopService, private dialog: MatDialog,
+              private snackBar: MatSnackBar) {
     this.collection = data.collection;
     this.alias = data.alias;
     this.parent = data.parent;
@@ -127,6 +129,26 @@ export class CollectableEditDialogComponent implements OnInit {
         });
       }
     });
+  }
+
+  onDone() {
+    // if no outstanding changes, just close
+    if (this.name === this.collectable.name
+      && this.docs === this.collectable.docs
+      && !(this.creatingNewCodeVersion && this.newCodeVersionContent)) {
+      this.dialogRef.close(this.collectable);
+    } else {
+      // otherwise pop up a confirmation snackbar (?)
+      this.snackBar.open('You have unsaved changes. Do you want to discard them?', 'Discard',
+        {duration: 5000}
+      ).afterDismissed().subscribe(
+        event => {
+          if (event.dismissedByAction) {
+            this.dialogRef.close(this.collectable);
+          }
+        }
+      );
+    }
   }
 
   onViewCodeVersion(codeVersion: CodeVersion) {

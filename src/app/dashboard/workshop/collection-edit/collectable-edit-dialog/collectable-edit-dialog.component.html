@@ -119,7 +119,7 @@
   </p>
 </div>
 <div mat-dialog-actions>
-  <button mat-flat-button [mat-dialog-close]="collectable">Done</button>
+  <button mat-flat-button (click)="onDone()">Done</button>
   <mat-spinner *ngIf="loading" [diameter]="24"></mat-spinner>
   <span class="toolbar-spacer"></span>
   <button mat-flat-button (click)="onDelete()" color="warn"
