@@ -13,6 +13,7 @@ mat-form-field {
   grid-template-columns: 1fr auto;
   background: $gray-dark1;
   border-radius: 4px;
+  height: 55vh;
 
   .no-code-version {
     padding: 8px;
@@ -20,8 +21,7 @@ mat-form-field {
 }
 
 .code-editor {
-  min-height: 35vh;
-  max-height: 55vh;
+  height: 55vh;
 }
 
 .monaco-editor-container {
@@ -34,6 +34,8 @@ mat-form-field {
 
 .code-versions-list {
   border-left: 1px solid rgba($gray2, 0.3);
+  height: 55vh;
+  overflow: auto;
 
   mat-action-list {
     margin-top: -8px; // undo a forced angular theme
