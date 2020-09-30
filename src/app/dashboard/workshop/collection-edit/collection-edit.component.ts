@@ -53,7 +53,6 @@ export class CollectionEditComponent implements OnInit {
   // event listeners
   onCollectionInit(collection: WorkshopCollectionFull) {
     this.collection = collection;
-    this.editors = [];
     this.loadOwner();
     this.loadEditors();
   }
@@ -186,7 +185,7 @@ export class CollectionEditComponent implements OnInit {
     }
     let currentUser = getUser();
     // if current user cannot edit
-    if (this.owner.id !== currentUser.id && !this.editors.find(e => e.id === currentUser.id)) {
+    if (this.owner.id !== currentUser.id && !this.canEdit()) {
       // redirect back to view
       this.router.navigate(['..'], {skipLocationChange: true});
     }

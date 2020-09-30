@@ -86,7 +86,7 @@
         <div class="meta-author">
           <avr-pretty-user [user]="owner"></avr-pretty-user>
         </div>
-        <div class="meta-author" *ngFor="let editor of editors">
+        <div class="meta-author" *ngFor="let editor of editors || []">
           <avr-pretty-user [user]="editor">
             <button mat-icon-button matTooltip="Remove editor" (click)="onRemoveEditor(editor)">
               <mat-icon class="muted">clear</mat-icon>
