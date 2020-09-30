@@ -25,11 +25,16 @@ export function getGuildAvatarUrl(guild: PartialGuild, size: number = null): str
   return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${ext}${sizeQ}`;
 }
 
-export function getUserAvatarUrl(userId: string, hash: string, size: number = 1024) {
+export function getUserAvatarUrl(userId: string, hash: string | null, size: number = 1024) {
   let sizeQ = '';
   if (size !== null) {
     sizeQ = `?size=${size}`;
   }
+
+  if (hash === null) {
+    return `https://cdn.discordapp.com/embed/avatars/0.png${sizeQ}`
+  }
+
   const ext = hash.startsWith('a_') ? 'gif' : 'png';
   return `https://cdn.discordapp.com/avatars/${userId}/${hash}.${ext}${sizeQ}`;
 }
