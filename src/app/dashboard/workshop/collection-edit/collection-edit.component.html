@@ -1,0 +1,153 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Back" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <span>{{collection?.name || 'Loading...'}}</span>
+  <span class="toolbar-spacer"></span>
+
+  <!-- finish editing, edit meta -->
+  <a mat-icon-button aria-label="Done Editing Button" matTooltip="Done Editing" [routerLink]="'../'"
+     [skipLocationChange]="true">
+    <mat-icon>check</mat-icon>
+  </a>
+
+  <button mat-icon-button aria-label="Edit Button" matTooltip="Edit Settings" (click)="onEditSettings()">
+    <mat-icon>settings</mat-icon>
+  </button>
+
+  <!-- loading -->
+  <mat-spinner *ngIf="loading" color="accent" diameter="24" class="toolbar-spinner"></mat-spinner>
+</mat-toolbar>
+
+<!-- CONTENT -->
+<div class="content mat-typography" *ngIf="collection">
+
+  <div class="metadata-grid">
+    <!-- image, description, tags -->
+    <div class="description-etc">
+      <img *ngIf="collection.image" [src]="collection.image" alt="Collection Image" class="desc-image">
+
+      <!-- unpublished: publish or edit sharing settings -->
+      <div class="desc-subscribe-container" *ngIf="collection.publish_state !== PublicationState.PUBLISHED">
+        <div>
+          <b>{{collection.name}}</b> is currently {{collection.publish_state.toLowerCase()}}. Ready to share
+          <b>{{collection.name}}</b> with the world? Publish it to let anyone add it to their own
+          collection or server!
+        </div>
+        <div class="desc-subscribe-buttons">
+          <!-- edit sharing -->
+          <button mat-raised-button color="accent" (click)="onEditSettings()">
+            <mat-icon>share</mat-icon>
+            Sharing Settings
+          </button>
+          <!-- publish -->
+          <button mat-raised-button color="accent" (click)="onPublish()">
+            <mat-icon>publish</mat-icon>
+            Publish
+          </button>
+        </div>
+
+        <div class="desc-error mat-error" *ngIf="error">
+          {{error}}
+        </div>
+      </div>
+      <!-- published: view -->
+      <div class="desc-subscribe-container" *ngIf="collection.publish_state === PublicationState.PUBLISHED">
+        <div>
+          <b>{{collection.name}}</b> is published! Everyone who has added it to a personal or server collection will
+          automatically receive the latest updates.
+        </div>
+        <div class="desc-subscribe-buttons">
+          <!-- view -->
+          <a mat-raised-button color="accent" [routerLink]="'../'" [skipLocationChange]="true">
+            View on Workshop
+          </a>
+        </div>
+
+        <div class="desc-error mat-error" *ngIf="error">
+          {{error}}
+        </div>
+      </div>
+
+      <div class="desc-tags">
+        <avr-tag-chip-list [collection]="collection" [showEdit]="true"></avr-tag-chip-list>
+      </div>
+
+      <p class="desc-text">
+        <markdown [data]="debrace(collection.description)"></markdown>
+      </p>
+    </div>
+
+    <!-- metadata -->
+    <div class="metadata-container"> <!-- this is here for grid purposes, it takes up 100% of the grid cell -->
+      <div class="metadata">
+        <!-- authors/editors -->
+        <div class="meta-author">
+          <avr-pretty-user [user]="owner"></avr-pretty-user>
+        </div>
+        <div class="meta-author" *ngFor="let editor of editors || []">
+          <avr-pretty-user [user]="editor">
+            <button mat-icon-button matTooltip="Remove editor" (click)="onRemoveEditor(editor)">
+              <mat-icon class="muted">clear</mat-icon>
+            </button>
+          </avr-pretty-user>
+        </div>
+        <!-- search/add editor -->
+        <mat-divider></mat-divider>
+        <div class="add-editor">
+          <avr-add-editor (addEditor)="onAddEditor($event)"></avr-add-editor>
+        </div>
+        <!-- edit settings -->
+        <div class="meta-buttons">
+          <button mat-raised-button color="accent" (click)="onEditSettings()">
+            Edit Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+  <!-- aliases/snippets -->
+
+  <div class="collectable-container">
+    <h2>Aliases</h2>
+    <avr-collectable-edit *ngFor="let alias of collection.aliases"
+                          [collection]="collection"
+                          [alias]="alias">
+    </avr-collectable-edit>
+
+    <mat-divider></mat-divider>
+    <div class="create-new clickable" (click)="onCreateNewAlias()"
+         [matTooltip]="collection.publish_state === PublicationState.PUBLISHED
+         ? 'An alias cannot be deleted once created in a published collection.'
+         : null">
+      <div>Create New Alias...</div>
+      <mat-icon>add</mat-icon>
+    </div>
+  </div>
+
+  <div class="collectable-container">
+    <h2>Snippets</h2>
+    <avr-collectable-edit *ngFor="let snippet of collection.snippets"
+                          [collection]="collection"
+                          [snippet]="snippet">
+    </avr-collectable-edit>
+
+    <mat-divider></mat-divider>
+    <div class="create-new clickable" (click)="onCreateNewSnippet()"
+         [matTooltip]="collection.publish_state === PublicationState.PUBLISHED
+         ? 'A snippet cannot be deleted once created in a published collection.'
+         : null">
+      <div>Create New Snippet...</div>
+      <mat-icon>add</mat-icon>
+    </div>
+  </div>
+
+</div>
+
+<div class="content mat-typography" *ngIf="!collection">
+  Loading...
+</div>
+

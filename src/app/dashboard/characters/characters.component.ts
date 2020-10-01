@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {UserInfo, UserStats} from '../../schemas/UserInfo';
-import {DashboardService} from '../dashboard.service';
+import {Observable, of} from 'rxjs';
 import {CharacterMeta} from '../../schemas/Character';
-import {Observable} from 'rxjs';
+import {UserInfo, UserStats} from '../../schemas/UserInfo';
+import {getUser} from '../APIHelper';
+import {DashboardService} from '../dashboard.service';
 import {AttackEditorDialog} from './attack-editor-dialog/attack-editor-dialog.component';
 
 @Component({
@@ -31,7 +32,7 @@ export class CharactersComponent implements OnInit {
   }
 
   getUserInfo(): void {
-    this.userInfo = this.dashboardService.getUserInfo();
+    this.userInfo = of(getUser());
   }
 
   getUserStats(): void {

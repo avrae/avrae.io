@@ -10,11 +10,11 @@
 @include mat-core();
 
 
-// Define the light theme.
-$primary: mat-palette($mat-indigo);
-$accent:  mat-palette($mat-pink, A200, A100, A400);
+// Define the dark theme.
+$primary: mat-palette($mat-purple);
+$accent:  mat-palette($mat-green, A200, A100, A400);
 
-$theme: mat-light-theme($primary, $accent);
+$theme: mat-dark-theme($primary, $accent);
 @include angular-material-theme($theme);
 @include avr-app-theme($theme);
 

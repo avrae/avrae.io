@@ -1,0 +1,133 @@
+<h1 mat-dialog-title>Editing {{collectable.name}}...</h1>
+<div mat-dialog-content class="mat-typography">
+  <h3>Name &amp; Description</h3>
+  <p>
+    You can edit the collectible's name, documentation, licenses, and code here.
+  </p>
+
+  <!-- name, description -->
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="name">
+    <mat-hint>This won't change the name of the item for current subscribers.</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Documentation (Markdown Supported)</mat-label>
+    <textarea matInput [(ngModel)]="docs" mat-autosize></textarea>
+    <mat-hint *ngIf="alias">This will appear in your alias' help command.</mat-hint>
+  </mat-form-field>
+
+  <button mat-flat-button (click)="onSave()" color="primary" class="spaced-button">Save</button>
+
+  <mat-divider></mat-divider>
+
+  <!-- code versions -->
+  <div class="section">
+    <h3>Code Versions</h3>
+    <p>
+      You can view the code version and set the active code version here. To edit the code, create a new code version.
+      It is recommended to test code in a personal alias before publishing a code version, as code versions cannot
+      be edited or deleted.
+    </p>
+    <p>
+      Need some references? You can <a href="https://avrae.readthedocs.io/en/stable/aliasing/api.html" target="_blank">
+      find the Draconic documentation here</a>.
+    </p>
+    <div class="code-versions-container ignore-theme">
+      <!-- code editor: display selected, edit new version, or placeholder if nothing selected -->
+      <div class="code-editor">
+        <div *ngIf="selectedCodeVersion" class="monaco-editor-container">
+          <ngx-monaco-editor [options]="readonlyEditorOptions"
+                             [ngModel]="selectedCodeVersion.content"></ngx-monaco-editor>
+        </div>
+        <div *ngIf="creatingNewCodeVersion" class="monaco-editor-container">
+          <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="newCodeVersionContent"></ngx-monaco-editor>
+        </div>
+        <p *ngIf="!(selectedCodeVersion || creatingNewCodeVersion)" class="no-code-version">
+          Looks like this item doesn't have any code yet. Go ahead and create a new code version on the right or
+          <a href="https://avrae.readthedocs.io/en/stable/aliasing/api.html" target="_blank">read the
+            Draconic documentation</a> to get started!
+        </p>
+      </div>
+      <!-- code version viewer -->
+      <div class="code-versions-list">
+        <mat-action-list>
+          <button mat-list-item (click)="onStartCreatingCodeVersion()" [class.active]="creatingNewCodeVersion"
+                  class="ignore-theme">
+            Create New Version
+          </button>
+          <button mat-list-item *ngFor="let codeVersion of getSortedVersions()" class="ignore-theme"
+                  (click)="onViewCodeVersion(codeVersion)" [class.active]="selectedCodeVersion === codeVersion">
+            <p matLine>
+              Version {{codeVersion.version}}
+              <em *ngIf="codeVersion.is_current"> (active)</em>
+            </p>
+            <p matLine>{{codeVersion.created_at | date}}</p>
+          </button>
+        </mat-action-list>
+      </div>
+    </div> <!-- </code-versions-container> -->
+    <!-- buttons: set active code version or save new code version -->
+    <button mat-raised-button *ngIf="selectedCodeVersion && !selectedCodeVersion.is_current" color="accent"
+            (click)="onSetCurrentAsActive()" class="code-versions-button">
+      Set Version {{selectedCodeVersion.version}} as Active Code Version
+    </button>
+    <button mat-raised-button *ngIf="creatingNewCodeVersion" color="accent" (click)="onSaveNewCodeVersion()"
+            class="spaced-button">
+      Save New Code Version
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- entitlements -->
+  <div class="section">
+    <h3>Licenses</h3>
+    <p>
+      If you plan on publishing this collection, make sure to add the relevant licenses if this item uses any licensed
+      rules or data. You don't have to add licenses here for data that is free on D&amp;D Beyond.
+    </p>
+
+    <mat-form-field class="entitlements-list">
+      <mat-chip-list #chipList aria-label="Entitlements selection">
+        <mat-chip
+          *ngFor="let entitlement of collectable.entitlements"
+          [removable]="!entitlement.required"
+          (removed)="onRemoveEntitlement(entitlement)">
+          {{(getEntity(entitlement) | async)?.name}}
+          <mat-icon matChipRemove *ngIf="!entitlement.required">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Add License..." [matAutocomplete]="auto" [matChipInputFor]="chipList"
+               [formControl]="entitlementsControl">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-optgroup *ngFor="let tup of addableEntitlements | async" [label]="tup[0] | titlecase">
+          <mat-option *ngFor="let entitlement of tup[1]" (click)="onAddEntitlement(entitlement)">
+            {{entitlement.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- errors -->
+  <p class="mat-error" *ngIf="error">
+    {{error}}
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button (click)="onDone()">Done</button>
+  <mat-spinner *ngIf="loading" [diameter]="24"></mat-spinner>
+  <span class="toolbar-spacer"></span>
+  <button mat-flat-button (click)="onDelete()" color="warn"
+          *ngIf="collection.publish_state !== PublicationState.PUBLISHED || parent">
+    Delete
+  </button>
+  <div *ngIf="collection.publish_state === PublicationState.PUBLISHED && !parent"
+       matTooltip="You cannot delete a top-level item of a published collection.">
+    <button mat-flat-button disabled color="warn">Delete</button>
+  </div>
+</div>

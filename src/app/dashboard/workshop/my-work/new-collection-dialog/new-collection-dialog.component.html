@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Creating Collection</h2>
+
+<mat-dialog-content class="mat-typography">
+  <p>
+    Start by giving your collection a name, description, and optionally an image! These can
+    be changed at any time after your collection is created.
+  </p>
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Collection Name" required [(ngModel)]="name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput placeholder="What is this collection about?" required [(ngModel)]="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Image URL</mat-label>
+    <input matInput placeholder="Image URL" [(ngModel)]="imageUrl">
+  </mat-form-field>
+
+  <p class="mat-error" *ngIf="error">
+    {{error}}
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <mat-spinner [diameter]="24" *ngIf="loading"></mat-spinner>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" (click)="onCreate()">Create</button>
+</mat-dialog-actions>

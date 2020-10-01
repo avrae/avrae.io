@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Editing {{collection.name}}...</h1>
+<div mat-dialog-content class="mat-typography">
+  <p>This won't change how the collection appears for anyone else until you click Save.</p>
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description (Markdown Supported)</mat-label>
+    <textarea matInput [(ngModel)]="description" mat-autosize></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Image URL</mat-label>
+    <input matInput [(ngModel)]="imageUrl">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Sharing Settings</mat-label>
+    <!-- not published: private/unlisted -->
+    <mat-select [(value)]="publishState" *ngIf="publishState !== PublicationState.PUBLISHED">
+      <mat-option [value]="PublicationState.PRIVATE">
+        Private (Only the owner and editors can subscribe)
+      </mat-option>
+      <mat-option [value]="PublicationState.UNLISTED">
+        Unlisted (Anyone with the link can subscribe)
+      </mat-option>
+      <mat-option disabled matTooltip="To publish this collection, click Publish on the main edit page.">
+        Published (Anyone can find this collection in the workshop)
+      </mat-option>
+    </mat-select>
+    <!-- published: cannot unpublish -->
+    <mat-select [(value)]="publishState" *ngIf="publishState === PublicationState.PUBLISHED"
+                matTooltip="You cannot unpublish a collection."
+                disabled>
+      <mat-option [value]="PublicationState.PUBLISHED">
+        Published
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p class="mat-error" *ngIf="error">
+    {{error}}
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button (click)="onSaveAndExit()" color="primary">Save</button>
+  <mat-spinner *ngIf="loading" [diameter]="24"></mat-spinner>
+  <span class="toolbar-spacer"></span>
+  <button mat-flat-button (click)="onDelete()" color="warn" *ngIf="publishState !== PublicationState.PUBLISHED">
+    Delete
+  </button>
+  <div *ngIf="publishState === PublicationState.PUBLISHED" matTooltip="You cannot delete a published collection.">
+    <button mat-flat-button color="warn" disabled>
+      Delete
+    </button>
+  </div>
+</div>

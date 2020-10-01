@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {GlobalVar} from '../../../schemas/Customization';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {NewDialog} from '../../new-dialog/new-dialog.component';
-import {EditDialog} from '../../edit-dialog/edit-dialog.component';
 import {ConfirmDeleteDialog} from '../../confirm-delete-dialog/confirm-delete-dialog.component';
+import {EditDialog} from '../../edit-dialog/edit-dialog.component';
+import {NewDialog} from '../../new-dialog/new-dialog.component';
 import {GvarService} from '../gvar.service';
 
 @Component({
@@ -23,6 +23,10 @@ export class GvarListComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  sortedGvars(gvars: GlobalVar[]) {
+    return gvars?.sort((a, b) => a.key.localeCompare(b.key));
   }
 
   refresh() {

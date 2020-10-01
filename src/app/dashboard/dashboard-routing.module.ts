@@ -4,16 +4,17 @@ import {DashboardComponent} from './dashboard.component';
 import {CharactersComponent} from './characters/characters.component';
 import {CustomizationComponent} from './customization/customization.component';
 import {GvarsComponent} from './gvars/gvars.component';
-import {AuthGuard} from "../auth.guard";
+import {AuthGuard} from '../auth.guard';
 
 
 const dashboardRoutes: Routes = [
   {
-    path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent, children: [
+    path: '', canActivate: [AuthGuard], component: DashboardComponent, children: [
       {path: 'characters', component: CharactersComponent},
-      // {path: "characters/:id"}
       {path: 'aliases', component: CustomizationComponent},
       {path: 'gvars', component: GvarsComponent},
+      {path: 'homebrew', loadChildren: () => import('./homebrew/homebrew.module').then(mod => mod.HomebrewModule)},
+      {path: 'workshop', loadChildren: () => import('./workshop/workshop.module').then(mod => mod.WorkshopModule)},
       {path: '', redirectTo: 'characters', pathMatch: 'full'}
     ]
   }

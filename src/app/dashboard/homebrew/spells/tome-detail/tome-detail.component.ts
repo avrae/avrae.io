@@ -32,22 +32,11 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getUser();
     this.getTome();
   }
 
   ngOnDestroy() {
     this.snackBar.dismiss();
-  }
-
-  getUser() {
-    if (!this.user) {
-      this.dashboardService.getUserInfo()
-        .subscribe(user => {
-          this.user = user;
-          this.calcCanEdit();
-        });
-    }
   }
 
   getTome() {

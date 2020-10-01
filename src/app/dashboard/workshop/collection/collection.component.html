@@ -1,0 +1,145 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Back" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <span>{{collection?.name || 'Loading...'}}</span>
+  <span class="toolbar-spacer"></span>
+
+  <!-- edit, edit bindings -->
+  <a mat-icon-button aria-label="Edit Collection Button" matTooltip="Edit Collection"
+          *ngIf="canEdit()" [routerLink]="'./edit'" [skipLocationChange]="true">
+    <mat-icon>edit</mat-icon>
+  </a>
+
+  <button mat-icon-button aria-label="Edit Bindings Button" matTooltip="Edit Bindings"
+          *ngIf="bindings" (click)="onEditBindings()">
+    <mat-icon>handyman</mat-icon>
+  </button>
+
+  <!-- loading, guild select -->
+  <mat-spinner *ngIf="loading" color="accent" diameter="24" class="toolbar-spinner"></mat-spinner>
+
+  <div class="toolbar-search-form">
+    <!-- guild context -->
+    <avr-guild-select-field class="toolbar-search-form-guild-context"
+                            label="View As"
+                            (guildChange)="onGuildContextChange($event)">
+    </avr-guild-select-field>
+  </div>
+
+</mat-toolbar>
+
+<!-- CONTENT -->
+<div class="content mat-typography" *ngIf="collection">
+
+  <div class="metadata-grid">
+    <!-- image, description, tags -->
+    <div class="description-etc">
+      <img *ngIf="collection.image" [src]="collection.image" alt="Collection Image" class="desc-image">
+
+      <div class="desc-subscribe-container">
+        <div>
+          Subscribe or add <b>{{collection.name}}</b> to a server to instantly gain access to
+          <b>{{collection.alias_ids.length}}</b>
+          {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}} and
+          <b>{{collection.snippet_ids.length}}</b>
+          {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}.
+        </div>
+        <div class="desc-subscribe-buttons">
+          <!-- server sub -->
+          <button mat-raised-button color="accent" [matMenuTriggerFor]="serverSubMenu">
+            <mat-icon>post_add</mat-icon>
+            Add to Server
+          </button>
+          <mat-menu #serverSubMenu="matMenu">
+            <button mat-menu-item *ngFor="let guild of getGuilds() | async" (click)="onGuildSubscribe(guild)">
+              {{guild.name}}
+            </button>
+          </mat-menu>
+          <!-- personal sub -->
+          <button mat-raised-button color="accent" *ngIf="!isSubscribed()" (click)="onSubscribe()">
+            <mat-icon>add</mat-icon>
+            Subscribe
+          </button>
+          <button mat-raised-button color="accent" *ngIf="isSubscribed()" (click)="onUnsubscribe()">
+            <mat-icon>check</mat-icon>
+            Subscribed!
+          </button>
+        </div>
+
+        <div class="desc-error mat-error" *ngIf="error">
+          {{error}}
+        </div>
+      </div>
+
+      <div class="desc-tags">
+        <avr-tag-chip-list [collection]="collection"></avr-tag-chip-list>
+      </div>
+
+      <p class="desc-text">
+        <markdown>{{debrace(collection.description)}}</markdown>
+      </p>
+    </div>
+
+    <!-- metadata -->
+    <div class="metadata-container"> <!-- this is here for grid purposes, it takes up 100% of the grid cell -->
+      <div class="metadata">
+        <!-- authors/editors -->
+        <div class="meta-author" *ngFor="let editor of editors">
+          <avr-pretty-user [user]="editor"></avr-pretty-user>
+        </div>
+
+        <!-- edit/creation time -->
+        <div class="meta-times">
+          <p>
+            Last Edited: {{collection.last_edited | dateAgoLong}} <br>
+            Created: {{collection.created_at | dateAgoLong}}
+          </p>
+        </div>
+
+        <!-- subscriptions -->
+        <div class="meta-subscriptions">
+          <p>
+            Added by <b>{{collection.num_subscribers}}</b> people
+            and <b>{{collection.num_guild_subscribers}}</b> servers
+          </p>
+        </div>
+
+        <!-- # alias/snippets -->
+        <div class="meta-numbers">
+          <p>
+            <b>{{collection.alias_ids.length}}</b> {{collection.alias_ids.length === 1 ? 'alias' : 'aliases'}}
+            <br>
+            <b>{{collection.snippet_ids.length}}</b> {{collection.snippet_ids.length === 1 ? 'snippet' : 'snippets'}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+  <!-- aliases/snippets display -->
+
+  <div class="collectable-container" *ngIf="collection.alias_ids.length">
+    <h2>Aliases</h2>
+    <avr-collectable-display *ngFor="let alias of collection.aliases"
+                             [alias]="alias"
+                             [bindings]="bindings">
+    </avr-collectable-display>
+  </div>
+
+  <div class="collectable-container" *ngIf="collection.snippet_ids.length">
+    <h2>Snippets</h2>
+    <avr-collectable-display *ngFor="let snippet of collection.snippets"
+                             [snippet]="snippet"
+                             [bindings]="bindings">
+    </avr-collectable-display>
+  </div>
+
+</div>
+
+<div class="content mat-typography" *ngIf="!collection">
+  Loading...
+</div>
+

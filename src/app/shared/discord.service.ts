@@ -1,8 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
+import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import {UserInfo} from '../schemas/UserInfo';
+import {ApiResponse, defaultErrorHandler, defaultOptions} from '../dashboard/APIHelper';
+import {DiscordUser, PartialGuild} from '../schemas/Discord';
 
 const discordUrl = `${environment.apiURL}/discord`;
 
@@ -11,22 +13,53 @@ const discordUrl = `${environment.apiURL}/discord`;
 })
 export class DiscordService {
 
-  user_cache: Map<string, UserInfo> = new Map<string, UserInfo>();
+  user_cache: Map<string, Observable<DiscordUser>> = new Map<string, Observable<DiscordUser>>();
+  guild_cache: Observable<PartialGuild[]>;
 
   constructor(private http: HttpClient) {
   }
 
-  userById(id: string): Observable<UserInfo> {
-    return this.http.get<UserInfo>(`${discordUrl}/users/${id}`);
+  // api endpoints
+  userById(id: string): Observable<DiscordUser> {
+    return this.http.get<DiscordUser>(`${discordUrl}/users/${id}`);
   }
 
+  fetchCurrentUserGuilds(): Observable<ApiResponse<PartialGuild[]>> {
+    return this.http.get<ApiResponse<PartialGuild[]>>(`${discordUrl}/guilds`, defaultOptions());
+  }
 
-  getUser(id: string): Observable<UserInfo> {
+  searchUser(username: string): Observable<ApiResponse<DiscordUser>> {
+    return this.http.get<ApiResponse<DiscordUser>>(`${discordUrl}/users`,
+      defaultOptions({params: {username}}))
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  // helpers
+  getUser(id: string): Observable<DiscordUser> {
     if (this.user_cache.has(id)) {
-      return of(this.user_cache.get(id));
+      return this.user_cache.get(id);
     }
-    const user = this.userById(id);
-    user.subscribe(info => this.user_cache.set(id, info));
+    const user = this.userById(id).pipe(share());
+    this.user_cache.set(id, user);
+    user.subscribe(info => this.user_cache.set(id, of(info)));
     return user;
+  }
+
+  getUserGuilds(): Observable<PartialGuild[]> {
+    if (this.guild_cache !== undefined) {
+      return this.guild_cache;
+    }
+    const guilds = this.fetchCurrentUserGuilds()
+      .pipe(map(resp => resp.success ? resp.data : null))
+      .pipe(share());
+    this.guild_cache = guilds;
+    guilds.subscribe(info => {
+      if (info !== null) {
+        this.guild_cache = of(info);
+      } else {
+        this.guild_cache = undefined;
+      }
+    });
+    return guilds;
   }
 }

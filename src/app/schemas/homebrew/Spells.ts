@@ -1,4 +1,4 @@
-import {DiscordUser} from '../DiscordUser';
+import {DiscordUser} from '../Discord';
 import {AutomationEffect} from './AutomationEffects';
 
 export const REQUIRED_SPELL_PROPS = ['name', 'level', 'school'];
