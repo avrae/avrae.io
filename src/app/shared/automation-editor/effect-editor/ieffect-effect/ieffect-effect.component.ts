@@ -21,6 +21,13 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
         Ticks on end?
       </mat-checkbox>
     </div>
+    <div fxLayout="row">
+      <mat-form-field class="wide">
+        <textarea matInput placeholder="Description" rows="3" (change)="changed.emit()"
+            [(ngModel)]="effect.desc" maxlength="500"></textarea>
+        <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
+      </mat-form-field>
+    </div>
   `,
   styleUrls: ['../effect-editor.component.css']
 })
