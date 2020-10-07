@@ -42,13 +42,14 @@ export class WorkshopCollectionSsrComponent implements OnInit {
     this.meta.updateTag(
       {property: 'og:url', content: `${environment.baseURL}/${this.route.snapshot.url.join('/')}`}
     );
-    this.meta.updateTag(
-      {property: 'og:image', content: collection.image}
-    );
+    if (collection.image) {
+      this.meta.updateTag(
+        {property: 'og:image', content: collection.image}
+      );
+    }
     this.meta.updateTag({
       property: 'og:description',
       content: `${collection.description}\nView ${collection.name} on the Alias Workshop.`.trim()
     });
   }
-
 }
