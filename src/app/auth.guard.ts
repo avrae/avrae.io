@@ -1,7 +1,6 @@
 import {isPlatformServer} from '@angular/common';
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
 import {isLoggedIn, navigateToDiscordOauth} from './SecurityHelper';
 import {setLocalStorage} from './shared/StorageUtils';
 
@@ -18,11 +17,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): boolean {
     if (isLoggedIn()) {
       return true;
     } else if (isPlatformServer(this.platformId)) {
       // servers cannot do auth
+      // try and route to the ssr module - if it doesn't exist this will render the home page instead
+      this.router.navigateByUrl(`/ssr${state.url}`);
       return false;
     } else {
       // the discord auth endpoint requires an exact redirect_uri (no after param) so we store where the user wanted to go in localStorage
@@ -37,7 +38,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot) {
     return this.canActivate(childRoute, state);
   }
 }
