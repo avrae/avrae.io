@@ -4,7 +4,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Meta} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
-import {environment} from '../../../../environments/environment';
 import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
 import {WorkshopBindings, WorkshopCollectionFull} from '../../../schemas/Workshop';
 import {DiscordService} from '../../../shared/discord.service';
@@ -67,7 +66,6 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
     this.loadOwner();
     this.loadEditors();
     this.loadBindings();
-    this.updateMeta();
   }
 
   onEditBindings() {
@@ -160,25 +158,5 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
 
   goBack() {
     this.location.back();
-  }
-
-  updateMeta() {
-    this.meta.updateTag({
-      name: 'description',
-      content: `${this.collection.description}\nView ${this.collection.name} on Avrae Homebrew.`.trim()
-    });
-    this.meta.updateTag(
-      {property: 'og:title', content: this.collection.name}
-    );
-    this.meta.updateTag(
-      {property: 'og:url', content: `${environment.baseURL}/${this.route.snapshot.url.join('/')}`}
-    );
-    this.meta.updateTag(
-      {property: 'og:image', content: this.collection.image}
-    );
-    this.meta.updateTag({
-      property: 'og:description',
-      content: `${this.collection.description}\nView ${this.collection.name} on Avrae Homebrew.`.trim()
-    });
   }
 }
