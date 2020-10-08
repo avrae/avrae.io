@@ -7,7 +7,7 @@ import {MyWorkComponent} from './my-work/my-work.component';
 import {WorkshopExploreComponent} from './workshop-explore.component';
 
 const routes: Routes = [
-  {path: '', component: WorkshopExploreComponent},
+  {path: '', component: WorkshopExploreComponent, pathMatch: 'full'},
   {path: 'my-subscriptions', component: MySubscriptionsComponent},
   {path: 'my-work', component: MyWorkComponent},
   {path: ':id', component: CollectionComponent},

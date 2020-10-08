@@ -45,7 +45,8 @@ export class WorkshopService {
   }
 
   getCollection(id: string): Observable<ApiResponse<WorkshopCollection>> {
-    return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`, defaultOptions())
+    // gets a collection without auth
+    return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`)
       .pipe(catchError(defaultErrorHandler));
   }
 
