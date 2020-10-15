@@ -9,7 +9,7 @@ import {DashboardService} from '../../dashboard.service';
 @Component({
   selector: 'avr-attack-editor-dialog',
   templateUrl: './attack-editor-dialog.component.html',
-  styleUrls: ['./attack-editor-dialog.component.css']
+  styleUrls: ['./attack-editor-dialog.component.scss']
 })
 export class AttackEditorDialog implements OnInit {
 
@@ -19,6 +19,7 @@ export class AttackEditorDialog implements OnInit {
   saveButtonValue = 'Save and Exit';
   saveButtonDisabled = false;
   errorValue: string;
+  showAdvancedOptions = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public character: CharacterMeta, private charService: DashboardService,
               private dialogRef: MatDialogRef<AttackEditorDialog>, private dialog: MatDialog) {
