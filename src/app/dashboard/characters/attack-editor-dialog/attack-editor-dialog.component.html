@@ -43,6 +43,7 @@
   <p *ngIf="!selectedAttack">Please select an attack.</p>
 
   <div *ngIf="selectedAttack">
+    <!-- name, delete, export -->
     <div fxLayout="row" fxLayoutGap="4px">
       <mat-form-field fxFlex="grow">
         <input matInput placeholder="Attack Name" [(ngModel)]="selectedAttack.name">
@@ -62,19 +63,64 @@
       </span>
     </div>
 
-    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="center center">
-      <mat-checkbox fxFlex [(ngModel)]="selectedAttack.proper">Proper Noun</mat-checkbox>
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Verb" [(ngModel)]="selectedAttack.verb">
-      </mat-form-field>
+    <span (click)="showAdvancedOptions = !showAdvancedOptions" class="toggle-advanced-options">
+      Advanced Options
+      <mat-icon>
+        {{showAdvancedOptions ? 'expand_less' : 'expand_more'}}
+      </mat-icon>
+    </span>
 
-      <span fxFlex="noshrink">
-        Display: {{character.name}} {{selectedAttack.verb || 'attacks with'}} {{selectedAttack.proper ? selectedAttack.name : 'a ' + selectedAttack.name}}!
+    <div class="advanced-options" *ngIf="showAdvancedOptions">
+      <!-- display options -->
+      <mat-divider></mat-divider>
+      <h3>
+        Display Options
+      </h3>
+      <div class="display-options-container">
+      <span>
+        Display: {{character.name}}
+        <mat-form-field>
+          <input matInput placeholder="attacks with" [(ngModel)]="selectedAttack.verb">
+        </mat-form-field>
+        {{selectedAttack.proper ? selectedAttack.name : 'a ' + selectedAttack.name}}!
       </span>
 
-      <span fxFlex="grow"></span>
+        <mat-checkbox [(ngModel)]="selectedAttack.proper">Proper Noun</mat-checkbox>
+
+        <mat-form-field>
+          <input matInput placeholder="Thumbnail URL" [(ngModel)]="selectedAttack.thumb"
+                 matTooltip="The URL of an image that will display each time this attack is used.">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Flavor Text" [(ngModel)]="selectedAttack.phrase"
+                 matTooltip="Some text that will display each time this attack is used.">
+        </mat-form-field>
+      </div>
+
+      <!-- crit options -->
+      <mat-divider></mat-divider>
+      <h3>
+        Critical Hit Options
+      </h3>
+      <div class="crit-options-container">
+        <mat-form-field>
+          <input matInput placeholder="Criton" [(ngModel)]="selectedAttack.criton" type="number" min="1" max="20"
+                 matTooltip="The natural roll this attack will crit on.">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Extra Crit Damage" [(ngModel)]="selectedAttack.extra_crit_damage"
+                 matTooltip="How much extra damage this attack does on a crit, beyond doubling dice.">
+        </mat-form-field>
+      </div>
     </div>
 
+    <!-- automation editor -->
+    <mat-divider></mat-divider>
+    <h3>
+      Automation
+    </h3>
     <avr-automation-editor [automation]="selectedAttack.automation"></avr-automation-editor>
   </div>
 

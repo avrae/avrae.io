@@ -59,6 +59,10 @@ export class Attack {
   _v: 2;
   proper?: boolean;
   verb?: string;
+  phrase?: string;
+  thumb?: string;
+  criton?: number;
+  extra_crit_damage?: string;
 
   constructor(name = '', automation: AutomationEffect[] = [], proper: boolean = false, verb: string = null) {
     this.name = name;

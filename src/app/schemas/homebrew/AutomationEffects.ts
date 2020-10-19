@@ -81,9 +81,10 @@ export class IEffect extends AutomationEffect {
   duration: number | string;
   effects: string;
   end?: boolean;
+  conc?: boolean;
   desc?: string;
 
-  constructor(name = '', duration = '', effects = '', desc = '',end = false, meta?) {
+  constructor(name = '', duration = '', effects = '', desc = '', end = false, conc = false, meta?) {
     super('ieffect', meta);
     this.name = name;
     this.duration = duration;
