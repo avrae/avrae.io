@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Attack, Damage, IEffect, Roll, Save, AutomationEffect, Target, TempHP, Text} from '../../../schemas/homebrew/AutomationEffects';
+import {Attack, AutomationEffect, Damage, IEffect, Roll, Save, Target, TempHP, Text} from '../../../schemas/homebrew/AutomationEffects';
 
 const typeOptions = new Map<string, Array<string>>(
   [
-    ['root', ['target', 'text', 'attack and damage (Preset)', 'save for half (Preset)']],
-    ['meta', ['roll']],
-    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect']],
-    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'text']],
-    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'text']],
+    ['root', ['target', 'roll', 'text', 'attack and damage (Preset)', 'save for half (Preset)']],
+    ['meta', []],
+    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll']],
+    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text']],
+    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text']],
     ['damage', []],
     ['temphp', []],
     ['ieffect', []],
@@ -87,6 +87,9 @@ export class NewEffectCardComponent implements OnInit {
     this.parent.push(effect);
   }
 
+  /**
+   * @deprecated
+   */
   newMeta(effect: AutomationEffect) {
     this.metaParent.push(effect);
   }
