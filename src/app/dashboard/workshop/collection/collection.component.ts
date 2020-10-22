@@ -101,7 +101,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
 
   onGuildSubscribe(guild: PartialGuild) {
     this.doGuildSubscribe(guild).subscribe(resp => {
-      if (resp.success && this.guildContext.id === guild.id) {
+      if (resp.success && this.guildContext && this.guildContext.id === guild.id) {
         this.bindings = resp.data;
       }
     });
