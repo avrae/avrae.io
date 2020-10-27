@@ -3,7 +3,7 @@
     <mat-form-field>
       <mat-select [(value)]="toAddType" placeholder="Choose effect to add">
           <mat-option *ngFor="let option of availableTypes"
-                      [value]="{option: option, meta: false}">Add {{option}}</mat-option>
+                      [value]="option">Add {{option}}</mat-option>
       </mat-select>
     </mat-form-field>
   </span>
