@@ -1,3 +1,11 @@
+// helper types
+
+type AnnotatedString = string;
+type IntExpression = string;
+type HigherLevels<T = string> = Map<number, T>;
+
+
+// exported types
 export class AutomationEffect {
   type: string;
   meta: AutomationEffect[];
@@ -10,7 +18,7 @@ export class AutomationEffect {
 }
 
 export class Target extends AutomationEffect {
-  target: string | number;
+  target: string | number;  // 'all' | 'each' | number | 'self'
   effects: AutomationEffect[];
 
   constructor(target = 'all', effects = [], meta?) {
@@ -34,10 +42,10 @@ export class Attack extends AutomationEffect {
 }
 
 export class Save extends AutomationEffect {
-  stat: string;
+  stat: string;  // 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha'
   fail: AutomationEffect[];
   success: AutomationEffect[];
-  dc: string;
+  dc: IntExpression;
 
   constructor(stat = 'str', fail = [], success = [], dc?, meta?) {
     super('save', meta);
@@ -49,9 +57,9 @@ export class Save extends AutomationEffect {
 }
 
 export class Damage extends AutomationEffect {
-  damage: string;
+  damage: AnnotatedString;
   overheal: boolean;
-  higher?: Map<number, string>;
+  higher?: HigherLevels;
   cantripScale?: boolean;
 
   constructor(damage = '', overheal?, higher?, cantripScale?, meta?) {
@@ -64,8 +72,8 @@ export class Damage extends AutomationEffect {
 }
 
 export class TempHP extends AutomationEffect {
-  amount: string;
-  higher?: Map<number, string>;
+  amount: AnnotatedString;
+  higher?: HigherLevels;
   cantripScale?: boolean;
 
   constructor(amount = '', higher?, cantripScale?, meta?) {
@@ -78,11 +86,11 @@ export class TempHP extends AutomationEffect {
 
 export class IEffect extends AutomationEffect {
   name: string;
-  duration: number | string;
-  effects: string;
+  duration: number | IntExpression;
+  effects: AnnotatedString;
   end?: boolean;
   conc?: boolean;
-  desc?: string;
+  desc?: AnnotatedString;
 
   constructor(name = '', duration = '', effects = '', desc = '', end = false, conc = false, meta?) {
     super('ieffect', meta);
@@ -95,9 +103,9 @@ export class IEffect extends AutomationEffect {
 }
 
 export class Roll extends AutomationEffect {
-  dice: string;
+  dice: AnnotatedString;
   name: string;
-  higher?: Map<number, string>;
+  higher?: HigherLevels;
   cantripScale?: boolean;
   hidden?: boolean;
 
@@ -112,10 +120,40 @@ export class Roll extends AutomationEffect {
 }
 
 export class Text extends AutomationEffect {
-  text: string;
+  text: AnnotatedString;
 
   constructor(text = '', meta?) {
     super('text', meta);
     this.text = text;
+  }
+}
+
+export class SetVariable extends AutomationEffect {
+  name: string;
+  value: IntExpression;
+  higher?: HigherLevels<IntExpression>;
+  onError?: IntExpression;
+
+  constructor(name = '', value = '', higher?, onError?, meta?) {
+    super('variable', meta);
+    this.name = name;
+    this.value = value;
+    this.higher = higher;
+    this.onError = onError;
+  }
+}
+
+export class Condition extends AutomationEffect {
+  condition: IntExpression;
+  onTrue: AutomationEffect[];
+  onFalse: AutomationEffect[];
+  errorBehaviour?: string; // 'true' | 'false' | 'both' | 'neither' | 'raise'
+
+  constructor(condition = '', onTrue = [], onFalse = [], errorBehaviour = 'false', meta?) {
+    super('condition', meta);
+    this.condition = condition;
+    this.onTrue = onTrue;
+    this.onFalse = onFalse;
+    this.errorBehaviour = errorBehaviour;
   }
 }

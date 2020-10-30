@@ -4,14 +4,16 @@ import {Attack, AutomationEffect, Damage, IEffect, Roll, Save, Target, TempHP, T
 const typeOptions = new Map<string, Array<string>>(
   [
     ['root', ['target', 'roll', 'text', 'attack and damage (Preset)', 'save for half (Preset)']],
-    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll']],
-    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text']],
-    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text']],
+    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'variable', 'condition']],
+    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition']],
+    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition']],
     ['damage', []],
     ['temphp', []],
     ['ieffect', []],
     ['roll', []],
-    ['text', []]
+    ['text', []],
+    ['variable', []],
+    ['condition', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition']]
   ]
 );
 
