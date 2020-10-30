@@ -32,6 +32,12 @@
       <avr-text-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
                        *ngSwitchCase="'text'"></avr-text-effect>
 
+      <avr-variable-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                       *ngSwitchCase="'variable'"></avr-variable-effect>
+
+      <avr-condition-effect [effect]="effect" [spell]="spell" (changed)="changed.emit()"
+                       *ngSwitchCase="'condition'"></avr-condition-effect>
+
       <div *ngSwitchDefault>
         You should not see this text. If you do, that's a bug! Please report that {{effect.type}} is not handled on the
         dev server!
