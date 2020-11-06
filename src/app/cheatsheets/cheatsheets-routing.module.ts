@@ -9,13 +9,13 @@ const cheatsheetRoutes: Routes = [
     path: 'cheatsheets/aliasing',
     canActivate: [RedirectGuard],
     component: RedirectGuard,
-    data: {externalUrl: 'https://avrae.readthedocs.io/en/latest/aliasing/api.html'}
+    data: {externalUrl: 'https://avrae.readthedocs.io/en/stable/aliasing/api.html'}
   },
   {
     path: 'cheatsheets/:title',
     canActivate: [RedirectGuard],
     component: RedirectGuard,
-    data: {externalUrl: 'https://avrae.readthedocs.io/en/latest/'}
+    data: {externalUrl: 'https://avrae.readthedocs.io/en/stable/'}
   }
 ];
 

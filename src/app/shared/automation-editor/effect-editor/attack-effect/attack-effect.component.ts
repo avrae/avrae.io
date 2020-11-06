@@ -14,7 +14,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
-    <mat-expansion-panel>
+    <mat-expansion-panel class="hoverable">
       <mat-expansion-panel-header>
         <mat-panel-title>
           On Hit
@@ -24,7 +24,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
       <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.hit"
                            [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <mat-expansion-panel class="hoverable">
       <mat-expansion-panel-header>
         <mat-panel-title>
           On Miss
