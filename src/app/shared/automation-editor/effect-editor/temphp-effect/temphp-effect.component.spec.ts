@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TempHPEffectComponent } from './temphp-effect.component';
 
@@ -6,7 +6,7 @@ describe('TempHPEffectComponent', () => {
   let component: TempHPEffectComponent;
   let fixture: ComponentFixture<TempHPEffectComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TempHPEffectComponent ]
     })

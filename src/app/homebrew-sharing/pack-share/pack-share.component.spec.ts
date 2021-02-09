@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {PackShareComponent} from './pack-share.component';
 
@@ -6,7 +6,7 @@ describe('PackShareComponent', () => {
   let component: PackShareComponent;
   let fixture: ComponentFixture<PackShareComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PackShareComponent]
     })

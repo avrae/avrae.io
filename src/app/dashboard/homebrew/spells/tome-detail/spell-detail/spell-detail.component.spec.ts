@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {SpellDetailComponent} from './spell-detail.component';
 
@@ -6,7 +6,7 @@ describe('SpellDetailComponent', () => {
   let component: SpellDetailComponent;
   let fixture: ComponentFixture<SpellDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SpellDetailComponent]
     })

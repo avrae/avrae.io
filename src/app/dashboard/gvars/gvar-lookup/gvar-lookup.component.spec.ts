@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GvarLookupComponent } from './gvar-lookup.component';
 
@@ -6,7 +6,7 @@ describe('GvarLookupComponent', () => {
   let component: GvarLookupComponent;
   let fixture: ComponentFixture<GvarLookupComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GvarLookupComponent ]
     })

@@ -35,28 +35,30 @@
             ],
             "styles": [
               {
-                "input": "src/main.scss"
+                "input": "src/main.scss",
+                "inject": true
               },
               {
-                "input": "src/highlightjs/material-light.scss"
+                "input": "src/highlightjs/material-light.scss",
+                "inject": true
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/pink-bluegrey.css",
                 "bundleName": "pink-bluegrey"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/deeppurple-amber.css",
                 "bundleName": "deeppurple-amber"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/indigo-pink.css",
                 "bundleName": "indigo-pink"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/purple-green.css",
                 "bundleName": "purple-green"
               }
@@ -82,7 +84,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -99,7 +100,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false
@@ -132,28 +132,30 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               {
-                "input": "src/main.scss"
+                "input": "src/main.scss",
+                "inject": true
               },
               {
-                "input": "src/highlightjs/material-light.scss"
+                "input": "src/highlightjs/material-light.scss",
+                "inject": true
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/pink-bluegrey.css",
                 "bundleName": "pink-bluegrey"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/deeppurple-amber.css",
                 "bundleName": "deeppurple-amber"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/indigo-pink.css",
                 "bundleName": "indigo-pink"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/purple-green.css",
                 "bundleName": "purple-green"
               }

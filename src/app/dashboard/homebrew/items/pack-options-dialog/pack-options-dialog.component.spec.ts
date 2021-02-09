@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {PackOptionsDialog} from './pack-options-dialog.component';
 
@@ -6,7 +6,7 @@ describe('PackOptionsDialog', () => {
   let component: PackOptionsDialog;
   let fixture: ComponentFixture<PackOptionsDialog>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PackOptionsDialog]
     })
