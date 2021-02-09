@@ -20,6 +20,7 @@ export class WorkshopExploreComponent implements OnInit {
 
   // state
   loading = true;
+  expectedCollectionIds: string[] = [];  // the ids of the collections we currently want (some may not be displayed in some edge cases where a collection is private)
   collections: WorkshopCollection[] = [];
   validTags: WorkshopTag[];  // all valid tags
   filteredTags: [string, WorkshopTag[]][] = [];  // list of tuples of (category, tags) of tags that match query in search
@@ -109,6 +110,7 @@ export class WorkshopExploreComponent implements OnInit {
   }
 
   loadCollectionsFromIds(ids: string[]) {
+    this.expectedCollectionIds = ids;
     if (ids.length === 0) {
       this.loading = false;
     } else {
@@ -117,6 +119,10 @@ export class WorkshopExploreComponent implements OnInit {
           if (response.success) {
             this.collections.push(...response.data);
             this.loading = false;
+            // #1438 batch returns fewer collections if some are private
+            if (this.collections.length != this.expectedCollectionIds.length) {
+              this.error = 'One or more collections were hidden because they are private.';
+            }
           } else {
             this.error = response.error;
           }

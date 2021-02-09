@@ -99,6 +99,10 @@ export class MySubscriptionsComponent implements OnInit {
             // ensure the collections populate in the requested order
             this.sortCollections();
             this.loading = false;
+            // #1438 batch returns fewer collections if some are private
+            if (this.collections.length != ids.length) {
+              this.error = 'One or more collections were hidden because they are private.';
+            }
           } else {
             this.error = response.error;
           }
