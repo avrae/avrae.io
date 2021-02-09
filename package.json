@@ -39,7 +39,7 @@
     "express": "^4.15.2",
     "lodash": "^4.17.20",
     "ngx-markdown": "^11.0.1",
-    "ngx-monaco-editor": "^10.0.0-beta.1",
+    "ngx-monaco-editor": "^9.0.0",
     "numeral": "^2.0.6",
     "query-string": "^6.13.8",
     "rxjs": "^6.6.3",
