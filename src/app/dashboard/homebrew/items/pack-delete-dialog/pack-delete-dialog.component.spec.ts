@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {PackDeleteDialog} from './pack-delete-dialog.component';
 
@@ -6,7 +6,7 @@ describe('PackDeleteDialog', () => {
   let component: PackDeleteDialog;
   let fixture: ComponentFixture<PackDeleteDialog>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PackDeleteDialog]
     })

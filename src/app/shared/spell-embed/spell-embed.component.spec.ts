@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {SpellEmbedComponent} from './spell-embed.component';
 
@@ -6,7 +6,7 @@ describe('SpellEmbedComponent', () => {
   let component: SpellEmbedComponent;
   let fixture: ComponentFixture<SpellEmbedComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SpellEmbedComponent]
     })

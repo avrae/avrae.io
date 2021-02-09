@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AttackEffectComponent } from './attack-effect.component';
 
@@ -6,7 +6,7 @@ describe('AttackEffectComponent', () => {
   let component: AttackEffectComponent;
   let fixture: ComponentFixture<AttackEffectComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AttackEffectComponent ]
     })
