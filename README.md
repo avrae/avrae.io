@@ -1,4 +1,4 @@
-# Avrae.io [![Build Status](https://travis-ci.org/avrae/avrae.io.svg?branch=master)](https://travis-ci.org/avrae/avrae.io)
+# Avrae.io ![Build Status](https://github.com/avrae/avrae.io/workflows/Test/badge.svg)
 
 ![Avrae.io](docs/avrae.png)
 
