@@ -32,7 +32,7 @@ jobs:
 
       - name: Run E2E Tests
         run: |
-          ng e2e --protractor-config=e2e/protractor-ci.conf.js --prod
+          npm run e2e
 
       - name: Build SSR
         run: |
