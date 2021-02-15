@@ -41,7 +41,7 @@
     "ngx-markdown": "^11.0.1",
     "ngx-monaco-editor": "^9.0.0",
     "numeral": "^2.0.6",
-    "query-string": "^6.13.8",
+    "query-string": "^6.14.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.1.0",
     "zone.js": "~0.10.3"
