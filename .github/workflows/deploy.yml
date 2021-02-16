@@ -3,6 +3,7 @@ name: Deploy to ECS
 on:
   release:
     types: [ created ]
+  workflow_dispatch:
 
 jobs:
   build:
