@@ -1,0 +1,66 @@
+name: Deploy to GH Pages (dev)
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - name: Install deps
+        run: |
+          npm install
+          npm run build-themes
+
+      - name: Run E2E Tests
+        run: |
+          npm run e2e
+
+      - name: Build Beta
+        run: |
+          npm run build -- --configuration=beta
+          cp dist/frontend/browser/index.html dist/frontend/browser/404.html
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-dev
+          path: dist/
+          if-no-files-found: error
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: dist-dev
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: dist/frontend/browser
+          clean: true
+          clean-exclude: |
+            CNAME
