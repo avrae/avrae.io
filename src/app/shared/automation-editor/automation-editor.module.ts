@@ -6,6 +6,7 @@ import {MaterialModule} from '../../material/material.module';
 import {AutomationEditorComponent} from './automation-editor.component';
 import {AttackEffectComponent} from './effect-editor/attack-effect/attack-effect.component';
 import {ConditionEffectComponent} from './effect-editor/condition-effect/condition-effect.component';
+import {CounterEffectComponent} from './effect-editor/counter-effect/counter-effect.component';
 import {DamageEffectComponent} from './effect-editor/damage-effect/damage-effect.component';
 import {EffectEditorComponent} from './effect-editor/effect-editor.component';
 import {HigherLevelComponent} from './effect-editor/higher-level/higher-level.component';
@@ -40,6 +41,7 @@ import {NewEffectCardComponent} from './new-effect-card/new-effect-card.componen
     AutomationEditorComponent,
     VariableEffectComponent,
     ConditionEffectComponent,
+    CounterEffectComponent,
   ],
   exports: [AutomationEditorComponent]
 })
