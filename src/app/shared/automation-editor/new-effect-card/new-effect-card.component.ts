@@ -42,7 +42,6 @@ export class NewEffectCardComponent implements OnInit {
   @Input() metaParent: Array<AutomationEffect>;  // deprecated, unused
   @Input() parentType: string;
   @Output() changed = new EventEmitter();
-  toAddType: string;
   availableTypes: Array<string>;
 
   constructor() {
@@ -52,9 +51,9 @@ export class NewEffectCardComponent implements OnInit {
     this.availableTypes = typeOptions.get(this.parentType);
   }
 
-  addEffect() {
+  addEffect(toAddType) {
     let effect: AutomationEffect;
-    switch (this.toAddType) {
+    switch (toAddType) {
       case 'target':
         effect = new Target();
         break;
