@@ -157,3 +157,26 @@ export class Condition extends AutomationEffect {
     this.errorBehaviour = errorBehaviour;
   }
 }
+
+export class UseCounter extends AutomationEffect {
+  counter: string | SpellSlotReference; // | FeatureReference;
+  amount: IntExpression;
+  allowOverflow?: boolean;
+  errorBehaviour?: string | null;
+
+  constructor(counter = '', amount = '', allowOverflow = false, errorBehaviour = 'warn', meta?) {
+    super('counter', meta);
+    this.counter = counter;
+    this.amount = amount;
+    this.allowOverflow = allowOverflow;
+    this.errorBehaviour = errorBehaviour;
+  }
+}
+
+export class SpellSlotReference {
+  slot: number;
+
+  constructor(slot) {
+    this.slot = slot;
+  }
+}

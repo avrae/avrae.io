@@ -10,22 +10,24 @@ import {
   SetVariable,
   Target,
   TempHP,
-  Text
+  Text,
+  UseCounter
 } from '../../../schemas/homebrew/AutomationEffects';
 
 const typeOptions = new Map<string, Array<string>>(
   [
-    ['root', ['target', 'roll', 'text', 'variable', 'condition', 'attack and damage (Preset)', 'save for half (Preset)']],
-    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'variable', 'condition']],
-    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition']],
-    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition']],
+    ['root', ['target', 'roll', 'text', 'variable', 'condition', 'counter', 'attack and damage (Preset)', 'save for half (Preset)']],
+    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'variable', 'condition', 'counter']],
+    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition', 'counter']],
+    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition', 'counter']],
     ['damage', []],
     ['temphp', []],
     ['ieffect', []],
     ['roll', []],
     ['text', []],
     ['variable', []],
-    ['condition', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition']]
+    ['condition', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition', 'counter']],
+    ['counter', []]
   ]
 );
 
@@ -40,7 +42,6 @@ export class NewEffectCardComponent implements OnInit {
   @Input() metaParent: Array<AutomationEffect>;  // deprecated, unused
   @Input() parentType: string;
   @Output() changed = new EventEmitter();
-  toAddType: string;
   availableTypes: Array<string>;
 
   constructor() {
@@ -50,9 +51,9 @@ export class NewEffectCardComponent implements OnInit {
     this.availableTypes = typeOptions.get(this.parentType);
   }
 
-  addEffect() {
+  addEffect(toAddType) {
     let effect: AutomationEffect;
-    switch (this.toAddType) {
+    switch (toAddType) {
       case 'target':
         effect = new Target();
         break;
@@ -82,6 +83,9 @@ export class NewEffectCardComponent implements OnInit {
         break;
       case 'condition':
         effect = new Condition();
+        break;
+      case 'counter':
+        effect = new UseCounter();
         break;
       case 'attack and damage (Preset)':
         this.parent.push(...generateAttackAndDamagePreset());
