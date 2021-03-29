@@ -3,10 +3,6 @@ name: Deploy to ECS
 on:
   release:
     types: [ published ]
-  push:
-    branches:
-      - dev
-      - master
   workflow_dispatch:
 
 jobs:
@@ -57,8 +53,8 @@ jobs:
     env:
       CLUSTER_NAME: avrae
       SERVICE_NAME: avrae-io
-      DEPLOY_ENV: stg
-      REGION: us-east-2
+      DEPLOY_ENV: live
+      REGION: us-east-1
 
     steps:
       - uses: actions/checkout@v2
@@ -72,8 +68,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.STG_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.STG_AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.REGION }}
 
       - name: Login to Amazon ECR
@@ -90,7 +86,6 @@ jobs:
           docker build -t $SERVICE_NAME .
           docker tag $SERVICE_NAME $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker tag $SERVICE_NAME $ECR_REGISTRY/$ECR_REPOSITORY:$DEPLOY_ENV
-          docker tag $SERVICE_NAME $ECR_REGISTRY/$ECR_REPOSITORY:live
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
       - name: Deploy Amazon ECS task definition
