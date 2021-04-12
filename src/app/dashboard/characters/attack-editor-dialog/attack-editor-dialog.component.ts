@@ -1,5 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {Attack, CharacterMeta} from '../../../schemas/Character';
 import {JSONExportDialog} from '../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 import {JSONImportDialog} from '../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
@@ -16,7 +18,8 @@ export class AttackEditorDialog implements OnInit {
   selectedAttack: Attack;
   allAttacks: Attack[];
 
-  saveButtonValue = 'Save and Exit';
+  saveButtonValue = 'Save';
+  saveAndExitButtonValue = 'Save and Exit';
   saveButtonDisabled = false;
   errorValue: string;
   showAdvancedOptions = false;
@@ -65,21 +68,35 @@ export class AttackEditorDialog implements OnInit {
     this.selectedAttack = null;
   }
 
-  saveAndExit() {
+  doSave(): Observable<string> {
     this.saveButtonValue = `Saving...`;
+    this.saveAndExitButtonValue = `Saving...`;
     this.saveButtonDisabled = true;
 
-    this.charService.putCharacterAttacks(this.character.upstream, this.allAttacks)
-      .subscribe(result => {
-        this.saveButtonValue = 'Save and Exit';
+    return this.charService.putCharacterAttacks(this.character.upstream, this.allAttacks)
+      .pipe(map(result => {
+        this.saveButtonValue = 'Save';
+        this.saveAndExitButtonValue = 'Save and Exit';
         this.saveButtonDisabled = false;
 
+        if (!result) {
+          // failed PUT, display error... somewhere
+          this.errorValue = 'Failed to save attacks.';
+        }
+        return result;
+      }));
+  }
+
+  save() {
+    this.doSave().subscribe();
+  }
+
+  saveAndExit() {
+    this.doSave()
+      .subscribe(result => {
         if (result) {
           // successful PUT, exit
           this.dialogRef.close();
-        } else {
-          // failed PUT, display error... somewhere
-          this.errorValue = 'Failed to save attacks.';
         }
       });
   }
