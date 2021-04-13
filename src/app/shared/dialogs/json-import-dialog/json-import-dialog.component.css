@@ -1,3 +1,7 @@
 .form-container > * {
   width: 100%;
 }
+
+.preserve-whitespace {
+  white-space: pre-wrap;
+}
