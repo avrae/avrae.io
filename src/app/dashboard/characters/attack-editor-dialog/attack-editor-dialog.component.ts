@@ -6,6 +6,7 @@ import {Attack, CharacterMeta} from '../../../schemas/Character';
 import {JSONExportDialog} from '../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 import {JSONImportDialog} from '../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
 import {SRDCopyDialog} from '../../../shared/dialogs/srd-copy-dialog/srd-copy-dialog.component';
+import {ApiResponse} from '../../APIHelper';
 import {DashboardService} from '../../dashboard.service';
 
 @Component({
@@ -68,7 +69,7 @@ export class AttackEditorDialog implements OnInit {
     this.selectedAttack = null;
   }
 
-  doSave(): Observable<string> {
+  doSave(): Observable<ApiResponse<string>> {
     this.saveButtonValue = `Saving...`;
     this.saveAndExitButtonValue = `Saving...`;
     this.saveButtonDisabled = true;
@@ -79,9 +80,11 @@ export class AttackEditorDialog implements OnInit {
         this.saveAndExitButtonValue = 'Save and Exit';
         this.saveButtonDisabled = false;
 
-        if (!result) {
+        if (!result || result.error) {
           // failed PUT, display error... somewhere
-          this.errorValue = 'Failed to save attacks.';
+          this.errorValue = result?.error || 'Failed to save attacks.';
+        } else {
+          this.errorValue = null;
         }
         return result;
       }));
@@ -94,7 +97,7 @@ export class AttackEditorDialog implements OnInit {
   saveAndExit() {
     this.doSave()
       .subscribe(result => {
-        if (result) {
+        if (result && !result.error) {
           // successful PUT, exit
           this.dialogRef.close();
         }
@@ -137,7 +140,7 @@ export class AttackEditorDialog implements OnInit {
           if (result.success) {
             dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
           } else {
-            dialogRef.componentInstance.error = result.result;
+            dialogRef.componentInstance.error = result.error;
           }
         }
       );

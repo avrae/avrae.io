@@ -1,12 +1,12 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Attack, CharacterMeta} from '../schemas/Character';
 import {Customizations} from '../schemas/Customization';
-import {UserInfo, UserStats} from '../schemas/UserInfo';
-import {defaultOptions, defaultTextOptions} from './APIHelper';
+import {UserStats} from '../schemas/UserInfo';
+import {ApiResponse, defaultErrorHandler, defaultOptions} from './APIHelper';
 
 const userInfoUrl = `${environment.apiURL}/user`;
 const userStatsUrl = `${environment.apiURL}/userStats`;
@@ -43,27 +43,16 @@ export class DashboardService {
     return this.http.get<Attack[]>(`${characterBaseUrl}/attacks/srd`, defaultOptions());
   }
 
-  putCharacterAttacks(upstream: string, attacks: Attack[]): Observable<string> {
-    // Returns false if the put fails.
+  putCharacterAttacks(upstream: string, attacks: Attack[]): Observable<ApiResponse<string>> {
     const endpt = `${characterBaseUrl}/${upstream}/attacks`;
-    // @ts-ignore
-    return this.http.put<string>(endpt, attacks, defaultTextOptions())
-      .pipe(
-        catchError(_ => {
-          return of(false);
-        })
-      );
+    return this.http.put<ApiResponse<string>>(endpt, attacks, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  validateAttackJSON(attacks: Attack | Attack[]): Observable<{ success: boolean, result: string }> {
+  validateAttackJSON(attacks: Attack | Attack[]): Observable<ApiResponse<string>> {
     const endpt = `${characterBaseUrl}/attacks/validate`;
-    return this.http.post<{ success: boolean, result: string }>(endpt, attacks, defaultOptions())
-      .pipe(
-        catchError(err => {
-          console.error(err);
-          return of({success: false, result: err.error});
-        })
-      );
+    return this.http.post<ApiResponse<string>>(endpt, attacks, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
   getCustomizations(): Observable<Customizations> {
