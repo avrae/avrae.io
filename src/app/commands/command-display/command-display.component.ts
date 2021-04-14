@@ -34,7 +34,7 @@ export class CommandDisplayComponent implements OnInit, AfterViewInit {
   }
 
   canBeOpened() {
-    return this.command.args.length || this.command.docs !== this.command.short;
+    return /* this.command.args.length || */ this.command.docs !== this.command.short;
   }
 
   toggleOpen() {

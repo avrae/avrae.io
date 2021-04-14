@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -52,7 +52,7 @@ export class CollectableEditDialogComponent implements OnInit {
   // state
   loading = false;
   error: string;
-  entitlementsControl = new FormControl();
+  entitlementsControl = new FormControl('');
   allEntities: DDBEntity[];
   addableEntitlements: Observable<[string, DDBEntity[]][]>;
 
@@ -235,6 +235,7 @@ export class CollectableEditDialogComponent implements OnInit {
   onAddEntitlement(entitlement: DDBEntity) {
     this.loading = true;
     this.error = null;
+    this.entitlementsControl.setValue('');
     let request: Observable<ApiResponse<WorkshopEntitlement[]>>;
     if (this.alias) {
       request = this.workshopService.addAliasEntitlement(this.alias._id, entitlement);
@@ -273,12 +274,13 @@ export class CollectableEditDialogComponent implements OnInit {
     this.addableEntitlements = this.entitlementsControl.valueChanges
       .pipe(debounceTime(500))
       .pipe(map(value => {
+        let normValue = value && typeof value === 'string' ? value : '';
         const possible = this.allEntities
           // filter out entities that are already in the entitlement list
           .filter(entity => !this.collectable.entitlements
             .find(entitlement => entitlement.entity_type === entity.entity_type && entitlement.entity_id === entity.entity_id))
           // filter to entities that contain the search
-          .filter(entity => entity.name.toLowerCase().includes(value.toLowerCase()))
+          .filter(entity => entity.name.toLowerCase().includes(normValue.toLowerCase()))
           // sort alphabetically
           .sort((a, b) => a.name.localeCompare(b.name));
         // group by entitlement type and sort

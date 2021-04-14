@@ -8,7 +8,7 @@
       <textarea matInput placeholder="JSON" rows="10" [(ngModel)]="data"></textarea>
     </mat-form-field>
   </div>
-  <mat-error *ngIf="error">{{error}}</mat-error>
+  <mat-error *ngIf="error"><span class="preserve-whitespace">{{error}}</span></mat-error>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>

@@ -139,6 +139,9 @@
 
 <!-- Buttons -->
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button (click)="saveAndExit()" [disabled]="saveButtonDisabled">{{saveButtonValue}}</button>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button (click)="save()" [disabled]="saveButtonDisabled"
+          color="primary">{{saveButtonValue}}</button>
+  <button mat-flat-button (click)="saveAndExit()" [disabled]="saveButtonDisabled"
+          color="primary">{{saveAndExitButtonValue}}</button>
 </mat-dialog-actions>
