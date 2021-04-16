@@ -113,9 +113,16 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
     // HTTP PUT /homebrew/spells/:tome
     this.homebrewService.putTome(this.tome)
       .subscribe(result => {
-        console.log(result);
         this.changesOpen = false;
-        this.snackBar.open(`${result} Use "!tome ${this.tome.name}" to activate the tome in Discord!`, null, {horizontalPosition: 'right'});
+        if (result.success) {
+          this.snackBar.open(`${result.data} Use "!tome ${this.tome.name}" to activate the pack in Discord!`, null, {horizontalPosition: 'right'});
+        } else {
+          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+            horizontalPosition: 'right',
+            duration: -1,
+            panelClass: 'preserve-whitespace'
+          });
+        }
       });
   }
 

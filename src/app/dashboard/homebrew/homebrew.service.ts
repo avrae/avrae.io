@@ -1,12 +1,11 @@
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Item, Pack} from '../../schemas/homebrew/Items';
-import {Observable, of} from 'rxjs';
-import {UserInfo} from '../../schemas/UserInfo';
-import {defaultOptions, defaultTextOptions} from '../APIHelper';
-import {catchError} from 'rxjs/operators';
 import {Spell, Tome} from '../../schemas/homebrew/Spells';
+import {ApiResponse, defaultOptions, defaultTextErrorHandler, defaultTextOptions} from '../APIHelper';
 
 const itemsUrl = `${environment.apiURL}/homebrew/items`;
 const spellsUrl = `${environment.apiURL}/homebrew/spells`;
@@ -35,11 +34,13 @@ export class HomebrewService {
     return this.http.get<Pack>(`${itemsUrl}/${id}`, defaultOptions());
   }
 
-  putPack(pack: Pack): Observable<string> {
-    // @ts-ignore
-    return this.http.put<string>(`${itemsUrl}/${pack._id.$oid}`, pack, defaultTextOptions())
+  putPack(pack: Pack): Observable<ApiResponse<string>> {
+    return this.http.put<string>(`${itemsUrl}/${pack._id.$oid}`, pack, defaultTextOptions({observe: 'response'}))
       .pipe(
-        catchError(this.handleError('putPack'))
+        map((resp: HttpResponse<string>) => {
+          return {success: resp.ok, data: resp.body, status: resp.status} as ApiResponse<string>;
+        }),
+        catchError(defaultTextErrorHandler)
       );
   }
 
@@ -75,11 +76,13 @@ export class HomebrewService {
     return this.http.get<Tome>(`${spellsUrl}/${id}`, defaultOptions());
   }
 
-  putTome(tome: Tome): Observable<string> {
-    // @ts-ignore
-    return this.http.put<string>(`${spellsUrl}/${tome._id.$oid}`, tome, defaultTextOptions())
+  putTome(tome: Tome): Observable<ApiResponse<string>> {
+    return this.http.put<string>(`${spellsUrl}/${tome._id.$oid}`, tome, defaultTextOptions({observe: 'response'}))
       .pipe(
-        catchError(this.handleError('putTome'))
+        map((resp: HttpResponse<string>) => {
+          return {success: resp.ok, data: resp.body, status: resp.status} as ApiResponse<string>;
+        }),
+        catchError(defaultTextErrorHandler)
       );
   }
 

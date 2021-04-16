@@ -185,9 +185,16 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     // HTTP PUT /homebrew/items/:pack
     this.homebrewService.putPack(this.pack)
       .subscribe(result => {
-        console.log(result);
         this.changesOpen = false;
-        this.snackBar.open(`${result} Use "!pack ${this.pack.name}" to activate the pack in Discord!`, null, {horizontalPosition: 'right'});
+        if (result.success) {
+          this.snackBar.open(`${result.data} Use "!pack ${this.pack.name}" to activate the pack in Discord!`, null, {horizontalPosition: 'right'});
+        } else {
+          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+            horizontalPosition: 'right',
+            duration: -1,
+            panelClass: 'preserve-whitespace'
+          });
+        }
       });
   }
 
