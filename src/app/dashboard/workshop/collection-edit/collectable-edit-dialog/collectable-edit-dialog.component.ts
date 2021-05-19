@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -15,6 +15,7 @@ import {
   WorkshopEntitlement,
   WorkshopSnippet
 } from '../../../../schemas/Workshop';
+import {GamedataService} from '../../../../shared/gamedata.service';
 import {ApiResponse} from '../../../APIHelper';
 import {ConfirmDeleteDialog} from '../../../confirm-delete-dialog/confirm-delete-dialog.component';
 import {WorkshopService} from '../../workshop.service';
@@ -58,8 +59,8 @@ export class CollectableEditDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: CollectableEditDialogComponentData,
               private dialogRef: MatDialogRef<CollectableEditDialogComponent>,
-              private workshopService: WorkshopService, private dialog: MatDialog,
-              private snackBar: MatSnackBar) {
+              private workshopService: WorkshopService, private gamedataService: GamedataService,
+              private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.collection = data.collection;
     this.alias = data.alias;
     this.parent = data.parent;
@@ -258,12 +259,12 @@ export class CollectableEditDialogComponent implements OnInit {
   }
 
   getEntity(entitlement: WorkshopEntitlement) {
-    return this.workshopService.entityFromEntitlement(entitlement.entity_type, entitlement.entity_id);
+    return this.gamedataService.entityFromEntitlement(entitlement.entity_type, entitlement.entity_id);
   }
 
   updateAddableEntitlements() {
     // load entitlements
-    this.workshopService.getEntitlements()
+    this.gamedataService.getEntitlements()
       .subscribe(response => {
         this.allEntities = Array.from(response.data.values());
         this.entitlementsControl.setValue(''); // emit a value to get started
