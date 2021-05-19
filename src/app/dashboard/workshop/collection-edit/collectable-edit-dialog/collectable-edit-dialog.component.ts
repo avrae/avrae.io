@@ -5,9 +5,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {groupBy} from 'lodash';
 import {Observable} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
+import {DDBEntity} from '../../../../schemas/GameData';
 import {
   CodeVersion,
-  DDBEntity,
   PublicationState,
   WorkshopAliasFull,
   WorkshopCollectable,

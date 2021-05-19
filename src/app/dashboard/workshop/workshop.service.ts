@@ -4,9 +4,9 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {DiscordUser} from '../../schemas/Discord';
+import {DDBEntity} from '../../schemas/GameData';
 import {
   CodeVersion,
-  DDBEntity,
   PublicationState,
   WorkshopAlias,
   WorkshopAliasFull,
