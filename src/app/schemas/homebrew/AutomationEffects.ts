@@ -159,7 +159,7 @@ export class Condition extends AutomationEffect {
 }
 
 export class UseCounter extends AutomationEffect {
-  counter: string | SpellSlotReference; // | FeatureReference;
+  counter: AbilityReference | SpellSlotReference | string;
   amount: IntExpression;
   allowOverflow?: boolean;
   errorBehaviour?: string | null;
@@ -178,5 +178,15 @@ export class SpellSlotReference {
 
   constructor(slot) {
     this.slot = slot;
+  }
+}
+
+export class AbilityReference {
+  id: number;
+  typeId: number;
+
+  constructor(id, typeId) {
+    this.id = id;
+    this.typeId = typeId;
   }
 }

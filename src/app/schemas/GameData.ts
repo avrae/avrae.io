@@ -8,3 +8,10 @@ export class DDBEntity {
   url: string | null;
   marketplace_url: string;
 }
+
+export class LimitedUse {
+  name: string;
+  type: string;
+  id: number;
+  typeId: number;
+}

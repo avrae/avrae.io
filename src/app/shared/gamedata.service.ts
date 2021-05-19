@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {ApiResponse, defaultErrorHandler, defaultOptions} from '../dashboard/APIHelper';
-import {DDBEntity} from '../schemas/GameData';
+import {DDBEntity, LimitedUse} from '../schemas/GameData';
 
 const baseUrl = `${environment.apiURL}/gamedata`;
 
@@ -15,6 +15,7 @@ export class GamedataService {
 
   // cached stuff
   entitlements: Observable<ApiResponse<Map<string, DDBEntity>>>;
+  limitedUse: Observable<ApiResponse<LimitedUse[]>>;
 
   constructor(private http: HttpClient) {
   }
@@ -34,6 +35,18 @@ export class GamedataService {
       .pipe(catchError(defaultErrorHandler));
     this.entitlements = req;
     req.subscribe(result => this.entitlements = of(result));
+    return req;
+  }
+
+  getLimitedUse(): Observable<ApiResponse<LimitedUse[]>> {
+    if (this.limitedUse) {
+      return this.limitedUse;
+    }
+    const req = this.http.get<ApiResponse<LimitedUse[]>>(`${baseUrl}/limiteduse`, defaultOptions())
+      .pipe(share())
+      .pipe(catchError(defaultErrorHandler));
+    this.limitedUse = req;
+    req.subscribe(result => this.limitedUse = of(result));
     return req;
   }
 
