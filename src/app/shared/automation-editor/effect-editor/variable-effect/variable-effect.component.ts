@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SetVariable} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-variable-effect',
@@ -25,16 +25,11 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class VariableEffectComponent implements OnInit {
-
-  @Input() effect: SetVariable;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
-
+export class VariableEffectComponent extends EffectComponent<SetVariable> implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit(): void {
   }
-
 }

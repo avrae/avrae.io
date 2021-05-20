@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Text} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-text-effect',
@@ -13,16 +13,11 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class TextEffectComponent implements OnInit {
-
-  @Input() effect: Text;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
-
+export class TextEffectComponent extends EffectComponent<Text> implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit() {
   }
-
 }

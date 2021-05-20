@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IEffect} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-ieffect-effect',
@@ -11,7 +11,7 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
       </mat-form-field>
       <mat-form-field fxFlex="1 2 auto">
         <input matInput placeholder="Duration" (change)="changed.emit()" [(ngModel)]="effect.duration"
-          matTooltip="Use -1 for infinite duration.">
+               matTooltip="Use -1 for infinite duration.">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
       <mat-form-field fxFlex="2 1 auto">
@@ -38,16 +38,11 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class IEffectEffectComponent implements OnInit {
-
-  @Input() effect: IEffect;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
-
+export class IEffectEffectComponent extends EffectComponent<IEffect> implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit() {
   }
-
 }

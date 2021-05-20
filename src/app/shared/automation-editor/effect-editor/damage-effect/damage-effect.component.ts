@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Damage} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-damage-effect',
@@ -21,16 +21,11 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class DamageEffectComponent implements OnInit {
-
-  @Input() effect: Damage;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
-
+export class DamageEffectComponent extends EffectComponent<Damage> implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit() {
   }
-
 }

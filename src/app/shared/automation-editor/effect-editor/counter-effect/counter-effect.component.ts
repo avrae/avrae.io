@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatSelectChange} from '@angular/material/select';
 import {groupBy} from 'lodash';
 import {LimitedUse} from '../../../../schemas/GameData';
 import {AbilityReference, SpellSlotReference, UseCounter} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
 import {GamedataService} from '../../../gamedata.service';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-counter-effect',
@@ -80,11 +80,7 @@ import {GamedataService} from '../../../gamedata.service';
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class CounterEffectComponent implements OnInit {
-
-  @Input() effect: UseCounter;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
+export class CounterEffectComponent extends EffectComponent<UseCounter> implements OnInit {
   counterType: 'counter' | 'slot' | 'ability';
 
   // abilityreference builder stuff
@@ -93,6 +89,7 @@ export class CounterEffectComponent implements OnInit {
   searchFilteredGroupedLimitedUse: [string, LimitedUse[]][] = [];
 
   constructor(private gamedataService: GamedataService) {
+    super();
   }
 
   ngOnInit(): void {

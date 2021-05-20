@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TempHP} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-temphp-effect',
@@ -18,13 +18,9 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class TempHPEffectComponent implements OnInit {
-
-  @Input() effect: TempHP;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
-
+export class TempHPEffectComponent extends EffectComponent<TempHP> implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit() {

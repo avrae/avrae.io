@@ -1,5 +1,11 @@
 <mat-accordion multi="true">
-  <avr-effect-editor [parent]="automation" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
-  <avr-new-effect-card [parent]="automation" [parentType]="'root'"
-                       (changed)="changed.emit()"></avr-new-effect-card>
+  <avr-effect-editor [parent]="automation"
+                     [parentTypeStack]="[]"
+                     [spell]="spell"
+                     (changed)="changed.emit()">
+  </avr-effect-editor>
+  <avr-new-effect-card [parent]="automation"
+                       [parentTypeStack]="[]"
+                       (changed)="changed.emit()">
+  </avr-new-effect-card>
 </mat-accordion>
