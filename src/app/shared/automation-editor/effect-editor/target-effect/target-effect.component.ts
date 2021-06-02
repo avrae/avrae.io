@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Target} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-target-effect',
@@ -20,19 +20,22 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
                (change)="onTargetPosChange(targetPosInput)" min="1">
       </mat-form-field>
     </div>
-    <avr-effect-editor [parent]="effect.effects" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
-    <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.effects"
-                         [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
+    <avr-effect-editor [parent]="effect.effects"
+                       [parentTypeStack]="newParentTypeStack"
+                       [spell]="spell"
+                       (changed)="changed.emit()">
+    </avr-effect-editor>
+    <avr-new-effect-card [metaParent]="effect.meta"
+                         [parent]="effect.effects"
+                         [parentTypeStack]="newParentTypeStack"
+                         (changed)="changed.emit()">
+    </avr-new-effect-card>
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class TargetEffectComponent implements OnInit {
-
-  @Input() effect: Target;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
-
+export class TargetEffectComponent extends EffectComponent<Target> implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit() {

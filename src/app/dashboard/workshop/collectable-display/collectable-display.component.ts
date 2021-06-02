@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WorkshopAliasFull, WorkshopBindings, WorkshopCollectable, WorkshopEntitlement, WorkshopSnippet} from '../../../schemas/Workshop';
 import {debrace} from '../../../shared/DisplayUtils';
+import {GamedataService} from '../../../shared/gamedata.service';
 import {WorkshopService} from '../workshop.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class CollectableDisplayComponent implements OnInit {
   entitlementsIsOpen = false;
 
 
-  constructor(public workshopService: WorkshopService) {
+  constructor(public workshopService: WorkshopService, public gamedataService: GamedataService) {
   }
 
   ngOnInit(): void {
@@ -86,6 +87,6 @@ export class CollectableDisplayComponent implements OnInit {
   }
 
   getEntity(entitlement: WorkshopEntitlement) {
-    return this.workshopService.entityFromEntitlement(entitlement.entity_type, entitlement.entity_id);
+    return this.gamedataService.entityFromEntitlement(entitlement.entity_type, entitlement.entity_id);
   }
 }

@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Condition} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-condition-effect',
@@ -29,9 +29,15 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
           On True
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.onTrue" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.onTrue"
-                           [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
+      <avr-effect-editor [parent]="effect.onTrue"
+                         [parentTypeStack]="newParentTypeStack"
+                         [spell]="spell"
+                         (changed)="changed.emit()"></avr-effect-editor>
+      <avr-new-effect-card [metaParent]="effect.meta"
+                           [parent]="effect.onTrue"
+                           [parentTypeStack]="newParentTypeStack"
+                           (changed)="changed.emit()">
+      </avr-new-effect-card>
     </mat-expansion-panel>
 
     <mat-expansion-panel class="hoverable">
@@ -40,23 +46,25 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
           On False
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.onFalse" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.onFalse"
-                           [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
+      <avr-effect-editor [parent]="effect.onFalse"
+                         [parentTypeStack]="newParentTypeStack"
+                         [spell]="spell"
+                         (changed)="changed.emit()">
+      </avr-effect-editor>
+      <avr-new-effect-card [metaParent]="effect.meta"
+                           [parent]="effect.onFalse"
+                           [parentTypeStack]="newParentTypeStack"
+                           (changed)="changed.emit()">
+      </avr-new-effect-card>
     </mat-expansion-panel>
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class ConditionEffectComponent implements OnInit {
-
-  @Input() effect: Condition;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
-
+export class ConditionEffectComponent extends EffectComponent<Condition> implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit(): void {
   }
-
 }

@@ -14,22 +14,23 @@ import {
   UseCounter
 } from '../../../schemas/homebrew/AutomationEffects';
 
-const typeOptions = new Map<string, Array<string>>(
-  [
-    ['root', ['target', 'roll', 'text', 'variable', 'condition', 'counter', 'attack and damage (Preset)', 'save for half (Preset)']],
-    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'variable', 'condition', 'counter']],
-    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition', 'counter']],
-    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition', 'counter']],
-    ['damage', []],
-    ['temphp', []],
-    ['ieffect', []],
-    ['roll', []],
-    ['text', []],
-    ['variable', []],
-    ['condition', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'roll', 'text', 'variable', 'condition', 'counter']],
-    ['counter', []]
-  ]
-);
+
+// each type option defines a list of rules (function parents -> bool) - all must return true to be addable
+const typeRules = new Map<string, Array<(stack: Array<string>) => boolean>>([
+  ['target', [stack => !stack.includes('target')]],
+  ['attack', [stack => stack.includes('target')]],
+  ['save', [stack => stack.includes('target')]],
+  ['damage', [stack => stack.includes('target')]],
+  ['temphp', [stack => stack.includes('target')]],
+  ['ieffect', [stack => stack.includes('target')]],
+  ['roll', []],
+  ['text', []],
+  ['variable', []],
+  ['condition', []],
+  ['counter', []],
+  ['attack and damage (Preset)', [stack => !stack.includes('target')]],
+  ['save for half (Preset)', [stack => !stack.includes('target')]]
+]);
 
 @Component({
   selector: 'avr-new-effect-card',
@@ -38,17 +39,19 @@ const typeOptions = new Map<string, Array<string>>(
 })
 export class NewEffectCardComponent implements OnInit {
 
-  @Input() parent: Array<AutomationEffect>;
-  @Input() metaParent: Array<AutomationEffect>;  // deprecated, unused
-  @Input() parentType: string;
+  @Input() parent: AutomationEffect[];
+  @Input() metaParent: AutomationEffect[];  // deprecated, unused
+  @Input() parentTypeStack: string[];
   @Output() changed = new EventEmitter();
-  availableTypes: Array<string>;
+  availableTypes: string[];
 
   constructor() {
   }
 
   ngOnInit() {
-    this.availableTypes = typeOptions.get(this.parentType);
+    this.availableTypes = Array.from(typeRules.entries())
+      .filter(([type, rules]) => rules.every(rule => rule(this.parentTypeStack)))
+      .map(([type, rules]) => type);
   }
 
   addEffect(toAddType) {

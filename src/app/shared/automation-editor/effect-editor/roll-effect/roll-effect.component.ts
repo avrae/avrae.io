@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Roll} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-roll-effect',
@@ -24,16 +24,11 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class RollEffectComponent implements OnInit {
-
-  @Input() effect: Roll;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
-
+export class RollEffectComponent extends EffectComponent<Roll> implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit() {
   }
-
 }
