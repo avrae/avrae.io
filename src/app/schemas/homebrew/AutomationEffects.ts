@@ -190,3 +190,20 @@ export class AbilityReference {
     this.typeId = typeId;
   }
 }
+
+export class CastSpell extends AutomationEffect {
+  id: number;
+  level?: number;
+  dc?: IntExpression;
+  attackBonus?: IntExpression;
+  castingMod?: IntExpression;
+
+  constructor(id = 0, level?, dc?, attackBonus?, castingMod?, meta?) {
+    super('spell', meta);
+    this.id = id;
+    this.level = level;
+    this.dc = dc;
+    this.attackBonus = attackBonus;
+    this.castingMod = castingMod;
+  }
+}
