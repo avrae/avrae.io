@@ -198,7 +198,7 @@ export class CastSpell extends AutomationEffect {
   attackBonus?: IntExpression;
   castingMod?: IntExpression;
 
-  constructor(id = 0, level?, dc?, attackBonus?, castingMod?, meta?) {
+  constructor(id = 2102, level?, dc?, attackBonus?, castingMod?, meta?) {
     super('spell', meta);
     this.id = id;
     this.level = level;
