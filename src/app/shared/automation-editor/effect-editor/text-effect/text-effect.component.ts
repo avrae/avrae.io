@@ -49,6 +49,7 @@ const DESCRIBABLE_TYPES = [];
         <mat-label>Referenced Ability</mat-label>
         <mat-select [value]="selectedAbilityRef" (selectionChange)="onRefSelectionChange($event)">
           <mat-option>
+            <!--suppress TypeScriptValidateTypes -->
             <ngx-mat-select-search placeholderLabel="Search"
                                    noEntriesFoundLabel="No matches found."
                                    ngModel (ngModelChange)="debouncedUpdateSearchFilteredGroupedRefs($event)">
