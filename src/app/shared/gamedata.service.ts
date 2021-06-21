@@ -84,8 +84,8 @@ export class GamedataService {
 
   // ---- helpers ----
   entityFromEntitlement(entityType: string, entityId: number, useFree: boolean = false): Observable<DDBEntity | null> {
-    const entitlementGetter = useFree ? this.getAllEntitlements : this.getEntitlements;
-    return entitlementGetter()
+    const entitlementGetter = useFree ? this.getAllEntitlements() : this.getEntitlements();
+    return entitlementGetter
       .pipe(map(response => {
         if (response.success) {
           const entity = response.data.get(`${entityType}-${entityId.toString()}`);
