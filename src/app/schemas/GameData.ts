@@ -1,8 +1,11 @@
 export class DDBEntity {
-  entity_type: string;
   name: string;
   source: string;
+  entity_type: string;
   entity_id: number;
+  type_id: number;
+  entitlement_entity_type: string;
+  entitlement_entity_id: number;
   page: number | null;
   is_free: boolean;
   url: string | null;

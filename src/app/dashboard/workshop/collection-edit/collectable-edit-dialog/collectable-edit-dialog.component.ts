@@ -279,7 +279,7 @@ export class CollectableEditDialogComponent implements OnInit {
         const possible = this.allEntities
           // filter out entities that are already in the entitlement list
           .filter(entity => !this.collectable.entitlements
-            .find(entitlement => entitlement.entity_type === entity.entity_type && entitlement.entity_id === entity.entity_id))
+            .find(entitlement => entitlement.entity_type === entity.entitlement_entity_type && entitlement.entity_id === entity.entitlement_entity_id))
           // filter to entities that contain the search
           .filter(entity => entity.name.toLowerCase().includes(normValue.toLowerCase()))
           // sort alphabetically
