@@ -120,7 +120,7 @@ export class Roll extends AutomationEffect {
 }
 
 export class Text extends AutomationEffect {
-  text: AnnotatedString;
+  text: AnnotatedString | AbilityReference;
 
   constructor(text = '', meta?) {
     super('text', meta);

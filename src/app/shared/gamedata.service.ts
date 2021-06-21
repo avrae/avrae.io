@@ -17,6 +17,7 @@ export class GamedataService {
   entitlements: Observable<ApiResponse<Map<string, DDBEntity>>>;
   allEntitlements: Observable<ApiResponse<Map<string, DDBEntity>>>;
   limitedUse: Observable<ApiResponse<LimitedUse[]>>;
+  describableEntities: Observable<ApiResponse<DDBEntity[]>>;
 
   constructor(private http: HttpClient) {
   }
@@ -66,6 +67,18 @@ export class GamedataService {
       .pipe(catchError(defaultErrorHandler));
     this.limitedUse = req;
     req.subscribe(result => this.limitedUse = of(result));
+    return req;
+  }
+
+  getDescribableEntities(): Observable<ApiResponse<DDBEntity[]>> {
+    if (this.describableEntities) {
+      return this.describableEntities;
+    }
+    const req = this.http.get<ApiResponse<DDBEntity[]>>(`${baseUrl}/describable`, defaultOptions())
+      .pipe(share())
+      .pipe(catchError(defaultErrorHandler));
+    this.describableEntities = req;
+    req.subscribe(result => this.describableEntities = of(result));
     return req;
   }
 
