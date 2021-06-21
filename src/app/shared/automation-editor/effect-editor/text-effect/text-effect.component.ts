@@ -10,7 +10,6 @@ const TEXT_TYPE_HELPS = {
   text: 'Display the text given below when the effect is run. This is the most common way to display an ability\'s effect.',
   ref: 'Display the full description of a given feature.'
 };
-const DESCRIBABLE_TYPES = [];
 
 @Component({
   selector: 'avr-text-effect',
