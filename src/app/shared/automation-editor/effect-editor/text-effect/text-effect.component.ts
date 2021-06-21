@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSelectChange} from '@angular/material/select';
-import {groupBy} from 'lodash';
+import {groupBy, debounce} from 'lodash';
 import {DDBEntity} from '../../../../schemas/GameData';
 import {AbilityReference, Text} from '../../../../schemas/homebrew/AutomationEffects';
 import {GamedataService} from '../../../gamedata.service';
@@ -51,7 +51,7 @@ const DESCRIBABLE_TYPES = [];
           <mat-option>
             <ngx-mat-select-search placeholderLabel="Search"
                                    noEntriesFoundLabel="No matches found."
-                                   ngModel (ngModelChange)="updateSearchFilteredGroupedRefs($event)">
+                                   ngModel (ngModelChange)="debouncedUpdateSearchFilteredGroupedRefs($event)">
             </ngx-mat-select-search>
           </mat-option>
           <mat-optgroup *ngFor="let tup of searchFilteredGroupedRefs" [label]="tup[0]">
@@ -100,6 +100,8 @@ export class TextEffectComponent extends EffectComponent<Text> implements OnInit
     this.effect.text = new AbilityReference(event.value.entity_id, event.value.type_id);
     this.selectedAbilityRef = event.value;
   }
+
+  debouncedUpdateSearchFilteredGroupedRefs = debounce(this.updateSearchFilteredGroupedRefs, 500);
 
   updateSearchFilteredGroupedRefs(searchTerm: string) {
     let filteredRefs = this.allRefs.filter(lu => lu.name.toLowerCase().includes(searchTerm.toLowerCase()));
