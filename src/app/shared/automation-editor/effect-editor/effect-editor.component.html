@@ -41,6 +41,9 @@
       <avr-counter-effect [effect]="effect" [parentTypeStack]="parentTypeStack" [spell]="spell"
                           (changed)="changed.emit()" *ngSwitchCase="'counter'"></avr-counter-effect>
 
+      <avr-spell-effect [effect]="effect" [parentTypeStack]="parentTypeStack" [spell]="spell"
+                        (changed)="changed.emit()" *ngSwitchCase="'spell'"></avr-spell-effect>
+
       <div *ngSwitchDefault>
         You should not see this text. If you do, that's a bug! Please report that {{effect.type}} is not handled on the
         dev server!

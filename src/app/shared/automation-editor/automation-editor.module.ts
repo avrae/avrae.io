@@ -18,6 +18,7 @@ import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect
 import {TextEffectComponent} from './effect-editor/text-effect/text-effect.component';
 import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
 import {NewEffectCardComponent} from './new-effect-card/new-effect-card.component';
+import { SpellEffectComponent } from './effect-editor/spell-effect/spell-effect.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import {NewEffectCardComponent} from './new-effect-card/new-effect-card.componen
     VariableEffectComponent,
     ConditionEffectComponent,
     CounterEffectComponent,
+    SpellEffectComponent,
   ],
   exports: [AutomationEditorComponent]
 })

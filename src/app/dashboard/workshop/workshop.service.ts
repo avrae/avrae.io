@@ -158,7 +158,7 @@ export class WorkshopService {
 
   addAliasEntitlement(aliasId: string, entity: DDBEntity): Observable<ApiResponse<WorkshopEntitlement[]>> {
     return this.http.post<ApiResponse<WorkshopEntitlement[]>>(`${baseUrl}/alias/${aliasId}/entitlement`,
-      {entity_type: entity.entity_type, entity_id: entity.entity_id},
+      {entity_type: entity.entitlement_entity_type, entity_id: entity.entitlement_entity_id},
       defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
@@ -212,7 +212,7 @@ export class WorkshopService {
 
   addSnippetEntitlement(snippetId: string, entity: DDBEntity): Observable<ApiResponse<WorkshopEntitlement[]>> {
     return this.http.post<ApiResponse<WorkshopEntitlement[]>>(`${baseUrl}/snippet/${snippetId}/entitlement`,
-      {entity_type: entity.entity_type, entity_id: entity.entity_id},
+      {entity_type: entity.entitlement_entity_type, entity_id: entity.entitlement_entity_id},
       defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }

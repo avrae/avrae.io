@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
   Attack,
-  AutomationEffect,
+  AutomationEffect, CastSpell,
   Condition,
   Damage,
   IEffect,
@@ -28,6 +28,7 @@ const typeRules = new Map<string, Array<(stack: Array<string>) => boolean>>([
   ['variable', []],
   ['condition', []],
   ['counter', []],
+  ['spell', [stack => stack.length === 0]],
   ['attack and damage (Preset)', [stack => !stack.includes('target')]],
   ['save for half (Preset)', [stack => !stack.includes('target')]]
 ]);
@@ -89,6 +90,9 @@ export class NewEffectCardComponent implements OnInit {
         break;
       case 'counter':
         effect = new UseCounter();
+        break;
+      case 'spell':
+        effect = new CastSpell();
         break;
       case 'attack and damage (Preset)':
         this.parent.push(...generateAttackAndDamagePreset());

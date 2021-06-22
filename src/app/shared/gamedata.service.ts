@@ -15,7 +15,9 @@ export class GamedataService {
 
   // cached stuff
   entitlements: Observable<ApiResponse<Map<string, DDBEntity>>>;
+  allEntitlements: Observable<ApiResponse<Map<string, DDBEntity>>>;
   limitedUse: Observable<ApiResponse<LimitedUse[]>>;
+  describableEntities: Observable<ApiResponse<DDBEntity[]>>;
 
   constructor(private http: HttpClient) {
   }
@@ -38,6 +40,24 @@ export class GamedataService {
     return req;
   }
 
+  getAllEntitlements(): Observable<ApiResponse<Map<string, DDBEntity>>> {
+    if (this.allEntitlements) {
+      return this.allEntitlements;
+    }
+    const req = this.http.get<ApiResponse<Map<string, DDBEntity>>>(`${baseUrl}/entitlements?free=true`, defaultOptions())
+      .pipe(map(resp => {
+        if (resp.success) {
+          resp.data = new Map(Object.entries(resp.data));
+        }
+        return resp;
+      }))
+      .pipe(share())
+      .pipe(catchError(defaultErrorHandler));
+    this.allEntitlements = req;
+    req.subscribe(result => this.allEntitlements = of(result));
+    return req;
+  }
+
   getLimitedUse(): Observable<ApiResponse<LimitedUse[]>> {
     if (this.limitedUse) {
       return this.limitedUse;
@@ -50,9 +70,22 @@ export class GamedataService {
     return req;
   }
 
+  getDescribableEntities(): Observable<ApiResponse<DDBEntity[]>> {
+    if (this.describableEntities) {
+      return this.describableEntities;
+    }
+    const req = this.http.get<ApiResponse<DDBEntity[]>>(`${baseUrl}/describable`, defaultOptions())
+      .pipe(share())
+      .pipe(catchError(defaultErrorHandler));
+    this.describableEntities = req;
+    req.subscribe(result => this.describableEntities = of(result));
+    return req;
+  }
+
   // ---- helpers ----
-  entityFromEntitlement(entityType: string, entityId: number): Observable<DDBEntity | null> {
-    return this.getEntitlements()
+  entityFromEntitlement(entityType: string, entityId: number, useFree: boolean = false): Observable<DDBEntity | null> {
+    const entitlementGetter = useFree ? this.getAllEntitlements() : this.getEntitlements();
+    return entitlementGetter
       .pipe(map(response => {
         if (response.success) {
           const entity = response.data.get(`${entityType}-${entityId.toString()}`);
