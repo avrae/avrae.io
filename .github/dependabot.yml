@@ -5,3 +5,6 @@ updates:
   schedule:
     interval: weekly
   open-pull-requests-limit: 10
+  ignore:
+    - dependency-name: "@angular*"
+      update-types: ["version-update:semver-major"]  # don't do major semver angular patches
