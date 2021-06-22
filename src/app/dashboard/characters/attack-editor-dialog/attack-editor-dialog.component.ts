@@ -107,7 +107,7 @@ export class AttackEditorDialog implements OnInit {
   // JSON
   beginJSONExport(attack: Attack | Attack[]) {
     this.dialog.open(JSONExportDialog, {
-      data: {name: (attack instanceof Array) ? 'All Attacks' : attack.name, data: attack},
+      data: {name: (attack instanceof Array) ? 'All Attacks' : attack.name, data: attack, yaml: true},
       width: '60%'
     });
   }
@@ -116,7 +116,7 @@ export class AttackEditorDialog implements OnInit {
     const dialogRef = this.dialog.open(JSONImportDialog, {
       width: '60%',
       disableClose: true,
-      data: {validator: (data) => this.validateAttackJSON(dialogRef, data)}
+      data: {validator: (data) => this.validateAttackJSON(dialogRef, data), yaml: true}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -135,10 +135,9 @@ export class AttackEditorDialog implements OnInit {
     this.charService.validateAttackJSON(data)
       .subscribe(
         result => {
-          console.log(result);
           dialogRef.componentInstance.loading = false;
           if (result.success) {
-            dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
+            dialogRef.close(data);
           } else {
             dialogRef.componentInstance.error = result.error;
           }
