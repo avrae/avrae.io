@@ -8,6 +8,10 @@
     <avr-automation-editor [automation]="localSavedAutomation"
                            (changed)="saveLocalAutomation()"></avr-automation-editor>
 
+    <button mat-flat-button color="warn" (click)="clearLocalAutomation()">Clear</button>
+    <button mat-flat-button (click)="beginJSONImport()" color="primary">Import</button>
+    <button mat-flat-button (click)="beginJSONExport(localSavedAutomation)" color="primary">Export</button>
+
     <h3>YAML</h3>
     <pre class="text-monospace" [innerHTML]="getLocalAutomationYaml()"></pre>
   </mat-card>
