@@ -1,0 +1,16 @@
+<div class="container">
+  <mat-card>
+    <h1>Automation Editor Dev</h1>
+    <p>do the editing, saves to localstorage</p>
+
+    <mat-divider></mat-divider>
+
+    <avr-automation-editor [automation]="localSavedAutomation"
+                           (changed)="saveLocalAutomation()"></avr-automation-editor>
+
+    <h3>YAML</h3>
+    <pre class="text-monospace" [innerHTML]="getLocalAutomationYaml()"></pre>
+  </mat-card>
+</div>
+
+

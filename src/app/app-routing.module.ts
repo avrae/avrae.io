@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {environment} from '../environments/environment';
 import {CommandsComponent} from './commands/commands.component';
 import {ErrorComponent} from './error/error.component';
 
@@ -13,11 +14,12 @@ const routes: Routes = [
   {path: 'commands', component: CommandsComponent},
   {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule)},
   {path: 'ssr', loadChildren: () => import('./ssr/ssr.module').then(mod => mod.SsrModule), canLoad: [SsrGuard]},
+  ...(environment.production ? [] : [{path: 'dev', loadChildren: () => import('./dev/dev.module').then(mod => mod.DevModule)}]),  // dev module if not production
   {path: '**', component: ErrorComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
