@@ -4,7 +4,7 @@ import {AutomationEditorDevComponent} from './automation-editor-dev/automation-e
 
 
 const devRoutes: Routes = [
-  {path: 'automationeditor', component: AutomationEditorDevComponent},
+  {path: 'automation', component: AutomationEditorDevComponent},
 ];
 
 @NgModule({

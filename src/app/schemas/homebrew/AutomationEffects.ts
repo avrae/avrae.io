@@ -15,6 +15,10 @@ export class AutomationEffect {
     this.meta = meta || [];
   }
 
+  public toJSON() {
+    const {meta, ...props} = this;
+    return meta?.length ? this : props;
+  }
 }
 
 export class Target extends AutomationEffect {

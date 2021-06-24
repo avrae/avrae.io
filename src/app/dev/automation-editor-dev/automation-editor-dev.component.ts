@@ -21,6 +21,7 @@ export class AutomationEditorDevComponent implements OnInit {
     this.loadLocalAutomation();
   }
 
+  // persistence
   loadLocalAutomation(): void {
     const localSave = JSON.parse(localStorage.getItem('dev-automation-editor'));
     this.localSavedAutomation = localSave || [];
@@ -35,10 +36,16 @@ export class AutomationEditorDevComponent implements OnInit {
     this.localSavedAutomation = [];
   }
 
+  // serialization tests
   getLocalAutomationYaml(): string {
     return YAMLStringify(this.localSavedAutomation);
   }
 
+  getLocalAutomationJson(): string {
+    return JSON.stringify(this.localSavedAutomation, null, 2);
+  }
+
+  // dialog tests
   beginJSONImport() {
     const dialogRef = this.dialog.open(JSONImportDialog, {
       width: '60%',
@@ -54,9 +61,9 @@ export class AutomationEditorDevComponent implements OnInit {
     });
   }
 
-  beginJSONExport(automation: AutomationEffect[]) {
+  beginJSONExport(automation: AutomationEffect[], allowYaml = true) {
     this.dialog.open(JSONExportDialog, {
-      data: {name: 'Automation', data: automation, yaml: true},
+      data: {name: 'Automation', data: automation, yaml: allowYaml},
       width: '60%'
     });
   }

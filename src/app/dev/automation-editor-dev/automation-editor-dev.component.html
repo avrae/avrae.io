@@ -1,19 +1,31 @@
 <div class="container">
   <mat-card>
-    <h1>Automation Editor Dev</h1>
-    <p>do the editing, saves to localstorage</p>
+    <h1>Automation Editor Playground</h1>
+    <p>Build automation without tying it to a character or spell here.</p>
 
     <mat-divider></mat-divider>
 
     <avr-automation-editor [automation]="localSavedAutomation"
                            (changed)="saveLocalAutomation()"></avr-automation-editor>
 
-    <button mat-flat-button color="warn" (click)="clearLocalAutomation()">Clear</button>
-    <button mat-flat-button (click)="beginJSONImport()" color="primary">Import</button>
-    <button mat-flat-button (click)="beginJSONExport(localSavedAutomation)" color="primary">Export</button>
+    <div class="button-group">
+      <button mat-flat-button color="warn" (click)="clearLocalAutomation()">Clear</button>
+      <button mat-flat-button (click)="beginJSONImport()" color="primary">Import</button>
+      <button mat-flat-button (click)="beginJSONExport(localSavedAutomation)" color="primary"
+              matTooltip="Note that this will not be importable in the Attack or Spell editors.">
+        Export
+      </button>
+      <button mat-flat-button (click)="beginJSONExport(localSavedAutomation, false)" color="primary"
+              matTooltip="Note that this will not be importable in the Attack or Spell editors.">
+        Export JSON
+      </button>
+    </div>
 
     <h3>YAML</h3>
     <pre class="text-monospace" [innerHTML]="getLocalAutomationYaml()"></pre>
+
+    <h3>JSON</h3>
+    <pre class="text-monospace" [innerHTML]="getLocalAutomationJson()"></pre>
   </mat-card>
 </div>
 
