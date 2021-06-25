@@ -1,10 +1,14 @@
 <h2 mat-dialog-title>Importing from JSON...</h2>
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content class="mat-typography"
+                    (keydown.control.enter)="validateAndExit()"
+                    (keydown.meta.enter)="validateAndExit()">
   <p>
     Paste your JSON here. This should be either an object or list exported from this site.
   </p>
+  <span class="mat-small">You can use <kbd>Ctrl-Enter</kbd> to save changes.</span>
+
   <div class="form-container">
-    <mat-form-field>
+    <mat-form-field class="text-monospace">
       <textarea matInput placeholder="JSON" rows="10" [(ngModel)]="data"></textarea>
     </mat-form-field>
   </div>

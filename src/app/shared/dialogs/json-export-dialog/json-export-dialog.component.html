@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>JSON - {{data.name}}</h2>
 <mat-dialog-content class="mat-typography">
   <div class="form-container">
-    <mat-form-field>
+    <mat-form-field class="text-monospace">
       <textarea matInput readonly [value]="jsonData" placeholder="JSON" rows="10" #jsonElem></textarea>
       <button mat-button matSuffix mat-icon-button aria-label="Copy" (click)="copy(jsonElem)"
               matTooltip="Copy to clipboard">

@@ -13,11 +13,12 @@ const routes: Routes = [
   {path: 'commands', component: CommandsComponent},
   {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule)},
   {path: 'ssr', loadChildren: () => import('./ssr/ssr.module').then(mod => mod.SsrModule), canLoad: [SsrGuard]},
+  {path: 'playground', loadChildren: () => import('./dev/dev.module').then(mod => mod.DevModule)},
   {path: '**', component: ErrorComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
