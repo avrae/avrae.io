@@ -1,10 +1,12 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: weekly
-  open-pull-requests-limit: 10
-  ignore:
-    - dependency-name: "@angular*"
-      update-types: ["version-update:semver-major"]  # don't do major semver angular patches
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "@angular*"
+        update-types: [ "version-update:semver-major" ]  # don't do major semver angular patches
+      - dependency-name: "*"
+        update-types: [ "version-update:semver-patch" ]  # don't care about non-security patch updates
