@@ -32,7 +32,7 @@
     "@angular/router": "^11.2.14",
     "@auth0/angular-jwt": "^5.0.2",
     "@nguniversal/express-engine": "^11.2.1",
-    "@sentry/browser": "^6.7.2",
+    "@sentry/browser": "^6.8.0",
     "compression": "^1.7.4",
     "core-js": "^3.8.3",
     "domino": "^2.1.6",
