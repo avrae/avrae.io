@@ -13,6 +13,9 @@ import {EffectComponent} from '../shared/EffectComponent';
       <mat-checkbox [(ngModel)]="effect.overheal" (change)="changed.emit()">
         Allow Overheal
       </mat-checkbox>
+      <mat-checkbox [(ngModel)]="effect.nocritical" (change)="changed.emit()">
+        Prevent Critical Damage
+      </mat-checkbox>
       <avr-higher-level *ngIf="spell != null" [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
       <mat-checkbox *ngIf="spell != null" [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
         Scales like Cantrip

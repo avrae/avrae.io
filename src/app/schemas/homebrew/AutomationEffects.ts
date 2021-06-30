@@ -61,13 +61,15 @@ export class Damage extends AutomationEffect {
   overheal: boolean;
   higher?: HigherLevels;
   cantripScale?: boolean;
+  nocritical?: boolean
 
-  constructor(damage = '', overheal?, higher?, cantripScale?, meta?) {
+  constructor(damage = '', overheal?, higher?, cantripScale?, nocrtical?, meta?) {
     super('damage', meta);
     this.damage = damage;
     this.overheal = overheal;
     this.higher = higher;
     this.cantripScale = cantripScale;
+    this.nocritical = nocrtical;
   }
 }
 
