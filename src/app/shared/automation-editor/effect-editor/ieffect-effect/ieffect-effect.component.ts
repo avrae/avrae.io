@@ -27,6 +27,9 @@ import {EffectComponent} from '../shared/EffectComponent';
       <mat-checkbox [(ngModel)]="effect.conc" (change)="changed.emit();">
         Requires concentration?
       </mat-checkbox>
+      <mat-checkbox [(ngModel)]="effect.stacking" (change)="changed.emit();">
+        Stacking?
+      </mat-checkbox>
     </div>
     <div fxLayout="row">
       <mat-form-field class="wide">
