@@ -180,7 +180,7 @@ export class UseCounter extends AutomationEffect {
 }
 
 export class SpellSlotReference {
-  slot: number;
+  slot: number | IntExpression;
 
   constructor(slot) {
     this.slot = slot;

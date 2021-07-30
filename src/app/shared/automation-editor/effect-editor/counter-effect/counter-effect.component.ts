@@ -32,8 +32,8 @@ import {EffectComponent} from '../shared/EffectComponent';
         <span *ngSwitchCase="'slot'">
           <span> of level </span>
           <mat-form-field>
-            <input matInput placeholder="Slot Level" type="number" max="9" min="1" (change)="changed.emit()"
-                   [(ngModel)]="effect.counter.slot">
+            <input matInput placeholder="Slot Level" (change)="changed.emit()" [(ngModel)]="effect.counter.slot">
+            <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
           </mat-form-field>
         </span>
 
