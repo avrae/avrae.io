@@ -71,6 +71,7 @@ export class CollectableEditDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.refreshCollectable();
     this.updateAddableEntitlements();
   }
 
@@ -203,14 +204,7 @@ export class CollectableEditDialogComponent implements OnInit {
       request = this.workshopService.setActiveSnippetCodeVersion(this.snippet._id, this.selectedCodeVersion.version);
     }
     request.subscribe(response => {
-      this.loading = false;
-      if (response.success) {
-        Object.assign(this.collectable, response.data);
-        // refresh the reference from selected
-        this.selectedCodeVersion = this.collectable.versions.find(cv => cv.version === this.selectedCodeVersion.version);
-      } else {
-        this.error = response.error;
-      }
+      this.updateCollectableFromResponse(response);
     });
   }
 
@@ -253,7 +247,31 @@ export class CollectableEditDialogComponent implements OnInit {
     });
   }
 
+  // loaders
+  refreshCollectable() {
+    let request: Observable<ApiResponse<WorkshopCollectable>>;
+    if (this.alias) {
+      request = this.workshopService.getAlias(this.alias._id);
+    } else {
+      request = this.workshopService.getSnippet(this.snippet._id);
+    }
+    request.subscribe(response => {
+      this.updateCollectableFromResponse(response);
+    });
+  }
+
   // helpers
+  private updateCollectableFromResponse(response: ApiResponse<WorkshopCollectable>) {
+    this.loading = false;
+    if (response.success) {
+      Object.assign(this.collectable, response.data);
+      // refresh the reference from selected
+      this.selectedCodeVersion = this.collectable.versions.find(cv => cv.version === this.selectedCodeVersion.version);
+    } else {
+      this.error = response.error;
+    }
+  }
+
   getSortedVersions() {
     return this.collectable.versions.sort((a, b) => b.version - a.version);
   }
