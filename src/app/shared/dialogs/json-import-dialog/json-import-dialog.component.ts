@@ -17,12 +17,14 @@ export class JSONImportDialog implements OnInit {
   data: string;
   error: string;
   loading = false;
+  jsonOrYaml: string = 'JSON';
 
   constructor(private dialogRef: MatDialogRef<JSONImportDialog>,
               @Inject(MAT_DIALOG_DATA) public input: JSONImportDialogData) {
   }
 
   ngOnInit() {
+    this.jsonOrYaml = this.input.yaml ? 'YAML' : 'JSON';
   }
 
   validateAndExit() {
