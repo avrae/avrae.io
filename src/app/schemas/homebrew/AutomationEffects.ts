@@ -95,14 +95,16 @@ export class IEffect extends AutomationEffect {
   end?: boolean;
   conc?: boolean;
   desc?: AnnotatedString;
+  stacking?: boolean;
 
-  constructor(name = '', duration = '', effects = '', desc = '', end = false, conc = false, meta?) {
+  constructor(name = '', duration = '', effects = '', desc = '', end = false, conc = false, stacking=false, meta?) {
     super('ieffect', meta);
     this.name = name;
     this.duration = duration;
     this.effects = effects;
     this.end = end;
     this.desc = desc;
+    this.stacking = stacking;
   }
 }
 
@@ -178,7 +180,7 @@ export class UseCounter extends AutomationEffect {
 }
 
 export class SpellSlotReference {
-  slot: number;
+  slot: number | IntExpression;
 
   constructor(slot) {
     this.slot = slot;
