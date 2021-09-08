@@ -16,11 +16,14 @@ export interface JSONExportDialogData {
 export class JSONExportDialog implements OnInit {
 
   jsonData: string;
+  jsonOrYaml: string = 'JSON';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: JSONExportDialogData) {
     if (data.yaml) {
+      this.jsonOrYaml = 'YAML';
       this.jsonData = YAMLStringify(this.data.data);
     } else {
+      this.jsonOrYaml = 'JSON';
       this.jsonData = JSON.stringify(this.data.data);
     }
   }
