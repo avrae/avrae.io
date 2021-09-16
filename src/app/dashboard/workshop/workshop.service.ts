@@ -142,6 +142,12 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  getAliasCodeVersions(aliasId: string, skip: number = 0, limit: number = 25): Observable<ApiResponse<CodeVersion[]>> {
+    return this.http.get<ApiResponse<CodeVersion[]>>(`${baseUrl}/alias/${aliasId}/code`,
+      defaultOptions({params: {skip, limit}}))
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   createAliasCodeVersion(aliasId: string, content: string): Observable<ApiResponse<CodeVersion>> {
     return this.http.post<ApiResponse<CodeVersion>>(`${baseUrl}/alias/${aliasId}/code`,
       {content},
@@ -193,6 +199,12 @@ export class WorkshopService {
 
   deleteSnippet(snippetId: string): Observable<ApiResponse<string>> {
     return this.http.delete<ApiResponse<string>>(`${baseUrl}/snippet/${snippetId}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  getSnippetCodeVersions(snippetId: string, skip: number = 0, limit: number = 25): Observable<ApiResponse<CodeVersion[]>> {
+    return this.http.get<ApiResponse<CodeVersion[]>>(`${baseUrl}/snippet/${snippetId}/code`,
+      defaultOptions({params: {skip, limit}}))
       .pipe(catchError(defaultErrorHandler));
   }
 

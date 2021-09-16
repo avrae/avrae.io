@@ -50,6 +50,9 @@ export class CollectableEditDialogComponent implements OnInit {
   creatingNewCodeVersion: boolean;
   newCodeVersionContent: string;
 
+  // code version loading
+  loadingCodeVersions = true;
+
   // state
   loading = false;
   error: string;
@@ -71,8 +74,8 @@ export class CollectableEditDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.refreshCollectable();
     this.updateAddableEntitlements();
+    this.loadCodeVersions();
   }
 
   get collectable(): WorkshopCollectable {
@@ -257,6 +260,31 @@ export class CollectableEditDialogComponent implements OnInit {
     }
     request.subscribe(response => {
       this.updateCollectableFromResponse(response);
+    });
+  }
+
+  loadCodeVersions(skip = 0, limit = 10) {
+    let request: Observable<ApiResponse<CodeVersion[]>>;
+    if (this.alias) {
+      request = this.workshopService.getAliasCodeVersions(this.alias._id, skip, limit);
+    } else {
+      request = this.workshopService.getSnippetCodeVersions(this.snippet._id, skip, limit);
+    }
+    request.subscribe(response => {
+      if (!response.success) {
+        return;
+      }
+      const filteredData = response.data.filter(cv => !this.collectable.versions.some(v => v.version === cv.version));
+      this.collectable.versions.push(...filteredData);
+      if (this.collectable.versions.length && this.selectedCodeVersion === null) {
+        this.selectedCodeVersion = this.collectable.versions.find(cv => cv.is_current);
+      }
+      if (!filteredData.length || response.data.length < limit || Math.min(...response.data.map(v => v.version)) === 1) {
+        this.loadingCodeVersions = false;
+        return;
+      } else {
+        this.loadCodeVersions(skip + response.data.length, limit);
+      }
     });
   }
 
