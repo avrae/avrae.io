@@ -104,15 +104,15 @@ export class AttackEditorDialog implements OnInit {
       });
   }
 
-  // JSON
-  beginJSONExport(attack: Attack | Attack[]) {
+  // YAML
+  beginYAMLExport(attack: Attack | Attack[]) {
     this.dialog.open(JSONExportDialog, {
       data: {name: (attack instanceof Array) ? 'All Attacks' : attack.name, data: attack, yaml: true},
       width: '60%'
     });
   }
 
-  beginJSONImport() {
+  beginYAMLImport() {
     const dialogRef = this.dialog.open(JSONImportDialog, {
       width: '60%',
       disableClose: true,
