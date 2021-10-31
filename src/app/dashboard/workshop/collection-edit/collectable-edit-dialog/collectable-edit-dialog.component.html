@@ -34,6 +34,8 @@
       Need some references? You can <a href="https://avrae.readthedocs.io/en/stable/aliasing/api.html" target="_blank">
       find the Draconic documentation here</a>.
     </p>
+    <!-- <button (click)="toggleWordWrap()">{{ this.wordWrap === 'on' ? 'Word Wrap Enabled' : 'Word Wrap Disabled' }}</button> -->
+    <mat-slide-toggle (change)="toggleWordWrap()">Word Wrap</mat-slide-toggle>
     <div class="code-versions-container ignore-theme">
       <!-- code editor: display selected, edit new version, or placeholder if nothing selected -->
       <div class="code-editor">
