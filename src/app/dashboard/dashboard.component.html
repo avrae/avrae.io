@@ -1,10 +1,21 @@
-<mat-sidenav-container class="sidenav-container">
+<!-- Side Menu Floating Button -->
+<button mat-icon-button 
+  *ngIf="(small || mobile) && !sidenav.opened" 
+  (click)="sidenav.toggle()"
+  class="small-menu-button mat-fab"
+  color="accent">
+  <mat-icon>double_arrow</mat-icon>
+</button>
+
+<mat-sidenav-container class="sidenav-container"
+  [ngClass]="{'side-menu-open': !sidenav.opened}">
+
   <mat-sidenav
-    opened
-    mode="side"
+    #sidenav
+    [(opened)]="medium"
+    [mode]="small || mobile ? 'over' : 'side'"
     class="sidenav mat-elevation-z3"
-    fixedTopGap="56px"
-    disableClose="true">
+    fixedTopGap="56px">
     <mat-nav-list>
       <a mat-list-item [routerLink]="['characters']">Characters</a>
 
