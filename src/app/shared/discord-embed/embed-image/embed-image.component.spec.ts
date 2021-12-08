@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {EmbedImageComponent} from './embed-image.component';
 
@@ -6,7 +6,7 @@ describe('EmbedImageComponent', () => {
   let component: EmbedImageComponent;
   let fixture: ComponentFixture<EmbedImageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [EmbedImageComponent]
     })

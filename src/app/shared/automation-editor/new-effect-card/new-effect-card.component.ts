@@ -1,20 +1,37 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Attack, Damage, IEffect, Roll, Save, AutomationEffect, Target, TempHP, Text} from '../../../schemas/homebrew/AutomationEffects';
+import {
+  Attack,
+  AutomationEffect, CastSpell,
+  Condition,
+  Damage,
+  IEffect,
+  Roll,
+  Save,
+  SetVariable,
+  Target,
+  TempHP,
+  Text,
+  UseCounter
+} from '../../../schemas/homebrew/AutomationEffects';
 
-const typeOptions = new Map<string, Array<string>>(
-  [
-    ['root', ['target', 'text', 'attack and damage (Preset)', 'save for half (Preset)']],
-    ['meta', ['roll']],
-    ['target', ['attack', 'save', 'damage', 'temphp', 'ieffect']],
-    ['attack', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'text']],
-    ['save', ['attack', 'save', 'damage', 'temphp', 'ieffect', 'text']],
-    ['damage', []],
-    ['temphp', []],
-    ['ieffect', []],
-    ['roll', []],
-    ['text', []]
-  ]
-);
+
+// each type option defines a list of rules (function parents -> bool) - all must return true to be addable
+const typeRules = new Map<string, Array<(stack: Array<string>) => boolean>>([
+  ['target', [stack => !stack.includes('target')]],
+  ['attack', [stack => stack.includes('target')]],
+  ['save', [stack => stack.includes('target')]],
+  ['damage', [stack => stack.includes('target')]],
+  ['temphp', [stack => stack.includes('target')]],
+  ['ieffect', [stack => stack.includes('target')]],
+  ['roll', []],
+  ['text', []],
+  ['variable', []],
+  ['condition', []],
+  ['counter', []],
+  ['spell', [stack => stack.length === 0]],
+  ['attack and damage (Preset)', [stack => !stack.includes('target')]],
+  ['save for half (Preset)', [stack => !stack.includes('target')]]
+]);
 
 @Component({
   selector: 'avr-new-effect-card',
@@ -23,25 +40,24 @@ const typeOptions = new Map<string, Array<string>>(
 })
 export class NewEffectCardComponent implements OnInit {
 
-  @Input() parent: Array<AutomationEffect>;
-  @Input() metaParent: Array<AutomationEffect>;
-  @Input() parentType: string;
+  @Input() parent: AutomationEffect[];
+  @Input() metaParent: AutomationEffect[];  // deprecated, unused
+  @Input() parentTypeStack: string[];
   @Output() changed = new EventEmitter();
-  toAddType: { option: string, meta: boolean };
-  availableTypes: Array<string>;
-  availableMetaTypes: Array<string>;
+  availableTypes: string[];
 
   constructor() {
   }
 
   ngOnInit() {
-    this.availableTypes = typeOptions.get(this.parentType);
-    this.availableMetaTypes = this.parentType === 'root' ? [] : typeOptions.get('meta');
+    this.availableTypes = Array.from(typeRules.entries())
+      .filter(([type, rules]) => rules.every(rule => rule(this.parentTypeStack)))
+      .map(([type, rules]) => type);
   }
 
-  addEffect() {
+  addEffect(toAddType) {
     let effect: AutomationEffect;
-    switch (this.toAddType.option) {
+    switch (toAddType) {
       case 'target':
         effect = new Target();
         break;
@@ -66,55 +82,55 @@ export class NewEffectCardComponent implements OnInit {
       case 'text':
         effect = new Text();
         break;
+      case 'variable':
+        effect = new SetVariable();
+        break;
+      case 'condition':
+        effect = new Condition();
+        break;
+      case 'counter':
+        effect = new UseCounter();
+        break;
+      case 'spell':
+        effect = new CastSpell();
+        break;
       case 'attack and damage (Preset)':
-        effect = new AttackAndDamagePreset();
-        break;
+        this.parent.push(...generateAttackAndDamagePreset());
+        return;
       case 'save for half (Preset)':
-        effect = new SaveForHalfPreset();
-        break;
+        this.parent.push(...generateSaveForHalfPreset());
+        return;
       default:
         return;
     }
-    if (this.toAddType.meta) {
-      this.newMeta(effect);
-    } else {
-      this.newEffect(effect);
-    }
+    this.newEffect(effect);
     this.changed.emit();
   }
 
   newEffect(effect: AutomationEffect) {
     this.parent.push(effect);
   }
-
-  newMeta(effect: AutomationEffect) {
-    this.metaParent.push(effect);
-  }
 }
 
-class AttackAndDamagePreset extends Target {
-  constructor() {
-    const effects: AutomationEffect[] = [
+function generateAttackAndDamagePreset(): AutomationEffect[] {
+  return [
+    new Target('each', [
       new Attack([
         new Damage('1d10[fire]')
       ])
-    ];
-    super('each', effects, []);
-  }
+    ])
+  ];
 }
 
-class SaveForHalfPreset extends Target {
-  constructor() {
-    const effects: AutomationEffect[] = [
+function generateSaveForHalfPreset(): AutomationEffect[] {
+  return [
+    new Roll('8d6[fire]', 'damage'),
+    new Target('all', [
       new Save('dex', [
         new Damage('{damage}')
       ], [
         new Damage('({damage})/2')
       ])
-    ];
-    const meta: AutomationEffect[] = [
-      new Roll('8d6[fire]', 'damage')
-    ];
-    super('all', effects, meta);
-  }
+    ])
+  ];
 }

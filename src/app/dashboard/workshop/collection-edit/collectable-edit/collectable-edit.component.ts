@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CollectableType, WorkshopAliasFull, WorkshopCollectable, WorkshopCollection} from '../../../../schemas/Workshop';
+import {GamedataService} from '../../../../shared/gamedata.service';
 import {CollectableDisplayComponent} from '../../collectable-display/collectable-display.component';
 import {WorkshopService} from '../../workshop.service';
 import {CollectableEditDialogComponent} from '../collectable-edit-dialog/collectable-edit-dialog.component';
@@ -15,9 +16,9 @@ export class CollectableEditComponent extends CollectableDisplayComponent implem
 
   @Input() collection: WorkshopCollection;
 
-  constructor(public workshopService: WorkshopService,
+  constructor(public workshopService: WorkshopService, public gamedataService: GamedataService,
               private dialog: MatDialog) {
-    super(workshopService);
+    super(workshopService, gamedataService);
   }
 
   ngOnInit(): void {

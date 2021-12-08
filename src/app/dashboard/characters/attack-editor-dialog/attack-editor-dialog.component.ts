@@ -1,24 +1,29 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {Attack, CharacterMeta} from '../../../schemas/Character';
 import {JSONExportDialog} from '../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 import {JSONImportDialog} from '../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
 import {SRDCopyDialog} from '../../../shared/dialogs/srd-copy-dialog/srd-copy-dialog.component';
+import {ApiResponse} from '../../APIHelper';
 import {DashboardService} from '../../dashboard.service';
 
 @Component({
   selector: 'avr-attack-editor-dialog',
   templateUrl: './attack-editor-dialog.component.html',
-  styleUrls: ['./attack-editor-dialog.component.css']
+  styleUrls: ['./attack-editor-dialog.component.scss']
 })
 export class AttackEditorDialog implements OnInit {
 
   selectedAttack: Attack;
   allAttacks: Attack[];
 
-  saveButtonValue = 'Save and Exit';
+  saveButtonValue = 'Save';
+  saveAndExitButtonValue = 'Save and Exit';
   saveButtonDisabled = false;
   errorValue: string;
+  showAdvancedOptions = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public character: CharacterMeta, private charService: DashboardService,
               private dialogRef: MatDialogRef<AttackEditorDialog>, private dialog: MatDialog) {
@@ -64,38 +69,54 @@ export class AttackEditorDialog implements OnInit {
     this.selectedAttack = null;
   }
 
-  saveAndExit() {
+  doSave(): Observable<ApiResponse<string>> {
     this.saveButtonValue = `Saving...`;
+    this.saveAndExitButtonValue = `Saving...`;
     this.saveButtonDisabled = true;
 
-    this.charService.putCharacterAttacks(this.character.upstream, this.allAttacks)
-      .subscribe(result => {
-        this.saveButtonValue = 'Save and Exit';
+    return this.charService.putCharacterAttacks(this.character.upstream, this.allAttacks)
+      .pipe(map(result => {
+        this.saveButtonValue = 'Save';
+        this.saveAndExitButtonValue = 'Save and Exit';
         this.saveButtonDisabled = false;
 
-        if (result) {
+        if (!result || result.error) {
+          // failed PUT, display error... somewhere
+          this.errorValue = result?.error || 'Failed to save attacks.';
+        } else {
+          this.errorValue = null;
+        }
+        return result;
+      }));
+  }
+
+  save() {
+    this.doSave().subscribe();
+  }
+
+  saveAndExit() {
+    this.doSave()
+      .subscribe(result => {
+        if (result && !result.error) {
           // successful PUT, exit
           this.dialogRef.close();
-        } else {
-          // failed PUT, display error... somewhere
-          this.errorValue = 'Failed to save attacks.';
         }
       });
   }
 
-  // JSON
-  beginJSONExport(attack: Attack | Attack[]) {
+  // YAML
+  beginYAMLExport(attack: Attack | Attack[]) {
     this.dialog.open(JSONExportDialog, {
-      data: {name: (attack instanceof Array) ? 'All Attacks' : attack.name, data: attack},
+      data: {name: (attack instanceof Array) ? 'All Attacks' : attack.name, data: attack, yaml: true},
       width: '60%'
     });
   }
 
-  beginJSONImport() {
+  beginYAMLImport() {
     const dialogRef = this.dialog.open(JSONImportDialog, {
       width: '60%',
       disableClose: true,
-      data: {validator: (data) => this.validateAttackJSON(dialogRef, data)}
+      data: {validator: (data) => this.validateAttackJSON(dialogRef, data), yaml: true}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -114,12 +135,11 @@ export class AttackEditorDialog implements OnInit {
     this.charService.validateAttackJSON(data)
       .subscribe(
         result => {
-          console.log(result);
           dialogRef.componentInstance.loading = false;
           if (result.success) {
-            dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
+            dialogRef.close(data);
           } else {
-            dialogRef.componentInstance.error = result.result;
+            dialogRef.componentInstance.error = result.error;
           }
         }
       );

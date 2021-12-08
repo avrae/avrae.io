@@ -69,4 +69,12 @@
   .mat-checkbox-layout {
     white-space: normal !important;
   }
+
+  .preserve-whitespace {
+    white-space: pre-wrap;
+  }
+
+  .text-monospace {
+    font-family: 'Source Code Pro', monospace;
+  }
 }

@@ -5,6 +5,8 @@ import {FormsModule} from '@angular/forms';
 import {MaterialModule} from '../../material/material.module';
 import {AutomationEditorComponent} from './automation-editor.component';
 import {AttackEffectComponent} from './effect-editor/attack-effect/attack-effect.component';
+import {ConditionEffectComponent} from './effect-editor/condition-effect/condition-effect.component';
+import {CounterEffectComponent} from './effect-editor/counter-effect/counter-effect.component';
 import {DamageEffectComponent} from './effect-editor/damage-effect/damage-effect.component';
 import {EffectEditorComponent} from './effect-editor/effect-editor.component';
 import {HigherLevelComponent} from './effect-editor/higher-level/higher-level.component';
@@ -14,7 +16,9 @@ import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.compo
 import {TargetEffectComponent} from './effect-editor/target-effect/target-effect.component';
 import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
 import {TextEffectComponent} from './effect-editor/text-effect/text-effect.component';
+import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
 import {NewEffectCardComponent} from './new-effect-card/new-effect-card.component';
+import { SpellEffectComponent } from './effect-editor/spell-effect/spell-effect.component';
 
 @NgModule({
   imports: [
@@ -35,7 +39,11 @@ import {NewEffectCardComponent} from './new-effect-card/new-effect-card.componen
     TextEffectComponent,
     HigherLevelComponent,
     NewEffectCardComponent,
-    AutomationEditorComponent
+    AutomationEditorComponent,
+    VariableEffectComponent,
+    ConditionEffectComponent,
+    CounterEffectComponent,
+    SpellEffectComponent,
   ],
   exports: [AutomationEditorComponent]
 })

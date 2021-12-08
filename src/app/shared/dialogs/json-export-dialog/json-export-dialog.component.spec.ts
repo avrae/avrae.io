@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { JSONExportDialog } from './json-export-dialog.component';
 
@@ -6,7 +6,7 @@ describe('TomeJSONDialog', () => {
   let component: JSONExportDialog;
   let fixture: ComponentFixture<JSONExportDialog>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ JSONExportDialog ]
     })

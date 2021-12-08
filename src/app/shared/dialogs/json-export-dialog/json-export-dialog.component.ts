@@ -1,5 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {stringify as YAMLStringify} from 'yaml';
+
+export interface JSONExportDialogData {
+  name: string;
+  data: any;
+  yaml?: boolean;  // whether or not to export to YAML instead of JSON
+}
 
 @Component({
   selector: 'avr-json-export-dialog',
@@ -9,9 +16,16 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class JSONExportDialog implements OnInit {
 
   jsonData: string;
+  jsonOrYaml: string = 'JSON';
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { name: string, data: any }) {
-    this.jsonData = JSON.stringify(this.data.data);
+  constructor(@Inject(MAT_DIALOG_DATA) public data: JSONExportDialogData) {
+    if (data.yaml) {
+      this.jsonOrYaml = 'YAML';
+      this.jsonData = YAMLStringify(this.data.data);
+    } else {
+      this.jsonOrYaml = 'JSON';
+      this.jsonData = JSON.stringify(this.data.data);
+    }
   }
 
   ngOnInit() {

@@ -5,9 +5,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {groupBy} from 'lodash';
 import {Observable} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
+import {DDBEntity} from '../../../../schemas/GameData';
 import {
   CodeVersion,
-  DDBEntity,
   PublicationState,
   WorkshopAliasFull,
   WorkshopCollectable,
@@ -15,6 +15,7 @@ import {
   WorkshopEntitlement,
   WorkshopSnippet
 } from '../../../../schemas/Workshop';
+import {GamedataService} from '../../../../shared/gamedata.service';
 import {ApiResponse} from '../../../APIHelper';
 import {ConfirmDeleteDialog} from '../../../confirm-delete-dialog/confirm-delete-dialog.component';
 import {WorkshopService} from '../../workshop.service';
@@ -56,17 +57,20 @@ export class CollectableEditDialogComponent implements OnInit {
   creatingNewCodeVersion: boolean;
   newCodeVersionContent: string;
 
+  // code version loading
+  loadingCodeVersions = true;
+
   // state
   loading = false;
   error: string;
-  entitlementsControl = new FormControl();
+  entitlementsControl = new FormControl('');
   allEntities: DDBEntity[];
   addableEntitlements: Observable<[string, DDBEntity[]][]>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: CollectableEditDialogComponentData,
               private dialogRef: MatDialogRef<CollectableEditDialogComponent>,
-              private workshopService: WorkshopService, private dialog: MatDialog,
-              private snackBar: MatSnackBar) {
+              private workshopService: WorkshopService, private gamedataService: GamedataService,
+              private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.collection = data.collection;
     this.alias = data.alias;
     this.parent = data.parent;
@@ -78,6 +82,7 @@ export class CollectableEditDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateAddableEntitlements();
+    this.loadCodeVersions();
   }
 
   get collectable(): WorkshopCollectable {
@@ -209,14 +214,7 @@ export class CollectableEditDialogComponent implements OnInit {
       request = this.workshopService.setActiveSnippetCodeVersion(this.snippet._id, this.selectedCodeVersion.version);
     }
     request.subscribe(response => {
-      this.loading = false;
-      if (response.success) {
-        Object.assign(this.collectable, response.data);
-        // refresh the reference from selected
-        this.selectedCodeVersion = this.collectable.versions.find(cv => cv.version === this.selectedCodeVersion.version);
-      } else {
-        this.error = response.error;
-      }
+      this.updateCollectableFromResponse(response);
     });
   }
 
@@ -242,6 +240,7 @@ export class CollectableEditDialogComponent implements OnInit {
   onAddEntitlement(entitlement: DDBEntity) {
     this.loading = true;
     this.error = null;
+    this.entitlementsControl.setValue('');
     let request: Observable<ApiResponse<WorkshopEntitlement[]>>;
     if (this.alias) {
       request = this.workshopService.addAliasEntitlement(this.alias._id, entitlement);
@@ -258,18 +257,67 @@ export class CollectableEditDialogComponent implements OnInit {
     });
   }
 
+  // loaders
+  refreshCollectable() {
+    let request: Observable<ApiResponse<WorkshopCollectable>>;
+    if (this.alias) {
+      request = this.workshopService.getAlias(this.alias._id);
+    } else {
+      request = this.workshopService.getSnippet(this.snippet._id);
+    }
+    request.subscribe(response => {
+      this.updateCollectableFromResponse(response);
+    });
+  }
+
+  loadCodeVersions(skip = 0, limit = 10) {
+    let request: Observable<ApiResponse<CodeVersion[]>>;
+    if (this.alias) {
+      request = this.workshopService.getAliasCodeVersions(this.alias._id, skip, limit);
+    } else {
+      request = this.workshopService.getSnippetCodeVersions(this.snippet._id, skip, limit);
+    }
+    request.subscribe(response => {
+      if (!response.success) {
+        return;
+      }
+      const filteredData = response.data.filter(cv => !this.collectable.versions.some(v => v.version === cv.version));
+      this.collectable.versions.push(...filteredData);
+      if (this.collectable.versions.length && this.selectedCodeVersion === null) {
+        this.selectedCodeVersion = this.collectable.versions.find(cv => cv.is_current);
+      }
+      if (!filteredData.length || response.data.length < limit || Math.min(...response.data.map(v => v.version)) === 1) {
+        this.loadingCodeVersions = false;
+        return;
+      } else {
+        this.loadCodeVersions(skip + response.data.length, limit);
+      }
+    });
+  }
+
   // helpers
+  private updateCollectableFromResponse(response: ApiResponse<WorkshopCollectable>) {
+    this.loading = false;
+    if (response.success) {
+      Object.assign(this.collectable, response.data);
+      // refresh the reference from selected
+      this.selectedCodeVersion = this.collectable.versions.find(cv => cv.version === this.selectedCodeVersion.version);
+    } else {
+      this.error = response.error;
+    }
+  }
+
   getSortedVersions() {
     return this.collectable.versions.sort((a, b) => b.version - a.version);
   }
 
   getEntity(entitlement: WorkshopEntitlement) {
-    return this.workshopService.entityFromEntitlement(entitlement.entity_type, entitlement.entity_id);
+    return this.gamedataService.entityFromEntitlement(entitlement.entity_type, entitlement.entity_id);
   }
 
   updateAddableEntitlements() {
     // load entitlements
-    this.workshopService.getEntitlements()
+    this.gamedataService.getEntitlements()
       .subscribe(response => {
         this.allEntities = Array.from(response.data.values());
         this.entitlementsControl.setValue(''); // emit a value to get started
@@ -280,12 +328,13 @@ export class CollectableEditDialogComponent implements OnInit {
     this.addableEntitlements = this.entitlementsControl.valueChanges
       .pipe(debounceTime(500))
       .pipe(map(value => {
+        let normValue = value && typeof value === 'string' ? value : '';
         const possible = this.allEntities
           // filter out entities that are already in the entitlement list
           .filter(entity => !this.collectable.entitlements
-            .find(entitlement => entitlement.entity_type === entity.entity_type && entitlement.entity_id === entity.entity_id))
+            .find(entitlement => entitlement.entity_type === entity.entitlement_entity_type && entitlement.entity_id === entity.entitlement_entity_id))
           // filter to entities that contain the search
-          .filter(entity => entity.name.toLowerCase().includes(value.toLowerCase()))
+          .filter(entity => entity.name.toLowerCase().includes(normValue.toLowerCase()))
           // sort alphabetically
           .sort((a, b) => a.name.localeCompare(b.name));
         // group by entitlement type and sort

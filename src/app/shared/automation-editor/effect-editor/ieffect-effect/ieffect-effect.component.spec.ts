@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { IEffectEffectComponent } from './ieffect-effect.component';
 
@@ -6,7 +6,7 @@ describe('IEffectEffectComponent', () => {
   let component: IEffectEffectComponent;
   let fixture: ComponentFixture<IEffectEffectComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ IEffectEffectComponent ]
     })

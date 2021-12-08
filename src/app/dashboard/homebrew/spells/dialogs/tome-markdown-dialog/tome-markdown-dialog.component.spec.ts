@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TomeMarkdownDialog } from './tome-markdown-dialog.component';
 
@@ -6,7 +6,7 @@ describe('TomeMarkdownDialog', () => {
   let component: TomeMarkdownDialog;
   let fixture: ComponentFixture<TomeMarkdownDialog>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TomeMarkdownDialog ]
     })

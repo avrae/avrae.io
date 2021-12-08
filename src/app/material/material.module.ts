@@ -24,6 +24,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatBadgeModule,
     MatAutocompleteModule,
     MatChipsModule,
+    NgxMatSelectSearchModule,
   ],
   exports: [
     MatGridListModule,
@@ -80,6 +82,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatBadgeModule,
     MatAutocompleteModule,
     MatChipsModule,
+    NgxMatSelectSearchModule,
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, horizontalPosition: 'right'}}

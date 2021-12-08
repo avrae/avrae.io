@@ -11,6 +11,7 @@ import {Spell} from '../../../schemas/homebrew/Spells';
 export class EffectEditorComponent implements OnInit {
 
   @Input() parent: AutomationEffect[];
+  @Input() parentTypeStack: string[];
   @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 

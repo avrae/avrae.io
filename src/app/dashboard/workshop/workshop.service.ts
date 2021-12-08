@@ -4,9 +4,9 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, share} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {DiscordUser} from '../../schemas/Discord';
+import {DDBEntity} from '../../schemas/GameData';
 import {
   CodeVersion,
-  DDBEntity,
   PublicationState,
   WorkshopAlias,
   WorkshopAliasFull,
@@ -29,7 +29,6 @@ export class WorkshopService {
 
   // cached stuff
   tags: Observable<ApiResponse<WorkshopTag[]>>;
-  entitlements: Observable<ApiResponse<Map<string, DDBEntity>>>;
   personalSubscribedIds: string[];
   personalSubscribedIdsInflight = false;
 
@@ -45,7 +44,8 @@ export class WorkshopService {
   }
 
   getCollection(id: string): Observable<ApiResponse<WorkshopCollection>> {
-    return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`, defaultOptions())
+    // gets a collection without auth
+    return this.http.get<ApiResponse<WorkshopCollection>>(`${baseUrl}/collection/${id}`)
       .pipe(catchError(defaultErrorHandler));
   }
 
@@ -142,6 +142,12 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  getAliasCodeVersions(aliasId: string, skip: number = 0, limit: number = 25): Observable<ApiResponse<CodeVersion[]>> {
+    return this.http.get<ApiResponse<CodeVersion[]>>(`${baseUrl}/alias/${aliasId}/code`,
+      defaultOptions({params: {skip, limit}}))
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   createAliasCodeVersion(aliasId: string, content: string): Observable<ApiResponse<CodeVersion>> {
     return this.http.post<ApiResponse<CodeVersion>>(`${baseUrl}/alias/${aliasId}/code`,
       {content},
@@ -158,7 +164,7 @@ export class WorkshopService {
 
   addAliasEntitlement(aliasId: string, entity: DDBEntity): Observable<ApiResponse<WorkshopEntitlement[]>> {
     return this.http.post<ApiResponse<WorkshopEntitlement[]>>(`${baseUrl}/alias/${aliasId}/entitlement`,
-      {entity_type: entity.entity_type, entity_id: entity.entity_id},
+      {entity_type: entity.entitlement_entity_type, entity_id: entity.entitlement_entity_id},
       defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
@@ -196,6 +202,12 @@ export class WorkshopService {
       .pipe(catchError(defaultErrorHandler));
   }
 
+  getSnippetCodeVersions(snippetId: string, skip: number = 0, limit: number = 25): Observable<ApiResponse<CodeVersion[]>> {
+    return this.http.get<ApiResponse<CodeVersion[]>>(`${baseUrl}/snippet/${snippetId}/code`,
+      defaultOptions({params: {skip, limit}}))
+      .pipe(catchError(defaultErrorHandler));
+  }
+
   createSnippetCodeVersion(snippetId: string, content: string): Observable<ApiResponse<CodeVersion>> {
     return this.http.post<ApiResponse<CodeVersion>>(`${baseUrl}/snippet/${snippetId}/code`,
       {content},
@@ -212,7 +224,7 @@ export class WorkshopService {
 
   addSnippetEntitlement(snippetId: string, entity: DDBEntity): Observable<ApiResponse<WorkshopEntitlement[]>> {
     return this.http.post<ApiResponse<WorkshopEntitlement[]>>(`${baseUrl}/snippet/${snippetId}/entitlement`,
-      {entity_type: entity.entity_type, entity_id: entity.entity_id},
+      {entity_type: entity.entitlement_entity_type, entity_id: entity.entitlement_entity_id},
       defaultOptions())
       .pipe(catchError(defaultErrorHandler));
   }
@@ -351,38 +363,6 @@ export class WorkshopService {
     return this.http.get<ApiResponse<{ can_edit: boolean, message: string | null }>>(`${baseUrl}/guild-check`,
       defaultOptions({params: {g: id}}))
       .pipe(catchError(defaultErrorHandler));
-  }
-
-  getEntitlements(): Observable<ApiResponse<Map<string, DDBEntity>>> {
-    if (this.entitlements) {
-      return this.entitlements;
-    }
-    const req = this.http.get<ApiResponse<Map<string, DDBEntity>>>(`${baseUrl}/entitlements`, defaultOptions())
-      .pipe(map(resp => {
-        if (resp.success) {
-          resp.data = new Map(Object.entries(resp.data));
-        }
-        return resp;
-      }))
-      .pipe(share())
-      .pipe(catchError(defaultErrorHandler));
-    this.entitlements = req;
-    req.subscribe(result => this.entitlements = of(result));
-    return req;
-  }
-
-  // ---- helpers ----
-  entityFromEntitlement(entityType: string, entityId: number): Observable<DDBEntity | null> {
-    return this.getEntitlements()
-      .pipe(map(response => {
-        if (response.success) {
-          const entity = response.data.get(`${entityType}-${entityId.toString()}`);
-          if (entity) {
-            return entity;
-          }
-        }
-        return null;
-      }));
   }
 }
 

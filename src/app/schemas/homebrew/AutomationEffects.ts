@@ -1,3 +1,11 @@
+// helper types
+
+type AnnotatedString = string;
+type IntExpression = string;
+type HigherLevels<T = string> = Map<number, T>;
+
+
+// exported types
 export class AutomationEffect {
   type: string;
   meta: AutomationEffect[];
@@ -7,10 +15,14 @@ export class AutomationEffect {
     this.meta = meta || [];
   }
 
+  public toJSON() {
+    const {meta, ...props} = this;
+    return meta?.length ? this : props;
+  }
 }
 
 export class Target extends AutomationEffect {
-  target: string | number;
+  target: string | number;  // 'all' | 'each' | number | 'self'
   effects: AutomationEffect[];
 
   constructor(target = 'all', effects = [], meta?) {
@@ -34,10 +46,10 @@ export class Attack extends AutomationEffect {
 }
 
 export class Save extends AutomationEffect {
-  stat: string;
+  stat: string;  // 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha'
   fail: AutomationEffect[];
   success: AutomationEffect[];
-  dc: string;
+  dc: IntExpression;
 
   constructor(stat = 'str', fail = [], success = [], dc?, meta?) {
     super('save', meta);
@@ -49,9 +61,9 @@ export class Save extends AutomationEffect {
 }
 
 export class Damage extends AutomationEffect {
-  damage: string;
+  damage: AnnotatedString;
   overheal: boolean;
-  higher?: Map<number, string>;
+  higher?: HigherLevels;
   cantripScale?: boolean;
 
   constructor(damage = '', overheal?, higher?, cantripScale?, meta?) {
@@ -64,8 +76,8 @@ export class Damage extends AutomationEffect {
 }
 
 export class TempHP extends AutomationEffect {
-  amount: string;
-  higher?: Map<number, string>;
+  amount: AnnotatedString;
+  higher?: HigherLevels;
   cantripScale?: boolean;
 
   constructor(amount = '', higher?, cantripScale?, meta?) {
@@ -78,23 +90,28 @@ export class TempHP extends AutomationEffect {
 
 export class IEffect extends AutomationEffect {
   name: string;
-  duration: number | string;
-  effects: string;
+  duration: number | IntExpression;
+  effects: AnnotatedString;
   end?: boolean;
+  conc?: boolean;
+  desc?: AnnotatedString;
+  stacking?: boolean;
 
-  constructor(name = '', duration = '', effects = '', end = false, meta?) {
+  constructor(name = '', duration = '', effects = '', desc = '', end = false, conc = false, stacking=false, meta?) {
     super('ieffect', meta);
     this.name = name;
     this.duration = duration;
     this.effects = effects;
     this.end = end;
+    this.desc = desc;
+    this.stacking = stacking;
   }
 }
 
 export class Roll extends AutomationEffect {
-  dice: string;
+  dice: AnnotatedString;
   name: string;
-  higher?: Map<number, string>;
+  higher?: HigherLevels;
   cantripScale?: boolean;
   hidden?: boolean;
 
@@ -109,10 +126,90 @@ export class Roll extends AutomationEffect {
 }
 
 export class Text extends AutomationEffect {
-  text: string;
+  text: AnnotatedString | AbilityReference;
 
   constructor(text = '', meta?) {
     super('text', meta);
     this.text = text;
+  }
+}
+
+export class SetVariable extends AutomationEffect {
+  name: string;
+  value: IntExpression;
+  higher?: HigherLevels<IntExpression>;
+  onError?: IntExpression;
+
+  constructor(name = '', value = '', higher?, onError?, meta?) {
+    super('variable', meta);
+    this.name = name;
+    this.value = value;
+    this.higher = higher;
+    this.onError = onError;
+  }
+}
+
+export class Condition extends AutomationEffect {
+  condition: IntExpression;
+  onTrue: AutomationEffect[];
+  onFalse: AutomationEffect[];
+  errorBehaviour?: string; // 'true' | 'false' | 'both' | 'neither' | 'raise'
+
+  constructor(condition = '', onTrue = [], onFalse = [], errorBehaviour = 'false', meta?) {
+    super('condition', meta);
+    this.condition = condition;
+    this.onTrue = onTrue;
+    this.onFalse = onFalse;
+    this.errorBehaviour = errorBehaviour;
+  }
+}
+
+export class UseCounter extends AutomationEffect {
+  counter: AbilityReference | SpellSlotReference | string;
+  amount: IntExpression;
+  allowOverflow?: boolean;
+  errorBehaviour?: string | null;
+
+  constructor(counter = '', amount = '', allowOverflow = false, errorBehaviour = 'warn', meta?) {
+    super('counter', meta);
+    this.counter = counter;
+    this.amount = amount;
+    this.allowOverflow = allowOverflow;
+    this.errorBehaviour = errorBehaviour;
+  }
+}
+
+export class SpellSlotReference {
+  slot: number | IntExpression;
+
+  constructor(slot) {
+    this.slot = slot;
+  }
+}
+
+export class AbilityReference {
+  id: number;
+  typeId: number;
+
+  constructor(id, typeId) {
+    this.id = id;
+    this.typeId = typeId;
+  }
+}
+
+export class CastSpell extends AutomationEffect {
+  id: number;
+  level?: number;
+  dc?: IntExpression;
+  attackBonus?: IntExpression;
+  castingMod?: IntExpression;
+
+  constructor(id = 2102, level?, dc?, attackBonus?, castingMod?, meta?) {
+    super('spell', meta);
+    this.id = id;
+    this.level = level;
+    this.dc = dc;
+    this.attackBonus = attackBonus;
+    this.castingMod = castingMod;
   }
 }

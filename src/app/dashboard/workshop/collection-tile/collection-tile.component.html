@@ -18,9 +18,13 @@
     <mat-divider></mat-divider>
 
     <!-- name, author -->
-    <h2>
-      {{collection.name}}
-    </h2>
+    <a
+      [routerLink]="showEdit ? ['/dashboard/workshop/', collection._id, 'edit'] : ['/dashboard/workshop/', collection._id]"
+      class="ignore-theme">
+      <h2>
+        {{collection.name}}
+      </h2>
+    </a>
 
     <div class="collection-author">
       <img class="collection-author-avatar" [src]="author.avatarUrl" alt="avatar">

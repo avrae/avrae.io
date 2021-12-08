@@ -21,7 +21,8 @@ export function defaultOptions(additionalOptions = {}) {
   };
 }
 
-export function defaultTextOptions(additionalOptions = {}) {
+// 'any' type here is to prevent ts freaking out about return type not matching an overload
+export function defaultTextOptions(additionalOptions = {}): any {
   return {
     responseType: 'text',
     headers: new HttpHeaders({'Authorization': getToken()}),
@@ -44,5 +45,10 @@ export function getUser(): UserInfo {  // parse from JWT
 // error handling
 export function defaultErrorHandler(err: HttpErrorResponse): Observable<ApiResponse<any>> {
   console.error(err);
-  return of({...err.error, status: err.status} as ApiResponse<any>);
+  return of({...err.error, status: err.status, success: false} as ApiResponse<any>);
+}
+
+export function defaultTextErrorHandler(err: HttpErrorResponse): Observable<ApiResponse<any>> {
+  console.error(err);
+  return of({error: err.error, status: err.status, success: false} as ApiResponse<any>);
 }

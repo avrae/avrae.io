@@ -79,20 +79,16 @@ export class SpellListComponent implements OnInit {
   validateSpellJSON(dialogRef: MatDialogRef<JSONImportDialog>, data) {
     this.hbService.validateSpellJSON(data)
       .subscribe(
-        result => this.onValidationReply(dialogRef, result)
+        result => {
+          dialogRef.componentInstance.loading = false;
+          if (result.success) {
+            dialogRef.close(data);
+          } else {
+            dialogRef.componentInstance.error = result.result;
+          }
+        }
       );
   }
-
-  onValidationReply(dialogRef: MatDialogRef<JSONImportDialog>, result) {
-    console.log(result);
-    dialogRef.componentInstance.loading = false;
-    if (result.success) {
-      dialogRef.close(JSON.parse(dialogRef.componentInstance.data));
-    } else {
-      dialogRef.componentInstance.error = result.result;
-    }
-  }
-
 
   // move items in list
   moveUp(spell: Spell) {

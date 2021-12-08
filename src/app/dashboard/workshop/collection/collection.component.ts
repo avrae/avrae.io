@@ -2,6 +2,7 @@ import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Meta} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser, PartialGuild} from '../../../schemas/Discord';
 import {WorkshopBindings, WorkshopCollectionFull} from '../../../schemas/Workshop';
@@ -32,7 +33,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
   guildContext: PartialGuild | null;
 
   constructor(private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar,
-              private dialog: MatDialog, private location: Location,
+              private dialog: MatDialog, private location: Location, private meta: Meta,
               private workshopService: WorkshopService, private discordService: DiscordService) {
     super(snackBar, workshopService, discordService);
   }
@@ -100,7 +101,7 @@ export class CollectionComponent extends CollectionSubscriber implements OnInit 
 
   onGuildSubscribe(guild: PartialGuild) {
     this.doGuildSubscribe(guild).subscribe(resp => {
-      if (resp.success && this.guildContext.id === guild.id) {
+      if (resp.success && this.guildContext?.id === guild.id) {
         this.bindings = resp.data;
       }
     });

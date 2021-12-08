@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Save} from '../../../../schemas/homebrew/AutomationEffects';
-import {Spell} from '../../../../schemas/homebrew/Spells';
+import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-save-effect',
@@ -25,37 +25,48 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
-    <mat-expansion-panel>
+    <mat-expansion-panel class="hoverable">
       <mat-expansion-panel-header>
         <mat-panel-title>
           On Fail
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.fail" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.fail"
-                           [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
+      <avr-effect-editor [parent]="effect.fail"
+                         [parentTypeStack]="newParentTypeStack"
+                         [spell]="spell"
+                         (changed)="changed.emit()">
+      </avr-effect-editor>
+      <avr-new-effect-card [metaParent]="effect.meta"
+                           [parent]="effect.fail"
+                           [parentTypeStack]="newParentTypeStack"
+                           (changed)="changed.emit()">
+      </avr-new-effect-card>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <mat-expansion-panel class="hoverable">
       <mat-expansion-panel-header>
         <mat-panel-title>
           On Success
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.success" [spell]="spell" (changed)="changed.emit()"></avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta" [parent]="effect.success"
-                           [parentType]="effect.type" (changed)="changed.emit()"></avr-new-effect-card>
+      <avr-effect-editor [parent]="effect.success"
+                         [parentTypeStack]="newParentTypeStack"
+                         [spell]="spell"
+                         (changed)="changed.emit()">
+      </avr-effect-editor>
+      <avr-new-effect-card [metaParent]="effect.meta"
+                           [parent]="effect.success"
+                           [parentTypeStack]="newParentTypeStack"
+                           (changed)="changed.emit()">
+      </avr-new-effect-card>
     </mat-expansion-panel>
   `,
   styleUrls: ['../effect-editor.component.css']
 })
-export class SaveEffectComponent implements OnInit {
-
-  @Input() effect: Save;
-  @Input() spell: Spell;
-  @Output() changed = new EventEmitter();
+export class SaveEffectComponent extends EffectComponent<Save> implements OnInit {
   custom = false;
 
   constructor() {
+    super();
   }
 
   ngOnInit() {

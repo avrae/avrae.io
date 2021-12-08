@@ -16,14 +16,14 @@
   <div class="command-desc" *ngIf="isOpen">
     <markdown>{{debrace(command.docs)}}</markdown>
 
-    <table class="command-arguments" *ngIf="command.args.length">
-      <tr>
-        <th>Arguments</th>
-      </tr>
-      <tr *ngFor="let arg of command.args">
-        <td><code>{{arg.name}}</code>{{getArgDescriptors(arg)}} - {{arg.desc}}</td>
-      </tr>
-    </table>
+<!--    <table class="command-arguments" *ngIf="command.args.length">-->
+<!--      <tr>-->
+<!--        <th>Arguments</th>-->
+<!--      </tr>-->
+<!--      <tr *ngFor="let arg of command.args">-->
+<!--        <td><code>{{arg.name}}</code>{{getArgDescriptors(arg)}} - {{arg.desc}}</td>-->
+<!--      </tr>-->
+<!--    </table>-->
   </div>
 
   <div class="command-subcommands" *ngIf="command.subcommands.length">
