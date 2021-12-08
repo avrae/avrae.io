@@ -34,8 +34,15 @@ interface CollectableEditDialogComponentData {
 })
 export class CollectableEditDialogComponent implements OnInit {
   PublicationState = PublicationState;
-  editorOptions = {theme: 'draconicTheme', language: 'draconic', scrollBeyondLastLine: false};
-  readonlyEditorOptions = {...this.editorOptions, readOnly: true};
+  wordWrap = 'off';
+  editorOptions = {theme: 'draconicTheme', language: 'draconic', scrollBeyondLastLine: false, wordWrap: this.wordWrap};
+  readonlyEditorOptions = {...this.editorOptions, readOnly: true};  
+
+  toggleWordWrap() {
+    this.wordWrap = this.wordWrap === 'on' ? 'off' : 'on'
+    this.editorOptions = Object.assign({}, this.editorOptions, { wordWrap: this.wordWrap });
+    this.readonlyEditorOptions = Object.assign({}, this.readonlyEditorOptions, { wordWrap: this.wordWrap });
+  }
 
   // data
   collection: WorkshopCollectionFull; // root collection
