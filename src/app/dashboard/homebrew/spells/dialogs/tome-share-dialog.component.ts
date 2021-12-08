@@ -25,7 +25,7 @@ export class TomeShareDialog implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: Tome, private dialog: MatDialog,
               private hbService: HomebrewService, private discord: DiscordService) {
     this.public = data.public;
-    this.shareLink = `https://avrae.io/homebrew/spells/${data._id.$oid}`;
+    this.shareLink = `https://avrae.io/homebrew/spells/${data._id}`;
     this.loaded = data.spells !== undefined;
   }
 
@@ -38,20 +38,23 @@ export class TomeShareDialog implements OnInit {
   }
 
   loadEditors() {
-    const id = this.data._id.$oid;
+    const id = this.data._id;
     this.hbService.getTomeEditors(id)
-      .subscribe(editors => {
+      .subscribe(response => {
         const out = [];
-        editors.forEach(eid => out.push(this.discord.getUser(eid)));
+        response.data.forEach(eid => out.push(this.discord.getUser(eid)));
         this.editors = out;
       });
   }
 
   loadSpells() {
-    const id = this.data._id.$oid;
+    const id = this.data._id;
     this.hbService.getTome(id)
-      .subscribe(tome => {
-        this.data = tome;
+      .subscribe(response => {
+        if (!response.success) {
+          return;
+        }
+        this.data = response.data;
         this.loaded = true;
       });
   }

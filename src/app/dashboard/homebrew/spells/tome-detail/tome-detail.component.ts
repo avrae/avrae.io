@@ -25,6 +25,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   isOwner: boolean;
   changesOpen = false;
   selectedSpell: Spell;
+  error: string;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewService,
               private dashboardService: DashboardService, private location: Location, private dialog: MatDialog,
@@ -42,9 +43,13 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
   getTome() {
     const id = this.route.snapshot.paramMap.get('tome');
     this.homebrewService.getTome(id)
-      .subscribe(tome => {
-        this.tome = tome;
-        this.calcCanEdit();
+      .subscribe(response => {
+        if (response.success) {
+          this.tome = response.data;
+          this.calcCanEdit();
+        } else {
+          this.error = response.error;
+        }
       });
   }
 
@@ -56,9 +61,9 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
     if (this.isOwner) {
       this.canEdit = true;
     } else {
-      const id = this.tome._id.$oid;
+      const id = this.tome._id;
       this.homebrewService.getTomeEditors(id)
-        .subscribe(editors => this.canEdit = editors.some(e => e === this.user.id));
+        .subscribe(response => this.canEdit = response.data.some(e => e === this.user.id));
     }
   }
 
@@ -117,6 +122,7 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
         if (result.success) {
           this.snackBar.open(`${result.data} Use "!tome ${this.tome.name}" to activate the pack in Discord!`, null, {horizontalPosition: 'right'});
         } else {
+          console.log(result);
           this.snackBar.open(`Error: ${result.error}`, 'Close', {
             horizontalPosition: 'right',
             duration: -1,
@@ -130,8 +136,15 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
     // HTTP DELETE /homebrew/spells/:tome
     this.homebrewService.deleteTome(this.tome)
       .subscribe(result => {
-        console.log(result);
-        this.router.navigate(['../'], {relativeTo: this.route});
+        if (!result.success) {
+          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+            horizontalPosition: 'right',
+            duration: -1,
+            panelClass: 'preserve-whitespace'
+          });
+        } else {
+          this.router.navigate(['../'], {relativeTo: this.route});
+        }
       });
   }
 

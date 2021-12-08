@@ -1,6 +1,7 @@
 import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {map} from 'rxjs/operators';
 import {Spell, Tome} from '../../../../../schemas/homebrew/Spells';
 import {UserInfo} from '../../../../../schemas/UserInfo';
 import {JSONImportDialog} from '../../../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
@@ -59,7 +60,7 @@ export class SpellListComponent implements OnInit {
     const dialogRef = this.dialog.open(SRDCopyDialog, {
       width: '60%',
       disableClose: true,
-      data: {getter: () => this.hbService.getTemplateSpells(), namer: a => a.name}
+      data: {getter: () => this.hbService.getTemplateSpells().pipe(map(value => value.data)), namer: a => a.name}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -84,7 +85,7 @@ export class SpellListComponent implements OnInit {
           if (result.success) {
             dialogRef.close(data);
           } else {
-            dialogRef.componentInstance.error = result.result;
+            dialogRef.componentInstance.error = result.error;
           }
         }
       );

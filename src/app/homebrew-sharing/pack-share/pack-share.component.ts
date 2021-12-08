@@ -17,6 +17,7 @@ export class PackShareComponent implements OnInit {
   pack: Pack;
   owner: DiscordUser;
   selectedItem: Item;
+  error: string;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewSharingService, private discord: DiscordService,
               private meta: Meta) {
@@ -51,10 +52,14 @@ export class PackShareComponent implements OnInit {
   getPack() {
     const id = this.route.snapshot.paramMap.get('pack');
     this.homebrewService.getPack(id)
-      .subscribe(pack => {
-        this.pack = pack;
-        this.getOwner();
-        this.updateMeta();
+      .subscribe(response => {
+        if (response.success) {
+          this.pack = response.data;
+          this.getOwner();
+          this.updateMeta();
+        } else {
+          this.error = response.error;
+        }
       });
   }
 

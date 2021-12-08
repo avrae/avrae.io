@@ -12,7 +12,7 @@ export class Tome {
   image: string;
   spells?: Spell[];
   numSpells?: number;
-  _id: { '$oid': string };
+  _id: string;
 }
 
 export class Spell {

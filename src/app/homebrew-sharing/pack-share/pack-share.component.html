@@ -54,8 +54,8 @@
   <div class="container">
     <mat-card>
       <mat-spinner [diameter]="24"></mat-spinner>
-      <p>
-        If this is taking too long to load, you may not have permissions to view this pack.
+      <p class="mat-error" *ngIf="error">
+        {{error}}
       </p>
     </mat-card>
   </div>

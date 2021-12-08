@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DiscordUser} from '../../../schemas/Discord';
 import {Pack} from '../../../schemas/homebrew/Items';
@@ -19,7 +20,8 @@ export class ItemsComponent implements OnInit {
   owners: Map<string, DiscordUser> = new Map<string, DiscordUser>();
 
   constructor(private homebrewService: HomebrewService, private discord: DiscordService,
-              private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
+              private dialog: MatDialog, private router: Router, private route: ActivatedRoute,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -28,10 +30,13 @@ export class ItemsComponent implements OnInit {
 
   getPacks(): void {
     this.homebrewService.getUserPacks()
-      .subscribe(packs => {
-        this.packs = packs;
+      .subscribe(response => {
+        if (!response.success) {
+          return;
+        }
+        this.packs = response.data;
         const requested = new Set();
-        for (const pack of packs) {
+        for (const pack of response.data) {
           if (!requested.has(pack.owner)) {
             requested.add(pack.owner);
             this.discord.getUser(pack.owner)
@@ -76,16 +81,24 @@ export class ItemsComponent implements OnInit {
     this.homebrewService.newPack(pack)
       .subscribe(result => {
         if (result.success) {
-          this.router.navigate([result.packId], {relativeTo: this.route});
+          this.router.navigate([result.data.packId], {relativeTo: this.route});
         }
       });
   }
 
   commit(pack: Pack) {
     // HTTP PUT /homebrew/items/:pack
-    this.homebrewService.putPack(pack)
+    this.homebrewService.updatePackSharing(pack._id, pack.public)
       .subscribe(result => {
-        console.log(result);
+        if (result.success) {
+          this.snackBar.open('Pack sharing options updated.', null, {horizontalPosition: 'right'});
+        } else {
+          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+            horizontalPosition: 'right',
+            duration: -1,
+            panelClass: 'preserve-whitespace'
+          });
+        }
       });
   }
 

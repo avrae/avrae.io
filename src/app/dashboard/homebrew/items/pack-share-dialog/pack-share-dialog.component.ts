@@ -26,7 +26,7 @@ export class PackShareDialog implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: Pack, private dialog: MatDialog,
               private hbService: HomebrewService, private discord: DiscordService) {
     this.public = data.public;
-    this.shareLink = `https://avrae.io/homebrew/items/${data._id.$oid}`;
+    this.shareLink = `https://avrae.io/homebrew/items/${data._id}`;
     this.loaded = data.items !== undefined;
   }
 
@@ -39,20 +39,26 @@ export class PackShareDialog implements OnInit {
   }
 
   loadItems() {
-    const id = this.data._id.$oid;
+    const id = this.data._id;
     this.hbService.getPack(id)
-      .subscribe(pack => {
-        this.data = pack;
+      .subscribe(response => {
+        if (!response.success) {
+          return;
+        }
+        this.data = response.data;
         this.loaded = true;
       });
   }
 
   loadEditors() {
-    const id = this.data._id.$oid;
+    const id = this.data._id;
     this.hbService.getPackEditors(id)
-      .subscribe(editors => {
+      .subscribe(response => {
+        if (!response.success) {
+          return;
+        }
         const out = [];
-        editors.forEach(eid => out.push(this.discord.getUser(eid)));
+        response.data.forEach(eid => out.push(this.discord.getUser(eid)));
         this.editors = out;
       });
   }
@@ -76,5 +82,4 @@ export class PackShareDialog implements OnInit {
       width: '60%'
     });
   }
-
 }

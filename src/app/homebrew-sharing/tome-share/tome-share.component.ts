@@ -17,6 +17,7 @@ export class TomeShareComponent implements OnInit {
   tome: Tome;
   owner: DiscordUser;
   selectedSpell: Spell;
+  error: string;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewSharingService, private discord: DiscordService,
               private meta: Meta) {
@@ -56,10 +57,14 @@ export class TomeShareComponent implements OnInit {
   getTome() {
     const id = this.route.snapshot.paramMap.get('tome');
     this.homebrewService.getTome(id)
-      .subscribe(tome => {
-        this.tome = tome;
-        this.getOwner();
-        this.updateMeta();
+      .subscribe(response => {
+        if (response.success) {
+          this.tome = response.data;
+          this.getOwner();
+          this.updateMeta();
+        } else {
+          this.error = response.error;
+        }
       });
   }
 
