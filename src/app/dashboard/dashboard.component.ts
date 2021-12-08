@@ -1,9 +1,9 @@
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {isLoggedIn, removeToken} from '../SecurityHelper';
-import {DashboardService} from './dashboard.service';
 import {BreakpointBaseComponent} from '../shared/breakpoints';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import {DashboardService} from './dashboard.service';
 
 @Component({
   selector: 'avr-dashboard',
