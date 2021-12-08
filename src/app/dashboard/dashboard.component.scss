@@ -43,8 +43,17 @@ mat-sidenav-content {
   padding-left: 4px;
 }
 
-@media only screen and (max-width: 840px) {
-  .sidenav {
-    width: 150px;
-  }
+::ng-deep .small-menu-button > span {
+  padding: 0 !important;
+}
+
+.small-menu-button {
+  position: sticky;
+  top: 100px;
+  left: 17px;
+  z-index: 5;
+}
+
+.side-menu-open {
+  margin-top: -40px;
 }
