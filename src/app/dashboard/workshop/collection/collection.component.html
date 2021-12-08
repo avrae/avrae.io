@@ -140,6 +140,9 @@
 </div>
 
 <div class="content mat-typography" *ngIf="!collection">
-  Loading...
+  <mat-spinner [diameter]="24" *ngIf="!error"></mat-spinner>
+  <p class="mat-error" *ngIf="error">
+    {{error}}
+  </p>
 </div>
 
