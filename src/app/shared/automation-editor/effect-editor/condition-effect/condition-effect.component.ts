@@ -7,7 +7,7 @@ import {EffectComponent} from '../shared/EffectComponent';
   template: `
     <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
       <mat-form-field>
-        <input matInput placeholder="Condition" (change)="changed.emit()" [(ngModel)]="effect.condition">
+        <input matInput placeholder="Condition" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.condition" required>
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
 
