@@ -5,3 +5,7 @@
 .wide {
   width: 100%;
 }
+
+.input-monospace {
+  font-family: "Source Code Pro", monospace;
+}

@@ -7,10 +7,10 @@ import {EffectComponent} from '../shared/EffectComponent';
   template: `
     <div fxLayout="row" fxLayoutGap="4px">
       <mat-form-field fxFlex="1 2 auto">
-        <input matInput placeholder="Name" (change)="changed.emit()" [(ngModel)]="effect.name">
+        <input matInput placeholder="Name" (change)="changed.emit()" [(ngModel)]="effect.name" required>
       </mat-form-field>
       <mat-form-field fxFlex="1 2 auto">
-        <input matInput placeholder="Duration" (change)="changed.emit()" [(ngModel)]="effect.duration"
+        <input matInput placeholder="Duration" (change)="changed.emit()" [(ngModel)]="effect.duration" required
                matTooltip="Use -1 for infinite duration.">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
@@ -19,10 +19,11 @@ import {EffectComponent} from '../shared/EffectComponent';
         <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
       </mat-form-field>
     </div>
+
     <div fxLayout="row" fxLayoutGap="8px">
       <mat-checkbox [(ngModel)]="effect.end" (change)="changed.emit();"
                     matTooltip="Whether the effect duration ticks down at the end of the turn rather than the start.">
-        Ticks on end?
+        Ticks on end of turn?
       </mat-checkbox>
       <mat-checkbox [(ngModel)]="effect.conc" (change)="changed.emit();">
         Requires concentration?
@@ -32,11 +33,23 @@ import {EffectComponent} from '../shared/EffectComponent';
         Stacking?
       </mat-checkbox>
     </div>
+
     <div fxLayout="row">
       <mat-form-field class="wide">
         <textarea matInput placeholder="Description" rows="3" (change)="changed.emit()"
                   [(ngModel)]="effect.desc" maxlength="500"></textarea>
         <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="8px">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Save As" class="input-monospace" (change)="changed.emit()" [(ngModel)]="effect.save_as"
+               matTooltip="If supplied, saves the added effect as an automation variable. Use this in another IEffect's parent field to set this effect as its parent.">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Parent" class="input-monospace" (change)="changed.emit()" [(ngModel)]="effect.parent"
+               matTooltip="If supplied, sets the added effect's parent to the given effect. This must be the same as another IEffect's save_as.">
       </mat-form-field>
     </div>
   `,

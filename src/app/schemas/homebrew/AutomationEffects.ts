@@ -96,8 +96,10 @@ export class IEffect extends AutomationEffect {
   conc?: boolean;
   desc?: AnnotatedString;
   stacking?: boolean;
+  save_as?: string;
+  parent?: string;
 
-  constructor(name = '', duration = '', effects = '', desc = '', end = false, conc = false, stacking=false, meta?) {
+  constructor(name = '', duration = '', effects = '', desc = '', end = false, conc = false, stacking = false, save_as = null, parent = null, meta?) {
     super('ieffect', meta);
     this.name = name;
     this.duration = duration;
@@ -105,6 +107,8 @@ export class IEffect extends AutomationEffect {
     this.end = end;
     this.desc = desc;
     this.stacking = stacking;
+    this.save_as = save_as;
+    this.parent = parent;
   }
 }
 
