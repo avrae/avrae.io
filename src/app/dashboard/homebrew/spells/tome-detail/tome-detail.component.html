@@ -37,6 +37,9 @@
   <div class="container">
     <mat-card>
       <mat-spinner [diameter]="24"></mat-spinner>
+      <p class="mat-error" *ngIf="error">
+        {{error}}
+      </p>
     </mat-card>
   </div>
 </div>

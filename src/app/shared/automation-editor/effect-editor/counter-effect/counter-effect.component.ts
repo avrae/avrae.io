@@ -25,14 +25,15 @@ import {EffectComponent} from '../shared/EffectComponent';
         <span *ngSwitchDefault>
           <span> named </span>
           <mat-form-field>
-            <input matInput placeholder="Counter Name" (change)="changed.emit()" [(ngModel)]="effect.counter">
+            <input matInput placeholder="Counter Name" (change)="changed.emit()" [(ngModel)]="effect.counter" required>
           </mat-form-field>
         </span>
 
         <span *ngSwitchCase="'slot'">
           <span> of level </span>
           <mat-form-field>
-            <input matInput placeholder="Slot Level" (change)="changed.emit()" [(ngModel)]="effect.counter.slot">
+            <input matInput placeholder="Slot Level" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.counter.slot"
+                   required>
             <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
           </mat-form-field>
         </span>
@@ -60,7 +61,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 
     <div>
       <mat-form-field>
-        <input matInput placeholder="Amount" (change)="changed.emit()" [(ngModel)]="effect.amount">
+        <input matInput placeholder="Amount" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.amount" required>
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
 

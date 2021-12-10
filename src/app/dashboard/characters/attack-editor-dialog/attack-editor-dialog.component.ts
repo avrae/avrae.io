@@ -6,8 +6,10 @@ import {Attack, CharacterMeta} from '../../../schemas/Character';
 import {JSONExportDialog} from '../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 import {JSONImportDialog} from '../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
 import {SRDCopyDialog} from '../../../shared/dialogs/srd-copy-dialog/srd-copy-dialog.component';
+import {ValidationSnackbar} from '../../../shared/validation-snackbar/validation-snackbar.component';
 import {ApiResponse} from '../../APIHelper';
 import {DashboardService} from '../../dashboard.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'avr-attack-editor-dialog',
@@ -26,7 +28,12 @@ export class AttackEditorDialog implements OnInit {
   showAdvancedOptions = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public character: CharacterMeta, private charService: DashboardService,
-              private dialogRef: MatDialogRef<AttackEditorDialog>, private dialog: MatDialog) {
+              private dialogRef: MatDialogRef<AttackEditorDialog>, private dialog: MatDialog, private snackBar: MatSnackBar) {
+  }
+
+
+  ngOnDestroy() {
+    this.snackBar.dismiss();
   }
 
   ngOnInit() {
@@ -81,8 +88,13 @@ export class AttackEditorDialog implements OnInit {
         this.saveButtonDisabled = false;
 
         if (!result || result.error) {
-          // failed PUT, display error... somewhere
-          this.errorValue = result?.error || 'Failed to save attacks.';
+          this.snackBar.openFromComponent(ValidationSnackbar, {
+            data: {
+              html: `${result.error}`
+            },
+            horizontalPosition: 'right',
+            duration: -1
+          });
         } else {
           this.errorValue = null;
         }
@@ -139,7 +151,13 @@ export class AttackEditorDialog implements OnInit {
           if (result.success) {
             dialogRef.close(data);
           } else {
-            dialogRef.componentInstance.error = result.error;
+            this.snackBar.openFromComponent(ValidationSnackbar, {
+              data: {
+                html: `${result.error}`
+              },
+              horizontalPosition: 'right',
+              duration: -1
+            });
           }
         }
       );

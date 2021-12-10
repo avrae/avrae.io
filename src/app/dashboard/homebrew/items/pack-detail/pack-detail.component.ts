@@ -4,10 +4,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
+import {map} from 'rxjs/operators';
 import {Item, Pack, REQUIRED_ITEM_PROPS} from '../../../../schemas/homebrew/Items';
 import {UserInfo} from '../../../../schemas/UserInfo';
 import {JSONImportDialog} from '../../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
 import {SRDCopyDialog} from '../../../../shared/dialogs/srd-copy-dialog/srd-copy-dialog.component';
+import {ValidationSnackbar} from '../../../../shared/validation-snackbar/validation-snackbar.component';
 import {getUser} from '../../../APIHelper';
 import {DashboardService} from '../../../dashboard.service';
 import {HomebrewService} from '../../homebrew.service';
@@ -27,6 +29,7 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   isOwner: boolean;
   changesOpen = false;
   selectedItem: Item;
+  error: string;
 
   constructor(private route: ActivatedRoute, private homebrewService: HomebrewService,
               private dashboardService: DashboardService, private location: Location, private dialog: MatDialog,
@@ -44,9 +47,13 @@ export class PackDetailComponent implements OnInit, OnDestroy {
   getPack() {
     const id = this.route.snapshot.paramMap.get('pack');
     this.homebrewService.getPack(id)
-      .subscribe(pack => {
-        this.pack = pack;
-        this.calcCanEdit();
+      .subscribe(response => {
+        if (response.success) {
+          this.pack = response.data;
+          this.calcCanEdit();
+        } else {
+          this.error = response.error;
+        }
       });
   }
 
@@ -58,9 +65,15 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     if (this.isOwner) {
       this.canEdit = true;
     } else {
-      const id = this.pack._id.$oid;
+      const id = this.pack._id;
       this.homebrewService.getPackEditors(id)
-        .subscribe(editors => this.canEdit = editors.some(e => e === this.user.id));
+        .subscribe(response => {
+          if (response.success) {
+            this.canEdit = response.data.some(e => e === this.user.id);
+          } else {
+            this.error = response.error;
+          }
+        });
     }
   }
 
@@ -147,7 +160,10 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(SRDCopyDialog, {
       width: '60%',
       disableClose: true,
-      data: {getter: () => this.homebrewService.getTemplateItems(), namer: a => a.name}
+      data: {
+        getter: () => this.homebrewService.getTemplateItems().pipe(map((value) => value.data)),
+        namer: a => a.name
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -189,10 +205,12 @@ export class PackDetailComponent implements OnInit, OnDestroy {
         if (result.success) {
           this.snackBar.open(`${result.data} Use "!pack ${this.pack.name}" to activate the pack in Discord!`, null, {horizontalPosition: 'right'});
         } else {
-          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+          this.snackBar.openFromComponent(ValidationSnackbar, {
+            data: {
+              html: `${result.error}`
+            },
             horizontalPosition: 'right',
-            duration: -1,
-            panelClass: 'preserve-whitespace'
+            duration: -1
           });
         }
       });
@@ -202,8 +220,18 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     // HTTP DELETE /homebrew/items/:pack
     this.homebrewService.deletePack(this.pack)
       .subscribe(result => {
-        console.log(result);
-        this.router.navigate(['../'], {relativeTo: this.route});
+        if (!result.success) {
+          this.snackBar.openFromComponent(ValidationSnackbar, {
+            data: {
+              html: `${result.error}`
+            },
+            horizontalPosition: 'right',
+            duration: -1
+          }
+          );
+        } else {
+          this.router.navigate(['../'], {relativeTo: this.route});
+        }
       });
   }
 

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {of} from 'rxjs';
 import {DiscordUser} from '../../../schemas/Discord';
@@ -21,7 +22,8 @@ export class SpellsComponent implements OnInit {
   owners: Map<string, DiscordUser> = new Map<string, DiscordUser>();
 
   constructor(private homebrewService: HomebrewService, private discord: DiscordService,
-              private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
+              private dialog: MatDialog, private router: Router, private route: ActivatedRoute,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -30,10 +32,14 @@ export class SpellsComponent implements OnInit {
 
   getTomes(): void {
     this.homebrewService.getUserTomes()
-      .subscribe(tomes => {
-        this.tomes = tomes;
+      .subscribe(response => {
+        console.log(response);
+        if (!response.success) {
+          return;
+        }
+        this.tomes = response.data;
         const requested = new Set();
-        for (const tome of tomes) {
+        for (const tome of response.data) {
           if (!requested.has(tome.owner)) {
             requested.add(tome.owner);
             this.discord.getUser(tome.owner)
@@ -78,16 +84,25 @@ export class SpellsComponent implements OnInit {
     this.homebrewService.newTome(tome)
       .subscribe(result => {
         if (result.success) {
-          this.router.navigate([result.tomeId], {relativeTo: this.route});
+          this.router.navigate([result.data.tomeId], {relativeTo: this.route});
         }
       });
   }
 
   commit(tome: Tome) {
     // HTTP PUT /homebrew/spells/:tome
-    this.homebrewService.putTome(tome)
+    this.homebrewService.updateTomeSharing(tome._id, tome.public)
       .subscribe(result => {
-        console.log(result);
+        if (result.success) {
+          this.snackBar.open('Tome sharing options updated.', null, {horizontalPosition: 'right'});
+        } else {
+          console.log(result);
+          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+            horizontalPosition: 'right',
+            duration: -1,
+            panelClass: 'preserve-whitespace'
+          });
+        }
       });
   }
 

@@ -42,18 +42,19 @@ import {EffectComponent} from '../shared/EffectComponent';
     </div>
 
     <div *ngIf="custom" fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
-      <mat-form-field>
-        <input matInput placeholder="DC" (change)="changed.emit()" [(ngModel)]="effect.dc">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="DC" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.dc">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Spell Attack Bonus" (change)="changed.emit()" [(ngModel)]="effect.attackBonus">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Spell Attack Bonus" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.attackBonus">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Spellcasting Modifier" (change)="changed.emit()" [(ngModel)]="effect.castingMod">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Spellcasting Modifier" class="text-monospace" (change)="changed.emit()"
+               [(ngModel)]="effect.castingMod">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
@@ -79,9 +80,9 @@ export class SpellEffectComponent extends EffectComponent<CastSpell> implements 
 
   onCustomChange() {
     if (!this.custom) {
-      this.effect.dc = null;
-      this.effect.attackBonus = null;
-      this.effect.castingMod = null;
+      this.effect.dc = undefined;
+      this.effect.attackBonus = undefined;
+      this.effect.castingMod = undefined;
     }
   }
 

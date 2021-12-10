@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Damage, Roll, SetVariable} from '../../../../schemas/homebrew/AutomationEffects';
+import {Damage, Roll, SetVariable, TempHP} from '../../../../schemas/homebrew/AutomationEffects';
 import {Spell} from '../../../../schemas/homebrew/Spells';
 
 const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
@@ -30,7 +30,7 @@ const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + 
 })
 export class HigherLevelComponent implements OnInit, OnChanges {
 
-  @Input() parent: Damage | Roll | SetVariable;
+  @Input() parent: Damage | Roll | TempHP | SetVariable;
   @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 

@@ -1,5 +1,3 @@
-import {DiscordUser} from '../Discord';
-
 export const REQUIRED_ITEM_PROPS = ['name'];
 
 export class Pack {
@@ -10,7 +8,7 @@ export class Pack {
   image: string;
   items?: Item[];
   numItems?: number;
-  _id: { '$oid': string };
+  _id: string;
 }
 
 export class Item {

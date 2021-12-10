@@ -1,11 +1,11 @@
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Item, Pack} from '../../schemas/homebrew/Items';
 import {Spell, Tome} from '../../schemas/homebrew/Spells';
-import {ApiResponse, defaultOptions, defaultTextErrorHandler, defaultTextOptions} from '../APIHelper';
+import {ApiResponse, defaultErrorHandler, defaultOptions} from '../APIHelper';
 
 const itemsUrl = `${environment.apiURL}/homebrew/items`;
 const spellsUrl = `${environment.apiURL}/homebrew/spells`;
@@ -19,101 +19,91 @@ export class HomebrewService {
   }
 
   /* -----PACKS----- */
-  getUserPacks(): Observable<Pack[]> {
-    return this.http.get<Pack[]>(`${itemsUrl}/me`, defaultOptions());
+  getUserPacks(): Observable<ApiResponse<Pack[]>> {
+    return this.http.get<ApiResponse<Pack[]>>(`${itemsUrl}/me`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  newPack(pack: { name: string, public: boolean, desc: string, image: string }): Observable<any> {
-    return this.http.post<any>(`${itemsUrl}`, pack, defaultOptions())
-      .pipe(
-        catchError(this.handleError('newPack'))
-      );
+  newPack(pack: { name: string, public: boolean, desc: string, image: string }): Observable<ApiResponse<{ packId: string }>> {
+    return this.http.post<ApiResponse<{ packId: string }>>(`${itemsUrl}`, pack, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  getPack(id): Observable<Pack> {
-    return this.http.get<Pack>(`${itemsUrl}/${id}`, defaultOptions());
+  getPack(id): Observable<ApiResponse<Pack>> {
+    return this.http.get<ApiResponse<Pack>>(`${itemsUrl}/${id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
   putPack(pack: Pack): Observable<ApiResponse<string>> {
-    return this.http.put<string>(`${itemsUrl}/${pack._id.$oid}`, pack, defaultTextOptions({observe: 'response'}))
-      .pipe(
-        map((resp: HttpResponse<string>) => {
-          return {success: resp.ok, data: resp.body, status: resp.status} as ApiResponse<string>;
-        }),
-        catchError(defaultTextErrorHandler)
-      );
-  }
-
-  deletePack(pack: Pack): Observable<string> {
     // @ts-ignore
-    return this.http.delete<string>(`${itemsUrl}/${pack._id.$oid}`, defaultTextOptions())
-      .pipe(
-        catchError(this.handleError('deletePack'))
-      );
+    return this.http.put<ApiResponse<string>>(`${itemsUrl}/${pack._id}`, pack, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  getPackEditors(id: string): Observable<string[]> {
-    return this.http.get<string[]>(`${itemsUrl}/${id}/editors`, defaultOptions());
+  deletePack(pack: Pack): Observable<ApiResponse<string>> {
+    // @ts-ignore
+    return this.http.delete<ApiResponse<string>>(`${itemsUrl}/${pack._id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  getTemplateItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(`${itemsUrl}/srd`, defaultOptions());
+  updatePackSharing(id: string, isPublic: boolean): Observable<ApiResponse<string>> {
+    return this.http.patch<ApiResponse<string>>(`${itemsUrl}/${id}/sharing`, {public: isPublic}, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  getPackEditors(id: string): Observable<ApiResponse<string[]>> {
+    return this.http.get<ApiResponse<string[]>>(`${itemsUrl}/${id}/editors`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
+  }
+
+  getTemplateItems(): Observable<ApiResponse<Item[]>> {
+    return this.http.get<ApiResponse<Item[]>>(`${itemsUrl}/srd`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
   /* -----TOMES----- */
-  getUserTomes(): Observable<Tome[]> {
-    return this.http.get<Tome[]>(`${spellsUrl}/me`, defaultOptions());
+  getUserTomes(): Observable<ApiResponse<Tome[]>> {
+    return this.http.get<ApiResponse<Tome[]>>(`${spellsUrl}/me`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  newTome(tome: { name: string, public: boolean, desc: string, image: string }): Observable<any> {
-    return this.http.post<any>(`${spellsUrl}`, tome, defaultOptions())
-      .pipe(
-        catchError(this.handleError('newTome'))
-      );
+  newTome(tome: { name: string, public: boolean, desc: string, image: string }): Observable<ApiResponse<{ tomeId: string }>> {
+    return this.http.post<ApiResponse<{ tomeId: string }>>(`${spellsUrl}`, tome, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  getTome(id): Observable<Tome> {
-    return this.http.get<Tome>(`${spellsUrl}/${id}`, defaultOptions());
+  getTome(id): Observable<ApiResponse<Tome>> {
+    return this.http.get<ApiResponse<Tome>>(`${spellsUrl}/${id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
   putTome(tome: Tome): Observable<ApiResponse<string>> {
-    return this.http.put<string>(`${spellsUrl}/${tome._id.$oid}`, tome, defaultTextOptions({observe: 'response'}))
-      .pipe(
-        map((resp: HttpResponse<string>) => {
-          return {success: resp.ok, data: resp.body, status: resp.status} as ApiResponse<string>;
-        }),
-        catchError(defaultTextErrorHandler)
-      );
+    return this.http.put<ApiResponse<string>>(`${spellsUrl}/${tome._id}`, tome, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  deleteTome(tome: Tome): Observable<string> {
-    // @ts-ignore
-    return this.http.delete<string>(`${spellsUrl}/${tome._id.$oid}`, defaultTextOptions())
-      .pipe(
-        catchError(this.handleError('deleteTome'))
-      );
+  deleteTome(tome: Tome): Observable<ApiResponse<string>> {
+    return this.http.delete<ApiResponse<string>>(`${spellsUrl}/${tome._id}`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  getTomeEditors(id: string): Observable<string[]> {
-    return this.http.get<string[]>(`${spellsUrl}/${id}/editors`, defaultOptions());
+  updateTomeSharing(id: string, isPublic: boolean): Observable<ApiResponse<string>> {
+    return this.http.patch<ApiResponse<string>>(`${spellsUrl}/${id}/sharing`, {public: isPublic}, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  getTemplateSpells(): Observable<Spell[]> {
-    return this.http.get<Spell[]>(`${spellsUrl}/srd`, defaultOptions());
+  getTomeEditors(id: string): Observable<ApiResponse<string[]>> {
+    return this.http.get<ApiResponse<string[]>>(`${spellsUrl}/${id}/editors`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  validateSpellJSON(data: object): Observable<{ success: boolean, result: string }> {
-    return this.http.post<{ success: boolean, result: string }>(`${spellsUrl}/validate`, data, defaultOptions())
-      .pipe(
-        catchError(err => of({success: false, result: err.error}))
-      );
+  getTemplateSpells(): Observable<ApiResponse<Spell[]>> {
+    return this.http.get<ApiResponse<Spell[]>>(`${spellsUrl}/srd`, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 
-  /* -----META----- */
-  private handleError<T>(operation = 'operation') {
-    return (error: any): Observable<object> => {
-      console.error(error); // log to console and hope for the best
-      return of({error: `${operation} failed: ${error.error}`, success: false});
-    };
+  validateSpellJSON(data: object): Observable<ApiResponse<{ success: boolean, result: string }>> {
+    return this.http.post<ApiResponse<{ success: boolean, result: string }>>(`${spellsUrl}/validate`, data, defaultOptions())
+      .pipe(catchError(defaultErrorHandler));
   }
 }
