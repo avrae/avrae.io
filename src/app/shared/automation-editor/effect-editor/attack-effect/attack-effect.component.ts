@@ -6,11 +6,11 @@ import {EffectComponent} from '../shared/EffectComponent';
   selector: 'avr-attack-effect',
   template: `
     <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
-      <mat-checkbox [(ngModel)]="custom" (change)="changed.emit(); onCustomChange()">
+      <mat-checkbox [(ngModel)]="custom" (change)="changed.emit(); onCustomChange()" *ngIf="spell != null">
         Has custom attack bonus
       </mat-checkbox>
       <mat-form-field *ngIf="custom">
-        <input matInput placeholder="Custom Bonus" (change)="changed.emit()" [(ngModel)]="effect.attackBonus">
+        <input matInput placeholder="Attack Bonus" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.attackBonus">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
@@ -66,7 +66,7 @@ export class AttackEffectComponent extends EffectComponent<Attack> implements On
 
   onCustomChange() {
     if (!this.custom) {
-      this.effect.attackBonus = '';
+      this.effect.attackBonus = undefined;
     }
   }
 

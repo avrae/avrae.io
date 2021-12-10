@@ -17,14 +17,15 @@ import {EffectComponent} from '../shared/EffectComponent';
           <mat-option value="cha">Charisma</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-checkbox [(ngModel)]="custom" (change)="changed.emit(); onCustomChange()">
+      <mat-checkbox [(ngModel)]="custom" (change)="changed.emit(); onCustomChange()" *ngIf="spell != null">
         Has custom DC
       </mat-checkbox>
       <mat-form-field *ngIf="custom">
-        <input matInput placeholder="Custom DC" (change)="changed.emit()" [(ngModel)]="effect.dc">
+        <input matInput placeholder="DC" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.dc">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
+
     <mat-expansion-panel class="hoverable">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -77,7 +78,7 @@ export class SaveEffectComponent extends EffectComponent<Save> implements OnInit
 
   onCustomChange() {
     if (!this.custom) {
-      this.effect.dc = '';
+      this.effect.dc = undefined;
     }
   }
 
