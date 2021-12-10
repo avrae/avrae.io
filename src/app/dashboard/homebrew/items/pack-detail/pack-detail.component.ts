@@ -9,6 +9,7 @@ import {Item, Pack, REQUIRED_ITEM_PROPS} from '../../../../schemas/homebrew/Item
 import {UserInfo} from '../../../../schemas/UserInfo';
 import {JSONImportDialog} from '../../../../shared/dialogs/json-import-dialog/json-import-dialog.component';
 import {SRDCopyDialog} from '../../../../shared/dialogs/srd-copy-dialog/srd-copy-dialog.component';
+import {ValidationSnackbar} from '../../../../shared/validation-snackbar/validation-snackbar.component';
 import {getUser} from '../../../APIHelper';
 import {DashboardService} from '../../../dashboard.service';
 import {HomebrewService} from '../../homebrew.service';
@@ -204,10 +205,12 @@ export class PackDetailComponent implements OnInit, OnDestroy {
         if (result.success) {
           this.snackBar.open(`${result.data} Use "!pack ${this.pack.name}" to activate the pack in Discord!`, null, {horizontalPosition: 'right'});
         } else {
-          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+          this.snackBar.openFromComponent(ValidationSnackbar, {
+            data: {
+              html: `${result.error}`
+            },
             horizontalPosition: 'right',
-            duration: -1,
-            panelClass: 'preserve-whitespace'
+            duration: -1
           });
         }
       });
@@ -218,11 +221,14 @@ export class PackDetailComponent implements OnInit, OnDestroy {
     this.homebrewService.deletePack(this.pack)
       .subscribe(result => {
         if (!result.success) {
-          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+          this.snackBar.openFromComponent(ValidationSnackbar, {
+            data: {
+              html: `${result.error}`
+            },
             horizontalPosition: 'right',
-            duration: -1,
-            panelClass: 'preserve-whitespace'
-          });
+            duration: -1
+          }
+          );
         } else {
           this.router.navigate(['../'], {relativeTo: this.route});
         }
