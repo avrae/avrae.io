@@ -28,6 +28,7 @@ import {AutomationEditorModule} from './shared/automation-editor/automation-edit
 import {DialogsModule} from './shared/dialogs/dialogs.module';
 import {DiscordEmbedModule} from './shared/discord-embed/discord-embed.module';
 import {registerDraconicLanguage} from './shared/monacoDraconic';
+import {ValidationSnackbar} from './shared/validation-snackbar/validation-snackbar.component';
 import {ThemesModule} from './themes/themes.module';
 
 Sentry.init({dsn: 'https://af2b06560981446bb55f64b6f79fd520@sentry.io/1486249'});
@@ -59,6 +60,7 @@ const monacoConfig = {
     ErrorComponent,
     CommandsComponent,
     CommandDisplayComponent,
+    ValidationSnackbar,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

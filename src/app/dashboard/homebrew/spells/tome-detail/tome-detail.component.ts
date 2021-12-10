@@ -11,6 +11,8 @@ import {DashboardService} from '../../../dashboard.service';
 import {HomebrewService} from '../../homebrew.service';
 import {TomeOptionsDialog} from '../dialogs/tome-options-dialog.component';
 import {TomeShareDialog} from '../dialogs/tome-share-dialog.component';
+import {ValidationSnackbar} from '../../../../shared/validation-snackbar/validation-snackbar.component';
+
 
 @Component({
   selector: 'avr-tome-detail',
@@ -122,12 +124,13 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
         if (result.success) {
           this.snackBar.open(`${result.data} Use "!tome ${this.tome.name}" to activate the pack in Discord!`, null, {horizontalPosition: 'right'});
         } else {
-          console.log(result);
-          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+          this.snackBar.openFromComponent(ValidationSnackbar, {
+            data: {
+              html: `${result.error}`
+            },
             horizontalPosition: 'right',
-            duration: -1,
-            panelClass: 'preserve-whitespace'
-          });
+            duration: -1
+          });  
         }
       });
   }
@@ -137,11 +140,15 @@ export class TomeDetailComponent implements OnInit, OnDestroy {
     this.homebrewService.deleteTome(this.tome)
       .subscribe(result => {
         if (!result.success) {
-          this.snackBar.open(`Error: ${result.error}`, 'Close', {
+          this.snackBar.openFromComponent(ValidationSnackbar, {
+            data: {
+              html: `${result.error}`
+            },
             horizontalPosition: 'right',
             duration: -1,
-            panelClass: 'preserve-whitespace'
-          });
+            panelClass: ['mat-simple-snackbar']
+          }
+          );
         } else {
           this.router.navigate(['../'], {relativeTo: this.route});
         }
