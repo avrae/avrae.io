@@ -151,7 +151,13 @@ export class AttackEditorDialog implements OnInit {
           if (result.success) {
             dialogRef.close(data);
           } else {
-            dialogRef.componentInstance.error = result.error;
+            this.snackBar.openFromComponent(ValidationSnackbar, {
+              data: {
+                html: `${result.error}`
+              },
+              horizontalPosition: 'right',
+              duration: -1
+            });
           }
         }
       );
