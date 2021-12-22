@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-ieffect-effect',
   template: `
-    <div fxLayout="row" fxLayoutGap="4px">
+    <div fxLayout="row" fxLayoutGap="4px" class="auto-row">
       <mat-form-field fxFlex="1 2 auto">
         <input matInput placeholder="Name" (change)="changed.emit()" [(ngModel)]="effect.name" required>
       </mat-form-field>
@@ -20,18 +20,20 @@ import {EffectComponent} from '../shared/EffectComponent';
       </mat-form-field>
     </div>
 
-    <div fxLayout="row" fxLayoutGap="8px">
-      <mat-checkbox [(ngModel)]="effect.end" (change)="changed.emit();"
-                    matTooltip="Whether the effect duration ticks down at the end of the turn rather than the start.">
-        Ticks on end of turn?
-      </mat-checkbox>
-      <mat-checkbox [(ngModel)]="effect.conc" (change)="changed.emit();">
-        Requires concentration?
-      </mat-checkbox>
-      <mat-checkbox [(ngModel)]="effect.stacking" (change)="changed.emit();"
-                    matTooltip="If another effect with the same name exists, add this effect as a child instead of overwriting it.">
-        Stacking?
-      </mat-checkbox>
+    <div fxLayout="row" fxLayoutGap="8px" class="auto-row">
+      <span>
+        <mat-checkbox [(ngModel)]="effect.end" (change)="changed.emit();"
+                      matTooltip="Whether the effect duration ticks down at the end of the turn rather than the start.">
+          Ticks on end of turn?
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="effect.conc" (change)="changed.emit();">
+          Requires concentration?
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="effect.stacking" (change)="changed.emit();"
+                      matTooltip="If another effect with the same name exists, add this effect as a child instead of overwriting it.">
+          Stacking?
+        </mat-checkbox>
+      </span>
     </div>
 
     <div fxLayout="row">

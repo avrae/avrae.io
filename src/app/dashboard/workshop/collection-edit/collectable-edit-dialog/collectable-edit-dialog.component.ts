@@ -19,6 +19,8 @@ import {GamedataService} from '../../../../shared/gamedata.service';
 import {ApiResponse} from '../../../APIHelper';
 import {ConfirmDeleteDialog} from '../../../confirm-delete-dialog/confirm-delete-dialog.component';
 import {WorkshopService} from '../../workshop.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {BreakpointBaseComponent} from '../../../../shared/breakpoints';
 
 interface CollectableEditDialogComponentData {
   collection: WorkshopCollectionFull;
@@ -32,9 +34,10 @@ interface CollectableEditDialogComponentData {
   templateUrl: './collectable-edit-dialog.component.html',
   styleUrls: ['./collectable-edit-dialog.component.scss', '../../dialog-common.scss', '../../common.scss']
 })
-export class CollectableEditDialogComponent implements OnInit {
+export class CollectableEditDialogComponent extends BreakpointBaseComponent implements OnInit {
   PublicationState = PublicationState;
   wordWrap = 'off';
+  mobileCodeVersion = false;
   editorOptions = {theme: 'draconicTheme', language: 'draconic', scrollBeyondLastLine: false, wordWrap: this.wordWrap};
   readonlyEditorOptions = {...this.editorOptions, readOnly: true};  
 
@@ -42,6 +45,10 @@ export class CollectableEditDialogComponent implements OnInit {
     this.wordWrap = this.wordWrap === 'on' ? 'off' : 'on'
     this.editorOptions = Object.assign({}, this.editorOptions, { wordWrap: this.wordWrap });
     this.readonlyEditorOptions = Object.assign({}, this.readonlyEditorOptions, { wordWrap: this.wordWrap });
+  }
+
+  toggleCodeVersions() {
+    this.mobileCodeVersion = !this.mobileCodeVersion 
   }
 
   // data
@@ -70,7 +77,9 @@ export class CollectableEditDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: CollectableEditDialogComponentData,
               private dialogRef: MatDialogRef<CollectableEditDialogComponent>,
               private workshopService: WorkshopService, private gamedataService: GamedataService,
-              private dialog: MatDialog, private snackBar: MatSnackBar) {
+              private dialog: MatDialog, private snackBar: MatSnackBar,
+              private bp: BreakpointObserver) {
+    super(bp);
     this.collection = data.collection;
     this.alias = data.alias;
     this.parent = data.parent;
@@ -78,6 +87,7 @@ export class CollectableEditDialogComponent implements OnInit {
     this.name = this.collectable.name;
     this.docs = this.collectable.docs;
     this.selectedCodeVersion = this.collectable.versions.length ? this.collectable.versions.find(cv => cv.is_current) : null;
+
   }
 
   ngOnInit(): void {

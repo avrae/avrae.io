@@ -36,6 +36,7 @@
     </p>
     <!-- <button (click)="toggleWordWrap()">{{ this.wordWrap === 'on' ? 'Word Wrap Enabled' : 'Word Wrap Disabled' }}</button> -->
     <mat-slide-toggle (change)="toggleWordWrap()">Word Wrap</mat-slide-toggle>
+    <mat-slide-toggle *ngIf="mobile" (change)="toggleCodeVersions()">Code Versions</mat-slide-toggle>
     <div class="code-versions-container ignore-theme">
       <!-- code editor: display selected, edit new version, or placeholder if nothing selected -->
       <div class="code-editor">
@@ -53,7 +54,7 @@
         </p>
       </div>
       <!-- code version viewer -->
-      <div class="code-versions-list">
+      <div class="code-versions-list" [ngClass]="{'mobile-code-version' : mobileCodeVersion}">
         <mat-action-list>
           <button mat-list-item (click)="onStartCreatingCodeVersion()" [class.active]="creatingNewCodeVersion"
                   class="ignore-theme">

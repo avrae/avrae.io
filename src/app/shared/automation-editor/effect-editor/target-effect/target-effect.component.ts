@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-target-effect',
   template: `
-    <div fxLayout="row" fxLayoutGap="6px">
+    <div fxLayout="row" fxLayoutGap="6px" class="auto-row">
       <mat-form-field>
         <mat-label>Target</mat-label>
         <mat-select [(value)]="effect.target" (selectionChange)="changed.emit()">

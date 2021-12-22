@@ -49,3 +49,19 @@ mat-form-field {
 .active {
   background: rgba(white, 0.05);
 }
+
+@media (max-width: 600px) {
+  .code-versions-list {
+    display: none;
+    background: $gray-dark1;
+    right: 0;
+    position: absolute;
+    z-index: 20;
+  }
+  .code-versions-container {
+    position: relative;
+  }
+  .mobile-code-version {
+    display: block;
+  }
+}

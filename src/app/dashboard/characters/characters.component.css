@@ -109,3 +109,43 @@
 .character-meta:hover {
   opacity: 1;
 }
+
+@media (max-width: 960px) {
+  ::ng-deep .automation-overlay {
+    max-width: 95vw !important;
+    width: 95% !important;
+  }
+
+  .character-meta {
+    opacity: 1;
+  }
+
+  .character-tile .character-image {
+    webkit-filter: blur(3px) brightness(0.6); /* Chrome, Safari, Opera */
+    filter: blur(3px) brightness(0.6);
+    transform: scale(1.05);
+  }
+
+  .character-meta .mat-typography p {
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  avr-attack-editor-dialog mat-dialog-content div {
+    flex-wrap: wrap;
+  }
+
+  .mat-typography.ignore-theme.character-actions {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 600px) {
+  .avatarImg {
+    width: 40%;
+  }
+}

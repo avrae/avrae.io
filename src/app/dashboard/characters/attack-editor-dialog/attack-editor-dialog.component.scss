@@ -21,7 +21,46 @@
 }
 
 .crit-options-container {
-  display: grid;
+  display: flex;
   grid-template-columns: auto 1fr;
   grid-column-gap: 8px;
+}
+
+mat-dialog-actions {
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+
+  mat-dialog-actions {
+    justify-content: center;
+    flex-direction: column-reverse;    
+  }
+
+}
+@media (max-width: 960px) {
+  .auto-row {
+    flex-wrap: wrap;
+    justify-content: center;    
+  }
+
+  .auto-row span, .auto-row mat-form-field {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .auto-row span span {
+    display: flex;
+    justify-content: center;
+  }
+
+  mat-dialog-actions span {
+    gap: 8px;
+    display: flex;
+    justify-content: center;
+  }
+
+  mat-dialog-actions span button {
+    margin: 0;
+  }
 }

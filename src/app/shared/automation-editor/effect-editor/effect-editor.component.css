@@ -1,5 +1,5 @@
 .hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .wide {
@@ -8,4 +8,26 @@
 
 .text-monospace {
   font-family: "Source Code Pro", monospace;
+}
+
+@media (max-width: 700px) {
+  .auto-row {
+    flex-wrap: wrap;
+    justify-content: center;    
+  }
+
+  .auto-row span, .auto-row mat-form-field {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .auto-row span, .auto-row span span {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0 8px 24px 16px;
+  }
 }

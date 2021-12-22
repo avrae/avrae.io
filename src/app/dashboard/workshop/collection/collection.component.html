@@ -1,34 +1,38 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button aria-label="Back" (click)="goBack()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
+  <div class="toolbar-title">
+    <button mat-icon-button aria-label="Back" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
 
-  <span>{{collection?.name || 'Loading...'}}</span>
-  <span class="toolbar-spacer"></span>
+    <span class="collection-name">{{collection?.name || 'Loading...'}}</span>
+    <span class="toolbar-spacer"></span>
 
-  <!-- edit, edit bindings -->
-  <a mat-icon-button aria-label="Edit Collection Button" matTooltip="Edit Collection"
-          *ngIf="canEdit()" [routerLink]="'./edit'" [skipLocationChange]="true">
-    <mat-icon>edit</mat-icon>
-  </a>
+    <!-- edit, edit bindings -->
+    <a mat-icon-button aria-label="Edit Collection Button" matTooltip="Edit Collection"
+            *ngIf="canEdit()" [routerLink]="'./edit'" [skipLocationChange]="true">
+      <mat-icon>edit</mat-icon>
+    </a>
 
-  <button mat-icon-button aria-label="Edit Bindings Button" matTooltip="Edit Bindings"
-          *ngIf="bindings" (click)="onEditBindings()">
-    <mat-icon>handyman</mat-icon>
-  </button>
+    <button mat-icon-button aria-label="Edit Bindings Button" matTooltip="Edit Bindings"
+            *ngIf="bindings" (click)="onEditBindings()">
+      <mat-icon>handyman</mat-icon>
+    </button>
+  </div>
+  <div class="toolbar-select">
+    <!-- loading, guild select -->
+    <mat-spinner *ngIf="loading" color="accent" diameter="24" class="toolbar-spinner"></mat-spinner>
 
-  <!-- loading, guild select -->
-  <mat-spinner *ngIf="loading" color="accent" diameter="24" class="toolbar-spinner"></mat-spinner>
-
-  <div class="toolbar-search-form">
-    <!-- guild context -->
-    <avr-guild-select-field class="toolbar-search-form-guild-context"
-                            label="View As"
-                            (guildChange)="onGuildContextChange($event)">
-    </avr-guild-select-field>
+    <div class="toolbar-search-form">
+      <!-- guild context -->
+      <avr-guild-select-field class="toolbar-search-form-guild-context"
+                              label="View As"
+                              (guildChange)="onGuildContextChange($event)">
+      </avr-guild-select-field>
+    </div>
   </div>
 
 </mat-toolbar>
+
 
 <!-- CONTENT -->
 <div class="content mat-typography" *ngIf="collection">

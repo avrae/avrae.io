@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-roll-effect',
   template: `
-    <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="left center">
+    <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="left center" class="auto-row">
       <mat-form-field fxFlex="1 3 auto">
         <input matInput placeholder="Name" (change)="changed.emit()" [(ngModel)]="effect.name" required
                matTooltip="The result of the roll will be saved to an automation variable with this name.">
