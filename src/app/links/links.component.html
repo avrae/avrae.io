@@ -10,13 +10,9 @@
     <p>
       If you wish to submit a link, edit the following document and create a
       pull request. You will need to fork the repository. <br />
-      <a
-        href="https://github.com/avrae/.github/blob/master/community/community-links.md"
-        target="_blank"
-        >https://github.com/avrae/.github/blob/master/community/community-links.md</a
-      >
+      <a href="{{ linkUrl }}" target="_blank">{{ linkUrl }}</a>
     </p>
     <hr />
-    <markdown [src]="url"></markdown>
+    <markdown [src]="rawUrl"></markdown>
   </div>
 </div>
