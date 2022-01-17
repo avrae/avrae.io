@@ -14,6 +14,7 @@
     <a mat-button class="button" routerLink="/commands">COMMANDS</a>
     <a mat-button class="button" href="https://avrae.readthedocs.io/en/stable/" target="_blank"
        rel="noopener noreferrer">CHEATSHEETS</a>
+    <a mat-button class="button" routerLink="/links">LINKS</a>
     <button mat-button [matMenuTriggerFor]="appMenu">
       MORE
       <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="more-arrow">
@@ -49,6 +50,8 @@
      (click)="mobileMenuOpen = !mobileMenuOpen">COMMANDS</a>
   <a class="button mobile-menu-link" href="https://avrae.readthedocs.io/en/stable/" target="_blank"
      rel="noopener noreferrer">CHEATSHEETS</a>
+    <a class="button mobile-menu-link" routerLink="/links"
+     (click)="mobileMenuOpen = !mobileMenuOpen">LINKS</a>
   <a class="button mobile-menu-link" href="http://invite.avrae.io">INVITE LINK</a>
   <a class="button mobile-menu-link" href="http://support.avrae.io">SUPPORT SERVER</a>
 
