@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "avr-links",
-  templateUrl: "./links.component.html",
-  styleUrls: ["./links.component.scss"],
+  selector: "avr-community-links",
+  templateUrl: "./community-links.component.html",
+  styleUrls: ["./community-links.component.scss"],
 })
-export class LinksComponent implements OnInit {
+export class CommunityLinksComponent implements OnInit {
   linkUrl =
     "https://github.com/avrae/.github/blob/master/community/community-links.md";
   rawUrl =
