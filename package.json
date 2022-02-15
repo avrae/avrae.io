@@ -42,7 +42,7 @@
     "ngx-mat-select-search": "^3.3.0",
     "ngx-monaco-editor": "^9.0.0",
     "numeral": "^2.0.6",
-    "query-string": "^7.0.0",
+    "query-string": "^7.1.0",
     "rxjs": "^6.6.7",
     "tslib": "^2.3.0",
     "yaml": "2.0.0-6",
