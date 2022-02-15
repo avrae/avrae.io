@@ -24,11 +24,13 @@ export class AutomationEffect {
 export class Target extends AutomationEffect {
   target: string | number;  // 'all' | 'each' | number | 'self'
   effects: AutomationEffect[];
+  sortBy?: string;  // 'hp_asc' | 'hp_desc'
 
-  constructor(target = 'all', effects = [], meta?) {
+  constructor(target = 'all', effects = [], sortBy?, meta?) {
     super('target', meta);
     this.target = target;
     this.effects = effects;
+    this.sortBy = sortBy;
   }
 }
 
