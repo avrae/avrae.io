@@ -1,10 +1,11 @@
+@use '~@angular/material' as mat;
 @import '../../app-theme';
 @import '../../highlightjs/material-dark';
 @import '../../colors';
 // Define the dark theme.
-$primary: mat-palette($avr-red);
-$accent:  mat-palette($avr-purple, A100, A100, A100);
+$primary: mat.define-palette($avr-red);
+$accent:  mat.define-palette($avr-purple, A100, A100, A100);
 
-$theme: mat-dark-theme($primary, $accent);
-@include angular-material-theme($theme);
+$theme: mat.define-dark-theme($primary, $accent);
+@include mat.all-component-themes($theme);
 @include avr-app-theme($theme);

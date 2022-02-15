@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../node_modules/@angular/material/theming';
 
 // Styles for the docs app that are based on the current theme.
@@ -9,41 +10,41 @@
   $foreground: map-get($theme, foreground);
 
   .avr-app-background {
-    background: mat-color($background, background);
+    background: mat.get-color-from-palette($background, background);
   }
 
   .avr-primary-header {
-    background: mat-color($primary);
+    background: mat.get-color-from-palette($primary);
 
     h1 {
-      color: mat-color($primary, default-contrast);
+      color: mat.get-color-from-palette($primary, default-contrast);
     }
   }
 
   a {
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
     text-decoration: none;
     font-weight: 300;
     transition: background-color .5s ease-in-out;
   }
 
   a.active {
-    background-color: mat-color($foreground, base, 0.04);
+    background-color: mat.get-color-from-palette($foreground, base, 0.04);
   }
 
   .avr-footer {
-    background: mat-color($primary);
-    color: mat-color($primary, default-contrast);
+    background: mat.get-color-from-palette($primary);
+    color: mat.get-color-from-palette($primary, default-contrast);
   }
 
   kbd {
-    color: mat-color($accent, default-contrast);
-    background: mat-color($accent);
+    color: mat.get-color-from-palette($accent, default-contrast);
+    background: mat.get-color-from-palette($accent);
     border-radius: 2px;
   }
 
   .muted {
-    color: mat-color($foreground, base, 0.62);
+    color: mat.get-color-from-palette($foreground, base, 0.62);
   }
 
   .pointer {
@@ -51,7 +52,7 @@
   }
 
   .hoverable:hover {
-    background-color: mat-color($foreground, base, 0.04);
+    background-color: mat.get-color-from-palette($foreground, base, 0.04);
   }
 
   body.avr-app-background {
