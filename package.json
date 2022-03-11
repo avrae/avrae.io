@@ -38,6 +38,7 @@
     "domino": "^2.1.6",
     "express": "^4.15.2",
     "lodash": "^4.17.21",
+    "monaco-editor": "^0.24.0",
     "ngx-markdown": "^13.1.0",
     "ngx-mat-select-search": "^4.0.2",
     "ngx-monaco-editor": "^12.0.0",
