@@ -27,7 +27,6 @@ jobs:
           npm run build-themes
 
       - name: Run E2E Tests
-        continue-on-error: true
         run: |
           npm run e2e
 
