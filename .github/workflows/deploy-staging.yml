@@ -27,6 +27,7 @@ jobs:
           npm run build-themes
 
       - name: Run E2E Tests
+        continue-on-error: true
         run: |
           npm run e2e
 
@@ -40,6 +41,13 @@ jobs:
         with:
           name: dist
           path: dist/
+          if-no-files-found: error
+
+      - name: Upload debug
+        uses: actions/upload-artifact@v2
+        with:
+          name: debug
+          path: /
           if-no-files-found: error
 
   deploy:
