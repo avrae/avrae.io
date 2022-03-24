@@ -38,7 +38,7 @@ export class Attack extends AutomationEffect {
   hit: AutomationEffect[];
   miss: AutomationEffect[];
   attackBonus?: string;
-  adv?: int; // 1 == adv || 2 == ea || -1 == dis || 0 == flat
+  adv?: string; // 1 == adv || 2 == ea || -1 == dis || 0 == flat
 
   constructor(hit = [], miss = [], attackBonus?, adv?, meta?) {
     super('attack', meta);

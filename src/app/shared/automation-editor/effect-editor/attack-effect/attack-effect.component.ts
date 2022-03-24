@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {MatSelectChange} from '@angular/material/select';
 import {Attack} from '../../../../schemas/homebrew/AutomationEffects';
 import {EffectComponent} from '../shared/EffectComponent';
 
@@ -13,10 +14,18 @@ import {EffectComponent} from '../shared/EffectComponent';
         <input matInput placeholder="Attack Bonus" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.attackBonus">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
       <mat-form-field>
-        <input matInput placeholder="Advantage" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.adv" matTooltip="1 == Advantage, 2 == Elven Accuracy, -1 == Disadvantage, 0 == Flat">
+        <mat-label>Advantage</mat-label>
+        <mat-select [(value)]="advantage" (selectionChange)="onAdvantageSelectChange($event)">
+          <mat-option value="0">Flat</mat-option>
+          <mat-option value="1">Advantage</mat-option>
+          <mat-option value="2">Elven Accuracy</mat-option>
+          <mat-option value="-1">Disadvantage</mat-option>
+          <mat-option value="custom">Custom</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="advantage === 'custom'">
+        <input matInput [(ngModel)]="customadvantage" placeholder="Custom Advantage" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.adv" matTooltip="0 for Flat\n1 for Advantage\n2 for Elven Accuracy\n-1 for Disadvantage" [matTooltipClass]="'adv-tooltip'">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
@@ -59,6 +68,8 @@ import {EffectComponent} from '../shared/EffectComponent';
 })
 export class AttackEffectComponent extends EffectComponent<Attack> implements OnInit {
   custom = false;
+  advantage = '0';
+  customadvantage = ""
 
   constructor() {
     super();
@@ -68,12 +79,28 @@ export class AttackEffectComponent extends EffectComponent<Attack> implements On
     if (this.effect.attackBonus || this.spell == null) {
       this.custom = true;
     }
+    if (!["-1", "0", "1", "2"].includes(this.effect.adv)) {
+      this.advantage = 'custom'
+      this.customadvantage = this.effect.adv
+    } else {
+      this.advantage = this.effect.adv
+    }
   }
 
   onCustomChange() {
     if (!this.custom) {
       this.effect.attackBonus = undefined;
     }
+  }
+
+  onAdvantageSelectChange(changeEvent: MatSelectChange) {
+    if (changeEvent.value === 'custom') {
+      this.effect.adv = this.customadvantage;
+    } else {
+      this.effect.adv = changeEvent.value;
+    }
+
+    this.changed.emit();
   }
 
 }
