@@ -14,6 +14,12 @@ import {EffectComponent} from '../shared/EffectComponent';
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
+    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+      <mat-form-field>
+        <input matInput placeholder="Advantage" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.adv" matTooltip="1 == Advantage, 2 == Elven Accuracy, -1 == Disadvantage, 0 == Flat">
+        <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
+      </mat-form-field>
+    </div>
     <mat-expansion-panel class="hoverable">
       <mat-expansion-panel-header>
         <mat-panel-title>
