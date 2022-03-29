@@ -9,3 +9,7 @@
 .text-monospace {
   font-family: "Source Code Pro", monospace;
 }
+
+::ng-deep .adv-tooltip {
+  white-space:  pre-line !important;
+}
