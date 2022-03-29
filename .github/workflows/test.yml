@@ -20,6 +20,12 @@ jobs:
           npm install
           npm run build-themes
 
+      - name: Update Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get --only-upgrade install google-chrome-stable
+          google-chrome --version
+
       # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md#browsers-and-drivers
       # GH Actions comes with chromedriver installed :D
       - name: Run E2E Tests
