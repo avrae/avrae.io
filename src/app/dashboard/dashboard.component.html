@@ -17,7 +17,7 @@
     class="sidenav mat-elevation-z3"
     fixedTopGap="56px">
     <mat-nav-list>
-      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="['characters']">Characters</a>
+      <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" [routerLink]="['characters']">Characters</a>
 
       <mat-expansion-panel expanded class="mat-elevation-z0">
         <mat-expansion-panel-header>
@@ -26,9 +26,9 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="nav-panel-body">
-          <a mat-list-item (click)="sidenav.toggle()" routerLink="/dashboard/workshop">Explore</a>
-          <a mat-list-item (click)="sidenav.toggle()" routerLink="/dashboard/workshop/my-subscriptions">My Subscriptions</a>
-          <a mat-list-item (click)="sidenav.toggle()" routerLink="/dashboard/workshop/my-work">My Work</a>
+          <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" routerLink="/dashboard/workshop">Explore</a>
+          <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" routerLink="/dashboard/workshop/my-subscriptions">My Subscriptions</a>
+          <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" routerLink="/dashboard/workshop/my-work">My Work</a>
         </div>
       </mat-expansion-panel>
 
@@ -39,8 +39,8 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="nav-panel-body">
-          <a mat-list-item (click)="sidenav.toggle()" [routerLink]="['aliases']">My Customizations</a>
-          <a mat-list-item (click)="sidenav.toggle()" [routerLink]="['gvars']">Global Variables</a>
+          <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" [routerLink]="['aliases']">My Customizations</a>
+          <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" [routerLink]="['gvars']">Global Variables</a>
         </div>
       </mat-expansion-panel>
 
@@ -51,9 +51,9 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="nav-panel-body">
-          <a mat-list-item (click)="sidenav.toggle()" routerLink="/dashboard/homebrew/items">Items</a>
-          <a mat-list-item (click)="sidenav.toggle()" routerLink="/dashboard/homebrew/spells">Spells</a>
-          <a mat-list-item (click)="sidenav.toggle()" href="https://critterdb.com/#/index" target="_blank" rel="noopener noreferrer">Creatures
+          <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" routerLink="/dashboard/homebrew/items">Items</a>
+          <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" routerLink="/dashboard/homebrew/spells">Spells</a>
+          <a mat-list-item (click)="(small || mobile) && sidenav.toggle()" href="https://critterdb.com/#/index" target="_blank" rel="noopener noreferrer">Creatures
             <mat-icon class="icon-in-panel">launch</mat-icon>
           </a>
         </div>
