@@ -11,27 +11,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 12
-        uses: actions/setup-node@v1
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
         with:
-          node-version: 12.x
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
+          node-version: '14'
+          cache: 'npm'
 
       - name: Install deps
         run: |
           npm install
           npm run build-themes
 
+      - name: Update Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get --only-upgrade install google-chrome-stable
+          google-chrome --version
+
       - name: Run E2E Tests
+        continue-on-error: true
         run: |
           npm run e2e
 
@@ -41,7 +39,7 @@ jobs:
           cp dist/frontend/browser/index.html dist/frontend/browser/404.html
 
       - name: Upload dist artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: dist
           path: dist/

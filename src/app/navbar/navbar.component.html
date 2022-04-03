@@ -51,6 +51,8 @@
      rel="noopener noreferrer">CHEATSHEETS</a>
   <a class="button mobile-menu-link" href="http://invite.avrae.io">INVITE LINK</a>
   <a class="button mobile-menu-link" href="http://support.avrae.io">SUPPORT SERVER</a>
+  <a class="button mobile-menu-link" routerLink="/community-links"
+     (click)="mobileMenuOpen = !mobileMenuOpen">COMMUNITY LINKS</a>
 
   <!-- log in -->
   <a class="button mobile-menu-login" *ngIf="!loggedIn()" (click)="doLogin()">
@@ -66,4 +68,5 @@
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
   <a mat-menu-item class="button" href="http://invite.avrae.io">Invite Link</a>
   <a mat-menu-item class="button" href="http://support.avrae.io">Support Server</a>
+  <a mat-menu-item class="button" routerLink="/community-links">Community Links</a>
 </mat-menu>

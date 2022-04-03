@@ -30,6 +30,7 @@ import {DiscordEmbedModule} from './shared/discord-embed/discord-embed.module';
 import {registerDraconicLanguage} from './shared/monacoDraconic';
 import {ValidationSnackbar} from './shared/validation-snackbar/validation-snackbar.component';
 import {ThemesModule} from './themes/themes.module';
+import {CommunityLinksComponent} from './community-links/community-links.component';
 
 Sentry.init({dsn: 'https://af2b06560981446bb55f64b6f79fd520@sentry.io/1486249'});
 
@@ -61,6 +62,7 @@ const monacoConfig = {
     CommandsComponent,
     CommandDisplayComponent,
     ValidationSnackbar,
+    CommunityLinksComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

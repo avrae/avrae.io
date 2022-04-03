@@ -5,7 +5,7 @@ import * as express from 'express';
 import * as compression from 'compression';
 import {existsSync, readFileSync} from 'fs';
 import {join} from 'path';
-import 'zone.js/dist/zone-node';
+import 'zone.js/node';
 
 import {AppServerModule} from './src/main.server';
 

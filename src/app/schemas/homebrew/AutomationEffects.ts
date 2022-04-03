@@ -24,11 +24,13 @@ export class AutomationEffect {
 export class Target extends AutomationEffect {
   target: string | number;  // 'all' | 'each' | number | 'self'
   effects: AutomationEffect[];
+  sortBy?: string;  // 'hp_asc' | 'hp_desc'
 
-  constructor(target = 'all', effects = [], meta?) {
+  constructor(target = 'all', effects = [], sortBy?, meta?) {
     super('target', meta);
     this.target = target;
     this.effects = effects;
+    this.sortBy = sortBy;
   }
 }
 
@@ -36,12 +38,14 @@ export class Attack extends AutomationEffect {
   hit: AutomationEffect[];
   miss: AutomationEffect[];
   attackBonus?: string;
+  adv?: string; // 1 == adv || 2 == ea || -1 == dis || 0 == flat
 
-  constructor(hit = [], miss = [], attackBonus?, meta?) {
+  constructor(hit = [], miss = [], attackBonus?, adv?, meta?) {
     super('attack', meta);
     this.hit = hit;
     this.miss = miss;
     this.attackBonus = attackBonus;
+    this.adv = adv;
   }
 }
 

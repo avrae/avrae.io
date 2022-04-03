@@ -12,6 +12,10 @@
 
 This is the source code for the Angular website located at https://avrae.io.  It serves as a web portal for users of the D&D Beyond Avrae Discord Bot to manage their data.
 
+## Local Config
+
+Edit `src/environments/environment.js#clientId` to the Discord client ID of your test application.
+
 ## Build
 
 To build for development:
@@ -27,10 +31,6 @@ Run `npm run build-prod:ssr`
 Run `npm run dev:ssr`
 
 ## Run tests
-
-To run unit tests:
-
-Run `ng test` or `npm test`
 
 To run end to end tests:
 

@@ -1,14 +1,60 @@
 @import "../_variables.scss";
 
-.footer {
-  height: $footer-height;
-  background: $gray-dark1;
-  text-align: center;
-}
+// CSS copied from https://github.com/DnDBeyond/ddb-common-components/blob/master/src/Components/Footer/Footer.scss
 
-.footer-body {
-  padding: 16px;
-  z-index: 100;
-  color: $gray-light1;
-  margin: 0;
+.ddb-footer {
+  background-color: #242527;
+  display: flex;
+  flex-direction: column;
+
+  &-wrapper-lower {
+    padding: 10px;
+  }
+
+  &-lower {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &-copyright {
+    &-site {
+      color: #979aa4;
+      font-family: 'Roboto Condensed', Roboto, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      padding-bottom: 10px;
+    }
+
+    &-wotc {
+      color: #979aa4;
+      font-family: 'Roboto Condensed', Roboto, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+
+  &-lower-links {
+    text-align: center;
+
+    &-item {
+      color: #979aa4;
+      font-family: 'Roboto Condensed', Roboto, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      text-decoration: none;
+    }
+
+    &-item + &-item::before {
+      content: '\2022';
+      margin: 0 5px;
+    }
+  }
 }
