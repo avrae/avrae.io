@@ -7,7 +7,7 @@ const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + 
 @Component({
   selector: 'avr-higher-level',
   template: `
-    <div *ngIf="parent.higher != undefined">
+    <div *ngIf="parent.higher != undefined" style="min-width: 300px;">
       <mat-expansion-panel class="higher-level-panel">
         <mat-expansion-panel-header>
           <mat-panel-title>

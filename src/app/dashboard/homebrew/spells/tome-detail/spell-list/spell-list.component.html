@@ -36,7 +36,7 @@
     </mat-card>
   </div>
 
-  <div class="spell-preview mat-typography mat-elevation-z3" fxFlex="grow">
+  <div class="spell-preview mat-typography mat-elevation-z3" fxFlex="grow" fxHide fxShow.gt-xs="true">
     <avr-spell-embed [name]="selectedSpell?.name" [image]="selectedSpell?.image" [level]="selectedSpell?.level"
                      [school]="selectedSpell?.school" [classes]="selectedSpell?.classes"
                      [subclasses]="selectedSpell?.subclasses" [verbal]="selectedSpell?.components.verbal"

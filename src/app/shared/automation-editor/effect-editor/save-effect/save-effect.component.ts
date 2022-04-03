@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-save-effect',
   template: `
-    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
       <mat-form-field>
         <mat-label>Save Stat</mat-label>
         <mat-select [(value)]="effect.stat" (selectionChange)="changed.emit()">

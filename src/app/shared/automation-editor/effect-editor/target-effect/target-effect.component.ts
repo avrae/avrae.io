@@ -9,7 +9,7 @@ type TargetSortType = 'user' | 'hp_asc' | 'hp_desc';
 @Component({
   selector: 'avr-target-effect',
   template: `
-    <div fxLayout="row" fxLayoutGap="6px">
+    <div fxLayout="row" fxLayoutGap="6px" class="auto-row">
       <mat-form-field>
         <mat-label>Target</mat-label>
         <mat-select [(value)]="selectedTarget" (selectionChange)="onTargetSelectChange($event)">
