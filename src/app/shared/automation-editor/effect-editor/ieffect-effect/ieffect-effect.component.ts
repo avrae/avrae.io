@@ -20,6 +20,12 @@ import {EffectComponent} from '../shared/EffectComponent';
       </mat-form-field>
     </div>
 
+    <div style="color: red; font-weight: bold; margin-bottom: 10px; margin-top: -10px;" *ngIf="spell != null && spell.concentration && spell.name == effect.name">
+      <span>
+        Concentration spells create an effect with the spell name automatically, this will overwrite it, potentially breaking things.
+      </span>
+    </div>
+
     <div fxLayout="row" fxLayoutGap="8px" class="auto-row">
       <span>
         <mat-checkbox [(ngModel)]="effect.end" (change)="changed.emit();"
