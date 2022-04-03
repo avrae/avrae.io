@@ -1,5 +1,6 @@
 <table mat-table [dataSource]="sortedGvars(data)" class="list-table">
-  <ng-container matColumnDef="name">
+  
+  <ng-container matColumnDef="name" sticky>
     <th mat-header-cell *matHeaderCellDef>ID</th>
     <td mat-cell *matCellDef="let gvar">{{gvar.key}}</td>
     <td mat-footer-cell *matFooterCellDef>{{owned ? "Create New" : ""}}</td>
@@ -13,7 +14,7 @@
     <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
-  <ng-container matColumnDef="buttons">
+  <ng-container matColumnDef="buttons" stickyEnd>
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let gvar">
       <button mat-icon-button (click)="beginEdit(gvar)">

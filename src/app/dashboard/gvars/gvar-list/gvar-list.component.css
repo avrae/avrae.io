@@ -24,7 +24,7 @@ td {
 }
 
 tr:nth-child(even) {
-  background: rgba(204, 204, 204, .15);
+  background: #545454;
 }
 
 
@@ -38,5 +38,5 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 
 
 th {
-  min-width: 120px;
+  min-width: 100px;
 }
