@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-variable-effect',
   template: `
-    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
       <mat-form-field fxFlex="1 3 auto">
         <input matInput placeholder="Name" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.name" required>
       </mat-form-field>

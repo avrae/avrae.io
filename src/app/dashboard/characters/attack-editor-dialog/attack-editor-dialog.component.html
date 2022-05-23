@@ -9,7 +9,7 @@
     </p>
   </div>
 
-  <div fxLayout="row">
+  <div fxLayout="row" class="auto-row">
     <mat-form-field>
       <mat-label>Select an attack</mat-label>
       <mat-select [(value)]="selectedAttack">
@@ -20,20 +20,22 @@
       </mat-select>
     </mat-form-field>
 
-    <span fxFlex>
-      <button mat-icon-button matTooltip="Import YAML" (click)="beginYAMLImport()">
-        <mat-icon aria-label="Import from YAML">vertical_align_bottom</mat-icon>
-      </button>
-    </span>
-    <span fxFlex>
-      <button mat-icon-button matTooltip="Copy SRD Monster Action" (click)="newFromSRD()">
-        <mat-icon aria-label="Copy SRD Monster Action">scanner</mat-icon>
-      </button>
-    </span>
-    <span fxFlex>
-      <button mat-icon-button matTooltip="Export All to YAML" (click)="beginYAMLExport(allAttacks)">
-        <mat-icon aria-label="Export All to YAML">vertical_align_top</mat-icon>
-      </button>
+    <span>
+      <span fxFlex>
+        <button mat-icon-button matTooltip="Import YAML" (click)="beginYAMLImport()">
+          <mat-icon aria-label="Import from YAML">vertical_align_bottom</mat-icon>
+        </button>
+      </span>
+      <span fxFlex>
+        <button mat-icon-button matTooltip="Copy SRD Monster Action" (click)="newFromSRD()">
+          <mat-icon aria-label="Copy SRD Monster Action">scanner</mat-icon>
+        </button>
+      </span>
+      <span fxFlex>
+        <button mat-icon-button matTooltip="Export All to YAML" (click)="beginYAMLExport(allAttacks)">
+          <mat-icon aria-label="Export All to YAML">vertical_align_top</mat-icon>
+        </button>
+      </span>
     </span>
     <span fxFlex="grow"></span>
   </div>
@@ -44,22 +46,21 @@
 
   <div *ngIf="selectedAttack">
     <!-- name, delete, export -->
-    <div fxLayout="row" fxLayoutGap="4px">
+    <div fxLayout="row" fxLayoutGap="4px" class="auto-row">
       <mat-form-field fxFlex="grow">
         <input matInput placeholder="Attack Name" [(ngModel)]="selectedAttack.name">
       </mat-form-field>
-
-      <span fxFlex="grow"></span>
-
-      <span fxFlex>
-        <button mat-icon-button color="warn" (click)="deleteAttack(selectedAttack)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </span>
-      <span fxFlex>
-        <button mat-icon-button matTooltip="Export to YAML" (click)="beginYAMLExport(selectedAttack)">
-          <mat-icon aria-label="Export to YAML">vertical_align_top</mat-icon>
-        </button>
+      <span>
+        <span fxFlex>
+          <button mat-icon-button color="warn" (click)="deleteAttack(selectedAttack)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+        <span fxFlex>
+          <button mat-icon-button matTooltip="Export to YAML" (click)="beginYAMLExport(selectedAttack)">
+            <mat-icon aria-label="Export to YAML">vertical_align_top</mat-icon>
+          </button>
+        </span>
       </span>
     </div>
 
@@ -72,7 +73,7 @@
 
     <div class="advanced-options" *ngIf="showAdvancedOptions">
       <!-- display options -->
-      <mat-divider></mat-divider>
+      <mat-divider class="beefy-divider"></mat-divider>
       <h3>
         Display Options
       </h3>
@@ -99,11 +100,11 @@
       </div>
 
       <!-- crit options -->
-      <mat-divider></mat-divider>
+      <mat-divider class="beefy-divider"></mat-divider>
       <h3>
         Critical Hit Options
       </h3>
-      <div class="crit-options-container">
+      <div class="crit-options-container auto-row">
         <mat-form-field>
           <input matInput placeholder="Criton" [(ngModel)]="selectedAttack.criton" type="number" min="1" max="20"
                  matTooltip="The natural roll this attack will crit on.">
@@ -117,7 +118,7 @@
     </div>
 
     <!-- automation editor -->
-    <mat-divider></mat-divider>
+    <mat-divider class="beefy-divider"></mat-divider>
     <h3>
       Automation
     </h3>
@@ -139,9 +140,11 @@
 
 <!-- Buttons -->
 <mat-dialog-actions>
-  <button mat-flat-button mat-dialog-close>Cancel</button>
-  <button mat-flat-button (click)="save()" [disabled]="saveButtonDisabled"
-          color="primary">{{saveButtonValue}}</button>
-  <button mat-flat-button (click)="saveAndExit()" [disabled]="saveButtonDisabled"
-          color="primary">{{saveAndExitButtonValue}}</button>
+  <button mat-flat-button mat-dialog-close color="warn">Cancel</button>
+  <span>
+    <button mat-flat-button (click)="save()" [disabled]="saveButtonDisabled"
+            color="primary">{{saveButtonValue}}</button>
+    <button mat-flat-button (click)="saveAndExit()" [disabled]="saveButtonDisabled"
+            color="primary">{{saveAndExitButtonValue}}</button>
+  </span>
 </mat-dialog-actions>

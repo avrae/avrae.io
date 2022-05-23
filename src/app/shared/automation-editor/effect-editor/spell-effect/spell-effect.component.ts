@@ -8,7 +8,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-spell-effect',
   template: `
-    <div>
+    <div class="auto-row">
       <span>Cast </span>
 
       <mat-form-field>

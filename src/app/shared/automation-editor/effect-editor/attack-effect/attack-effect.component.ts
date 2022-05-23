@@ -6,7 +6,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-attack-effect',
   template: `
-    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
       <mat-checkbox [(ngModel)]="custom" (change)="changed.emit(); onCustomChange()" *ngIf="spell != null">
         Has custom attack bonus
       </mat-checkbox>

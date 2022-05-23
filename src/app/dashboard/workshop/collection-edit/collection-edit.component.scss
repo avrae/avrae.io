@@ -18,3 +18,10 @@
 .clickable {
   cursor: pointer;
 }
+
+@media (max-width: 960px) {
+  ::ng-deep .collectable-overlay {
+    max-width: 95vw !important;
+    width: 95% !important;
+  }
+}

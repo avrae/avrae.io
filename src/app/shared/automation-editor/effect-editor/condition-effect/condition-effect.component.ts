@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-condition-effect',
   template: `
-    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+    <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
       <mat-form-field>
         <input matInput placeholder="Condition" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.condition" required>
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>

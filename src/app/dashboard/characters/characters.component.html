@@ -1,10 +1,10 @@
 <div class="characterList">
   <mat-card class="user-card" *ngIf="(userInfo | async)">
-    <mat-grid-list cols="4" rowHeight="1:1">
-      <mat-grid-tile>
+    <mat-grid-list cols="4" rowHeight="{{ !mobile ? '1:1' : '1:2' }}">
+      <mat-grid-tile colspan="{{ !mobile ? 1 : 4 }}" >
         <img alt="avatar" [src]="(userInfo | async)?.avatarUrl" class="avatarImg mat-elevation-z1">
       </mat-grid-tile>
-      <mat-grid-tile colspan="3">
+      <mat-grid-tile colspan="{{ !mobile ? 3 : 4 }}" class="user-stats">
         <div>
           <h1 class="mat-display-2 smallmargin">
             {{(userInfo | async)?.username}}<span class="mat-small">#{{(userInfo | async)?.discriminator}}</span>
@@ -34,7 +34,9 @@
           <h3>
             {{character.name}}
           </h3>
-          {{getDescription(character)}}
+          <p>
+            {{getDescription(character)}}
+          </p>
         </div>
         <div class="mat-typography ignore-theme character-actions">
           <a mat-icon-button matTooltip="View Sheet"

@@ -28,6 +28,7 @@ $viewport-height: calc(100vh - #{$navbar-height + $footer-height + $pack-toolbar
 .new-item-card {
   height: 48px;
   padding: 0 24px;
+  margin-top: 8px;
 }
 
 .no-text-cursor {

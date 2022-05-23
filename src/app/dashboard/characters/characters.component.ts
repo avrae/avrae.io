@@ -6,13 +6,15 @@ import {UserInfo, UserStats} from '../../schemas/UserInfo';
 import {getUser} from '../APIHelper';
 import {DashboardService} from '../dashboard.service';
 import {AttackEditorDialog} from './attack-editor-dialog/attack-editor-dialog.component';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {BreakpointBaseComponent} from '../../shared/breakpoints';
 
 @Component({
   selector: 'avr-characters',
   templateUrl: './characters.component.html',
   styleUrls: ['./characters.component.css']
 })
-export class CharactersComponent implements OnInit {
+export class CharactersComponent extends BreakpointBaseComponent implements OnInit {
 
   userInfo: Observable<UserInfo>;
   userStats: Observable<UserStats>;
@@ -21,8 +23,11 @@ export class CharactersComponent implements OnInit {
 
   MIN_CHARACTER_AUTOMATION_VERSION = 17;
 
-  constructor(private dashboardService: DashboardService, private dialog: MatDialog) {
-  }
+  constructor(private dashboardService: DashboardService,
+    private dialog: MatDialog,
+    private bp: BreakpointObserver) {
+      super(bp);
+    }
 
   ngOnInit() {
     this.getUserInfo();
@@ -75,7 +80,8 @@ export class CharactersComponent implements OnInit {
 
     this.dialog.open(AttackEditorDialog, {
       width: '75%', disableClose: true,
-      data: character
+      data: character,
+      panelClass: 'automation-overlay'
     })
       .afterClosed().subscribe(result => {
       console.log(result);

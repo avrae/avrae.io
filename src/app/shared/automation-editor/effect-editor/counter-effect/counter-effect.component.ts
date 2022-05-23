@@ -9,7 +9,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-counter-effect',
   template: `
-    <div>
+    <div class="auto-row">
       <span>Use {{counterType === 'ability' ? 'an' : 'a'}} </span>
 
       <mat-form-field>

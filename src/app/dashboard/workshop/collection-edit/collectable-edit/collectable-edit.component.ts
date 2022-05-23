@@ -31,6 +31,7 @@ export class CollectableEditComponent extends CollectableDisplayComponent implem
       {
         disableClose: true,
         minWidth: '70%',
+        panelClass: 'collectable-overlay',
         data: {collection: this.collection, alias: this.alias, snippet: this.snippet, parent: this.parentComponent?.alias}
       }
     );
