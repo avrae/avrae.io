@@ -12,7 +12,7 @@ import {
   TempHP,
   Text,
   UseCounter
-} from '../../../schemas/homebrew/AutomationEffects';
+} from '../types';
 
 
 // each type option defines a list of rules (function parents -> bool) - all must return true to be addable
@@ -59,47 +59,47 @@ export class NewEffectCardComponent implements OnInit {
     let effect: AutomationEffect;
     switch (toAddType) {
       case 'target':
-        effect = new Target();
+        effect = {type: "target", target: "all", effects: []} as Target;
         break;
-      case 'attack':
-        effect = new Attack();
-        break;
-      case 'save':
-        effect = new Save();
-        break;
-      case 'damage':
-        effect = new Damage();
-        break;
-      case 'temphp':
-        effect = new TempHP();
-        break;
-      case 'ieffect':
-        effect = new IEffect();
-        break;
-      case 'roll':
-        effect = new Roll();
-        break;
-      case 'text':
-        effect = new Text();
-        break;
-      case 'variable':
-        effect = new SetVariable();
-        break;
-      case 'condition':
-        effect = new Condition();
-        break;
-      case 'counter':
-        effect = new UseCounter();
-        break;
-      case 'spell':
-        effect = new CastSpell();
-        break;
-      case 'attack and damage (Preset)':
-        this.parent.push(...generateAttackAndDamagePreset());
-        return;
-      case 'save for half (Preset)':
-        this.parent.push(...generateSaveForHalfPreset());
-        return;
+      // case 'attack':
+      //   effect = new Attack();
+      //   break;
+      // case 'save':
+      //   effect = new Save();
+      //   break;
+      // case 'damage':
+      //   effect = new Damage();
+      //   break;
+      // case 'temphp':
+      //   effect = new TempHP();
+      //   break;
+      // case 'ieffect':
+      //   effect = new IEffect();
+      //   break;
+      // case 'roll':
+      //   effect = new Roll();
+      //   break;
+      // case 'text':
+      //   effect = new Text();
+      //   break;
+      // case 'variable':
+      //   effect = new SetVariable();
+      //   break;
+      // case 'condition':
+      //   effect = new Condition();
+      //   break;
+      // case 'counter':
+      //   effect = new UseCounter();
+      //   break;
+      // case 'spell':
+      //   effect = new CastSpell();
+      //   break;
+      // case 'attack and damage (Preset)':
+      //   this.parent.push(...generateAttackAndDamagePreset());
+      //   return;
+      // case 'save for half (Preset)':
+      //   this.parent.push(...generateSaveForHalfPreset());
+      //   return;
       default:
         return;
     }
@@ -114,23 +114,23 @@ export class NewEffectCardComponent implements OnInit {
 
 function generateAttackAndDamagePreset(): AutomationEffect[] {
   return [
-    new Target('each', [
-      new Attack([
-        new Damage('1d10[fire]')
-      ])
-    ])
+    // new Target('each', [
+    //   new Attack([
+    //     new Damage('1d10[fire]')
+    //   ])
+    // ])
   ];
 }
 
 function generateSaveForHalfPreset(): AutomationEffect[] {
   return [
-    new Roll('8d6[fire]', 'damage'),
-    new Target('all', [
-      new Save('dex', [
-        new Damage('{damage}')
-      ], [
-        new Damage('({damage})/2')
-      ])
-    ])
+    // new Roll('8d6[fire]', 'damage'),
+    // new Target('all', [
+    //   new Save('dex', [
+    //     new Damage('{damage}')
+    //   ], [
+    //     new Damage('({damage})/2')
+    //   ])
+    // ])
   ];
 }

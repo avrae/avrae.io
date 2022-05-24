@@ -1,6 +1,6 @@
 import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AutomationEffect} from '../../../schemas/homebrew/AutomationEffects';
+import {AutomationEffect} from '../types';
 import {Spell} from '../../../schemas/homebrew/Spells';
 
 @Component({

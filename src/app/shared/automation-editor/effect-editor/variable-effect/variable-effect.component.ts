@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SetVariable} from '../../../../schemas/homebrew/AutomationEffects';
+import {SetVariable} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({

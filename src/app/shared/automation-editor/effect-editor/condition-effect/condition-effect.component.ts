@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Condition} from '../../../../schemas/homebrew/AutomationEffects';
+import {Condition} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({

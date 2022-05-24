@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSelectChange} from '@angular/material/select';
 import {DDBEntity} from '../../../../schemas/GameData';
-import {CastSpell} from '../../../../schemas/homebrew/AutomationEffects';
+import {CastSpell} from '../../types';
 import {GamedataService} from '../../../gamedata.service';
 import {EffectComponent} from '../shared/EffectComponent';
 

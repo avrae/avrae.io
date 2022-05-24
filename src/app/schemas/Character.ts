@@ -1,4 +1,4 @@
-import {AutomationEffect} from './homebrew/AutomationEffects';
+import {AutomationEffect} from '../shared/automation-editor/types';
 
 export class Character {
   owner: string;

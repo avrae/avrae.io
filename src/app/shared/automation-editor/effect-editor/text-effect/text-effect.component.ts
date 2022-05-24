@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSelectChange} from '@angular/material/select';
-import {groupBy, debounce} from 'lodash';
+import {debounce, groupBy} from 'lodash';
 import {DDBEntity} from '../../../../schemas/GameData';
-import {AbilityReference, Text} from '../../../../schemas/homebrew/AutomationEffects';
 import {GamedataService} from '../../../gamedata.service';
+import {AbilityReference, Text} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 const TEXT_TYPE_HELPS = {
@@ -90,14 +90,14 @@ export class TextEffectComponent extends EffectComponent<Text> implements OnInit
     if (this.textType === 'text') {
       this.effect.text = '';
     } else {
-      this.effect.text = new AbilityReference(192, 12168134);  // also second wind idk
+      this.effect.text = {id: 192, typeId: 12168134};  // also second wind idk
       this.updateSelectedRef();
     }
   }
 
   // ref stuff
   onRefSelectionChange(event: MatSelectChange) {
-    this.effect.text = new AbilityReference(event.value.entity_id, event.value.type_id);
+    this.effect.text = {id: event.value.entity_id, typeId: event.value.type_id};
     this.selectedAbilityRef = event.value;
   }
 

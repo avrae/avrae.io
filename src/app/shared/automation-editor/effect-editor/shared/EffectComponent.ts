@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {AutomationEffect} from '../../../../schemas/homebrew/AutomationEffects';
+import {AutomationEffect} from '../../types';
 import {Spell} from '../../../../schemas/homebrew/Spells';
 
 @Component({template: ''})

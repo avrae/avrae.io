@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Damage, Roll, SetVariable, TempHP} from '../../../../schemas/homebrew/AutomationEffects';
+import {Damage, Roll, SetVariable, TempHP} from '../../types';
 import {Spell} from '../../../../schemas/homebrew/Spells';
 
 const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);

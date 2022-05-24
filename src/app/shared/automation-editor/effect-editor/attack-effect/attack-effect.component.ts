@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSelectChange} from '@angular/material/select';
-import {Attack} from '../../../../schemas/homebrew/AutomationEffects';
+import {Attack} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({

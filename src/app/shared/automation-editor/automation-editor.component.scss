@@ -1,0 +1,37 @@
+@import "../../variables";
+
+.ignore-theme {
+  color: #fff;
+}
+
+.editor-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  background: $gray-dark1;
+  border-radius: 4px;
+  min-height: 55vh;
+}
+
+
+.automation-tree {
+  border-right: 1px solid rgba($gray2, 0.3);
+  padding: 6px;
+  overflow: auto;
+}
+
+// tree styles
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree-node {
+  display: block;
+}
+
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.tree-children-container {
+  padding-left: 12px;
+  border-left: 1px solid $gray2;
+}

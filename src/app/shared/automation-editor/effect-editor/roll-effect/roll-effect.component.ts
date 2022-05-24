@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Roll} from '../../../../schemas/homebrew/AutomationEffects';
+import {Roll} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TempHP} from '../../../../schemas/homebrew/AutomationEffects';
+import {TempHP} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({

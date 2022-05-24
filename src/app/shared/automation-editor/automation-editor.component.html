@@ -9,3 +9,51 @@
                        (changed)="changed.emit()">
   </avr-new-effect-card>
 </mat-accordion>
+
+<mat-divider></mat-divider>
+
+ok here's the rewrite
+
+<div class="editor-container ignore-theme">
+  <!-- automation tree: easy to scroll through list of effects -->
+  <div class="automation-tree">
+    <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <!-- This is the tree node template for expandable nodes -->
+      <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild"
+                            [matTooltip]="node.tooltip"
+                            class="example-tree-node">
+        <div>
+          <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
+          {{node.label}}
+          <button mat-icon-button cdkTreeNodeToggle>
+            <mat-icon>
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+        </div>
+        <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" class="tree-children-container">
+          <ng-container cdkTreeNodeOutlet></ng-container>
+        </div>
+      </cdk-nested-tree-node>
+      <!-- node for adding effects -->
+      <!--  <mat-tree-node *cdkTreeNodeDef="let node; when: isAddEffectNode" cdkTreeNodeToggle>-->
+      <!--    {{node.label}}-->
+      <!--  </mat-tree-node>-->
+      <!-- This is the tree node template for leaf nodes -->
+      <!-- There is inline padding applied to this node using styles.
+        This padding value depends on the mat-icon-button width. -->
+      <cdk-nested-tree-node *cdkTreeNodeDef="let node"
+                            cdkTreeNodeToggle
+                            class="example-tree-node"
+                            [matTooltip]="node.tooltip">
+        <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
+        {{node.label}}
+      </cdk-nested-tree-node>
+    </cdk-tree>
+  </div> <!-- </automation-tree> -->
+  <!-- node editor: individual node editing -->
+  <div class="node-editor">
+    todo
+  </div> <!-- </node-editor> -->
+</div>
+

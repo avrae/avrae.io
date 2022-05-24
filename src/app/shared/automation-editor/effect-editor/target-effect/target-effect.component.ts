@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSelectChange} from '@angular/material/select';
-import {Target} from '../../../../schemas/homebrew/AutomationEffects';
+import {Target} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 type TargetType = 'all' | 'each' | 'self' | 'position';

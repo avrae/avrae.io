@@ -1,3 +1,4 @@
+import {CdkTreeModule} from '@angular/cdk/tree';
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FlexModule} from '@angular/flex-layout';
@@ -13,19 +14,20 @@ import {HigherLevelComponent} from './effect-editor/higher-level/higher-level.co
 import {IEffectEffectComponent} from './effect-editor/ieffect-effect/ieffect-effect.component';
 import {RollEffectComponent} from './effect-editor/roll-effect/roll-effect.component';
 import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.component';
+import {SpellEffectComponent} from './effect-editor/spell-effect/spell-effect.component';
 import {TargetEffectComponent} from './effect-editor/target-effect/target-effect.component';
 import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
 import {TextEffectComponent} from './effect-editor/text-effect/text-effect.component';
 import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
 import {NewEffectCardComponent} from './new-effect-card/new-effect-card.component';
-import { SpellEffectComponent } from './effect-editor/spell-effect/spell-effect.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
-    FlexModule
+    FlexModule,
+    CdkTreeModule
   ],
   declarations: [
     EffectEditorComponent,

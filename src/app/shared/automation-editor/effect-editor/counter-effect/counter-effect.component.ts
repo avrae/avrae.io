@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatSelectChange} from '@angular/material/select';
 import {groupBy} from 'lodash';
 import {LimitedUse} from '../../../../schemas/GameData';
-import {AbilityReference, SpellSlotReference, UseCounter} from '../../../../schemas/homebrew/AutomationEffects';
+import {AbilityReference, SpellSlotReference, UseCounter} from '../../types';
 import {GamedataService} from '../../../gamedata.service';
 import {EffectComponent} from '../shared/EffectComponent';
 
@@ -108,14 +108,14 @@ export class CounterEffectComponent extends EffectComponent<UseCounter> implemen
     if (this.counterType === 'counter') {
       this.effect.counter = '';
     } else if (this.counterType === 'slot') {
-      this.effect.counter = new SpellSlotReference(1);
+      this.effect.counter = {slot: 1};
     } else if (this.counterType === 'ability') {
-      this.effect.counter = new AbilityReference(1091, 222216831);  // default to like... second wind?
+      this.effect.counter = {id: 1091, typeId: 222216831};  // default to like... second wind?
     }
   }
 
   onAbilitySelectionChange(event: MatSelectChange) {
-    this.effect.counter = new AbilityReference(event.value.id, event.value.typeId);
+    this.effect.counter = {id: event.value.id, typeId: event.value.typeId};
     this.selectedLimitedUse = event.value;
   }
 
