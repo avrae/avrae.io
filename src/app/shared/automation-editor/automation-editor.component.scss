@@ -6,32 +6,56 @@
 
 .editor-container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: auto 1fr;
   background: $gray-dark1;
   border-radius: 4px;
   min-height: 55vh;
 }
 
-
+// tree styles
 .automation-tree {
   border-right: 1px solid rgba($gray2, 0.3);
   padding: 6px;
   overflow: auto;
 }
 
-// tree styles
-.example-tree-invisible {
+.automation-tree-header {
+  display: flex;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba($gray2, 0.3);
+
+  .automation-tree-header-text {
+    font-weight: bold;
+    margin-right: 8px;
+  }
+
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.tree-invisible {
   display: none;
 }
 
-.example-tree-node {
+.tree-node {
   display: block;
+  margin-top: 4px;
 }
 
-/*
- * This padding sets alignment of the nested nodes.
- */
 .tree-children-container {
   padding-left: 12px;
   border-left: 1px solid $gray2;
+}
+
+.automation-tree button[mat-icon-button] {
+  font-size: 20px;
+  line-height: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.node-icon {
+  font-size: 16px;
+  color: $gray2;
 }

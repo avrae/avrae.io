@@ -19,6 +19,7 @@ import {TargetEffectComponent} from './effect-editor/target-effect/target-effect
 import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
 import {TextEffectComponent} from './effect-editor/text-effect/text-effect.component';
 import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
+import {NewEffectButtonComponent} from './new-effect-button.component';
 import {NewEffectCardComponent} from './new-effect-card/new-effect-card.component';
 
 @NgModule({
@@ -46,6 +47,7 @@ import {NewEffectCardComponent} from './new-effect-card/new-effect-card.componen
     ConditionEffectComponent,
     CounterEffectComponent,
     SpellEffectComponent,
+    NewEffectButtonComponent,
   ],
   exports: [AutomationEditorComponent]
 })

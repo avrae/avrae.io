@@ -32,7 +32,7 @@ export interface Save extends AutomationEffect {
   stat: 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
   fail: AutomationEffect[];
   success: AutomationEffect[];
-  dc: IntExpression;
+  dc?: IntExpression;
   adv?: -1 | 0 | 1;
 }
 

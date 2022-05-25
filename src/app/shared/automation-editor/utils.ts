@@ -1,5 +1,6 @@
 import {AbilityCheck, Attack, AutomationEffect, Condition, Save, Target} from './types';
 
+// ==== automation-editor ====
 export interface AutomationTreeNode {
   label: string;
   icon?: string;
@@ -9,51 +10,79 @@ export interface AutomationTreeNode {
 
 export interface AutomationEffectTreeNode extends AutomationTreeNode {
   effect: AutomationEffect;
+  ancestors: AutomationEffect[];  // root -> direct parent list of ancestor effects
 }
 
-export interface AutomationAddNodeNode extends AutomationTreeNode {
-  parentArray: AutomationEffect[];  // reference; if set, allows adding children
+export interface AutomationAddEffectNode extends AutomationTreeNode {
+  meta: NewEffectMeta;
 }
 
-export function effectsToNodes(effects: AutomationEffect[]): AutomationTreeNode[] {
-  // given a list of Automation effects, build the node tree to give to the TreeControl
-  let out: AutomationTreeNode[] = [];
-  for (const effect of effects) {
-    const nodeDef = AUTOMATION_NODE_DEFS[effect.type];
-    if (nodeDef === undefined) {
-      out.push({
-        label: 'Unknown Node',
-        icon: 'help_outline',
-        tooltip: 'This node is not yet supported by the web builder.',
-        effect
-      } as AutomationEffectTreeNode);
-      continue;
-    }
-    out.push({
-      label: nodeDef.label || effect.type,
-      icon: nodeDef.icon,
-      tooltip: nodeDef.tooltip,
-      children: nodeDef.getChildren ? nodeDef.getChildren(effect) : undefined,
-      effect
-    } as AutomationEffectTreeNode);
+export class AutomationTreeBuilder {
+  isSpell: boolean;
+  ancestors: AutomationEffect[] = [];
+
+  constructor(isSpell: boolean) {
+    this.isSpell = isSpell;
   }
 
-  out.push({
-    label: 'Add Node',
-    icon: 'add',
-    parentArray: effects,
-  } as AutomationAddNodeNode);
+  public effectsToNodes(effects: AutomationEffect[]): AutomationTreeNode[] {
+    // given a list of Automation effects, build the node tree to give to the TreeControl
+    let out: AutomationTreeNode[] = [];
+    // copy the current ancestor state
+    const ancestors = this.ancestors.slice();
 
-  return out;
+    for (const effect of effects) {
+      // update the ancestor state to account for the effect
+      this.ancestors = [...ancestors, effect];
+
+      // find the def for the effect
+      const nodeDef = AUTOMATION_NODE_DEFS[effect.type];
+      if (nodeDef === undefined) {
+        out.push({
+          label: 'Unknown Node',
+          icon: 'help_outline',
+          tooltip: 'This node is not yet supported by the web builder.',
+          effect,
+          ancestors
+        } as AutomationEffectTreeNode);
+        continue;
+      }
+      // recursively build nodes
+      out.push({
+        label: nodeDef.label || effect.type,
+        icon: nodeDef.icon,
+        tooltip: nodeDef.tooltip,
+        children: nodeDef.getChildren ? nodeDef.getChildren(this, effect) : undefined,
+        effect,
+        ancestors
+      } as AutomationEffectTreeNode);
+    }
+
+    // add node to add additional effects to the given effect array
+    out.push({
+      label: 'Add Effect',
+      meta: {
+        ancestors,
+        parentArray: effects,
+        isSpell: this.isSpell,
+        isIEffect: ancestors.some(effect => effect.type === 'ieffect2')
+      },
+    } as AutomationAddEffectNode);
+
+    // restore the old ancestor state
+    this.ancestors = ancestors;
+
+    return out;
+  }
 }
 
-// ==== a ====
+// ---- type => tree map ----
 interface NodeDef {
   label?: string;
   icon?: string;
   tooltip?: string;
 
-  getChildren?(effect: AutomationEffect): AutomationTreeNode[];
+  getChildren?(builder: AutomationTreeBuilder, effect: AutomationEffect): AutomationTreeNode[];
 }
 
 interface NodeDefRegistry {
@@ -64,25 +93,25 @@ interface NodeDefRegistry {
 export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   target: {
     label: 'Target',
-    getChildren(effect: Target): AutomationTreeNode[] {
-      return effectsToNodes(effect.effects);
+    getChildren(builder: AutomationTreeBuilder, effect: Target): AutomationTreeNode[] {
+      return builder.effectsToNodes(effect.effects);
     }
   },
   attack: {
     label: 'Attack Roll',
-    getChildren(effect: Attack): AutomationTreeNode[] {
+    getChildren(builder: AutomationTreeBuilder, effect: Attack): AutomationTreeNode[] {
       return [
-        {label: 'Hit', effect, children: effectsToNodes(effect.hit)} as AutomationEffectTreeNode,
-        {label: 'Miss', effect, children: effectsToNodes(effect.miss)} as AutomationEffectTreeNode
+        {label: 'Hit', children: builder.effectsToNodes(effect.hit)},
+        {label: 'Miss', children: builder.effectsToNodes(effect.miss)}
       ];
     }
   },
   save: {
     label: 'Saving Throw',
-    getChildren(effect: Save): AutomationTreeNode[] {
+    getChildren(builder: AutomationTreeBuilder, effect: Save): AutomationTreeNode[] {
       return [
-        {label: 'Fail', effect, children: effectsToNodes(effect.fail)} as AutomationEffectTreeNode,
-        {label: 'Success', effect, children: effectsToNodes(effect.success)} as AutomationEffectTreeNode
+        {label: 'Fail', children: builder.effectsToNodes(effect.fail)},
+        {label: 'Success', children: builder.effectsToNodes(effect.success)}
       ];
     }
   },
@@ -106,17 +135,18 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
     label: 'Roll'
   },
   text: {
-    label: 'Text'
+    label: 'Text',
+    icon: 'chat'
   },
   variable: {
     label: 'Set Variable'
   },
   condition: {
     label: 'Branch',
-    getChildren(effect: Condition): AutomationTreeNode[] {
+    getChildren(builder: AutomationTreeBuilder, effect: Condition): AutomationTreeNode[] {
       return [
-        {label: 'On True', effect, children: effectsToNodes(effect.onTrue)} as AutomationEffectTreeNode,
-        {label: 'On False', effect, children: effectsToNodes(effect.onFalse)} as AutomationEffectTreeNode
+        {label: 'On True', children: builder.effectsToNodes(effect.onTrue)},
+        {label: 'On False', children: builder.effectsToNodes(effect.onFalse)}
       ];
     }
   },
@@ -128,19 +158,27 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   },
   check: {
     label: 'Ability Check',
-    getChildren(effect: AbilityCheck): AutomationTreeNode[] {
+    getChildren(builder: AutomationTreeBuilder, effect: AbilityCheck): AutomationTreeNode[] {
       if (effect.dc) {
         return [
-          {label: 'Success', effect, children: effectsToNodes(effect.success)} as AutomationEffectTreeNode,
-          {label: 'Fail', effect, children: effectsToNodes(effect.fail)} as AutomationEffectTreeNode
+          {label: 'Success', children: builder.effectsToNodes(effect.success)},
+          {label: 'Fail', children: builder.effectsToNodes(effect.fail)}
         ];
       } else if (effect.contestAbility) {
         return [
-          {label: 'Target Wins', effect, children: effectsToNodes(effect.success)} as AutomationEffectTreeNode,
-          {label: 'Caster Wins', effect, children: effectsToNodes(effect.fail)} as AutomationEffectTreeNode
+          {label: 'Target Wins', children: builder.effectsToNodes(effect.success)},
+          {label: 'Caster Wins', children: builder.effectsToNodes(effect.fail)}
         ];
       }
       return [];
     }
   }
 };
+
+// ==== new-effect-button ====
+export interface NewEffectMeta {
+  ancestors: AutomationEffect[];  // root -> direct parent list of ancestor effects
+  parentArray: AutomationEffect[];  // the array to add a new effect to
+  isSpell: boolean;
+  isIEffect: boolean;
+}

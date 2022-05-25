@@ -17,40 +17,57 @@ ok here's the rewrite
 <div class="editor-container ignore-theme">
   <!-- automation tree: easy to scroll through list of effects -->
   <div class="automation-tree">
+    <div class="automation-tree-header">
+      <span class="automation-tree-header-text">Effect Tree</span>
+      <span class="toolbar-spacer"></span>
+      <span>
+        <button mat-icon-button matTooltip="Expand All" (click)="treeControl.expandAll()">
+          <mat-icon>expand</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Collapse All" (click)="treeControl.collapseAll()">
+          <mat-icon>compress</mat-icon>
+        </button>
+      </span>
+    </div>
+
     <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
-      <!-- This is the tree node template for expandable nodes -->
-      <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild"
-                            [matTooltip]="node.tooltip"
-                            class="example-tree-node">
-        <div>
-          <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
-          {{node.label}}
+      <cdk-nested-tree-node *cdkTreeNodeDef="let node"
+                            class="tree-node"
+                            [matTooltip]="node.tooltip">
+        <!-- icon -->
+        <span *ngIf="node.icon">
+          <!-- for some reason I can't replicate the styling of this button so we just use a disabled button -->
+          <button mat-icon-button disabled>
+            <mat-icon class="node-icon">{{node.icon}}</mat-icon>
+          </button>
+        </span>
+        <!-- label -->
+        {{node.label}}
+        <!-- for nodes representing effects (AutomationEffectTreeNode) -->
+        <span *ngIf="isEffectNode(node)">
+          <button mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+        </span>
+        <!-- for AutomationAddEffectNode -->
+        <span *ngIf="isAddEffectNode(node)">
+          <avr-new-effect-button [meta]="node.meta" (created)="changed.emit()"></avr-new-effect-button>
+        </span>
+        <!-- for nodes with children -->
+        <span *ngIf="hasChild(node)">
           <button mat-icon-button cdkTreeNodeToggle>
             <mat-icon>
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
           </button>
-        </div>
-        <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" class="tree-children-container">
-          <ng-container cdkTreeNodeOutlet></ng-container>
-        </div>
-      </cdk-nested-tree-node>
-      <!-- node for adding effects -->
-      <!--  <mat-tree-node *cdkTreeNodeDef="let node; when: isAddEffectNode" cdkTreeNodeToggle>-->
-      <!--    {{node.label}}-->
-      <!--  </mat-tree-node>-->
-      <!-- This is the tree node template for leaf nodes -->
-      <!-- There is inline padding applied to this node using styles.
-        This padding value depends on the mat-icon-button width. -->
-      <cdk-nested-tree-node *cdkTreeNodeDef="let node"
-                            cdkTreeNodeToggle
-                            class="example-tree-node"
-                            [matTooltip]="node.tooltip">
-        <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
-        {{node.label}}
+          <div [class.tree-invisible]="!treeControl.isExpanded(node)" class="tree-children-container">
+            <ng-container cdkTreeNodeOutlet></ng-container>
+          </div>
+        </span>
       </cdk-nested-tree-node>
     </cdk-tree>
   </div> <!-- </automation-tree> -->
+
   <!-- node editor: individual node editing -->
   <div class="node-editor">
     todo
