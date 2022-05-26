@@ -17,7 +17,7 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
   @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 
-  treeControl = new NestedTreeControl<AutomationTreeNode>(node => node.children ?? []);
+  treeControl = new NestedTreeControl<AutomationTreeNode>(node => node.childrenSubject);
   dataSource = new MatTreeNestedDataSource<AutomationTreeNode>();
   nodeBuilder: AutomationTreeBuilder;
 
@@ -34,8 +34,6 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
   }
 
   refreshTree() {
-    // todo - might need to use a BehaviorSubject to keep refs the same
-    // or https://stackoverflow.com/questions/46330070/angular-4-how-to-watch-an-object-for-changes?
     this.dataSource.data = this.nodeBuilder?.effectsToNodes(this.automation);
     this.treeControl.dataNodes = this.dataSource.data;
   }

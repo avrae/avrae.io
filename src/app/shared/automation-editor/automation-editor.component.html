@@ -51,7 +51,7 @@ ok here's the rewrite
         </span>
         <!-- for AutomationAddEffectNode -->
         <span *ngIf="isAddEffectNode(node)">
-          <avr-new-effect-button [meta]="node.meta" (created)="changed.emit()"></avr-new-effect-button>
+          <avr-new-effect-button [meta]="node.meta" (created)="refreshTree(); changed.emit()"></avr-new-effect-button>
         </span>
         <!-- for nodes with children -->
         <span *ngIf="hasChild(node)">

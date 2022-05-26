@@ -30,7 +30,7 @@ function noAncestorOfType(type: string): (meta: NewEffectMeta) => boolean {
 interface EffectRule {
   id: string;
   rules: Array<(meta: NewEffectMeta) => boolean>;
-  label?: string;  // defaults to "Add ${utils.AUTOMATION_NODE_DEFS[id].label}"
+  label?: string;  // defaults to utils.AUTOMATION_NODE_DEFS[id].label
   group?: string;  // defaults to "Effects"
   icon?: string;  // defaults to utils.AUTOMATION_NODE_DEFS[id].icon
 }
