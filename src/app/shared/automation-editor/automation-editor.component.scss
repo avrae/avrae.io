@@ -10,13 +10,17 @@
   background: $gray-dark1;
   border-radius: 4px;
   min-height: 55vh;
+
+  > div {
+    max-height: calc(100vh - #{$navbar-height + $footer-height});
+    overflow: scroll;
+  }
 }
 
 // tree styles
 .automation-tree {
   border-right: 1px solid rgba($gray2, 0.3);
   padding: 6px;
-  overflow: auto;
 }
 
 .automation-tree-header {
@@ -59,3 +63,5 @@
   font-size: 16px;
   color: $gray2;
 }
+
+// editor styles
