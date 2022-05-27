@@ -1,4 +1,8 @@
 import {BehaviorSubject} from 'rxjs';
+import {AttackEffectComponent} from './effect-editor/attack-effect/attack-effect.component';
+import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.component';
+import {EffectComponent} from './effect-editor/shared/EffectComponent';
+import {TargetEffectComponent} from './effect-editor/target-effect/target-effect.component';
 import {AbilityCheck, Attack, AutomationEffect, Condition, IEffect, Save, Target} from './types';
 
 // ==== automation-editor ====
@@ -179,11 +183,14 @@ export class AutomationTreeBuilder {
   };
 }
 
-// ---- type => tree map ----
+// ==== helpful node constants ====
+type EffectComponentImpl = (new () => EffectComponent<any>);
+
 interface NodeDef {
   label?: string;
   icon?: string;
   tooltip?: string;
+  component?: EffectComponentImpl;
 }
 
 interface NodeDefRegistry {
@@ -194,15 +201,19 @@ interface NodeDefRegistry {
 export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   target: {
     label: 'Target',
+    component: TargetEffectComponent
   },
   attack: {
     label: 'Attack Roll',
+    component: AttackEffectComponent
   },
   save: {
     label: 'Saving Throw',
+    component: SaveEffectComponent
   },
   damage: {
     label: 'Damage'
+    // todo
   },
   temphp: {
     label: 'Temp HP'

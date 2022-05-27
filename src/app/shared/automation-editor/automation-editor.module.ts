@@ -9,7 +9,7 @@ import {AttackEffectComponent} from './effect-editor/attack-effect/attack-effect
 import {ConditionEffectComponent} from './effect-editor/condition-effect/condition-effect.component';
 import {CounterEffectComponent} from './effect-editor/counter-effect/counter-effect.component';
 import {DamageEffectComponent} from './effect-editor/damage-effect/damage-effect.component';
-import {EffectEditorComponent} from './effect-editor/effect-editor.component';
+import {EffectEditorComponent, EffectEditorDirective} from './effect-editor/effect-editor.component';
 import {HigherLevelComponent} from './effect-editor/higher-level/higher-level.component';
 import {IEffectEffectComponent} from './effect-editor/ieffect-effect/ieffect-effect.component';
 import {RollEffectComponent} from './effect-editor/roll-effect/roll-effect.component';
@@ -31,6 +31,7 @@ import {NewEffectButtonComponent} from './new-effect-button.component';
   ],
   declarations: [
     EffectEditorComponent,
+    EffectEditorDirective,
     AttackEffectComponent,
     DamageEffectComponent,
     IEffectEffectComponent,

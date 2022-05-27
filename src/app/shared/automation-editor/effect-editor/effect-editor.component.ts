@@ -1,8 +1,17 @@
 import {moveItemInArray} from '@angular/cdk/drag-drop';
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Directive, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {AutomationEffect} from '../types';
 import {Spell} from '../../../schemas/homebrew/Spells';
-import {AutomationEffectTreeNode} from '../utils';
+import {AUTOMATION_NODE_DEFS, AutomationEffectTreeNode} from '../utils';
+import {EffectComponent} from './shared/EffectComponent';
+
+@Directive({
+  selector: '[effectHost]',
+})
+export class EffectEditorDirective {
+  constructor(public viewContainerRef: ViewContainerRef) {
+  }
+}
 
 @Component({
   selector: 'avr-effect-editor',
@@ -13,6 +22,7 @@ export class EffectEditorComponent implements OnInit {
 
   @Input() effectNode: AutomationEffectTreeNode;
   @Output() changed = new EventEmitter();
+  @ViewChild(EffectEditorDirective, {static: true}) effectEditorDirective!: EffectEditorDirective;
 
   get effect(): AutomationEffect {
     return this.effectNode.effect;
@@ -22,6 +32,18 @@ export class EffectEditorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadComponent();
+  }
+
+  loadComponent() {
+    const componentT = AUTOMATION_NODE_DEFS[this.effectNode.effect.type]?.component;
+    // todo what if component not defined
+
+    const viewContainerRef = this.effectEditorDirective.viewContainerRef;
+    viewContainerRef.clear();
+
+    const componentRef = viewContainerRef.createComponent<EffectComponent<any>>(componentT);
+    componentRef.instance.effect = this.effectNode.effect;
   }
 
   // moveUp(effect) {

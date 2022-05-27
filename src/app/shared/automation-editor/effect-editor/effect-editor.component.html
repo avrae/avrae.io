@@ -1,70 +1,70 @@
 <!--suppress TypeScriptValidateTypes-->
 <!--TS does not like validating the subclass constraint on *effect*-->
-<div [ngSwitch]="effect.type">
-  <avr-target-effect *ngSwitchCase="'target'"
-                     [effect]="effect"
-                     (changed)="changed.emit()">
-  </avr-target-effect>
+<!--<div [ngSwitch]="effect.type">-->
+<!--  <avr-target-effect *ngSwitchCase="'target'"-->
+<!--                     [effect]="effect"-->
+<!--                     (changed)="changed.emit()">-->
+<!--  </avr-target-effect>-->
 
-  <avr-attack-effect *ngSwitchCase="'attack'"
-                     [effect]="effect"
-                     (changed)="changed.emit()">
-  </avr-attack-effect>
+<!--  <avr-attack-effect *ngSwitchCase="'attack'"-->
+<!--                     [effect]="effect"-->
+<!--                     (changed)="changed.emit()">-->
+<!--  </avr-attack-effect>-->
 
-  <avr-save-effect *ngSwitchCase="'save'"
-                   [effect]="effect"
-                   (changed)="changed.emit()">
-  </avr-save-effect>
+<!--  <avr-save-effect *ngSwitchCase="'save'"-->
+<!--                   [effect]="effect"-->
+<!--                   (changed)="changed.emit()">-->
+<!--  </avr-save-effect>-->
 
-  <avr-damage-effect *ngSwitchCase="'damage'"
-                     [effect]="effect"
-                     (changed)="changed.emit()">
-  </avr-damage-effect>
+<!--  <avr-damage-effect *ngSwitchCase="'damage'"-->
+<!--                     [effect]="effect"-->
+<!--                     (changed)="changed.emit()">-->
+<!--  </avr-damage-effect>-->
 
-  <avr-temphp-effect *ngSwitchCase="'temphp'"
-                     [effect]="effect"
-                     (changed)="changed.emit()">
-  </avr-temphp-effect>
+<!--  <avr-temphp-effect *ngSwitchCase="'temphp'"-->
+<!--                     [effect]="effect"-->
+<!--                     (changed)="changed.emit()">-->
+<!--  </avr-temphp-effect>-->
 
-  <avr-ieffect-effect *ngSwitchCase="'ieffect'"
-                      [effect]="effect"
-                      (changed)="changed.emit()">
-  </avr-ieffect-effect>
+<!--  <avr-ieffect-effect *ngSwitchCase="'ieffect'"-->
+<!--                      [effect]="effect"-->
+<!--                      (changed)="changed.emit()">-->
+<!--  </avr-ieffect-effect>-->
 
-  <avr-roll-effect *ngSwitchCase="'roll'"
-                   [effect]="effect"
-                   (changed)="changed.emit()">
-  </avr-roll-effect>
+<!--  <avr-roll-effect *ngSwitchCase="'roll'"-->
+<!--                   [effect]="effect"-->
+<!--                   (changed)="changed.emit()">-->
+<!--  </avr-roll-effect>-->
 
-  <avr-text-effect *ngSwitchCase="'text'"
-                   [effect]="effect"
-                   (changed)="changed.emit()">
-  </avr-text-effect>
+<!--  <avr-text-effect *ngSwitchCase="'text'"-->
+<!--                   [effect]="effect"-->
+<!--                   (changed)="changed.emit()">-->
+<!--  </avr-text-effect>-->
 
-  <avr-variable-effect *ngSwitchCase="'variable'"
-                       [effect]="effect"
-                       (changed)="changed.emit()">
-  </avr-variable-effect>
+<!--  <avr-variable-effect *ngSwitchCase="'variable'"-->
+<!--                       [effect]="effect"-->
+<!--                       (changed)="changed.emit()">-->
+<!--  </avr-variable-effect>-->
 
-  <avr-condition-effect *ngSwitchCase="'condition'"
-                        [effect]="effect"
-                        (changed)="changed.emit()">
-  </avr-condition-effect>
+<!--  <avr-condition-effect *ngSwitchCase="'condition'"-->
+<!--                        [effect]="effect"-->
+<!--                        (changed)="changed.emit()">-->
+<!--  </avr-condition-effect>-->
 
-  <avr-counter-effect *ngSwitchCase="'counter'"
-                      [effect]="effect"
-                      (changed)="changed.emit()">
-  </avr-counter-effect>
+<!--  <avr-counter-effect *ngSwitchCase="'counter'"-->
+<!--                      [effect]="effect"-->
+<!--                      (changed)="changed.emit()">-->
+<!--  </avr-counter-effect>-->
 
-  <avr-spell-effect *ngSwitchCase="'spell'"
-                    [effect]="effect"
-                    (changed)="changed.emit()">
-  </avr-spell-effect>
+<!--  <avr-spell-effect *ngSwitchCase="'spell'"-->
+<!--                    [effect]="effect"-->
+<!--                    (changed)="changed.emit()">-->
+<!--  </avr-spell-effect>-->
 
-  <div *ngSwitchDefault>
-    This effect (of type {{effect.type}}) is not yet supported in the automation editor.
-  </div>
-</div>
+<!--  <div *ngSwitchDefault>-->
+<!--    This effect (of type {{effect.type}}) is not yet supported in the automation editor.-->
+<!--  </div>-->
+<!--</div>-->
 
 <!-- ACTION BUTTONS -->
 <!--<div class="actions" fxLayout="row">-->
@@ -85,3 +85,6 @@
 <!--    </button>-->
 <!--  </span>-->
 <!--</div>-->
+
+<ng-template effectHost>
+</ng-template>
