@@ -29,15 +29,10 @@ import {EffectComponent} from '../shared/EffectComponent';
           On True
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.onTrue"
-                         [parentTypeStack]="newParentTypeStack"
-                         [spell]="spell"
-                         (changed)="changed.emit()"></avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta"
-                           [parent]="effect.onTrue"
-                           [parentTypeStack]="newParentTypeStack"
-                           (changed)="changed.emit()">
-      </avr-new-effect-card>
+      <!--<avr-effect-editor [parent]="effect.onTrue"-->
+      <!--                   [parentTypeStack]="newParentTypeStack"-->
+      <!--                   [spell]="spell"-->
+      <!--                   (changed)="changed.emit()"></avr-effect-editor>-->
     </mat-expansion-panel>
 
     <mat-expansion-panel class="hoverable">
@@ -46,16 +41,11 @@ import {EffectComponent} from '../shared/EffectComponent';
           On False
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.onFalse"
-                         [parentTypeStack]="newParentTypeStack"
-                         [spell]="spell"
-                         (changed)="changed.emit()">
-      </avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta"
-                           [parent]="effect.onFalse"
-                           [parentTypeStack]="newParentTypeStack"
-                           (changed)="changed.emit()">
-      </avr-new-effect-card>
+      <!--<avr-effect-editor [parent]="effect.onFalse"-->
+      <!--                   [parentTypeStack]="newParentTypeStack"-->
+      <!--                   [spell]="spell"-->
+      <!--                   (changed)="changed.emit()">-->
+      <!--</avr-effect-editor>-->
     </mat-expansion-panel>
   `,
   styleUrls: ['../effect-editor.component.css']

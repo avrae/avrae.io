@@ -38,17 +38,11 @@ type TargetSortType = 'user' | 'hp_asc' | 'hp_desc';
       </mat-form-field>
     </div>
 
-    <avr-effect-editor [parent]="effect.effects"
-                       [parentTypeStack]="newParentTypeStack"
-                       [spell]="spell"
-                       (changed)="changed.emit()">
-    </avr-effect-editor>
-
-    <avr-new-effect-card [metaParent]="effect.meta"
-                         [parent]="effect.effects"
-                         [parentTypeStack]="newParentTypeStack"
-                         (changed)="changed.emit()">
-    </avr-new-effect-card>
+    <!--<avr-effect-editor [parent]="effect.effects"-->
+    <!--                   [parentTypeStack]="newParentTypeStack"-->
+    <!--                   [spell]="spell"-->
+    <!--                   (changed)="changed.emit()">-->
+    <!--</avr-effect-editor>-->
   `,
   styleUrls: ['../effect-editor.component.css']
 })

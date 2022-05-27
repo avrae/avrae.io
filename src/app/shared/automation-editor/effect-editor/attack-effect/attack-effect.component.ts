@@ -25,7 +25,9 @@ import {EffectComponent} from '../shared/EffectComponent';
         </mat-select>
       </mat-form-field>
       <mat-form-field *ngIf="advantage === 'custom'">
-        <input matInput [(ngModel)]="customadvantage" placeholder="Custom Advantage" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.adv" matTooltip="0 for Flat\n1 for Advantage\n2 for Elven Accuracy\n-1 for Disadvantage" [matTooltipClass]="'adv-tooltip'">
+        <input matInput [(ngModel)]="customadvantage" placeholder="Custom Advantage" class="text-monospace" (change)="changed.emit()"
+               [(ngModel)]="effect.adv" matTooltip="0 for Flat\n1 for Advantage\n2 for Elven Accuracy\n-1 for Disadvantage"
+               [matTooltipClass]="'adv-tooltip'">
         <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate</mat-icon>
       </mat-form-field>
     </div>
@@ -35,16 +37,11 @@ import {EffectComponent} from '../shared/EffectComponent';
           On Hit
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.hit"
-                         [parentTypeStack]="newParentTypeStack"
-                         [spell]="spell"
-                         (changed)="changed.emit()">
-      </avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta"
-                           [parent]="effect.hit"
-                           [parentTypeStack]="newParentTypeStack"
-                           (changed)="changed.emit()">
-      </avr-new-effect-card>
+      <!--<avr-effect-editor [parent]="effect.hit"-->
+      <!--                   [parentTypeStack]="newParentTypeStack"-->
+      <!--                   [spell]="spell"-->
+      <!--                   (changed)="changed.emit()">-->
+      <!--</avr-effect-editor>-->
     </mat-expansion-panel>
     <mat-expansion-panel class="hoverable">
       <mat-expansion-panel-header>
@@ -52,16 +49,11 @@ import {EffectComponent} from '../shared/EffectComponent';
           On Miss
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.miss"
-                         [parentTypeStack]="newParentTypeStack"
-                         [spell]="spell"
-                         (changed)="changed.emit()">
-      </avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta"
-                           [parent]="effect.miss"
-                           [parentTypeStack]="newParentTypeStack"
-                           (changed)="changed.emit()">
-      </avr-new-effect-card>
+      <!--<avr-effect-editor [parent]="effect.miss"-->
+      <!--                   [parentTypeStack]="newParentTypeStack"-->
+      <!--                   [spell]="spell"-->
+      <!--                   (changed)="changed.emit()">-->
+      <!--</avr-effect-editor>-->
     </mat-expansion-panel>
   `,
   styleUrls: ['../effect-editor.component.css']
@@ -69,7 +61,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 export class AttackEffectComponent extends EffectComponent<Attack> implements OnInit {
   custom = false;
   advantage = '0';
-  customadvantage = ""
+  customadvantage = '';
 
   constructor() {
     super();
@@ -79,11 +71,11 @@ export class AttackEffectComponent extends EffectComponent<Attack> implements On
     if (this.effect.attackBonus || this.spell == null) {
       this.custom = true;
     }
-    if (!["-1", "0", "1", "2"].includes(this.effect.adv)) {
-      this.advantage = 'custom'
-      this.customadvantage = this.effect.adv
+    if (!['-1', '0', '1', '2'].includes(this.effect.adv)) {
+      this.advantage = 'custom';
+      this.customadvantage = this.effect.adv;
     } else {
-      this.advantage = this.effect.adv
+      this.advantage = this.effect.adv;
     }
   }
 

@@ -3,9 +3,8 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {Spell} from '../../schemas/homebrew/Spells';
 import {AutomationEffect} from './types';
-import {AutomationEffectTreeNode, AutomationTreeBuilder, AutomationTreeNode} from './utils';
+import {AutomationAddEffectNode, AutomationEffectTreeNode, AutomationTreeBuilder, AutomationTreeNode} from './utils';
 
-// ==== component ====
 @Component({
   selector: 'avr-automation-editor',
   templateUrl: './automation-editor.component.html',
@@ -17,9 +16,13 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
   @Input() spell: Spell;
   @Output() changed = new EventEmitter();
 
+  // tree
   treeControl = new NestedTreeControl<AutomationTreeNode>(node => node.childrenSubject);
   dataSource = new MatTreeNestedDataSource<AutomationTreeNode>();
   nodeBuilder: AutomationTreeBuilder;
+
+  // node editor
+  selectedEffectNode: AutomationEffectTreeNode;
 
   constructor() {
   }
@@ -39,6 +42,11 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
   }
 
   hasChild = (node: AutomationTreeNode) => !!node.children && node.children.length > 0;
-  isEffectNode = (node: AutomationTreeNode) => 'effect' in node && !!(node as AutomationEffectTreeNode).effect;
-  isAddEffectNode = (node: AutomationTreeNode) => 'meta' in node;
+  isEffectNode = (node: AutomationTreeNode) => node instanceof AutomationEffectTreeNode;
+  isAddEffectNode = (node: AutomationTreeNode) => node instanceof AutomationAddEffectNode;
+
+  // tree actions
+  beginEditEffectNode(node: AutomationEffectTreeNode) {
+    this.selectedEffectNode = node;
+  }
 }

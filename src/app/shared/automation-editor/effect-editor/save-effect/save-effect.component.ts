@@ -32,16 +32,11 @@ import {EffectComponent} from '../shared/EffectComponent';
           On Fail
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.fail"
-                         [parentTypeStack]="newParentTypeStack"
-                         [spell]="spell"
-                         (changed)="changed.emit()">
-      </avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta"
-                           [parent]="effect.fail"
-                           [parentTypeStack]="newParentTypeStack"
-                           (changed)="changed.emit()">
-      </avr-new-effect-card>
+      <!--<avr-effect-editor [parent]="effect.fail"-->
+      <!--                   [parentTypeStack]="newParentTypeStack"-->
+      <!--                   [spell]="spell"-->
+      <!--                   (changed)="changed.emit()">-->
+      <!--</avr-effect-editor>-->
     </mat-expansion-panel>
     <mat-expansion-panel class="hoverable">
       <mat-expansion-panel-header>
@@ -49,16 +44,11 @@ import {EffectComponent} from '../shared/EffectComponent';
           On Success
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <avr-effect-editor [parent]="effect.success"
-                         [parentTypeStack]="newParentTypeStack"
-                         [spell]="spell"
-                         (changed)="changed.emit()">
-      </avr-effect-editor>
-      <avr-new-effect-card [metaParent]="effect.meta"
-                           [parent]="effect.success"
-                           [parentTypeStack]="newParentTypeStack"
-                           (changed)="changed.emit()">
-      </avr-new-effect-card>
+      <!--<avr-effect-editor [parent]="effect.success"-->
+      <!--                   [parentTypeStack]="newParentTypeStack"-->
+      <!--                   [spell]="spell"-->
+      <!--                   (changed)="changed.emit()">-->
+      <!--</avr-effect-editor>-->
     </mat-expansion-panel>
   `,
   styleUrls: ['../effect-editor.component.css']

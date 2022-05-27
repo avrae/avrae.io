@@ -47,6 +47,11 @@
   margin-top: 4px;
 }
 
+.tree-node-active {
+  background: rgba($blurple, 0.2);
+  border-radius: 2px;
+}
+
 .tree-children-container {
   padding-left: 12px;
   border-left: 1px solid $gray2;
@@ -65,3 +70,6 @@
 }
 
 // editor styles
+.node-editor {
+  padding: 6px;
+}
