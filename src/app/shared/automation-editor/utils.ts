@@ -270,6 +270,7 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   },
   check: {
     label: 'Ability Check',
+    // todo
   }
 };
 

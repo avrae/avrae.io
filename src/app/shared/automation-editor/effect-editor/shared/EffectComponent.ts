@@ -1,15 +1,20 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {AutomationEffect} from '../../types';
 import {Spell} from '../../../../schemas/homebrew/Spells';
+import {AutomationEffect} from '../../types';
+import {AutomationEffectTreeNode} from '../../utils';
 
 @Component({template: ''})
 export abstract class EffectComponent<T extends AutomationEffect> {
-  @Input() effect: T;
-  @Input() parentTypeStack: string[];
+  @Input() effectNode: AutomationEffectTreeNode;
   @Input() spell: Spell;
+
   @Output() changed = new EventEmitter();
 
-  get newParentTypeStack(): string[] {
-    return [...this.parentTypeStack, this.effect.type];
+  get effect(): T {
+    return this.effectNode.effect as T;
+  }
+
+  get isIEffect(): boolean {
+    return this.effectNode.ancestors.some(effect => effect.type === 'ieffect2');
   }
 }

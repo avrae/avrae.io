@@ -11,7 +11,6 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {AutomationEffect} from '../types';
 import {Spell} from '../../../schemas/homebrew/Spells';
 import {AUTOMATION_NODE_DEFS, AutomationEffectTreeNode} from '../utils';
 import {EffectComponent} from './shared/EffectComponent';
@@ -56,6 +55,8 @@ export class EffectEditorDirective {
 export class EffectEditorComponent implements OnInit, OnChanges {
 
   @Input() effectNode: AutomationEffectTreeNode;
+  @Input() spell: Spell;
+
   @Output() changed = new EventEmitter();
   @Output() treeChanged = new EventEmitter();
   @Output() deleted = new EventEmitter();
@@ -90,7 +91,8 @@ export class EffectEditorComponent implements OnInit, OnChanges {
     viewContainerRef.clear();
 
     const componentRef = viewContainerRef.createComponent<EffectComponent<any>>(componentT);
-    componentRef.instance.effect = this.effectNode.effect;
+    componentRef.instance.effectNode = this.effectNode;
+    componentRef.instance.spell = this.spell;
     componentRef.instance.changed.subscribe(() => {
       this.changed.emit();
     });
