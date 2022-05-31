@@ -1,5 +1,16 @@
 import {moveItemInArray} from '@angular/cdk/drag-drop';
-import {Component, Directive, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  Directive,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {AutomationEffect} from '../types';
 import {Spell} from '../../../schemas/homebrew/Spells';
 import {AUTOMATION_NODE_DEFS, AutomationEffectTreeNode} from '../utils';
@@ -15,23 +26,53 @@ export class EffectEditorDirective {
 
 @Component({
   selector: 'avr-effect-editor',
-  templateUrl: './effect-editor.component.html',
-  styleUrls: ['./effect-editor.component.css']
+  template: `
+    <div class="editor-header">
+      <span class="editor-header-text">{{effectNode.label}}</span>
+      <span class="toolbar-spacer"></span>
+      <span>
+          <button mat-icon-button matTooltip="Move Up" *ngIf="!isFirst" (click)="moveUp()">
+            <mat-icon aria-label="Move Up">arrow_upward</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Move Down" *ngIf="!isLast" (click)="moveDown()">
+            <mat-icon aria-label="Move Down">arrow_downward</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="delete()">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+      </span>
+    </div>
+
+    <ng-template effectHost></ng-template>
+  `,
+  styleUrls: ['./effect-editor.component.css', '../shared.scss']
 })
-export class EffectEditorComponent implements OnInit {
+export class EffectEditorComponent implements OnInit, OnChanges {
 
   @Input() effectNode: AutomationEffectTreeNode;
   @Output() changed = new EventEmitter();
+  @Output() treeChanged = new EventEmitter();
+  @Output() deleted = new EventEmitter();
   @ViewChild(EffectEditorDirective, {static: true}) effectEditorDirective!: EffectEditorDirective;
 
-  get effect(): AutomationEffect {
-    return this.effectNode.effect;
+  deleteState = 0;  // tracks 2-click on the delete button
+
+  get isFirst(): boolean {
+    return this.effectNode.parentArray.indexOf(this.effectNode.effect) === 0;
+  }
+
+  get isLast(): boolean {
+    return this.effectNode.parentArray.indexOf(this.effectNode.effect) === this.effectNode.parentArray.length - 1;
   }
 
   constructor() {
   }
 
   ngOnInit() {
+    this.loadComponent();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     this.loadComponent();
   }
 
@@ -44,32 +85,41 @@ export class EffectEditorComponent implements OnInit {
 
     const componentRef = viewContainerRef.createComponent<EffectComponent<any>>(componentT);
     componentRef.instance.effect = this.effectNode.effect;
+    componentRef.instance.changed.subscribe(() => {
+      this.changed.emit();
+    });
   }
 
-  // moveUp(effect) {
-  //   const index = this.parent.indexOf(effect);
-  //   const newIndex = index - 1;
-  //   if (newIndex > -1) {
-  //     moveItemInArray(this.parent, index, newIndex);
-  //     this.changed.emit();
-  //   }
-  // }
-  //
-  // moveDown(effect) {
-  //   const index = this.parent.indexOf(effect);
-  //   const newIndex = index + 1;
-  //   if (newIndex < this.parent.length) {
-  //     moveItemInArray(this.parent, index, newIndex);
-  //     this.changed.emit();
-  //   }
-  // }
-  //
-  // delete(effect) {
-  //   const index = this.parent.indexOf(effect);
-  //   if (index > -1) {
-  //     this.parent.splice(index, 1);
-  //     this.changed.emit();
-  //   }
-  // }
+  moveUp() {
+    const index = this.effectNode.parentArray.indexOf(this.effectNode.effect);
+    const newIndex = index - 1;
+    if (newIndex > -1) {
+      moveItemInArray(this.effectNode.parentArray, index, newIndex);
+      this.changed.emit();
+      this.treeChanged.emit();
+    }
+  }
 
+  moveDown() {
+    const index = this.effectNode.parentArray.indexOf(this.effectNode.effect);
+    const newIndex = index + 1;
+    if (newIndex < this.effectNode.parentArray.length) {
+      moveItemInArray(this.effectNode.parentArray, index, newIndex);
+      this.changed.emit();
+      this.treeChanged.emit();
+    }
+  }
+
+  delete() {
+    this.deleteState++;
+    if (this.deleteState === 2) {  // only delete on the 2nd click
+      const index = this.effectNode.parentArray.indexOf(this.effectNode.effect);
+      if (index > -1) {
+        this.effectNode.parentArray.splice(index, 1);
+        this.changed.emit();
+        this.treeChanged.emit();
+        this.deleted.emit();
+      }
+    }
+  }
 }

@@ -1,8 +1,17 @@
 import {BehaviorSubject} from 'rxjs';
 import {AttackEffectComponent} from './effect-editor/attack-effect/attack-effect.component';
+import {ConditionEffectComponent} from './effect-editor/condition-effect/condition-effect.component';
+import {CounterEffectComponent} from './effect-editor/counter-effect/counter-effect.component';
+import {DamageEffectComponent} from './effect-editor/damage-effect/damage-effect.component';
+import {IEffectEffectComponent} from './effect-editor/ieffect-effect/ieffect-effect.component';
+import {RollEffectComponent} from './effect-editor/roll-effect/roll-effect.component';
 import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.component';
 import {EffectComponent} from './effect-editor/shared/EffectComponent';
+import {SpellEffectComponent} from './effect-editor/spell-effect/spell-effect.component';
 import {TargetEffectComponent} from './effect-editor/target-effect/target-effect.component';
+import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
+import {TextEffectComponent} from './effect-editor/text-effect/text-effect.component';
+import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
 import {AbilityCheck, Attack, AutomationEffect, Condition, IEffect, Save, Target} from './types';
 
 // ==== automation-editor ====
@@ -34,11 +43,13 @@ export class AutomationTreeNode {
 
 export class AutomationEffectTreeNode extends AutomationTreeNode {
   effect: AutomationEffect;
+  parentArray: AutomationEffect[];
   ancestors: AutomationEffect[];  // root -> direct parent list of ancestor effects
 
-  constructor(effect: AutomationEffect, ancestors: AutomationEffect[], label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
+  constructor(effect: AutomationEffect, parentArray: AutomationEffect[], ancestors: AutomationEffect[], label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
     super(label, icon, tooltip, children);
     this.effect = effect;
+    this.parentArray = parentArray;
     this.ancestors = ancestors;
   }
 }
@@ -67,7 +78,7 @@ export class AutomationTreeBuilder {
     let out: AutomationTreeNode[] = [];
 
     for (const effect of effects) {
-      out.push(this.effectToNode(effect));
+      out.push(this.effectToNode(effect, effects));
     }
 
     // add node to add additional effects to the given effect array
@@ -84,7 +95,7 @@ export class AutomationTreeBuilder {
     return out;
   }
 
-  public effectToNode(effect: AutomationEffect): AutomationEffectTreeNode {
+  public effectToNode(effect: AutomationEffect, parentArray: AutomationEffect[]): AutomationEffectTreeNode {
     const existing = this.treeNodeMap.get(effect);
 
     // find the def for the effect
@@ -95,6 +106,7 @@ export class AutomationTreeBuilder {
     if (nodeDef === undefined) {
       result = new AutomationEffectTreeNode(
         effect,
+        parentArray,
         this.ancestors,
         'Unknown Node',
         'help_outline',
@@ -109,6 +121,7 @@ export class AutomationTreeBuilder {
 
       result = new AutomationEffectTreeNode(
         effect,
+        parentArray,
         this.ancestors,
         nodeDef.label || effect.type,
         nodeDef.icon,
@@ -184,7 +197,7 @@ export class AutomationTreeBuilder {
 }
 
 // ==== helpful node constants ====
-type EffectComponentImpl = (new () => EffectComponent<any>);
+type EffectComponentImpl = (new (..._) => EffectComponent<any>);
 
 interface NodeDef {
   label?: string;
@@ -212,14 +225,16 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
     component: SaveEffectComponent
   },
   damage: {
-    label: 'Damage'
-    // todo
+    label: 'Damage',
+    component: DamageEffectComponent
   },
   temphp: {
-    label: 'Temp HP'
+    label: 'Temp HP',
+    component: TempHPEffectComponent
   },
   ieffect: {
-    label: 'Initiative Effect (Legacy)'
+    label: 'Initiative Effect (Legacy)',
+    component: IEffectEffectComponent
   },
   ieffect2: {
     label: 'Initiative Effect',
@@ -229,23 +244,29 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
     label: 'Remove Initiative Effect'
   },
   roll: {
-    label: 'Roll'
+    label: 'Roll',
+    component: RollEffectComponent
   },
   text: {
     label: 'Text',
-    icon: 'chat'
+    icon: 'chat',
+    component: TextEffectComponent
   },
   variable: {
-    label: 'Set Variable'
+    label: 'Set Variable',
+    component: VariableEffectComponent
   },
   condition: {
     label: 'Branch',
+    component: ConditionEffectComponent
   },
   counter: {
-    label: 'Use Counter'
+    label: 'Use Counter',
+    component: CounterEffectComponent
   },
   spell: {
-    label: 'Cast Spell'
+    label: 'Cast Spell',
+    component: SpellEffectComponent
   },
   check: {
     label: 'Ability Check',

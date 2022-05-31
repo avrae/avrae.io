@@ -29,6 +29,7 @@ export class AutomationEditorDevComponent implements OnInit {
   }
 
   saveLocalAutomation(): void {
+    console.log("Saving local automation on change...");
     localStorage.setItem('dev-automation-editor', JSON.stringify(this.localSavedAutomation));
   }
 

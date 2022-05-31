@@ -23,21 +23,6 @@
   padding: 6px;
 }
 
-.automation-tree-header {
-  display: flex;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba($gray2, 0.3);
-
-  .automation-tree-header-text {
-    font-weight: bold;
-    margin-right: 8px;
-  }
-
-  .toolbar-spacer {
-    flex: 1 1 auto;
-  }
-}
-
 .tree-invisible {
   display: none;
 }

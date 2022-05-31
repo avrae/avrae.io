@@ -8,7 +8,7 @@ import {AutomationAddEffectNode, AutomationEffectTreeNode, AutomationTreeBuilder
 @Component({
   selector: 'avr-automation-editor',
   templateUrl: './automation-editor.component.html',
-  styleUrls: ['./automation-editor.component.scss']
+  styleUrls: ['./automation-editor.component.scss', './shared.scss']
 })
 export class AutomationEditorComponent implements OnInit, OnChanges {
 

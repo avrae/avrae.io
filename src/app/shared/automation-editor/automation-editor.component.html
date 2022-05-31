@@ -1,8 +1,8 @@
 <div class="editor-container ignore-theme">
   <!-- automation tree: easy to scroll through list of effects -->
   <div class="automation-tree">
-    <div class="automation-tree-header">
-      <span class="automation-tree-header-text">Effect Tree</span>
+    <div class="editor-header">
+      <span class="editor-header-text">Effect Tree</span>
       <span class="toolbar-spacer"></span>
       <span>
         <button mat-icon-button matTooltip="Expand All" (click)="treeControl.expandAll()">
@@ -56,10 +56,17 @@
   <!-- node editor: individual node editing -->
   <div class="node-editor">
     <div *ngIf="!selectedEffectNode">
-      No node selected.
+      <div class="editor-header">
+        <span class="editor-header-text">Node Editor</span>
+      </div>
+      No node selected. Select an automation effect node from the Effect Tree to edit it!
     </div>
     <div *ngIf="selectedEffectNode">
-      <avr-effect-editor [effectNode]="selectedEffectNode"></avr-effect-editor>
+      <avr-effect-editor [effectNode]="selectedEffectNode"
+                         (changed)="changed.emit()"
+                         (treeChanged)="refreshTree()"
+                         (deleted)="selectedEffectNode = null">
+      </avr-effect-editor>
     </div>
   </div> <!-- </node-editor> -->
 </div>
