@@ -22,6 +22,7 @@ import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect
 import {TextEffectComponent} from './effect-editor/text-effect/text-effect.component';
 import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
 import {NewEffectButtonComponent} from './new-effect-button.component';
+import { UnknownEffectComponent } from './effect-editor/unknown-effect/unknown-effect.component';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import {NewEffectButtonComponent} from './new-effect-button.component';
     SpellEffectComponent,
     NewEffectButtonComponent,
     AutodocLinkComponent,
+    UnknownEffectComponent,
   ],
   exports: [AutomationEditorComponent]
 })

@@ -9,6 +9,8 @@ export abstract class EffectComponent<T extends AutomationEffect> {
   @Input() spell: Spell;
 
   @Output() changed = new EventEmitter();
+  @Output() treeChanged = new EventEmitter();
+  @Output() deleted = new EventEmitter();
 
   get effect(): T {
     return this.effectNode.effect as T;

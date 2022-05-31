@@ -14,6 +14,7 @@ import {
 import {Spell} from '../../../schemas/homebrew/Spells';
 import {AUTOMATION_NODE_DEFS, AutomationEffectTreeNode} from '../utils';
 import {EffectComponent} from './shared/EffectComponent';
+import {UnknownEffectComponent} from './unknown-effect/unknown-effect.component';
 
 @Directive({
   selector: '[effectHost]',
@@ -84,8 +85,7 @@ export class EffectEditorComponent implements OnInit, OnChanges {
   }
 
   loadComponent() {
-    const componentT = AUTOMATION_NODE_DEFS[this.effectNode.effect.type]?.component;
-    // todo what if component not defined
+    const componentT = AUTOMATION_NODE_DEFS[this.effectNode.effect.type]?.component ?? UnknownEffectComponent;
 
     const viewContainerRef = this.effectEditorDirective.viewContainerRef;
     viewContainerRef.clear();
@@ -95,6 +95,12 @@ export class EffectEditorComponent implements OnInit, OnChanges {
     componentRef.instance.spell = this.spell;
     componentRef.instance.changed.subscribe(() => {
       this.changed.emit();
+    });
+    componentRef.instance.treeChanged.subscribe(() => {
+      this.treeChanged.emit();
+    });
+    componentRef.instance.deleted.subscribe(() => {
+      this.deleted.emit();
     });
   }
 
