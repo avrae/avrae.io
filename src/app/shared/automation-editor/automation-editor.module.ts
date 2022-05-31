@@ -15,6 +15,7 @@ import {HigherLevelComponent} from './effect-editor/higher-level/higher-level.co
 import {IEffectEffectComponent} from './effect-editor/ieffect-effect/ieffect-effect.component';
 import {RollEffectComponent} from './effect-editor/roll-effect/roll-effect.component';
 import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.component';
+import {AutodocLinkComponent} from './effect-editor/shared/autodoc-link.component';
 import {SpellEffectComponent} from './effect-editor/spell-effect/spell-effect.component';
 import {TargetEffectComponent} from './effect-editor/target-effect/target-effect.component';
 import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
@@ -49,6 +50,7 @@ import {NewEffectButtonComponent} from './new-effect-button.component';
     CounterEffectComponent,
     SpellEffectComponent,
     NewEffectButtonComponent,
+    AutodocLinkComponent,
   ],
   exports: [AutomationEditorComponent]
 })

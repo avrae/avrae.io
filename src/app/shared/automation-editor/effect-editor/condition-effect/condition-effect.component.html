@@ -1,0 +1,30 @@
+<p>
+  A Branch effect runs certain effects if a certain condition is met, or other effects otherwise.
+  AKA "condition" or "if-else".
+  <avr-autodoc-link anchor="condition-branch"></avr-autodoc-link>
+</p>
+
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+  <mat-form-field>
+    <input matInput placeholder="Condition" class="text-monospace" (change)="changed.emit()"
+           [(ngModel)]="effect.condition" required>
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+      calculate
+    </mat-icon>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Error Behaviour</mat-label>
+    <mat-select [(value)]="effect.errorBehaviour" (selectionChange)="changed.emit()">
+      <mat-option value="true">Treat as True</mat-option>
+      <mat-option value="false">Treat as False</mat-option>
+      <mat-option value="both">Run Both</mat-option>
+      <mat-option value="neither">Skip Effect</mat-option>
+      <mat-option value="raise">Stop Execution</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<p>
+  Use the Effect Tree to edit the on-true and on-false effects!
+</p>

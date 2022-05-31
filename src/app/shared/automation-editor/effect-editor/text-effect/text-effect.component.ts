@@ -13,57 +13,8 @@ const TEXT_TYPE_HELPS = {
 
 @Component({
   selector: 'avr-text-effect',
-  template: `
-    <div>
-      <mat-form-field>
-        <mat-label>Text Type</mat-label>
-        <mat-select [(value)]="textType" (selectionChange)="changed.emit(); onTextTypeChange()">
-          <mat-option value="text">
-            Text
-          </mat-option>
-          <mat-option value="ref">
-            Ability Reference
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <span>
-        <mat-icon aria-hidden="false" aria-label="Text type help" inline
-                  [matTooltip]="TEXT_TYPE_HELPS[textType]">
-          help
-        </mat-icon>
-      </span>
-    </div>
-
-    <div *ngIf="textType === 'text'">
-      <mat-form-field class="wide">
-        <textarea matInput placeholder="Description" rows="5" (change)="changed.emit()"
-                  [(ngModel)]="effect.text"></textarea>
-        <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
-      </mat-form-field>
-    </div>
-
-    <div *ngIf="textType === 'ref'">
-      <mat-form-field>
-        <mat-label>Referenced Ability</mat-label>
-        <mat-select [value]="selectedAbilityRef" (selectionChange)="onRefSelectionChange($event)">
-          <mat-option>
-            <!--suppress TypeScriptValidateTypes -->
-            <ngx-mat-select-search placeholderLabel="Search"
-                                   noEntriesFoundLabel="No matches found."
-                                   ngModel (ngModelChange)="debouncedUpdateSearchFilteredGroupedRefs($event)">
-            </ngx-mat-select-search>
-          </mat-option>
-          <mat-optgroup *ngFor="let tup of searchFilteredGroupedRefs" [label]="tup[0]">
-            <mat-option *ngFor="let abilityRef of tup[1]" [value]="abilityRef">
-              {{abilityRef.name}}
-            </mat-option>
-          </mat-optgroup>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  `,
-  styleUrls: ['../effect-editor.component.css']
+  templateUrl: './text-effect.component.html',
+  styleUrls: ['../shared.css']
 })
 export class TextEffectComponent extends EffectComponent<Text> implements OnInit {
   TEXT_TYPE_HELPS = TEXT_TYPE_HELPS;
