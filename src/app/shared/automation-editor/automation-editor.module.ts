@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FlexModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
+import {NgClickOutsideModule} from 'ng-click-outside2';
 import {MaterialModule} from '../../material/material.module';
 import {AutomationEditorComponent} from './automation-editor.component';
 import {AttackEffectComponent} from './effect-editor/attack-effect/attack-effect.component';
@@ -27,7 +28,8 @@ import {NewEffectButtonComponent} from './new-effect-button.component';
     MaterialModule,
     FormsModule,
     FlexModule,
-    CdkTreeModule
+    CdkTreeModule,
+    NgClickOutsideModule
   ],
   declarations: [
     EffectEditorComponent,

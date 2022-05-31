@@ -16,6 +16,7 @@ import {AppComponent} from './app.component';
 import {CheatsheetsModule} from './cheatsheets/cheatsheets.module';
 import {CommandDisplayComponent} from './commands/command-display/command-display.component';
 import {CommandsComponent} from './commands/commands.component';
+import {CommunityLinksComponent} from './community-links/community-links.component';
 import {ErrorComponent} from './error/error.component';
 import {FooterComponent} from './footer/footer.component';
 import {FeatureBoxComponent} from './home/feature-box/feature-box.component';
@@ -30,7 +31,6 @@ import {DiscordEmbedModule} from './shared/discord-embed/discord-embed.module';
 import {registerDraconicLanguage} from './shared/monacoDraconic';
 import {ValidationSnackbar} from './shared/validation-snackbar/validation-snackbar.component';
 import {ThemesModule} from './themes/themes.module';
-import {CommunityLinksComponent} from './community-links/community-links.component';
 
 Sentry.init({dsn: 'https://af2b06560981446bb55f64b6f79fd520@sentry.io/1486249'});
 
