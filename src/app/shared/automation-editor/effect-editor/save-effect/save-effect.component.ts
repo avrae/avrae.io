@@ -10,6 +10,13 @@ import {EffectComponent} from '../shared/EffectComponent';
 export class SaveEffectComponent extends EffectComponent<Save> implements OnInit {
   custom = false;
 
+  get advantageWrapper(): -1 | 0 | 1 {
+    return this.effect.adv ?? 0;
+  }
+  set advantageWrapper(value) {
+    this.effect.adv = value || undefined;
+  }
+
   constructor() {
     super();
   }
