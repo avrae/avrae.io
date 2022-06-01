@@ -29,7 +29,7 @@
     "@angular/platform-browser": "^13.2.2",
     "@angular/platform-browser-dynamic": "^13.2.2",
     "@angular/platform-server": "^13.2.2",
-    "@angular/router": "^13.2.2",
+    "@angular/router": "^13.3.11",
     "@auth0/angular-jwt": "^5.0.2",
     "@nguniversal/express-engine": "^13.0.2",
     "@sentry/browser": "^6.18.1",
