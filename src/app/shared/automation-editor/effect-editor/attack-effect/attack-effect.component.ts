@@ -21,11 +21,11 @@ export class AttackEffectComponent extends EffectComponent<Attack> implements On
     if (this.effect.attackBonus || this.spell == null) {
       this.custom = true;
     }
-    if (!['-1', '0', '1', '2'].includes(this.effect.adv)) {
+    if (this.effect.adv && !['-1', '0', '1', '2'].includes(this.effect.adv)) {
       this.advantage = 'custom';
       this.customadvantage = this.effect.adv;
     } else {
-      this.advantage = this.effect.adv;
+      this.advantage = this.effect.adv || '0';
     }
   }
 
@@ -45,4 +45,7 @@ export class AttackEffectComponent extends EffectComponent<Attack> implements On
     this.changed.emit();
   }
 
+  onCustomAdvantageChange() {
+    this.effect.adv = this.customadvantage;
+  }
 }
