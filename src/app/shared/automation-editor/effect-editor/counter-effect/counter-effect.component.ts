@@ -9,7 +9,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-counter-effect',
   templateUrl: './counter-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class CounterEffectComponent extends EffectComponent<UseCounter> implements OnInit {
   counterType: 'counter' | 'slot' | 'ability';
@@ -18,6 +18,22 @@ export class CounterEffectComponent extends EffectComponent<UseCounter> implemen
   limitedUse: LimitedUse[] = [];
   selectedLimitedUse: LimitedUse;
   searchFilteredGroupedLimitedUse: [string, LimitedUse[]][] = [];
+
+  // error behaviour - defaults to warn on undefined
+  get errorBehaviourWrapper(): 'warn' | 'raise' | 'ignore' {
+    if (this.effect.errorBehaviour === undefined) {
+      return 'warn';
+    }
+    return this.effect.errorBehaviour ?? 'ignore';
+  }
+
+  set errorBehaviourWrapper(value: 'warn' | 'raise' | 'ignore') {
+    if (value === 'ignore') {
+      this.effect.errorBehaviour = null;
+    } else {
+      this.effect.errorBehaviour = value;
+    }
+  }
 
   constructor(private gamedataService: GamedataService) {
     super();

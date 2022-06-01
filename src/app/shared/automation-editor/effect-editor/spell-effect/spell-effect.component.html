@@ -4,7 +4,7 @@
   <avr-autodoc-link anchor="cast-spell"></avr-autodoc-link>
 </p>
 
-
+<!-- spell -->
 <div class="auto-row">
   <span>Cast </span>
 
@@ -32,11 +32,12 @@
   </mat-form-field>
 </div>
 
+<!-- spellcasting info -->
 <div>
   <mat-checkbox [(ngModel)]="custom"
-                (change)="changed.emit(); onCustomChange()"
-                matTooltip="Whether to use the caster's default DC and attack modifier or a custom defined one.">
-    Use custom spellcasting information
+                (change)="onCustomChange(); changed.emit()"
+                matTooltip="Whether to use the caster's default DC and attack modifier or the information defined here.">
+    Override caster's spellcasting information
   </mat-checkbox>
 </div>
 

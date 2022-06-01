@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSelectChange} from '@angular/material/select';
 import {DDBEntity} from '../../../../schemas/GameData';
-import {CastSpell} from '../../types';
 import {GamedataService} from '../../../gamedata.service';
+import {CastSpell} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
   selector: 'avr-spell-effect',
   templateUrl: './spell-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class SpellEffectComponent extends EffectComponent<CastSpell> implements OnInit {
   spellToCast: DDBEntity;

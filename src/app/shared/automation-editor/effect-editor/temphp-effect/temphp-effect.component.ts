@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-temphp-effect',
   templateUrl: './temphp-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class TempHPEffectComponent extends EffectComponent<TempHP> implements OnInit {
   constructor() {

@@ -1,19 +1,23 @@
+@import "../../../variables";
+
 .hidden {
   visibility: hidden;
 }
 
-.wide {
+.is-fullwidth {
   width: 100%;
 }
 
 .text-monospace {
-  font-family: "Source Code Pro", monospace;
+  font-family: $font-monospace;
 }
 
-::ng-deep .adv-tooltip {
-  white-space:  pre-line !important;
+.auto-label {
+  font-family: $font-accent;
+  opacity: 0.7;
 }
 
+/* mobile styles */
 @media (max-width: 700px) {
   .auto-row {
     flex-wrap: wrap;
@@ -29,9 +33,5 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-  }
-
-  ::ng-deep .mat-expansion-panel-body {
-    padding: 0 8px 24px 16px;
   }
 }

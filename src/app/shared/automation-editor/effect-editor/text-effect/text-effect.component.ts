@@ -14,7 +14,7 @@ const TEXT_TYPE_HELPS = {
 @Component({
   selector: 'avr-text-effect',
   templateUrl: './text-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class TextEffectComponent extends EffectComponent<Text> implements OnInit {
   TEXT_TYPE_HELPS = TEXT_TYPE_HELPS;

@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-condition-effect',
   templateUrl: 'condition-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class ConditionEffectComponent extends EffectComponent<Condition> implements OnInit {
   constructor() {

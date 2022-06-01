@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-roll-effect',
   templateUrl: './roll-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class RollEffectComponent extends EffectComponent<Roll> implements OnInit {
   constructor() {

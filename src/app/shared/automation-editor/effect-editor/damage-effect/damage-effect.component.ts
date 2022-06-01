@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-damage-effect',
   templateUrl: './damage-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class DamageEffectComponent extends EffectComponent<Damage> implements OnInit {
   constructor() {

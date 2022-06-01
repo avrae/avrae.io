@@ -3,6 +3,7 @@
   <avr-autodoc-link anchor="use-counter"></avr-autodoc-link>
 </p>
 
+<!-- counter type -->
 <div class="auto-row">
   <span>Use {{counterType === 'ability' ? 'an' : 'a'}} </span>
 
@@ -61,8 +62,9 @@
   </span>
 </div>
 
-<div>
-  <mat-form-field>
+<!-- amount -->
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+  <mat-form-field fxFlex="grow">
     <input matInput
            placeholder="Amount"
            class="text-monospace"
@@ -73,17 +75,23 @@
       calculate
     </mat-icon>
   </mat-form-field>
-
-  <mat-checkbox [(ngModel)]="effect.allowOverflow" (change)="changed.emit()" style="margin-left: 4px;">
-    Allow Overflow
-  </mat-checkbox>
 </div>
 
-<mat-form-field>
-  <mat-label>Error Behaviour</mat-label>
-  <mat-select [(value)]="effect.errorBehaviour" (selectionChange)="changed.emit()">
-    <mat-option [value]="null">Ignore</mat-option>
-    <mat-option value="warn">Show Warning</mat-option>
-    <mat-option value="raise">Stop Execution</mat-option>
-  </mat-select>
-</mat-form-field>
+<!-- options -->
+<span class="auto-label">Additional Options</span>
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left baseline" class="auto-row">
+  <mat-checkbox [(ngModel)]="effect.allowOverflow" (change)="changed.emit()">
+    Allow Overflow
+  </mat-checkbox>
+
+  <span>|</span>
+
+  <mat-form-field>
+    <mat-label>Error Behaviour</mat-label>
+    <mat-select [(value)]="errorBehaviourWrapper" (selectionChange)="changed.emit()">
+      <mat-option value="ignore">Ignore</mat-option>
+      <mat-option value="warn">Show Warning</mat-option>
+      <mat-option value="raise">Stop Execution</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

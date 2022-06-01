@@ -4,15 +4,19 @@
   <avr-autodoc-link anchor="condition-branch"></avr-autodoc-link>
 </p>
 
-<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
-  <mat-form-field>
+<!-- condition -->
+<div>
+  <mat-form-field class="is-fullwidth">
     <input matInput placeholder="Condition" class="text-monospace" (change)="changed.emit()"
            [(ngModel)]="effect.condition" required>
     <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
       calculate
     </mat-icon>
   </mat-form-field>
+</div>
 
+<!-- error behaviour -->
+<div>
   <mat-form-field>
     <mat-label>Error Behaviour</mat-label>
     <mat-select [(value)]="effect.errorBehaviour" (selectionChange)="changed.emit()">

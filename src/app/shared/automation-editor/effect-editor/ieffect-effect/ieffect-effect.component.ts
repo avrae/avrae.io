@@ -5,7 +5,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-ieffect-effect',
   templateUrl: './ieffect-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class IEffectEffectComponent extends EffectComponent<IEffect> implements OnInit {
   constructor() {

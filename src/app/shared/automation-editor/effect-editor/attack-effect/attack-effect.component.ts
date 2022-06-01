@@ -6,7 +6,7 @@ import {EffectComponent} from '../shared/EffectComponent';
 @Component({
   selector: 'avr-attack-effect',
   templateUrl: './attack-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss', './attack-effect.component.css']
 })
 export class AttackEffectComponent extends EffectComponent<Attack> implements OnInit {
   custom = false;

@@ -26,7 +26,7 @@ const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + 
       <button mat-stroked-button (click)="addHigher()">Add Higher Level</button>
     </div>
   `,
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class HigherLevelComponent implements OnInit, OnChanges {
 

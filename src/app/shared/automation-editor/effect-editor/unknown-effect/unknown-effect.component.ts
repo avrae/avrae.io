@@ -5,7 +5,7 @@ import {parse as YAMLParse, stringify as YAMLStringify} from 'yaml';
 @Component({
   selector: 'avr-unknown-effect',
   templateUrl: './unknown-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class UnknownEffectComponent extends EffectComponent<any> implements OnInit {
 

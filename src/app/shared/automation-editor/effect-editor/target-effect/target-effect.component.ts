@@ -9,7 +9,7 @@ type TargetSortType = 'user' | 'hp_asc' | 'hp_desc';
 @Component({
   selector: 'avr-target-effect',
   templateUrl: './target-effect.component.html',
-  styleUrls: ['../shared.css']
+  styleUrls: ['../shared.scss']
 })
 export class TargetEffectComponent extends EffectComponent<Target> implements OnInit {
   selectedTarget: TargetType = 'all';
