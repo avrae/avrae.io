@@ -43,7 +43,7 @@
 </div>
 
 <!-- spell options -->
-<div *ngIf="spell !== null">
+<div *ngIf="spell != null">
   <p class="auto-label">Spell Options</p>
   <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
     <avr-higher-level fxFlex [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
