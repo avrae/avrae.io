@@ -2,17 +2,19 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FlexModule} from '@angular/flex-layout';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgClickOutsideModule} from 'ng-click-outside2';
 import {MaterialModule} from '../../material/material.module';
 import {AutomationEditorComponent} from './automation-editor.component';
 import {AttackEffectComponent} from './effect-editor/attack-effect/attack-effect.component';
+import {CheckEffectComponent} from './effect-editor/check-effect/check-effect.component';
 import {ConditionEffectComponent} from './effect-editor/condition-effect/condition-effect.component';
 import {CounterEffectComponent} from './effect-editor/counter-effect/counter-effect.component';
 import {DamageEffectComponent} from './effect-editor/damage-effect/damage-effect.component';
 import {EffectEditorComponent, EffectEditorDirective} from './effect-editor/effect-editor.component';
 import {HigherLevelComponent} from './effect-editor/higher-level/higher-level.component';
 import {IEffectEffectComponent} from './effect-editor/ieffect-effect/ieffect-effect.component';
+import {RemoveIEffectEffectComponent} from './effect-editor/remove-ieffect-effect/remove-ieffect-effect.component';
 import {RollEffectComponent} from './effect-editor/roll-effect/roll-effect.component';
 import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.component';
 import {AutodocLinkComponent} from './effect-editor/shared/autodoc-link.component';
@@ -20,10 +22,10 @@ import {SpellEffectComponent} from './effect-editor/spell-effect/spell-effect.co
 import {TargetEffectComponent} from './effect-editor/target-effect/target-effect.component';
 import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
 import {TextEffectComponent} from './effect-editor/text-effect/text-effect.component';
+import {UnknownEffectComponent} from './effect-editor/unknown-effect/unknown-effect.component';
 import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
 import {NewEffectButtonComponent} from './new-effect-button.component';
-import { UnknownEffectComponent } from './effect-editor/unknown-effect/unknown-effect.component';
-import { RemoveIEffectEffectComponent } from './effect-editor/remove-ieffect-effect/remove-ieffect-effect.component';
+import { AbilitySelectComponent } from './effect-editor/check-effect/ability-select.component';
 
 @NgModule({
   imports: [
@@ -32,7 +34,8 @@ import { RemoveIEffectEffectComponent } from './effect-editor/remove-ieffect-eff
     FormsModule,
     FlexModule,
     CdkTreeModule,
-    NgClickOutsideModule
+    NgClickOutsideModule,
+    ReactiveFormsModule
   ],
   declarations: [
     EffectEditorComponent,
@@ -55,6 +58,8 @@ import { RemoveIEffectEffectComponent } from './effect-editor/remove-ieffect-eff
     AutodocLinkComponent,
     UnknownEffectComponent,
     RemoveIEffectEffectComponent,
+    CheckEffectComponent,
+    AbilitySelectComponent,
   ],
   exports: [AutomationEditorComponent]
 })

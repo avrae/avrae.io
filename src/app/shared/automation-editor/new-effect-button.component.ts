@@ -149,7 +149,7 @@ export class NewEffectButtonComponent implements OnInit {
         effect = {type: 'spell', id: 2102} as CastSpell;
         break;
       case 'check':
-        effect = {type: 'check', ability: 'arcana'} as AbilityCheck;
+        effect = {type: 'check', ability: 'athletics'} as AbilityCheck;
         break;
       // --- presets ---
       case 'preset_atk_dmg':

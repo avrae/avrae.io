@@ -1,5 +1,6 @@
 import {BehaviorSubject} from 'rxjs';
 import {AttackEffectComponent} from './effect-editor/attack-effect/attack-effect.component';
+import {CheckEffectComponent} from './effect-editor/check-effect/check-effect.component';
 import {ConditionEffectComponent} from './effect-editor/condition-effect/condition-effect.component';
 import {CounterEffectComponent} from './effect-editor/counter-effect/counter-effect.component';
 import {DamageEffectComponent} from './effect-editor/damage-effect/damage-effect.component';
@@ -181,12 +182,12 @@ export class AutomationTreeBuilder {
       ];
     },
     check(effect: AbilityCheck): AutomationTreeNode[] {
-      if (effect.dc) {
+      if (effect.dc != null) {
         return [
           new AutomationTreeNode('Success', undefined, undefined, this.effectsToNodes(effect.success)),
           new AutomationTreeNode('Fail', undefined, undefined, this.effectsToNodes(effect.fail))
         ];
-      } else if (effect.contestAbility) {
+      } else if (effect.contestAbility != null) {
         return [
           new AutomationTreeNode('Target Wins', undefined, undefined, this.effectsToNodes(effect.success)),
           new AutomationTreeNode('Caster Wins', undefined, undefined, this.effectsToNodes(effect.fail))
@@ -272,7 +273,7 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   },
   check: {
     label: 'Ability Check',
-    // todo
+    component: CheckEffectComponent
   }
 };
 

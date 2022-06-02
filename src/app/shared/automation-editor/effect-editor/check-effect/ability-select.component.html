@@ -1,0 +1,24 @@
+<mat-form-field class="is-fullwidth" matTooltip="The highest of any listed abilities will be used.">
+  <mat-label>{{label}}</mat-label>
+
+  <mat-chip-list #chipList aria-label="Fruit selection" [required]="required">
+    <mat-chip *ngFor="let skillKey of skills" (removed)="remove(skillKey)">
+      {{skillKeyToName(skillKey)}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+
+    <input placeholder="Add skill..."
+           #skillInput
+           [formControl]="skillCtrl"
+           [matAutocomplete]="auto"
+           [matChipInputFor]="chipList">
+  </mat-chip-list>
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let skillPair of filteredSkills | async" [value]="skillPair[0]">
+      {{skillPair[1]}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
