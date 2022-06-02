@@ -23,6 +23,7 @@ import {TextEffectComponent} from './effect-editor/text-effect/text-effect.compo
 import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
 import {NewEffectButtonComponent} from './new-effect-button.component';
 import { UnknownEffectComponent } from './effect-editor/unknown-effect/unknown-effect.component';
+import { RemoveIEffectEffectComponent } from './effect-editor/remove-ieffect-effect/remove-ieffect-effect.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { UnknownEffectComponent } from './effect-editor/unknown-effect/unknown-e
     NewEffectButtonComponent,
     AutodocLinkComponent,
     UnknownEffectComponent,
+    RemoveIEffectEffectComponent,
   ],
   exports: [AutomationEditorComponent]
 })
