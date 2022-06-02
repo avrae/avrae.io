@@ -14,6 +14,7 @@ import {JSONImportDialog} from '../../shared/dialogs/json-import-dialog/json-imp
 })
 export class AutomationEditorDevComponent implements OnInit {
   localSavedAutomation: AutomationEffect[] = [];
+  editorDebugMode = false;
 
   constructor(private dialog: MatDialog, private clipboard: Clipboard, private snackBar: MatSnackBar) {
   }

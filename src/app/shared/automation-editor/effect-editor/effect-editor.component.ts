@@ -11,6 +11,7 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
+import {stringify as YAMLStringify} from 'yaml';
 import {Spell} from '../../../schemas/homebrew/Spells';
 import {AUTOMATION_NODE_DEFS, AutomationEffectTreeNode} from '../utils';
 import {EffectComponent} from './shared/EffectComponent';
@@ -26,37 +27,14 @@ export class EffectEditorDirective {
 
 @Component({
   selector: 'avr-effect-editor',
-  template: `
-    <div class="editor-header">
-      <span class="editor-header-text" [class.is-italics]="deleteState">
-        {{effectNode.label}}
-      </span>
-      <span class="toolbar-spacer"></span>
-      <span>
-          <button mat-icon-button matTooltip="Move Up" *ngIf="!isFirst" (click)="moveUp()">
-            <mat-icon aria-label="Move Up">arrow_upward</mat-icon>
-          </button>
-          <button mat-icon-button matTooltip="Move Down" *ngIf="!isLast" (click)="moveDown()">
-            <mat-icon aria-label="Move Down">arrow_downward</mat-icon>
-          </button>
-          <button mat-icon-button
-                  [color]="deleteState === 0 ? 'warn' : 'accent'"
-                  matTooltip="Double click to delete."
-                  (click)="delete()"
-                  (clickOutside)="deleteState = 0">
-            <mat-icon aria-label="Delete">delete</mat-icon>
-          </button>
-      </span>
-    </div>
-
-    <ng-template effectHost></ng-template>
-  `,
-  styleUrls: ['./effect-editor.component.css', '../shared.scss']
+  templateUrl: './effect-editor.component.html',
+  styleUrls: ['./effect-editor.component.css', '../shared.scss', './shared.scss']
 })
 export class EffectEditorComponent implements OnInit, OnChanges {
 
   @Input() effectNode: AutomationEffectTreeNode;
   @Input() spell: Spell;
+  @Input() debugMode = false;
 
   @Output() changed = new EventEmitter();
   @Output() treeChanged = new EventEmitter();
@@ -135,5 +113,10 @@ export class EffectEditorComponent implements OnInit, OnChanges {
         this.deleted.emit();
       }
     }
+  }
+
+  // ==== debug mode helpers ====
+  get effectYAML(): string {
+    return YAMLStringify(this.effectNode.effect);
   }
 }

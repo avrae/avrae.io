@@ -1,0 +1,30 @@
+<div class="editor-header">
+  <span class="editor-header-text" [class.is-italics]="deleteState">
+    {{effectNode.label}}
+  </span>
+  <span class="toolbar-spacer"></span>
+  <span>
+    <button mat-icon-button matTooltip="Move Up" *ngIf="!isFirst" (click)="moveUp()">
+      <mat-icon aria-label="Move Up">arrow_upward</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Move Down" *ngIf="!isLast" (click)="moveDown()">
+      <mat-icon aria-label="Move Down">arrow_downward</mat-icon>
+    </button>
+    <button mat-icon-button
+            [color]="deleteState === 0 ? 'warn' : 'accent'"
+            matTooltip="Double click to delete."
+            (click)="delete()"
+            (clickOutside)="deleteState = 0">
+      <mat-icon aria-label="Delete">delete</mat-icon>
+    </button>
+  </span>
+</div>
+
+<ng-template effectHost></ng-template>
+
+<div *ngIf="debugMode">
+  <mat-divider></mat-divider>
+  <span class="auto-label">Debug Information</span>
+  <pre class="text-monospace" [innerHTML]="effectYAML"></pre>
+</div>
+

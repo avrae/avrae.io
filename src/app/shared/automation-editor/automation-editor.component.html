@@ -64,6 +64,7 @@
     <div *ngIf="selectedEffectNode">
       <avr-effect-editor [effectNode]="selectedEffectNode"
                          [spell]="spell"
+                         [debugMode]="debugMode"
                          (changed)="changed.emit()"
                          (treeChanged)="refreshTree()"
                          (deleted)="selectedEffectNode = null">

@@ -14,6 +14,7 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
 
   @Input() automation: AutomationEffect[];
   @Input() spell: Spell;
+  @Input() debugMode = false;
   @Output() changed = new EventEmitter();
 
   // tree
