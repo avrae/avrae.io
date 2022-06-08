@@ -65,25 +65,25 @@ export interface LegacyIEffect extends AutomationEffect {
 }
 
 export interface PassiveEffects {
-  attack_advantage: IntExpression;
-  to_hit_bonus: AnnotatedString;
-  damage_bonus: AnnotatedString;
-  magical_damage: IntExpression;
-  silvered_damage: IntExpression;
-  resistances: AnnotatedString[];
-  immunities: AnnotatedString[];
-  vulnerabilities: AnnotatedString[];
-  ignored_resistances: AnnotatedString[];
-  ac_value: IntExpression;
-  ac_bonus: IntExpression;
-  max_hp_value: IntExpression;
-  max_hp_bonus: IntExpression;
-  save_bonus: AnnotatedString;
-  save_adv: AnnotatedString[];
-  save_dis: AnnotatedString[];
-  check_bonus: AnnotatedString;
-  check_adv: AnnotatedString[];
-  check_dis: AnnotatedString[];
+  attack_advantage?: IntExpression;
+  to_hit_bonus?: AnnotatedString;
+  damage_bonus?: AnnotatedString;
+  magical_damage?: IntExpression;
+  silvered_damage?: IntExpression;
+  resistances?: AnnotatedString[];
+  immunities?: AnnotatedString[];
+  vulnerabilities?: AnnotatedString[];
+  ignored_resistances?: AnnotatedString[];
+  ac_value?: IntExpression;
+  ac_bonus?: IntExpression;
+  max_hp_value?: IntExpression;
+  max_hp_bonus?: IntExpression;
+  save_bonus?: AnnotatedString;
+  save_adv?: AnnotatedString[];
+  save_dis?: AnnotatedString[];
+  check_bonus?: AnnotatedString;
+  check_adv?: AnnotatedString[];
+  check_dis?: AnnotatedString[];
 }
 
 export interface AttackInteraction {

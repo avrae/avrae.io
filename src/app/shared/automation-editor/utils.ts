@@ -5,6 +5,7 @@ import {ConditionEffectComponent} from './effect-editor/condition-effect/conditi
 import {CounterEffectComponent} from './effect-editor/counter-effect/counter-effect.component';
 import {DamageEffectComponent} from './effect-editor/damage-effect/damage-effect.component';
 import {IEffectEffectComponent} from './effect-editor/ieffect-effect/ieffect-effect.component';
+import {IEffect2EffectComponent} from './effect-editor/ieffect-effect/ieffect2-effect.component';
 import {RemoveIEffectEffectComponent} from './effect-editor/remove-ieffect-effect/remove-ieffect-effect.component';
 import {RollEffectComponent} from './effect-editor/roll-effect/roll-effect.component';
 import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.component';
@@ -240,7 +241,7 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   },
   ieffect2: {
     label: 'Initiative Effect',
-    // todo
+    component: IEffect2EffectComponent
   },
   remove_ieffect: {
     label: 'Remove Initiative Effect',
