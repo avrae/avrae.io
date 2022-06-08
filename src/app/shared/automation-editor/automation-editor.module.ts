@@ -12,13 +12,13 @@ import {ConditionEffectComponent} from './effect-editor/condition-effect/conditi
 import {CounterEffectComponent} from './effect-editor/counter-effect/counter-effect.component';
 import {DamageEffectComponent} from './effect-editor/damage-effect/damage-effect.component';
 import {EffectEditorComponent, EffectEditorDirective} from './effect-editor/effect-editor.component';
-import {HigherLevelComponent} from './effect-editor/higher-level/higher-level.component';
 import {IEffectEffectComponent} from './effect-editor/ieffect-effect/ieffect-effect.component';
 import {RemoveIEffectEffectComponent} from './effect-editor/remove-ieffect-effect/remove-ieffect-effect.component';
 import {RollEffectComponent} from './effect-editor/roll-effect/roll-effect.component';
 import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.component';
 import {AutodocLinkComponent} from './effect-editor/shared/autodoc-link.component';
 import {DoubleClickDeleteButtonComponent} from './effect-editor/shared/doubleclick-delete-button.component';
+import {HigherLevelComponent} from './effect-editor/shared/higher-level.component';
 import {SpellEffectComponent} from './effect-editor/spell-effect/spell-effect.component';
 import {TargetEffectComponent} from './effect-editor/target-effect/target-effect.component';
 import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
