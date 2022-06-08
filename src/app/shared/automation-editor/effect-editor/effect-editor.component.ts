@@ -41,8 +41,6 @@ export class EffectEditorComponent implements OnInit, OnChanges {
   @Output() deleted = new EventEmitter();
   @ViewChild(EffectEditorDirective, {static: true}) effectEditorDirective!: EffectEditorDirective;
 
-  deleteState = 0;  // tracks 2-click on the delete button
-
   get isFirst(): boolean {
     return this.effectNode.parentArray.indexOf(this.effectNode.effect) === 0;
   }
@@ -103,15 +101,12 @@ export class EffectEditorComponent implements OnInit, OnChanges {
   }
 
   delete() {
-    this.deleteState++;
-    if (this.deleteState === 2) {  // only delete on the 2nd click
-      const index = this.effectNode.parentArray.indexOf(this.effectNode.effect);
-      if (index > -1) {
-        this.effectNode.parentArray.splice(index, 1);
-        this.changed.emit();
-        this.treeChanged.emit();
-        this.deleted.emit();
-      }
+    const index = this.effectNode.parentArray.indexOf(this.effectNode.effect);
+    if (index > -1) {
+      this.effectNode.parentArray.splice(index, 1);
+      this.changed.emit();
+      this.treeChanged.emit();
+      this.deleted.emit();
     }
   }
 

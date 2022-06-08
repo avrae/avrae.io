@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IEffect} from '../../types';
+import {LegacyIEffect} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
@@ -7,7 +7,7 @@ import {EffectComponent} from '../shared/EffectComponent';
   templateUrl: './ieffect-effect.component.html',
   styleUrls: ['../shared.scss']
 })
-export class IEffectEffectComponent extends EffectComponent<IEffect> implements OnInit {
+export class IEffectEffectComponent extends EffectComponent<LegacyIEffect> implements OnInit {
   constructor() {
     super();
   }

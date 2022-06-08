@@ -18,6 +18,7 @@ import {RemoveIEffectEffectComponent} from './effect-editor/remove-ieffect-effec
 import {RollEffectComponent} from './effect-editor/roll-effect/roll-effect.component';
 import {SaveEffectComponent} from './effect-editor/save-effect/save-effect.component';
 import {AutodocLinkComponent} from './effect-editor/shared/autodoc-link.component';
+import {DoubleClickDeleteButtonComponent} from './effect-editor/shared/doubleclick-delete-button.component';
 import {SpellEffectComponent} from './effect-editor/spell-effect/spell-effect.component';
 import {TargetEffectComponent} from './effect-editor/target-effect/target-effect.component';
 import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
@@ -60,6 +61,7 @@ import { AbilitySelectComponent } from './effect-editor/check-effect/ability-sel
     RemoveIEffectEffectComponent,
     CheckEffectComponent,
     AbilitySelectComponent,
+    DoubleClickDeleteButtonComponent,
   ],
   exports: [AutomationEditorComponent]
 })
