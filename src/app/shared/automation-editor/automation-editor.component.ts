@@ -56,6 +56,15 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
   isAddEffectNode = (node: AutomationTreeNode) => node instanceof AutomationAddEffectNode;
 
   // tree actions
+  toggleNode(node: AutomationTreeNode, event: MouseEvent) {
+    // recursive expand on command/control-click
+    if (event.metaKey || event.ctrlKey) {
+      this.treeControl.toggleDescendants(node);
+    } else {
+      this.treeControl.toggle(node);
+    }
+  }
+
   beginEditEffectNode(node: AutomationEffectTreeNode) {
     this.selectedEffectNode = node;
   }

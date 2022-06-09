@@ -40,7 +40,7 @@
         </span>
         <!-- for nodes with children -->
         <span *ngIf="hasChild(node)">
-          <button mat-icon-button cdkTreeNodeToggle>
+          <button mat-icon-button (click)="toggleNode(node, $event)">
             <mat-icon>
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
