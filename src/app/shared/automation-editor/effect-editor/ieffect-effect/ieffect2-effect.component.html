@@ -109,9 +109,113 @@
 </div>
 
 <!-- attacks -->
-<p class="auto-label">
-  Granted Actions
-</p>
+<div [formGroup]="effectGroup">
+  <div formArrayName="attacks">
+    <p class="auto-label">
+      Granted Actions
+    </p>
+
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let attackGroup of attacks.controls; let i=index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{attackGroup.get('name').value}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div [formGroupName]="i">
+          <!-- name -->
+          <mat-form-field class="is-fullwidth">
+            <input matInput formControlName="name" placeholder="Name" required>
+          </mat-form-field>
+
+          <!-- display options -->
+          <p class="auto-label">
+            Display Options
+          </p>
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <mat-form-field fxFlex floatLabel="always">
+              <mat-label>Verb</mat-label>
+              <input matInput placeholder="attacks with">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Thumbnail URL">
+            </mat-form-field>
+          </div>
+          <mat-form-field class="is-fullwidth">
+            <input matInput placeholder="Flavor Text">
+          </mat-form-field>
+          <mat-checkbox>
+            Name is proper noun
+          </mat-checkbox>
+
+          <!-- crit options -->
+          <p class="auto-label">
+            Critical Hit Options
+          </p>
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <mat-form-field fxFlex floatLabel="always">
+              <mat-label>Crit On</mat-label>
+              <input matInput placeholder="20" type="number" min="1" max="20">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Extra Crit Damage">
+            </mat-form-field>
+          </div>
+
+          <!-- spellcasting info -->
+          <p class="auto-label">
+            Default Casting Information Overrides
+          </p>
+          <p>
+            For Attack and Save nodes without an explicitly defined attack bonus/DC, the default DC and attack modifier
+            to use. If left blank, the target's default spellcasting information is used.
+          </p>
+
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <mat-form-field fxFlex>
+              <input matInput placeholder="DC" class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Spell Attack Bonus" class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Spellcasting Modifier" class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+          </div>
+
+          <p class="auto-label">
+            Effects
+          </p>
+          <p>
+            To edit this action's effects, use the Effect Tree!
+          </p>
+        </div>
+
+        <mat-action-row>
+          <avr-doubleclick-delete-button (delete)="deleteAttack(i)"></avr-doubleclick-delete-button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <button mat-button (click)="addAttack()">
+      + Add granted action
+    </button>
+  </div>
+</div>
 
 <!-- buttons -->
 <p class="auto-label">

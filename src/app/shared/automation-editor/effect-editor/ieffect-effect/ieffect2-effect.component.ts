@@ -14,10 +14,12 @@ const CUSTOM_SENTINEL = '__custom';
 export class IEffect2EffectComponent extends EffectComponent<IEffect> implements OnInit {
 
   passiveEffects = this.fb.array([]);
+  attacks = this.fb.array([]);
 
   // formgroup for the entire effect
   effectGroup = this.fb.group({
-    passiveEffects: this.passiveEffects
+    passiveEffects: this.passiveEffects,
+    attacks: this.attacks
   });
 
   constructor(private fb: FormBuilder) {
@@ -160,6 +162,43 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
       return true;
     }
     return passiveEffectDef.type === 'intexpression';
+  }
+
+  // ==== actions ====
+  // attack schema:
+  // {
+  //   attack: {
+  //     _v: 2;
+  //     name: string;
+  //     automation: Effect[];
+  //     verb?: string;
+  //     proper?: boolean;
+  //     criton?: number;
+  //     phrase?: string;
+  //     thumb?: string;
+  //     extra_crit_damage?: string;
+  //   }
+  //   defaultDC?: IntExpression;
+  //   defaultAttackBonus?: IntExpression;
+  //   defaultCastingMod?: IntExpression;
+  // }
+  // --- lifecycle ---
+  populateAttackForm() {
+    // called once to set up the FormArray with the existing attacks
+    if (!this.effect.attacks) {
+      return;
+    }
+  }
+
+  addAttack() {
+    // add to formarray
+    this.attacks.push(this.fb.group({
+      name: this.fb.control('New Action')
+    }));
+  }
+
+  deleteAttack(idx: number) {
+    this.attacks.removeAt(idx);
   }
 }
 

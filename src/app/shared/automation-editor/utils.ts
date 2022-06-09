@@ -217,7 +217,7 @@ export class AutomationTreeBuilder {
 
   // ieffect2 helpers
   ieffect2AttackNode(attack: AttackInteraction): AutomationTreeNode {
-    return this.ieffect2Node(attack, `Attack: ${attack.attack.name}`, attack.attack.automation, undefined, 'Edit the parent Initiative Effect node to edit this attack!');
+    return this.ieffect2Node(attack, `Action: ${attack.attack.name}`, attack.attack.automation, undefined, 'Edit the parent Initiative Effect node to edit this attack!');
   }
 
   ieffect2ButtonNode(button: ButtonInteraction): AutomationTreeNode {
