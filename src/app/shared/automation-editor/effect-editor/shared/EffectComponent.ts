@@ -17,6 +17,6 @@ export abstract class EffectComponent<T extends AutomationEffect> {
   }
 
   get isIEffect(): boolean {
-    return this.effectNode.ancestors.some(effect => effect.type === 'ieffect2');
+    return this.effectNode.isInIEffect;
   }
 }

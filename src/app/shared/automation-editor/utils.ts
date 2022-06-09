@@ -15,9 +15,10 @@ import {TargetEffectComponent} from './effect-editor/target-effect/target-effect
 import {TempHPEffectComponent} from './effect-editor/temphp-effect/temphp-effect.component';
 import {TextEffectComponent} from './effect-editor/text-effect/text-effect.component';
 import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
-import {AbilityCheck, Attack, AutomationEffect, Condition, IEffect, Save, Target} from './types';
+import {AbilityCheck, Attack, AttackInteraction, AutomationEffect, ButtonInteraction, Condition, IEffect, Save, Target} from './types';
 
 // ==== automation-editor ====
+// nodes
 export class AutomationTreeNode {
   label: string;
   icon?: string;
@@ -48,12 +49,14 @@ export class AutomationEffectTreeNode extends AutomationTreeNode {
   effect: AutomationEffect;
   parentArray: AutomationEffect[];
   ancestors: AutomationEffect[];  // root -> direct parent list of ancestor effects
+  isInIEffect: boolean;
 
-  constructor(effect: AutomationEffect, parentArray: AutomationEffect[], ancestors: AutomationEffect[], label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
+  constructor(effect: AutomationEffect, parentArray: AutomationEffect[], ancestors: AutomationEffect[], isInIEffect: boolean, label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
     super(label, icon, tooltip, children);
     this.effect = effect;
     this.parentArray = parentArray;
     this.ancestors = ancestors;
+    this.isInIEffect = isInIEffect;
   }
 }
 
@@ -66,14 +69,18 @@ export class AutomationAddEffectNode extends AutomationTreeNode {
   }
 }
 
+// builder
 export class AutomationTreeBuilder {
   isSpell: boolean;
-  treeNodeMap: WeakMap<AutomationEffect, AutomationEffectTreeNode>;
+  isIEffect: boolean;
+  effectTreeNodeMap: WeakMap<AutomationEffect, AutomationEffectTreeNode>;
+  otherTreeNodeMap: WeakMap<any, AutomationTreeNode>;
   ancestors: AutomationEffect[] = [];
 
   constructor(isSpell: boolean) {
     this.isSpell = isSpell;
-    this.treeNodeMap = new WeakMap<AutomationEffect, AutomationEffectTreeNode>();
+    this.effectTreeNodeMap = new WeakMap<AutomationEffect, AutomationEffectTreeNode>();
+    this.otherTreeNodeMap = new WeakMap<any, AutomationTreeNode>();
   }
 
   public effectsToNodes(effects: AutomationEffect[]): AutomationTreeNode[] {
@@ -90,7 +97,7 @@ export class AutomationTreeBuilder {
         ancestors: this.ancestors,
         parentArray: effects,
         isSpell: this.isSpell,
-        isIEffect: this.ancestors.some(effect => effect.type === 'ieffect2')
+        isIEffect: this.isIEffect
       },
       'Add Effect'
     ));
@@ -99,7 +106,7 @@ export class AutomationTreeBuilder {
   }
 
   public effectToNode(effect: AutomationEffect, parentArray: AutomationEffect[]): AutomationEffectTreeNode {
-    const existing = this.treeNodeMap.get(effect);
+    const existing = this.effectTreeNodeMap.get(effect);
 
     // find the def for the effect
     const nodeDef = AUTOMATION_NODE_DEFS[effect.type];
@@ -111,6 +118,7 @@ export class AutomationTreeBuilder {
         effect,
         parentArray,
         this.ancestors,
+        this.isIEffect,
         'Unknown Node',
         'help_outline',
         'This node is not yet supported by the web builder.',
@@ -126,6 +134,7 @@ export class AutomationTreeBuilder {
         effect,
         parentArray,
         this.ancestors,
+        this.isIEffect,
         nodeDef.label || effect.type,
         nodeDef.icon,
         nodeDef.tooltip,
@@ -136,8 +145,9 @@ export class AutomationTreeBuilder {
     if (existing) {
       // update the attributes of the existing node:
       // all we need to do is update the children since the other attrs are static for a given effect type
-      if (effect.type === 'target') {
+      if (effect.type === 'target' || effect.type === 'ieffect2') {
         // special case since target's children are AutomationEffectTreeNodes
+        // and ieffect2's children have mapping (see ieffect2 helpers)
         existing.children = children;
       } else if (existing.children?.length === children?.length) {
         for (let idx = 0; idx < existing.children?.length ?? 0; idx++) {
@@ -152,7 +162,7 @@ export class AutomationTreeBuilder {
       return existing;
     }
 
-    this.treeNodeMap.set(effect, result);
+    this.effectTreeNodeMap.set(effect, result);
     return result;
   }
 
@@ -174,7 +184,14 @@ export class AutomationTreeBuilder {
       ];
     },
     ieffect2(effect: IEffect): AutomationTreeNode[] {
-      return [];  // todo
+      const out = [];
+      for (const attack of effect.attacks ?? []) {
+        out.push(this.ieffect2AttackNode(attack));
+      }
+      for (const button of effect.buttons ?? []) {
+        out.push(this.ieffect2ButtonNode(button));
+      }
+      return out;
     },
     condition(effect: Condition): AutomationTreeNode[] {
       return [
@@ -197,6 +214,41 @@ export class AutomationTreeBuilder {
       return [];
     }
   };
+
+  // ieffect2 helpers
+  ieffect2AttackNode(attack: AttackInteraction): AutomationTreeNode {
+    return this.ieffect2Node(attack, `Attack: ${attack.attack.name}`, attack.attack.automation, undefined, 'Edit the parent Initiative Effect node to edit this attack!');
+  }
+
+  ieffect2ButtonNode(button: ButtonInteraction): AutomationTreeNode {
+    return this.ieffect2Node(button, `Button: ${button.label}`, button.automation, undefined, 'Edit the parent Initiative Effect node to edit this button!');
+  }
+
+  ieffect2Node(interaction: AttackInteraction | ButtonInteraction, name: string, automation: AutomationEffect[], icon, tooltip) {
+    const existing = this.otherTreeNodeMap.get(interaction);
+
+    // update ancestor stack, recursively build nodes
+    const oldAncestors = this.ancestors;
+    const oldIsIEffect = this.isIEffect;
+    this.ancestors = [];
+    this.isIEffect = true;
+    const children = this.effectsToNodes(automation);
+    this.ancestors = oldAncestors;
+    this.isIEffect = oldIsIEffect;
+
+    const result = new AutomationTreeNode(name, icon, tooltip, children);
+
+    if (existing) {
+      existing.label = result.label;
+      existing.icon = result.icon;
+      existing.tooltip = result.tooltip;
+      existing.children = children;
+      return existing;
+    }
+
+    this.otherTreeNodeMap.set(interaction, result);
+    return result;
+  }
 }
 
 // ==== helpful node constants ====

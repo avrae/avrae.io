@@ -43,7 +43,7 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
     this.changed.emit();
     // mildly hacky way to set the selected node to the newly created node
     const newEffect = byNode.meta.parentArray[byNode.meta.parentArray.length - 1];
-    this.selectedEffectNode = this.nodeBuilder.treeNodeMap.get(newEffect) ?? this.selectedEffectNode;
+    this.selectedEffectNode = this.nodeBuilder.effectTreeNodeMap.get(newEffect) ?? this.selectedEffectNode;
   }
 
   refreshTree() {
