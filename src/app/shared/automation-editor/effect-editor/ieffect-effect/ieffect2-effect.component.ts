@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, ValidationErrors} from '@angular/forms';
 import {isEmpty} from 'lodash';
-import {AttackInteraction, IEffect} from '../../types';
+import {AttackInteraction, ButtonInteraction, IEffect} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 import {PASSIVE_EFFECTS} from './passiveEffects';
 
@@ -16,11 +16,13 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
 
   passiveEffects = this.fb.array([]);
   attacks = this.fb.array([]);
+  buttons = this.fb.array([]);
 
   // formgroup for the entire effect
   effectGroup = this.fb.group({
     passiveEffects: this.passiveEffects,
-    attacks: this.attacks
+    attacks: this.attacks,
+    buttons: this.buttons
   });
 
   constructor(private fb: FormBuilder) {
@@ -29,9 +31,11 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
 
   ngOnInit() {
     this.populatePassiveEffectForm();
-    this.passiveEffects.valueChanges.subscribe((value) => this.onPassiveEffectsChange(value));
+    this.passiveEffects.valueChanges.subscribe(value => this.onPassiveEffectsChange(value));
     this.populateAttackForm();
-    this.attacks.valueChanges.subscribe((value) => this.onAttacksChange(value));
+    this.attacks.valueChanges.subscribe(value => this.onAttacksChange(value));
+    this.populateButtonForm();
+    this.buttons.valueChanges.subscribe(value => this.onButtonsChange(value));
   }
 
   // ==== wrappers ====
@@ -167,23 +171,6 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
   }
 
   // ==== actions ====
-  // attack schema:
-  // {
-  //   attack: {
-  //     _v: 2;
-  //     name: string;
-  //     automation: Effect[];
-  //     verb?: string;
-  //     proper?: boolean;
-  //     criton?: number;
-  //     phrase?: string;
-  //     thumb?: string;
-  //     extra_crit_damage?: string;
-  //   }
-  //   defaultDC?: IntExpression;
-  //   defaultAttackBonus?: IntExpression;
-  //   defaultCastingMod?: IntExpression;
-  // }
   // --- lifecycle ---
   populateAttackForm() {
     // called once to set up the FormArray with the existing attacks
@@ -253,6 +240,95 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
     // write changes back to PassiveEffect
     this.effect.attacks = isEmpty(out) ? undefined : out;
     this.changed.emit();
+  }
+
+  // ==== buttons ====
+  buttonStyleOptions = [
+    {name: 'Blurple', value: '1'},
+    {name: 'Grey', value: '2'},
+    {name: 'Green', value: '3'},
+    {name: 'Red', value: '4'}
+  ];
+
+  // --- lifecycle ---
+  populateButtonForm() {
+    // called once to set up the FormArray with the existing buttons
+    if (!this.effect.buttons) {
+      return;
+    }
+    for (const buttonInteraction of this.effect.buttons) {
+      this.addButton(buttonInteraction, false);
+    }
+  }
+
+  addButton(buttonInteraction?: ButtonInteraction, emitChanges = true) {
+    // name changes emit treeChanged to update the tree with interaction name
+    const labelControl = this.fb.control(buttonInteraction?.label ?? 'New Button');
+    labelControl.valueChanges.subscribe(() => {
+      setTimeout(() => this.treeChanged.emit());  // hack to ensure changed happens first
+    });
+
+    // style can be custom
+    let styleConfig;
+    if (!buttonInteraction?.style || this.buttonStyleOptions.some(style => style.value === buttonInteraction.style)) {
+      styleConfig = {
+        style: this.fb.control(buttonInteraction?.style || '1'),
+        customStyle: this.fb.control(null),
+      };
+    } else {
+      styleConfig = {
+        style: this.fb.control(CUSTOM_SENTINEL),
+        customStyle: this.fb.control(buttonInteraction?.style || null),
+      };
+    }
+
+    // add to formarray
+    this.buttons.push(this.fb.group(
+      {
+        label: labelControl,
+        verb: this.fb.control(buttonInteraction?.verb ?? null),
+        ...styleConfig,
+        defaultDc: this.fb.control(buttonInteraction?.defaultDC ?? null),
+        defaultAttackBonus: this.fb.control(buttonInteraction?.defaultAttackBonus ?? null),
+        defaultCastingMod: this.fb.control(buttonInteraction?.defaultCastingMod ?? null),
+        // used to maintain a ref to the automation that gets edited in the tree
+        _automation: this.fb.control(buttonInteraction?.automation ?? [])
+      },
+      {emitEvent: emitChanges}
+    ));
+    if (emitChanges) {
+      this.treeChanged.emit();
+    }
+  }
+
+  deleteButton(idx: number) {
+    this.buttons.removeAt(idx);
+    this.treeChanged.emit();
+  }
+
+  onButtonsChange(newValue) {
+    // build new list of ButtonInteractions
+    const out: ButtonInteraction[] = [];
+    for (const buttonGroup of newValue) {
+      const style = buttonGroup.style === CUSTOM_SENTINEL ? buttonGroup.customStyle : buttonGroup.style;
+      out.push({
+        label: buttonGroup.label,
+        automation: buttonGroup._automation,
+        verb: buttonGroup.verb || undefined,
+        style: style || undefined,
+        defaultDC: buttonGroup.defaultDc || undefined,
+        defaultAttackBonus: buttonGroup.defaultAttackBonus || undefined,
+        defaultCastingMod: buttonGroup.defaultCastingMod || undefined
+      });
+    }
+    // write changes back to PassiveEffect
+    this.effect.buttons = isEmpty(out) ? undefined : out;
+    this.changed.emit();
+  }
+
+  // helpers
+  isCustomButtonStyle(buttonGroup: AbstractControl): boolean {
+    return buttonGroup.get('style').value === CUSTOM_SENTINEL;
   }
 }
 

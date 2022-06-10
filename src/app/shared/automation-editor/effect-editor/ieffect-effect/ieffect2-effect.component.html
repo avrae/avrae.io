@@ -229,9 +229,122 @@
 </div>
 
 <!-- buttons -->
-<p class="auto-label">
-  Granted Buttons
-</p>
+<div [formGroup]="effectGroup">
+  <div formArrayName="buttons">
+    <p class="auto-label">
+      Granted Buttons
+    </p>
+
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let buttonGroup of buttons.controls; let i=index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{buttonGroup.get('label').value}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div [formGroupName]="i">
+          <!-- label -->
+          <mat-form-field class="is-fullwidth">
+            <input matInput formControlName="label" placeholder="Label" required>
+            <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">
+              {{"{ }"}}
+            </span>
+          </mat-form-field>
+
+          <!-- display options -->
+          <p class="auto-label">
+            Display Options
+          </p>
+          <mat-form-field class="is-fullwidth" floatLabel="always">
+            <mat-label>Verb</mat-label>
+            <input matInput formControlName="verb" [placeholder]="'uses ' + buttonGroup.get('label').value">
+            <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">
+              {{"{ }"}}
+            </span>
+          </mat-form-field>
+
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <!-- style -->
+            <mat-form-field fxFlex="1 4 auto">
+              <mat-label>Style</mat-label>
+              <mat-select formControlName="style">
+                <mat-option *ngFor="let styleOption of buttonStyleOptions" [value]="styleOption.value">
+                  {{styleOption.name}}
+                </mat-option>
+                <mat-option [value]="CUSTOM_SENTINEL">
+                  Custom Expression
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- custom expression -->
+            <mat-form-field fxFlex="4 1 auto" *ngIf="isCustomButtonStyle(buttonGroup)">
+              <mat-label>Custom Expression</mat-label>
+              <input matInput formControlName="customStyle">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+          </div>
+
+          <!-- spellcasting info -->
+          <p class="auto-label">
+            Default Casting Information Overrides
+          </p>
+          <p>
+            For Attack and Save nodes without an explicitly defined attack bonus/DC, the default DC and attack modifier
+            to use. If left blank, the target's default spellcasting information is used.
+          </p>
+
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <mat-form-field fxFlex>
+              <input matInput formControlName="defaultDc" placeholder="DC" class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput
+                     formControlName="defaultAttackBonus"
+                     placeholder="Spell Attack Bonus"
+                     class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput
+                     formControlName="defaultCastingMod"
+                     placeholder="Spellcasting Modifier"
+                     class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+          </div>
+
+          <p class="auto-label">
+            Effects
+          </p>
+          <p>
+            To edit this button's effects, use the Effect Tree!
+          </p>
+        </div>
+
+        <mat-action-row>
+          <avr-doubleclick-delete-button (delete)="deleteButton(i)"></avr-doubleclick-delete-button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <button mat-button (click)="addButton()">
+      + Add granted button
+    </button>
+  </div>
+</div>
 
 <!-- desc -->
 <p class="auto-label">
