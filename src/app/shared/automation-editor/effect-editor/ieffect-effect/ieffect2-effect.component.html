@@ -270,7 +270,10 @@
               <mat-label>Style</mat-label>
               <mat-select formControlName="style">
                 <mat-option *ngFor="let styleOption of buttonStyleOptions" [value]="styleOption.value">
-                  {{styleOption.name}}
+                  <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="left center">
+                    <span class="button-style button-style-{{styleOption.value}}"></span>
+                    <span>{{styleOption.name}}</span>
+                  </div>
                 </mat-option>
                 <mat-option [value]="CUSTOM_SENTINEL">
                   Custom Expression

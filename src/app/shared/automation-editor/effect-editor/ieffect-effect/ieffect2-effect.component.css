@@ -1,0 +1,22 @@
+.button-style {
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  display: inline-block;
+}
+
+.button-style-1 {
+  background: rgb(88, 101, 242);
+}
+
+.button-style-2 {
+  background: rgb(79, 84, 92);
+}
+
+.button-style-3 {
+  background: rgb(45, 125, 70);
+}
+
+.button-style-4 {
+  background: rgb(216, 60, 62);
+}

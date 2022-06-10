@@ -10,7 +10,7 @@ const CUSTOM_SENTINEL = '__custom';
 @Component({
   selector: 'avr-ieffect2-effect',
   templateUrl: './ieffect2-effect.component.html',
-  styleUrls: ['../shared.scss']
+  styleUrls: ['../shared.scss', './ieffect2-effect.component.css']
 })
 export class IEffect2EffectComponent extends EffectComponent<IEffect> implements OnInit {
 
