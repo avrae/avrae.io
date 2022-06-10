@@ -74,13 +74,11 @@ export class AutomationTreeBuilder {
   isSpell: boolean;
   isIEffect: boolean;
   effectTreeNodeMap: WeakMap<AutomationEffect, AutomationEffectTreeNode>;
-  otherTreeNodeMap: WeakMap<any, AutomationTreeNode>;
   ancestors: AutomationEffect[] = [];
 
   constructor(isSpell: boolean) {
     this.isSpell = isSpell;
     this.effectTreeNodeMap = new WeakMap<AutomationEffect, AutomationEffectTreeNode>();
-    this.otherTreeNodeMap = new WeakMap<any, AutomationTreeNode>();
   }
 
   public effectsToNodes(effects: AutomationEffect[]): AutomationTreeNode[] {
@@ -145,7 +143,7 @@ export class AutomationTreeBuilder {
     if (existing) {
       // update the attributes of the existing node:
       // all we need to do is update the children since the other attrs are static for a given effect type
-      if (effect.type === 'target' || effect.type === 'ieffect2') {
+      if (effect.type === 'target') {
         // special case since target's children are AutomationEffectTreeNodes
         // and ieffect2's children have mapping (see ieffect2 helpers)
         existing.children = children;
@@ -225,8 +223,6 @@ export class AutomationTreeBuilder {
   }
 
   ieffect2Node(interaction: AttackInteraction | ButtonInteraction, name: string, automation: AutomationEffect[], icon, tooltip) {
-    const existing = this.otherTreeNodeMap.get(interaction);
-
     // update ancestor stack, recursively build nodes
     const oldAncestors = this.ancestors;
     const oldIsIEffect = this.isIEffect;
@@ -236,18 +232,7 @@ export class AutomationTreeBuilder {
     this.ancestors = oldAncestors;
     this.isIEffect = oldIsIEffect;
 
-    const result = new AutomationTreeNode(name, icon, tooltip, children);
-
-    if (existing) {
-      existing.label = result.label;
-      existing.icon = result.icon;
-      existing.tooltip = result.tooltip;
-      existing.children = children;
-      return existing;
-    }
-
-    this.otherTreeNodeMap.set(interaction, result);
-    return result;
+    return new AutomationTreeNode(name, icon, tooltip, children);
   }
 }
 

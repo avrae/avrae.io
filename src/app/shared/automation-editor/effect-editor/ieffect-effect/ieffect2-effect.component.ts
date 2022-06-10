@@ -214,6 +214,7 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
         defaultDc: this.fb.control(attackInteraction?.defaultDC ?? null),
         defaultAttackBonus: this.fb.control(attackInteraction?.defaultAttackBonus ?? null),
         defaultCastingMod: this.fb.control(attackInteraction?.defaultCastingMod ?? null),
+        // used to maintain a ref to the automation that gets edited in the tree
         _automation: this.fb.control(attackInteraction?.attack.automation ?? [])
       },
       {emitEvent: emitChanges}
