@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, ValidationErrors} from '@angular/forms';
-import {IEffect} from '../../types';
+import {isEmpty} from 'lodash';
+import {AttackInteraction, IEffect} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 import {PASSIVE_EFFECTS} from './passiveEffects';
 
@@ -29,6 +30,8 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
   ngOnInit() {
     this.populatePassiveEffectForm();
     this.passiveEffects.valueChanges.subscribe((value) => this.onPassiveEffectsChange(value));
+    this.populateAttackForm();
+    this.attacks.valueChanges.subscribe((value) => this.onAttacksChange(value));
   }
 
   // ==== wrappers ====
@@ -102,7 +105,6 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
     this.passiveEffects.removeAt(idx);
   }
 
-  // --- change ---
   onPassiveEffectsChange(newValue: { effectType: string | null, defaultOptions: string | null, value: string | null }[]) {
     // build new PassiveEffect
     const out = {};
@@ -119,7 +121,7 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
       }
     }
     // write changes back to PassiveEffect
-    this.effect.effects = out;
+    this.effect.effects = isEmpty(out) ? undefined : out;
     this.changed.emit();
   }
 
@@ -188,17 +190,68 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
     if (!this.effect.attacks) {
       return;
     }
+    for (const attackInteraction of this.effect.attacks) {
+      this.addAttack(attackInteraction, false);
+    }
   }
 
-  addAttack() {
+  addAttack(attackInteraction?: AttackInteraction, emitChanges = true) {
+    // name changes emit treeChanged to update the tree with interaction name
+    const nameControl = this.fb.control(attackInteraction?.attack.name ?? 'New Action');
+    nameControl.valueChanges.subscribe(() => {
+      setTimeout(() => this.treeChanged.emit());  // hack to ensure changed happens first
+    });
     // add to formarray
-    this.attacks.push(this.fb.group({
-      name: this.fb.control('New Action')
-    }));
+    this.attacks.push(this.fb.group(
+      {
+        name: nameControl,
+        verb: this.fb.control(attackInteraction?.attack.verb ?? null),
+        thumb: this.fb.control(attackInteraction?.attack.thumb ?? null),
+        phrase: this.fb.control(attackInteraction?.attack.phrase ?? null),
+        proper: this.fb.control(attackInteraction?.attack.proper ?? false),
+        criton: this.fb.control(attackInteraction?.attack.criton ?? null),
+        extraCritDamage: this.fb.control(attackInteraction?.attack.extra_crit_damage ?? null),
+        defaultDc: this.fb.control(attackInteraction?.defaultDC ?? null),
+        defaultAttackBonus: this.fb.control(attackInteraction?.defaultAttackBonus ?? null),
+        defaultCastingMod: this.fb.control(attackInteraction?.defaultCastingMod ?? null),
+        _automation: this.fb.control(attackInteraction?.attack.automation ?? [])
+      },
+      {emitEvent: emitChanges}
+    ));
+    if (emitChanges) {
+      this.treeChanged.emit();
+    }
   }
 
   deleteAttack(idx: number) {
     this.attacks.removeAt(idx);
+    this.treeChanged.emit();
+  }
+
+  onAttacksChange(newValue) {
+    // build new list of AttackInteractions
+    const out: AttackInteraction[] = [];
+    for (const attackGroup of newValue) {
+      out.push({
+        attack: {
+          _v: 2,
+          name: attackGroup.name,
+          automation: attackGroup._automation,  // hopefully this keeps the right ref lol
+          verb: attackGroup.verb || undefined,
+          thumb: attackGroup.thumb || undefined,
+          phrase: attackGroup.phrase || undefined,
+          proper: attackGroup.proper || undefined,
+          criton: attackGroup.criton || undefined,
+          extra_crit_damage: attackGroup.extraCritDamage || undefined,
+        },
+        defaultDC: attackGroup.defaultDc || undefined,
+        defaultAttackBonus: attackGroup.defaultAttackBonus || undefined,
+        defaultCastingMod: attackGroup.defaultCastingMod || undefined
+      });
+    }
+    // write changes back to PassiveEffect
+    this.effect.attacks = isEmpty(out) ? undefined : out;
+    this.changed.emit();
   }
 }
 

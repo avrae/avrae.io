@@ -136,17 +136,17 @@
           <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
             <mat-form-field fxFlex floatLabel="always">
               <mat-label>Verb</mat-label>
-              <input matInput placeholder="attacks with">
+              <input matInput formControlName="verb" placeholder="attacks with">
             </mat-form-field>
 
             <mat-form-field fxFlex>
-              <input matInput placeholder="Thumbnail URL">
+              <input matInput formControlName="thumb" placeholder="Thumbnail URL">
             </mat-form-field>
           </div>
           <mat-form-field class="is-fullwidth">
-            <input matInput placeholder="Flavor Text">
+            <input matInput formControlName="phrase" placeholder="Flavor Text">
           </mat-form-field>
-          <mat-checkbox>
+          <mat-checkbox formControlName="proper">
             Name is proper noun
           </mat-checkbox>
 
@@ -157,11 +157,16 @@
           <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
             <mat-form-field fxFlex floatLabel="always">
               <mat-label>Crit On</mat-label>
-              <input matInput placeholder="20" type="number" min="1" max="20">
+              <input matInput
+                     formControlName="criton"
+                     placeholder="(target's criton setting)"
+                     type="number"
+                     min="1"
+                     max="20">
             </mat-form-field>
 
             <mat-form-field fxFlex>
-              <input matInput placeholder="Extra Crit Damage">
+              <input matInput formControlName="extraCritDamage" placeholder="Extra Crit Damage">
             </mat-form-field>
           </div>
 
@@ -176,21 +181,27 @@
 
           <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
             <mat-form-field fxFlex>
-              <input matInput placeholder="DC" class="text-monospace">
+              <input matInput formControlName="defaultDc" placeholder="DC" class="text-monospace">
               <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
                 calculate
               </mat-icon>
             </mat-form-field>
 
             <mat-form-field fxFlex>
-              <input matInput placeholder="Spell Attack Bonus" class="text-monospace">
+              <input matInput
+                     formControlName="defaultAttackBonus"
+                     placeholder="Spell Attack Bonus"
+                     class="text-monospace">
               <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
                 calculate
               </mat-icon>
             </mat-form-field>
 
             <mat-form-field fxFlex>
-              <input matInput placeholder="Spellcasting Modifier" class="text-monospace">
+              <input matInput
+                     formControlName="defaultCastingMod"
+                     placeholder="Spellcasting Modifier"
+                     class="text-monospace">
               <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
                 calculate
               </mat-icon>
