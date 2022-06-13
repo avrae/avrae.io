@@ -3,7 +3,7 @@ import {MatSelectChange} from '@angular/material/select';
 import {Target} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
-type TargetType = 'all' | 'each' | 'self' | 'position';
+type TargetType = 'all' | 'each' | 'self' | 'position' | 'parent' | 'children';
 type TargetSortType = 'user' | 'hp_asc' | 'hp_desc';
 
 @Component({
@@ -12,7 +12,7 @@ type TargetSortType = 'user' | 'hp_asc' | 'hp_desc';
   styleUrls: ['../shared.scss']
 })
 export class TargetEffectComponent extends EffectComponent<Target> implements OnInit {
-  selectedTarget: TargetType = 'all';
+  selectedTarget: TargetType = 'self';
   selectedTargetSort: TargetSortType = 'user';
 
   constructor() {
@@ -20,7 +20,7 @@ export class TargetEffectComponent extends EffectComponent<Target> implements On
   }
 
   ngOnInit() {
-    this.selectedTarget = typeof this.effect.target === 'number' ? 'position' : this.effect.target as TargetType;
+    this.selectedTarget = this.isNumber(this.effect.target) ? 'position' : this.effect.target as TargetType;
     this.selectedTargetSort = (this.effect.sortBy ?? 'user') as TargetSortType;
   }
 

@@ -7,9 +7,11 @@
   <mat-form-field>
     <mat-label>Target</mat-label>
     <mat-select [(value)]="selectedTarget" (selectionChange)="onTargetSelectChange($event)">
-      <mat-option value="all">All</mat-option>
+      <mat-option value="all" *ngIf="!isIEffect">All</mat-option>
       <mat-option value="self">Caster</mat-option>
-      <mat-option value="position">Position</mat-option>
+      <mat-option value="position" *ngIf="!isIEffect">Position</mat-option>
+      <mat-option value="parent" *ngIf="isIEffect">Parent</mat-option>
+      <mat-option value="children" *ngIf="isIEffect">Children</mat-option>
       <!-- this value is deprecated, but it still needs to exist here -->
       <mat-option value="each" style="height: 0;">All</mat-option>
     </mat-select>
@@ -27,8 +29,8 @@
   </mat-form-field>
 
   <!-- target sorting -->
-  <mat-form-field *ngIf="effect.target === 'all' || effect.target === 'each'"
-                  matTooltip="If not given, targets are processed in the order the -t arguments are given. Usually this is what you want.">
+  <mat-form-field *ngIf="effect.target !== 'self'"
+                  matTooltip="By default, targets are processed in the order the -t arguments are given.">
     <mat-label>Sort Targets By</mat-label>
     <mat-select [(value)]="selectedTargetSort" (selectionChange)="onTargetSortChange($event)">
       <mat-option value="user">User Input</mat-option>
