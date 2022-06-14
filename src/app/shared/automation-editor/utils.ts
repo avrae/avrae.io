@@ -254,38 +254,47 @@ interface NodeDefRegistry {
 export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   target: {
     label: 'Target',
+    icon: 'flare',
     component: TargetEffectComponent
   },
   attack: {
     label: 'Attack Roll',
+    icon: 'ddb:melee-attack',
     component: AttackEffectComponent
   },
   save: {
     label: 'Saving Throw',
+    icon: 'ddb:resistant',
     component: SaveEffectComponent
   },
   damage: {
     label: 'Damage',
+    icon: 'ddb:force',
     component: DamageEffectComponent
   },
   temphp: {
     label: 'Temp HP',
+    icon: 'ddb:healing',
     component: TempHPEffectComponent
   },
   ieffect: {
     label: 'Initiative Effect (Legacy)',
+    icon: 'extension',
     component: IEffectEffectComponent
   },
   ieffect2: {
     label: 'Initiative Effect',
+    icon: 'extension',
     component: IEffect2EffectComponent
   },
   remove_ieffect: {
     label: 'Remove Initiative Effect',
+    icon: 'extension_off',
     component: RemoveIEffectEffectComponent
   },
   roll: {
     label: 'Roll',
+    icon: 'ddb:digital-dice',
     component: RollEffectComponent
   },
   text: {
@@ -295,22 +304,27 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   },
   variable: {
     label: 'Set Variable',
+    icon: 'code',
     component: VariableEffectComponent
   },
   condition: {
     label: 'Branch',
+    icon: 'fork_right',
     component: ConditionEffectComponent
   },
   counter: {
     label: 'Use Counter',
+    icon: 'looks_one',
     component: CounterEffectComponent
   },
   spell: {
     label: 'Cast Spell',
+    icon: 'ddb:spells',
     component: SpellEffectComponent
   },
   check: {
     label: 'Ability Check',
+    icon: 'beenhere',
     component: CheckEffectComponent
   }
 };

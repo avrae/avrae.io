@@ -72,7 +72,9 @@ const typeRules: EffectRule[] = [
 
         <!-- render each button in the group -->
         <button mat-menu-item *ngFor="let effectRule of group[1]" (click)="addEffect(effectRule.id)">
-          <mat-icon *ngIf="getRuleIcon(effectRule)">{{getRuleIcon(effectRule)}}</mat-icon>
+          <mat-icon *ngIf="getRuleIcon(effectRule) && getRuleIcon(effectRule).includes('ddb:')"
+                    [svgIcon]="getRuleIcon(effectRule)"></mat-icon>
+          <mat-icon *ngIf="getRuleIcon(effectRule) && !getRuleIcon(effectRule).includes('ddb:')">{{getRuleIcon(effectRule)}}</mat-icon>
           <span>{{getRuleLabel(effectRule)}}</span>
         </button>
       </div>
@@ -159,7 +161,7 @@ export class NewEffectButtonComponent implements OnInit {
         this.doSaveForHalfPreset();
         return;
       default:
-        console.error(`Unknown effect type to add: "${toAddType}"`)
+        console.error(`Unknown effect type to add: "${toAddType}"`);
         return;
     }
     this.newEffect(effect);

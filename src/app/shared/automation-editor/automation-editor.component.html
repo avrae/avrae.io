@@ -17,13 +17,14 @@
     <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
       <cdk-nested-tree-node *cdkTreeNodeDef="let node"
                             class="tree-node"
-            <mat-icon class="node-icon">{{node.icon}}</mat-icon>
                             [class.tree-node-active]="node === selectedEffectNode">
         <span [matTooltip]="node.tooltip">
           <!-- icon -->
           <span *ngIf="node.icon">
             <!-- for some reason I can't replicate the styling of this button so we just use a disabled button -->
             <button mat-icon-button disabled>
+              <mat-icon class="node-icon" [svgIcon]="node.icon" *ngIf="node.icon.includes('ddb:')"></mat-icon>
+              <mat-icon class="node-icon" *ngIf="!node.icon.includes('ddb:')">{{node.icon}}</mat-icon>
             </button>
           </span>
           <!-- label -->

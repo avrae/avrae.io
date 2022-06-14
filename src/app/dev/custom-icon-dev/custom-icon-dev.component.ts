@@ -25,6 +25,7 @@ export class CustomIconDevComponent {
     'melee-attack',
     'piercing',
     'ranged-attack',
+    'resistant',
     'spells'
   ];
 }
