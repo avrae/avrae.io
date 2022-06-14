@@ -167,7 +167,7 @@ export interface UseCounter extends AutomationEffect {
   counter: string | SpellSlotReference | AbilityReference;
   amount: IntExpression;
   allowOverflow?: boolean;
-  errorBehaviour?: null | 'warn' | 'raise';
+  errorBehaviour?: 'warn' | 'raise' | 'ignore';
 }
 
 

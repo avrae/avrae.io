@@ -28,8 +28,8 @@ export class CounterEffectComponent extends EffectComponent<UseCounter> implemen
   }
 
   set errorBehaviourWrapper(value: 'warn' | 'raise' | 'ignore') {
-    if (value === 'ignore') {
-      this.effect.errorBehaviour = null;
+    if (value === 'warn') {
+      this.effect.errorBehaviour = undefined;
     } else {
       this.effect.errorBehaviour = value;
     }
