@@ -254,7 +254,7 @@ interface NodeDefRegistry {
 export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   target: {
     label: 'Target',
-    icon: 'flare',
+    icon: 'my_location',
     component: TargetEffectComponent
   },
   attack: {
@@ -309,7 +309,7 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   },
   condition: {
     label: 'Branch',
-    icon: 'fork_right',
+    icon: 'call_split',
     component: ConditionEffectComponent
   },
   counter: {
