@@ -17,26 +17,27 @@
     <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
       <cdk-nested-tree-node *cdkTreeNodeDef="let node"
                             class="tree-node"
-                            [class.tree-node-active]="node === selectedEffectNode"
-                            [matTooltip]="node.tooltip">
-        <!-- icon -->
-        <span *ngIf="node.icon">
-          <!-- for some reason I can't replicate the styling of this button so we just use a disabled button -->
-          <button mat-icon-button disabled>
             <mat-icon class="node-icon">{{node.icon}}</mat-icon>
-          </button>
-        </span>
-        <!-- label -->
-        {{node.label}}
-        <!-- for nodes representing effects (AutomationEffectTreeNode) -->
-        <span *ngIf="isEffectNode(node)">
-          <button mat-icon-button (click)="beginEditEffectNode(node)">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </span>
-        <!-- for AutomationAddEffectNode -->
-        <span *ngIf="isAddEffectNode(node)">
-          <avr-new-effect-button [meta]="node.meta" (created)="onNewEffectCreated(node)"></avr-new-effect-button>
+                            [class.tree-node-active]="node === selectedEffectNode">
+        <span [matTooltip]="node.tooltip">
+          <!-- icon -->
+          <span *ngIf="node.icon">
+            <!-- for some reason I can't replicate the styling of this button so we just use a disabled button -->
+            <button mat-icon-button disabled>
+            </button>
+          </span>
+          <!-- label -->
+          {{node.label}}
+          <!-- for nodes representing effects (AutomationEffectTreeNode) -->
+          <span *ngIf="isEffectNode(node)">
+            <button mat-icon-button (click)="beginEditEffectNode(node)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </span>
+          <!-- for AutomationAddEffectNode -->
+          <span *ngIf="isAddEffectNode(node)">
+            <avr-new-effect-button [meta]="node.meta" (created)="onNewEffectCreated(node)"></avr-new-effect-button>
+          </span>
         </span>
         <!-- for nodes with children -->
         <span *ngIf="hasChild(node)">
