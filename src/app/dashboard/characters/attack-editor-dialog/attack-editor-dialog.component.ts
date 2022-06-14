@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Attack, CharacterMeta} from '../../../schemas/Character';
@@ -9,7 +10,6 @@ import {SRDCopyDialog} from '../../../shared/dialogs/srd-copy-dialog/srd-copy-di
 import {ValidationSnackbar} from '../../../shared/validation-snackbar/validation-snackbar.component';
 import {ApiResponse} from '../../APIHelper';
 import {DashboardService} from '../../dashboard.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'avr-attack-editor-dialog',
@@ -48,7 +48,7 @@ export class AttackEditorDialog implements OnInit {
   }
 
   addAndSelectNewAttack() {
-    const atk = new Attack();
+    const atk = new Attack('New Attack');
     this.allAttacks.push(atk);
     this.selectedAttack = atk;
   }
