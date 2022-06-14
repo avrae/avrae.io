@@ -9,7 +9,7 @@
 
     <!-- edit, edit bindings -->
     <a mat-icon-button aria-label="Edit Collection Button" matTooltip="Edit Collection"
-            *ngIf="canEdit()" [routerLink]="'./edit'" [skipLocationChange]="true">
+       *ngIf="canEdit()" [routerLink]="'./edit'" [skipLocationChange]="true">
       <mat-icon>edit</mat-icon>
     </a>
 
@@ -104,8 +104,9 @@
         <!-- subscriptions -->
         <div class="meta-subscriptions">
           <p>
-            Added by <b>{{collection.num_subscribers}}</b> people
-            and <b>{{collection.num_guild_subscribers}}</b> servers
+            Added by <b>{{collection.num_subscribers}}</b> {{collection.num_subscribers === 1 ? 'person' : 'people'}}
+            and
+            <b>{{collection.num_guild_subscribers}}</b> {{collection.num_guild_subscribers === 1 ? 'server' : 'servers'}}
           </p>
         </div>
 
