@@ -162,4 +162,26 @@ export class AttackEditorDialog implements OnInit {
         }
       );
   }
+
+  // attack model wrappers
+  @removeEmpty('verb') verbWrapper: string;
+  @removeEmpty('thumb') thumbWrapper: string;
+  @removeEmpty('phrase') phraseWrapper: string;
+  @removeEmpty('criton') critonWrapper: number;
+  @removeEmpty('extra_crit_damage') extraCritDamageWrapper: string;
+}
+
+// adapted from https://stackoverflow.com/questions/59651284/dynamic-setter-from-decorator-typescript-complains-about-read-only-property
+// used to define getters/setters for wrapped props on selectedAttack that undefine them if the set value is empty
+function removeEmpty(attackProp: string) {
+  return function (target, propertyKey: string) {
+    Object.defineProperty(target, propertyKey, {
+      get: function (this) {
+        return this.selectedAttack[attackProp];
+      },
+      set: function (this, value) {
+        this.selectedAttack[attackProp] = value || undefined;
+      },
+    });
+  };
 }
