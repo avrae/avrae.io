@@ -81,7 +81,7 @@
       <span>
         Display: {{character.name}}
         <mat-form-field>
-          <input matInput placeholder="attacks with" [(ngModel)]="selectedAttack.verb">
+          <input matInput placeholder="attacks with" [(ngModel)]="verbWrapper">
         </mat-form-field>
         {{selectedAttack.proper ? selectedAttack.name : 'a ' + selectedAttack.name}}!
       </span>
@@ -89,12 +89,12 @@
         <mat-checkbox [(ngModel)]="selectedAttack.proper">Proper Noun</mat-checkbox>
 
         <mat-form-field>
-          <input matInput placeholder="Thumbnail URL" [(ngModel)]="selectedAttack.thumb"
+          <input matInput placeholder="Thumbnail URL" [(ngModel)]="thumbWrapper"
                  matTooltip="The URL of an image that will display each time this attack is used.">
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Flavor Text" [(ngModel)]="selectedAttack.phrase"
+          <input matInput placeholder="Flavor Text" [(ngModel)]="phraseWrapper"
                  matTooltip="Some text that will display each time this attack is used.">
         </mat-form-field>
       </div>
@@ -106,12 +106,12 @@
       </h3>
       <div class="crit-options-container auto-row">
         <mat-form-field>
-          <input matInput placeholder="Criton" [(ngModel)]="selectedAttack.criton" type="number" min="1" max="20"
+          <input matInput placeholder="Criton" [(ngModel)]="critonWrapper" type="number" min="1" max="20"
                  matTooltip="The natural roll this attack will crit on.">
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Extra Crit Damage" [(ngModel)]="selectedAttack.extra_crit_damage"
+          <input matInput placeholder="Extra Crit Damage" [(ngModel)]="extraCritDamageWrapper"
                  matTooltip="How much extra damage this attack does on a crit, beyond doubling dice.">
         </mat-form-field>
       </div>

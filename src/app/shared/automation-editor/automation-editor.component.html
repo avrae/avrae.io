@@ -1,11 +1,77 @@
-<mat-accordion multi="true">
-  <avr-effect-editor [parent]="automation"
-                     [parentTypeStack]="[]"
-                     [spell]="spell"
-                     (changed)="changed.emit()">
-  </avr-effect-editor>
-  <avr-new-effect-card [parent]="automation"
-                       [parentTypeStack]="[]"
-                       (changed)="changed.emit()">
-  </avr-new-effect-card>
-</mat-accordion>
+<div class="editor-container ignore-theme">
+  <!-- automation tree: easy to scroll through list of effects -->
+  <div class="automation-tree">
+    <div class="editor-header">
+      <span class="editor-header-text">Effect Tree</span>
+      <span class="toolbar-spacer"></span>
+      <span>
+        <button mat-icon-button matTooltip="Expand All" (click)="treeControl.expandAll()">
+          <mat-icon>expand</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Collapse All" (click)="treeControl.collapseAll()">
+          <mat-icon>compress</mat-icon>
+        </button>
+      </span>
+    </div>
+
+    <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <cdk-nested-tree-node *cdkTreeNodeDef="let node"
+                            class="tree-node"
+                            [class.tree-node-active]="node === selectedEffectNode">
+        <span [matTooltip]="node.tooltip">
+          <!-- icon -->
+          <span *ngIf="node.icon">
+            <!-- for some reason I can't replicate the styling of this button so we just use a disabled button -->
+            <button mat-icon-button disabled>
+              <mat-icon class="node-icon" [svgIcon]="node.icon" *ngIf="node.icon.includes('ddb:')"></mat-icon>
+              <mat-icon class="node-icon" *ngIf="!node.icon.includes('ddb:')">{{node.icon}}</mat-icon>
+            </button>
+          </span>
+          <!-- label -->
+          {{node.label}}
+          <!-- for nodes representing effects (AutomationEffectTreeNode) -->
+          <span *ngIf="isEffectNode(node)">
+            <button mat-icon-button (click)="beginEditEffectNode(node)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </span>
+          <!-- for AutomationAddEffectNode -->
+          <span *ngIf="isAddEffectNode(node)">
+            <avr-new-effect-button [meta]="node.meta" (created)="onNewEffectCreated(node)"></avr-new-effect-button>
+          </span>
+        </span>
+        <!-- for nodes with children -->
+        <span *ngIf="hasChild(node)">
+          <button mat-icon-button (click)="toggleNode(node, $event)">
+            <mat-icon>
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+        </span>
+        <div [class.tree-invisible]="!treeControl.isExpanded(node)" class="tree-children-container">
+          <ng-container cdkTreeNodeOutlet></ng-container>
+        </div>
+      </cdk-nested-tree-node>
+    </cdk-tree>
+  </div> <!-- </automation-tree> -->
+
+  <!-- node editor: individual node editing -->
+  <div class="node-editor">
+    <div *ngIf="!selectedEffectNode">
+      <div class="editor-header">
+        <span class="editor-header-text">Node Editor</span>
+      </div>
+      No node selected. Select an automation effect node from the Effect Tree to edit it!
+    </div>
+    <div *ngIf="selectedEffectNode">
+      <avr-effect-editor [effectNode]="selectedEffectNode"
+                         [spell]="spell"
+                         [debugMode]="debugMode"
+                         (changed)="changed.emit()"
+                         (treeChanged)="refreshTree()"
+                         (deleted)="selectedEffectNode = null">
+      </avr-effect-editor>
+    </div>
+  </div> <!-- </node-editor> -->
+</div>
+

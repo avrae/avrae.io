@@ -1,0 +1,57 @@
+<p>
+  An Attack effect makes an attack roll against a targeted creature.
+  <avr-autodoc-link anchor="attack"></avr-autodoc-link>
+</p>
+
+<!-- attack bonus -->
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+  <mat-checkbox matTooltip="If not checked, uses the caster's default spell attack bonus."
+                [(ngModel)]="custom"
+                (change)="changed.emit(); onCustomChange()"
+                *ngIf="spell != null">
+    Has custom attack bonus
+  </mat-checkbox>
+  <mat-form-field fxFlex="grow" *ngIf="custom">
+    <input matInput
+           placeholder="Attack Bonus"
+           class="text-monospace"
+           (change)="changed.emit()"
+           [(ngModel)]="effect.attackBonus">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+      calculate
+    </mat-icon>
+  </mat-form-field>
+</div>
+
+<!-- advantage -->
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+  <mat-form-field matTooltip="The default advantage for this attack roll.">
+    <mat-label>Advantage</mat-label>
+    <mat-select [(value)]="advantage" (selectionChange)="onAdvantageSelectChange($event)">
+      <mat-option value="0">Flat</mat-option>
+      <mat-option value="1">Advantage</mat-option>
+      <mat-option value="2">Elven Accuracy</mat-option>
+      <mat-option value="-1">Disadvantage</mat-option>
+      <mat-option value="custom">Custom</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field fxFlex="grow" *ngIf="advantage === 'custom'">
+    <input matInput
+           [(ngModel)]="customadvantage"
+           placeholder="Custom Advantage"
+           class="text-monospace"
+           (change)="onCustomAdvantageChange(); changed.emit()"
+           matTooltip="0 for Flat
+1 for Advantage
+2 for Elven Accuracy
+-1 for Disadvantage"
+           [matTooltipClass]="'adv-tooltip'">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+      calculate
+    </mat-icon>
+  </mat-form-field>
+</div>
+
+<p>
+  Use the Effect Tree to edit the on-hit and on-miss effects!
+</p>

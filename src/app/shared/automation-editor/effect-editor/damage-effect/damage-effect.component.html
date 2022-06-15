@@ -1,0 +1,29 @@
+<p>
+  Deals damage to or heals a targeted creature.
+  <avr-autodoc-link anchor="damage"></avr-autodoc-link>
+</p>
+
+<div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="left center" class="auto-row">
+  <mat-form-field fxFlex>
+    <input matInput placeholder="Damage" (change)="changed.emit()" [(ngModel)]="effect.damage" required>
+    <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
+  </mat-form-field>
+  <span>
+        <mat-checkbox [(ngModel)]="effect.overheal" (change)="changed.emit()">
+          Allow Overheal
+        </mat-checkbox>
+      </span>
+</div>
+
+<div fxLayout="column"
+     fxFill
+     fxLayout.gt-xs="row"
+     fxLayoutGap="8px"
+     fxLayoutAlign="space-evenly center"
+     fxLayoutAlign.gt-xs="left center"
+     *ngIf="spell != null">
+  <avr-higher-level fxFlex [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
+  <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
+    Scales like Cantrip
+  </mat-checkbox>
+</div>

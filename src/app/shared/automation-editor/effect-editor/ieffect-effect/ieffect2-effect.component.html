@@ -1,0 +1,407 @@
+<p>
+  Adds an InitTracker Effect to a targeted creature, if the target is in combat.
+  Initiative Effects are a versatile method to modify a combatant's bonuses, maluses, grant temporary actions,
+  and create automation that runs at the click of a button!
+  <avr-autodoc-link anchor="ieffect"></avr-autodoc-link>
+</p>
+
+<!-- name -->
+<div>
+  <mat-form-field class="is-fullwidth">
+    <input matInput placeholder="Name" (change)="changed.emit()" [(ngModel)]="effect.name" required>
+    <mat-error *ngIf="spell != null && spell.concentration && spell.name === effect.name">
+      Concentration spells create an effect with the spell name automatically. This will overwrite it, potentially
+      creating issues.
+    </mat-error>
+  </mat-form-field>
+</div>
+
+<!-- duration, end, conc -->
+<p class="auto-label">
+  Duration Options
+</p>
+<div>
+  <mat-form-field class="is-fullwidth" floatLabel="always">
+    <mat-label>Duration</mat-label>
+    <input matInput
+           placeholder="Indefinite"
+           (change)="changed.emit()"
+           [(ngModel)]="durationWrapper"
+           matTooltip="The duration, in rounds. Leave blank for infinite duration.">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+      calculate
+    </mat-icon>
+  </mat-form-field>
+</div>
+<div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="left baseline" class="auto-row">
+  <mat-checkbox [(ngModel)]="effect.end"
+                (change)="changed.emit();"
+                matTooltip="Whether the effect duration ticks down at the end of the turn rather than the start.">
+    Ticks on end of turn
+  </mat-checkbox>
+  <mat-checkbox [(ngModel)]="effect.conc" (change)="changed.emit();">
+    Requires concentration
+  </mat-checkbox>
+</div>
+
+<!-- passive effects -->
+<div [formGroup]="effectGroup">
+  <div formArrayName="passiveEffects">
+    <p class="auto-label">
+      Passive Effects
+    </p>
+
+    <div *ngFor="let passiveEffectGroup of passiveEffects.controls; let i=index">
+      <!-- The repeated passive effect template -->
+      <div [formGroupName]="i" fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left baseline" class="auto-row">
+        <!-- effect type -->
+        <mat-form-field fxFlex="1 4 auto">
+          <mat-label>Passive Effect</mat-label>
+          <mat-select formControlName="effectType">
+            <mat-option *ngFor="let passiveOption of passiveEffectTypeOptions" [value]="passiveOption.value">
+              {{passiveOption.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error>Only one instance of this effect may be specified.</mat-error>
+        </mat-form-field>
+
+        <!-- predefined value -->
+        <mat-form-field fxFlex="1 4 auto" *ngIf="hasDefaultOptions(passiveEffectGroup)">
+          <mat-label>Value</mat-label>
+          <mat-select formControlName="defaultOptions">
+            <mat-option *ngFor="let option of PASSIVE_EFFECTS[passiveEffectGroup.get('effectType').value]!.defaultOptions"
+                        [value]="option.value">
+              {{option.name}}
+            </mat-option>
+            <mat-option [value]="CUSTOM_SENTINEL">Custom</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- custom expression -->
+        <mat-form-field fxFlex="4 1 auto" *ngIf="isCustomValue(passiveEffectGroup)">
+          <mat-label>Custom Expression</mat-label>
+          <input matInput formControlName="value">
+          <!-- intexpression or annotatedstring -->
+          <mat-icon matSuffix
+                    *ngIf="isValueIntExpression(passiveEffectGroup)"
+                    matTooltip="IntExpression - variables and functions allowed, braces optional">
+            calculate
+          </mat-icon>
+          <span matSuffix
+                *ngIf="!isValueIntExpression(passiveEffectGroup)"
+                matTooltip="AnnotatedString - variables and functions allowed in braces">
+            {{"{ }"}}
+          </span>
+        </mat-form-field>
+        <span fxFlex="4 1 auto" *ngIf="!isCustomValue(passiveEffectGroup)">
+          <!-- empty space-filler -->
+        </span>
+
+        <!-- delete -->
+        <avr-doubleclick-delete-button (delete)="deletePassiveEffect(i)"></avr-doubleclick-delete-button>
+      </div>
+    </div>
+
+    <button mat-button (click)="addPassiveEffect()">
+      + Add passive effect
+    </button>
+  </div>
+</div>
+
+<!-- attacks -->
+<div [formGroup]="effectGroup">
+  <div formArrayName="attacks">
+    <p class="auto-label">
+      Granted Actions
+    </p>
+
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let attackGroup of attacks.controls; let i=index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{attackGroup.get('name').value}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div [formGroupName]="i">
+          <!-- name -->
+          <mat-form-field class="is-fullwidth">
+            <input matInput formControlName="name" placeholder="Name" required>
+          </mat-form-field>
+
+          <!-- display options -->
+          <p class="auto-label">
+            Display Options
+          </p>
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <mat-form-field fxFlex floatLabel="always">
+              <mat-label>Verb</mat-label>
+              <input matInput formControlName="verb" placeholder="attacks with">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput formControlName="thumb" placeholder="Thumbnail URL">
+            </mat-form-field>
+          </div>
+          <mat-form-field class="is-fullwidth">
+            <input matInput formControlName="phrase" placeholder="Flavor Text">
+          </mat-form-field>
+          <mat-checkbox formControlName="proper">
+            Name is proper noun
+          </mat-checkbox>
+
+          <!-- crit options -->
+          <p class="auto-label">
+            Critical Hit Options
+          </p>
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <mat-form-field fxFlex floatLabel="always">
+              <mat-label>Crit On</mat-label>
+              <input matInput
+                     formControlName="criton"
+                     placeholder="(target's criton setting)"
+                     type="number"
+                     min="1"
+                     max="20">
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput formControlName="extraCritDamage" placeholder="Extra Crit Damage">
+            </mat-form-field>
+          </div>
+
+          <!-- spellcasting info -->
+          <p class="auto-label">
+            Default Casting Information Overrides
+          </p>
+          <p>
+            For Attack and Save nodes without an explicitly defined attack bonus/DC, the default DC and attack modifier
+            to use. If left blank, the target's default spellcasting information is used.
+          </p>
+
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <mat-form-field fxFlex>
+              <input matInput formControlName="defaultDc" placeholder="DC" class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput
+                     formControlName="defaultAttackBonus"
+                     placeholder="Spell Attack Bonus"
+                     class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput
+                     formControlName="defaultCastingMod"
+                     placeholder="Spellcasting Modifier"
+                     class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+          </div>
+
+          <p class="auto-label">
+            Effects
+          </p>
+          <p>
+            To edit this action's effects, use the Effect Tree!
+          </p>
+        </div>
+
+        <mat-action-row>
+          <avr-doubleclick-delete-button (delete)="deleteAttack(i)"></avr-doubleclick-delete-button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <button mat-button (click)="addAttack()">
+      + Add granted action
+    </button>
+  </div>
+</div>
+
+<!-- buttons -->
+<div [formGroup]="effectGroup">
+  <div formArrayName="buttons">
+    <p class="auto-label">
+      Granted Buttons
+    </p>
+
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let buttonGroup of buttons.controls; let i=index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{buttonGroup.get('label').value}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div [formGroupName]="i">
+          <!-- label -->
+          <mat-form-field class="is-fullwidth">
+            <input matInput formControlName="label" placeholder="Label" required>
+            <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">
+              {{"{ }"}}
+            </span>
+          </mat-form-field>
+
+          <!-- display options -->
+          <p class="auto-label">
+            Display Options
+          </p>
+          <mat-form-field class="is-fullwidth" floatLabel="always">
+            <mat-label>Verb</mat-label>
+            <input matInput formControlName="verb" [placeholder]="'uses ' + buttonGroup.get('label').value">
+            <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">
+              {{"{ }"}}
+            </span>
+          </mat-form-field>
+
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <!-- style -->
+            <mat-form-field fxFlex="1 4 auto">
+              <mat-label>Style</mat-label>
+              <mat-select formControlName="style">
+                <mat-option *ngFor="let styleOption of buttonStyleOptions" [value]="styleOption.value">
+                  <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="left center">
+                    <span class="button-style button-style-{{styleOption.value}}"></span>
+                    <span>{{styleOption.name}}</span>
+                  </div>
+                </mat-option>
+                <mat-option [value]="CUSTOM_SENTINEL">
+                  Custom Expression
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- custom expression -->
+            <mat-form-field fxFlex="4 1 auto" *ngIf="isCustomButtonStyle(buttonGroup)">
+              <mat-label>Custom Expression</mat-label>
+              <input matInput formControlName="customStyle">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+          </div>
+
+          <!-- spellcasting info -->
+          <p class="auto-label">
+            Default Casting Information Overrides
+          </p>
+          <p>
+            For Attack and Save nodes without an explicitly defined attack bonus/DC, the default DC and attack modifier
+            to use. If left blank, the target's default spellcasting information is used.
+          </p>
+
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+            <mat-form-field fxFlex>
+              <input matInput formControlName="defaultDc" placeholder="DC" class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput
+                     formControlName="defaultAttackBonus"
+                     placeholder="Spell Attack Bonus"
+                     class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <input matInput
+                     formControlName="defaultCastingMod"
+                     placeholder="Spellcasting Modifier"
+                     class="text-monospace">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+                calculate
+              </mat-icon>
+            </mat-form-field>
+          </div>
+
+          <p class="auto-label">
+            Effects
+          </p>
+          <p>
+            To edit this button's effects, use the Effect Tree!
+          </p>
+        </div>
+
+        <mat-action-row>
+          <avr-doubleclick-delete-button (delete)="deleteButton(i)"></avr-doubleclick-delete-button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <button mat-button (click)="addButton()">
+      + Add granted button
+    </button>
+  </div>
+</div>
+
+<!-- desc -->
+<p class="auto-label">
+  Description
+</p>
+<div>
+  <mat-form-field class="is-fullwidth">
+    <textarea matInput
+              placeholder="Description"
+              rows="3"
+              (change)="changed.emit()"
+              [(ngModel)]="effect.desc"
+              maxlength="500">
+    </textarea>
+    <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
+  </mat-form-field>
+</div>
+
+<!-- save_as, parent -->
+<p class="auto-label">
+  Parenting Options
+</p>
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left baseline">
+  <mat-form-field fxFlex>
+    <input matInput
+           placeholder="Save As"
+           class="text-monospace"
+           (change)="changed.emit()"
+           [(ngModel)]="effect.save_as"
+           matTooltip="If supplied, saves the added effect as an automation variable. Use this in another IEffect's parent field to set this effect as its parent.">
+  </mat-form-field>
+  <mat-form-field fxFlex>
+    <input matInput
+           placeholder="Parent"
+           class="text-monospace"
+           (change)="changed.emit()"
+           [(ngModel)]="effect.parent"
+           matTooltip="If supplied, sets the added effect's parent to the given effect. This must be the same as another IEffect's save_as.">
+  </mat-form-field>
+</div>
+
+<!-- stacking -->
+<p class="auto-label">
+  Other Options
+</p>
+
+
+<div>
+  <mat-checkbox [(ngModel)]="effect.stacking"
+                (change)="changed.emit();"
+                matTooltip="If another effect with the same name exists, add this effect as a child instead of overwriting it.">
+    Enable Effect Stacking
+  </mat-checkbox>
+</div>
+
+
+

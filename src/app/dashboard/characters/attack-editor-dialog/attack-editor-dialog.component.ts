@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Attack, CharacterMeta} from '../../../schemas/Character';
@@ -9,7 +10,6 @@ import {SRDCopyDialog} from '../../../shared/dialogs/srd-copy-dialog/srd-copy-di
 import {ValidationSnackbar} from '../../../shared/validation-snackbar/validation-snackbar.component';
 import {ApiResponse} from '../../APIHelper';
 import {DashboardService} from '../../dashboard.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'avr-attack-editor-dialog',
@@ -48,7 +48,7 @@ export class AttackEditorDialog implements OnInit {
   }
 
   addAndSelectNewAttack() {
-    const atk = new Attack();
+    const atk = new Attack('New Attack');
     this.allAttacks.push(atk);
     this.selectedAttack = atk;
   }
@@ -162,4 +162,26 @@ export class AttackEditorDialog implements OnInit {
         }
       );
   }
+
+  // attack model wrappers
+  @removeEmpty('verb') verbWrapper: string;
+  @removeEmpty('thumb') thumbWrapper: string;
+  @removeEmpty('phrase') phraseWrapper: string;
+  @removeEmpty('criton') critonWrapper: number;
+  @removeEmpty('extra_crit_damage') extraCritDamageWrapper: string;
+}
+
+// adapted from https://stackoverflow.com/questions/59651284/dynamic-setter-from-decorator-typescript-complains-about-read-only-property
+// used to define getters/setters for wrapped props on selectedAttack that undefine them if the set value is empty
+function removeEmpty(attackProp: string) {
+  return function (target, propertyKey: string) {
+    Object.defineProperty(target, propertyKey, {
+      get: function (this) {
+        return this.selectedAttack[attackProp];
+      },
+      set: function (this, value) {
+        this.selectedAttack[attackProp] = value || undefined;
+      },
+    });
+  };
 }

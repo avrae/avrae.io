@@ -1,0 +1,37 @@
+@import "../../../variables";
+
+.hidden {
+  visibility: hidden;
+}
+
+.is-fullwidth {
+  width: 100%;
+}
+
+.text-monospace {
+  font-family: $font-monospace;
+}
+
+.auto-label {
+  font-family: $font-accent;
+  opacity: 0.7;
+}
+
+/* mobile styles */
+@media (max-width: 700px) {
+  .auto-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .auto-row span, .auto-row mat-form-field {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .auto-row span, .auto-row span span {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

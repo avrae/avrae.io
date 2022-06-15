@@ -1,0 +1,23 @@
+@import "../../variables";
+
+.editor-header {
+  display: flex;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba($gray2, 0.3);
+
+  .editor-header-text {
+    font-weight: bold;
+    margin-right: 8px;
+  }
+
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+
+  button[mat-icon-button] {
+    font-size: 20px;
+    line-height: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}

@@ -1,0 +1,22 @@
+<p>
+  This effect has not yet been implemented in the Automation Editor. Sorry about that!
+</p>
+<p>
+  If you know what you're doing, you can check below to edit this effect's YAML directly.
+  <em>This can lead to automation corruption. Here be dragons.</em>
+</p>
+<p>
+  <mat-checkbox [(ngModel)]="userKnowsWhatTheyreDoing">I know what I'm doing</mat-checkbox>
+</p>
+<div *ngIf="userKnowsWhatTheyreDoing">
+  <p>
+    Good luck! Click the button below once you've edited the YAML to update the effect.
+  </p>
+  <button mat-flat-button color="primary" (click)="updateEffectData()">Update Effect Data</button>
+  <pre class="mat-error" *ngIf="error">{{error}}</pre>
+  <mat-form-field class="is-fullwidth text-monospace">
+    <textarea matInput rows="5" [(ngModel)]="editedYaml">
+    </textarea>
+  </mat-form-field>
+
+</div>

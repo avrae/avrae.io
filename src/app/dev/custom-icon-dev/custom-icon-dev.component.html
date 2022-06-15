@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-card>
+    <h1>Icon Dev</h1>
+    <p>Test custom icons here</p>
+    <p>
+      Note: when pulling icons from Figma it's easiest to use Copy as SVG, you'll need to remove any fill= attributes
+      from the SVG too to make sure styling works
+    </p>
+
+    <mat-list>
+      <mat-list-item *ngFor="let icon of CUSTOM_ICONS">
+        <mat-icon matListIcon svgIcon="ddb:{{icon}}"></mat-icon>
+        <h3 matLine> ddb:{{icon}} </h3>
+      </mat-list-item>
+    </mat-list>
+
+    <button mat-icon-button disabled>
+      <mat-icon svgIcon="ddb:healing"></mat-icon>
+    </button>
+    <button mat-icon-button disabled>
+      <mat-icon>comment</mat-icon>
+    </button>
+  </mat-card>
+</div>
+
+
