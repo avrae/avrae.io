@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist-dev
-          path: dist
+          path: dist/
           if-no-files-found: error
 
   deploy:
@@ -52,6 +52,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist-dev
+          path: dist
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.0.0
