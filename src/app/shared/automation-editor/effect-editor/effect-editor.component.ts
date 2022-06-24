@@ -42,11 +42,11 @@ export class EffectEditorComponent implements OnInit, OnChanges {
   @ViewChild(EffectEditorDirective, {static: true}) effectEditorDirective!: EffectEditorDirective;
 
   get isFirst(): boolean {
-    return this.effectNode.parentArray.indexOf(this.effectNode.effect) === 0;
+    return this.effectNode.context.parentArray.indexOf(this.effectNode.effect) === 0;
   }
 
   get isLast(): boolean {
-    return this.effectNode.parentArray.indexOf(this.effectNode.effect) === this.effectNode.parentArray.length - 1;
+    return this.effectNode.context.parentArray.indexOf(this.effectNode.effect) === this.effectNode.context.parentArray.length - 1;
   }
 
   constructor() {
@@ -81,29 +81,29 @@ export class EffectEditorComponent implements OnInit, OnChanges {
   }
 
   moveUp() {
-    const index = this.effectNode.parentArray.indexOf(this.effectNode.effect);
+    const index = this.effectNode.context.parentArray.indexOf(this.effectNode.effect);
     const newIndex = index - 1;
     if (newIndex > -1) {
-      moveItemInArray(this.effectNode.parentArray, index, newIndex);
+      moveItemInArray(this.effectNode.context.parentArray, index, newIndex);
       this.changed.emit();
       this.treeChanged.emit();
     }
   }
 
   moveDown() {
-    const index = this.effectNode.parentArray.indexOf(this.effectNode.effect);
+    const index = this.effectNode.context.parentArray.indexOf(this.effectNode.effect);
     const newIndex = index + 1;
-    if (newIndex < this.effectNode.parentArray.length) {
-      moveItemInArray(this.effectNode.parentArray, index, newIndex);
+    if (newIndex < this.effectNode.context.parentArray.length) {
+      moveItemInArray(this.effectNode.context.parentArray, index, newIndex);
       this.changed.emit();
       this.treeChanged.emit();
     }
   }
 
   delete() {
-    const index = this.effectNode.parentArray.indexOf(this.effectNode.effect);
+    const index = this.effectNode.context.parentArray.indexOf(this.effectNode.effect);
     if (index > -1) {
-      this.effectNode.parentArray.splice(index, 1);
+      this.effectNode.context.parentArray.splice(index, 1);
       this.changed.emit();
       this.treeChanged.emit();
       this.deleted.emit();

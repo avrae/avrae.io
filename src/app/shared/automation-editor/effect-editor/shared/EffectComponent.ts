@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Spell} from '../../../../schemas/homebrew/Spells';
 import {AutomationEffect} from '../../types';
-import {AutomationEffectTreeNode} from '../../utils';
+import {AutomationEffectTreeNode, NodeContext} from '../../utils';
 
 @Component({template: ''})
 export abstract class EffectComponent<T extends AutomationEffect> {
@@ -16,7 +16,7 @@ export abstract class EffectComponent<T extends AutomationEffect> {
     return this.effectNode.effect as T;
   }
 
-  get isIEffectButton(): boolean {
-    return this.effectNode.isInIEffectButton;
+  get context(): NodeContext {
+    return this.effectNode.context;
   }
 }

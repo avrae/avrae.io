@@ -17,19 +17,19 @@ import {
   Text,
   UseCounter
 } from './types';
-import {AUTOMATION_NODE_DEFS, NewEffectMeta} from './utils';
+import {AUTOMATION_NODE_DEFS, NodeContext} from './utils';
 
-function hasAncestorOfType(type: string): (meta: NewEffectMeta) => boolean {
-  return meta => meta.ancestors.some(effect => effect.type === type);
+function hasAncestorOfType(type: string): (context: NodeContext) => boolean {
+  return context => context.ancestors.some(effect => effect.type === type);
 }
 
-function noAncestorOfType(type: string): (meta: NewEffectMeta) => boolean {
-  return meta => !(hasAncestorOfType(type)(meta));
+function noAncestorOfType(type: string): (context: NodeContext) => boolean {
+  return context => !(hasAncestorOfType(type)(context));
 }
 
 interface EffectRule {
   id: string;
-  rules: Array<(meta: NewEffectMeta) => boolean>;
+  rules: Array<(context: NodeContext) => boolean>;
   label?: string;  // defaults to utils.AUTOMATION_NODE_DEFS[id].label
   group?: string;  // defaults to "Effects"
   icon?: string;  // defaults to utils.AUTOMATION_NODE_DEFS[id].icon
@@ -49,7 +49,7 @@ const typeRules: EffectRule[] = [
   {id: 'variable', rules: []},
   {id: 'condition', rules: []},
   {id: 'counter', rules: []},
-  {id: 'spell', rules: [meta => meta.ancestors.length === 0, meta => !meta.isSpell]},
+  {id: 'spell', rules: [context => context.ancestors.length === 0, context => !context.isSpell]},
   {id: 'check', rules: [hasAncestorOfType('target')]},
   // --- presets ---
   {id: 'preset_atk_dmg', label: 'Attack and Damage', group: 'Presets', rules: [noAncestorOfType('target')]},
@@ -85,7 +85,7 @@ const typeRules: EffectRule[] = [
 })
 export class NewEffectButtonComponent implements OnInit {
 
-  @Input() meta: NewEffectMeta;
+  @Input() context: NodeContext;
   @Output() created = new EventEmitter();
   satisfiedRules: [string, EffectRule[]][];
 
@@ -94,7 +94,7 @@ export class NewEffectButtonComponent implements OnInit {
 
   ngOnInit() {
     const satisfiedRules = typeRules
-      .filter((effectRule) => effectRule.rules.every(rule => rule(this.meta)));
+      .filter((effectRule) => effectRule.rules.every(rule => rule(this.context)));
     this.satisfiedRules = Object.entries(groupBy(satisfiedRules, effectRule => effectRule.group ?? 'Effects'));
   }
 
@@ -169,7 +169,7 @@ export class NewEffectButtonComponent implements OnInit {
   }
 
   newEffect(effect: AutomationEffect) {
-    this.meta.parentArray.push(effect);
+    this.context.parentArray.push(effect);
   }
 
   // --- presets ---
@@ -209,7 +209,7 @@ export class NewEffectButtonComponent implements OnInit {
         ]
       } as Target
     ];
-    this.meta.parentArray.push(...effects);
+    this.context.parentArray.push(...effects);
     this.created.emit();
   }
 }

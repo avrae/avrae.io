@@ -33,8 +33,8 @@ export class UnknownEffectComponent extends EffectComponent<any> implements OnIn
     }
 
     // replace the node in the parent array
-    const idx = this.effectNode.parentArray.indexOf(this.effectNode.effect);
-    this.effectNode.parentArray[idx] = parsed;
+    const idx = this.effectNode.context.parentArray.indexOf(this.effectNode.effect);
+    this.effectNode.context.parentArray[idx] = parsed;
     // lol good luck
     this.changed.emit();
     this.treeChanged.emit();
