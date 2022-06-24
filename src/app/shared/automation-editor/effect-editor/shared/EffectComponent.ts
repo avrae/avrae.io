@@ -16,7 +16,7 @@ export abstract class EffectComponent<T extends AutomationEffect> {
     return this.effectNode.effect as T;
   }
 
-  get isIEffect(): boolean {
-    return this.effectNode.isInIEffect;
+  get isIEffectButton(): boolean {
+    return this.effectNode.isInIEffectButton;
   }
 }

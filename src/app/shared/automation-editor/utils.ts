@@ -49,14 +49,14 @@ export class AutomationEffectTreeNode extends AutomationTreeNode {
   effect: AutomationEffect;
   parentArray: AutomationEffect[];
   ancestors: AutomationEffect[];  // root -> direct parent list of ancestor effects
-  isInIEffect: boolean;
+  isInIEffectButton: boolean;
 
-  constructor(effect: AutomationEffect, parentArray: AutomationEffect[], ancestors: AutomationEffect[], isInIEffect: boolean, label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
+  constructor(effect: AutomationEffect, parentArray: AutomationEffect[], ancestors: AutomationEffect[], isInIEffectButton: boolean, label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
     super(label, icon, tooltip, children);
     this.effect = effect;
     this.parentArray = parentArray;
     this.ancestors = ancestors;
-    this.isInIEffect = isInIEffect;
+    this.isInIEffectButton = isInIEffectButton;
   }
 }
 
@@ -71,10 +71,13 @@ export class AutomationAddEffectNode extends AutomationTreeNode {
 
 // builder
 export class AutomationTreeBuilder {
+  // node context props
   isSpell: boolean;
   isIEffect: boolean;
-  effectTreeNodeMap: WeakMap<AutomationEffect, AutomationEffectTreeNode>;
+  isIEffectButton: boolean;
   ancestors: AutomationEffect[] = [];
+  // other props
+  effectTreeNodeMap: WeakMap<AutomationEffect, AutomationEffectTreeNode>;
 
   constructor(isSpell: boolean) {
     this.isSpell = isSpell;
@@ -116,7 +119,7 @@ export class AutomationTreeBuilder {
         effect,
         parentArray,
         this.ancestors,
-        this.isIEffect,
+        this.isIEffectButton,
         'Unknown Node',
         'help_outline',
         'This node is not yet supported by the web builder.',
@@ -132,7 +135,7 @@ export class AutomationTreeBuilder {
         effect,
         parentArray,
         this.ancestors,
-        this.isIEffect,
+        this.isIEffectButton,
         nodeDef.label || effect.type,
         nodeDef.icon,
         nodeDef.tooltip,
@@ -219,7 +222,11 @@ export class AutomationTreeBuilder {
   }
 
   ieffect2ButtonNode(button: ButtonInteraction): AutomationTreeNode {
-    return this.ieffect2Node(button, `Button: ${button.label}`, button.automation, undefined, 'Edit the parent Initiative Effect node to edit this button!');
+    const oldIsIEffectButton = this.isIEffectButton;
+    this.isIEffectButton = true;
+    const node = this.ieffect2Node(button, `Button: ${button.label}`, button.automation, undefined, 'Edit the parent Initiative Effect node to edit this button!');
+    this.isIEffectButton = oldIsIEffectButton;
+    return node;
   }
 
   ieffect2Node(interaction: AttackInteraction | ButtonInteraction, name: string, automation: AutomationEffect[], icon, tooltip) {

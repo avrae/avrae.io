@@ -7,11 +7,11 @@
   <mat-form-field>
     <mat-label>Target</mat-label>
     <mat-select [(value)]="selectedTarget" (selectionChange)="onTargetSelectChange($event)">
-      <mat-option value="all" *ngIf="!isIEffect">All</mat-option>
+      <mat-option value="all" *ngIf="!isIEffectButton">All</mat-option>
       <mat-option value="self">Caster</mat-option>
-      <mat-option value="position" *ngIf="!isIEffect">Position</mat-option>
-      <mat-option value="parent" *ngIf="isIEffect">Parent</mat-option>
-      <mat-option value="children" *ngIf="isIEffect">Children</mat-option>
+      <mat-option value="position" *ngIf="!isIEffectButton">Position</mat-option>
+      <mat-option value="parent" *ngIf="isIEffectButton">Parent</mat-option>
+      <mat-option value="children" *ngIf="isIEffectButton">Children</mat-option>
       <!-- this value is deprecated, but it still needs to exist here -->
       <mat-option value="each" style="height: 0;">All</mat-option>
     </mat-select>
