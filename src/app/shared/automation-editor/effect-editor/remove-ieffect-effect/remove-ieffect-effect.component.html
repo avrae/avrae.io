@@ -5,7 +5,7 @@
 </p>
 
 <!-- remove parent -->
-<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+<div fxLayout="row nowrap" fxLayoutGap="6px" class="auto-row">
   <mat-form-field>
     <mat-label>Remove Parent</mat-label>
     <mat-select [(value)]="removeParentWrapper" (selectionChange)="changed.emit()">
@@ -14,13 +14,10 @@
       <mat-option value="if_no_children">If No Children</mat-option>
     </mat-select>
   </mat-form-field>
-
-  <span>
-    <mat-icon aria-hidden="false"
-              aria-label="Remove parent help"
-              inline
-              matTooltip="If the removed effect has a parent effect, whether to remove it as well.">
-      help
-    </mat-icon>
-  </span>
+  <mat-icon aria-hidden="false"
+  aria-label="Remove parent help"
+  inline
+  matTooltip="If the removed effect has a parent effect, whether to remove it as well.">
+    help
+  </mat-icon>
 </div>

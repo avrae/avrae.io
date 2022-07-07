@@ -4,6 +4,10 @@
   color: #fff;
 }
 
+.editor-container.ignore-theme.hidden-tree {
+  grid-template-columns: none;
+}
+
 .editor-container {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -13,7 +17,7 @@
 
   > div {
     max-height: calc(100vh - #{$navbar-height + $footer-height});
-    overflow: scroll;
+    overflow-y: scroll;
   }
 }
 
@@ -21,6 +25,7 @@
 .automation-tree {
   border-right: 1px solid rgba($gray2, 0.3);
   padding: 6px;
+  min-width: 200px;
 }
 
 .tree-invisible {
@@ -35,6 +40,8 @@
 .tree-node-active {
   background: rgba($blurple, 0.2);
   border-radius: 2px;
+  padding-left: 2px;
+  margin-left: -2px;
 }
 
 .tree-children-container {
@@ -57,4 +64,23 @@
 // editor styles
 .node-editor {
   padding: 6px;
+}
+
+.edit-node {
+  cursor: pointer;
+  height: max;
+}
+
+.editor-container div::-webkit-scrollbar {
+  width: 10px;
+}
+
+.editor-container div::-webkit-scrollbar-thumb {
+  background: rgba(102, 102, 102, 0.5);
+  border-radius: 20px;
+}
+
+.editor-container div::-webkit-scrollbar-track {
+  background: rgba(221, 221, 221, 0.1);
+  border-radius: 20px;
 }

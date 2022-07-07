@@ -35,7 +35,7 @@
 </div>
 
 <!-- advantage -->
-<div>
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
   <mat-form-field matTooltip="The default advantage for this saving throw.">
     <mat-label>Advantage</mat-label>
     <mat-select [(value)]="advantageWrapper" (selectionChange)="changed.emit()">
