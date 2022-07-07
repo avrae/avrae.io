@@ -30,10 +30,6 @@ function noAncestorOfType(type: string): (meta: NewEffectMeta) => boolean {
   return meta => !(hasAncestorOfType(type)(meta));
 }
 
-function childOfType(type: string): (meta: NewEffectMeta) => boolean {
-  return meta => meta.ancestors.length != 0 && meta.ancestors[meta.ancestors.length - 1].type === type;
-}
-
 interface EffectRule {
   id: string;
   rules: Array<(meta: NewEffectMeta) => boolean>;
