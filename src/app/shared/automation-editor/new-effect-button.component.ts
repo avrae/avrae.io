@@ -61,8 +61,8 @@ const typeRules: EffectRule[] = [
   {id: 'preset_save_to_end', label: 'Save to Remove Condition', group: 'Presets', rules: [hasAncestorOfType('target')]},
   {id: 'preset_recharge', label: 'Monster Ability Recharge', group: 'Presets', rules: [meta => meta.ancestors.length === 0]},
   {id: 'preset_basic_dot', label: 'Damage Over Time Effect', group: 'Presets', rules: [hasAncestorOfType('target')]},
-  {id: 'preset_grapple', label: 'Grapple Contest', group: 'Presets', rules: [meta => meta.ancestors.length === 0]},
-  {id: 'preset_aura', label: 'Basic Aura', group: 'Presets', rules: [meta => meta.ancestors.length === 0]},
+  {id: 'preset_grapple', label: 'Grapple Contest', group: 'Presets', rules: [noAncestorOfType('target')]},
+  {id: 'preset_aura', label: 'Basic Aura', group: 'Presets', rules: [noAncestorOfType('target')]},
 ];
 
 // ==== component ====
