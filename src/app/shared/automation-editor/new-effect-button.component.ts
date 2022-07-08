@@ -179,7 +179,7 @@ export class NewEffectButtonComponent implements OnInit {
         effect = this.generateSaveToEndPreset();
         break;
       case 'preset_basic_dot':
-        effect = this.generateBasicDOT();
+        effect = this.generateBasicDOTPreset();
         break;
       case 'preset_grapple':
         this.doGrapplePreset();
