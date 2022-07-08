@@ -121,7 +121,8 @@ export class NewEffectButtonComponent implements OnInit {
     let effect: AutomationEffect;
     switch (toAddType) {
       case 'target':
-        effect = {type: 'target', target: 'self', effects: []} as Target;
+        const target = this.context.isIEffectButton ? "self" : "all";
+        effect = {type: 'target', target, effects: []} as Target;
         break;
       case 'attack':
         effect = {type: 'attack', hit: [], miss: []} as Attack;
