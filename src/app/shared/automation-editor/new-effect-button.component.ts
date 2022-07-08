@@ -341,7 +341,7 @@ export class NewEffectButtonComponent implements OnInit {
     } as IEffect;
   }
 
-  generateBasicDOT(): AutomationEffect {
+  generateBasicDOTPreset(): AutomationEffect {
     return {
       type: "ieffect2",
       name: "On Fire",
