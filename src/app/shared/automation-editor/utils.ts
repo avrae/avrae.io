@@ -18,6 +18,14 @@ import {VariableEffectComponent} from './effect-editor/variable-effect/variable-
 import {AbilityCheck, Attack, AttackInteraction, AutomationEffect, ButtonInteraction, Condition, IEffect, Save, Target} from './types';
 
 // ==== automation-editor ====
+export interface NodeContext {
+  ancestors: AutomationEffect[];  // root -> direct parent list of ancestor effects
+  parentArray: AutomationEffect[];  // the array to add a new effect to
+  isSpell: boolean;
+  isIEffect: boolean;
+  isIEffectButton: boolean;
+}
+
 // nodes
 export class AutomationTreeNode {
   label: string;
@@ -47,37 +55,31 @@ export class AutomationTreeNode {
 
 export class AutomationEffectTreeNode extends AutomationTreeNode {
   effect: AutomationEffect;
-  parentArray: AutomationEffect[];
-  ancestors: AutomationEffect[];  // root -> direct parent list of ancestor effects
-  isInIEffect: boolean;
+  context: NodeContext;
 
-  constructor(effect: AutomationEffect, parentArray: AutomationEffect[], ancestors: AutomationEffect[], isInIEffect: boolean, label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
+  constructor(effect: AutomationEffect, context: NodeContext, label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
     super(label, icon, tooltip, children);
     this.effect = effect;
-    this.parentArray = parentArray;
-    this.ancestors = ancestors;
-    this.isInIEffect = isInIEffect;
+    this.context = context;
   }
 }
 
 export class AutomationAddEffectNode extends AutomationTreeNode {
-  meta: NewEffectMeta;
+  context: NodeContext;
 
-  constructor(meta: NewEffectMeta, label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
+  constructor(context: NodeContext, label: string, icon?: string, tooltip?: string, children?: AutomationTreeNode[]) {
     super(label, icon, tooltip, children);
-    this.meta = meta;
+    this.context = context;
   }
 }
 
 // builder
 export class AutomationTreeBuilder {
-  isSpell: boolean;
-  isIEffect: boolean;
+  context: Partial<NodeContext> = {ancestors: []};
   effectTreeNodeMap: WeakMap<AutomationEffect, AutomationEffectTreeNode>;
-  ancestors: AutomationEffect[] = [];
 
   constructor(isSpell: boolean) {
-    this.isSpell = isSpell;
+    this.context.isSpell = isSpell;
     this.effectTreeNodeMap = new WeakMap<AutomationEffect, AutomationEffectTreeNode>();
   }
 
@@ -91,12 +93,7 @@ export class AutomationTreeBuilder {
 
     // add node to add additional effects to the given effect array
     out.push(new AutomationAddEffectNode(
-      {
-        ancestors: this.ancestors,
-        parentArray: effects,
-        isSpell: this.isSpell,
-        isIEffect: this.isIEffect
-      },
+      this.getContext(effects),
       'Add Effect'
     ));
 
@@ -114,25 +111,21 @@ export class AutomationTreeBuilder {
     if (nodeDef === undefined) {
       result = new AutomationEffectTreeNode(
         effect,
-        parentArray,
-        this.ancestors,
-        this.isIEffect,
+        this.getContext(parentArray),
         'Unknown Node',
         'help_outline',
         'This node is not yet supported by the web builder.',
       );
     } else {
       // update ancestor stack, recursively build nodes
-      const oldAncestors = this.ancestors;
-      this.ancestors = [...this.ancestors, effect];
-      children = this.childrenBuilders[effect.type]?.call(this, effect);
-      this.ancestors = oldAncestors;
+      children = this.withContext(
+        {ancestors: [...this.context.ancestors, effect]},
+        () => this.childrenBuilders[effect.type]?.call(this, effect)
+      );
 
       result = new AutomationEffectTreeNode(
         effect,
-        parentArray,
-        this.ancestors,
-        this.isIEffect,
+        this.getContext(parentArray),
         nodeDef.label || effect.type,
         nodeDef.icon,
         nodeDef.tooltip,
@@ -161,6 +154,25 @@ export class AutomationTreeBuilder {
     }
 
     this.effectTreeNodeMap.set(effect, result);
+    return result;
+  }
+
+  // context helpers
+  private getContext(parentArray: AutomationEffect[]): NodeContext {
+    return {
+      parentArray,
+      ancestors: this.context.ancestors ?? [],
+      isSpell: this.context.isSpell ?? false,
+      isIEffect: this.context.isIEffect ?? false,
+      isIEffectButton: this.context.isIEffectButton ?? false
+    };
+  }
+
+  private withContext<T>(contextProps: Partial<NodeContext>, callback: () => T): T {
+    const oldContext = {...this.context};
+    Object.assign(this.context, contextProps);
+    const result = callback();
+    this.context = oldContext;
     return result;
   }
 
@@ -219,19 +231,18 @@ export class AutomationTreeBuilder {
   }
 
   ieffect2ButtonNode(button: ButtonInteraction): AutomationTreeNode {
-    return this.ieffect2Node(button, `Button: ${button.label}`, button.automation, undefined, 'Edit the parent Initiative Effect node to edit this button!');
+    return this.withContext(
+      {isIEffectButton: true},
+      () => this.ieffect2Node(button, `Button: ${button.label}`, button.automation, undefined, 'Edit the parent Initiative Effect node to edit this button!')
+    );
   }
 
   ieffect2Node(interaction: AttackInteraction | ButtonInteraction, name: string, automation: AutomationEffect[], icon, tooltip) {
     // update ancestor stack, recursively build nodes
-    const oldAncestors = this.ancestors;
-    const oldIsIEffect = this.isIEffect;
-    this.ancestors = [];
-    this.isIEffect = true;
-    const children = this.effectsToNodes(automation);
-    this.ancestors = oldAncestors;
-    this.isIEffect = oldIsIEffect;
-
+    const children = this.withContext(
+      {ancestors: [], isIEffect: true},
+      () => this.effectsToNodes(automation)
+    );
     return new AutomationTreeNode(name, icon, tooltip, children);
   }
 }
@@ -329,10 +340,3 @@ export const AUTOMATION_NODE_DEFS: NodeDefRegistry = {
   }
 };
 
-// ==== new-effect-button ====
-export interface NewEffectMeta {
-  ancestors: AutomationEffect[];  // root -> direct parent list of ancestor effects
-  parentArray: AutomationEffect[];  // the array to add a new effect to
-  isSpell: boolean;
-  isIEffect: boolean;
-}

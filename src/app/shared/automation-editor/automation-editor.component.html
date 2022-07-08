@@ -41,7 +41,7 @@
           </span>
           <!-- for AutomationAddEffectNode -->
           <span *ngIf="isAddEffectNode(node)">
-            <avr-new-effect-button [meta]="node.meta" (created)="onNewEffectCreated(node)"></avr-new-effect-button>
+            <avr-new-effect-button [context]="node.context" (created)="onNewEffectCreated(node)"></avr-new-effect-button>
           </span>
         </span>
         <!-- for nodes with children -->
