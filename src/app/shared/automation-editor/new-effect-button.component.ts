@@ -216,30 +216,6 @@ export class NewEffectButtonComponent implements OnInit {
     } as Target;
   }
 
-  doSaveForHalfPreset() {
-    const effects = [
-      {type: 'roll', dice: '8d6[fire]', name: 'damage'} as Roll,
-      {
-        type: 'target',
-        target: 'all',
-        effects: [
-          {
-            type: 'save',
-            stat: 'dex',
-            fail: [
-              {type: 'damage', damage: '{damage}'} as Damage
-            ],
-            success: [
-              {type: 'damage', damage: '({damage}/2)'} as Damage
-            ]
-          } as Save
-        ]
-      } as Target
-    ];
-    this.meta.parentArray.push(...effects);
-    this.created.emit();
-  }
-
   generatePronePreset(): AutomationEffect {
     return {
       type: 'ieffect2',
@@ -376,6 +352,30 @@ export class NewEffectButtonComponent implements OnInit {
         } as ButtonInteraction
       ]
     } as IEffect
+  }
+
+  doSaveForHalfPreset() {
+    const effects = [
+      {type: 'roll', dice: '8d6[fire]', name: 'damage'} as Roll,
+      {
+        type: 'target',
+        target: 'all',
+        effects: [
+          {
+            type: 'save',
+            stat: 'dex',
+            fail: [
+              {type: 'damage', damage: '{damage}'} as Damage
+            ],
+            success: [
+              {type: 'damage', damage: '({damage}/2)'} as Damage
+            ]
+          } as Save
+        ]
+      } as Target
+    ];
+    this.meta.parentArray.push(...effects);
+    this.created.emit();
   }
 
   doGrapplePreset() {
