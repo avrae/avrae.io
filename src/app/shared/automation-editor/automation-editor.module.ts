@@ -28,6 +28,7 @@ import {TextEffectComponent} from './effect-editor/text-effect/text-effect.compo
 import {UnknownEffectComponent} from './effect-editor/unknown-effect/unknown-effect.component';
 import {VariableEffectComponent} from './effect-editor/variable-effect/variable-effect.component';
 import {NewEffectButtonComponent} from './new-effect-button.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {NewEffectButtonComponent} from './new-effect-button.component';
     FlexModule,
     CdkTreeModule,
     NgClickOutsideModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   declarations: [
     EffectEditorComponent,

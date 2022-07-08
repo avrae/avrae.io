@@ -21,6 +21,7 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
   treeControl = new NestedTreeControl<AutomationTreeNode>(node => node.childrenSubject);
   dataSource = new MatTreeNestedDataSource<AutomationTreeNode>();
   nodeBuilder: AutomationTreeBuilder;
+  showEffectTree = true;
 
   // node editor
   selectedEffectNode: AutomationEffectTreeNode;
@@ -67,5 +68,9 @@ export class AutomationEditorComponent implements OnInit, OnChanges {
 
   beginEditEffectNode(node: AutomationEffectTreeNode) {
     this.selectedEffectNode = node;
+  }
+
+  toggleEffectTree() {
+    this.showEffectTree = !this.showEffectTree
   }
 }

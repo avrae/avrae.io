@@ -33,7 +33,7 @@
     </mat-icon>
   </mat-form-field>
 </div>
-<div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="left baseline" class="auto-row">
+<div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center baseline" class="auto-row">
   <mat-checkbox [(ngModel)]="effect.end"
                 (change)="changed.emit();"
                 matTooltip="Whether the effect duration ticks down at the end of the turn rather than the start.">
@@ -78,7 +78,7 @@
         </mat-form-field>
 
         <!-- custom expression -->
-        <mat-form-field fxFlex="4 1 auto" *ngIf="isCustomValue(passiveEffectGroup)">
+        <mat-form-field fxFlex="1 4 auto" *ngIf="isCustomValue(passiveEffectGroup)">
           <mat-label>Custom Expression</mat-label>
           <input matInput formControlName="value">
           <!-- intexpression or annotatedstring -->
@@ -93,7 +93,7 @@
             {{"{ }"}}
           </span>
         </mat-form-field>
-        <span fxFlex="4 1 auto" *ngIf="!isCustomValue(passiveEffectGroup)">
+        <span fxFlex="1 4 auto" *ngIf="!isCustomValue(passiveEffectGroup)">
           <!-- empty space-filler -->
         </span>
 
