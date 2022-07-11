@@ -1,5 +1,5 @@
 import {DiscordUser} from '../Discord';
-import {AutomationEffect} from './AutomationEffects';
+import {AutomationEffect} from '../../shared/automation-editor/types';
 
 export const REQUIRED_SPELL_PROPS = ['name', 'level', 'school'];
 export const SPELL_SCHOOLS = ['A', 'V', 'E', 'I', 'D', 'N', 'T', 'C'];

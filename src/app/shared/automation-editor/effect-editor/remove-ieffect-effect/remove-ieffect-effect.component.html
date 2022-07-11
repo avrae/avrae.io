@@ -1,0 +1,23 @@
+<p>
+  Removes the initiative effect that triggered this automation.
+  Only works when run in execution triggered by an initiative effect, such as a ButtonInteraction.
+  <avr-autodoc-link anchor="remove-ieffect"></avr-autodoc-link>
+</p>
+
+<!-- remove parent -->
+<div fxLayout="row nowrap" fxLayoutGap="6px" class="auto-row">
+  <mat-form-field>
+    <mat-label>Remove Parent</mat-label>
+    <mat-select [(value)]="removeParentWrapper" (selectionChange)="changed.emit()">
+      <mat-option value="never">Never</mat-option>
+      <mat-option value="always">Always</mat-option>
+      <mat-option value="if_no_children">If No Children</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-icon aria-hidden="false"
+  aria-label="Remove parent help"
+  inline
+  matTooltip="If the removed effect has a parent effect, whether to remove it as well.">
+    help
+  </mat-icon>
+</div>

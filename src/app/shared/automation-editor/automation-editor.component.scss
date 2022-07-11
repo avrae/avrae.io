@@ -1,0 +1,86 @@
+@import "../../variables";
+
+.ignore-theme {
+  color: #fff;
+}
+
+.editor-container.ignore-theme.hidden-tree {
+  grid-template-columns: none;
+}
+
+.editor-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  background: $gray-dark1;
+  border-radius: 4px;
+  min-height: 55vh;
+
+  > div {
+    max-height: calc(100vh - #{$navbar-height + $footer-height});
+    overflow-y: scroll;
+  }
+}
+
+// tree styles
+.automation-tree {
+  border-right: 1px solid rgba($gray2, 0.3);
+  padding: 6px;
+  min-width: 200px;
+}
+
+.tree-invisible {
+  display: none;
+}
+
+.tree-node {
+  display: block;
+  margin-top: 4px;
+}
+
+.tree-node-active {
+  background: rgba($blurple, 0.2);
+  border-radius: 2px;
+  padding-left: 2px;
+  margin-left: -2px;
+}
+
+.tree-children-container {
+  padding-left: 12px;
+  border-left: 1px solid $gray2;
+}
+
+.automation-tree button[mat-icon-button] {
+  font-size: 20px;
+  line-height: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.node-icon {
+  font-size: 16px;
+  color: $gray2;
+}
+
+// editor styles
+.node-editor {
+  padding: 6px;
+}
+
+.edit-node {
+  cursor: pointer;
+  height: max;
+}
+
+.editor-container div::-webkit-scrollbar {
+  width: 10px;
+}
+
+.editor-container div::-webkit-scrollbar-thumb {
+  background: rgba(102, 102, 102, 0.5);
+  border-radius: 20px;
+}
+
+.editor-container div::-webkit-scrollbar-track {
+  background: rgba(221, 221, 221, 0.1);
+  border-radius: 20px;
+}

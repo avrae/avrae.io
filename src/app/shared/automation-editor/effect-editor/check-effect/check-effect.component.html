@@ -1,0 +1,70 @@
+<p>
+  Makes an ability check as the targeted creature, optionally as a contest against the caster.
+  <avr-autodoc-link anchor="ability-check"></avr-autodoc-link>
+</p>
+
+<!-- check type -->
+<div>
+  <mat-form-field>
+    <mat-label>Check Type</mat-label>
+    <mat-select [(value)]="checkType" (selectionChange)="onCheckTypeChange()">
+      <mat-option value="basic">Check Roll</mat-option>
+      <mat-option value="dc">Check Against DC</mat-option>
+      <mat-option value="contest">Contest Against Caster</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<!-- ability -->
+<div>
+  <avr-ability-select class="is-fullwidth" required [(skills)]="abilityWrapper" (skillsChange)="changed.emit()">
+  </avr-ability-select>
+</div>
+
+<!-- dc -->
+<div *ngIf="checkType === 'dc'">
+  <mat-form-field class="is-fullwidth">
+    <input matInput required placeholder="DC" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.dc">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+      calculate
+    </mat-icon>
+  </mat-form-field>
+</div>
+
+<!-- contest -->
+<div *ngIf="checkType === 'contest'">
+  <avr-ability-select class="is-fullwidth"
+                      required
+                      label="Caster Skills (Contest)"
+                      [(skills)]="contestAbilityWrapper"
+                      (skillsChange)="changed.emit()">
+  </avr-ability-select>
+</div>
+
+<span class="auto-label">Additional Options</span>
+
+<!-- advantage -->
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left baseline" class="auto-row">
+  <mat-form-field matTooltip="The default advantage for the target's ability check.">
+    <mat-label>Advantage</mat-label>
+    <mat-select [(value)]="advantageWrapper" (selectionChange)="changed.emit()">
+      <mat-option [value]="0">Flat</mat-option>
+      <mat-option [value]="1">Advantage</mat-option>
+      <mat-option [value]="-1">Disadvantage</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field matTooltip="Which list of effects to run if the ability contest results in a tie."
+                  *ngIf="checkType === 'contest'">
+    <mat-label>Tie Behaviour</mat-label>
+    <mat-select [(value)]="effect.contestTie" (selectionChange)="changed.emit()">
+      <mat-option value="success">Target Wins</mat-option>
+      <mat-option value="fail">Caster Wins</mat-option>
+      <mat-option value="neither">Neither</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<p *ngIf="checkType !== 'basic'">
+  Use the Effect Tree to edit the on-fail and on-success effects!
+</p>

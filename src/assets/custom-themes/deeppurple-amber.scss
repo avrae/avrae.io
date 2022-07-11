@@ -4,6 +4,6 @@
 $primary: mat.define-palette(mat.$deep-purple-palette);
 $accent:  mat.define-palette(mat.$amber-palette, A200, A100, A400);
 
-$theme: mat.define-light-theme($primary, $accent);
+$theme: mat.define-dark-theme($primary, $accent);
 @include mat.all-component-themes($theme);
 @include avr-app-theme($theme);

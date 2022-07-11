@@ -79,7 +79,8 @@ export class CharactersComponent extends BreakpointBaseComponent implements OnIn
     }
 
     this.dialog.open(AttackEditorDialog, {
-      width: '75%', disableClose: true,
+      width: '95%',
+      disableClose: true,
       data: character,
       panelClass: 'automation-overlay'
     })

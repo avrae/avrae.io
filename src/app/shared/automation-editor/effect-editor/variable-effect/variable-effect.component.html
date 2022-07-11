@@ -1,0 +1,52 @@
+<p>
+  Saves the result of an IntExpression to a variable without displaying anything.
+  <avr-autodoc-link anchor="set-variable"></avr-autodoc-link>
+</p>
+
+<!-- name, value -->
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left baseline" class="auto-row">
+  <mat-form-field fxFlex="1 3 auto">
+    <input matInput
+           placeholder="Name"
+           class="text-monospace"
+           (change)="changed.emit()"
+           [(ngModel)]="effect.name"
+           required>
+  </mat-form-field>
+
+  <span>=</span>
+
+  <mat-form-field fxFlex="3 1 auto">
+    <input matInput
+           placeholder="Value"
+           class="text-monospace"
+           (change)="changed.emit()"
+           [(ngModel)]="effect.value"
+           required>
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate
+    </mat-icon>
+  </mat-form-field>
+</div>
+
+<!-- on error -->
+<span class="auto-label">On Error</span>
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+  <mat-form-field fxFlex="grow">
+    <input matInput
+           placeholder="Error Value"
+           class="text-monospace"
+           (change)="changed.emit()"
+           [(ngModel)]="effect.onError">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">calculate
+    </mat-icon>
+  </mat-form-field>
+</div>
+
+<!-- spell options -->
+<div *ngIf="spell != null">
+  <p class="auto-label">Spell Options</p>
+  <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
+    <avr-higher-level fxFlex [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
+  </div>
+</div>
+

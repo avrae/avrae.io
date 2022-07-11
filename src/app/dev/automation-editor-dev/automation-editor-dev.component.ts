@@ -3,7 +3,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {stringify as YAMLStringify} from 'yaml';
-import {AutomationEffect} from '../../schemas/homebrew/AutomationEffects';
+import {AutomationEffect} from '../../shared/automation-editor/types';
 import {JSONExportDialog} from '../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 import {JSONImportDialog} from '../../shared/dialogs/json-import-dialog/json-import-dialog.component';
 
@@ -14,6 +14,7 @@ import {JSONImportDialog} from '../../shared/dialogs/json-import-dialog/json-imp
 })
 export class AutomationEditorDevComponent implements OnInit {
   localSavedAutomation: AutomationEffect[] = [];
+  editorDebugMode = false;
 
   constructor(private dialog: MatDialog, private clipboard: Clipboard, private snackBar: MatSnackBar) {
   }
@@ -29,6 +30,7 @@ export class AutomationEditorDevComponent implements OnInit {
   }
 
   saveLocalAutomation(): void {
+    console.log("Saving local automation on change...");
     localStorage.setItem('dev-automation-editor', JSON.stringify(this.localSavedAutomation));
   }
 
