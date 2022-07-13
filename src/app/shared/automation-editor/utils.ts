@@ -211,14 +211,18 @@ export class AutomationTreeBuilder {
     },
     check(effect: AbilityCheck): AutomationTreeNode[] {
       if (effect.dc != null) {
+        effect.success = effect.success ?? []
+        effect.fail = effect.fail ?? []
         return [
-          new AutomationTreeNode('Success', undefined, undefined, this.effectsToNodes(effect.success ?? [])),
-          new AutomationTreeNode('Fail', undefined, undefined, this.effectsToNodes(effect.fail ?? []))
+          new AutomationTreeNode('Success', undefined, undefined, this.effectsToNodes(effect.success)),
+          new AutomationTreeNode('Fail', undefined, undefined, this.effectsToNodes(effect.fail))
         ];
       } else if (effect.contestAbility != null) {
+        effect.success = effect.success ?? []
+        effect.fail = effect.fail ?? []
         return [
-          new AutomationTreeNode('Target Wins', undefined, undefined, this.effectsToNodes(effect.success ?? [])),
-          new AutomationTreeNode('Caster Wins', undefined, undefined, this.effectsToNodes(effect.fail ?? []))
+          new AutomationTreeNode('Target Wins', undefined, undefined, this.effectsToNodes(effect.success)),
+          new AutomationTreeNode('Caster Wins', undefined, undefined, this.effectsToNodes(effect.fail))
         ];
       }
       return [];
