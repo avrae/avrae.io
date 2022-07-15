@@ -97,6 +97,20 @@
           <input matInput placeholder="Flavor Text" [(ngModel)]="phraseWrapper"
                  matTooltip="Some text that will display each time this attack is used.">
         </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Action Type</mat-label>
+          <mat-select [(ngModel)]="activationTypeWrapper">
+            <mat-option [value]="0">Attack</mat-option>
+            <mat-option [value]="1">Action</mat-option>
+            <mat-option [value]="2">No Action</mat-option>
+            <mat-option [value]="3">Bonus Action</mat-option>
+            <mat-option [value]="4">Reaction</mat-option>
+            <mat-option [value]="6">Minute</mat-option>
+            <mat-option [value]="7">Hour</mat-option>
+            <mat-option [value]="8">Special</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <!-- crit options -->
