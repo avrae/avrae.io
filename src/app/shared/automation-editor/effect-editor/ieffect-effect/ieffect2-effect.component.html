@@ -146,9 +146,26 @@
           <mat-form-field class="is-fullwidth">
             <input matInput formControlName="phrase" placeholder="Flavor Text">
           </mat-form-field>
-          <mat-checkbox formControlName="proper">
-            Name is proper noun
-          </mat-checkbox>
+          <div>
+            <mat-checkbox formControlName="proper">
+              Name is proper noun
+            </mat-checkbox>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label>Action Type</mat-label>
+              <mat-select formControlName="activationType">
+                <mat-option [value]="0">Attack</mat-option>
+                <mat-option [value]="1">Action</mat-option>
+                <mat-option [value]="2">No Action</mat-option>
+                <mat-option [value]="3">Bonus Action</mat-option>
+                <mat-option [value]="4">Reaction</mat-option>
+                <mat-option [value]="6">Minute</mat-option>
+                <mat-option [value]="7">Hour</mat-option>
+                <mat-option [value]="8">Special</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
           <!-- crit options -->
           <p class="auto-label">

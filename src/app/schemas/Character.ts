@@ -63,13 +63,15 @@ export class Attack {
   thumb?: string;
   criton?: number;
   extra_crit_damage?: string;
+  activation_type?: number;
 
-  constructor(name = '', automation: AutomationEffect[] = [], proper: boolean = false, verb: string = null) {
+  constructor(name = '', automation: AutomationEffect[] = [], proper: boolean = false, verb: string = undefined, activation_type: number = undefined) {
     this.name = name;
     this.automation = automation;
     this._v = 2;
     this.proper = proper;
     this.verb = verb;
+    this.activation_type = activation_type;
   }
 }
 
