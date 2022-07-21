@@ -393,7 +393,7 @@
            placeholder="Save As"
            class="text-monospace"
            (change)="changed.emit()"
-           [(ngModel)]="effect.save_as"
+           [(ngModel)]="saveAsWrapper"
            matTooltip="If supplied, saves the added effect as an automation variable. Use this in another IEffect's parent field to set this effect as its parent.">
   </mat-form-field>
   <mat-form-field fxFlex>
