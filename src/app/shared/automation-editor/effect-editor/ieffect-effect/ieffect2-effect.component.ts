@@ -52,6 +52,20 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
     }
   }
 
+  // save_as: blank -> undefined
+  // this needs an extra wrapper since it fails the identifier validator before the emptystr -> None validator
+  get saveAsWrapper(): string {
+    return this.effect.save_as?.toString() ?? '';
+  }
+
+  set saveAsWrapper(value: string) {
+    if (!value) {
+      this.effect.save_as = undefined;
+    } else {
+      this.effect.save_as = value;
+    }
+  }
+
   // ==== passive effects ====
   PASSIVE_EFFECTS = PASSIVE_EFFECTS;
   CUSTOM_SENTINEL = CUSTOM_SENTINEL;
