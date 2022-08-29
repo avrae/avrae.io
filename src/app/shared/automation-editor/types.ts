@@ -178,6 +178,7 @@ export interface CastSpell extends AutomationEffect {
   dc?: IntExpression;
   attackBonus?: IntExpression;
   castingMod?: IntExpression;
+  parent?: string;
 }
 
 export interface AbilityCheck extends AutomationEffect {
