@@ -130,6 +130,7 @@ export interface Roll extends AutomationEffect {
   higher?: HigherLevels;
   cantripScale?: boolean;
   hidden?: boolean;
+  displayName?: string;
 }
 
 export interface Text extends AutomationEffect {

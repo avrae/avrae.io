@@ -32,7 +32,6 @@ export class SpellEffectComponent extends EffectComponent<CastSpell> implements 
       this.effect.dc = undefined;
       this.effect.attackBonus = undefined;
       this.effect.castingMod = undefined;
-      this.effect.parent = undefined
     }
   }
 

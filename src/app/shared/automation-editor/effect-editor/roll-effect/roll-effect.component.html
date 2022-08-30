@@ -20,12 +20,22 @@
 </div>
 
 <p class="auto-label">Additional Options</p>
-<div>
-  <mat-checkbox [(ngModel)]="effect.hidden"
-                (change)="changed.emit()"
-                matTooltip="If checked, the roll won't display in the automation's Meta field or apply bonuses from the -d argument.">
-    Hidden
-  </mat-checkbox>
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
+  <div fxFlex="1 4 auto" fxLayoutAlign="center center">
+    <mat-checkbox [(ngModel)]="effect.hidden"
+                  (change)="changed.emit()"
+                  matTooltip="If checked, the roll won't display in the automation's Meta field or apply bonuses from the -d argument.">
+      Hidden
+    </mat-checkbox>
+  </div>
+  <mat-form-field fxFlex="4 1 auto">
+    <input matInput
+           placeholder="Display Name"
+           (change)="changed.emit()"
+           [(ngModel)]="effect.displayName"
+           matTooltip="The name to display in the Meta field. If left blank, will use the saved name."
+           class="text-monospace">
+  </mat-form-field>
 </div>
 
 <div *ngIf="spell">
