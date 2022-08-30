@@ -71,3 +71,15 @@
     </mat-icon>
   </mat-form-field>
 </div>
+
+
+<div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left baseline">
+  <mat-form-field fxFlex>
+    <input matInput
+           placeholder="Parent"
+           class="text-monospace"
+           (change)="changed.emit()"
+           [(ngModel)]="effect.parent"
+           matTooltip="If supplied, sets the added effect's parent to the given effect. This must be the same as another IEffect's save_as.">
+  </mat-form-field>
+</div>
