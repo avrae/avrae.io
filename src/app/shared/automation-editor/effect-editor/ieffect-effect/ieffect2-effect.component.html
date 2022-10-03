@@ -27,7 +27,13 @@
            placeholder="Indefinite"
            (change)="changed.emit()"
            [(ngModel)]="durationWrapper"
-           matTooltip="The duration, in rounds. Leave blank for infinite duration.">
+           matTooltip="The duration, in rounds. Leave blank for infinite duration.
+
+1 Min  - 10
+1 Hour - 600
+1 Day  - 14400
+1 Year - 5256000"
+           [matTooltipClass]="'adv-tooltip'">
     <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
       calculate
     </mat-icon>
@@ -84,7 +90,7 @@
           <!-- intexpression or annotatedstring -->
           <mat-icon matSuffix
                     *ngIf="isValueIntExpression(passiveEffectGroup)"
-                    matTooltip="IntExpression - variables and functions allowed, braces optional">
+                    matTooltip="IntExpression - variables and functions allowed">
             calculate
           </mat-icon>
           <span matSuffix
@@ -202,7 +208,7 @@
           <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
             <mat-form-field fxFlex>
               <input matInput formControlName="defaultDc" placeholder="DC" class="text-monospace">
-              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
                 calculate
               </mat-icon>
             </mat-form-field>
@@ -212,7 +218,7 @@
                      formControlName="defaultAttackBonus"
                      placeholder="Spell Attack Bonus"
                      class="text-monospace">
-              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
                 calculate
               </mat-icon>
             </mat-form-field>
@@ -222,7 +228,7 @@
                      formControlName="defaultCastingMod"
                      placeholder="Spellcasting Modifier"
                      class="text-monospace">
-              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
                 calculate
               </mat-icon>
             </mat-form-field>
@@ -305,7 +311,7 @@
             <mat-form-field fxFlex="4 1 auto" *ngIf="isCustomButtonStyle(buttonGroup)">
               <mat-label>Custom Expression</mat-label>
               <input matInput formControlName="customStyle">
-              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
                 calculate
               </mat-icon>
             </mat-form-field>
@@ -323,7 +329,7 @@
           <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center" class="auto-row">
             <mat-form-field fxFlex>
               <input matInput formControlName="defaultDc" placeholder="DC" class="text-monospace">
-              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
                 calculate
               </mat-icon>
             </mat-form-field>
@@ -333,7 +339,7 @@
                      formControlName="defaultAttackBonus"
                      placeholder="Spell Attack Bonus"
                      class="text-monospace">
-              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
                 calculate
               </mat-icon>
             </mat-form-field>
@@ -343,7 +349,7 @@
                      formControlName="defaultCastingMod"
                      placeholder="Spellcasting Modifier"
                      class="text-monospace">
-              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+              <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
                 calculate
               </mat-icon>
             </mat-form-field>

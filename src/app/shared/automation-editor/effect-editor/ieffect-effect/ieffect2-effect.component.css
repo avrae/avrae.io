@@ -20,3 +20,7 @@
 .button-style-4 {
   background: rgb(216, 60, 62);
 }
+
+::ng-deep .adv-tooltip {
+  white-space:  pre-line !important;
+}
