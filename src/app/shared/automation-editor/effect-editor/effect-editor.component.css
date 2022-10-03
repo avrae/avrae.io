@@ -1,3 +1,6 @@
 .is-italics {
   font-style: italic;
 }
+.move-up {
+  margin-right: 24px;
+}
