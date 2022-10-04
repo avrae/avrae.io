@@ -65,3 +65,24 @@ mat-form-field {
     display: block;
   }
 }
+
+.editor-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  min-height: 45px;
+}
+
+.editor-controls div {
+  gap: 8px;
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  .editor-controls {
+    justify-content: center;
+  }
+}

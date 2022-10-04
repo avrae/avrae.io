@@ -369,7 +369,7 @@ export class NewEffectButtonComponent implements OnInit {
               {type: 'damage', damage: '{damage}'} as Damage
             ],
             success: [
-              {type: 'damage', damage: '({damage}/2)'} as Damage
+              {type: 'damage', damage: '({damage})/2'} as Damage
             ]
           } as Save
         ]

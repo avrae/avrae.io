@@ -44,7 +44,7 @@
 <div *ngIf="custom" fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="left center">
   <mat-form-field fxFlex>
     <input matInput placeholder="DC" class="text-monospace" (change)="changed.emit()" [(ngModel)]="effect.dc">
-    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
       calculate
     </mat-icon>
   </mat-form-field>
@@ -55,7 +55,7 @@
            class="text-monospace"
            (change)="changed.emit()"
            [(ngModel)]="effect.attackBonus">
-    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
       calculate
     </mat-icon>
   </mat-form-field>
@@ -66,7 +66,7 @@
            class="text-monospace"
            (change)="changed.emit()"
            [(ngModel)]="effect.castingMod">
-    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
       calculate
     </mat-icon>
   </mat-form-field>

@@ -34,7 +34,7 @@
                [(ngModel)]="effect.counter.slot"
                required>
         <mat-icon matSuffix
-                  matTooltip="IntExpression - variables and functions allowed, braces optional">
+                  matTooltip="IntExpression - variables and functions allowed">
           calculate
         </mat-icon>
       </mat-form-field>
@@ -70,8 +70,9 @@
            class="text-monospace"
            (change)="changed.emit()"
            [(ngModel)]="effect.amount"
-           required>
-    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed, braces optional">
+           required
+           matTooltip="If negative, will add charges instead of using them">
+    <mat-icon matSuffix matTooltip="IntExpression - variables and functions allowed">
       calculate
     </mat-icon>
   </mat-form-field>
