@@ -105,7 +105,7 @@ export interface ButtonInteraction {
 
 export interface IEffect extends AutomationEffect {
   type: 'ieffect2';
-  name: string;
+  name: AnnotatedString;
   duration?: number | IntExpression;
   effects?: PassiveEffects;
   attacks?: AttackInteraction[];
@@ -136,6 +136,7 @@ export interface Roll extends AutomationEffect {
 export interface Text extends AutomationEffect {
   type: 'text';
   text: AnnotatedString | AbilityReference;
+  title?: string;
 }
 
 export interface SetVariable extends AutomationEffect {
