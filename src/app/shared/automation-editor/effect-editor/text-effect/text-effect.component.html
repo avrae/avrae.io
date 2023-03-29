@@ -23,6 +23,16 @@
   </span>
 </div>
 
+<div>
+  <mat-form-field class="is-fullwidth">
+    <textarea matInput
+              placeholder="Title"
+              (change)="changed.emit()"
+              [(ngModel)]="effect.title">
+    </textarea>
+  </mat-form-field>
+</div>
+
 <div *ngIf="textType === 'text'">
   <mat-form-field class="is-fullwidth">
     <textarea matInput
