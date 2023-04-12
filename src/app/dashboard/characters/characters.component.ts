@@ -63,11 +63,13 @@ export class CharactersComponent extends BreakpointBaseComponent implements OnIn
 
   getUpstreamURL(upstream: string): string {
     if (upstream.startsWith('dicecloud-')) {
-      return `https://dicecloud.com/character/${upstream.slice(10)}`;
+      return `https://v1.dicecloud.com/character/${upstream.slice(10)}`;
     } else if (upstream.startsWith('google-')) {
       return `https://docs.google.com/spreadsheets/d/${upstream.slice(7)}`;
     } else if (upstream.startsWith('beyond-')) {
       return `https://ddb.ac/characters/${upstream.slice(7)}`;
+    } else if (upstream.startsWith('dicecloudv2-')) {
+      return `https://dicecloud.com/character/${upstream.slice(12)}`;
     }
     return '';
   }
