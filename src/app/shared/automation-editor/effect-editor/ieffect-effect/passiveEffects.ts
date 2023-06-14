@@ -176,6 +176,10 @@ export const PASSIVE_EFFECTS: PassiveEffectMap = {
     isList: true,
     defaultOptions: SKILL_NAMES
   },
+  dc_bonus: {
+    name: 'DC Bonus',
+    type: IntExpression
+  },
 };
 
 

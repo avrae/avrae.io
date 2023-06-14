@@ -20,10 +20,15 @@
      fxLayout.gt-xs="row"
      fxLayoutGap="8px"
      fxLayoutAlign="space-evenly center"
-     fxLayoutAlign.gt-xs="left center"
-     *ngIf="spell != null">
-  <avr-higher-level fxFlex [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level>
+     fxLayoutAlign.gt-xs="left center">
+  <div *ngIf="spell != null"><avr-higher-level fxFlex [parent]="effect" [spell]="spell" (changed)="changed.emit()"></avr-higher-level></div>
+  
   <mat-checkbox [(ngModel)]="effect.cantripScale" (change)="changed.emit()">
     Scales like Cantrip
+  </mat-checkbox>
+  <mat-checkbox [(ngModel)]="effect.fixedValue"
+                (change)="changed.emit()"
+                matTooltip="If checked, the roll won't apply bonuses from the -d argument.">
+    Fixed Value
   </mat-checkbox>
 </div>

@@ -28,6 +28,13 @@
       Hidden
     </mat-checkbox>
   </div>
+  <div fxFlex="1 4 auto" fxLayoutAlign="center center">
+    <mat-checkbox [(ngModel)]="effect.fixedValue"
+                  (change)="changed.emit()"
+                  matTooltip="If checked, the roll won't apply bonuses from the -d argument.">
+      Fixed Value
+    </mat-checkbox>
+  </div>
   <mat-form-field fxFlex="4 1 auto">
     <input matInput
            placeholder="Display Name"
