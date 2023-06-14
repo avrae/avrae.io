@@ -87,6 +87,14 @@
 
   <span>|</span>
 
+  <mat-checkbox [(ngModel)]="effect.fixedValue"
+                (change)="changed.emit()"
+                matTooltip="If checked, the counter will ignore the -amt argument.">
+    Fixed Value
+  </mat-checkbox>
+
+  <span>|</span>
+
   <mat-form-field>
     <mat-label>Error Behaviour</mat-label>
     <mat-select [(value)]="errorBehaviourWrapper" (selectionChange)="changed.emit()">

@@ -42,6 +42,7 @@ export interface Damage extends AutomationEffect {
   overheal?: boolean;
   higher?: HigherLevels;
   cantripScale?: boolean;
+  fixedValue?: boolean;
 }
 
 export interface TempHP extends AutomationEffect {
@@ -84,6 +85,7 @@ export interface PassiveEffects {
   check_bonus?: AnnotatedString;
   check_adv?: AnnotatedString[];
   check_dis?: AnnotatedString[];
+  dc_bonus?: IntExpression
 }
 
 export interface AttackInteraction {
@@ -116,6 +118,7 @@ export interface IEffect extends AutomationEffect {
   stacking?: boolean;
   save_as?: string;
   parent?: string;
+  target_self?: boolean;
 }
 
 export interface RemoveIEffect extends AutomationEffect {
@@ -131,6 +134,7 @@ export interface Roll extends AutomationEffect {
   cantripScale?: boolean;
   hidden?: boolean;
   displayName?: string;
+  fixedValue?: boolean;
 }
 
 export interface Text extends AutomationEffect {
@@ -170,6 +174,7 @@ export interface UseCounter extends AutomationEffect {
   amount: IntExpression;
   allowOverflow?: boolean;
   errorBehaviour?: 'warn' | 'raise' | 'ignore';
+  fixedValue?: boolean;
 }
 
 

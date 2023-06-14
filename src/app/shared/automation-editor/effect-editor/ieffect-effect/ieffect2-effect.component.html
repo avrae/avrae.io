@@ -424,11 +424,21 @@
 </p>
 
 
-<div>
+<div fxLayout="column"
+     fxFill
+     fxLayout.gt-xs="row"
+     fxLayoutGap="8px"
+     fxLayoutAlign="space-evenly center"
+     fxLayoutAlign.gt-xs="left center">
   <mat-checkbox [(ngModel)]="effect.stacking"
                 (change)="changed.emit();"
                 matTooltip="If another effect with the same name exists, add this effect as a child instead of overwriting it.">
     Enable Effect Stacking
+  </mat-checkbox>
+  <mat-checkbox [(ngModel)]="effect.target_self"
+                (change)="changed.emit();"
+                matTooltip="Targets the caster of the automation instead of the current target.">
+    Target Self
   </mat-checkbox>
 </div>
 
