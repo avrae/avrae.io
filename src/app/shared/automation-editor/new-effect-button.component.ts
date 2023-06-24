@@ -382,132 +382,132 @@ export class NewEffectButtonComponent implements OnInit {
   doGrapplePreset() {
     const effects = [
       {
-        "type": "target",
-        "target": "self",
-        "effects": [
+        type: "target",
+        target: "self",
+        effects: [
           {
-            "type": "check",
-            "ability": "athletics"
+            type: "check",
+            ability: "athletics"
           } as AbilityCheck
         ]
       } as Target,
       {
-        "type": "variable",
-        "name": "Grapple",
-        "value": "lastCheckRollTotal"
+        type: "variable",
+        name: "Grapple",
+        value: "lastCheckRollTotal"
       } as SetVariable,
       {
-        "type": "target",
-        "target": 1,
-        "effects": [
+        type: "target",
+        target: 1,
+        effects: [
           {
-            "type": "check",
-            "ability": [
+            type: "check",
+            ability: [
               "acrobatics",
               "athletics"
             ],
-            "dc": "Grapple",
-            "fail": [
+            dc: "Grapple",
+            fail: [
               {
-                "type": "ieffect2",
-                "name": "Grappling {{targets[0].name if str(targets[0])!=targets[0] else targets[0]}}",
-                "duration": null,
-                "effects": null,
-                "attacks": [],
-                "buttons": [
+                type: "ieffect2",
+                name: "Grappling {{targets[0].name if str(targets[0])!=targets[0] else targets[0]}}",
+                duration: null,
+                effects: null,
+                attacks: [],
+                buttons: [
                   {
-                    "label": "Release {{targets[0].name if str(targets[0])!=targets[0] else targets[0]}}",
-                    "automation": [
+                    label: "Release {{targets[0].name if str(targets[0])!=targets[0] else targets[0]}}",
+                    automation: [
                       {
-                        "type": "remove_ieffect",
-                        "removeParent": "always"
+                        type: "remove_ieffect",
+                        removeParent: "always"
                       } as RemoveIEffect
                     ],
-                    "verb": "lets go of {{targets[0].name if str(targets[0])!=targets[0] else targets[0]}}",
-                    "style": "3"
+                    verb: "lets go of {{targets[0].name if str(targets[0])!=targets[0] else targets[0]}}",
+                    style: "3"
                   } as ButtonInteraction
                 ],
-                "end": false,
-                "conc": false,
-                "desc": null,
-                "stacking": false,
-                "save_as": "grappling",
-                "parent": null,
-                "target_self": true
+                end: false,
+                conc: false,
+                desc: null,
+                stacking: false,
+                save_as: "grappling",
+                parent: null,
+                target_self: true
               } as IEffect,
               {
-                "type": "ieffect2",
-                "name": "Grappled",
-                "duration": null,
-                "effects": null,
-                "attacks": [],
-                "buttons": [
+                type: "ieffect2",
+                name: "Grappled",
+                duration: null,
+                effects: null,
+                attacks: [],
+                buttons: [
                   {
-                    "label": "Escape Grapple",
-                    "automation": [
+                    label: "Escape Grapple",
+                    automation: [
                       {
-                        "type": "target",
-                        "target": "parent",
-                        "effects": [
+                        type: "target",
+                        target: "parent",
+                        effects: [
                           {
-                            "type": "check",
-                            "ability": [
+                            type: "check",
+                            ability: [
                               "athletics"
                             ]
                           } as AbilityCheck,
                           {
-                            "type": "variable",
-                            "name": "maintainGrapple",
-                            "value": "lastCheckRollTotal"
+                            type: "variable",
+                            name: "maintainGrapple",
+                            value: "lastCheckRollTotal"
                           } as SetVariable
                         ]
                       } as Target,
                       {
-                        "type": "target",
-                        "target": "self",
-                        "effects": [
+                        type: "target",
+                        target: "self",
+                        effects: [
                           {
-                            "type": "check",
-                            "ability": [
+                            type: "check",
+                            ability: [
                               "athletics",
                               "acrobatics"
                             ],
-                            "dc": "maintainGrapple",
-                            "success": [
+                            dc: "maintainGrapple",
+                            success: [
                               {
-                                "type": "remove_ieffect",
-                                "removeParent": "if_no_children"
+                                type: "remove_ieffect",
+                                removeParent: "if_no_children"
                               } as RemoveIEffect
                             ],
-                            "fail": []
+                            fail: []
                           } as AbilityCheck
                         ]
                       } as Target
                     ],
-                    "verb": "attempts to break out of the grapple",
-                    "style": "4",
-                    "defaultDC": null,
-                    "defaultAttackBonus": null,
-                    "defaultCastingMod": null
+                    verb: "attempts to break out of the grapple",
+                    style: "4",
+                    defaultDC: null,
+                    defaultAttackBonus: null,
+                    defaultCastingMod: null
                   } as ButtonInteraction
                 ],
-                "end": false,
-                "conc": false,
-                "desc": "Grappled by {{caster.name}}",
-                "stacking": false,
-                "save_as": "grapple",
-                "parent": "grappling",
-                "target_self": false
+                end: false,
+                conc: false,
+                desc: "Grappled by {{caster.name}}",
+                stacking: false,
+                save_as: "grapple",
+                parent: "grappling",
+                target_self: false
               } as IEffect
             ],
-            "success": []
+            success: []
           } as AbilityCheck
         ]
       } as Target,
       {
-        "type": "text",
-        "text": "When you want to grab a creature or wrestle with it, you can use the Attack action to make a special melee attack, a grapple. If you’re able to make multiple attacks with the Attack action, this attack replaces one of them.\n\nThe target of your grapple must be no more than one size larger than you and must be within your reach. Using at least one free hand, you try to seize the target by making a grapple check instead of an attack roll: a Strength (Athletics) check contested by the target’s Strength (Athletics) or Dexterity (Acrobatics) check (the target chooses the ability to use). You succeed automatically if the target is incapacitated. If you succeed, you subject the target to the grappled condition. The condition specifies the things that end it, and you can release the target whenever you like (no action required).",
-        "title": "Effect"
+        type: "text",
+        text: "When you want to grab a creature or wrestle with it, you can use the Attack action to make a special melee attack, a grapple. If you’re able to make multiple attacks with the Attack action, this attack replaces one of them.\n\nThe target of your grapple must be no more than one size larger than you and must be within your reach. Using at least one free hand, you try to seize the target by making a grapple check instead of an attack roll: a Strength (Athletics) check contested by the target’s Strength (Athletics) or Dexterity (Acrobatics) check (the target chooses the ability to use). You succeed automatically if the target is incapacitated. If you succeed, you subject the target to the grappled condition. The condition specifies the things that end it, and you can release the target whenever you like (no action required).",
+        title: "Effect"
       } as Text
     ];
     this.context.parentArray.push(...effects);
