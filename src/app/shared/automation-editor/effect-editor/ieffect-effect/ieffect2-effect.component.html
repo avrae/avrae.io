@@ -48,6 +48,11 @@
                 matTooltip="Whether the effect duration ticks down at the end of the turn rather than the start.">
     Ticks on end of turn
   </mat-checkbox>
+  <mat-checkbox [(ngModel)]="effect.tick_on_caster"
+                (change)="changed.emit();"
+                matTooltip="Should this effect tick down on the casters turn, or the targets turn.">
+    Tick on Caster
+  </mat-checkbox>
   <mat-checkbox [(ngModel)]="effect.conc" (change)="changed.emit();">
     Requires concentration
   </mat-checkbox>
