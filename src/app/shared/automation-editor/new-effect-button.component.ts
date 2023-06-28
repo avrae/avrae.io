@@ -419,7 +419,7 @@ export class NewEffectButtonComponent implements OnInit {
               } as IEffect,
               {
                 type: "ieffect2",
-                name: "Grappled",
+                name: "Grappled by {{caster.name}}",
                 attacks: [],
                 buttons: [
                   {
