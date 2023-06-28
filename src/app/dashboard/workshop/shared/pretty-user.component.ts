@@ -18,7 +18,7 @@ import {DiscordService} from '../../../shared/discord.service';
         <ng-content></ng-content>
       </div>
 
-      <div class="user-discriminator">
+      <div class="user-discriminator" *ngIf="getDiscriminator() != '#0'">
         {{getDiscriminator()}}
       </div>
     </div>

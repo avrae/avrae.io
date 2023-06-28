@@ -119,6 +119,7 @@ export interface IEffect extends AutomationEffect {
   save_as?: string;
   parent?: string;
   target_self?: boolean;
+  tick_on_caster?: boolean;
 }
 
 export interface RemoveIEffect extends AutomationEffect {

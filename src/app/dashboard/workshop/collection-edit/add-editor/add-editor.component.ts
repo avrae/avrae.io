@@ -52,9 +52,6 @@ export class AddEditorComponent implements OnInit {
   onSearchUser(username: string) {
     this.validEditor = null;
     this.error = null;
-    if (!username.includes('#')) {  // user must have discrim at least
-      return;
-    }
     this.loading = true;
     this.discordService.searchUser(username)
       .subscribe(response => {
