@@ -40,6 +40,10 @@
         <mat-slide-toggle (change)="toggleWordWrap()">Word Wrap</mat-slide-toggle>
         <mat-slide-toggle *ngIf="mobile" (change)="toggleCodeVersions()" style="margin-left:8px">Code Versions</mat-slide-toggle>
       </div>
+      <!-- errors -->
+      <p class="mat-error" *ngIf="error">
+        {{error}}
+      </p>
       <div *ngIf="(selectedCodeVersion && !selectedCodeVersion.is_current) || creatingNewCodeVersion">
         <!-- buttons: set active code version or save new code version -->
         <button mat-raised-button *ngIf="selectedCodeVersion && !selectedCodeVersion.is_current" color="accent"
@@ -127,10 +131,6 @@
 
   <mat-divider></mat-divider>
 
-  <!-- errors -->
-  <p class="mat-error" *ngIf="error">
-    {{error}}
-  </p>
 </div>
 <div mat-dialog-actions>
   <button mat-flat-button (click)="onDone()">Done</button>
