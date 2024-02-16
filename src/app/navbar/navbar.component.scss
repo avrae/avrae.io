@@ -12,6 +12,12 @@
   z-index: 100;
 }
 
+// Increase size of img in navbar
+.navbar-header img {
+  height: 40px;
+  width: auto;
+}
+
 .flex-spacer {
   flex: 1 1;
   //flex-grow: 1;
