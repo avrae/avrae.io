@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 RUN npm install
-RUN npm run build-themes
+RUN npm run build-themes:dev
 RUN npm run build:ssr
 
 EXPOSE 4000
