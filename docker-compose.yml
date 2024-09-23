@@ -7,6 +7,6 @@ services:
             dockerfile: Dockerfile-dev
         container_name: avrae_io
         ports:
-            - "8080:8080"
+            - "8000:4000"
         environment:
             - NODE_ENV=development
