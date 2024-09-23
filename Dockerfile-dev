@@ -1,0 +1,14 @@
+FROM node:12
+
+# Create app directory
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN npm install
+RUN npm run build-themes
+RUN npm run build:ssr
+
+EXPOSE 4000
+
+CMD [ "node", "dist/frontend/server/main.js" ]

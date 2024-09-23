@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile-dev
+        container_name: avrae_io
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/usr/src/app
+        environment:
+            - NODE_ENV=development
