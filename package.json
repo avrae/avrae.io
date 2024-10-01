@@ -31,7 +31,7 @@
     "@angular/platform-browser-dynamic": "^13.3.9",
     "@angular/platform-server": "^13.3.9",
     "@angular/router": "^13.3.9",
-    "@auth0/angular-jwt": "^5.0.2",
+    "@auth0/angular-jwt": "^5.1.2",
     "@nguniversal/express-engine": "^13.1.1",
     "@sentry/browser": "^6.18.1",
     "compression": "^1.7.4",
