@@ -35,7 +35,7 @@
     "@nguniversal/express-engine": "^13.1.1",
     "@sentry/browser": "^6.18.1",
     "compression": "^1.7.4",
-    "core-js": "^3.8.3",
+    "core-js": "^3.38.1",
     "domino": "^2.1.6",
     "express": "^4.15.2",
     "lodash": "^4.17.21",
