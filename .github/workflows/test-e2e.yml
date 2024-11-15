@@ -1,10 +1,11 @@
 name: E2E Tests
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
   workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment to run tests against"
+        required: true
+        default: "live"
 jobs:
   test:
     timeout-minutes: 60
@@ -20,7 +21,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npm run e2e:${{ github.event.inputs.env }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
