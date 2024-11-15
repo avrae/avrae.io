@@ -2,12 +2,12 @@ name: Deploy to GH Pages (dev)
 
 on:
   push:
-    branches: [ dev ]
+    branches: [dev]
 
 permissions:
   contents: read
   id-token: write
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,8 +17,8 @@ jobs:
       - name: Use Node.js 14
         uses: actions/setup-node@v4
         with:
-          node-version: '14'
-          cache: 'npm'
+          node-version: "14"
+          cache: "npm"
 
       - name: Install deps
         run: |
@@ -33,7 +33,7 @@ jobs:
 
       - name: Run E2E Tests
         run: |
-          npm run e2e
+          npm run e2e:dev
 
       - name: Build Beta
         run: |
