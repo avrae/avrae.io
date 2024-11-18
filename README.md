@@ -3,6 +3,7 @@
 ![Avrae.io](docs/avrae.png)
 
 ## Important Links
+
 - [avrae.io](https://avrae.io)
 - [Support Discord Server](http://support.avrae.io)
 - [D&D Beyond Discord Server](https://dndbeyond.com/discord)
@@ -10,7 +11,7 @@
 
 ## Overview
 
-This is the source code for the Angular website located at https://avrae.io.  It serves as a web portal for users of the D&D Beyond Avrae Discord Bot to manage their data.
+This is the source code for the Angular website located at https://avrae.io. It serves as a web portal for users of the D&D Beyond Avrae Discord Bot to manage their data.
 
 ## Local Config
 
@@ -34,7 +35,7 @@ Run `npm run dev:ssr`
 
 To run end to end tests:
 
-Run `ng e2e` or `npm run e2e`
+Run `npm run e2e:<env>` where env is either `live`, `stg`, `dev` or `docker`
 
 ## Lint
 
