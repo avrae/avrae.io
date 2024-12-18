@@ -19,4 +19,10 @@ export const environment = {
  * below file. Don't forget to comment it out in production mode
  * because it will have a performance impact when errors are thrown
  */
+
+/*
+  Currently, the datadog `clientToken` and `applicationId` are public since they're
+  not sensitive data, and they are designed to be used in client-side code which is
+  a common and safe practice when integrating Datadog RUM.
+*/
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
