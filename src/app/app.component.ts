@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer, Meta} from '@angular/platform-browser';
 import {environment} from '../environments/environment';
+import {MonitoringService} from './shared/monitoring/monitoring.service'
 
 @Component({
   selector: 'avr-root',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
     'Featuring advanced dice, SRD and character sheet integration, and initiative tracking, ' +
     'you\'ll never need another D&D bot.';
 
-  constructor(private meta: Meta, private iconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(private meta: Meta, private iconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private monitoringService: MonitoringService ) {
     this.meta.addTags([
       {name: 'description', content: this.description},
       {property: 'og:title', content: this.title},
@@ -35,5 +36,6 @@ export class AppComponent implements OnInit {
 
   // On init function (make sure to implement OnInit is called when component is initialized
   ngOnInit() {
+    this.monitoringService.initializeDatadog();
   }
 }
