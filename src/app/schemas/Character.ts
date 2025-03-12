@@ -64,6 +64,7 @@ export class Attack {
   criton?: number;
   extra_crit_damage?: string;
   activation_type?: number;
+  list_display_override?: string;
 
   constructor(name = '', automation: AutomationEffect[] = [], proper: boolean = false, verb: string = undefined, activation_type: number = undefined) {
     this.name = name;

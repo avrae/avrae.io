@@ -170,6 +170,7 @@ export class AttackEditorDialog implements OnInit {
   @removeEmpty('criton') critonWrapper: number;
   @removeEmpty('extra_crit_damage') extraCritDamageWrapper: string;
   @removeEmpty('activation_type') activationTypeWrapper: number;
+  @removeEmpty('list_display_override') list_display_override?: string;
 }
 
 // adapted from https://stackoverflow.com/questions/59651284/dynamic-setter-from-decorator-typescript-complains-about-read-only-property
