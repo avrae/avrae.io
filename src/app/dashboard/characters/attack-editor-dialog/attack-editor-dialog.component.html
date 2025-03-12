@@ -114,6 +114,12 @@
             <mat-option [value]="11">Lair Action</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="List Display Override" [(ngModel)]="list_display_override"
+                 matTooltip="Overrides the default display text when listing actions.">
+          <span matSuffix matTooltip="AnnotatedString - variables and functions allowed in braces">{{"{ }"}}</span>
+        </mat-form-field>
       </div>
 
       <!-- crit options -->
