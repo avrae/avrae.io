@@ -183,9 +183,9 @@ export class NewEffectButtonComponent implements OnInit {
       case 'preset_basic_dot':
         effect = this.generateBasicDOTPreset();
         break;
-        case 'preset_all_resistance':
-          effect = this.generateAllResistancePreset();
-          break;
+      case 'preset_all_resistance':
+        effect = this.generateAllResistancePreset();
+        break;
       case 'preset_grapple':
         this.doGrapplePreset();
         return;
