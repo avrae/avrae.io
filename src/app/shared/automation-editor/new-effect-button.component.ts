@@ -55,14 +55,15 @@ const typeRules: EffectRule[] = [
   {id: 'spell',          rules: [context => context.ancestors.length === 0, context => !context.isSpell]},
   {id: 'check',          rules: [hasAncestorOfType('target')]},
   // --- presets ---
-  {id: 'preset_atk_dmg',     label: 'Attack and Damage',        group: 'Presets', rules: [noAncestorOfType('target')]},
-  {id: 'preset_save_half',   label: 'Save for Half',            group: 'Presets', rules: [noAncestorOfType('target')]},
-  {id: 'preset_prone',       label: 'Prone Effect',             group: 'Presets', rules: [hasAncestorOfType('target')]},
-  {id: 'preset_save_to_end', label: 'Save to Remove Condition', group: 'Presets', rules: [hasAncestorOfType('target')]},
-  {id: 'preset_recharge',    label: 'Monster Ability Recharge', group: 'Presets', rules: [context => context.ancestors.length === 0]},
-  {id: 'preset_basic_dot',   label: 'Damage Over Time Effect',  group: 'Presets', rules: [hasAncestorOfType('target')]},
-  {id: 'preset_grapple',     label: 'Grapple Contest',          group: 'Presets', rules: [noAncestorOfType('target')]},
-  {id: 'preset_aura',        label: 'Basic Aura',               group: 'Presets', rules: [noAncestorOfType('target')]},
+  {id: 'preset_atk_dmg',        label: 'Attack and Damage',              group: 'Presets', rules: [noAncestorOfType('target')]},
+  {id: 'preset_save_half',      label: 'Save for Half',                  group: 'Presets', rules: [noAncestorOfType('target')]},
+  {id: 'preset_prone',          label: 'Prone Effect',                   group: 'Presets', rules: [hasAncestorOfType('target')]},
+  {id: 'preset_save_to_end',    label: 'Save to Remove Condition',       group: 'Presets', rules: [hasAncestorOfType('target')]},
+  {id: 'preset_all_resistance', label: 'Resistance to All Damage Types', group: 'Presets', rules: [hasAncestorOfType('target')]},
+  {id: 'preset_recharge',       label: 'Monster Ability Recharge',       group: 'Presets', rules: [context => context.ancestors.length === 0]},
+  {id: 'preset_basic_dot',      label: 'Damage Over Time Effect',        group: 'Presets', rules: [hasAncestorOfType('target')]},
+  {id: 'preset_grapple',        label: 'Grapple Contest',                group: 'Presets', rules: [noAncestorOfType('target')]},
+  {id: 'preset_aura',           label: 'Basic Aura',                     group: 'Presets', rules: [noAncestorOfType('target')]},
 ];
 
 // ==== component ====
@@ -182,6 +183,9 @@ export class NewEffectButtonComponent implements OnInit {
       case 'preset_basic_dot':
         effect = this.generateBasicDOTPreset();
         break;
+        case 'preset_all_resistance':
+          effect = this.generateAllResistancePreset();
+          break;
       case 'preset_grapple':
         this.doGrapplePreset();
         return;
@@ -352,6 +356,18 @@ export class NewEffectButtonComponent implements OnInit {
           ]
         } as ButtonInteraction
       ]
+    } as IEffect
+  }
+
+  generateAllResistancePreset(): AutomationEffect {
+    return {
+      type: "ieffect2",
+      name: "Generic Resistance Effect",
+      effects: {
+        "resistances": [
+          "bludgeoning", "piercing", "slashing", "thunder", "necrotic", "fire", "force", "lightning", "cold", "poison", "radiant", "acid", "psychic"
+        ]
+      } as PassiveEffects,
     } as IEffect
   }
 
