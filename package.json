@@ -37,7 +37,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@datadog/browser-rum": "^5.34.0",
     "@nguniversal/express-engine": "^13.1.1",
-    "compression": "^1.7.4",
+    "compression": "^1.8.1",
     "core-js": "^3.8.3",
     "domino": "^2.1.6",
     "express": "^4.15.2",
