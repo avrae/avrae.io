@@ -53,6 +53,11 @@
                 matTooltip="Should this effect tick down on the casters turn, or the targets turn.">
     Tick on Caster
   </mat-checkbox>
+  <mat-checkbox [(ngModel)]="effect.hidden"
+                (change)="changed.emit();"
+                matTooltip="Should this effect's stat modifiers and description be hidden from display in combat display.">
+    Hidden
+  </mat-checkbox>
   <mat-checkbox [(ngModel)]="effect.conc" (change)="changed.emit();">
     Requires concentration
   </mat-checkbox>
