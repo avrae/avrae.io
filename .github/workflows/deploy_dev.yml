@@ -2,7 +2,10 @@ name: Deploy to GH Pages (dev)
 
 on:
   push:
-    branches: [dev]
+    branches: [AVR-1501]
+  pull_request:
+    branches: [AVR-1501]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -21,15 +24,10 @@ jobs:
           cache: "npm"
 
       - name: Install deps
-        run: |
-          npm install
-          npm run build-themes
+        run: npm ci # 👈 Use 'ci' for faster, more reliable CI installs
 
-      - name: Update Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get --only-upgrade install google-chrome-stable
-          google-chrome --version
+      - name: Install Playwright Browsers # 👈 REPLACED 'Update Chrome'
+        run: npx playwright install --with-deps
 
       - name: Run E2E Tests
         run: |
@@ -48,6 +46,7 @@ jobs:
           if-no-files-found: error
 
   deploy:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     needs: build
 
