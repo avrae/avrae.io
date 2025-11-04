@@ -2,9 +2,9 @@ name: Deploy to GH Pages (dev)
 
 on:
   push:
-    branches: [AVR-1501]
+    branches: [dev]
   pull_request:
-    branches: [AVR-1501]
+    branches: [dev]
   workflow_dispatch:
 
 permissions:
