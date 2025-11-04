@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 jobs:
@@ -26,15 +26,10 @@ jobs:
           cache: "npm"
 
       - name: Install deps
-        run: |
-          npm install
-          npm run build-themes
+        run: npm ci
 
-      - name: Update Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get --only-upgrade install google-chrome-stable
-          google-chrome --version
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
       - name: Run E2E Tests
         run: |
