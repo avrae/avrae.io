@@ -24,9 +24,9 @@ jobs:
           cache: "npm"
 
       - name: Install deps
-        run: npm ci # 👈 Use 'ci' for faster, more reliable CI installs
+        run: npm ci
 
-      - name: Install Playwright Browsers # 👈 REPLACED 'Update Chrome'
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Run E2E Tests
