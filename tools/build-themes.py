@@ -4,7 +4,7 @@ import subprocess
 DEST_PATH = 'src/assets'
 INPUT_PATH = os.path.join(DEST_PATH, 'custom-themes')
 
-print "Building custom theme scss files."
+print("Building custom theme scss files.")
 
 # Get the files
 files = []
@@ -19,4 +19,4 @@ for file in files:
   output_file = os.path.join(DEST_PATH, "{}.css".format(basename))
   subprocess.call([os.path.join('node_modules', '.bin', 'sass'), '-I', 'node_modules', file, output_file])
 
-print "Finished building CSS."
+print("Finished building CSS.")
