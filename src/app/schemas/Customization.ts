@@ -35,4 +35,5 @@ export class GlobalVar {
   owner_name: string;
   value: string;
   editors: string[];
+  script_writable: boolean;
 }

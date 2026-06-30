@@ -17,7 +17,7 @@ export class GvarListComponent implements OnInit {
   @Input() data: GlobalVar[];
   @Input() owned: boolean;
 
-  columnsToDisplay: string[] = ['name', 'value', 'buttons'];
+  columnsToDisplay: string[] = ['name', 'value', 'scripting', 'buttons'];
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private gvarService: GvarService) {
   }
