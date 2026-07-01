@@ -9,7 +9,7 @@
 pre {
   white-space: pre-wrap;
   max-height: 200px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 @media only screen and (max-width: 840px) {
@@ -39,4 +39,9 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 
 th {
   min-width: 100px;
+}
+
+.scripting-col {
+  text-align: center;
+  vertical-align: middle;
 }
