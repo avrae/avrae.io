@@ -120,6 +120,7 @@ export interface IEffect extends AutomationEffect {
   parent?: string;
   target_self?: boolean;
   tick_on_caster?: boolean;
+  hidden?: boolean;
 }
 
 export interface RemoveIEffect extends AutomationEffect {
