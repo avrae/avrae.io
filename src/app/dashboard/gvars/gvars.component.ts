@@ -5,9 +5,10 @@ import {GlobalVar} from '../../schemas/Customization';
 import {GvarService} from './gvar.service';
 
 @Component({
-  selector: 'avr-gvars',
-  templateUrl: './gvars.component.html',
-  styleUrls: ['./gvars.component.css']
+    selector: 'avr-gvars',
+    templateUrl: './gvars.component.html',
+    styleUrls: ['./gvars.component.css'],
+    standalone: false
 })
 export class GvarsComponent implements OnInit {
 

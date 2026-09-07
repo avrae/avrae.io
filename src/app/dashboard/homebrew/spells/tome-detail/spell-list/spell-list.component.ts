@@ -9,9 +9,10 @@ import {SRDCopyDialog} from '../../../../../shared/dialogs/srd-copy-dialog/srd-c
 import {HomebrewService} from '../../../homebrew.service';
 
 @Component({
-  selector: 'avr-spell-list',
-  templateUrl: './spell-list.component.html',
-  styleUrls: ['./spell-list.component.scss']
+    selector: 'avr-spell-list',
+    templateUrl: './spell-list.component.html',
+    styleUrls: ['./spell-list.component.scss'],
+    standalone: false
 })
 export class SpellListComponent implements OnInit {
 

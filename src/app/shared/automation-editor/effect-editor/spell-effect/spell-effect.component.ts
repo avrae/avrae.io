@@ -6,9 +6,10 @@ import {CastSpell} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-spell-effect',
-  templateUrl: './spell-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-spell-effect',
+    templateUrl: './spell-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class SpellEffectComponent extends EffectComponent<CastSpell> implements OnInit {
   spellToCast: DDBEntity;

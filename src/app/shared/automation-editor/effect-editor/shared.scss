@@ -1,4 +1,4 @@
-@import "../../../variables";
+@use "../../../variables" as vars;
 
 .hidden {
   visibility: hidden;
@@ -9,11 +9,11 @@
 }
 
 .text-monospace {
-  font-family: $font-monospace;
+  font-family: vars.$font-monospace;
 }
 
 .auto-label {
-  font-family: $font-accent;
+  font-family: vars.$font-accent;
   opacity: 0.7;
 }
 
@@ -24,12 +24,14 @@
     justify-content: center;
   }
 
-  .auto-row span, .auto-row mat-form-field {
+  .auto-row span,
+  .auto-row mat-form-field {
     width: 100%;
     justify-content: space-around;
   }
 
-  .auto-row span, .auto-row span span {
+  .auto-row span,
+  .auto-row span span {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

@@ -17,9 +17,10 @@ import {PackOptionsDialog} from '../pack-options-dialog/pack-options-dialog.comp
 import {PackShareDialog} from '../pack-share-dialog/pack-share-dialog.component';
 
 @Component({
-  selector: 'avr-pack-detail',
-  templateUrl: './pack-detail.component.html',
-  styleUrls: ['./pack-detail.component.scss']
+    selector: 'avr-pack-detail',
+    templateUrl: './pack-detail.component.html',
+    styleUrls: ['./pack-detail.component.scss'],
+    standalone: false
 })
 export class PackDetailComponent implements OnInit, OnDestroy {
 

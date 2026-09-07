@@ -3,9 +3,10 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {WorkshopService} from '../../workshop.service';
 
 @Component({
-  selector: 'avr-new-collection-dialog',
-  templateUrl: './new-collection-dialog.component.html',
-  styleUrls: ['../../dialog-common.scss']
+    selector: 'avr-new-collection-dialog',
+    templateUrl: './new-collection-dialog.component.html',
+    styleUrls: ['../../dialog-common.scss'],
+    standalone: false
 })
 export class NewCollectionDialogComponent implements OnInit {
 

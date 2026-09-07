@@ -4,9 +4,10 @@ import {Attack} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-attack-effect',
-  templateUrl: './attack-effect.component.html',
-  styleUrls: ['../shared.scss', './attack-effect.component.css']
+    selector: 'avr-attack-effect',
+    templateUrl: './attack-effect.component.html',
+    styleUrls: ['../shared.scss', './attack-effect.component.css'],
+    standalone: false
 })
 export class AttackEffectComponent extends EffectComponent<Attack> implements OnInit {
   custom = false;

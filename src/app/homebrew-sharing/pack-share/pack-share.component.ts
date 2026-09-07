@@ -8,9 +8,10 @@ import {DiscordService} from '../../shared/discord.service';
 import {HomebrewSharingService} from '../homebrew-sharing.service';
 
 @Component({
-  selector: 'avr-pack-share',
-  templateUrl: './pack-share.component.html',
-  styleUrls: ['./pack-share.component.scss']
+    selector: 'avr-pack-share',
+    templateUrl: './pack-share.component.html',
+    styleUrls: ['./pack-share.component.scss'],
+    standalone: false
 })
 export class PackShareComponent implements OnInit {
 

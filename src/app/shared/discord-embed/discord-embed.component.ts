@@ -4,9 +4,10 @@ import {EmbedField} from './embed-fields/embed-fields.component';
 import {EmbedFooter} from './embed-footer/embed-footer.component';
 
 @Component({
-  selector: 'avr-discord-embed',
-  templateUrl: './discord-embed.component.html',
-  styleUrls: ['./discord-embed.component.css']
+    selector: 'avr-discord-embed',
+    templateUrl: './discord-embed.component.html',
+    styleUrls: ['./discord-embed.component.css'],
+    standalone: false
 })
 export class DiscordEmbedComponent implements OnInit {
 

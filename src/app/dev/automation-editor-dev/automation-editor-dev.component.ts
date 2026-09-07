@@ -8,9 +8,10 @@ import {JSONExportDialog} from '../../shared/dialogs/json-export-dialog/json-exp
 import {JSONImportDialog} from '../../shared/dialogs/json-import-dialog/json-import-dialog.component';
 
 @Component({
-  selector: 'avr-automation-editor-dev',
-  templateUrl: './automation-editor-dev.component.html',
-  styleUrls: ['./automation-editor-dev.component.css']
+    selector: 'avr-automation-editor-dev',
+    templateUrl: './automation-editor-dev.component.html',
+    styleUrls: ['./automation-editor-dev.component.css'],
+    standalone: false
 })
 export class AutomationEditorDevComponent implements OnInit {
   localSavedAutomation: AutomationEffect[] = [];

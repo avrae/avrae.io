@@ -3,9 +3,10 @@ import {RemoveIEffect} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-remove-ieffect-effect',
-  templateUrl: './remove-ieffect-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-remove-ieffect-effect',
+    templateUrl: './remove-ieffect-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class RemoveIEffectEffectComponent extends EffectComponent<RemoveIEffect> implements OnInit {
 

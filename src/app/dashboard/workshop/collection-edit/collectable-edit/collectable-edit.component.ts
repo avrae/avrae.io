@@ -8,9 +8,10 @@ import {CollectableEditDialogComponent} from '../collectable-edit-dialog/collect
 import {CreateCollectableDialogComponent} from '../create-collectable-dialog/create-collectable-dialog.component';
 
 @Component({
-  selector: 'avr-collectable-edit',
-  templateUrl: './collectable-edit.component.html',
-  styleUrls: ['./collectable-edit.component.scss', '../../collectable-display/collectable-display.component.scss']
+    selector: 'avr-collectable-edit',
+    templateUrl: './collectable-edit.component.html',
+    styleUrls: ['./collectable-edit.component.scss', '../../collectable-display/collectable-display.component.scss'],
+    standalone: false
 })
 export class CollectableEditComponent extends CollectableDisplayComponent implements OnInit {
 

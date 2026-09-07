@@ -7,13 +7,14 @@ export class EmbedFooter {
 }
 
 @Component({
-  selector: 'avr-embed-footer',
-  styleUrls: ['../discord-embed.component.css'],
-  template: `
+    selector: 'avr-embed-footer',
+    styleUrls: ['../discord-embed.component.css'],
+    template: `
     <img [src]="footer.icon_url" class="embed-footer-icon" role="presentation" width="20" height="20"
          *ngIf="(footer?.text || footer?.timestamp) && footer.icon_url">
     <span class="embed-footer" *ngIf="footer?.text || footer?.timestamp">{{footerText}}</span>
-  `
+  `,
+    standalone: false
 })
 export class EmbedFooterComponent implements OnInit {
 

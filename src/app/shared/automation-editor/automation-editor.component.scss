@@ -1,4 +1,4 @@
-@import "../../variables";
+@use "../../variables" as vars;
 
 .ignore-theme {
   color: #fff;
@@ -11,19 +11,19 @@
 .editor-container {
   display: grid;
   grid-template-columns: auto 1fr;
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   border-radius: 4px;
   min-height: 55vh;
 
   > div {
-    max-height: calc(100vh - #{$navbar-height + $footer-height});
+    max-height: calc(100vh - #{vars.$navbar-height + vars.$footer-height});
     overflow-y: scroll;
   }
 }
 
 // tree styles
 .automation-tree {
-  border-right: 1px solid rgba($gray2, 0.3);
+  border-right: 1px solid rgba(vars.$gray2, 0.3);
   padding: 6px;
   min-width: 200px;
 }
@@ -38,7 +38,7 @@
 }
 
 .tree-node-active {
-  background: rgba($blurple, 0.2);
+  background: rgba(vars.$blurple, 0.2);
   border-radius: 2px;
   padding-left: 2px;
   margin-left: -2px;
@@ -46,7 +46,7 @@
 
 .tree-children-container {
   padding-left: 12px;
-  border-left: 1px solid $gray2;
+  border-left: 1px solid vars.$gray2;
 }
 
 .automation-tree button[mat-icon-button] {
@@ -58,7 +58,7 @@
 
 .node-icon {
   font-size: 16px;
-  color: $gray2;
+  color: vars.$gray2;
 }
 
 // editor styles

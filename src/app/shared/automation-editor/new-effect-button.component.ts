@@ -68,8 +68,8 @@ const typeRules: EffectRule[] = [
 
 // ==== component ====
 @Component({
-  selector: 'avr-new-effect-button',
-  template: `
+    selector: 'avr-new-effect-button',
+    template: `
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>add</mat-icon>
     </button>
@@ -90,8 +90,10 @@ const typeRules: EffectRule[] = [
       </div>
     </mat-menu>
   `,
-  styleUrls: ['./automation-editor.component.scss'],
-  encapsulation: ViewEncapsulation.None  // inherit button styling from automation-editor
+    styleUrls: ['./automation-editor.component.scss'],
+    encapsulation: ViewEncapsulation.None // inherit button styling from automation-editor
+    ,
+    standalone: false
 })
 export class NewEffectButtonComponent implements OnInit {
 

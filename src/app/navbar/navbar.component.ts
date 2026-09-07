@@ -4,9 +4,10 @@ import {isLoggedIn, navigateToDiscordOauth} from '../SecurityHelper';
 import {BreakpointBaseComponent} from '../shared/breakpoints';
 
 @Component({
-  selector: 'avr-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'avr-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    standalone: false
 })
 export class NavbarComponent extends BreakpointBaseComponent implements OnInit {
 

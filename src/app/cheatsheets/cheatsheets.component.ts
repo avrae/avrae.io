@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Meta} from '@angular/platform-browser';
 
 @Component({
-  selector: 'avr-cheatsheets',
-  templateUrl: './cheatsheets.component.html',
-  styleUrls: ['./cheatsheets.component.css']
+    selector: 'avr-cheatsheets',
+    templateUrl: './cheatsheets.component.html',
+    styleUrls: ['./cheatsheets.component.css'],
+    standalone: false
 })
 export class CheatsheetsComponent implements OnInit {
 

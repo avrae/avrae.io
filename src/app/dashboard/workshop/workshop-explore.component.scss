@@ -1,4 +1,4 @@
-@import "../../variables";
+@use "../../variables" as vars;
 
 .toolbar-search-form-order {
   margin: 0 8px;
@@ -13,7 +13,7 @@
 }
 
 .paginator {
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   border-radius: 4px;
   width: fit-content;
   margin: 0 auto;

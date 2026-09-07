@@ -22,15 +22,15 @@
     <!-- search + tags -->
     <mat-form-field class="toolbar-search-form-search">
       <mat-label>Search...</mat-label>
-      <mat-chip-list #chipList>
-        <mat-chip *ngFor="let tag of tags" removable (removed)="onTagRemove(tag)">
+      <mat-chip-grid #chipList>
+        <mat-chip-row *ngFor="let tag of tags" removable (removed)="onTagRemove(tag)">
           {{tag.name}}
           <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
+        </mat-chip-row>
         <input type="text" matInput autocomplete="off" #search [matAutocomplete]="auto"
                [value]="q" (keyup)="filterTags(search.value)" (keyup.enter)="onSearch(search.value)"
                [matChipInputFor]="chipList">
-      </mat-chip-list>
+      </mat-chip-grid>
       <button mat-icon-button matSuffix (click)="onSearchClear()" *ngIf="q || tags?.length">
         <mat-icon>cancel</mat-icon>
       </button>
@@ -48,7 +48,7 @@
 
 <!-- CONTENT -->
 <div class="container">
-  <mat-card *ngIf="page === 1 || error" class="workshop-header">
+  <mat-card appearance="outlined" *ngIf="page === 1 || error" class="workshop-header">
     <div *ngIf="page === 1">
       <h3 class="welcome-header">Welcome to the Alias Workshop!</h3>
       <p>
@@ -63,7 +63,7 @@
     </p>
   </mat-card>
 
-  <mat-card *ngIf="!loading && collections.length === 0">
+  <mat-card appearance="outlined" *ngIf="!loading && collections.length === 0">
     <p>There are no results. Try a different search!</p>
   </mat-card>
 

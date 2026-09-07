@@ -1,4 +1,4 @@
-@import "../_variables.scss";
+@use "../_variables.scss" as vars;
 
 // CSS copied from https://github.com/DnDBeyond/ddb-common-components/blob/master/src/Components/Footer/Footer.scss
 
@@ -27,7 +27,7 @@
   &-copyright {
     &-site {
       color: #979aa4;
-      font-family: 'Roboto Condensed', Roboto, Helvetica, sans-serif;
+      font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
       font-size: 12px;
       line-height: 16px;
       padding-bottom: 10px;
@@ -35,7 +35,7 @@
 
     &-wotc {
       color: #979aa4;
-      font-family: 'Roboto Condensed', Roboto, Helvetica, sans-serif;
+      font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
       font-size: 12px;
       line-height: 16px;
     }
@@ -46,14 +46,14 @@
 
     &-item {
       color: #979aa4;
-      font-family: 'Roboto Condensed', Roboto, Helvetica, sans-serif;
+      font-family: "Roboto Condensed", Roboto, Helvetica, sans-serif;
       font-size: 12px;
       line-height: 16px;
       text-decoration: none;
     }
 
     &-item + &-item::before {
-      content: '\2022';
+      content: "\2022";
       margin: 0 5px;
     }
   }

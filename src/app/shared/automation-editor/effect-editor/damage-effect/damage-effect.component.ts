@@ -3,9 +3,10 @@ import {Damage} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-damage-effect',
-  templateUrl: './damage-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-damage-effect',
+    templateUrl: './damage-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class DamageEffectComponent extends EffectComponent<Damage> implements OnInit {
   constructor() {

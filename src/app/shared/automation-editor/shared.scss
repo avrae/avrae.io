@@ -1,9 +1,9 @@
-@import "../../variables";
+@use "../../variables" as vars;
 
 .editor-header {
   display: flex;
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba($gray2, 0.3);
+  border-bottom: 1px solid rgba(vars.$gray2, 0.3);
 
   .editor-header-text {
     font-weight: bold;

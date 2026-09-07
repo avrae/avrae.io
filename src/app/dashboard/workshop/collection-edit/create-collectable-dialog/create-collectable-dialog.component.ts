@@ -11,9 +11,10 @@ interface CreateCollectableDialogComponentData {
 }
 
 @Component({
-  selector: 'avr-create-collectable-dialog',
-  templateUrl: './create-collectable-dialog.component.html',
-  styleUrls: ['../../dialog-common.scss']
+    selector: 'avr-create-collectable-dialog',
+    templateUrl: './create-collectable-dialog.component.html',
+    styleUrls: ['../../dialog-common.scss'],
+    standalone: false
 })
 export class CreateCollectableDialogComponent implements OnInit {
   PublicationState = PublicationState;

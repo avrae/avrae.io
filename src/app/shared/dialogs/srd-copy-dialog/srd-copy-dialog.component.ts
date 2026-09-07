@@ -8,8 +8,9 @@ class SRDDialogData<T> {
 }
 
 @Component({
-  selector: 'avr-srd-copy-dialog',
-  templateUrl: './srd-copy-dialog.component.html'
+    selector: 'avr-srd-copy-dialog',
+    templateUrl: './srd-copy-dialog.component.html',
+    standalone: false
 })
 export class SRDCopyDialog<T> implements OnInit {
 

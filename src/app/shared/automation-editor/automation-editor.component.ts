@@ -6,9 +6,10 @@ import {AutomationEffect} from './types';
 import {AutomationAddEffectNode, AutomationEffectTreeNode, AutomationTreeBuilder, AutomationTreeNode} from './utils';
 
 @Component({
-  selector: 'avr-automation-editor',
-  templateUrl: './automation-editor.component.html',
-  styleUrls: ['./automation-editor.component.scss', './shared.scss']
+    selector: 'avr-automation-editor',
+    templateUrl: './automation-editor.component.html',
+    styleUrls: ['./automation-editor.component.scss', './shared.scss'],
+    standalone: false
 })
 export class AutomationEditorComponent implements OnInit, OnChanges {
 

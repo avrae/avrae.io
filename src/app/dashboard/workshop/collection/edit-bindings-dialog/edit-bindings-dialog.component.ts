@@ -14,9 +14,10 @@ interface EditBindingsDialogData {
 }
 
 @Component({
-  selector: 'avr-edit-bindings-dialog',
-  templateUrl: './edit-bindings-dialog.component.html',
-  styleUrls: ['./edit-bindings-dialog.component.scss']
+    selector: 'avr-edit-bindings-dialog',
+    templateUrl: './edit-bindings-dialog.component.html',
+    styleUrls: ['./edit-bindings-dialog.component.scss'],
+    standalone: false
 })
 export class EditBindingsDialogComponent implements OnInit {
 

@@ -12,7 +12,7 @@
 
   <div class="container" fxLayout="row" fxLayoutGap="8px">
     <div class="spell-list" fxFlex="grow" *ngIf="tome.spells.length">
-      <mat-card class="card">
+      <mat-card appearance="outlined" class="card">
 
         <mat-list>
           <mat-list-item *ngFor="let spell of tome.spells">
@@ -48,7 +48,7 @@
 
 <div *ngIf="!tome">
   <div class="container">
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-spinner [diameter]="24"></mat-spinner>
       <p class="mat-error" *ngIf="error">
         {{error}}

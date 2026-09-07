@@ -1,9 +1,9 @@
-@import "../../../variables";
+@use "../../../variables" as vars;
 
 .collectable-container {
   mat-divider {
     margin: 12px 0;
-    border-top-color: $gray2;
+    border-top-color: vars.$gray2;
   }
 
   color: white;

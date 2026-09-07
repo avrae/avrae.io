@@ -1,14 +1,10 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "esModuleInterop": true,
     "outDir": "../out-tsc/app",
-    "types": []
+    "types": ["node"]
   },
-  "files": [
-    "main.ts",
-    "polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["main.ts", "polyfills.ts", "main.server.ts", "../server.ts"],
+  "include": ["src/**/*.d.ts"]
 }

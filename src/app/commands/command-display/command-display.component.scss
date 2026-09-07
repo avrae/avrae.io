@@ -1,8 +1,8 @@
-@import "../../_variables.scss";
+@use "../../_variables.scss" as vars;
 
 mat-divider {
   margin: 12px 0;
-  border-top-color: $gray2;
+  border-top-color: vars.$gray2;
 }
 
 // ==== header ====
@@ -23,18 +23,18 @@ mat-divider {
 }
 
 .command-closed-desc {
-  color: $gray4;
+  color: vars.$gray4;
   font-size: 16px;
 
   .has-subcommands {
     margin-top: -1em;
-    color: $blurple;
+    color: vars.$blurple;
   }
 }
 
 // ==== content ====
 .command-desc {
-  color: $gray4;
+  color: vars.$gray4;
   font-size: 16px;
 }
 
@@ -50,7 +50,7 @@ mat-divider {
   padding: 0 20px;
 
   h4 {
-    color: $blurple;
+    color: vars.$blurple;
     font-weight: bold;
   }
 }

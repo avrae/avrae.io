@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
-  selector: 'avr-doubleclick-delete-button',
-  template: `
+    selector: 'avr-doubleclick-delete-button',
+    template: `
     <button mat-icon-button
             [color]="deleteState === 0 ? 'warn' : 'accent'"
             matTooltip="Double click to delete."
@@ -11,7 +11,8 @@ import {Component, EventEmitter, Output} from '@angular/core';
       <mat-icon aria-label="Delete">delete</mat-icon>
     </button>
   `,
-  styles: []
+    styles: [],
+    standalone: false
 })
 export class DoubleClickDeleteButtonComponent {
 

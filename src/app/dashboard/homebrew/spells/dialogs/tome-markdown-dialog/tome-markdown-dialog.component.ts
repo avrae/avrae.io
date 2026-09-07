@@ -3,10 +3,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {parseComponents, parseLevel, parseSchool, Spell, Tome} from '../../../../../schemas/homebrew/Spells';
 
 @Component({
-  selector: 'avr-tome-markdown-dialog',
-  templateUrl: './tome-markdown-dialog.component.html',
-  styleUrls: ['./tome-markdown-dialog.component.css'],
-  preserveWhitespaces: true
+    selector: 'avr-tome-markdown-dialog',
+    templateUrl: './tome-markdown-dialog.component.html',
+    styleUrls: ['./tome-markdown-dialog.component.css'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class TomeMarkdownDialog implements OnInit {
 

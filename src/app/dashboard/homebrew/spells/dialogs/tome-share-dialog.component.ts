@@ -9,9 +9,10 @@ import {HomebrewService} from '../../homebrew.service';
 import {TomeMarkdownDialog} from './tome-markdown-dialog/tome-markdown-dialog.component';
 
 @Component({
-  selector: 'avr-pack-share-dialog',
-  templateUrl: './tome-share-dialog.component.html',
-  styleUrls: ['./tome-share-dialog.component.css']
+    selector: 'avr-pack-share-dialog',
+    templateUrl: './tome-share-dialog.component.html',
+    styleUrls: ['./tome-share-dialog.component.css'],
+    standalone: false
 })
 export class TomeShareDialog implements OnInit {
 
