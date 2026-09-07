@@ -9,9 +9,10 @@ export interface JSONExportDialogData {
 }
 
 @Component({
-  selector: 'avr-json-export-dialog',
-  templateUrl: './json-export-dialog.component.html',
-  styleUrls: ['./json-export-dialog.component.css']
+    selector: 'avr-json-export-dialog',
+    templateUrl: './json-export-dialog.component.html',
+    styleUrls: ['./json-export-dialog.component.css'],
+    standalone: false
 })
 export class JSONExportDialog implements OnInit {
 

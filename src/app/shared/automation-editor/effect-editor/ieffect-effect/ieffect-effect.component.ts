@@ -3,9 +3,10 @@ import {LegacyIEffect} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-ieffect-effect',
-  templateUrl: './ieffect-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-ieffect-effect',
+    templateUrl: './ieffect-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class IEffectEffectComponent extends EffectComponent<LegacyIEffect> implements OnInit {
   constructor() {

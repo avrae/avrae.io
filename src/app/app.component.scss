@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables" as vars;
 
 /* Application-wide Styles */
 .spacer {
@@ -16,5 +16,5 @@
 }
 
 .content {
-  min-height: calc(100vh - (#{$navbar-height} + #{$footer-height}));
+  min-height: calc(100vh - (#{vars.$navbar-height} + #{vars.$footer-height}));
 }

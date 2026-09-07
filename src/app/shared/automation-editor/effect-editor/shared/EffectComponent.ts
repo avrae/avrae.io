@@ -3,7 +3,10 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
 import {AutomationEffect} from '../../types';
 import {AutomationEffectTreeNode, NodeContext} from '../../utils';
 
-@Component({template: ''})
+@Component({
+    template: '',
+    standalone: false
+})
 export abstract class EffectComponent<T extends AutomationEffect> {
   @Input() effectNode: AutomationEffectTreeNode;
   @Input() spell: Spell;

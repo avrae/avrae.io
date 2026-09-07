@@ -5,9 +5,10 @@ import {UserInfo} from '../../../../../schemas/UserInfo';
 import {JSONExportDialog} from '../../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 
 @Component({
-  selector: 'avr-spell-detail',
-  templateUrl: './spell-detail.component.html',
-  styleUrls: ['./spell-detail.component.css']
+    selector: 'avr-spell-detail',
+    templateUrl: './spell-detail.component.html',
+    styleUrls: ['./spell-detail.component.css'],
+    standalone: false
 })
 export class SpellDetailComponent implements OnInit {
 

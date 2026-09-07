@@ -4,18 +4,18 @@ import {WorkshopCollection, WorkshopTag} from '../../../schemas/Workshop';
 import {WorkshopService} from '../workshop.service';
 
 @Component({
-  selector: 'avr-tag-chip-list',
-  template: `
-    <mat-chip-list aria-label="Tag list" class="collection-tags" *ngIf="tags?.length && (collection.tags.length || showEdit)">
-      <mat-chip *ngFor="let tag of limit ? collection.tags.slice(0, limit) : collection.tags"
+    selector: 'avr-tag-chip-list',
+    template: `
+    <mat-chip-listbox aria-label="Tag list" class="collection-tags" *ngIf="tags?.length && (collection.tags.length || showEdit)">
+      <mat-chip-option *ngFor="let tag of limit ? collection.tags.slice(0, limit) : collection.tags"
                 [removable]="showEdit" (removed)="onTagRemoved(tag)">
         {{tagNameFromSlug(tag)}}
         <mat-icon matChipRemove *ngIf="showEdit">cancel</mat-icon>
-      </mat-chip>
-      <mat-chip *ngIf="limit && collection.tags.length > limit">{{collection.tags.length - limit}} more...</mat-chip>
+      </mat-chip-option>
+      <mat-chip-option *ngIf="limit && collection.tags.length > limit">{{collection.tags.length - limit}} more...</mat-chip-option>
       <!-- add tag menu -->
       <div *ngIf="showEdit">
-        <mat-chip [matMenuTriggerFor]="menu">Add Tag...</mat-chip>
+        <mat-chip-option [matMenuTriggerFor]="menu">Add Tag...</mat-chip-option>
         <mat-menu #menu="matMenu">
           <mat-optgroup *ngFor="let tup of addableTags" [label]="tup[0]">
             <mat-option *ngFor="let tag of tup[1]" (click)="onTagAdd(tag)">
@@ -24,8 +24,9 @@ import {WorkshopService} from '../workshop.service';
           </mat-optgroup>
         </mat-menu>
       </div>
-    </mat-chip-list>
-  `
+    </mat-chip-listbox>
+  `,
+    standalone: false
 })
 export class TagChipListComponent implements OnInit {
 

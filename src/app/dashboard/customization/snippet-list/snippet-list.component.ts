@@ -8,9 +8,10 @@ import {EditDialog} from '../../edit-dialog/edit-dialog.component';
 import {ConfirmDeleteDialog} from '../../confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
-  selector: 'avr-snippet-list',
-  templateUrl: './snippet-list.component.html',
-  styleUrls: ['./snippet-list.component.css']
+    selector: 'avr-snippet-list',
+    templateUrl: './snippet-list.component.html',
+    styleUrls: ['./snippet-list.component.css'],
+    standalone: false
 })
 export class SnippetListComponent implements OnInit {
 

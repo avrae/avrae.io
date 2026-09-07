@@ -11,4 +11,4 @@ COPY dist/ ./dist/
 
 EXPOSE 4000
 
-CMD [ "node", "dist/frontend/server/main.js" ]
+CMD [ "node", "dist/frontend/server/server.js" ]

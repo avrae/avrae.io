@@ -5,9 +5,10 @@ import {GamedataService} from '../../../shared/gamedata.service';
 import {WorkshopService} from '../workshop.service';
 
 @Component({
-  selector: 'avr-collectable-display',
-  templateUrl: './collectable-display.component.html',
-  styleUrls: ['./collectable-display.component.scss']
+    selector: 'avr-collectable-display',
+    templateUrl: './collectable-display.component.html',
+    styleUrls: ['./collectable-display.component.scss'],
+    standalone: false
 })
 export class CollectableDisplayComponent implements OnInit {
   // exports

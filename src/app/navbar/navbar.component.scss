@@ -1,11 +1,12 @@
-@import "../_variables.scss";
+@use "../_variables.scss" as vars;
 
-.navbar-header {  // the mat-toolbar
+.navbar-header {
+  // the mat-toolbar
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   padding: 8px 16px;
-  height: $navbar-height;
+  height: vars.$navbar-height;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -23,19 +24,26 @@
   //flex-grow: 1;
 }
 
-.logo-center { // mobile: center logo in middle of screen horizontally
+.logo-button {
+  top: 5px;
+}
+
+.logo-center {
+  // mobile: center logo in middle of screen horizontally
   position: fixed;
   left: 50%;
-  top: 5px;
+  top: 13px;
   transform: translate(-50%, 0);
 }
 
-.more-arrow { // more (arrow)
+.more-arrow {
+  // more (arrow)
   padding-bottom: 2px;
 }
 
 /* ==== mobile menu ==== */
-.mobile-menu { // mobile menu overlay
+.mobile-menu {
+  // mobile menu overlay
   position: fixed;
   width: 100%;
   height: 100%;
@@ -44,14 +52,14 @@
   right: 0;
   bottom: 0;
   z-index: 101; // even over the navbar!
-  background: $gray-dark1;
-  font-family: $font;
+  background: vars.$gray-dark1;
+  font-family: vars.$font;
   font-style: normal;
 }
 
 .mobile-menu-header {
   padding: 8px 16px;
-  height: $navbar-height;
+  height: vars.$navbar-height;
   color: white;
   font-size: 24px;
   margin-bottom: 10px;
@@ -80,6 +88,6 @@
   letter-spacing: 0.06em;
   font-size: 18px;
   line-height: 65px;
-  background: $blurple;
+  background: vars.$blurple;
   text-align: center;
 }

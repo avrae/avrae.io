@@ -3,8 +3,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {Tome} from '../../../../schemas/homebrew/Spells';
 
 @Component({
-  selector: 'avr-tome-delete-dialog',
-  templateUrl: './tome-delete-dialog.component.html',
+    selector: 'avr-tome-delete-dialog',
+    templateUrl: './tome-delete-dialog.component.html',
+    standalone: false
 })
 export class TomeDeleteDialog implements OnInit {
 

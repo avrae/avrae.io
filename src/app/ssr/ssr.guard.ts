@@ -1,11 +1,11 @@
 import {isPlatformServer} from '@angular/common';
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot, UrlSegment} from '@angular/router';
+import { ActivatedRouteSnapshot, Route, RouterStateSnapshot, UrlSegment } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SsrGuard implements CanActivate, CanLoad {
+export class SsrGuard  {
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
   }
 

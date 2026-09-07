@@ -5,9 +5,10 @@ import {CommandModule} from '../schemas/Commands';
 import {CommandsService} from './commands.service';
 
 @Component({
-  selector: 'avr-commands',
-  templateUrl: './commands.component.html',
-  styleUrls: ['./commands.component.scss']
+    selector: 'avr-commands',
+    templateUrl: './commands.component.html',
+    styleUrls: ['./commands.component.scss'],
+    standalone: false
 })
 export class CommandsComponent implements OnInit {
 

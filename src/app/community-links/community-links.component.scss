@@ -1,4 +1,4 @@
-@import "../_variables.scss";
+@use "../_variables.scss" as vars;
 
 .background {
   position: fixed;
@@ -6,13 +6,13 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: $black;
+  background: vars.$black;
   z-index: -999; // hacky way to override app background color for now
 }
 
 .container {
-  background: $black;
-  font-family: $font;
+  background: vars.$black;
+  font-family: vars.$font;
   color: white;
   max-width: 1080px;
   margin: 0 auto;

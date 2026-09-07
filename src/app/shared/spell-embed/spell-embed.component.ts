@@ -4,13 +4,14 @@ import {UserInfo} from '../../schemas/UserInfo';
 import {EmbedField} from '../discord-embed/embed-fields/embed-fields.component';
 
 @Component({
-  selector: 'avr-spell-embed',
-  template: `
+    selector: 'avr-spell-embed',
+    template: `
     <avr-discord-embed [author]="user ? {name: user.username, icon_url: user.avatarUrl} : undefined"
                        [title]="embedTitle" [description]="embedDescription" [fields]="fields" [thumbnail]="embedImage"
                        [footer]="{text: 'Homebrew content.', icon_url: '../../../../assets/img/homebrew.png'}">
     </avr-discord-embed>
-  `
+  `,
+    standalone: false
 })
 export class SpellEmbedComponent implements OnInit, OnChanges {
 

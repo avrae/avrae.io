@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "avr-community-links",
-  templateUrl: "./community-links.component.html",
-  styleUrls: ["./community-links.component.scss"],
+    selector: "avr-community-links",
+    templateUrl: "./community-links.component.html",
+    styleUrls: ["./community-links.component.scss"],
+    standalone: false
 })
 export class CommunityLinksComponent implements OnInit {
   linkUrl =

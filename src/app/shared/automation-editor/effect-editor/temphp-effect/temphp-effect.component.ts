@@ -3,9 +3,10 @@ import {TempHP} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-temphp-effect',
-  templateUrl: './temphp-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-temphp-effect',
+    templateUrl: './temphp-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class TempHPEffectComponent extends EffectComponent<TempHP> implements OnInit {
   constructor() {

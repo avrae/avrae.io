@@ -3,9 +3,10 @@ import {Roll} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-roll-effect',
-  templateUrl: './roll-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-roll-effect',
+    templateUrl: './roll-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class RollEffectComponent extends EffectComponent<Roll> implements OnInit {
   constructor() {

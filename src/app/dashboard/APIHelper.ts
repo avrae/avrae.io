@@ -1,4 +1,4 @@
-import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable, of} from 'rxjs';
 import {getUserAvatarUrl} from '../schemas/Discord';

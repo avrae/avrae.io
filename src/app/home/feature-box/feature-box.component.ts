@@ -3,9 +3,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {BreakpointBaseComponent} from '../../shared/breakpoints';
 
 @Component({
-  selector: 'avr-feature-box',
-  templateUrl: './feature-box.component.html',
-  styleUrls: ['./feature-box.component.scss']
+    selector: 'avr-feature-box',
+    templateUrl: './feature-box.component.html',
+    styleUrls: ['./feature-box.component.scss'],
+    standalone: false
 })
 export class FeatureBoxComponent extends BreakpointBaseComponent implements OnInit {
 

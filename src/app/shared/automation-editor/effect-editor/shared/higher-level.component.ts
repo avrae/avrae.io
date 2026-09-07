@@ -5,8 +5,8 @@ import {Spell} from '../../../../schemas/homebrew/Spells';
 const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
 
 @Component({
-  selector: 'avr-higher-level',
-  template: `
+    selector: 'avr-higher-level',
+    template: `
     <div *ngIf="parent.higher != undefined" style="min-width: 300px;">
       <mat-expansion-panel class="higher-level-panel">
         <mat-expansion-panel-header>
@@ -26,7 +26,8 @@ const range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + 
       <button mat-stroked-button (click)="addHigher()">Add Higher Level</button>
     </div>
   `,
-  styleUrls: ['../shared.scss']
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class HigherLevelComponent implements OnInit, OnChanges {
 

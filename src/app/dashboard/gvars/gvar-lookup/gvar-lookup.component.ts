@@ -4,9 +4,10 @@ import {GlobalVar} from '../../../schemas/Customization';
 import {GvarService} from '../gvar.service';
 
 @Component({
-  selector: 'avr-gvar-lookup',
-  templateUrl: './gvar-lookup.component.html',
-  styleUrls: ['./gvar-lookup.component.css']
+    selector: 'avr-gvar-lookup',
+    templateUrl: './gvar-lookup.component.html',
+    styleUrls: ['./gvar-lookup.component.css'],
+    standalone: false
 })
 export class GvarLookupComponent implements OnInit {
 

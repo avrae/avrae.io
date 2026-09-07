@@ -1,4 +1,4 @@
-@import "../variables";
+@use "../variables" as vars;
 
 .sidenav-container {
   height: 100%;
@@ -13,13 +13,13 @@
 }
 
 mat-expansion-panel-header {
-  transition: background-color .5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
   padding-left: 16px;
 }
 
 mat-sidenav-content {
   // duplicated from app theme to ensure sidenav covers entire page
-  min-height: calc(100vh - (#{$navbar-height} + #{$footer-height}));
+  min-height: calc(100vh - (#{vars.$navbar-height} + #{vars.$footer-height}));
 }
 
 .nav-panel {

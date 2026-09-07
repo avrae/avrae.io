@@ -1,4 +1,4 @@
-@import "../../../../variables";
+@use "../../../../variables" as vars;
 
 mat-form-field {
   margin-bottom: 8px;
@@ -11,7 +11,7 @@ mat-form-field {
 .code-versions-container {
   display: grid;
   grid-template-columns: 1fr auto;
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   border-radius: 4px;
   height: 55vh;
 
@@ -28,12 +28,14 @@ mat-form-field {
   height: 55vh;
 
   ngx-monaco-editor {
-    height: calc(100% / 0.98);  // the inner container has a height of 98% for some reason, and isn't stylable <.<
+    height: calc(
+      100% / 0.98
+    ); // the inner container has a height of 98% for some reason, and isn't stylable <.<
   }
 }
 
 .code-versions-list {
-  border-left: 1px solid rgba($gray2, 0.3);
+  border-left: 1px solid rgba(vars.$gray2, 0.3);
   height: 55vh;
   overflow: auto;
 
@@ -53,7 +55,7 @@ mat-form-field {
 @media (max-width: 600px) {
   .code-versions-list {
     display: none;
-    background: $gray-dark1;
+    background: vars.$gray-dark1;
     right: 0;
     position: absolute;
     z-index: 20;

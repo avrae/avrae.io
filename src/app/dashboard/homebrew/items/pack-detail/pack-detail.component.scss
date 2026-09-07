@@ -1,10 +1,13 @@
-@import "../../../../_variables.scss";
-@import "../_variables.scss";
+@use "../../../../_variables.scss" as vars;
+@use "../_variables.scss" as pack-vars;
 
-$viewport-height: calc(100vh - #{$navbar-height + $footer-height + $pack-toolbar-height + ($container-margin*2)});
+$viewport-height: calc(
+  100vh - #{vars.$navbar-height + vars.$footer-height +
+    pack-vars.$pack-toolbar-height + (vars.$container-margin * 2)}
+);
 
 .pack-toolbar {
-  height: $pack-toolbar-height;
+  height: pack-vars.$pack-toolbar-height;
 }
 
 .toolbar-spacer {
@@ -22,7 +25,7 @@ $viewport-height: calc(100vh - #{$navbar-height + $footer-height + $pack-toolbar
 }
 
 .container {
-  margin: $container-margin;
+  margin: vars.$container-margin;
 }
 
 .new-item-card {

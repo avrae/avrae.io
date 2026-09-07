@@ -1,8 +1,8 @@
-@import "../../_variables.scss";
-@import "../../dashboard/homebrew/items/_variables.scss";
+@use "../../_variables.scss" as vars;
+@use "../../dashboard/homebrew/items/_variables.scss" as pack-vars;
 
 .pack-toolbar {
-  height: $pack-toolbar-height;
+  height: pack-vars.$pack-toolbar-height;
 }
 
 .toolbar-spacer {
@@ -10,11 +10,14 @@
 }
 
 .container {
-  margin: $container-margin;
+  margin: vars.$container-margin;
 }
 
 .item-list {
-  max-height: calc(100vh - #{$navbar-height + $footer-height + $pack-toolbar-height + ($container-margin*2)});
+  max-height: calc(
+    100vh - #{vars.$navbar-height + vars.$footer-height +
+      pack-vars.$pack-toolbar-height + (vars.$container-margin * 2)}
+  );
   overflow-y: auto;
 }
 

@@ -6,9 +6,10 @@ import {getLocalStorage, removeLocalStorage} from '../shared/StorageUtils';
 import {AuthService} from './auth.service';
 
 @Component({
-  selector: 'avr-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'avr-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   error: string;

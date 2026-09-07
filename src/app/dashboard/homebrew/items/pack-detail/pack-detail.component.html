@@ -29,7 +29,7 @@
                          [isFirst]="isFirst" [isLast]="isLast" (moveUp)="moveUp(item)" (moveDown)="moveDown(item)"
                          (changed)="ensureChangesNotif()" (opened)="selectedItem = item"
                          (delete)="deleteItem(item)"></avr-item-detail>
-        <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-item-card">
+        <mat-card appearance="outlined" fxLayout="row" fxLayoutAlign="start center" class="new-item-card">
           <span class="no-text-cursor">New...</span>
           <span class="toolbar-spacer"></span>
           <span>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="item-list" fxFlex="grow" *ngIf="!pack.items.length">
-      <mat-card>
+      <mat-card appearance="outlined">
         <p>Looks like this pack is empty.</p>
         <button mat-raised-button color="accent" (click)="newLooseItem()">Make an Item</button>
         <button mat-icon-button matTooltip="Import from JSON" (click)="beginNewFromJSON()">
@@ -77,7 +77,7 @@
 
 <div *ngIf="!pack">
   <div class="container">
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-spinner [diameter]="24"></mat-spinner>
       <p class="mat-error" *ngIf="error">
         {{error}}
@@ -88,7 +88,7 @@
 
 <div *ngIf="pack && !canEdit">
   <div class="container">
-    <mat-card>
+    <mat-card appearance="outlined">
       <p>You do not have permission to edit this pack.</p>
       <button mat-raised-button color="accent" (click)="back()">Go Back</button>
     </mat-card>

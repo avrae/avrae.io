@@ -5,9 +5,10 @@ import {WorkshopCollection, WorkshopTag} from '../../schemas/Workshop';
 import {WorkshopService} from './workshop.service';
 
 @Component({
-  selector: 'avr-workshop',
-  templateUrl: './workshop-explore.component.html',
-  styleUrls: ['./common.scss', './workshop-explore.component.scss']
+    selector: 'avr-workshop',
+    templateUrl: './workshop-explore.component.html',
+    styleUrls: ['./common.scss', './workshop-explore.component.scss'],
+    standalone: false
 })
 export class WorkshopExploreComponent implements OnInit {
   COLLECTIONS_PER_PAGE = 48;

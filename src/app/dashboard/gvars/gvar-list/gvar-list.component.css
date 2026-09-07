@@ -27,15 +27,15 @@ tr:nth-child(even) {
   background: #545454;
 }
 
-
-.mat-tab-body-content {
+.mat-mdc-tab-body-content {
   max-width: 968px;
 }
 
-td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+td.mat-mdc-cell,
+td.mat-mdc-footer-cell,
+th.mat-mdc-header-cell {
   max-width: 400px;
 }
-
 
 th {
   min-width: 100px;

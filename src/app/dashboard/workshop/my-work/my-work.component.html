@@ -25,7 +25,7 @@
 
 <!-- CONTENT -->
 <div class="container">
-  <mat-card class="workshop-header">
+  <mat-card appearance="outlined" class="workshop-header">
     Here are all the collections you own or have access to. You can subscribe to your own work to use it on Avrae,
     or click on a collection to edit it.
 
@@ -34,7 +34,7 @@
     </p>
   </mat-card>
 
-  <mat-card *ngIf="!(loadingOwned || loadingEditable) && collections.length === 0">
+  <mat-card appearance="outlined" *ngIf="!(loadingOwned || loadingEditable) && collections.length === 0">
     <p>You have no collections. Create one to share your aliases and snippets!</p>
     <button mat-raised-button color="primary" (click)="onCreateCollection()">
       Create Collection

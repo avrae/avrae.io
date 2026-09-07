@@ -8,9 +8,10 @@ import {DiscordService} from '../../shared/discord.service';
 import {HomebrewSharingService} from '../homebrew-sharing.service';
 
 @Component({
-  selector: 'avr-tome-share',
-  templateUrl: './tome-share.component.html',
-  styleUrls: ['./tome-share.component.scss']
+    selector: 'avr-tome-share',
+    templateUrl: './tome-share.component.html',
+    styleUrls: ['./tome-share.component.scss'],
+    standalone: false
 })
 export class TomeShareComponent implements OnInit {
 

@@ -1,8 +1,8 @@
-@import "../../_variables.scss";
-@import "../../dashboard/homebrew/spells/_variables.scss";
+@use "../../_variables.scss" as vars;
+@use "../../dashboard/homebrew/spells/_variables.scss" as tome-vars;
 
 .tome-toolbar {
-  height: $tome-toolbar-height;
+  height: tome-vars.$tome-toolbar-height;
 }
 
 .flex-spacer {
@@ -10,12 +10,15 @@
 }
 
 .spell-list {
-  max-height: calc(100vh - #{$navbar-height + $footer-height + $tome-toolbar-height + ($container-margin*2)});
+  max-height: calc(
+    100vh - #{vars.$navbar-height + vars.$footer-height +
+      tome-vars.$tome-toolbar-height + (vars.$container-margin * 2)}
+  );
   overflow-y: auto;
 }
 
 .container {
-  margin: $container-margin;
+  margin: vars.$container-margin;
 }
 
 .spell {

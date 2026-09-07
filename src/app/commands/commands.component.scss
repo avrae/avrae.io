@@ -1,4 +1,4 @@
-@import "../_variables.scss";
+@use "../_variables.scss" as vars;
 
 .background {
   position: fixed;
@@ -6,13 +6,13 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: $black;
+  background: vars.$black;
   z-index: -999; // hacky way to override app background color for now
 }
 
 .commands-page {
-  background: $black;
-  font-family: $font;
+  background: vars.$black;
+  font-family: vars.$font;
   color: white;
   max-width: 1080px;
   margin: 0 auto;
@@ -39,22 +39,22 @@
   padding: 0;
 
   mat-icon {
-    color: $blurple;
+    color: vars.$blurple;
   }
 }
 
 .module-container {
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   border-radius: 3px;
   padding: 16px 24px;
   margin: 12px 0;
 
   h2 {
-    color: $blurple;
+    color: vars.$blurple;
     margin: 8px 0;
   }
 
   .module-description {
-    margin-top: -0.8em;  // ngx-markdown forces an internal <p> with margin 1em
+    margin-top: -0.8em; // ngx-markdown forces an internal <p> with margin 1em
   }
 }

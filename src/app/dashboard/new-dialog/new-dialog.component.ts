@@ -2,9 +2,10 @@ import {Component, Inject, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'avr-new-dialog',
-  templateUrl: './new-dialog.component.html',
-  styleUrls: ['./new-dialog.component.css']
+    selector: 'avr-new-dialog',
+    templateUrl: './new-dialog.component.html',
+    styleUrls: ['./new-dialog.component.css'],
+    standalone: false
 })
 export class NewDialog implements OnInit {
 

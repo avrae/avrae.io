@@ -108,17 +108,17 @@
     </p>
 
     <mat-form-field class="entitlements-list">
-      <mat-chip-list #chipList aria-label="Entitlements selection">
-        <mat-chip
+      <mat-chip-grid #chipList aria-label="Entitlements selection">
+        <mat-chip-row
           *ngFor="let entitlement of collectable.entitlements"
           [removable]="!entitlement.required"
           (removed)="onRemoveEntitlement(entitlement)">
           {{(getEntity(entitlement) | async)?.name}}
           <mat-icon matChipRemove *ngIf="!entitlement.required">cancel</mat-icon>
-        </mat-chip>
+        </mat-chip-row>
         <input placeholder="Search for licenses..." [matAutocomplete]="auto" [matChipInputFor]="chipList"
                [formControl]="entitlementsControl">
-      </mat-chip-list>
+      </mat-chip-grid>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAddEntitlement($event.option.value)">
         <mat-optgroup *ngFor="let tup of addableEntitlements | async" [label]="tup[0] | titlecase">
           <mat-option *ngFor="let entitlement of tup[1]" [value]="entitlement">
