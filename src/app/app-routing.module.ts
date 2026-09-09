@@ -7,9 +7,10 @@ import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {SsrGuard} from './ssr/ssr.guard';
 import { OathExternalComponent } from "./oath-external/oath-external.component";
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'oath-external', component: OathExternalComponent},
   {path: 'commands', component: CommandsComponent},

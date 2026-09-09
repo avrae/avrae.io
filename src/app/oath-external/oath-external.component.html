@@ -35,7 +35,7 @@
   Invalid redirect URL.
 </div>
 
-<div *ngIf="!allowedUrl" class="warning">
+<div *ngIf="validUrl && !allowedUrl" class="warning">
   <mat-icon>warning</mat-icon>
   Redirect target not allowed.
 </div>

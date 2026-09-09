@@ -4,23 +4,29 @@ import { MaterialModule } from '../material/material.module';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
-
+import {isLoggedIn} from '../SecurityHelper';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'avr-oath-external',
-  imports: [
-    CommonModule,
-    MaterialModule
-  ],
   templateUrl: './oath-external.component.html',
-  styleUrl: './oath-external.component.scss',
+  styleUrls: ['./oath-external.component.scss'],
+  imports: [
+    MaterialModule, 
+    CommonModule
+  ]
 })
+
 export class OathExternalComponent implements OnInit {
   redirect_uri = '';
   validUrl = false;
   allowedUrl = false;
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {
+    if (!isLoggedIn()) {
+      this.router.navigate(['login']);
+    }
+   }
 
   ngOnInit() {
     this.getRedirectUri()
