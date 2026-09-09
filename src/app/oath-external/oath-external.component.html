@@ -1,0 +1,69 @@
+<div class="container" *ngIf="validUrl && allowedUrl">
+  <div class="warning">
+    <mat-icon>warning</mat-icon>
+    <span
+      >Warning! Only authorize tools and sites you trust, as this grants them
+      access to your Avrae Data!</span
+    >
+  </div>
+
+  <mat-card>
+    <mat-card-title>
+      Authorize an external service to use manage your Avrae Data.
+    </mat-card-title>
+
+    <mat-card-content>
+      The following site is requesting authorization:
+      <a [href]="redirect_uri" target="_blank" rel="noopener noreferrer">
+        {{ redirect_uri }}
+      </a>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="openConfirmDialog(confirmDialog)"
+      >
+        Authorize
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div *ngIf="!validUrl" class="warning">
+  <mat-icon>warning</mat-icon>
+  Invalid redirect URL.
+</div>
+
+<div *ngIf="!allowedUrl" class="warning">
+  <mat-icon>warning</mat-icon>
+  Redirect target not allowed.
+</div>
+
+<ng-template #confirmDialog>
+  <h2 mat-dialog-title>Authorize external service?</h2>
+
+  <mat-dialog-content>
+    <p>
+      You are about to authorize the following site to access your Avrae Data:
+    </p>
+
+    <p>
+      <strong>
+        <a [href]="redirect_uri" target="_blank" rel="noopener noreferrer">
+          {{ redirect_uri }}
+        </a></strong
+      >
+    </p>
+
+    <p>Only continue if you trust this site.</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+
+    <button mat-raised-button color="primary" [mat-dialog-close]="true">
+      Authorize
+    </button>
+  </mat-dialog-actions>
+</ng-template>

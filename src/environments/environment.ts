@@ -11,6 +11,7 @@ export const environment = {
   baseURL: "http://127.0.0.1:4200",
   datadogAplicationId: "a",
   datadogClientToken: "b",
+  allowedExternalOaths: []
 };
 
 /*
