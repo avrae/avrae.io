@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  clientId: "1191388889382916287",
+  clientId: "219251784445591553",
   loginURL: "https://discordapp.com/api/oauth2/authorize",
   apiURL: "http://127.0.0.1:58000",
   mediaURL: "https://media.avrae.io",
