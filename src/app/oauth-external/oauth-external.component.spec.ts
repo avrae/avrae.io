@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OauthExternalComponent } from './oauth-external.component';
 
-describe('OathExternalComponent', () => {
+describe('OauthExternalComponent', () => {
   let component: OauthExternalComponent;
   let fixture: ComponentFixture<OauthExternalComponent>;
 
