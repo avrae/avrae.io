@@ -4,14 +4,14 @@
 
 export const environment = {
   production: false,
-  clientId: "219251784445591553",
+  clientId: "1191388889382916287",
   loginURL: "https://discordapp.com/api/oauth2/authorize",
-  apiURL: "http://127.0.0.1:5000",
+  apiURL: "http://127.0.0.1:58000",
   mediaURL: "https://media.avrae.io",
   baseURL: "http://127.0.0.1:4200",
   datadogAplicationId: "a",
   datadogClientToken: "b",
-  allowedExternalOaths: []
+  allowedExternalOauths: ["https://bestiarybuilder.com"]
 };
 
 /*
