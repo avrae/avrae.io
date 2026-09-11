@@ -73,7 +73,7 @@ export class OauthExternalComponent implements OnInit {
   }
 
   redirect() {
-    if (!this.validUrl && !this.allowedUrl) return;
+    if (!this.validUrl || !this.allowedUrl) return;
 
     const value = localStorage.getItem('avrae-token');
 
