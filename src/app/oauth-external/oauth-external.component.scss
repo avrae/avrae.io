@@ -15,4 +15,12 @@
 mat-card {
   padding: 1rem;
   color: white;
+  margin-top: 1rem;
+
+  mat-card-content {
+    margin: .5rem 0;
+  }
+  button {
+    margin-left: .5rem;
+  }
 }

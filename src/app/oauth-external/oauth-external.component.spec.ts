@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OathExternalComponent } from './oath-external.component';
+import { OauthExternalComponent } from './oauth-external.component';
 
 describe('OathExternalComponent', () => {
-  let component: OathExternalComponent;
-  let fixture: ComponentFixture<OathExternalComponent>;
+  let component: OauthExternalComponent;
+  let fixture: ComponentFixture<OauthExternalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OathExternalComponent]
+      imports: [OauthExternalComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OathExternalComponent);
+    fixture = TestBed.createComponent(OauthExternalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

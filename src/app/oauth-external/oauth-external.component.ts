@@ -2,22 +2,27 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import {isLoggedIn} from '../SecurityHelper';
 import {Router} from '@angular/router';
+import { environment } from '../../environments/environment';
+import {Observable, of} from 'rxjs';
+import {UserInfo} from "../schemas/UserInfo";
+import {getUser} from "../dashboard/APIHelper";
 
 @Component({
-  selector: 'avr-oath-external',
-  templateUrl: './oath-external.component.html',
-  styleUrls: ['./oath-external.component.scss'],
+  selector: 'avr-oauth-external',
+  templateUrl: './oauth-external.component.html',
+  styleUrls: ['./oauth-external.component.scss'],
   imports: [
     MaterialModule, 
     CommonModule
   ]
 })
 
-export class OathExternalComponent implements OnInit {
+export class OauthExternalComponent implements OnInit {
+  userInfo!: Observable<UserInfo>;
+
   redirect_uri = '';
   validUrl = false;
   allowedUrl = false;
@@ -29,6 +34,7 @@ export class OathExternalComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.userInfo = of(getUser())
     this.getRedirectUri()
   }
 

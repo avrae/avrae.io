@@ -1,12 +1,4 @@
 <div class="container" *ngIf="validUrl && allowedUrl">
-  <div class="warning">
-    <mat-icon>warning</mat-icon>
-    <span
-      >Warning! Only authorize tools and sites you trust, as this grants them
-      access to your Avrae Data!</span
-    >
-  </div>
-
   <mat-card>
     <mat-card-title>
       Authorize an external service to use manage your Avrae Data.
@@ -30,7 +22,12 @@
   </mat-card>
 </div>
 
-<div *ngIf="!validUrl" class="warning">
+<div *ngIf="redirect_uri === ''" class="warning">
+  <mat-icon>warning</mat-icon>
+  No redirect URL target given.
+</div>
+
+<div *ngIf="!validUrl && redirect_uri !== ''" class="warning">
   <mat-icon>warning</mat-icon>
   Invalid redirect URL.
 </div>
@@ -45,18 +42,18 @@
 
   <mat-dialog-content>
     <p>
-      You are about to authorize the following site to access your Avrae Data:
+      The following service will have access to the Avrae Data of <strong>{{(userInfo | async)?.username}}</strong>.<br>
+      This includes aliases, characters, gvars, tomes, etc.
     </p>
+
 
     <p>
-      <strong>
         <a [href]="redirect_uri" target="_blank" rel="noopener noreferrer">
-          {{ redirect_uri }}
-        </a></strong
-      >
+          <strong> {{ redirect_uri }}</strong>
+        </a>
     </p>
 
-    <p>Only continue if you trust this site.</p>
+    <p><strong> Only continue if you trust this site. </strong></p>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
