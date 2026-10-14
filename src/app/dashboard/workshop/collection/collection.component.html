@@ -39,7 +39,7 @@
   <div class="metadata-grid">
     <!-- image, description, tags -->
     <div class="description-etc">
-      <img *ngIf="collection.image" [src]="collection.image" alt="Collection Image" class="desc-image">
+      <img *ngIf="collection.image" [src]="collection.image" appImgFallback="assets/img/pack.png" alt="Collection Image" class="desc-image">
 
       <div class="desc-subscribe-container">
         <div>

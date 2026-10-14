@@ -2,7 +2,7 @@
   <mat-card appearance="outlined" class="user-card" *ngIf="(userInfo | async)">
     <mat-grid-list cols="4" rowHeight="{{ !mobile ? '1:1' : '1:2' }}">
       <mat-grid-tile colspan="{{ !mobile ? 1 : 4 }}" >
-        <img alt="avatar" [src]="(userInfo | async)?.avatarUrl" class="avatarImg mat-elevation-z1">
+        <img alt="avatar" [src]="(userInfo | async)?.avatarUrl" appImgFallback class="avatarImg mat-elevation-z1">
       </mat-grid-tile>
       <mat-grid-tile colspan="{{ !mobile ? 3 : 4 }}" class="user-stats">
         <div>
@@ -28,7 +28,7 @@
         </p>
       </div>
       <img class="character-image" [src]="getImage(character)" [alt]="'Image for ' + character.name"
-           *ngIf="getImage(character)">
+           appImgFallback *ngIf="getImage(character)">
       <div class="character-meta">
         <div class="mat-typography ignore-theme character-text">
           <h3>

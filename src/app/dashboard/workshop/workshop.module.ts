@@ -5,6 +5,7 @@ import { MarkdownModule } from "ngx-markdown";
 import { MonacoEditorModule } from "ngx-monaco-editor-v2";
 import { MaterialModule } from "../../material/material.module";
 import { PipesModule } from "../../shared/pipes/pipes.module";
+import { ImgFallbackDirective } from "../../shared/img-fallback.directive";
 import { AddEditorComponent } from "./collection-edit/add-editor/add-editor.component";
 import { CollectionEditComponent } from "./collection-edit/collection-edit.component";
 import { EditSettingsDialogComponent } from "./collection-edit/edit-settings-dialog/edit-settings-dialog.component";
@@ -56,6 +57,7 @@ import { CollectableEditDialogComponent } from "./collection-edit/collectable-ed
     PipesModule,
     MarkdownModule,
     MonacoEditorModule,
+    ImgFallbackDirective,
   ],
 })
 export class WorkshopModule {}

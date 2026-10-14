@@ -10,7 +10,7 @@
         </p>
       </div>
       <img class="collection-image" [src]="collection.image" [alt]="'Image for ' + collection.name"
-           *ngIf="collection.image">
+           appImgFallback="assets/img/pack.png" *ngIf="collection.image">
     </div>
   </a>
 
@@ -27,7 +27,7 @@
     </a>
 
     <div class="collection-author">
-      <img class="collection-author-avatar" [src]="author.avatarUrl" alt="avatar">
+      <img class="collection-author-avatar" [src]="author.avatarUrl" appImgFallback alt="avatar">
       <span class="collection-author-username">
         by {{author.username}}
 

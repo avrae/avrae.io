@@ -7,7 +7,7 @@ import {DiscordService} from '../../../shared/discord.service';
     template: `
     <div class="user-grid" *ngIf="user">
       <div class="user-img">
-        <img [src]="user.avatarUrl" alt="Avatar of {{user.username}}">
+        <img [src]="user.avatarUrl" appImgFallback alt="Avatar of {{user.username}}">
       </div>
       <div class="user-username">
         <strong>{{getUsername()}}</strong>
