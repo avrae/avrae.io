@@ -45,7 +45,7 @@ const markdownConfig = {
 };
 
 const monacoConfig = {
-  // baseUrl: './assets/monaco/vs',
+  baseUrl: './assets/monaco-editor/min/vs',
   onMonacoLoad: () => {
     registerDraconicLanguage((<any>window).monaco);
   },
