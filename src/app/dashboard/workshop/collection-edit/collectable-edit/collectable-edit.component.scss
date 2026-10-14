@@ -9,8 +9,12 @@
 }
 
 .edit-button {
-  height: 18px;
+  // square so the MDC hover state layer renders as a circle, not an ellipse
+  width: 24px;
+  height: 24px;
+  padding: 0;
   margin-top: -12px;
+  --mdc-icon-button-state-layer-size: 24px;
 }
 
 .create-new {
