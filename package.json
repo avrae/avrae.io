@@ -39,11 +39,11 @@
     "@datadog/browser-rum": "^5.34.0",
     "@ngbracket/ngx-layout": "^19.0.0",
     "@types/numeral": "^2.0.5",
-    "compression": "^1.7.4",
+    "compression": "^1.8.2",
     "core-js": "^3.8.3",
     "domino": "^2.1.6",
     "express": "^4.18.2",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "ng-click-outside2": "^10.0.4",
     "ngx-markdown": "^19.1.1",
     "ngx-mat-select-search": "^7.0.10",
@@ -52,7 +52,7 @@
     "query-string": "^7.1.0",
     "rxjs": "^7.8.2",
     "tslib": "^2.3.0",
-    "yaml": "2.0.0-6",
+    "yaml": "^2.2.2",
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
@@ -89,6 +89,16 @@
   },
   "overrides": {
     "mermaid": "npm:empty-npm-package@1.0.0",
-    "katex": "npm:empty-npm-package@1.0.0"
+    "katex": "npm:empty-npm-package@1.0.0",
+    "proxy-addr": "^2.0.8",
+    "piscina": "^4.9.4",
+    "fast-uri": "^3.1.8",
+    "vite": "^6.4.3",
+    "esbuild": "^0.28.1",
+    "qs": "^6.16.0",
+    "on-headers": "^1.1.0",
+    "decode-uri-component": "^0.2.2",
+    "@babel/core": "^7.29.6",
+    "picomatch@^2.0.0": "^2.3.2"
   }
 }
