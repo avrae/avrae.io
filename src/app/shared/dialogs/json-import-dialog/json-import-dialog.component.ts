@@ -8,9 +8,10 @@ export interface JSONImportDialogData {
 }
 
 @Component({
-  selector: 'avr-json-import-dialog',
-  templateUrl: './json-import-dialog.component.html',
-  styleUrls: ['./json-import-dialog.component.css']
+    selector: 'avr-json-import-dialog',
+    templateUrl: './json-import-dialog.component.html',
+    styleUrls: ['./json-import-dialog.component.css'],
+    standalone: false
 })
 export class JSONImportDialog implements OnInit {
 

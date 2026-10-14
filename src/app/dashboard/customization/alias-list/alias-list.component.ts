@@ -8,9 +8,10 @@ import {EditDialog} from '../../edit-dialog/edit-dialog.component';
 import {NewDialog} from '../../new-dialog/new-dialog.component';
 
 @Component({
-  selector: 'avr-alias-list',
-  templateUrl: './alias-list.component.html',
-  styleUrls: ['./alias-list.component.css']
+    selector: 'avr-alias-list',
+    templateUrl: './alias-list.component.html',
+    styleUrls: ['./alias-list.component.css'],
+    standalone: false
 })
 export class AliasListComponent implements OnInit {
 

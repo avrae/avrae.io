@@ -8,7 +8,7 @@
 
 <div class="container" fxLayout="row wrap" fxLayoutAlign="space-around" *ngIf="packs && packs.length">
   <div class="pack-tile" *ngFor="let pack of packs" fxFlex="32%">
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-card-header>
         <mat-card-title>{{pack.name}}</mat-card-title>
         <mat-card-subtitle>By {{owners.get(pack.owner)?.username || 'loading...'}} - {{pack.numItems}} items
@@ -29,7 +29,7 @@
 </div>
 
 <div class="container" *ngIf="packs && !packs.length">
-  <mat-card>
+  <mat-card appearance="outlined">
     <p>Looks like you don't have any packs yet.</p>
     <button mat-raised-button color="accent" (click)="beginNew()">Create One</button>
   </mat-card>

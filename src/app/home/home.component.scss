@@ -1,4 +1,4 @@
-@import "../_variables.scss";
+@use "../_variables.scss" as vars;
 
 .background {
   position: fixed;
@@ -6,13 +6,13 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: $black;
+  background: vars.$black;
   z-index: -999; // hacky way to override app background color for now
 }
 
 .landing-page {
-  background: $black;
-  font-family: $font;
+  background: vars.$black;
+  font-family: vars.$font;
   text-align: center;
   color: white;
 }
@@ -59,7 +59,7 @@
     margin: 0 auto;
     width: 138px;
     height: 32px;
-    background: $blurple;
+    background: vars.$blurple;
   }
 }
 
@@ -68,12 +68,13 @@
 }
 
 .cta-large {
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   margin: 40px 0 36px;
   padding: 21px 305px;
 }
 
-@media only screen and (min-width: 768px) { // desktop
+@media only screen and (min-width: 768px) {
+  // desktop
   .ddb-logo {
     margin: 67px 0 12px;
     width: 15%;

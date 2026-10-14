@@ -6,9 +6,10 @@ import {BreakpointBaseComponent} from '../shared/breakpoints';
 import {DashboardService} from './dashboard.service';
 
 @Component({
-  selector: 'avr-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'avr-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent extends BreakpointBaseComponent {
 

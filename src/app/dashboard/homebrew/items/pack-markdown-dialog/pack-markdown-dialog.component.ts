@@ -3,10 +3,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {Pack} from '../../../../schemas/homebrew/Items';
 
 @Component({
-  selector: 'avr-pack-markdown-dialog',
-  templateUrl: './pack-markdown-dialog.component.html',
-  styleUrls: ['./pack-markdown-dialog.component.css'],
-  preserveWhitespaces: true
+    selector: 'avr-pack-markdown-dialog',
+    templateUrl: './pack-markdown-dialog.component.html',
+    styleUrls: ['./pack-markdown-dialog.component.css'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class PackMarkdownDialog implements OnInit {
 

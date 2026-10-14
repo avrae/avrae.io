@@ -7,14 +7,15 @@ export class EmbedAuthor {
 }
 
 @Component({
-  selector: 'avr-embed-author',
-  styleUrls: ['../discord-embed.component.css'],
-  template: `
+    selector: 'avr-embed-author',
+    styleUrls: ['../discord-embed.component.css'],
+    template: `
     <div class='embed-author' *ngIf="author?.name">
       <img [src]="author.icon_url" *ngIf="author.icon_url" role="presentation" class="embed-author-icon">
       <span class="embed-author-name" *ngIf="!author.url">{{author.name}}</span>
       <a [href]="author.url" class="embed-author-name" *ngIf="author.url">{{author.name}}</a>
-    </div>`
+    </div>`,
+    standalone: false
 })
 export class EmbedAuthorComponent implements OnInit {
 

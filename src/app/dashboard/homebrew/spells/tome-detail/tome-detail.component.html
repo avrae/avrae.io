@@ -35,7 +35,7 @@
 
 <div *ngIf="!tome">
   <div class="container">
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-spinner [diameter]="24"></mat-spinner>
       <p class="mat-error" *ngIf="error">
         {{error}}
@@ -46,7 +46,7 @@
 
 <div *ngIf="tome && !canEdit">
   <div class="container">
-    <mat-card>
+    <mat-card appearance="outlined">
       <p>You do not have permission to edit this tome.</p>
       <button mat-raised-button color="accent" (click)="back()">Go Back</button>
     </mat-card>

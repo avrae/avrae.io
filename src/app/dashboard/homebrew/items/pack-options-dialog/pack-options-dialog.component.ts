@@ -5,9 +5,10 @@ import {PackDeleteDialog} from '../pack-delete-dialog/pack-delete-dialog.compone
 import {getUser} from '../../../APIHelper';
 
 @Component({
-  selector: 'avr-pack-options-dialog',
-  templateUrl: './pack-options-dialog.component.html',
-  styleUrls: ['./pack-options-dialog.component.css']
+    selector: 'avr-pack-options-dialog',
+    templateUrl: './pack-options-dialog.component.html',
+    styleUrls: ['./pack-options-dialog.component.css'],
+    standalone: false
 })
 export class PackOptionsDialog implements OnInit {
 

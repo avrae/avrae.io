@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'avr-new-pack-dialog',
-  templateUrl: './new-pack-dialog.component.html',
-  styleUrls: ['./new-pack-dialog.component.css']
+    selector: 'avr-new-pack-dialog',
+    templateUrl: './new-pack-dialog.component.html',
+    styleUrls: ['./new-pack-dialog.component.css'],
+    standalone: false
 })
 export class NewPackDialog implements OnInit {
 

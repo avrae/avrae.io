@@ -8,9 +8,10 @@ import {NewDialog} from '../../new-dialog/new-dialog.component';
 import {GvarService} from '../gvar.service';
 
 @Component({
-  selector: 'avr-gvar-list',
-  templateUrl: './gvar-list.component.html',
-  styleUrls: ['./gvar-list.component.css']
+    selector: 'avr-gvar-list',
+    templateUrl: './gvar-list.component.html',
+    styleUrls: ['./gvar-list.component.css'],
+    standalone: false
 })
 export class GvarListComponent implements OnInit {
 

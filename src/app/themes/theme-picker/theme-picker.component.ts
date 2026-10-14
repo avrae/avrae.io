@@ -3,12 +3,13 @@ import {StyleManager} from '../style-manager';
 import {DocsSiteTheme, ThemeStorage} from './theme-storage/theme-storage';
 
 @Component({
-  selector: 'avr-theme-picker',
-  templateUrl: 'theme-picker.component.html',
-  styleUrls: ['theme-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  host: {'aria-hidden': 'true'},
+    selector: 'avr-theme-picker',
+    templateUrl: 'theme-picker.component.html',
+    styleUrls: ['theme-picker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    host: { 'aria-hidden': 'true' },
+    standalone: false
 })
 export class ThemePickerComponent {
   currentTheme;

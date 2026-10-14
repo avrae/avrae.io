@@ -1,13 +1,13 @@
 import {isPlatformServer} from '@angular/common';
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import {isLoggedIn, navigateToDiscordOauth} from './SecurityHelper';
 import {setLocalStorage} from './shared/StorageUtils';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard  {
 
   constructor(
     private router: Router,

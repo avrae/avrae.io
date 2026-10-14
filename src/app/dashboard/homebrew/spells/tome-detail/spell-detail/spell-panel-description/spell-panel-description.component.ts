@@ -2,9 +2,10 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {parseLevel, parseSchool} from '../../../../../../schemas/homebrew/Spells';
 
 @Component({
-  selector: 'avr-spell-panel-description',
-  template: `
-    <mat-panel-description>{{description}}</mat-panel-description>`
+    selector: 'avr-spell-panel-description',
+    template: `
+    <mat-panel-description>{{description}}</mat-panel-description>`,
+    standalone: false
 })
 export class SpellPanelDescriptionComponent implements OnInit, OnChanges {
 

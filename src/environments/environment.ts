@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
-  clientId: '219251784445591553',
-  loginURL: 'https://discordapp.com/api/oauth2/authorize',
-  apiURL: 'http://127.0.0.1:5000',
-  mediaURL: 'https://media.avrae.io',
-  baseURL: 'http://127.0.0.1:4200',
-  datadogAplicationId: '7350206a-687c-4dc4-942b-c3f0d1bb024b',
-  datadogClientToken: 'pubf700faf5c2632d84266ee5171c2eb062'
+  clientId: "219251784445591553",
+  loginURL: "https://discordapp.com/api/oauth2/authorize",
+  apiURL: "http://127.0.0.1:5000",
+  mediaURL: "https://media.avrae.io",
+  baseURL: "http://127.0.0.1:4200",
+  datadogAplicationId: "a",
+  datadogClientToken: "b",
 };
 
 /*

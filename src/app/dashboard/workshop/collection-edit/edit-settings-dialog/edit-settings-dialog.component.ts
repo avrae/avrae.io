@@ -9,9 +9,10 @@ import {ConfirmDeleteDialog} from '../../../confirm-delete-dialog/confirm-delete
 import {WorkshopService} from '../../workshop.service';
 
 @Component({
-  selector: 'avr-edit-settings-dialog',
-  templateUrl: './edit-settings-dialog.component.html',
-  styleUrls: ['../../dialog-common.scss', '../../common.scss']
+    selector: 'avr-edit-settings-dialog',
+    templateUrl: './edit-settings-dialog.component.html',
+    styleUrls: ['../../dialog-common.scss', '../../common.scss'],
+    standalone: false
 })
 export class EditSettingsDialogComponent implements OnInit {
   PublicationState = PublicationState;

@@ -1,7 +1,7 @@
-@import "../../../../variables";
+@use "../../../../variables" as vars;
 
 h3 {
-  color: $blurple;
+  color: vars.$blurple;
   margin: 0;
   font-weight: bold;
 }

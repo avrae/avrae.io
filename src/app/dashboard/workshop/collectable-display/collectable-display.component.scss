@@ -1,8 +1,8 @@
-@import "../../../variables";
+@use "../../../variables" as vars;
 
 mat-divider {
   margin: 12px 0;
-  border-top-color: $gray2;
+  border-top-color: vars.$gray2;
 }
 
 // ==== header ====
@@ -23,20 +23,20 @@ mat-divider {
 }
 
 .command-messages {
-  color: $blurple;
+  color: vars.$blurple;
   font-size: 12px;
   margin-top: -12px;
   margin-bottom: 12px;
 }
 
 .command-closed-desc {
-  color: $gray4;
+  color: vars.$gray4;
   font-size: 16px;
 }
 
 // ==== content ====
 .command-desc {
-  color: $gray4;
+  color: vars.$gray4;
   font-size: 16px;
 }
 
@@ -44,7 +44,7 @@ mat-divider {
   padding: 0 20px;
 
   h4 {
-    color: $blurple;
+    color: vars.$blurple;
     font-weight: bold;
   }
 }

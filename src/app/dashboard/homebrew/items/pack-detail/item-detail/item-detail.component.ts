@@ -4,9 +4,10 @@ import {Item} from '../../../../../schemas/homebrew/Items';
 import {JSONExportDialog} from '../../../../../shared/dialogs/json-export-dialog/json-export-dialog.component';
 
 @Component({
-  selector: 'avr-item-detail',
-  templateUrl: './item-detail.component.html',
-  styleUrls: ['./item-detail.component.css']
+    selector: 'avr-item-detail',
+    templateUrl: './item-detail.component.html',
+    styleUrls: ['./item-detail.component.css'],
+    standalone: false
 })
 export class ItemDetailComponent implements OnInit {
 

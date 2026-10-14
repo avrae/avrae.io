@@ -3,9 +3,10 @@ import {EffectComponent} from '../shared/EffectComponent';
 import {parse as YAMLParse, stringify as YAMLStringify} from 'yaml';
 
 @Component({
-  selector: 'avr-unknown-effect',
-  templateUrl: './unknown-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-unknown-effect',
+    templateUrl: './unknown-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class UnknownEffectComponent extends EffectComponent<any> implements OnInit {
 

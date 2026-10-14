@@ -12,9 +12,10 @@ const PUBLISH_STEPS = [
 ];
 
 @Component({
-  selector: 'avr-publish-dialog',
-  templateUrl: './publish-dialog.component.html',
-  styleUrls: ['../../dialog-common.scss', './publish-dialog.component.css']
+    selector: 'avr-publish-dialog',
+    templateUrl: './publish-dialog.component.html',
+    styleUrls: ['../../dialog-common.scss', './publish-dialog.component.css'],
+    standalone: false
 })
 export class PublishDialogComponent implements OnInit {
   // exports

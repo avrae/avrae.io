@@ -15,7 +15,7 @@
   margin: 0;
 }
 
-::ng-deep .mat-simple-snackbar {
+::ng-deep .mat-mdc-simple-snack-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;

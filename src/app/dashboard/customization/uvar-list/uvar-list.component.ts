@@ -8,9 +8,10 @@ import {EditDialog} from '../../edit-dialog/edit-dialog.component';
 import {ConfirmDeleteDialog} from '../../confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
-  selector: 'avr-uvar-list',
-  templateUrl: './uvar-list.component.html',
-  styleUrls: ['./uvar-list.component.css']
+    selector: 'avr-uvar-list',
+    templateUrl: './uvar-list.component.html',
+    styleUrls: ['./uvar-list.component.css'],
+    standalone: false
 })
 export class UvarListComponent implements OnInit {
 

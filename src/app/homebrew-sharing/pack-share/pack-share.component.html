@@ -12,7 +12,7 @@
 
   <div class="container" fxLayout="row" fxLayoutGap="8px">
     <div class="item-list" fxFlex="grow" *ngIf="pack.items.length">
-      <mat-card>
+      <mat-card appearance="outlined">
 
         <mat-list>
           <mat-list-item *ngFor="let item of pack.items">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="item-list" fxFlex="grow" *ngIf="!pack.items.length">
-      <mat-card>
+      <mat-card appearance="outlined">
         <p>Looks like this pack is empty.</p>
       </mat-card>
     </div>
@@ -52,7 +52,7 @@
 
 <div *ngIf="!pack">
   <div class="container">
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-spinner [diameter]="24"></mat-spinner>
       <p class="mat-error" *ngIf="error">
         {{error}}

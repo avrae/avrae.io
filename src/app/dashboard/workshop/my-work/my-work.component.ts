@@ -6,9 +6,10 @@ import {WorkshopService} from '../workshop.service';
 import {NewCollectionDialogComponent} from './new-collection-dialog/new-collection-dialog.component';
 
 @Component({
-  selector: 'avr-my-work',
-  templateUrl: './my-work.component.html',
-  styleUrls: ['../common.scss', './my-work.component.scss']
+    selector: 'avr-my-work',
+    templateUrl: './my-work.component.html',
+    styleUrls: ['../common.scss', './my-work.component.scss'],
+    standalone: false
 })
 export class MyWorkComponent implements OnInit {
 

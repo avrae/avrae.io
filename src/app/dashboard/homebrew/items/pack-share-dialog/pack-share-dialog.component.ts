@@ -10,9 +10,10 @@ import {HomebrewService} from '../../homebrew.service';
 import {PackMarkdownDialog} from '../pack-markdown-dialog/pack-markdown-dialog.component';
 
 @Component({
-  selector: 'avr-pack-share-dialog',
-  templateUrl: './pack-share-dialog.component.html',
-  styleUrls: ['./pack-share-dialog.component.css']
+    selector: 'avr-pack-share-dialog',
+    templateUrl: './pack-share-dialog.component.html',
+    styleUrls: ['./pack-share-dialog.component.css'],
+    standalone: false
 })
 export class PackShareDialog implements OnInit {
 

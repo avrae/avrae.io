@@ -6,8 +6,8 @@ import {DiscordService} from '../../../shared/discord.service';
 const sentinel = new PartialGuild();
 
 @Component({
-  selector: 'avr-guild-select-field',
-  template: `
+    selector: 'avr-guild-select-field',
+    template: `
     <mat-form-field appearance="fill" class="toolbar-search-form-guild-context">
       <mat-label>{{label}}</mat-label>
       <mat-select [(value)]="guildContext" (selectionChange)="onGuildContextChange()">
@@ -19,17 +19,18 @@ const sentinel = new PartialGuild();
       </mat-select>
     </mat-form-field>
   `,
-  styles: [
-      `
-      .guild-icon {
-        border-radius: 100%;
-        width: 24px;
-        height: 24px;
-        margin-bottom: -6px;
-        margin-right: 4px;
-      }
-    `
-  ]
+    styles: [
+        `
+            .guild-icon {
+              border-radius: 100%;
+              width: 24px;
+              height: 24px;
+              margin-bottom: -6px;
+              margin-right: 4px;
+            }
+          `
+    ],
+    standalone: false
 })
 export class GuildSelectFieldComponent implements OnInit {
   sentinel = sentinel;

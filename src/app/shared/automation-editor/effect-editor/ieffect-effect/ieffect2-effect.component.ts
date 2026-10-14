@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, ValidationErrors} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, ValidationErrors} from '@angular/forms';
 import {isEmpty} from 'lodash';
 import {AttackInteraction, ButtonInteraction, IEffect} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
@@ -8,9 +8,10 @@ import {PASSIVE_EFFECTS} from './passiveEffects';
 const CUSTOM_SENTINEL = '__custom';
 
 @Component({
-  selector: 'avr-ieffect2-effect',
-  templateUrl: './ieffect2-effect.component.html',
-  styleUrls: ['../shared.scss', './ieffect2-effect.component.css']
+    selector: 'avr-ieffect2-effect',
+    templateUrl: './ieffect2-effect.component.html',
+    styleUrls: ['../shared.scss', './ieffect2-effect.component.css'],
+    standalone: false
 })
 export class IEffect2EffectComponent extends EffectComponent<IEffect> implements OnInit {
 
@@ -25,7 +26,7 @@ export class IEffect2EffectComponent extends EffectComponent<IEffect> implements
     buttons: this.buttons
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     super();
   }
 

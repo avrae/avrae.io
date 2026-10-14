@@ -21,9 +21,10 @@ import {EditSettingsDialogComponent} from './edit-settings-dialog/edit-settings-
 import {PublishDialogComponent} from './publish-dialog/publish-dialog.component';
 
 @Component({
-  selector: 'avr-collection-edit',
-  templateUrl: './collection-edit.component.html',
-  styleUrls: ['../common.scss', './collection-edit.component.scss', '../collection/collection.component.scss']
+    selector: 'avr-collection-edit',
+    templateUrl: './collection-edit.component.html',
+    styleUrls: ['../common.scss', './collection-edit.component.scss', '../collection/collection.component.scss'],
+    standalone: false
 })
 export class CollectionEditComponent implements OnInit {
   // exports

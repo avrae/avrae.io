@@ -14,9 +14,10 @@ import {WorkshopService} from '../workshop.service';
 import {EditBindingsDialogComponent} from './edit-bindings-dialog/edit-bindings-dialog.component';
 
 @Component({
-  selector: 'avr-collection',
-  templateUrl: './collection.component.html',
-  styleUrls: ['../common.scss', './collection.component.scss']
+    selector: 'avr-collection',
+    templateUrl: './collection.component.html',
+    styleUrls: ['../common.scss', './collection.component.scss'],
+    standalone: false
 })
 export class CollectionComponent extends CollectionSubscriber implements OnInit {
   // exports

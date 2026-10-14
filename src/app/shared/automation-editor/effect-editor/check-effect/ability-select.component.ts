@@ -1,6 +1,6 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
@@ -35,9 +35,10 @@ const ALL_SKILLS = {
 };
 
 @Component({
-  selector: 'avr-ability-select',
-  templateUrl: './ability-select.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-ability-select',
+    templateUrl: './ability-select.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class AbilitySelectComponent {
 
@@ -47,7 +48,7 @@ export class AbilitySelectComponent {
   @Input() skills!: string[];
   @Output() skillsChange = new EventEmitter<string[]>();
 
-  skillCtrl = new FormControl('');
+  skillCtrl = new UntypedFormControl('');
   filteredSkills: Observable<[string, string][]>;
 
   @ViewChild('skillInput') skillInput: ElementRef<HTMLInputElement>;

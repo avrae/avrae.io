@@ -12,9 +12,10 @@ import {ApiResponse} from '../../APIHelper';
 import {DashboardService} from '../../dashboard.service';
 
 @Component({
-  selector: 'avr-attack-editor-dialog',
-  templateUrl: './attack-editor-dialog.component.html',
-  styleUrls: ['./attack-editor-dialog.component.scss']
+    selector: 'avr-attack-editor-dialog',
+    templateUrl: './attack-editor-dialog.component.html',
+    styleUrls: ['./attack-editor-dialog.component.scss'],
+    standalone: false
 })
 export class AttackEditorDialog implements OnInit {
 

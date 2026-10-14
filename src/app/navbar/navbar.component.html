@@ -1,23 +1,46 @@
 <mat-toolbar class="navbar-header mat-elevation-z4" color="primary">
   <!-- LOGO (horiz. center) -->
-  <a mat-button class="button" routerLink="/" aria-label="Avrae Home" [class]="mobile ? 'logo-center' : ''">
-    <img src="../../assets/img/AVRAE-FULL-LOGO-WHT.svg" alt="Avrae"/>
+  <a
+    mat-button
+    class="logo-button"
+    routerLink="/"
+    aria-label="Avrae Home"
+    [class]="mobile ? 'logo-center' : ''"
+  >
+    <img src="../../assets/img/AVRAE-FULL-LOGO-WHT.svg" alt="Avrae" />
   </a>
 
   <!-- Mobile Menu hamburger -->
-  <button mat-icon-button *ngIf="mobile" (click)="mobileMenuOpen = !mobileMenuOpen">
+  <button
+    mat-icon-button
+    *ngIf="mobile"
+    (click)="mobileMenuOpen = !mobileMenuOpen"
+  >
     <mat-icon>menu</mat-icon>
   </button>
 
   <!-- non-mobile nav links -->
   <ng-container *ngIf="!mobile">
     <a mat-button class="button" routerLink="/commands">COMMANDS</a>
-    <a mat-button class="button" href="https://avrae.readthedocs.io/en/stable/" target="_blank"
-       rel="noopener noreferrer">CHEATSHEETS</a>
+    <a
+      mat-button
+      class="button"
+      href="https://avrae.readthedocs.io/en/stable/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >CHEATSHEETS</a
+    >
     <button mat-button [matMenuTriggerFor]="appMenu">
       MORE
-      <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="more-arrow">
-        <path d="M8 0H0L4 5L8 0Z" fill="#fff"/>
+      <svg
+        width="8"
+        height="5"
+        viewBox="0 0 8 5"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="more-arrow"
+      >
+        <path d="M8 0H0L4 5L8 0Z" fill="#fff" />
       </svg>
     </button>
   </ng-container>
@@ -27,8 +50,12 @@
   <avr-theme-picker></avr-theme-picker>
 
   <ng-container *ngIf="!mobile">
-    <a *ngIf="loggedIn()" mat-button class="button" routerLink="/dashboard">DASHBOARD</a>
-    <a *ngIf="!loggedIn()" mat-button class="button" (click)="doLogin()">LOG IN</a>
+    <a *ngIf="loggedIn()" mat-button class="button" routerLink="/dashboard"
+      >DASHBOARD</a
+    >
+    <a *ngIf="!loggedIn()" mat-button class="button" (click)="doLogin()"
+      >LOG IN</a
+    >
   </ng-container>
 </mat-toolbar>
 
@@ -36,30 +63,60 @@
 <div class="mobile-menu" *ngIf="mobileMenuOpen">
   <div class="mobile-menu-header">
     <!-- exit button -->
-    <button mat-icon-button aria-label="Close mobile menu" (click)="mobileMenuOpen = !mobileMenuOpen">
+    <button
+      mat-icon-button
+      aria-label="Close mobile menu"
+      (click)="mobileMenuOpen = !mobileMenuOpen"
+    >
       <mat-icon>close</mat-icon>
     </button>
 
     <!-- horiz center logo -->
-    <img src="../../assets/img/AVRAE-FULL-LOGO-WHT.svg" alt="Avrae Logo" class="logo-center"/>
+    <img
+      src="../../assets/img/AVRAE-FULL-LOGO-WHT.svg"
+      alt="Avrae Logo"
+      class="logo-center"
+    />
   </div>
 
   <!-- nav links -->
-  <a class="button mobile-menu-link" routerLink="/commands" style="color: #7077E5"
-     (click)="mobileMenuOpen = !mobileMenuOpen">COMMANDS</a>
-  <a class="button mobile-menu-link" href="https://avrae.readthedocs.io/en/stable/" target="_blank"
-     rel="noopener noreferrer">CHEATSHEETS</a>
-  <a class="button mobile-menu-link" href="http://invite.avrae.io">INVITE LINK</a>
-  <a class="button mobile-menu-link" href="http://support.avrae.io">SUPPORT SERVER</a>
-  <a class="button mobile-menu-link" routerLink="/community-links"
-     (click)="mobileMenuOpen = !mobileMenuOpen">COMMUNITY LINKS</a>
+  <a
+    class="button mobile-menu-link"
+    routerLink="/commands"
+    style="color: #7077e5"
+    (click)="mobileMenuOpen = !mobileMenuOpen"
+    >COMMANDS</a
+  >
+  <a
+    class="button mobile-menu-link"
+    href="https://avrae.readthedocs.io/en/stable/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >CHEATSHEETS</a
+  >
+  <a class="button mobile-menu-link" href="http://invite.avrae.io"
+    >INVITE LINK</a
+  >
+  <a class="button mobile-menu-link" href="http://support.avrae.io"
+    >SUPPORT SERVER</a
+  >
+  <a
+    class="button mobile-menu-link"
+    routerLink="/community-links"
+    (click)="mobileMenuOpen = !mobileMenuOpen"
+    >COMMUNITY LINKS</a
+  >
 
   <!-- log in -->
   <a class="button mobile-menu-login" *ngIf="!loggedIn()" (click)="doLogin()">
     LOG IN
   </a>
-  <a class="button mobile-menu-login" *ngIf="loggedIn()" routerLink="/dashboard"
-     (click)="mobileMenuOpen = !mobileMenuOpen">
+  <a
+    class="button mobile-menu-login"
+    *ngIf="loggedIn()"
+    routerLink="/dashboard"
+    (click)="mobileMenuOpen = !mobileMenuOpen"
+  >
     DASHBOARD
   </a>
 </div>
@@ -67,6 +124,10 @@
 <!-- MORE menu -->
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
   <a mat-menu-item class="button" href="http://invite.avrae.io">Invite Link</a>
-  <a mat-menu-item class="button" href="http://support.avrae.io">Support Server</a>
-  <a mat-menu-item class="button" routerLink="/community-links">Community Links</a>
+  <a mat-menu-item class="button" href="http://support.avrae.io"
+    >Support Server</a
+  >
+  <a mat-menu-item class="button" routerLink="/community-links"
+    >Community Links</a
+  >
 </mat-menu>

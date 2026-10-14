@@ -12,9 +12,10 @@ import {NewTomeDialog} from './dialogs/new-tome-dialog.component';
 import {TomeShareDialog} from './dialogs/tome-share-dialog.component';
 
 @Component({
-  selector: 'avr-spells',
-  templateUrl: './spells.component.html',
-  styleUrls: ['./spells.component.css']
+    selector: 'avr-spells',
+    templateUrl: './spells.component.html',
+    styleUrls: ['./spells.component.css'],
+    standalone: false
 })
 export class SpellsComponent implements OnInit {
 

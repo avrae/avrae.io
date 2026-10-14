@@ -7,9 +7,10 @@ import {AbilityReference, UseCounter} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-counter-effect',
-  templateUrl: './counter-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-counter-effect',
+    templateUrl: './counter-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class CounterEffectComponent extends EffectComponent<UseCounter> implements OnInit {
   counterType: 'counter' | 'slot' | 'ability';

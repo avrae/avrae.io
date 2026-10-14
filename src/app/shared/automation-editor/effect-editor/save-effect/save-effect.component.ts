@@ -3,9 +3,10 @@ import {Save} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-save-effect',
-  templateUrl: './save-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-save-effect',
+    templateUrl: './save-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class SaveEffectComponent extends EffectComponent<Save> implements OnInit {
   custom = false;

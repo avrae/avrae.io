@@ -3,8 +3,8 @@ import {DiscordUser} from '../../../schemas/Discord';
 import {DiscordService} from '../../../shared/discord.service';
 
 @Component({
-  selector: 'avr-pretty-user',
-  template: `
+    selector: 'avr-pretty-user',
+    template: `
     <div class="user-grid" *ngIf="user">
       <div class="user-img">
         <img [src]="user.avatarUrl" alt="Avatar of {{user.username}}">
@@ -23,7 +23,8 @@ import {DiscordService} from '../../../shared/discord.service';
       </div>
     </div>
   `,
-  styleUrls: ['./pretty-user.component.scss']
+    styleUrls: ['./pretty-user.component.scss'],
+    standalone: false
 })
 export class PrettyUserComponent implements OnInit {
 

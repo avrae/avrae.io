@@ -4,9 +4,10 @@ import {DashboardService} from '../dashboard.service';
 import {Observable} from 'rxjs';
 
 @Component({
-  selector: 'avr-customization',
-  templateUrl: './customization.component.html',
-  styleUrls: ['./customization.component.css']
+    selector: 'avr-customization',
+    templateUrl: './customization.component.html',
+    styleUrls: ['./customization.component.css'],
+    standalone: false
 })
 export class CustomizationComponent implements OnInit {
 

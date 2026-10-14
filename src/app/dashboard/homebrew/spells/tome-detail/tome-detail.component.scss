@@ -1,11 +1,11 @@
-@import "../_variables.scss";
+@use "../_variables.scss" as tome-vars;
 
 .tome-toolbar {
-  height: $tome-toolbar-height;
+  height: tome-vars.$tome-toolbar-height;
 }
 
 mat-tab-header {
-  height: $tome-tabs-height;
+  height: tome-vars.$tome-tabs-height;
 }
 
 .toolbar-spacer {

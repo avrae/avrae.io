@@ -3,9 +3,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {Pack} from '../../../../schemas/homebrew/Items';
 
 @Component({
-  selector: 'avr-pack-delete-dialog',
-  templateUrl: './pack-delete-dialog.component.html',
-  styleUrls: ['./pack-delete-dialog.component.css']
+    selector: 'avr-pack-delete-dialog',
+    templateUrl: './pack-delete-dialog.component.html',
+    styleUrls: ['./pack-delete-dialog.component.css'],
+    standalone: false
 })
 export class PackDeleteDialog implements OnInit {
 

@@ -5,9 +5,10 @@ import {Command, CommandArgument} from '../../schemas/Commands';
 import {debrace} from '../../shared/DisplayUtils';
 
 @Component({
-  selector: 'avr-command-display',
-  templateUrl: './command-display.component.html',
-  styleUrls: ['./command-display.component.scss']
+    selector: 'avr-command-display',
+    templateUrl: './command-display.component.html',
+    styleUrls: ['./command-display.component.scss'],
+    standalone: false
 })
 export class CommandDisplayComponent implements OnInit, AfterViewInit {
   // exports

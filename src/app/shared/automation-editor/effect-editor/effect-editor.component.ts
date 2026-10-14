@@ -18,7 +18,8 @@ import {EffectComponent} from './shared/EffectComponent';
 import {UnknownEffectComponent} from './unknown-effect/unknown-effect.component';
 
 @Directive({
-  selector: '[effectHost]',
+    selector: '[effectHost]',
+    standalone: false
 })
 export class EffectEditorDirective {
   constructor(public viewContainerRef: ViewContainerRef) {
@@ -26,9 +27,10 @@ export class EffectEditorDirective {
 }
 
 @Component({
-  selector: 'avr-effect-editor',
-  templateUrl: './effect-editor.component.html',
-  styleUrls: ['./effect-editor.component.css', '../shared.scss', './shared.scss']
+    selector: 'avr-effect-editor',
+    templateUrl: './effect-editor.component.html',
+    styleUrls: ['./effect-editor.component.css', '../shared.scss', './shared.scss'],
+    standalone: false
 })
 export class EffectEditorComponent implements OnInit, OnChanges {
 

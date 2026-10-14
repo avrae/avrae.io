@@ -15,9 +15,10 @@ import {ValidationSnackbar} from '../../../../shared/validation-snackbar/validat
 
 
 @Component({
-  selector: 'avr-tome-detail',
-  templateUrl: './tome-detail.component.html',
-  styleUrls: ['./tome-detail.component.scss']
+    selector: 'avr-tome-detail',
+    templateUrl: './tome-detail.component.html',
+    styleUrls: ['./tome-detail.component.scss'],
+    standalone: false
 })
 export class TomeDetailComponent implements OnInit, OnDestroy {
 

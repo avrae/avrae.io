@@ -6,9 +6,10 @@ import {WorkshopCollection} from '../../../schemas/Workshop';
 import {WorkshopService} from '../workshop.service';
 
 @Component({
-  selector: 'avr-my-subscriptions',
-  templateUrl: './my-subscriptions.component.html',
-  styleUrls: ['../common.scss', './my-subscriptions.component.scss']
+    selector: 'avr-my-subscriptions',
+    templateUrl: './my-subscriptions.component.html',
+    styleUrls: ['../common.scss', './my-subscriptions.component.scss'],
+    standalone: false
 })
 export class MySubscriptionsComponent implements OnInit {
 

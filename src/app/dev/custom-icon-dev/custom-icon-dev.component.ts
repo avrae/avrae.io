@@ -3,9 +3,10 @@ import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
-  selector: 'avr-custom-icon-dev',
-  templateUrl: './custom-icon-dev.component.html',
-  styleUrls: ['./custom-icon-dev.component.css']
+    selector: 'avr-custom-icon-dev',
+    templateUrl: './custom-icon-dev.component.html',
+    styleUrls: ['./custom-icon-dev.component.css'],
+    standalone: false
 })
 export class CustomIconDevComponent {
   constructor(private iconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {

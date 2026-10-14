@@ -7,9 +7,10 @@ interface ConfirmDeleteDialogData {
 }
 
 @Component({
-  selector: 'avr-confirm-delete-dialog',
-  templateUrl: './confirm-delete-dialog.component.html',
-  styleUrls: ['./confirm-delete-dialog.component.css']
+    selector: 'avr-confirm-delete-dialog',
+    templateUrl: './confirm-delete-dialog.component.html',
+    styleUrls: ['./confirm-delete-dialog.component.css'],
+    standalone: false
 })
 export class ConfirmDeleteDialog implements OnInit {
 

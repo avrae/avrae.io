@@ -10,9 +10,10 @@ import {NewPackDialog} from './new-pack-dialog/new-pack-dialog.component';
 import {PackShareDialog} from './pack-share-dialog/pack-share-dialog.component';
 
 @Component({
-  selector: 'avr-items',
-  templateUrl: './items.component.html',
-  styleUrls: ['./items.component.css']
+    selector: 'avr-items',
+    templateUrl: './items.component.html',
+    styleUrls: ['./items.component.css'],
+    standalone: false
 })
 export class ItemsComponent implements OnInit {
 

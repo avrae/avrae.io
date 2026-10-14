@@ -8,7 +8,7 @@
 
 <div class="container" fxLayout="row wrap" fxLayoutAlign="space-around" *ngIf="tomes && tomes.length">
   <div class="tome-tile" *ngFor="let tome of tomes" fxFlex="32%">
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-card-header>
         <mat-card-title>{{tome.name}}</mat-card-title>
         <mat-card-subtitle>By {{owners.get(tome.owner)?.username || 'loading...'}} - {{tome.numSpells}} spells
@@ -29,7 +29,7 @@
 </div>
 
 <div class="container" *ngIf="tomes && !tomes.length">
-  <mat-card>
+  <mat-card appearance="outlined">
     <p>Looks like you don't have any tomes yet.</p>
     <button mat-raised-button color="accent" (click)="beginNew()">Create One</button>
   </mat-card>

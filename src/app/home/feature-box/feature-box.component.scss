@@ -1,8 +1,8 @@
-@import "../../_variables.scss";
+@use "../../_variables.scss" as vars;
 
 // inline image feature box
 .feature-box {
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   text-align: center;
   margin: 20px 16px 0;
   padding: 18px 13px;
@@ -27,7 +27,8 @@
   }
 }
 
-@media only screen and (min-width: 768px) { // desktop
+@media only screen and (min-width: 768px) {
+  // desktop
   .feature-box {
     margin: 20px 60px 0;
     padding: 35px 56px;
@@ -43,15 +44,15 @@
   text-align: left;
 
   .feature-box-text {
-    padding-top: 50px;
-
     h2 {
+      margin: 50px 0px 16px;
       font-weight: bold;
       font-size: 48px;
       line-height: 1;
     }
 
     p {
+      margin-top: 0px;
       font-size: 18px;
       line-height: 1.4;
     }

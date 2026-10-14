@@ -5,8 +5,8 @@ import {DiscordUser} from '../../../../schemas/Discord';
 import {DiscordService} from '../../../../shared/discord.service';
 
 @Component({
-  selector: 'avr-add-editor',
-  template: `
+    selector: 'avr-add-editor',
+    template: `
     <mat-form-field>
       <mat-label>Add Editor</mat-label>
       <input matInput placeholder="zhu.exe#4211" (keyup)="onEditorSearch($event)">
@@ -23,7 +23,8 @@ import {DiscordService} from '../../../../shared/discord.service';
       </avr-pretty-user>
     </div>
   `,
-  styles: ['.valid-user {margin-bottom: 8px;}']
+    styles: ['.valid-user {margin-bottom: 8px;}'],
+    standalone: false
 })
 export class AddEditorComponent implements OnInit {
 

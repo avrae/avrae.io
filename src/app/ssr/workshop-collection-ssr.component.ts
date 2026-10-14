@@ -6,9 +6,10 @@ import {WorkshopService} from '../dashboard/workshop/workshop.service';
 import {WorkshopCollection} from '../schemas/Workshop';
 
 @Component({
-  selector: 'avr-workshop-collection-ssr',
-  template: ``,  // show the dark void of nothingness - servers don't care anyway
-  styles: []
+    selector: 'avr-workshop-collection-ssr',
+    template: ``, // show the dark void of nothingness - servers don't care anyway
+    styles: [],
+    standalone: false
 })
 export class WorkshopCollectionSsrComponent implements OnInit {
 

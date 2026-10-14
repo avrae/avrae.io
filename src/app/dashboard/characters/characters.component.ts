@@ -10,9 +10,10 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {BreakpointBaseComponent} from '../../shared/breakpoints';
 
 @Component({
-  selector: 'avr-characters',
-  templateUrl: './characters.component.html',
-  styleUrls: ['./characters.component.css']
+    selector: 'avr-characters',
+    templateUrl: './characters.component.html',
+    styleUrls: ['./characters.component.css'],
+    standalone: false
 })
 export class CharactersComponent extends BreakpointBaseComponent implements OnInit {
 

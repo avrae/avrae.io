@@ -1,5 +1,5 @@
 <div *ngIf="spell" class="container">
-  <mat-card>
+  <mat-card appearance="outlined">
     <p>Editing {{spell.name}}...</p>
     <p>You can find help on how to use the spell editor
       <a target="_blank" href="https://avrae.readthedocs.io/en/stable/automation_ref.html">here</a>.</p>
@@ -9,7 +9,7 @@
 </div>
 
 <div *ngIf="!spell" class="container">
-  <mat-card>
+  <mat-card appearance="outlined">
     <p>
       No spell selected.
     </p>

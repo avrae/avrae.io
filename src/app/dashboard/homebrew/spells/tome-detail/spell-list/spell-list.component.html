@@ -5,7 +5,7 @@
                         [isFirst]="isFirst" [isLast]="isLast" (moveUp)="moveUp(spell)" (moveDown)="moveDown(spell)"
                         (changed)="changed.emit()" (opened)="selectedSpell = spell; selected.emit(spell)"
                         (delete)="deleteSpell(spell)" (moveToEditor)="moveToEditor.emit()" ></avr-spell-detail>
-      <mat-card fxLayout="row" fxLayoutAlign="start center" class="new-spell-card">
+      <mat-card appearance="outlined" fxLayout="row" fxLayoutAlign="start center" class="new-spell-card">
         <span class="no-text-cursor">New...</span>
         <span class="toolbar-spacer"></span>
         <span>
@@ -24,7 +24,7 @@
   </div>
 
   <div class="spell-list" fxFlex="grow" *ngIf="!tome.spells.length">
-    <mat-card>
+    <mat-card appearance="outlined">
       <p>Looks like this tome is empty.</p>
       <button mat-raised-button color="accent" (click)="newSpell()">Make a Spell</button>
       <button mat-icon-button matTooltip="Import from JSON" (click)="newFromJSON()">

@@ -3,9 +3,10 @@ import {Component, OnInit} from '@angular/core';
 import {BreakpointBaseComponent} from '../shared/breakpoints';
 
 @Component({
-  selector: 'avr-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'avr-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent extends BreakpointBaseComponent implements OnInit {
 

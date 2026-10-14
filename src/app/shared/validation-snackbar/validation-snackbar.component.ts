@@ -4,9 +4,10 @@ import { Inject } from '@angular/core';
 
 
 @Component({
-  selector: 'validation-snackbar',
-  templateUrl: 'validation-snackbar.component.html',
-  styleUrls: ['./validation-snackbar.component.css']
+    selector: 'validation-snackbar',
+    templateUrl: 'validation-snackbar.component.html',
+    styleUrls: ['./validation-snackbar.component.css'],
+    standalone: false
 })
 
 export class ValidationSnackbar { 

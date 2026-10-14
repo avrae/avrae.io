@@ -83,6 +83,7 @@ export function registerDraconicLanguage(monaco) {
   monaco.editor.defineTheme('draconicTheme', {
     base: 'vs-dark',
     inherit: true,
+    colors: {}, // newer monaco throws if theme colors is undefined
     rules: [
       {token: 'delimiter.drac1', foreground: 'ADE1E5'},
 

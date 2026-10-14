@@ -1,8 +1,8 @@
-@import "../../../variables";
+@use "../../../variables" as vars;
 
 .tile {
   position: relative;
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   border-radius: 8px;
 }
 
@@ -95,5 +95,3 @@
     grid-column-start: 3;
   }
 }
-
-

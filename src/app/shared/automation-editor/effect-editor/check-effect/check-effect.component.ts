@@ -3,9 +3,10 @@ import {AbilityCheck} from '../../types';
 import {EffectComponent} from '../shared/EffectComponent';
 
 @Component({
-  selector: 'avr-check-effect',
-  templateUrl: './check-effect.component.html',
-  styleUrls: ['../shared.scss']
+    selector: 'avr-check-effect',
+    templateUrl: './check-effect.component.html',
+    styleUrls: ['../shared.scss'],
+    standalone: false
 })
 export class CheckEffectComponent extends EffectComponent<AbilityCheck> implements OnInit {
   checkType: 'basic' | 'dc' | 'contest' = 'basic';

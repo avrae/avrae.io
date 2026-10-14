@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {groupBy} from 'lodash';
@@ -30,9 +30,10 @@ interface CollectableEditDialogComponentData {
 }
 
 @Component({
-  selector: 'avr-collectable-edit-dialog',
-  templateUrl: './collectable-edit-dialog.component.html',
-  styleUrls: ['./collectable-edit-dialog.component.scss', '../../dialog-common.scss', '../../common.scss']
+    selector: 'avr-collectable-edit-dialog',
+    templateUrl: './collectable-edit-dialog.component.html',
+    styleUrls: ['./collectable-edit-dialog.component.scss', '../../dialog-common.scss', '../../common.scss'],
+    standalone: false
 })
 export class CollectableEditDialogComponent extends BreakpointBaseComponent implements OnInit {
   PublicationState = PublicationState;
@@ -70,7 +71,7 @@ export class CollectableEditDialogComponent extends BreakpointBaseComponent impl
   // state
   loading = false;
   error: string;
-  entitlementsControl = new FormControl('');
+  entitlementsControl = new UntypedFormControl('');
   allEntities: DDBEntity[];
   addableEntitlements: Observable<[string, DDBEntity[]][]>;
 

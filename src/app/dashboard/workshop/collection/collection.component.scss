@@ -1,15 +1,21 @@
-@import "../../../variables";
-@import "../variables";
+@use "../../../variables" as vars;
+@use "../variables" as toolbar-vars;
 
 .toolbar-search-form {
   margin-left: 8px;
 }
 
 .content {
-  color: $gray-light1;
-  background: $black;
+  color: vars.$gray-light1;
+  background: vars.$black;
   padding: 8px;
-  min-height: calc(100vh - (#{$footer-height} + #{$toolbar-height} + #{$navbar-height} + 16px));
+  min-height: calc(
+    100vh -
+      (
+        #{vars.$footer-height} + #{toolbar-vars.$toolbar-height} +
+          #{vars.$navbar-height} + 16px
+      )
+  );
 }
 
 .metadata-grid {
@@ -18,7 +24,7 @@
   gap: 1rem;
 
   .metadata {
-    background: $gray-dark1;
+    background: vars.$gray-dark1;
     padding: 8px;
     border-radius: 8px;
   }
@@ -36,7 +42,7 @@
 .desc-subscribe-container {
   display: grid;
   grid-template-columns: 1fr auto;
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   padding: 8px;
 
   .desc-subscribe-buttons {
@@ -52,18 +58,19 @@
   }
 }
 
-.desc-tags, .desc-text {
+.desc-tags,
+.desc-text {
   margin-top: 8px;
 }
 
 // ==== alias/snippet area ====
 .collectable-container {
-  background: $gray-dark1;
+  background: vars.$gray-dark1;
   padding: 16px 24px;
   margin: 12px 0;
 
   h2 {
-    color: $blurple;
+    color: vars.$blurple;
     margin-bottom: 8px;
     font-weight: bold;
   }
@@ -79,10 +86,9 @@ mat-toolbar {
   justify-content: space-between;
 }
 
-
 @media (max-width: 960px) {
   .metadata-container {
-    width: 65%
+    width: 65%;
   }
 
   .desc-subscribe-container {
@@ -121,8 +127,7 @@ mat-toolbar {
     margin-bottom: 10px;
   }
 
-
   .metadata-container {
-    width: 100%
+    width: 100%;
   }
 }

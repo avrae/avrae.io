@@ -5,9 +5,10 @@ import {Tome} from '../../../../schemas/homebrew/Spells';
 import {TomeDeleteDialog} from './tome-delete-dialog.component';
 
 @Component({
-  selector: 'avr-tome-options-dialog',
-  templateUrl: './tome-options-dialog.component.html',
-  styleUrls: ['./tome-options-dialog.component.css']
+    selector: 'avr-tome-options-dialog',
+    templateUrl: './tome-options-dialog.component.html',
+    styleUrls: ['./tome-options-dialog.component.css'],
+    standalone: false
 })
 export class TomeOptionsDialog implements OnInit {
 

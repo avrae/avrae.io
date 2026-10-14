@@ -26,7 +26,7 @@
 
 <!-- CONTENT -->
 <div class="container">
-  <mat-card class="workshop-header">
+  <mat-card appearance="outlined" class="workshop-header">
     <p *ngIf="!guildContext">
       Here are all the collections you're subscribed to. You can view them or unsubscribe from them here!
     </p>
@@ -39,7 +39,7 @@
     </p>
   </mat-card>
 
-  <mat-card *ngIf="!loading && collections.length === 0">
+  <mat-card appearance="outlined" *ngIf="!loading && collections.length === 0">
     <p>
       You have not subscribed to any collections. Try switching server contexts in the top right or exploring
       collections in the workshop!
