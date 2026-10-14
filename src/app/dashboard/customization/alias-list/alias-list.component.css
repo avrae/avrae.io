@@ -10,6 +10,13 @@ pre {
   white-space: pre-wrap;
   max-height: 200px;
   overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+pre::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
 }
 
 @media only screen and (max-width: 840px) {
