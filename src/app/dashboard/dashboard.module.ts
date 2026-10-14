@@ -4,6 +4,7 @@ import { FlexModule } from "@ngbracket/ngx-layout";
 import { FormsModule } from "@angular/forms";
 import { MaterialModule } from "../material/material.module";
 import { AutomationEditorModule } from "../shared/automation-editor/automation-editor.module";
+import { ImgFallbackDirective } from "../shared/img-fallback.directive";
 import { AttackEditorDialog } from "./characters/attack-editor-dialog/attack-editor-dialog.component";
 import { CharactersComponent } from "./characters/characters.component";
 import { ConfirmDeleteDialog } from "./confirm-delete-dialog/confirm-delete-dialog.component";
@@ -27,6 +28,7 @@ import { NewDialog } from "./new-dialog/new-dialog.component";
     DashboardRoutingModule,
     FlexModule,
     AutomationEditorModule,
+    ImgFallbackDirective,
   ],
   declarations: [
     DashboardComponent,
