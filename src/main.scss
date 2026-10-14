@@ -24,3 +24,9 @@ $theme: mat.m2-define-dark-theme(
 );
 @include mat.all-component-themes($theme);
 @include avr-app-theme($theme);
+
+// MDC (Material 15+) no longer applies a document font; restore the base Roboto.
+// Only sets the inherited default — elements with their own font-family keep it.
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
