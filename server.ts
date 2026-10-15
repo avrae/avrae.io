@@ -19,17 +19,23 @@ export function app(): express.Express {
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
-  // Serve static files from /browser
+  // Serve static files from /browser (hashed assets cache for a year; HTML revalidates)
   server.get(
     "**",
     express.static(browserDistFolder, {
       maxAge: "1y",
       index: "index.html",
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith(".html")) {
+          res.setHeader("Cache-Control", "no-cache");
+        }
+      },
     }),
   );
 
   // All regular routes use the Angular engine
   server.get("**", (req, res, next) => {
+    res.set("Cache-Control", "no-cache");
     const { protocol, originalUrl, baseUrl, headers } = req;
 
     commonEngine
