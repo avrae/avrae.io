@@ -54,6 +54,9 @@
   line-height: 24px;
   width: 24px;
   height: 24px;
+  padding: 0;
+  // match the 24px button so the MDC hover/focus state layer isn't an oversized grey circle
+  --mdc-icon-button-state-layer-size: 24px;
 }
 
 .node-icon {
