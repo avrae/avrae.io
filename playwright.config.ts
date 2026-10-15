@@ -74,7 +74,8 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npm run start',
+    // Angular 19's dev server binds to ::1 (IPv6) only; bind IPv4 too so the 127.0.0.1 probe connects
+    command: 'npm run build-themes && ng serve --host 0.0.0.0',
     url: 'http://127.0.0.1:4200',
     reuseExistingServer: !process.env.CI,
     timeout: 240 * 1000
