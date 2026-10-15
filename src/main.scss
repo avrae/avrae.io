@@ -25,8 +25,81 @@ $theme: mat.m2-define-dark-theme(
 @include mat.all-component-themes($theme);
 @include avr-app-theme($theme);
 
-// MDC (Material 15+) no longer applies a document font; restore the base Roboto.
-// Only sets the inherited default — elements with their own font-family keep it.
+// restore the base font the MDC migration dropped; keep the browser-default size
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// strip the MDC "fill" box off appearance-less fields for the legacy underline look
+.mat-mdc-form-field .mat-mdc-text-field-wrapper.mdc-text-field--filled {
+  --mdc-filled-text-field-container-color: transparent;
+  --mdc-filled-text-field-disabled-container-color: transparent;
+  background-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+
+  .mat-mdc-form-field-focus-overlay {
+    background-color: transparent;
+  }
+}
+
+// restore the legacy mat-card structural rules MDC dropped: 16px padding and the
+// first/last-child margin collapse that keeps content flush inside the padding.
+.mat-mdc-card {
+  padding: 16px;
+}
+.mat-mdc-card > :first-child,
+.mat-mdc-card-content > :first-child {
+  margin-top: 0;
+}
+.mat-mdc-card > :last-child:not(.mat-mdc-card-footer),
+.mat-mdc-card-content > :last-child:not(.mat-mdc-card-footer) {
+  margin-bottom: 0;
+}
+.mat-mdc-card-content {
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+// legacy icons were vertical-align: middle with a 24px line box; MDC switched to top,
+// misaligning inline icons from their adjacent text (e.g. the effect-tree node icons).
+.mat-icon {
+  vertical-align: middle;
+  line-height: 24px;
+}
+
+// legacy .mat-small helper, dropped in the MDC migration
+.mat-small {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+// MDC renders a check/cross glyph inside the switch thumb; legacy had a plain thumb
+.mdc-switch__icons {
+  display: none;
+}
+
+// MDC marks the selected option with a checkmark; legacy single-selects had none.
+// !important beats Material's runtime-injected component style (same specificity,
+// injected after this sheet, so it would otherwise win on source order).
+.mat-pseudo-checkbox-minimal {
+  display: none !important;
+}
+
+// MDC menu items read 16px off an M3 token; legacy used 14px with 16px gutters.
+// The text size needs !important to beat Material's runtime-injected menu style.
+.mat-mdc-menu-item {
+  --mat-menu-item-leading-spacing: 16px;
+  --mat-menu-item-trailing-spacing: 16px;
+}
+.mat-mdc-menu-item .mat-mdc-menu-item-text {
+  font-size: 14px !important;
+}
+
+// MDC's filled infix is far taller than legacy's, pushing the underline well below
+// the text. Compact it so the baseline-to-underline spacing matches the old look.
+.mat-mdc-text-field-wrapper.mdc-text-field--filled .mat-mdc-form-field-infix {
+  min-height: 36px;
+  padding-top: 20px;
+  padding-bottom: 4px;
 }
