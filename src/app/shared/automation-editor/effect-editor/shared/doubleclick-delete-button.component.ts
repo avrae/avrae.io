@@ -11,7 +11,17 @@ import {Component, EventEmitter, Output} from '@angular/core';
       <mat-icon aria-label="Delete">delete</mat-icon>
     </button>
   `,
-    styles: [],
+    // legacy delete button: 40px, icon centered, click ripple only (no hover layer)
+    styles: [`
+      :host .mat-mdc-icon-button {
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        --mdc-icon-button-state-layer-size: 40px;
+        --mat-icon-button-hover-state-layer-opacity: 0;
+        --mat-icon-button-focus-state-layer-opacity: 0;
+      }
+    `],
     standalone: false
 })
 export class DoubleClickDeleteButtonComponent {
