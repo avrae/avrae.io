@@ -45,7 +45,10 @@ const markdownConfig = {
 };
 
 const monacoConfig = {
-  baseUrl: './assets/monaco-editor/min/vs',
+  // absolute so Monaco's AMD loader resolves vs modules/workers from the domain
+  // root; a relative "./assets/..." resolves against the route and 404s on deep
+  // pages (e.g. /dashboard/aliases), leaving an empty, non-editable editor.
+  baseUrl: '/assets/monaco-editor/min/vs',
   onMonacoLoad: () => {
     registerDraconicLanguage((<any>window).monaco);
   },
