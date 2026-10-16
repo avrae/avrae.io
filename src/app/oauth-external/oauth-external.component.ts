@@ -3,19 +3,19 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import {isLoggedIn} from '../SecurityHelper';
-import {Router} from '@angular/router';
+import { isLoggedIn } from '../SecurityHelper';
+import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import {Observable, of} from 'rxjs';
-import {UserInfo} from "../schemas/UserInfo";
-import {getUser} from "../dashboard/APIHelper";
+import { Observable, of } from 'rxjs';
+import { UserInfo } from "../schemas/UserInfo";
+import { getUser } from "../dashboard/APIHelper";
 
 @Component({
   selector: 'avr-oauth-external',
   templateUrl: './oauth-external.component.html',
   styleUrls: ['./oauth-external.component.scss'],
   imports: [
-    MaterialModule, 
+    MaterialModule,
     CommonModule
   ]
 })
@@ -31,7 +31,7 @@ export class OauthExternalComponent implements OnInit {
     if (!isLoggedIn()) {
       this.router.navigate(['login']);
     }
-   }
+  }
 
   ngOnInit() {
     this.userInfo = of(getUser())
@@ -98,6 +98,4 @@ export class OauthExternalComponent implements OnInit {
       }
     });
   }
-
-
 }
