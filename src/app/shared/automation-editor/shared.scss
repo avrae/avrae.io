@@ -19,5 +19,8 @@
     line-height: 24px;
     width: 24px;
     height: 24px;
+    padding: 0;
+    // cap the MDC state layer so the button doesn't inflate the header to 48px
+    --mdc-icon-button-state-layer-size: 24px;
   }
 }

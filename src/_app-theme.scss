@@ -11,6 +11,7 @@
 
   .avr-app-background {
     background: mat.m2-get-color-from-palette($background, background);
+    color: mat.m2-get-color-from-palette($foreground, text);
   }
 
   .avr-primary-header {
