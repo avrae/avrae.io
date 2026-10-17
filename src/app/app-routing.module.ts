@@ -6,10 +6,13 @@ import {ErrorComponent} from './error/error.component';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {SsrGuard} from './ssr/ssr.guard';
+import { OauthExternalComponent } from "./oauth-external/oauth-external.component";
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'oauth-external', component: OauthExternalComponent, canActivate: [AuthGuard]},
   {path: 'commands', component: CommandsComponent},
   {path: "community-links", component: CommunityLinksComponent},
   {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule)},
