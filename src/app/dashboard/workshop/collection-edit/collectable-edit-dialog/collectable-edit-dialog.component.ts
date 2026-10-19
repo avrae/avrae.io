@@ -87,7 +87,7 @@ export class CollectableEditDialogComponent extends BreakpointBaseComponent impl
     this.snippet = data.snippet;
     this.name = this.collectable.name;
     this.docs = this.collectable.docs;
-    this.selectedCodeVersion = this.collectable.versions.length ? this.collectable.versions.find(cv => cv.is_current) : null;
+    this.selectedCodeVersion = this.activeOrNewestVersion();
   }
 
   ngOnInit(): void {
@@ -293,8 +293,8 @@ export class CollectableEditDialogComponent extends BreakpointBaseComponent impl
       }
       const filteredData = response.data.filter(cv => !this.collectable.versions.some(v => v.version === cv.version));
       this.collectable.versions.push(...filteredData);
-      if (this.collectable.versions.length && this.selectedCodeVersion === null) {
-        this.selectedCodeVersion = this.collectable.versions.find(cv => cv.is_current);
+      if (this.collectable.versions.length && !this.selectedCodeVersion) {
+        this.selectedCodeVersion = this.activeOrNewestVersion();
       }
       if (!filteredData.length || response.data.length < limit || Math.min(...response.data.map(v => v.version)) === 1) {
         this.loadingCodeVersions = false;
@@ -319,6 +319,15 @@ export class CollectableEditDialogComponent extends BreakpointBaseComponent impl
 
   getSortedVersions() {
     return this.collectable.versions.sort((a, b) => b.version - a.version);
+  }
+
+  // active version, or newest when none is flagged active, so the editor isn't left empty
+  private activeOrNewestVersion(): CodeVersion {
+    const versions = this.collectable.versions;
+    if (!versions.length) {
+      return null;
+    }
+    return versions.find(cv => cv.is_current) ?? versions.reduce((a, b) => (b.version > a.version ? b : a));
   }
 
   getEntity(entitlement: WorkshopEntitlement) {
