@@ -5,7 +5,8 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "esModuleInterop": true
   },
   "files": [
     "test.ts",
