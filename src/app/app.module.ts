@@ -13,6 +13,7 @@ import { MarkdownModule, MARKED_OPTIONS } from "ngx-markdown";
 import { MonacoEditorModule } from "ngx-monaco-editor-v2";
 
 import { AppRoutingModule } from "./app-routing.module";
+import { MONACO_VERSION } from "./monaco-version";
 
 import { AppComponent } from "./app.component";
 import { CheatsheetsModule } from "./cheatsheets/cheatsheets.module";
@@ -45,7 +46,8 @@ const markdownConfig = {
 };
 
 const monacoConfig = {
-  baseUrl: './assets/monaco-editor/min/vs',
+  // version-stamped path (see tools/copy-monaco.mjs) busts stale caches on monaco upgrades
+  baseUrl: `./assets/monaco-editor-${MONACO_VERSION}/min/vs`,
   onMonacoLoad: () => {
     registerDraconicLanguage((<any>window).monaco);
   },
