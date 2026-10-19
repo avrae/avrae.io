@@ -1,0 +1,65 @@
+<div class="container" *ngIf="validUrl && allowedUrl">
+  <mat-card>
+    <mat-card-title>
+      Authorize an external service to manage your Avrae Data.
+    </mat-card-title>
+
+    <mat-card-content>
+      The following site is requesting authorization:
+      <a [href]="redirect_uri" target="_blank" rel="noopener noreferrer">
+        {{ redirect_uri }}
+      </a>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="openConfirmDialog(confirmDialog)"
+      >
+        Authorize
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div *ngIf="redirect_uri === ''" class="warning">
+  <mat-icon>warning</mat-icon>
+  No redirect URL target given.
+</div>
+
+<div *ngIf="!validUrl && redirect_uri !== ''" class="warning">
+  <mat-icon>warning</mat-icon>
+  Invalid redirect URL.
+</div>
+
+<div *ngIf="validUrl && !allowedUrl" class="warning">
+  <mat-icon>warning</mat-icon>
+  Redirect target not allowed.
+</div>
+
+<ng-template #confirmDialog>
+  <h2 mat-dialog-title>Authorize external service?</h2>
+
+  <mat-dialog-content>
+    <p>
+      The following service will have access to the Avrae Data of <strong>{{(userInfo | async)?.username}}</strong>.<br>
+      This includes aliases, workshop collections, characters, server subscriptions, gvars, tomes, etc.
+    </p>
+
+    <p>
+        <a [href]="redirect_uri" target="_blank" rel="noopener noreferrer">
+          <strong> {{ redirect_uri }}</strong>
+        </a>
+    </p>
+
+    <p><strong> Only continue if you trust this site. </strong></p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+
+    <button mat-raised-button color="primary" [mat-dialog-close]="true">
+      Authorize
+    </button>
+  </mat-dialog-actions>
+</ng-template>

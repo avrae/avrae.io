@@ -1,0 +1,25 @@
+@use "../../_colors" as colors;
+@use 'sass:map';
+
+
+.warning {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: map.get(colors.$avr-red, 500);
+  border-radius: 4px;
+}
+
+mat-card {
+  padding: 1rem;
+  margin-top: 1rem;
+
+  mat-card-content {
+    margin: .5rem 0;
+  }
+  button {
+    margin-left: .5rem;
+  }
+}
