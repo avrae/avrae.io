@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SRDCopyDialog } from './srd-copy-dialog.component';
 
 describe('SrdCopyDialogComponent', () => {
-  let component: SRDCopyDialog;
-  let fixture: ComponentFixture<SRDCopyDialog>;
+  let component: SRDCopyDialog<any>;
+  let fixture: ComponentFixture<SRDCopyDialog<any>>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
