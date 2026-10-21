@@ -1,8 +1,4 @@
-FROM node:25
-
-RUN apt-get update
-
-RUN apt-get install -y python3 python-is-python3
+FROM node:26-bookworm-slim
 
 # Create app directory
 WORKDIR /usr/src/app
