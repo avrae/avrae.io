@@ -96,6 +96,20 @@ body {
   font-size: 14px !important;
 }
 
+// desktop: grow the narrow attack dropdown to fit names, bounded (mobile's field is full-width)
+@media (min-width: 961px) {
+  .attack-select-panel {
+    min-width: 14rem;
+    max-width: min(90vw, 24rem);
+
+    .mat-mdc-option .mdc-list-item__primary-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
 // MDC's filled infix is far taller than legacy's, pushing the underline well below
 // the text. Compact it so the baseline-to-underline spacing matches the old look.
 .mat-mdc-text-field-wrapper.mdc-text-field--filled .mat-mdc-form-field-infix {

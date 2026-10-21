@@ -12,7 +12,8 @@
   <div fxLayout="row" class="auto-row">
     <mat-form-field>
       <mat-label>Select an attack</mat-label>
-      <mat-select [(value)]="selectedAttack">
+      <mat-select [(value)]="selectedAttack" [panelWidth]="(mobile$ | async) ? 'auto' : null"
+                  panelClass="attack-select-panel">
         <mat-option *ngFor="let attack of allAttacks" [value]="attack">
           {{attack.name}}
         </mat-option>

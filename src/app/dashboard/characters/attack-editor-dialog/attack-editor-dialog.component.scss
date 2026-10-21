@@ -26,12 +26,12 @@
   grid-column-gap: 8px;
 }
 
-mat-mdc-dialog-actions {
+.mat-mdc-dialog-actions {
   gap: 8px;
 }
 
 @media (max-width: 600px) {
-  mat-mdc-dialog-actions {
+  .mat-mdc-dialog-actions {
     justify-content: center;
     flex-direction: column-reverse;
   }
@@ -52,12 +52,12 @@ mat-mdc-dialog-actions {
     display: flex;
     justify-content: center;
   }
-  mat-mdc-dialog-actions span {
+  .mat-mdc-dialog-actions span {
     gap: 8px;
     display: flex;
     justify-content: center;
   }
-  mat-mdc-dialog-actions span button {
+  .mat-mdc-dialog-actions span button {
     margin: 0;
   }
 }

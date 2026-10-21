@@ -1,3 +1,4 @@
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -22,6 +23,8 @@ export class AttackEditorDialog implements OnInit {
   selectedAttack: Attack;
   allAttacks: Attack[];
 
+  mobile$: Observable<boolean>;
+
   saveButtonValue = 'Save';
   saveAndExitButtonValue = 'Save and Exit';
   saveButtonDisabled = false;
@@ -29,7 +32,9 @@ export class AttackEditorDialog implements OnInit {
   showAdvancedOptions = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public character: CharacterMeta, private charService: DashboardService,
-              private dialogRef: MatDialogRef<AttackEditorDialog>, private dialog: MatDialog, private snackBar: MatSnackBar) {
+              private dialogRef: MatDialogRef<AttackEditorDialog>, private dialog: MatDialog, private snackBar: MatSnackBar,
+              private breakpointObserver: BreakpointObserver) {
+    this.mobile$ = this.breakpointObserver.observe('(max-width: 960px)').pipe(map((s) => s.matches));
   }
 
 
