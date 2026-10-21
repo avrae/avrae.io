@@ -12,7 +12,10 @@ export function app(): express.Express {
   const browserDistFolder = resolve(serverDistFolder, "../browser");
   const indexHtml = join(serverDistFolder, "index.server.html");
 
-  const commonEngine = new CommonEngine();
+  // Without an allowlist @angular/ssr rejects the host and falls back to CSR, dropping per-page meta tags.
+  const commonEngine = new CommonEngine({
+    allowedHosts: ["avrae.io", "www.avrae.io", "localhost"],
+  });
 
   server.set("view engine", "html");
   server.set("views", browserDistFolder);
