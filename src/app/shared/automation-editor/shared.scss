@@ -22,5 +22,6 @@
     padding: 0;
     // cap the MDC state layer so the button doesn't inflate the header to 48px
     --mdc-icon-button-state-layer-size: 24px;
+    --mat-icon-button-touch-target-display: none;
   }
 }

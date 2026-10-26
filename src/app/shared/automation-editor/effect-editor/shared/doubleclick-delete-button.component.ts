@@ -20,6 +20,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
         --mdc-icon-button-state-layer-size: 40px;
         --mat-icon-button-hover-state-layer-opacity: 0;
         --mat-icon-button-focus-state-layer-opacity: 0;
+        --mat-icon-button-touch-target-display: none;
       }
     `],
     standalone: false
