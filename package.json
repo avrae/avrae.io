@@ -97,7 +97,7 @@
     "katex": "npm:empty-npm-package@1.0.0",
     "proxy-addr": "^2.0.8",
     "piscina": "^4.9.4",
-    "fast-uri": "^3.1.8",
+    "fast-uri": "^3.1.9",
     "vite": "^6.4.3",
     "esbuild": "^0.28.1",
     "qs": "^6.16.0",
